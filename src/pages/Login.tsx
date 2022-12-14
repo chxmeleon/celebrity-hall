@@ -8,7 +8,7 @@ const Login: React.FC = () => {
     <Layout>
       <div className="w-full">
         <div className="relative">
-          <div className="top-0 left-0 fixed z-[-1] bg-[url('../assets/login_bg.webp')] bg-no-repeat bg-cover bg-center bg-fixed w-full">
+          <div className="top-0 left-0 fixed z-[-1] bg-[url('../assets/login_bg.avif')] bg-no-repeat bg-cover bg-center bg-fixed w-full">
             <div className="w-full h-screen bg-black/20"></div>
           </div>
         </div>
