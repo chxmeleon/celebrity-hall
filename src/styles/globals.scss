@@ -6,7 +6,7 @@
   html {
     @apply scroll-smooth;
     & body {
-      @apply overscroll-none bg-[#050505] text-gray-50;
+      @apply overscroll-none bg-[#050505] text-gray-300;
     }
   }
 }

@@ -1,9 +1,7 @@
 
-
-
 const LeftSidebar = () => {
   return (
-    <div className="flex-grow w-[170px] border-r-[1px] border-r-theme-100 flex text-center">
+    <div className="flex-grow w-52 border-r-[0.5px] border-r-theme-75 flex text-center">
       <div className="mx-auto p-8">
         <div>Avatar</div>
         <div>b1</div>
