@@ -1,8 +1,13 @@
 import React from 'react'
+import Layout from '@/layouts/Layout'
 
 const Rooms = () => {
   return (
-    <div>Room</div>
+    <Layout>
+      <section className="">
+
+      </section>
+    </Layout>
   )
 }
 

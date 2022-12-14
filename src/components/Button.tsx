@@ -10,7 +10,11 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   return (
     <button
       type="submit"
-      className={buttonStyle({ intent: 'linerSlope', round: 'full', size: 'medium' })}
+      className={buttonStyle({
+        intent: 'linerSlope',
+        round: 'full',
+        size: 'medium',
+      })}
       onClick={onClick}
     >
       {text}
