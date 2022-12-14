@@ -1,11 +1,18 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
 import { buttonStyle } from './buttonStyle'
 
-type ButtonProps = {
+type LoginButtonProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>
   text: string
 }
 
-const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
+type LinkButtonProps = {
+  children: React.ReactNode
+  href: string
+}
+
+export const LoginButton: React.FC<LoginButtonProps> = (props) => {
   const { onClick, text } = props
   return (
     <button
@@ -22,4 +29,27 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   )
 }
 
-export default Button
+export const LinkButton: React.FC<LinkButtonProps> = (props) => {
+  const { children, href } = props
+  return (
+    <div>
+      <div
+        className={buttonStyle({
+          intent: 'linerSlopeOutline',
+          round: 'sm',
+          size: 'full',
+        })}
+      >
+        <div
+          className={buttonStyle({
+            intent: 'slopeOutlineBg',
+            round: 'sm',
+            size: 'full',
+          })}
+        >
+          <h1 className="text-xl text-white">{children}</h1>
+        </div>
+      </div>
+    </div>
+  )
+}

@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { XCircleIcon } from '@heroicons/react/24/outline'
 import { UserIcon, KeyIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react'
-import Button from './Button'
+import { LoginButton } from './Button'
 import { clsx as cx } from 'clsx'
 
 type Inputs = {
@@ -81,7 +81,7 @@ const LoginForm: React.FC = () => {
             </div>
           </div>
           <div className="flex pt-2">
-            <Button onClick={handleNotify} text="Login" />
+            <LoginButton onClick={handleNotify} text="Login" />
           </div>
         </form>
       </div>

@@ -17,6 +17,9 @@ module.exports = {
           400: '#de9b16',
         },
       },
+      backgroundImage: {
+        'link-button-75': 'linear-gradient(75deg, #9c6c0e, #FCED95, #9c6c0e)',
+      },
     },
   },
   plugins: [],
