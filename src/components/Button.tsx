@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { buttonStyle } from './buttonStyle'
+import { buttonStyle as bts } from './buttonStyle'
 
 type LoginButtonProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>
@@ -12,12 +12,16 @@ type LinkButtonProps = {
   href: string
 }
 
+type ToggleButtonProps = {
+  children: React.ReactNode
+}
+
 export const LoginButton: React.FC<LoginButtonProps> = (props) => {
   const { onClick, text } = props
   return (
     <button
       type="submit"
-      className={buttonStyle({
+      className={bts({
         intent: 'linerSlope',
         round: 'full',
         size: 'medium',
@@ -32,24 +36,39 @@ export const LoginButton: React.FC<LoginButtonProps> = (props) => {
 export const LinkButton: React.FC<LinkButtonProps> = (props) => {
   const { children, href } = props
   return (
-    <div>
+    <Link to={href}>
       <div
-        className={buttonStyle({
+        className={bts({
           intent: 'linerSlopeOutline',
           round: 'sm',
           size: 'full',
         })}
       >
         <div
-          className={buttonStyle({
+          className={bts({
             intent: 'slopeOutlineBg',
             round: 'sm',
             size: 'full',
           })}
         >
-          <h1 className="text-xl text-white">{children}</h1>
+          <p className="text-xl text-white">{children}</p>
         </div>
       </div>
-    </div>
+    </Link>
+  )
+}
+
+export const ToggleButton: React.FC<ToggleButtonProps> = (props) => {
+  const { children } = props
+  return (
+      <button
+        className={bts({
+          intent: 'grayFill',
+          round: 'full',
+          size: 'full',
+        })}
+      >
+        <p className="text-sm font-medium">{children}</p>
+      </button>
   )
 }
