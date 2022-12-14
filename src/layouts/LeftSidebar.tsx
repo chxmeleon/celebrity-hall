@@ -38,7 +38,7 @@ const LeftSidebar = () => {
           </div>
         </section>
         <hr className="my-4 border-1 border-theme-75" />
-        <section className="w-full h-40">
+        <section className="w-full h-44">
           <div className="flex flex-col justify-around w-full h-full">
             <ToggleButton>
               <div className="flex justify-around items-center m-auto w-2/3">

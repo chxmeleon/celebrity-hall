@@ -9,7 +9,7 @@ export const buttonStyle = cva('text-center  m-auto', {
       goldFill: 'bg-theme-300 text-gray-800',
       linerSlopeOutline: 'p-[1px] bg-link-button-54 hover:cursor-pointer',
       slopeOutlineBg: 'py-2 flex justify-center items-center bg-gradient-to-b from-theme-150 to-theme-75 back',
-      grayFill: 'py-[4px] bg-theme-75',
+      grayFill: 'py-1.5 bg-theme-75',
     },
     round: {
       full: 'rounded-full',
