@@ -3,7 +3,7 @@ import { LinkButton, ToggleButton } from '@/components/Button'
 
 const LeftSidebar = () => {
   return (
-    <div className="flex flex-grow py-5 px-4 w-52 text-center border-r-[0.5px] border-r-theme-75">
+    <div className="flex flex-shrink-0 py-5 px-4 w-52 text-center border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full h-full">
         <section className="pb-5 w-full">
           <div className="flex">
