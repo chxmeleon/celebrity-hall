@@ -20,8 +20,15 @@
     ]
   },
   "dependencies": {
+    "@apollo/client": "^3.7.2",
+    "@heroicons/react": "^2.0.13",
+    "axios": "^1.2.1",
+    "class-variance-authority": "^0.4.0",
+    "clsx": "^1.2.1",
+    "graphql": "^16.6.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
