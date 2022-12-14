@@ -9,6 +9,8 @@ module.exports = {
     extend: {
       colors: {
         theme: {
+          50: '#131313',
+          75: '#333333',
           100: '#373737',
           200: '#9c6c0e',
           300: '#FCED95',
