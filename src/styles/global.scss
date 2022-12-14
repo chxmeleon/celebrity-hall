@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  html {
+    @apply scroll-smooth;
+    & body {
+      @apply overscroll-none bg-[#050505] text-gray-50;
+    }
+  }
+}
