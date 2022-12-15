@@ -7,8 +7,8 @@ export const buttonStyle = cva('text-center  m-auto', {
       linerSlope:
         'py-3 px-7 text-gray-800 bg-gradient-to-r hover:via-amber-200 from-theme-200 via-theme-300 to-theme-200 hover:from-theme-400 hover:to-theme-400',
       goldFill: 'bg-theme-300 text-gray-800',
-      linerSlopeOutline: 'p-[1px] bg-link-button-54 hover:cursor-pointer',
-      slopeOutlineBg: 'py-2 flex justify-center items-center bg-gradient-to-b from-theme-150 to-theme-75 back',
+      linerSlopeOutline: 'p-[1.16px] bg-link-button-54 hover:cursor-pointer',
+      slopeOutlineBg: 'py-1.5 flex justify-center items-center bg-gradient-to-b from-theme-150 to-theme-70 back',
       grayFill: 'py-1.5 bg-theme-75',
     },
     round: {

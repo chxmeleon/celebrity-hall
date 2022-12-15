@@ -4,12 +4,12 @@ import { LinkButton, ToggleButton } from '@/components/Button'
 const LeftSidebar = () => {
   return (
     <div className="flex flex-shrink-0 py-5 px-7 w-52 text-center border-r-[0.5px] border-r-theme-75">
-      <div className="mx-auto w-full h-full">
-        <section className="pb-5 w-full">
+      <div className="mx-auto w-full">
+        <section className="pb-6 w-full">
           <div className="flex">
             <img src={LogoImg} alt="logo image" className="m-auto w-24" />
           </div>
-          <div className="flex justify-around items-center pt-6 w-full">
+          <div className="flex justify-around items-center pt-3 w-full">
             <div className="mt-1.5 w-11 h-11 i-heroicons-user-circle-solid"></div>
             <div className="text-left">
               <p className="text-xl">username</p>
@@ -17,27 +17,27 @@ const LeftSidebar = () => {
             </div>
           </div>
         </section>
-        <hr className="py-1 border-t-1 border-t-theme-75" />
-        <section className="w-full h-80">
+        <hr className="border-t border-t-theme-75" />
+        <section className="my-2 w-full h-[270px]">
           <div className="flex flex-col justify-evenly w-full h-full">
-            <LinkButton href="/">
+            <LinkButton href="/" target={false}>
               <p>百家樂</p>
             </LinkButton>
-            <LinkButton href="/">
+            <LinkButton href="/streamers" target={false}>
               <p>美女主播</p>
             </LinkButton>
-            <LinkButton href="/">
+            <LinkButton href="/lists" target={false}>
               <p>快速好路</p>
             </LinkButton>
-            <LinkButton href="/">
+            <LinkButton href="/rankings" target={false}>
               <p>排行榜</p>
             </LinkButton>
-            <LinkButton href="/">
+            <LinkButton href="https://t.me/richman5888" target={true}>
               <p>成人影片</p>
             </LinkButton>
           </div>
         </section>
-        <hr className="my-4 border-1 border-theme-75" />
+        <hr className="pb-1 border-1 border-theme-75" />
         <section className="w-full h-44">
           <div className="flex flex-col justify-around w-full h-full">
             <ToggleButton>
