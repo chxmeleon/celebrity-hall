@@ -1,9 +1,7 @@
-import React from 'react'
+import Layout from '@/layouts/Layout'
 
 const Streamers = () => {
-  return (
-    <div>Streamers</div>
-  )
+  return <Layout>Streamers</Layout>
 }
 
 export default Streamers

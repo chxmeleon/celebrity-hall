@@ -4,8 +4,8 @@ import Layout from '@/layouts/Layout'
 const Rooms = () => {
   return (
     <Layout>
-      <section className="">
-
+      <section>
+        rooms
       </section>
     </Layout>
   )

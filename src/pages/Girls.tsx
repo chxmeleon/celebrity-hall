@@ -1,8 +1,8 @@
-import React from 'react'
+import Layout from '@/layouts/Layout'
 
 const Girls = () => {
   return (
-    <div>Girls</div>
+    <Layout>Girls</Layout>
   )
 }
 
