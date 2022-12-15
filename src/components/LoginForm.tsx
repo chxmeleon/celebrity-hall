@@ -46,11 +46,15 @@ const LoginForm: React.FC = () => {
           <p className="pr-2 pl-3">This field is required</p>
         </div>
       </div>
-      <div className="text-2xl inline-flex w-full justify-end px-1">
-        <div className="i-heroicons-globe-alt"></div>
-        <div className="ml-3 i-heroicons-arrow-top-right-on-square"></div>
+      <div className="flex justify-end px-1 w-full text-2xl">
+        <button>
+          <div className="i-heroicons-globe-alt"></div>
+        </button>
+        <button className="ml-3 ">
+          <div className="i-heroicons-arrow-top-right-on-square"></div>
+        </button>
       </div>
-      <div className="w-[480px] pt-4">
+      <div className="pt-4 w-[480px]">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col justify-between h-[230px]"
