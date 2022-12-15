@@ -5,7 +5,7 @@ const icons = {
   user: cx`i-heroicons-user-solid text-2xl hover:text-amber-200`,
   document: cx`i-heroicons-document-text-solid hover:text-amber-200`,
   chart: cx`i-heroicons-chart-pie-solid hover:text-amber-200`,
-  global: cx`i-heroicons-globe-alt hover:text-amber-200`,
+  global: cx`i-heroicons-cog-8-tooth hover:text-amber-200`,
   refresh: cx`i-mdi-refresh hover:text-amber-200`,
 }
 
