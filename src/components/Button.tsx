@@ -8,13 +8,15 @@ type LoginButtonProps = {
 }
 
 type LinkButtonProps = {
-  children: React.ReactNode
+  text: string
   href: string
-  target: boolean
+  isTarget: boolean
 }
 
 type ToggleButtonProps = {
   children: React.ReactNode
+  href: string
+  isTarget: boolean
 }
 
 export const LoginButton: React.FC<LoginButtonProps> = (props) => {
@@ -35,14 +37,14 @@ export const LoginButton: React.FC<LoginButtonProps> = (props) => {
 }
 
 export const LinkButton: React.FC<LinkButtonProps> = (props) => {
-  const { children, href, target = false } = props
+  const { text, href, isTarget } = props
   return (
     <>
-      {target ? (
+      {isTarget ? (
         <a href={href} target="_blank" rel="noopener noreferrer">
           <div
             className={bts({
-              intent: 'linerSlopeOutline',
+              intent: 'slopeOutline',
               round: 'sm',
               size: 'full',
             })}
@@ -54,7 +56,7 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
                 size: 'full',
               })}
             >
-              <p className="text-xl text-white">{children}</p>
+              <p className="text-xl">{text}</p>
             </div>
           </div>
         </a>
@@ -62,7 +64,7 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
         <Link to={href}>
           <div
             className={bts({
-              intent: 'linerSlopeOutline',
+              intent: 'slopeOutline',
               round: 'sm',
               size: 'full',
             })}
@@ -74,7 +76,7 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
                 size: 'full',
               })}
             >
-              <p className="text-xl text-white">{children}</p>
+              <p className="text-xl">{text}</p>
             </div>
           </div>
         </Link>
@@ -84,16 +86,37 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
 }
 
 export const ToggleButton: React.FC<ToggleButtonProps> = (props) => {
-  const { children } = props
+  const { children, href, isTarget } = props
   return (
-    <button
-      className={bts({
-        intent: 'grayFill',
-        round: 'full',
-        size: 'full',
-      })}
-    >
-      <p className="text-sm font-medium">{children}</p>
-    </button>
+    <>
+      {isTarget ? (
+        <a
+          className={bts({
+            intent: 'grayFill',
+            round: 'full',
+            size: 'tiny',
+          })}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="flex justify-around items-center m-auto w-2/3">
+            {children}
+          </div>
+        </a>
+      ) : (
+        <button
+          className={bts({
+            intent: 'grayFill',
+            round: 'full',
+            size: 'tiny',
+          })}
+        >
+          <div className="flex justify-around items-center m-auto w-2/3">
+            {children}
+          </div>
+        </button>
+      )}
+    </>
   )
 }
