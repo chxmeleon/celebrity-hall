@@ -4,11 +4,8 @@ import { clsx as cx } from 'clsx'
 import Header from './Header'
 import LeftSidebar from './LeftSidebar'
 
-// type LayoutProps = {
-//   children: React.ReactNode
-// }
-
 const Layout: React.FC = () => {
+  const outlet = useOutlet()
   const location = useLocation()
   const isLoginPath = location.pathname === '/login'
   const bgImage = cx(
@@ -17,7 +14,6 @@ const Layout: React.FC = () => {
      before:absolute before:w-full before:h-full before:bg-black/20 before:content-['']`
   )
 
-  const outlet = useOutlet()
   return (
     <main>
       <div className="relative">

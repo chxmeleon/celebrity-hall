@@ -7,7 +7,7 @@ const LeftSidebar = () => {
       <div className="mx-auto w-full">
         <section className="pb-6 w-full">
           <div className="flex">
-            <img src={LogoImg} alt="logo image" className="m-auto w-24" />
+            <img src={LogoImg} alt="logo image" className="m-auto w-24"/>
           </div>
           <div className="flex justify-around items-center pt-3 w-full">
             <div className="mt-1.5 w-11 h-11 i-heroicons-user-circle-solid"></div>
@@ -17,7 +17,7 @@ const LeftSidebar = () => {
             </div>
           </div>
         </section>
-        <hr className="border-t border-t-theme-75" />
+        <hr className="border-t border-t-theme-75"/>
         <section className="my-2 w-full h-[430px]">
           <div className="flex flex-col justify-evenly w-full h-full">
             <LinkButton href="/home/rooms" isTarget={false} text="全部" />
@@ -27,7 +27,7 @@ const LeftSidebar = () => {
             <LinkButton href="/home/tables" isTarget={false} text="多台下注" />
             <LinkButton href="/home/rankings" isTarget={false} text="排行榜" />
             <LinkButton href="/home/streamers" isTarget={false} text="美女主播" />
-            <LinkButton href="/home/rooms/:id" isTarget={false} text="APP下載" />
+            <LinkButton href="https://google.com/" isTarget={true} text="APP下載" />
           </div>
         </section>
       </div>
