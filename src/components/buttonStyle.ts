@@ -24,7 +24,7 @@ export const buttonStyle = cva('text-center m-auto', {
       activedSlopeOutline: [
         'p-[1px]',
         'bg-link-button-54',
-        'shadow-lg',
+        'shadow-md',
         'shadow-theme-300/70',
       ],
       slopeOutlineBg: [
@@ -51,17 +51,19 @@ export const buttonStyle = cva('text-center m-auto', {
         'flex',
         'justify-center',
         'text-gray-800',
-        'hover:text-theme-50',
+        'text-theme-50',
         'items-center',
         'back',
         'bg-gradient-to-tr',
         'from-theme-400',
         'via-theme-300',
         'to-theme-400',
-        'before:w-[9.4rem]',
-        'before:h-[2.6rem]',
+        'before:w-[12.1rem]',
+        'before:h-[2.7rem]',
         'before:fixed',
-        'before:bg-amber-100/20'
+        'before:rounded-full',
+        'before:blur-xl',
+        'before:bg-amber-100/40'
       ], 
       grayFill: [
         'py-1.5',

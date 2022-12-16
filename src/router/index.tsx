@@ -1,4 +1,4 @@
-import { Routes, Route, HashRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import Login from '@/pages/Login'
 import Rooms from '@/pages/Rooms'
 import Room from '@/pages/Rooms/[id]'
@@ -12,10 +12,9 @@ import Liverooms from '@/pages/Liverooms'
 import Mutualrooms from '@/pages/Mutualrooms'
 import Following from '@/pages/Following'
 
-
 const Router: React.FC = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/login" element={<Login />} />
@@ -33,7 +32,7 @@ const Router: React.FC = () => {
           <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 
