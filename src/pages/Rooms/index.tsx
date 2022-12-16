@@ -1,14 +1,5 @@
-import React from 'react'
-import Layout from '@/layouts/Layout'
-
 const Rooms = () => {
-  return (
-    <Layout>
-      <section>
-        rooms
-      </section>
-    </Layout>
-  )
+  return <div>rooms</div>
 }
 
-export default Rooms 
+export default Rooms

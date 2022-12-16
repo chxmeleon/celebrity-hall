@@ -1,7 +1,6 @@
-import Layout from '@/layouts/Layout'
 
 const Rankings = () => {
-  return <Layout>Rankings</Layout>
+  return <div>Rankings</div>
 }
 
 export default Rankings

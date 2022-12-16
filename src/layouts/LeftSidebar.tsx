@@ -1,5 +1,5 @@
 import LogoImg from '@/assets/login_logo.webp'
-import { LinkButton, ToggleButton } from '@/components/Button'
+import { LinkButton } from '@/components/Button'
 
 const LeftSidebar = () => {
   return (
@@ -20,14 +20,14 @@ const LeftSidebar = () => {
         <hr className="border-t border-t-theme-75" />
         <section className="my-2 w-full h-[430px]">
           <div className="flex flex-col justify-evenly w-full h-full">
-            <LinkButton href="/" isTarget={false} text="全部" />
-            <LinkButton href="/rooms" isTarget={false} text="互動廳" />
-            <LinkButton href="/rooms/:id" isTarget={false} text="現場廳" />
-            <LinkButton href="/rankings" isTarget={false} text="關注" />
-            <LinkButton href="/lists" isTarget={false} text="多台下注" />
-            <LinkButton href="/rankings" isTarget={false} text="排行榜" />
-            <LinkButton href="/streamers" isTarget={false} text="美女主播" />
-            <LinkButton href="/" isTarget={false} text="APP下載" />
+            <LinkButton href="/home/rooms" isTarget={false} text="全部" />
+            <LinkButton href="/home/liverooms" isTarget={false} text="互動廳" />
+            <LinkButton href="/home/mutualrooms" isTarget={false} text="現場廳" />
+            <LinkButton href="/home/rankings" isTarget={false} text="關注" />
+            <LinkButton href="/home/tables" isTarget={false} text="多台下注" />
+            <LinkButton href="/home/rankings" isTarget={false} text="排行榜" />
+            <LinkButton href="/home/streamers" isTarget={false} text="美女主播" />
+            <LinkButton href="/home/rooms/:id" isTarget={false} text="APP下載" />
           </div>
         </section>
       </div>
