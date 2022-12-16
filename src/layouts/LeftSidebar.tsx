@@ -18,41 +18,16 @@ const LeftSidebar = () => {
           </div>
         </section>
         <hr className="border-t border-t-theme-75" />
-        <section className="my-2 w-full h-[270px]">
+        <section className="my-2 w-full h-[430px]">
           <div className="flex flex-col justify-evenly w-full h-full">
-            <LinkButton href="/" isTarget={false} text="百家樂" />
-            <LinkButton href="/streamers" isTarget={false} text="美女主播" />
-            <LinkButton href="/lists" isTarget={false} text="快速好路" />
+            <LinkButton href="/" isTarget={false} text="全部" />
+            <LinkButton href="/rooms" isTarget={false} text="互動廳" />
+            <LinkButton href="/rooms/:id" isTarget={false} text="現場廳" />
+            <LinkButton href="/rankings" isTarget={false} text="關注" />
+            <LinkButton href="/lists" isTarget={false} text="多台下注" />
             <LinkButton href="/rankings" isTarget={false} text="排行榜" />
-            <LinkButton
-              href="https://t.me/richman5888"
-              isTarget={true}
-              text="成人影片"
-            />
-          </div>
-        </section>
-        <hr className="pb-1 border-1 border-theme-75" />
-        <section className="w-full h-44">
-          <div className="flex flex-col justify-around w-full h-full">
-            <ToggleButton isTarget={false} href="">
-              <div className="text-lg i-heroicons-megaphone-solid"></div>
-              <p>會員公告</p>
-            </ToggleButton>
-            <ToggleButton isTarget={false} href="">
-              <div className="text-lg i-heroicons-information-circle"></div>
-              <p>遊戲說明</p>
-            </ToggleButton>
-            <ToggleButton
-              isTarget={true}
-              href="https://page.line.me/?accountId=315xktcy"
-            >
-              <div className="text-lg i-heroicons-phone-arrow-up-right-solid"></div>
-              <p>客服中心</p>
-            </ToggleButton>
-            <ToggleButton isTarget={true} href="/">
-              <div className="text-lg i-mdi-cellphone-arrow-down-variant"></div>
-              <p>APP下載</p>
-            </ToggleButton>
+            <LinkButton href="/streamers" isTarget={false} text="美女主播" />
+            <LinkButton href="/" isTarget={false} text="APP下載" />
           </div>
         </section>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
 import Header from './Header'
 import LeftSidebar from './LeftSidebar'
@@ -33,6 +33,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
               <LeftSidebar />
               <div className="relative w-full bg-black">{children}</div>
             </div>
+            <Outlet />
           </>
         )}
       </section>
