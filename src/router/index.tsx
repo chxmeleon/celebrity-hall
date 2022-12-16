@@ -8,6 +8,8 @@ import Profile from '@/pages/Profile'
 import Rankings from '@/pages/Rankings'
 import Layout from '@/layouts/Layout'
 import Tables from '@/pages/Tables'
+import Liverooms from '@/pages/Liverooms'
+import Mutualrooms from '@/pages/Mutualrooms'
 
 
 const Router: React.FC = () => {
@@ -19,8 +21,8 @@ const Router: React.FC = () => {
         </Route>
         <Route path="home" element={<Layout />}>
           <Route path="rooms" element={<Rooms />} />
-          <Route path="liverooms" element={<Rooms />} />
-          <Route path="mutualrooms" element={<Rooms />} />
+          <Route path="liverooms" element={<Liverooms />} />
+          <Route path="mutualrooms" element={<Mutualrooms />} />
           <Route path="rooms/:id" element={<Room />} />
           <Route path="streamers" element={<Streamers />} />
           <Route path="streamers/:id" element={<Streamer />} />
