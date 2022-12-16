@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { buttonStyle as bts } from './buttonStyle'
 
 type LoginButtonProps = {
@@ -38,6 +38,10 @@ export const LoginButton: React.FC<LoginButtonProps> = (props) => {
 
 export const LinkButton: React.FC<LinkButtonProps> = (props) => {
   const { text, href, isTarget } = props
+  const location = useLocation()
+  const currentPath = location.pathname
+  const isCurrentPath = (href: string) => href === currentPath && true
+
   return (
     <>
       {isTarget ? (
@@ -61,17 +65,21 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
           </div>
         </a>
       ) : (
-        <Link to={href}>
+        <Link to={href} key={href}>
           <div
             className={bts({
-              intent: 'slopeOutline',
+              intent: isCurrentPath(href)
+                ? 'activedSlopeOutline'
+                : 'slopeOutline',
               round: 'sm',
               size: 'full',
             })}
           >
             <div
               className={bts({
-                intent: 'slopeOutlineBg',
+                intent: isCurrentPath(href)
+                  ? 'activedSlopeBg'
+                  : 'slopeOutlineBg',
                 round: 'sm',
                 size: 'full',
               })}
