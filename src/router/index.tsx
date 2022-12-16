@@ -10,6 +10,7 @@ import Layout from '@/layouts/Layout'
 import Tables from '@/pages/Tables'
 import Liverooms from '@/pages/Liverooms'
 import Mutualrooms from '@/pages/Mutualrooms'
+import Following from '@/pages/Following'
 
 
 const Router: React.FC = () => {
@@ -27,6 +28,7 @@ const Router: React.FC = () => {
           <Route path="streamers" element={<Streamers />} />
           <Route path="streamers/:id" element={<Streamer />} />
           <Route path="tables" element={<Tables />} />
+          <Route path="following" element={<Following />} />
           <Route path="rankings" element={<Rankings />} />
           <Route path="profile" element={<Profile />} />
         </Route>
