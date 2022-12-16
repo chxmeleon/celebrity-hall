@@ -1,15 +1,14 @@
 import React from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import { useOutlet, useLocation } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
 import Header from './Header'
 import LeftSidebar from './LeftSidebar'
 
-type LayoutProps = {
-  children: React.ReactNode
-}
+// type LayoutProps = {
+//   children: React.ReactNode
+// }
 
-const Layout: React.FC<LayoutProps> = (props) => {
-  const { children } = props
+const Layout: React.FC = () => {
   const location = useLocation()
   const isLoginPath = location.pathname === '/login'
   const bgImage = cx(
@@ -18,6 +17,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
      before:absolute before:w-full before:h-full before:bg-black/20 before:content-['']`
   )
 
+  const outlet = useOutlet()
   return (
     <main>
       <div className="relative">
@@ -25,15 +25,14 @@ const Layout: React.FC<LayoutProps> = (props) => {
       </div>
       <section className="w-full h-screen">
         {isLoginPath ? (
-          <>{children}</>
+          <>{outlet}</>
         ) : (
           <>
             <Header />
             <div className="flex justify-start pt-12 h-full">
               <LeftSidebar />
-              <div className="relative w-full bg-black">{children}</div>
+              <div className="relative w-full bg-black">{outlet}</div>
             </div>
-            <Outlet />
           </>
         )}
       </section>

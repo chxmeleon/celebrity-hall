@@ -1,7 +1,6 @@
-import Layout from '@/layouts/Layout'
 
 const Streamers = () => {
-  return <Layout>Streamers</Layout>
+  return <div>Streamers</div>
 }
 
 export default Streamers

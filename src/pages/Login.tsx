@@ -1,10 +1,9 @@
 import LogoImg from '@/assets/login_logo.webp'
 import LoginForm from '@/components/LoginForm'
-import Layout from '@/layouts/Layout'
 
 const Login: React.FC = () => {
   return (
-    <Layout>
+    <div>
       <div className="flex justify-center pt-28 w-full">
         <div className="w-full">
           <div className="flex flex-col items-center">
@@ -18,7 +17,7 @@ const Login: React.FC = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   )
 }
 
