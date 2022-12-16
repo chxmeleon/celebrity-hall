@@ -15,7 +15,7 @@ const Router: React.FC = () => {
     <HashRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Rooms />} />
+        <Route path="/rooms" element={<Rooms />} />
         <Route path="/rooms/:id" element={<Room />} />
         <Route path="/streamers" element={<Streamers />} />
         <Route path="/streamers/:id" element={<Streamer />} />
