@@ -13,17 +13,25 @@ import Mutualrooms from '@/pages/Mutualrooms'
 import Following from '@/pages/Following'
 
 const Router: React.FC = () => {
+
+  const route = [
+    {path: '/', element: '<Rooms />'},
+    {path: '/rooms', element: '<Rooms />'},
+  ]
+
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
+          <Route index element={<Login />} />
           <Route path="/login" element={<Login />} />
         </Route>
         <Route path="home" element={<Layout />}>
+          <Route index element={<Rooms />} />
           <Route path="rooms" element={<Rooms />} />
+          <Route path="rooms/:id" element={<Room />} />
           <Route path="liverooms" element={<Liverooms />} />
           <Route path="mutualrooms" element={<Mutualrooms />} />
-          <Route path="rooms/:id" element={<Room />} />
           <Route path="streamers" element={<Streamers />} />
           <Route path="streamers/:id" element={<Streamer />} />
           <Route path="tables" element={<Tables />} />

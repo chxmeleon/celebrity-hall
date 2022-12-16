@@ -8,7 +8,10 @@ import { useAuth } from '@/hooks/useAuth'
 const Layout: React.FC = () => {
   const location = useLocation()
   const user = useAuth()
-  const isLoginPath = location.pathname === '/login'
+  const isLoginPath =
+    location.pathname === '/login' ||
+    location.pathname === '/signup' ||
+    location.pathname === '/'
   const bgImage = cx(
     `${isLoginPath ? 'bg-fixed bg-center bg-cover' : 'bg-left-bottom bg-auto'}
      fixed top-0 left-0 w-full h-screen bg-no-repeat z-[-1] bg-[url('../assets/login_bg.avif')] 
