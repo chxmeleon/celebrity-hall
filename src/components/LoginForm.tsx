@@ -1,5 +1,4 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { XCircleIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react'
 import { LoginButton } from './Button'
 import { clsx as cx } from 'clsx'
@@ -38,12 +37,12 @@ const LoginForm: React.FC = () => {
 
   return (
     <div className="relative pt-5 w-full">
-      <div className={notifyAlert}>
-        <div className="flex items-center ">
-          <div className="text-2xl i-heroicons-x-circle" />
-          <p className="pr-2 pl-3">This field is required</p>
-        </div>
-      </div>
+      {/* <div className={notifyAlert}> */}
+      {/*   <div className="flex items-center "> */}
+      {/*     <div className="text-2xl i-heroicons-x-circle" /> */}
+      {/*     <p className="pr-2 pl-3">This field is required</p> */}
+      {/*   </div> */}
+      {/* </div> */}
       <div className="flex justify-center pt-4 w-full">
         <div className="w-[25rem]">
           <form
