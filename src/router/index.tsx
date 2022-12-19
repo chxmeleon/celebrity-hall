@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom'
 import Login from '@/pages/Login'
 import Rooms from '@/pages/Rooms'
 import Room from '@/pages/Rooms/[id]'
@@ -6,40 +6,38 @@ import Streamers from '@/pages/Streamers'
 import Streamer from '@/pages/Streamers/[id]'
 import Profile from '@/pages/Profile'
 import Rankings from '@/pages/Rankings'
-import Layout from '@/layouts/Layout'
+import PublicLayout from '@/layouts/PublicLayout'
+import ProtectedLayout from '@/layouts/ProtectedLayout'
 import Tables from '@/pages/Tables'
 import Liverooms from '@/pages/Liverooms'
 import Mutualrooms from '@/pages/Mutualrooms'
 import Following from '@/pages/Following'
+import { AuthProvider } from '@/hooks/useAuth'
 
 const Router: React.FC = () => {
-
-  const route = [
-    {path: '/', element: '<Rooms />'},
-    {path: '/rooms', element: '<Rooms />'},
-  ]
-
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<Login />} />
-          <Route path="/login" element={<Login />} />
-        </Route>
-        <Route path="home" element={<Layout />}>
-          <Route index element={<Rooms />} />
-          <Route path="rooms" element={<Rooms />} />
-          <Route path="rooms/:id" element={<Room />} />
-          <Route path="liverooms" element={<Liverooms />} />
-          <Route path="mutualrooms" element={<Mutualrooms />} />
-          <Route path="streamers" element={<Streamers />} />
-          <Route path="streamers/:id" element={<Streamer />} />
-          <Route path="tables" element={<Tables />} />
-          <Route path="following" element={<Following />} />
-          <Route path="rankings" element={<Rankings />} />
-          <Route path="profile" element={<Profile />} />
-        </Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route element={<PublicLayout />}>
+            <Route index element={<Navigate to="login" replace />} />
+            <Route path="login" element={<Login />} />
+          </Route>
+          <Route path="home" element={<ProtectedLayout />}>
+            <Route index element={<Navigate to="rooms" replace />} />
+            <Route path="rooms" element={<Rooms />} />
+            <Route path="rooms/:id" element={<Room />} />
+            <Route path="liverooms" element={<Liverooms />} />
+            <Route path="mutualrooms" element={<Mutualrooms />} />
+            <Route path="streamers" element={<Streamers />} />
+            <Route path="streamers/:id" element={<Streamer />} />
+            <Route path="tables" element={<Tables />} />
+            <Route path="following" element={<Following />} />
+            <Route path="rankings" element={<Rankings />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

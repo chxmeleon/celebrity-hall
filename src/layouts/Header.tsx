@@ -1,4 +1,5 @@
 import { clsx as cx } from 'clsx'
+import { useAuth } from '@/hooks/useAuth'
 
 const icons = {
   heart: cx`i-heroicons-heart-solid hover:text-pink-500`,
@@ -8,18 +9,20 @@ const icons = {
   global: cx`i-heroicons-cog-8-tooth hover:text-amber-200`,
   refresh: cx`i-mdi-refresh hover:text-amber-200`,
   bar: cx`i-heroicons-bars-3-solid`,
+  out: cx`i-heroicons-arrow-right-on-rectangle-solid`,
 }
 
 const Header = () => {
-
+  const { logout } = useAuth()
   return (
     <header className="relative">
       <nav className="absolute top-0 left-0 w-full h-12 bg-theme-50">
         <div className="flex justify-end items-center px-3 w-full h-full">
-          <div className="flex justify-around text-2xl w-[10rem]">
+          <div className="flex justify-around text-2xl w-[12rem]">
             <button className={icons.heart}></button>
             <button className={icons.chart}></button>
             <button className={icons.refresh}></button>
+            <button className={icons.out} onClick={() => logout()}></button>
             <button className={icons.bar}></button>
           </div>
         </div>

@@ -1,30 +1,38 @@
-import { createContext, useContext, useMemo } from 'react'
+import { createContext, useContext, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from 'usehooks-ts'
 
-const AuthContext = createContext({})
+interface AuthContextData {
+  auth: boolean
+  login: () => Promise<void>
+  logout: () => void
+}
 
-export const AuthProvider = ({ children }: any) => {
-  const [user, setUser] = useLocalStorage('user', null)
+const AuthContext = createContext<AuthContextData>({} as AuthContextData)
+
+export const AuthProvider = ({ children }: { children: JSX.Element }) => {
+  const [auth, setAuth] = useState<boolean>(false)
   const navigate = useNavigate()
 
-  const login = async (data: any) => {
-    setUser(data)
-    navigate('/home/rooms', { replace: true })
+  const login = async () => {
+    localStorage.setItem('user', 'ture')
+    setAuth(true)
+    navigate('/home/rooms')
   }
 
   const logout = () => {
-    setUser(null)
-    navigate('/login', { replace: true })
+    localStorage.clear()
+    setAuth(false)
+    navigate('/')
   }
 
   const value = useMemo(
     () => ({
-      user,
+      auth,
       login,
       logout,
     }),
-    [user]
+    [auth]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

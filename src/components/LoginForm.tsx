@@ -2,8 +2,10 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { useState } from 'react'
 import { LoginButton } from './Button'
 import { clsx as cx } from 'clsx'
+import { useAuth } from '@/hooks/useAuth'
 
 type Inputs = {
+  data(arg0: string): unknown
   email: string
   password: string
 }
@@ -15,7 +17,20 @@ const LoginForm: React.FC = () => {
     formState: { errors },
   } = useForm<Inputs>()
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  const { login } = useAuth()
+
+  // const onSubmit: SubmitHandler<Inputs> = (data) => {
+  //   login({
+  //     email: data.email,
+  //     password: data.password,
+  //   })
+  // }
+
+  const onSubmit = () => {
+    login()
+  }
+
+
   const isError = errors.password?.type === 'required'
   const [notify, setNotify] = useState<boolean>(false)
   const handleNotify = () => {
@@ -38,7 +53,7 @@ const LoginForm: React.FC = () => {
   return (
     <div className="relative pt-5 w-full">
       {/* <div className={notifyAlert}> */}
-      {/*   <div className="flex items-center "> */}
+      {/*   <div className="flex items-center"> */}
       {/*     <div className="text-2xl i-heroicons-x-circle" /> */}
       {/*     <p className="pr-2 pl-3">This field is required</p> */}
       {/*   </div> */}
@@ -46,7 +61,7 @@ const LoginForm: React.FC = () => {
       <div className="flex justify-center pt-4 w-full">
         <div className="w-[25rem]">
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={onSubmit}
             className="flex flex-col justify-between h-[16rem]"
           >
             <div className="relative w-full">
@@ -68,7 +83,12 @@ const LoginForm: React.FC = () => {
               />
             </div>
             <div className="pl-2">
-              <input type="checkbox" name="" id="" className="accent-theme-300" />
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                className="accent-theme-300"
+              />
             </div>
             <div className="flex">
               <div className="flex justify-between items-center m-auto w-2/3 text-sm font-light">
