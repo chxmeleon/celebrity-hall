@@ -1,22 +1,17 @@
+import { useLang } from '@/hooks/useLang'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-type ModalProps = {
-  show: boolean
-  onClick: React.MouseEventHandler<HTMLDivElement>
-  onChange: React.ChangeEventHandler<HTMLSelectElement>
-  locale: string
-}
 
-const Modal: React.FC<ModalProps> = (props) => {
-  const { show, onClick, onChange, locale } = props
+const Modal = () => {
+  const { isShow, closeModal, handleSelectValue, locale } = useLang()
 
   return (
     <>
-      {show && (
+      {isShow && (
         <div className="relative w-full h-full">
           <div
-            onClick={onClick}
+            onClick={closeModal}
             className="flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center h-screen bg-theme-50/30 backdrop-blur-sm"
           >
             <div
@@ -26,10 +21,10 @@ const Modal: React.FC<ModalProps> = (props) => {
               className="p-6 m-auto w-1/4 h-1/4 rounded-md border-yellow-400 bg-theme-70 border-[1px]"
             >
               <div className="flex justify-end">
-                <div
-                  onClick={onClick}
+                <button
+                  onClick={closeModal}
                   className="text-2xl i-heroicons-x-circle-solid"
-                ></div>
+                ></button>
               </div>
               <div className="w-full">
                 <label className="block mb-2 text-sm font-medium">
@@ -38,7 +33,7 @@ const Modal: React.FC<ModalProps> = (props) => {
                 <select
                   className="block p-2.5 w-full text-sm text-center text-gray-100 rounded-md border-r-[16px] border-theme-150 bg-theme-150 focus:outline-0"
                   value={locale}
-                  onChange={onChange}
+                  onChange={handleSelectValue}
                 >
                   <option selected>
                     <FormattedMessage

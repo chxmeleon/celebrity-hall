@@ -1,13 +1,10 @@
 import React from 'react'
 import LogoImg from '@/assets/login_logo.webp'
 import LoginForm from '@/components/LoginForm'
+import { useLang } from '@/hooks/useLang'
 
-type LoginProps = {
-  openModal: React.MouseEventHandler<HTMLButtonElement>
-}
-
-const Login: React.FC<LoginProps> = (props) => {
-  const { openModal } = props
+const Login: React.FC = () => {
+  const { openModal } = useLang()
 
   return (
     <div>

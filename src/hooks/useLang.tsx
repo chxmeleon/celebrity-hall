@@ -46,14 +46,16 @@ export const LangProvider = ({ children }: { children: JSX.Element }) => {
   )
 
   return (
-    <IntlProvider
-      locale={locale}
-      key={locale}
-      defaultLocale={message['en-US']}
-      messages={message[locale]}
-    >
-      <LangContext.Provider value={value}>{children}</LangContext.Provider>
-    </IntlProvider>
+    <LangContext.Provider value={value}>
+      <IntlProvider
+        locale={locale}
+        key={locale}
+        defaultLocale={message['en-US']}
+        messages={message[locale]}
+      >
+        {children}
+      </IntlProvider>
+    </LangContext.Provider>
   )
 }
 

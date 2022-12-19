@@ -1,5 +1,6 @@
 import { clsx as cx } from 'clsx'
 import { useAuth } from '@/hooks/useAuth'
+import { useLang } from '@/hooks/useLang'
 
 const icons = {
   heart: cx`i-heroicons-heart-solid hover:text-pink-500`,
@@ -10,10 +11,12 @@ const icons = {
   refresh: cx`i-mdi-refresh hover:text-amber-200`,
   bar: cx`i-heroicons-bars-3-solid`,
   out: cx`i-heroicons-arrow-right-on-rectangle-solid`,
+  gear: cx`i-heroicons-cog-6-tooth-solid`,
 }
 
 const Header = () => {
   const { logout } = useAuth()
+  const { openModal } = useLang()
   return (
     <header className="relative">
       <nav className="absolute top-0 left-0 w-full h-12 bg-theme-50">
@@ -22,6 +25,7 @@ const Header = () => {
             <button className={icons.heart}></button>
             <button className={icons.chart}></button>
             <button className={icons.refresh}></button>
+            <button onClick={openModal} className={icons.gear}></button>
             <button className={icons.out} onClick={() => logout()}></button>
             <button className={icons.bar}></button>
           </div>
