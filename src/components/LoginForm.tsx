@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { LoginButton } from './Button'
 import { clsx as cx } from 'clsx'
 import { useAuth } from '@/hooks/useAuth'
+import { useIntl } from 'react-intl'
 
 type Inputs = {
   data(arg0: string): unknown
@@ -30,7 +31,6 @@ const LoginForm: React.FC = () => {
     login()
   }
 
-
   const isError = errors.password?.type === 'required'
   const [notify, setNotify] = useState<boolean>(false)
   const handleNotify = () => {
@@ -50,25 +50,24 @@ const LoginForm: React.FC = () => {
     transition-all duration-500 ease-in-out fixed top-10 right-10 px-4 py-3 
     text-red-800 bg-red-200 rounded-sm border-l-4 border-l-red-500`)
 
+  const { formatMessage } = useIntl()
+
   return (
     <div className="relative pt-5 w-full">
-      {/* <div className={notifyAlert}> */}
-      {/*   <div className="flex items-center"> */}
-      {/*     <div className="text-2xl i-heroicons-x-circle" /> */}
-      {/*     <p className="pr-2 pl-3">This field is required</p> */}
-      {/*   </div> */}
-      {/* </div> */}
-      <div className="flex justify-center pt-4 w-full">
+      <div className="flex justify-center w-full">
         <div className="w-[25rem]">
           <form
             onSubmit={onSubmit}
-            className="flex flex-col justify-between h-[16rem]"
+            className="flex flex-col justify-between h-[20rem]"
           >
             <div className="relative w-full">
               <div className="absolute top-3 left-4 text-2xl i-heroicons-user-solid"></div>
               <input
                 autoComplete="off"
-                placeholder="Account"
+                placeholder={formatMessage({
+                  id: 'username',
+                  defaultMessage: 'Account',
+                })}
                 {...register('email')}
                 className={loginFromInput}
               />
@@ -77,7 +76,10 @@ const LoginForm: React.FC = () => {
               <div className="absolute top-3 left-4 text-2xl i-heroicons-key-solid"></div>
               <input
                 type="password"
-                placeholder="Password"
+                placeholder={formatMessage({
+                  id: 'password',
+                  defaultMessage: 'Password',
+                })}
                 {...register('password', { required: true })}
                 className={loginFromInput}
               />
@@ -92,23 +94,25 @@ const LoginForm: React.FC = () => {
             </div>
             <div className="flex">
               <div className="flex justify-between items-center m-auto w-2/3 text-sm font-light">
-                <p>forgot password</p>
+                <p>
+                  {formatMessage({
+                    id: 'screens.login.forgotpassword',
+                    defaultMessage: 'forgot password',
+                  })}
+                </p>
                 <p>|</p>
-                <p className="text-amber-200">play for free</p>
+                <p className="text-amber-200">
+                  {formatMessage({
+                    id: 'screens.login.trialLogin',
+                    defaultMessage: 'play for free',
+                  })}
+                </p>
               </div>
             </div>
-            <div className="flex pt-2">
+            <div className="flex pt-8">
               <LoginButton onClick={handleNotify} text="Login" />
             </div>
           </form>
-          <div className="flex justify-center py-10 px-1 w-full text-2xl">
-            <button>
-              <div className="i-heroicons-globe-alt"></div>
-            </button>
-            <button className="ml-6">
-              <div className="i-heroicons-arrow-top-right-on-square"></div>
-            </button>
-          </div>
         </div>
       </div>
     </div>

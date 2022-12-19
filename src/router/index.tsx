@@ -1,3 +1,4 @@
+import React from 'react'
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom'
 import Login from '@/pages/Login'
 import Rooms from '@/pages/Rooms'
@@ -14,14 +15,21 @@ import Mutualrooms from '@/pages/Mutualrooms'
 import Following from '@/pages/Following'
 import { AuthProvider } from '@/hooks/useAuth'
 
-const Router: React.FC = () => {
+type RouterProps = {
+  setLocale: React.Dispatch<React.SetStateAction<string>>
+  openModal: React.MouseEventHandler<HTMLButtonElement>
+}
+
+const Router: React.FC<RouterProps> = (props) => {
+  const { setLocale, openModal } = props
+
   return (
     <BrowserRouter>
       <AuthProvider>
         <Routes>
           <Route element={<PublicLayout />}>
             <Route index element={<Navigate to="login" replace />} />
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<Login openModal={openModal} />} />
           </Route>
           <Route path="home" element={<ProtectedLayout />}>
             <Route index element={<Navigate to="rooms" replace />} />

@@ -1,7 +1,14 @@
+import React from 'react'
 import LogoImg from '@/assets/login_logo.webp'
 import LoginForm from '@/components/LoginForm'
 
-const Login: React.FC = () => {
+type LoginProps = {
+  openModal: React.MouseEventHandler<HTMLButtonElement>
+}
+
+const Login: React.FC<LoginProps> = (props) => {
+  const { openModal } = props
+
   return (
     <div>
       <div className="flex justify-center pt-28 w-full">
@@ -10,8 +17,16 @@ const Login: React.FC = () => {
             <div>
               <img src={LogoImg} alt="logo image" className="w-24" />
             </div>
-            <div className="pt-10">
+            <div className="py-10">
               <p>Login</p>
+            </div>
+            <div className="flex justify-end px-1 text-2xl w-[25rem]">
+              <button onClick={openModal}>
+                <div className="i-heroicons-cog-6-tooth-solid"></div>
+              </button>
+              <button className="ml-6">
+                <div className="i-heroicons-arrow-top-right-on-square"></div>
+              </button>
             </div>
             <LoginForm />
           </div>
