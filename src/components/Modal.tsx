@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 
 const Modal = () => {
-  const { isShow, closeModal, handleSelectValue, locale } = useLang()
+  const { isShow, closeModal, handleSelectValue, isSelected } = useLang()
 
   return (
     <>
@@ -32,7 +32,7 @@ const Modal = () => {
                 </label>
                 <select
                   className="block p-2.5 w-full text-sm text-center text-gray-100 rounded-md border-r-[16px] border-theme-150 bg-theme-150 focus:outline-0"
-                  value={locale}
+                  value={isSelected}
                   onChange={handleSelectValue}
                 >
                   <option selected>

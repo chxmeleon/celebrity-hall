@@ -1,16 +1,12 @@
-import React, {
-  createContext,
-  SelectHTMLAttributes,
-  useContext,
-  useMemo,
-  useState,
-} from 'react'
+import React, { createContext, useContext, useMemo, useState } from 'react'
 import { IntlProvider } from 'react-intl'
 import message from '@/i18n'
+import { useLocalStorage } from 'usehooks-ts'
 
 interface LangContextData {
   isShow: boolean
   locale: string
+  isSelected: string
   openModal: () => void
   closeModal: () => void
   handleSelectValue: (e: React.ChangeEvent<HTMLSelectElement>) => void
@@ -20,10 +16,16 @@ const LangContext = createContext<LangContextData>({} as LangContextData)
 
 export const LangProvider = ({ children }: { children: JSX.Element }) => {
   const [isShow, setIsShow] = useState<boolean>(false)
-  const [locale, setLocale] = useState<string>(navigator.language.toLowerCase())
+  const locale = navigator.language.toLowerCase()
+  const [isSelected, setIsSelected] = useLocalStorage('lang', locale)
+  const localStorageLang = localStorage
+    .getItem('lang')
+    ?.split('"')
+    ?.slice(1, 2)
+    ?.toString() as string
 
   const handleSelectValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLocale(e.target.value)
+    setIsSelected(e.target.value)
   }
 
   const openModal = () => {
@@ -38,11 +40,12 @@ export const LangProvider = ({ children }: { children: JSX.Element }) => {
     () => ({
       isShow,
       locale,
+      isSelected,
       openModal,
       closeModal,
       handleSelectValue,
     }),
-    [isShow, locale]
+    [isShow, locale, isSelected]
   )
 
   return (
@@ -51,7 +54,7 @@ export const LangProvider = ({ children }: { children: JSX.Element }) => {
         locale={locale}
         key={locale}
         defaultLocale={message['en-US']}
-        messages={message[locale]}
+        messages={message[localStorageLang]}
       >
         {children}
       </IntlProvider>
