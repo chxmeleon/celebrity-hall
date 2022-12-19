@@ -1,6 +1,6 @@
 import Router from '@/router'
 import { useState } from 'react'
-import { ResponsiveProvider, Responsive } from '@/components/Responsive'
+import { ResponsiveProvider, Responsive } from '@/hooks/useResponsive'
 import { IntlProvider } from 'react-intl'
 import Modal from '@/components/Modal'
 import message from '@/i18n'
