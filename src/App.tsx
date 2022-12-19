@@ -1,7 +1,14 @@
 import Router from '@/router'
+import { ResponsiveProvider, Responsive } from '@/components/Responsive'
 
 function App() {
-  return <Router />
+  return (
+    <ResponsiveProvider>
+      <Responsive.Media>
+        <Router />
+      </Responsive.Media>
+    </ResponsiveProvider>
+  )
 }
 
 export default App
