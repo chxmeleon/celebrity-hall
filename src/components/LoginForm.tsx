@@ -43,7 +43,7 @@ const LoginForm: React.FC = () => {
   }
 
   const loginFromInput = cx`
-    border-0 outline-0 focus:border focus:border-theme-300 pl-14 w-full h-12 text-gray-100 rounded-full bg-theme-100
+    border-0 outline-0 focus:border focus:border-theme-300 pl-14 w-full h-10 text-gray-100 rounded-full bg-theme-100
   `
   const notifyAlert = cx(`
     ${notify ? 'opacity-100' : 'opacity-0 -translate-y-16'} 
@@ -55,13 +55,13 @@ const LoginForm: React.FC = () => {
   return (
     <div className="relative pt-5 w-full">
       <div className="flex justify-center w-full">
-        <div className="w-[25rem]">
+        <div className="w-[23rem]">
           <form
             onSubmit={onSubmit}
             className="flex flex-col justify-between h-[20rem]"
           >
             <div className="relative w-full">
-              <div className="absolute top-3 left-4 text-2xl i-heroicons-user-solid"></div>
+              <div className="absolute top-2 left-4 text-2xl i-heroicons-user-solid"></div>
               <input
                 autoComplete="off"
                 placeholder={formatMessage({
@@ -73,7 +73,7 @@ const LoginForm: React.FC = () => {
               />
             </div>
             <div className="relative w-full">
-              <div className="absolute top-3 left-4 text-2xl i-heroicons-key-solid"></div>
+              <div className="absolute top-2 left-4 text-2xl i-heroicons-key-solid"></div>
               <input
                 type="password"
                 placeholder={formatMessage({

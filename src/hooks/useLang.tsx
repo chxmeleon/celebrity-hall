@@ -18,12 +18,8 @@ export const LangProvider = ({ children }: { children: JSX.Element }) => {
   const [isShow, setIsShow] = useState<boolean>(false)
   const locale = navigator.language.toLowerCase()
   const [isSelected, setIsSelected] = useLocalStorage('lang', locale)
-  const localStorageLang = localStorage
-    .getItem('lang')
-    ?.split('"')
-    ?.slice(1, 2)
-    ?.toString() as string
-
+  console.log(isSelected);
+  
   const handleSelectValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setIsSelected(e.target.value)
   }
@@ -54,7 +50,7 @@ export const LangProvider = ({ children }: { children: JSX.Element }) => {
         locale={locale}
         key={locale}
         defaultLocale={message['en-US']}
-        messages={message[localStorageLang]}
+        messages={message[isSelected]}
       >
         {children}
       </IntlProvider>
