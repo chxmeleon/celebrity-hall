@@ -3,7 +3,7 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 const Modal = () => {
-  const { isShow, closeModal, handleSelectValue, isSelected } = useSetup()
+  const { locale, isShow, closeModal, handleSelectValue, isSelected } = useSetup()
 
   return (
     <>
@@ -35,9 +35,10 @@ const Modal = () => {
                 <select
                   className=" w-3/4 text-sm text-center text-gray-100 rounded-md border-r-[16px] border-theme-150 bg-theme-150 focus:outline-0"
                   value={isSelected}
+                  defaultValue={locale}
                   onChange={handleSelectValue}
                 >
-                  <option selected value="en-us">
+                  <option value="en-us">
                     <FormattedMessage id="enUS" />
                   </option>
                   <option value="zh-tw">

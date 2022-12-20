@@ -70,7 +70,7 @@ export const buttonStyle = cva('text-center m-auto', {
         'bg-theme-50/50',
         'border-b',
         'border-b-theme-70',
-        'hover:bg-theme-150',
+        'hover:bg-theme-150/50',
         'hover:text-gray-100',
         'active:bg-theme-400',
         'active:text-theme-50',

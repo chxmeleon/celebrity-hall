@@ -5,6 +5,7 @@ import { useLocalStorage } from 'usehooks-ts'
 
 interface SetupContextData {
   isShow: boolean
+  setIsShow: React.Dispatch<React.SetStateAction<boolean>>
   locale: string
   isSelected: string
   openModal: () => void
@@ -18,7 +19,6 @@ export const SetupProvider = ({ children }: { children: JSX.Element }) => {
   const [isShow, setIsShow] = useState<boolean>(false)
   const locale = navigator.language.toLowerCase()
   const [isSelected, setIsSelected] = useLocalStorage('lang', locale)
-  console.log(isSelected);
   
   const handleSelectValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setIsSelected(e.target.value)
@@ -35,13 +35,14 @@ export const SetupProvider = ({ children }: { children: JSX.Element }) => {
   const value = useMemo(
     () => ({
       isShow,
+      setIsShow,
       locale,
       isSelected,
       openModal,
       closeModal,
       handleSelectValue,
     }),
-    [isShow, locale, isSelected]
+    [isShow, setIsShow, locale, isSelected]
   )
 
   return (
