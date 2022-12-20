@@ -2,19 +2,19 @@ import Router from '@/router'
 import { ResponsiveProvider, Responsive } from '@/hooks/useResponsive'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from '@/hooks/useAuth'
-import { LangProvider } from '@/hooks/useLang'
+import { SetupProvider } from '@/hooks/useSetup'
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <LangProvider>
+        <SetupProvider>
           <ResponsiveProvider>
             <Responsive.Media>
               <Router />
             </Responsive.Media>
           </ResponsiveProvider>
-        </LangProvider>
+        </SetupProvider>
       </AuthProvider>
     </BrowserRouter>
   )

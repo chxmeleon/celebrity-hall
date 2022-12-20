@@ -3,7 +3,7 @@ import { IntlProvider } from 'react-intl'
 import message from '@/i18n'
 import { useLocalStorage } from 'usehooks-ts'
 
-interface LangContextData {
+interface SetupContextData {
   isShow: boolean
   locale: string
   isSelected: string
@@ -12,9 +12,9 @@ interface LangContextData {
   handleSelectValue: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-const LangContext = createContext<LangContextData>({} as LangContextData)
+const SetupContext = createContext<SetupContextData>({} as SetupContextData)
 
-export const LangProvider = ({ children }: { children: JSX.Element }) => {
+export const SetupProvider = ({ children }: { children: JSX.Element }) => {
   const [isShow, setIsShow] = useState<boolean>(false)
   const locale = navigator.language.toLowerCase()
   const [isSelected, setIsSelected] = useLocalStorage('lang', locale)
@@ -45,7 +45,7 @@ export const LangProvider = ({ children }: { children: JSX.Element }) => {
   )
 
   return (
-    <LangContext.Provider value={value}>
+    <SetupContext.Provider value={value}>
       <IntlProvider
         locale={locale}
         key={locale}
@@ -54,10 +54,10 @@ export const LangProvider = ({ children }: { children: JSX.Element }) => {
       >
         {children}
       </IntlProvider>
-    </LangContext.Provider>
+    </SetupContext.Provider>
   )
 }
 
-export const useLang = () => {
-  return useContext(LangContext)
+export const useSetup = () => {
+  return useContext(SetupContext)
 }

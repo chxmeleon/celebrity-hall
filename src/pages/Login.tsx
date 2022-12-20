@@ -1,23 +1,20 @@
 import React from 'react'
 import LogoImg from '@/assets/login_logo.webp'
 import LoginForm from '@/components/LoginForm'
-import { useLang } from '@/hooks/useLang'
+import { useSetup } from '@/hooks/useSetup'
 
 const Login: React.FC = () => {
-  const { openModal } = useLang()
+  const { openModal } = useSetup()
 
   return (
     <div>
-      <div className="flex justify-center pt-28 w-full">
-        <div className="w-full">
+      <div className="flex justify-center items-center w-full h-screen">
+        <div className="w-full ">
           <div className="flex flex-col items-center">
-            <div>
+            <div className="pb-8">
               <img src={LogoImg} alt="logo image" className="w-24" />
             </div>
-            <div className="py-10">
-              <p>Login</p>
-            </div>
-            <div className="flex justify-end px-1 text-2xl w-[25rem]">
+            <div className="flex justify-end px-1 pb-2 text-2xl w-[25rem]">
               <button onClick={openModal}>
                 <div className="i-heroicons-cog-6-tooth-solid"></div>
               </button>

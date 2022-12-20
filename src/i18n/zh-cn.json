@@ -106,6 +106,7 @@
   "screens.streamer.streamerIsOffline": "主播已下线",
   "screens.streamer.winRate": "胜率",
   "screens.login.wrongPassword": "帐号或密码错误",
+  "screens.login.forgotpassword": "忘記密碼",
   "screens.login.username": "帐号",
   "screens.login.password": "密码",
   "screens.login.rememberMe": "密码",

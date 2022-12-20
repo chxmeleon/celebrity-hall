@@ -58,14 +58,14 @@ const LoginForm: React.FC = () => {
         <div className="w-[23rem]">
           <form
             onSubmit={onSubmit}
-            className="flex flex-col justify-between h-[20rem]"
+            className="flex flex-col justify-between h-[19rem]"
           >
             <div className="relative w-full">
               <div className="absolute top-2 left-4 text-2xl i-heroicons-user-solid"></div>
               <input
                 autoComplete="off"
                 placeholder={formatMessage({
-                  id: 'username',
+                  id: 'screens.login.username',
                   defaultMessage: 'Account',
                 })}
                 {...register('email')}
@@ -77,40 +77,46 @@ const LoginForm: React.FC = () => {
               <input
                 type="password"
                 placeholder={formatMessage({
-                  id: 'password',
+                  id: 'screens.login.password',
                   defaultMessage: 'Password',
                 })}
                 {...register('password', { required: true })}
                 className={loginFromInput}
               />
             </div>
-            <div className="pl-2">
-              <input
-                type="checkbox"
-                name=""
-                id=""
-                className="accent-theme-300"
-              />
-            </div>
-            <div className="flex">
-              <div className="flex justify-between items-center m-auto w-2/3 text-sm font-light">
-                <p>
+            <div className="flex justify-between items-center px-1.5 w-full text-sm">
+              <div className="flex items-center">
+                <input type="checkbox" className="accent-theme-300" />
+                <p className="pl-2">
                   {formatMessage({
-                    id: 'screens.login.forgotpassword',
-                    defaultMessage: 'forgot password',
-                  })}
-                </p>
-                <p>|</p>
-                <p className="text-amber-200">
-                  {formatMessage({
-                    id: 'screens.login.trialLogin',
-                    defaultMessage: 'play for free',
+                    id: 'screens.login.rememberMe',
+                    defaultMessage: 'remamber me',
                   })}
                 </p>
               </div>
+              <p className="text-amber-200">
+                {formatMessage({
+                  id: 'screens.login.trialLogin',
+                  defaultMessage: 'play for free',
+                })}
+              </p>
             </div>
-            <div className="flex pt-8">
-              <LoginButton onClick={handleNotify} text="Login" />
+            <div className="flex justify-center py-2 font-thin">
+              <p>
+                {formatMessage({
+                  id: 'screens.login.entertainment',
+                  defaultMessage: 'Login',
+                })}
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <LoginButton
+                onClick={handleNotify}
+                text={formatMessage({
+                  id: 'screens.login.login',
+                  defaultMessage: 'Login',
+                })}
+              />
             </div>
           </form>
         </div>

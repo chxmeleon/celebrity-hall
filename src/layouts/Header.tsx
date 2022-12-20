@@ -1,6 +1,6 @@
 import { clsx as cx } from 'clsx'
 import { useAuth } from '@/hooks/useAuth'
-import { useLang } from '@/hooks/useLang'
+import { useSetup } from '@/hooks/useSetup'
 
 const icons = {
   heart: cx`i-heroicons-heart-solid hover:text-pink-500`,
@@ -16,7 +16,7 @@ const icons = {
 
 const Header = () => {
   const { logout } = useAuth()
-  const { openModal } = useLang()
+  const { openModal } = useSetup()
   return (
     <header className="relative">
       <nav className="absolute top-0 left-0 w-full h-12 bg-theme-50">
