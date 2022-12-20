@@ -2,7 +2,6 @@ import { useSetup } from '@/hooks/useSetup'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-
 const Modal = () => {
   const { isShow, closeModal, handleSelectValue, isSelected } = useSetup()
 
@@ -12,13 +11,13 @@ const Modal = () => {
         <div className="relative w-full h-full">
           <div
             onClick={closeModal}
-            className="   flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center h-screen  bg-black/30 backdrop-blur-sm "
+            className="flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center h-screen bg-black/30 backdrop-blur-sm"
           >
             <div
               onClick={(e) => {
                 e.stopPropagation()
               }}
-              className="p-5 m-auto w-1/4 h-1/4 rounded-md border-theme-300/50 bg-theme-70/75 backdrop-blur-md border"
+              className="p-5 m-auto w-1/4 h-1/4 bg-gradient-to-br rounded-md border border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md"
             >
               <div className="flex justify-end">
                 <button
@@ -26,22 +25,19 @@ const Modal = () => {
                   className="text-2xl i-heroicons-x-circle-solid"
                 ></button>
               </div>
-              <div className="w-full">
-                <label className="block py-5 text-sm font-medium pl-1">
-                  <FormattedMessage id="language" />
-                </label>
+              <div className="w-full flex justify-between p-3">
+                <div className="w-1/4 py-2.5 pl-1 text-sm font-medium tracking-widest">
+                  <FormattedMessage
+                    id="chooseacountry"
+                    defaultMessage="choose a language"
+                  />
+                </div>
                 <select
-                  className="block p-2.5 w-full text-sm text-center text-gray-100 rounded-md border-r-[16px] border-theme-150 bg-theme-150 focus:outline-0"
+                  className=" w-3/4 text-sm text-center text-gray-100 rounded-md border-r-[16px] border-theme-150 bg-theme-150 focus:outline-0"
                   value={isSelected}
                   onChange={handleSelectValue}
                 >
-                  <option selected>
-                    <FormattedMessage
-                      id="chooseacountry"
-                      defaultMessage="choose a language"
-                    />
-                  </option>
-                  <option value="en-us">
+                  <option selected value="en-us">
                     <FormattedMessage id="enUS" />
                   </option>
                   <option value="zh-tw">
@@ -63,6 +59,11 @@ const Modal = () => {
                     <FormattedMessage id="th" />
                   </option>
                 </select>
+              </div>
+              <div className="w-full flex justify-between p-3">
+                <div>Voice</div>
+                <div></div>
+
               </div>
             </div>
           </div>

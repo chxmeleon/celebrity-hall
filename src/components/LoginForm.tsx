@@ -84,9 +84,9 @@ const LoginForm: React.FC = () => {
                 className={loginFromInput}
               />
             </div>
-            <div className="flex justify-between items-center px-1.5 w-full text-sm">
+            <div className="flex justify-center items-center px-1.5 w-full text-sm">
               <div className="flex items-center">
-                <input type="checkbox" className="accent-theme-300" />
+                <input type="checkbox" className="accent-theme-300 outline-0 focus:outline-0" />
                 <p className="pl-2">
                   {formatMessage({
                     id: 'screens.login.rememberMe',
@@ -94,6 +94,7 @@ const LoginForm: React.FC = () => {
                   })}
                 </p>
               </div>
+              <p className="px-7">|</p>
               <p className="text-amber-200">
                 {formatMessage({
                   id: 'screens.login.trialLogin',
@@ -101,7 +102,7 @@ const LoginForm: React.FC = () => {
                 })}
               </p>
             </div>
-            <div className="flex justify-center py-2 font-thin">
+            <div className="flex justify-center py-2 text-sm">
               <p>
                 {formatMessage({
                   id: 'screens.login.entertainment',

@@ -8,7 +8,7 @@ const Login: React.FC = () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center w-full h-screen">
+      <div className="flex justify-center pt-32 w-full h-full">
         <div className="w-full ">
           <div className="flex flex-col items-center">
             <div className="pb-8">

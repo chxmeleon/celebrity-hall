@@ -17,7 +17,9 @@ type ToggleButtonProps = {
   children: React.ReactNode
   href: string
   isTarget: boolean
+  onClick: React.MouseEventHandler<HTMLButtonElement>
 }
+
 
 export const LoginButton: React.FC<LoginButtonProps> = (props) => {
   const { onClick, text } = props
@@ -93,16 +95,16 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
   )
 }
 
-export const ToggleButton: React.FC<ToggleButtonProps> = (props) => {
-  const { children, href, isTarget } = props
+export const RightSidebarButton: React.FC<ToggleButtonProps> = (props) => {
+  const { children, href, isTarget, onClick } = props
   return (
     <>
       {isTarget ? (
         <a
           className={bts({
             intent: 'grayFill',
-            round: 'full',
-            size: 'tiny',
+            round: 'sm',
+            size: 'full',
           })}
           href={href}
           target="_blank"
@@ -116,11 +118,12 @@ export const ToggleButton: React.FC<ToggleButtonProps> = (props) => {
         <button
           className={bts({
             intent: 'grayFill',
-            round: 'full',
-            size: 'tiny',
+            round: 'none',
+            size: 'full',
           })}
+          onClick={onClick}
         >
-          <div className="flex justify-around items-center m-auto w-2/3">
+          <div className="flex items-center pl-5 [&_p]:pl-5">
             {children}
           </div>
         </button>
