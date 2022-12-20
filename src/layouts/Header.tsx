@@ -1,10 +1,8 @@
 import { clsx as cx } from 'clsx'
 import { useAuth } from '@/hooks/useAuth'
 import { useSetup } from '@/hooks/useSetup'
-import { buttonStyle as bts } from '@/components/buttonStyle'
 import { RightSidebarButton } from '@/components/Button'
 import { useEffect, useRef, useState } from 'react'
-import OutsideClick from '@/hooks/OutsideClicked'
 
 const icons = {
   heart: cx`i-heroicons-heart-solid text-2xl hover:text-pink-500`,
@@ -19,7 +17,7 @@ const icons = {
   notice: cx`i-heroicons-megaphone-solid text-2xl`,
   info: cx`i-heroicons-information-circle-solid text-2xl`,
   phone: cx`i-heroicons-phone-arrow-up-right-solid text-2xl`,
-  sexy: cx`i-mdi-head-heart-outline text-2xl`
+  sexy: cx`i-mdi-head-heart-outline text-2xl`,
 }
 
 const Header = () => {
@@ -101,7 +99,6 @@ const Header = () => {
               <i className={icons.sexy}></i>
               <p>成人影片</p>
             </RightSidebarButton>
-
             <RightSidebarButton href="" isTarget={false} onClick={logout}>
               <i className={icons.out}></i>
               <p>登出</p>
