@@ -1,7 +1,7 @@
 import React from "react";
 import { Name, BodyShape, Timetable, Heart, Avatar, Rank } from "./Utilities";
 
-export function RankingCard3(): JSX.Element {
+export const RankingCard3: React.FC = () => {
   return (
     <div className="relative rounded-[15px] w-[320px] h-[301px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-300 to-rankingBorder-301">
       <div className="flex flex-col justify-between h-full bg-gradient-to-tl from-rankingbg-100  via-rankingbg-200 to-rankingbg-300 text-white rounded-[15px]">
@@ -16,9 +16,9 @@ export function RankingCard3(): JSX.Element {
       </div>
     </div>
   );
-}
+};
 
-export function RankingCard2(): JSX.Element {
+export const RankingCard2: React.FC = () => {
   return (
     <div className="relative rounded-[15px] w-[320px] h-[329px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-200 to-rankingBorder-201">
       <div className="flex flex-col justify-between h-full bg-gradient-to-tl from-rankingbg-100  via-rankingbg-200 to-rankingbg-300 text-white rounded-[15px]">
@@ -33,9 +33,9 @@ export function RankingCard2(): JSX.Element {
       </div>
     </div>
   );
-}
+};
 
-export function RankingCard1(): JSX.Element {
+export const RankingCard1: React.FC = () => {
   return (
     <div className="relative rounded-[15px] w-[320px] h-[375px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-100 to-rankingBorder-101">
       <div className="flex flex-col justify-between h-full bg-gradient-to-tl from-rankingbg-100  via-rankingbg-200 to-rankingbg-300 text-white rounded-[15px]">
@@ -50,9 +50,9 @@ export function RankingCard1(): JSX.Element {
       </div>
     </div>
   );
-}
+};
 
-export function RankingCardOther({ rank }: { rank: number }): JSX.Element {
+export const RankingCardOther: React.FC<{ rank: number }> = ({ rank }) => {
   return (
     <div className="w-[468px] h-[215px] flex h-full bg-[#262626] text-white rounded-[20px] items-center justify-center">
       <div className="w-[370px] flex justify-between items-center">
@@ -67,4 +67,4 @@ export function RankingCardOther({ rank }: { rank: number }): JSX.Element {
       </div>
     </div>
   );
-}
+};

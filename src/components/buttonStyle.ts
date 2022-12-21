@@ -1,20 +1,93 @@
 import { cva, VariantProps } from 'class-variance-authority'
 
 export type ButtonProps = VariantProps<typeof buttonStyle>
-export const buttonStyle = cva('font-medium py-3 px-7 m-auto', {
+export const buttonStyle = cva('text-center m-auto', {
   variants: {
     intent: {
-      linerSlope:
-        'text-gray-800 bg-gradient-to-r hover:via-amber-200 from-theme-200 via-theme-300 to-theme-200  hover:from-theme-400 hover:to-theme-400',
-      goldFill: 'bg-theme-300',
-      goldOutline: 'bg-black border-[1px] border-theme-300',
-      black: 'bg-theme-100'
+      linerSlope: [
+        'py-3',
+        'px-7',
+        'text-gray-800',
+        'bg-gradient-to-r',
+        'hover:via-amber-200',
+        'from-theme-200',
+        'via-theme-300',
+        'to-theme-200',
+        'hover:from-theme-400',
+        'hover:to-theme-400',
+      ],
+      goldFill: 'bg-theme-300 text-gray-800',
+      slopeOutline: [
+        'p-[1.16px]',
+        'bg-link-button-54',
+      ],
+      activedSlopeOutline: [
+        'p-[1px]',
+        'bg-link-button-54',
+        'shadow-md',
+        'shadow-theme-300/70',
+      ],
+      slopeOutlineBg: [
+        'py-1.5',
+        'flex',
+        'justify-center',
+        'text-gray-100',
+        'hover:text-theme-50',
+        'items-center',
+        'bg-gradient-to-b',
+        'from-theme-150',
+        'to-theme-70',
+        'back',
+        'hover:bg-gradient-to-tr',
+        'hover:from-theme-400',
+        'hover:via-theme-300',
+        'hover:to-theme-400 ',
+        'active:from-theme-150',
+        'active:to-theme-70',
+        'active:text-gray-100'
+      ],
+      activedSlopeBg: [
+        'py-1.5',
+        'flex',
+        'justify-center',
+        'text-gray-800',
+        'text-theme-50',
+        'items-center',
+        'back',
+        'bg-gradient-to-tr',
+        'from-theme-400',
+        'via-theme-300',
+        'to-theme-400',
+        'before:w-[12.1rem]',
+        'before:h-[2.7rem]',
+        'before:fixed',
+        'before:rounded-full',
+        'before:blur-xl',
+        'before:bg-amber-100/40'
+      ], 
+      grayFill: [
+        'py-3',
+        'bg-theme-50/50',
+        'border-b',
+        'border-b-theme-70',
+        'hover:bg-theme-150/50',
+        'hover:text-gray-100',
+        'active:bg-theme-400',
+        'active:text-theme-50',
+      ],
     },
-    round: { full: 'rounded-full', sm: 'rounded-sm' },
+    round: {
+      full: 'rounded-full',
+      xl: 'rounded-xl',
+      md: 'rounded-md',
+      sm: 'rounded-sm',
+      none: ''
+    },
     size: {
+      full: 'w-full',
+      tiny: 'w-full text-sm font-medium ',
       small: 'text-sm w-[130px]',
-      medium: 'text-lg w-[230px]',
-      large: '',
+      medium: 'text-lg w-[230px] font-medium',
     },
   },
   compoundVariants: [
@@ -28,21 +101,6 @@ export const buttonStyle = cva('font-medium py-3 px-7 m-auto', {
       round: 'full',
       size: 'medium',
     },
-    {
-      intent: 'goldOutline',
-      round: 'full',
-      size: 'medium',
-    },
-    {
-      intent: 'goldOutline',
-      round: 'sm',
-      size: 'medium',
-    },
-    {
-      intent: 'black',
-      round: 'sm',
-      size: 'medium'
-    }
   ],
   defaultVariants: {
     intent: 'linerSlope',

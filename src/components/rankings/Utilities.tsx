@@ -1,30 +1,24 @@
 import React from "react";
 
-export function Name({ name }: { name: string }): JSX.Element {
+export const Name: React.FC<{ name: string }> = ({ name }) => {
   return <div className="text-[24px] mt-[5px]">{name}</div>;
-}
+};
 
-export function BodyShape({
+export const BodyShape: React.FC<{ height: number; weight: number }> = ({
   height,
   weight,
-}: {
-  height: number;
-  weight: number;
-}): JSX.Element {
+}) => {
   return (
     <div className="text-[13px]">
       {height} cm / {weight} kg
     </div>
   );
-}
+};
 
-export function Timetable({
+export const Timetable: React.FC<{ start: string; end: string }> = ({
   start,
   end,
-}: {
-  start: string;
-  end: string;
-}): JSX.Element {
+}) => {
   return (
     <div className="flex items-center">
       <span className="flex items-center justify-center rounded-[5px] border-[0.5px] w-[35px] h-[18px] leading-[15px]">
@@ -35,9 +29,9 @@ export function Timetable({
       </span>
     </div>
   );
-}
+};
 
-export function Heart({ like }: { like: number }): JSX.Element {
+export const Heart: React.FC<{ like: number }> = ({ like }) => {
   return (
     <div className="flex mt-[8px] items-center">
       <span className="rounded-full bg-[#FF5F85] w-[30px] h-[30px] flex">
@@ -46,15 +40,12 @@ export function Heart({ like }: { like: number }): JSX.Element {
       <span className="ml-[7px] text-[32px]">{like}</span>
     </div>
   );
-}
+};
 
-export function Avatar({
+export const Avatar: React.FC<{ img?: string; rank?: string }> = ({
   img,
   rank,
-}: {
-  img?: string;
-  rank?: string;
-}): JSX.Element {
+}) => {
   if (rank === "1st") {
     return (
       <img
@@ -71,9 +62,9 @@ export function Avatar({
       alt="Avatar"
     />
   );
-}
+};
 
-export function Rank({ rank }: { rank: string }): JSX.Element {
+export const Rank: React.FC<{ rank: string }> = ({ rank }) => {
   return (
     <img
       className="absolute top-[-33px] left-[18px] z-10"
@@ -81,4 +72,4 @@ export function Rank({ rank }: { rank: string }): JSX.Element {
       alt={`${rank}`}
     />
   );
-}
+};

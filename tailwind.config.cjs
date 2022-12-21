@@ -9,7 +9,11 @@ module.exports = {
     extend: {
       colors: {
         theme: {
+          50: '#131313',
+          70: '#252525',
+          75: '#333333',
           100: '#373737',
+          150: '#4A4A4B', 
           200: '#9c6c0e',
           300: '#FCED95',
           400: '#de9b16',
@@ -27,6 +31,9 @@ module.exports = {
           300: '#CBA686',
           301: '#675749',
         }
+      },
+      backgroundImage: {
+        'link-button-54': 'linear-gradient(54deg, #FCED95, #9c6c0e, #FCED95)',
       },
     },
   },
