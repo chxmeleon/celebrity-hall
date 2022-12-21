@@ -9,4 +9,8 @@
       @apply overscroll-none bg-gradient-to-br bg-theme-50  text-gray-300;
     }
   }
+
+  .b-skew {
+    transform: scaleY(1.1) perspective(2.6rem) rotateX(0.45deg);
+  }
 }
