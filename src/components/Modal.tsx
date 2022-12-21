@@ -26,13 +26,16 @@ const Modal = () => {
                   className="text-2xl i-heroicons-x-circle"
                 ></button>
               </div>
-              <h1 className="text-3xl text-center pt-3 pb-6">
-                <FormattedMessage id="setting" defaultMessage="Setting" />
+              <h1 className="pt-3 pb-6 text-2xl font-semibold text-center">
+                <FormattedMessage
+                  id="setting.setting"
+                  defaultMessage="Setting"
+                />
               </h1>
               <div className="flex justify-between p-3 w-full">
-                <div className="flex-grow py-2.5 pl-1 text-md font-medium tracking-wider">
+                <div className="flex-grow py-2.5 pl-1 font-medium tracking-wider text-md">
                   <FormattedMessage
-                    id="chooseacountry"
+                    id="setting.chooseacountry"
                     defaultMessage="Language"
                   />
                 </div>
@@ -66,9 +69,9 @@ const Modal = () => {
                 </select>
               </div>
               <div className="flex justify-between items-center p-3 w-full">
-                <div className="flex-grow py-2.5 pl-1 text-md font-medium tracking-wider">
+                <div className="flex-grow py-2.5 pl-1 font-medium tracking-wider text-md">
                   <FormattedMessage
-                    id="gameVolume"
+                    id="setting.gameVolume"
                     defaultMessage="Game Volume"
                   />
                 </div>
@@ -81,9 +84,9 @@ const Modal = () => {
                 </div>
               </div>
               <div className="flex justify-between items-center p-3 w-full">
-                <div className="flex-grow py-2.5 pl-1 text-md font-medium tracking-wider">
+                <div className="flex-grow py-2.5 pl-1 font-medium tracking-wider text-md">
                   <FormattedMessage
-                    id="soundEffectsVolume"
+                    id="setting.soundEffectsVolume"
                     defaultMessage="Sound Effects Volume"
                   />
                 </div>
@@ -96,9 +99,9 @@ const Modal = () => {
                 </div>
               </div>
               <div className="flex justify-between items-center p-3 w-full">
-                <div className="flex-grow py-2.5 pl-1 text-md font-medium tracking-wider">
+                <div className="flex-grow py-2.5 pl-1 font-medium tracking-wider text-md">
                   <FormattedMessage
-                    id="giftVolume"
+                    id="setting.giftVolume"
                     defaultMessage="Gift Volume"
                   />
                 </div>

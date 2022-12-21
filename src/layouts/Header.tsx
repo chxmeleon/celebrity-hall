@@ -3,6 +3,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { useSetup } from '@/hooks/useSetup'
 import { RightSidebarButton } from '@/components/Button'
 import { useEffect, useRef, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 const icons = {
   heart: cx`i-heroicons-heart-solid text-2xl hover:text-pink-500`,
@@ -64,20 +65,32 @@ const Header = () => {
         <div
           className={`${
             toggle ? 'h-[343px] opacity-100' : 'h-0 opacity-0'
-          } fixed w-[14.5rem] min-h-fit max-h-fit top-12 right-4 z-40 transition-all duration-200 ease-in-out bg-theme-50/80 border border-theme-75 border-y-transparent`}
+          } fixed w-[17.5rem] max-w-fit min-h-fit max-h-fit top-12 right-4 z-40 transition-all duration-200 ease-in-out bg-theme-50/80 border border-theme-75 border-y-transparent`}
         >
           <div className="block w-full" onClick={stopProp}>
             <RightSidebarButton href="" isTarget={false} onClick={() => null}>
               <i className={icons.notice}></i>
-              <p>會員公告</p>
+              <p>
+                <FormattedMessage
+                  id="dropdown.notice"
+                  defaultMessage="Notice"
+                />
+              </p>
             </RightSidebarButton>
             <RightSidebarButton href="" isTarget={false} onClick={() => null}>
               <i className={icons.user}></i>
-              <p>會員中心</p>
+              <p>
+                <FormattedMessage
+                  id="dropdown.profile"
+                  defaultMessage="Profile"
+                />
+              </p>
             </RightSidebarButton>
             <RightSidebarButton href="" isTarget={false} onClick={() => null}>
               <i className={icons.info}></i>
-              <p>規則說明</p>
+              <p>
+                <FormattedMessage id="dropdown.info" defaultMessage="info" />
+              </p>
             </RightSidebarButton>
             <RightSidebarButton
               href="https://page.line.me/?accountId=315xktcy"
@@ -85,11 +98,21 @@ const Header = () => {
               onClick={() => null}
             >
               <i className={icons.phone}></i>
-              <p>客服中心</p>
+              <p>
+                <FormattedMessage
+                  id="dropdown.service"
+                  defaultMessage="service"
+                />
+              </p>
             </RightSidebarButton>
             <RightSidebarButton href="" isTarget={false} onClick={openModal}>
               <i className={icons.gear}></i>
-              <p>設定</p>
+              <p>
+                <FormattedMessage
+                  id="setting.setting"
+                  defaultMessage="Setting"
+                />
+              </p>
             </RightSidebarButton>
             <RightSidebarButton
               href="https://t.me/richman5888"
@@ -97,11 +120,21 @@ const Header = () => {
               onClick={() => null}
             >
               <i className={icons.sexy}></i>
-              <p>成人影片</p>
+              <p>
+                <FormattedMessage
+                  id="dropdown.porn"
+                  defaultMessage="Adult Video"
+                />
+              </p>
             </RightSidebarButton>
             <RightSidebarButton href="" isTarget={false} onClick={logout}>
               <i className={icons.out}></i>
-              <p>登出</p>
+              <p>
+                <FormattedMessage
+                  id="dropdown.logout"
+                  defaultMessage="Logout"
+                />
+              </p>
             </RightSidebarButton>
           </div>
         </div>
