@@ -3,10 +3,11 @@ import { clsx as cx } from 'clsx'
 import Header from './Header'
 import LeftSidebar from './LeftSidebar'
 import { useAuth } from '@/hooks/useAuth'
+import Modal from '@/components/Modal'
 
 const ProtectedLayout: React.FC = () => {
   const { auth } = useAuth()
-
+  
   if (!auth) {
     return <Navigate to="/login" replace />
   } 
@@ -17,6 +18,7 @@ const ProtectedLayout: React.FC = () => {
 
   return (
     <main>
+      <Modal />
       <div className="relative">
         <div className={bgImage}></div>
       </div>

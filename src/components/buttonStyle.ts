@@ -66,9 +66,11 @@ export const buttonStyle = cva('text-center m-auto', {
         'before:bg-amber-100/40'
       ], 
       grayFill: [
-        'py-1.5',
-        'bg-theme-75',
-        'hover:bg-theme-150',
+        'py-3',
+        'bg-theme-50/50',
+        'border-b',
+        'border-b-theme-70',
+        'hover:bg-theme-150/50',
         'hover:text-gray-100',
         'active:bg-theme-400',
         'active:text-theme-50',
@@ -79,6 +81,7 @@ export const buttonStyle = cva('text-center m-auto', {
       xl: 'rounded-xl',
       md: 'rounded-md',
       sm: 'rounded-sm',
+      none: ''
     },
     size: {
       full: 'w-full',

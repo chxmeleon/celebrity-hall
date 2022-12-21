@@ -4,23 +4,22 @@ import { buttonStyle as bts } from './buttonStyle'
 
 type LoginButtonProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>
-  text: string
 }
 
 type LinkButtonProps = {
-  text: string
   href: string
   isTarget: boolean
 }
 
 type ToggleButtonProps = {
-  children: React.ReactNode
   href: string
   isTarget: boolean
+  onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-export const LoginButton: React.FC<LoginButtonProps> = (props) => {
-  const { onClick, text } = props
+export const LoginButton: React.FC<
+  React.PropsWithChildren<LoginButtonProps>
+> = ({ children, onClick }) => {
   return (
     <button
       type="submit"
@@ -31,13 +30,16 @@ export const LoginButton: React.FC<LoginButtonProps> = (props) => {
       })}
       onClick={onClick}
     >
-      {text}
+      {children}
     </button>
   )
 }
 
-export const LinkButton: React.FC<LinkButtonProps> = (props) => {
-  const { text, href, isTarget } = props
+export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
+  children,
+  href,
+  isTarget,
+}) => {
   const location = useLocation()
   const currentPath = location.pathname
   const isCurrentPath = (href: string) => href === currentPath && true
@@ -60,7 +62,7 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
                 size: 'full',
               })}
             >
-              <p className="text-xl">{text}</p>
+              <p className="text-md font-medium">{children}</p>
             </div>
           </div>
         </a>
@@ -84,7 +86,7 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
                 size: 'full',
               })}
             >
-              <p className="text-xl">{text}</p>
+              <p className="text-md font-medium">{children}</p>
             </div>
           </div>
         </Link>
@@ -93,36 +95,33 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
   )
 }
 
-export const ToggleButton: React.FC<ToggleButtonProps> = (props) => {
-  const { children, href, isTarget } = props
+export const RightSidebarButton: React.FC<
+  React.PropsWithChildren<ToggleButtonProps>
+> = ({ children, href, isTarget, onClick }) => {
   return (
     <>
       {isTarget ? (
-        <a
+        <button
           className={bts({
             intent: 'grayFill',
-            round: 'full',
-            size: 'tiny',
+            round: 'sm',
+            size: 'full',
           })}
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
         >
-          <div className="flex justify-around items-center m-auto w-2/3">
-            {children}
-          </div>
-        </a>
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            <div className="flex items-center pl-8 [&_p]:pl-5">{children}</div>
+          </a>
+        </button>
       ) : (
         <button
           className={bts({
             intent: 'grayFill',
-            round: 'full',
-            size: 'tiny',
+            round: 'sm',
+            size: 'full',
           })}
+          onClick={onClick}
         >
-          <div className="flex justify-around items-center m-auto w-2/3">
-            {children}
-          </div>
+          <div className="flex items-center pl-8 [&_p]:pl-5">{children}</div>
         </button>
       )}
     </>

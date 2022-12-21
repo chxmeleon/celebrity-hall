@@ -13,15 +13,16 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [auth, setAuth] = useState<boolean>(false)
   const navigate = useNavigate()
+  
 
   const login = async () => {
-    localStorage.setItem('user', 'ture')
+    localStorage.setItem('user', 'true')
     setAuth(true)
     navigate('/home/rooms')
   }
 
   const logout = () => {
-    localStorage.clear()
+    localStorage.removeItem('user')
     setAuth(false)
     navigate('/')
   }
