@@ -7,10 +7,10 @@ import Modal from '@/components/Modal'
 
 const ProtectedLayout: React.FC = () => {
   const { auth } = useAuth()
-  
+
   if (!auth) {
     return <Navigate to="/login" replace />
-  } 
+  }
 
   const bgImage = cx`bg-left-bottom bg-auto
      fixed top-0 left-0 w-full h-screen bg-no-repeat z-[-1] bg-[url('../assets/login_bg.avif')] 

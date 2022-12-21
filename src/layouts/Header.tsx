@@ -64,7 +64,7 @@ const Header = () => {
       <div className="relative w-full">
         <div
           className={`${
-            toggle ? "h-[343px] opacity-100" : "h-0 opacity-0"
+            toggle ? 'h-[343px] opacity-100' : 'h-0 opacity-0 hidden'
           } fixed w-[17.5rem] max-w-fit min-h-fit max-h-fit top-12 right-4 z-40 transition-all duration-200 ease-in-out bg-theme-50/80 border border-theme-75 border-y-transparent`}
         >
           <div className="block w-full" onClick={stopProp}>

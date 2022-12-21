@@ -63,6 +63,9 @@ const LeftSidebar = () => {
                 defaultMessage="App Download"
               />
             </LinkButton>
+            <LinkButton href="/home/rooms/:id" isTarget={false}>
+              <p>rooms/:id</p>
+            </LinkButton>
           </div>
         </section>
       </div>

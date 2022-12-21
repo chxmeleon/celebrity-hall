@@ -39,7 +39,8 @@
     "react-router-dom": "^6.4.5",
     "sort-by": "^1.2.0",
     "styled-components": "^5.3.6",
-    "usehooks-ts": "^2.9.1"
+    "usehooks-ts": "^2.9.1",
+    "ws": "^8.11.0"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.1.6",
