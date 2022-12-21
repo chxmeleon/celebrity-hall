@@ -3,7 +3,8 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 const Modal = () => {
-  const { locale, isShow, closeModal, handleSelectValue, isSelected } = useSetup()
+  const { locale, isShow, closeModal, handleSelectValue, isSelected } =
+    useSetup()
 
   return (
     <>
@@ -17,23 +18,26 @@ const Modal = () => {
               onClick={(e) => {
                 e.stopPropagation()
               }}
-              className="p-5 m-auto w-1/4 h-1/4 bg-gradient-to-br rounded-md border border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md"
+              className="p-4 m-auto w-1/4 bg-gradient-to-br rounded-md border min-h-fit border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md"
             >
               <div className="flex justify-end">
                 <button
                   onClick={closeModal}
-                  className="text-2xl i-heroicons-x-circle-solid"
+                  className="text-2xl i-heroicons-x-circle"
                 ></button>
               </div>
-              <div className="w-full flex justify-between p-3">
-                <div className="w-1/4 py-2.5 pl-1 text-sm font-medium tracking-widest">
+              <h1 className="text-3xl text-center pt-3 pb-6">
+                <FormattedMessage id="setting" defaultMessage="Setting" />
+              </h1>
+              <div className="flex justify-between p-3 w-full">
+                <div className="flex-grow py-2.5 pl-1 text-md font-medium tracking-wider">
                   <FormattedMessage
                     id="chooseacountry"
-                    defaultMessage="choose a language"
+                    defaultMessage="Language"
                   />
                 </div>
                 <select
-                  className=" w-3/4 text-sm text-center text-gray-100 rounded-md border-r-[16px] border-theme-150 bg-theme-150 focus:outline-0"
+                  className="w-1/2 text-sm text-center text-gray-100 rounded-md border-r-[16px] border-theme-150 bg-theme-150 focus:outline-0"
                   value={isSelected}
                   defaultValue={locale}
                   onChange={handleSelectValue}
@@ -61,10 +65,50 @@ const Modal = () => {
                   </option>
                 </select>
               </div>
-              <div className="w-full flex justify-between p-3">
-                <div>Voice</div>
-                <div></div>
-
+              <div className="flex justify-between items-center p-3 w-full">
+                <div className="flex-grow py-2.5 pl-1 text-md font-medium tracking-wider">
+                  <FormattedMessage
+                    id="gameVolume"
+                    defaultMessage="Game Volume"
+                  />
+                </div>
+                <div className="w-1/2">
+                  <input
+                    type="range"
+                    defaultValue="50"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-400"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-between items-center p-3 w-full">
+                <div className="flex-grow py-2.5 pl-1 text-md font-medium tracking-wider">
+                  <FormattedMessage
+                    id="soundEffectsVolume"
+                    defaultMessage="Sound Effects Volume"
+                  />
+                </div>
+                <div className="w-1/2">
+                  <input
+                    type="range"
+                    defaultValue="50"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-400"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-between items-center p-3 w-full">
+                <div className="flex-grow py-2.5 pl-1 text-md font-medium tracking-wider">
+                  <FormattedMessage
+                    id="giftVolume"
+                    defaultMessage="Gift Volume"
+                  />
+                </div>
+                <div className="w-1/2">
+                  <input
+                    type="range"
+                    defaultValue="50"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-400"
+                  />
+                </div>
               </div>
             </div>
           </div>

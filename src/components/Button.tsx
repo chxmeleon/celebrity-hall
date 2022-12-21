@@ -4,24 +4,22 @@ import { buttonStyle as bts } from './buttonStyle'
 
 type LoginButtonProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>
-  text: string
 }
 
 type LinkButtonProps = {
-  text: string
   href: string
   isTarget: boolean
 }
 
 type ToggleButtonProps = {
-  children: React.ReactNode
   href: string
   isTarget: boolean
   onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-export const LoginButton: React.FC<LoginButtonProps> = (props) => {
-  const { onClick, text } = props
+export const LoginButton: React.FC<
+  React.PropsWithChildren<LoginButtonProps>
+> = ({ children, onClick }) => {
   return (
     <button
       type="submit"
@@ -32,13 +30,16 @@ export const LoginButton: React.FC<LoginButtonProps> = (props) => {
       })}
       onClick={onClick}
     >
-      {text}
+      {children}
     </button>
   )
 }
 
-export const LinkButton: React.FC<LinkButtonProps> = (props) => {
-  const { text, href, isTarget } = props
+export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
+  children,
+  href,
+  isTarget,
+}) => {
   const location = useLocation()
   const currentPath = location.pathname
   const isCurrentPath = (href: string) => href === currentPath && true
@@ -61,7 +62,7 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
                 size: 'full',
               })}
             >
-              <p className="text-xl">{text}</p>
+              <p className="text-md font-medium">{children}</p>
             </div>
           </div>
         </a>
@@ -85,7 +86,7 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
                 size: 'full',
               })}
             >
-              <p className="text-xl">{text}</p>
+              <p className="text-md font-medium">{children}</p>
             </div>
           </div>
         </Link>
@@ -94,8 +95,9 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
   )
 }
 
-export const RightSidebarButton: React.FC<ToggleButtonProps> = (props) => {
-  const { children, href, isTarget, onClick } = props
+export const RightSidebarButton: React.FC<
+  React.PropsWithChildren<ToggleButtonProps>
+> = ({ children, href, isTarget, onClick }) => {
   return (
     <>
       {isTarget ? (

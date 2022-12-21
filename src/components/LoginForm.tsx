@@ -86,7 +86,10 @@ const LoginForm: React.FC = () => {
             </div>
             <div className="flex justify-center items-center px-1.5 w-full text-sm">
               <div className="flex items-center">
-                <input type="checkbox" className="accent-theme-300 outline-0 focus:outline-0" />
+                <input
+                  type="checkbox"
+                  className="accent-theme-300 outline-0 focus:outline-0"
+                />
                 <p className="pl-2">
                   {formatMessage({
                     id: 'screens.login.rememberMe',
@@ -111,13 +114,14 @@ const LoginForm: React.FC = () => {
               </p>
             </div>
             <div className="flex justify-center">
-              <LoginButton
-                onClick={handleNotify}
-                text={formatMessage({
-                  id: 'screens.login.login',
-                  defaultMessage: 'Login',
-                })}
-              />
+              <LoginButton onClick={handleNotify}>
+                <p>
+                  {formatMessage({
+                    id: 'screens.login.login',
+                    defaultMessage: 'Login',
+                  })}
+                </p>
+              </LoginButton>
             </div>
           </form>
         </div>
