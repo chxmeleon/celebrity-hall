@@ -18,7 +18,7 @@ const Modal = () => {
               onClick={(e) => {
                 e.stopPropagation()
               }}
-              className="p-4 m-auto w-1/4 bg-gradient-to-br rounded-md border min-h-fit border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md"
+              className="p-4 m-auto w-[620px] bg-gradient-to-br rounded-md border min-h-fit border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md"
             >
               <div className="flex justify-end">
                 <button
