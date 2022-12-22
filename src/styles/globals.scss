@@ -10,7 +10,10 @@
     }
   }
 
-  .b-skew {
-    transform: scaleY(1.1) perspective(2.6rem) rotateX(0.45deg);
+  .bet-skew {
+    transform: scaleY(0.999) perspective(2.6rem) rotateX(1.69deg);
+  }
+  .bet-table-skew {
+    transform: scaleY(1.1) perspective(1.9rem) rotateX(2.70deg);
   }
 }
