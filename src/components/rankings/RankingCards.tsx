@@ -1,5 +1,16 @@
 import React from "react";
-import { Name, BodyShape, Timetable, Heart, Avatar, Rank } from "./Utilities";
+import {
+  Name,
+  BodyShape,
+  Timetable,
+  Heart,
+  Avatar,
+  Rank,
+  SimpleCardRank,
+  SimpleCardAvatar,
+  SimpleCardName,
+  SimpleCardPoint,
+} from "./Utilities";
 
 export const RankingCard3: React.FC = () => {
   return (
@@ -63,6 +74,57 @@ export const RankingCardOther: React.FC<{ rank: number }> = ({ rank }) => {
           <BodyShape height={162} weight={46} />
           <Timetable start="18:00" end="16:00" />
           <Heart like={189} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const SimpleRankingCard3: React.FC = () => {
+  return (
+    <div className="relative rounded-[15px] w-[320px] h-[301px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-300 to-rankingBorder-301">
+      <div className="flex flex-col justify-between h-full bg-gradient-to-tl from-rankingbg-100  via-rankingbg-200 to-rankingbg-300 text-white rounded-[15px]">
+        <SimpleCardRank rank="3rd" />
+        <div className="m-auto flex flex-col items-center">
+          <div className="m-auto flex mt-[115px] items-center">
+            <SimpleCardAvatar />
+            <SimpleCardName name="Angela" />
+          </div>
+          <SimpleCardPoint point={4567} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const SimpleRankingCard2: React.FC = () => {
+  return (
+    <div className="relative rounded-[15px] w-[320px] h-[329px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-200 to-rankingBorder-201">
+      <div className="flex flex-col justify-between h-full bg-gradient-to-tl from-rankingbg-100  via-rankingbg-200 to-rankingbg-300 text-white rounded-[15px]">
+        <SimpleCardRank rank="2nd" />
+        <div className="m-auto flex flex-col items-center">
+          <div className="m-auto flex mt-[115px] items-center">
+            <SimpleCardAvatar />
+            <SimpleCardName name="Angela" />
+          </div>
+          <SimpleCardPoint point={4567} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const SimpleRankingCard1: React.FC = () => {
+  return (
+    <div className="relative rounded-[15px] w-[320px] h-[375px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-100 to-rankingBorder-101">
+      <div className="flex flex-col justify-between h-full bg-gradient-to-tl from-rankingbg-100  via-rankingbg-200 to-rankingbg-300 text-white rounded-[15px]">
+        <SimpleCardRank rank="1st" />
+        <div className="m-auto flex flex-col items-center">
+          <div className="m-auto flex mt-[160px] items-center">
+            <SimpleCardAvatar />
+            <SimpleCardName name="Angela" />
+          </div>
+          <SimpleCardPoint point={4567} />
         </div>
       </div>
     </div>
