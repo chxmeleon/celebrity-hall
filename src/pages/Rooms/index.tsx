@@ -1,9 +1,5 @@
-import React from 'react'
-
 const Rooms = () => {
-  return (
-    <div>Room</div>
-  )
+  return <div>rooms</div>
 }
 
-export default Rooms 
+export default Rooms
