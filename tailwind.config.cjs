@@ -34,6 +34,16 @@ module.exports = {
       },
       backgroundImage: {
         'link-button-54': 'linear-gradient(54deg, #FCED95, #9c6c0e, #FCED95)',
+        'great-theme': 'linear-gradient(56deg, #FCED9510, #9c6c0e60, #FCED9510)',
+      },
+      aspectRatio: {
+        '4/3': '4 / 3',
+        film: '2 / 1',
+        cinema: '2.35 / 1',
+      },
+      screens: {
+        '1.5xl': '1440px',
+        '3xl': '1520px',
       },
     },
   },

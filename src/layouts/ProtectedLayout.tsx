@@ -26,7 +26,7 @@ const ProtectedLayout: React.FC = () => {
         <Header />
         <div className="flex justify-start pt-12 h-full">
           <LeftSidebar />
-          <div className="relative w-full bg-black">
+          <div className="relative bg-black w-full ">
             <Outlet />
           </div>
         </div>
