@@ -24,6 +24,8 @@ export const deskStyle = cva('text-3xl font-bold border border-gray-300/50', {
       col2: 'col-span-2',
       col3: 'col-span-3',
       col4: 'col-span-4',
+      row2: 'row-span-2',
+      row3: 'row-span-3',
       none: '',
     },
   },

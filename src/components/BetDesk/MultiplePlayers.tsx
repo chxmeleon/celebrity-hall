@@ -25,10 +25,10 @@ const userInfo = fackUserData.map((item, idx) => {
   )
 })
 
-export const multiple = () => {
+export const MultiplePlayers = () => {
   return (
-    <div className="relative h-full">
-      <div className="grid absolute bottom-5 grid-cols-7 gap-9 px-24 m-auto w-full h-1/3">
+    <>
+      <div className="grid absolute bottom-5 grid-cols-7 gap-12 px-24 m-auto w-full h-1/3">
         {userInfo}
       </div>
       <div className="grid grid-rows-3 m-auto w-[91%] h-full bet-skew px-2 pb-4 pt-0.5 ">
@@ -98,6 +98,6 @@ export const multiple = () => {
           <div className={btnIdx.brn}></div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
