@@ -9,10 +9,10 @@ const Room = () => {
     before:absolute before:w-full before:h-full before:bg-great-theme blur-[2px] before:content-['']`
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full ">
       <div className="relative w-full h-4/5">
         <div className={bgImage}></div>
-        <div className="flex absolute flex-col w-full h-full">
+        <div className="flex absolute flex-col w-full h-full outline outline-theme-50">
           <div className="relative w-full h-[30%]"></div>
           <div className="overflow-hidden relative flex-grow w-full">
             <div className="relative w-full h-full bg-[#3C4141] rounded-t-[50%] bet-table-skew border-[30px] border-theme-50/80 border-b-0 shadow-inner shadow-black"></div>

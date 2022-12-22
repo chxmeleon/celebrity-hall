@@ -13,7 +13,6 @@
   .bet-skew {
     transform: scaleY(0.999) scaleX(0.96) perspective(2.6rem) rotateX(2.864deg)
       translate(0px, -10px);
-    perspective-origin: top;
   }
 
   .bet-no-skew {
