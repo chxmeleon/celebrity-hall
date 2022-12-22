@@ -48,10 +48,10 @@ const Header = () => {
 
   return (
     <header className="relative" ref={sidebarRef} onClick={onCloseSide}>
-      <nav className="absolute top-0 left-0 z-20 w-full h-12 border-b bg-theme-50 border-b-theme-75">
-        <div className="flex justify-end items-center px-3 w-full h-full">
+      <nav className="absolute top-0 left-0 z-40 w-full h-12 border-b bg-theme-50 border-b-theme-75">
+        <div className="flex justify-end items-center px-3 w-full h-full bg-theme-50">
           <div
-            className="flex justify-around items-center w-[12rem]"
+            className="flex justify-around items-center w-[12rem] bg-theme-50"
             onClick={stopProp}
           >
             <button className={icons.heart}></button>
@@ -62,11 +62,11 @@ const Header = () => {
               <div
                 className={`${
                   toggle
-                    ? 'h-[375px] opacity-100'
-                    : 'h-[0px] opacity-0 hidden translate-y-0'
-                } absolute w-[17.5rem] min-h-fit max-h-fit translate-y-2 -translate-x-[16rem] z-40 transition-all duration-300 ease-in-out bg-theme-50/80 border border-theme-75 border-y-transparent`}
+                    ? 'h-fit opacity-100 scale-y-100 translate-y-2'
+                    : 'h-0 opacity-0 scale-y-[28%] -translate-y-36'
+                } absolute w-[17.5rem] min-h-fit max-h-fit  -translate-x-[16rem] -z-10 transition-all duration-300 ease-in-out bg-theme-50/95 border border-theme-75 border-y-transparent`}
               >
-                <div className="block w-full text-lg" onClick={stopProp}>
+                <div className="inline-block w-full text-lg" onClick={stopProp}>
                   <RightSidebarButton
                     href=""
                     isTarget={false}
@@ -160,84 +160,6 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      <div className="relative w-full">
-        <div
-          className={`${
-            toggle ? 'h-[343px] opacity-100' : 'h-0 opacity-0 hidden'
-          } fixed w-[17.5rem] max-w-fit min-h-fit max-h-fit top-12 right-4 z-40 transition-all duration-200 ease-in-out bg-theme-50/80 border border-theme-75 border-y-transparent`}
-        >
-          <div className="block w-full" onClick={stopProp}>
-            <RightSidebarButton href="" isTarget={false} onClick={() => null}>
-              <i className={icons.notice}></i>
-              <p>
-                <FormattedMessage
-                  id="dropdown.notice"
-                  defaultMessage="Notice"
-                />
-              </p>
-            </RightSidebarButton>
-            <RightSidebarButton href="" isTarget={false} onClick={() => null}>
-              <i className={icons.user}></i>
-              <p>
-                <FormattedMessage
-                  id="dropdown.profile"
-                  defaultMessage="Profile"
-                />
-              </p>
-            </RightSidebarButton>
-            <RightSidebarButton href="" isTarget={false} onClick={() => null}>
-              <i className={icons.info}></i>
-              <p>
-                <FormattedMessage id="dropdown.info" defaultMessage="info" />
-              </p>
-            </RightSidebarButton>
-            <RightSidebarButton
-              href="https://page.line.me/?accountId=315xktcy"
-              isTarget={true}
-              onClick={() => null}
-            >
-              <i className={icons.phone}></i>
-              <p>
-                <FormattedMessage
-                  id="dropdown.service"
-                  defaultMessage="service"
-                />
-              </p>
-            </RightSidebarButton>
-            <RightSidebarButton href="" isTarget={false} onClick={openModal}>
-              <i className={icons.gear}></i>
-              <p>
-                <FormattedMessage
-                  id="setting.setting"
-                  defaultMessage="Setting"
-                />
-              </p>
-            </RightSidebarButton>
-            <RightSidebarButton
-              href="https://t.me/richman5888"
-              isTarget={true}
-              onClick={() => null}
-            >
-              <i className={icons.sexy}></i>
-              <p>
-                <FormattedMessage
-                  id="dropdown.porn"
-                  defaultMessage="Adult Video"
-                />
-              </p>
-            </RightSidebarButton>
-            <RightSidebarButton href="" isTarget={false} onClick={logout}>
-              <i className={icons.out}></i>
-              <p>
-                <FormattedMessage
-                  id="dropdown.logout"
-                  defaultMessage="Logout"
-                />
-              </p>
-            </RightSidebarButton>
-          </div>
-        </div>
-      </div>
     </header>
   )
 }
