@@ -60,7 +60,7 @@ export const buttonStyle = cva('text-center m-auto', {
         'to-theme-400',
         'before:w-[12.1rem]',
         'before:h-[2.7rem]',
-        'before:fixed',
+        'before:absolute',
         'before:rounded-full',
         'before:blur-xl',
         'before:bg-amber-100/40'

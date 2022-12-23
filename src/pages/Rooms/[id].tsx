@@ -56,23 +56,22 @@ const Room = () => {
         </div>
       </div>
       <div className="flex w-full h-1/5 bg-gray-800">
-        <div className="flex justify-start w-full">
-          <div>
-            <div>bead plate</div>
-            <div>
-              <div></div>
-              <div>
-                <div></div>
-                <div></div>
-                <div></div>
+        <div className="flex justify-start flex-grow ">
+          <div className="w-1/3">bead plate</div>
+          <div className="w-2/3 flex">
+            <div className="block w-full flex-grow">
+              <div className="h-2/3"></div>
+              <div className="w-full h-1/3 flex">
+                <div className="w-1/3"></div>
+                <div className="w-1/3"></div>
+                <div className="w-1/3"></div>
               </div>
             </div>
+            <div className="w-1/4"></div>
           </div>
-          <div></div>
-          <div></div>
         </div>
         <div></div>
-        <div className="w-50">
+        <div className="w-2/6">
           <ChatRoom />
         </div>
       </div>
