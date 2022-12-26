@@ -75,6 +75,20 @@ export const buttonStyle = cva('text-center m-auto', {
         'active:bg-theme-400',
         'active:text-theme-50',
       ],
+      outlineButton: [
+        'py-1.5',
+        'px-4',
+        'font-bold',
+        'flex',
+        'bg-theme-70/50',
+        'justify-around',
+        'items-center',
+        'border',
+        'border-theme-300',
+        'drop-shadow-lg',
+        'active:bg-theme-300',
+        'active:text-theme-50'
+      ]
     },
     round: {
       full: 'rounded-full',
@@ -88,6 +102,8 @@ export const buttonStyle = cva('text-center m-auto', {
       tiny: 'w-full text-sm font-medium ',
       small: 'text-sm w-[130px]',
       medium: 'text-lg w-[230px] font-medium',
+      none: '',
+      little: 'w-[120px]'
     },
   },
   compoundVariants: [

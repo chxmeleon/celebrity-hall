@@ -8,7 +8,7 @@ type BetDeskProps = {
 const BetDesk: React.FC<BetDeskProps> = ({ isToggle }) => {
   return (
     <div className="relative h-full">
-      {isToggle ? <MultiplePlayers /> : <SinglePlayer />}
+      {isToggle ? <SinglePlayer /> : <MultiplePlayers />}
     </div>
   )
 }

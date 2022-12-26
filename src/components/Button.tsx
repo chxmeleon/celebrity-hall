@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { buttonStyle as bts } from './buttonStyle'
 
@@ -16,6 +16,19 @@ type ToggleButtonProps = {
   isTarget: boolean
   onClick: React.MouseEventHandler<HTMLButtonElement>
 }
+
+
+export const BetButton: React.FC<React.PropsWithChildren<LoginButtonProps>> = ({children, onClick}) => {
+  return (
+    <button className={bts({intent: 'outlineButton', round: 'full', size: 'little'})}>
+      {children}
+    </button>
+  )
+  
+}
+
+
+
 
 export const LoginButton: React.FC<
   React.PropsWithChildren<LoginButtonProps>
@@ -62,7 +75,7 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
                 size: 'full',
               })}
             >
-              <p className="text-md font-medium">{children}</p>
+              <p className="font-medium text-md">{children}</p>
             </div>
           </div>
         </a>
@@ -86,7 +99,7 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
                 size: 'full',
               })}
             >
-              <p className="text-md font-medium">{children}</p>
+              <p className="font-medium text-md">{children}</p>
             </div>
           </div>
         </Link>
