@@ -4,13 +4,64 @@ import ChatRoom from '@/components/Chatroom'
 import { FormattedMessage } from 'react-intl'
 import { clsx as cx } from 'clsx'
 import { useSetup } from '@/hooks/useSetup'
-import { useState } from 'react'
+import { MouseEventHandler, useRef, useState } from 'react'
 import { BetButton } from '@/components/Button'
+import chips_10 from '../../assets/chips/chips_10.webp'
+import chips_100 from '../../assets/chips/chips_100.webp'
+import chips_500 from '../../assets/chips/chips_500.webp'
+import chips_1K from '../../assets/chips/chips_1K.webp'
+import chips_5K from '../../assets/chips/chips_5K.webp'
+import chips_1W from '../../assets/chips/chips_1W.webp'
+import chips_5W from '../../assets/chips/chips_5W.webp'
+import chips_10W from '../../assets/chips/chips_10W.webp'
 
 const Room = () => {
   const [isToggle, setIsToggle] = useState<boolean>(false)
   const onToggle = () => setIsToggle((isToggle) => !isToggle)
   const { handleRegularToggle, isRegular } = useSetup()
+
+  const chipsImg = [
+    chips_10,
+    chips_100,
+    chips_500,
+    chips_1K,
+    chips_5K,
+    chips_1W,
+    chips_5W,
+    chips_10W,
+  ]
+
+  const [betPrice, setBetPrice] = useState('')
+  const handleSelectBetPrice = (e: React.MouseEvent) => {
+    const chipImgSrc = (e.target as HTMLImageElement).src
+      ?.split('/')
+      .slice(-1)[0]
+      .split('.')
+      .slice(0, 1)
+      .toString()
+    setBetPrice(chipImgSrc)
+  }
+
+  const chipsButton = chipsImg.map((item, idx) => {
+    const isActive =
+      betPrice ===
+      item?.split('/').slice(-1)[0].split('.').slice(0, 1).toString()
+
+    return (
+      <button
+        key={idx}
+        onClick={handleSelectBetPrice}
+        className={`${
+          isActive ? 'shadow-md shadow-theme-300' : 'shadow shadow-theme-50/80'
+        } rounded-full relative hover:cursor-pointer`}
+      >
+        {isActive && (
+          <div className="absolute left-1 top-2 w-7 h-4 rounded-full bg-theme-300 blur-md"></div>
+        )}
+        <img src={item} alt="bet image" className="w-9" />
+      </button>
+    )
+  })
 
   const bgImage = cx`
     absolute bg-cover bg-center w-full h-full bg-no-repeat bg-[url('../assets/room-bg-2.webp')]
@@ -40,7 +91,7 @@ const Room = () => {
             <BetDesk isToggle={isToggle} />
           </div>
           <div className="flex justify-between items-center px-2 my-2 w-full h-10">
-            <div className="flex items-center w-1/3">
+            <div className="flex items-center w-[24%]">
               <button
                 onClick={onToggle}
                 className={`${
@@ -74,7 +125,16 @@ const Room = () => {
               </button>
               <div className="px-2">投注 | 0</div>
             </div>
-            <div className="flex w-1/3">
+            <div className="flex flex-grow justify-around items-center">
+              {chipsButton}
+              <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/50 text-theme-300">
+                <button className="text-xl i-heroicons-play-pause-solid" />
+              </div>
+              <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/50 text-theme-300">
+                <button className="text-xl i-heroicons-pencil-square-20-solid" />
+              </div>
+            </div>
+            <div className="flex pl-5 w-[36%] text-theme-300">
               <BetButton onClick={() => null}>
                 <div className="text-2xl i-heroicons-x-mark-solid"></div>
                 <FormattedMessage id="common.cancel" />
@@ -88,7 +148,6 @@ const Room = () => {
                 <FormattedMessage id="common.confirm" />
               </BetButton>
             </div>
-            <div className="w-1/3"></div>
           </div>
         </div>
       </div>

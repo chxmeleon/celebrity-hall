@@ -85,7 +85,7 @@ export const buttonStyle = cva('text-center m-auto', {
         'items-center',
         'border',
         'border-theme-300',
-        'drop-shadow-lg',
+        'drop-shadow-2xl',
         'active:bg-theme-300',
         'active:text-theme-50'
       ]
@@ -103,7 +103,7 @@ export const buttonStyle = cva('text-center m-auto', {
       small: 'text-sm w-[130px]',
       medium: 'text-lg w-[230px] font-medium',
       none: '',
-      little: 'w-[120px]'
+      little: 'w-[105px]'
     },
   },
   compoundVariants: [
