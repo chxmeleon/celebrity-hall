@@ -14,7 +14,7 @@ import {
 
 export const RankingCard3: React.FC = () => {
   return (
-    <div className="relative rounded-[15px] w-[320px] h-[301px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-300 to-rankingBorder-301">
+    <div className="relative rounded-[15px] sm:w-[320px] w-[142px] sm:h-[301px] h-[110px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-300 to-rankingBorder-301">
       <div className="flex flex-col justify-between h-full bg-gradient-to-tl from-rankingbg-100  via-rankingbg-200 to-rankingbg-300 text-white rounded-[15px]">
         <Rank rank="3rd" />
         <div className="m-auto flex flex-col items-center">
@@ -31,7 +31,7 @@ export const RankingCard3: React.FC = () => {
 
 export const RankingCard2: React.FC = () => {
   return (
-    <div className="relative rounded-[15px] w-[320px] h-[329px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-200 to-rankingBorder-201">
+    <div className="relative rounded-[15px] sm:w-[320px] w-fit sm:h-[329px] h-fit mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-200 to-rankingBorder-201">
       <div className="flex flex-col justify-between h-full bg-gradient-to-tl from-rankingbg-100  via-rankingbg-200 to-rankingbg-300 text-white rounded-[15px]">
         <Rank rank="2nd" />
         <div className="m-auto flex flex-col items-center">
