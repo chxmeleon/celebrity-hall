@@ -490,5 +490,11 @@
   "gift.boat": "豪華遊艇",
   "tong.oddsType.normal": "平倍",
   "tong.oddsType.double": "翻倍",
-  "tong.oddsType.super": "超級"
+  "tong.oddsType.super": "超級",
+  "ranking.period.month": "月榜",
+  "ranking.period.week": "週榜",
+  "ranking.Tab.board": "局數榜",
+  "ranking.Tab.point": "勝點榜",
+  "ranking.Tab.contribute": "貢獻榜",
+  "ranking.Tab.anchor": "主播榜"
 }
