@@ -13,7 +13,7 @@ const Room = () => {
   const onToggle = () => setIsToggle((isToggle) => !isToggle)
   const { handleRegularToggle, isRegular } = useSetup()
 
-  const [betPrice, setBetPrice] = useState('')
+  const [betPrice, setBetPrice] = useState('chips_10')
   const handleSelectBetPrice = (e: React.MouseEvent) => {
     const chipImgSrc = (e.target as HTMLImageElement).src
       ?.split('/')
