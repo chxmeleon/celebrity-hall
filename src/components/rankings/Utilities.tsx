@@ -26,7 +26,7 @@ export const Timetable: React.FC<{ start: string; end: string }> = ({
       <span className="flex items-center justify-center rounded-[5px] border-[0.5px] sm:w-[35px] w-[28px] sm:h-[18px] h-[15px] leading-[15px]">
         <span className="sm:text-[12px] text-[9px]">時段</span>
       </span>
-      <span className="sm:text-[18px] text-[10px] pl-[6px]">
+      <span className="sm:text-[18px] text-[10px] sm:pl-[6px] pl-[2px]">
         {start} - {end}
       </span>
     </div>
@@ -36,14 +36,14 @@ export const Timetable: React.FC<{ start: string; end: string }> = ({
 export const Heart: React.FC<{ like: number }> = ({ like }) => {
   return (
     <div className="flex mt-[8px] items-center">
-      <span className="rounded-full bg-[#FF5F85] w-[30px] h-[30px] flex">
+      <span className="rounded-full bg-[#FF5F85] sm:w-[30px] w-[17px] sm:h-[30px] h-[17px] flex">
         <img
-          className="m-auto"
+          className="m-auto w-[8.44px] h-[7.51px] sm:w-[15.65px] sm:h-[13.92px]"
           src="../src/assets/rankings/heart.png"
           alt="heart"
         />
       </span>
-      <span className="ml-[7px] text-[32px]">{like}</span>
+      <span className="ml-[7px] sm:text-[32px] text-[15px]">{like}</span>
     </div>
   );
 };
@@ -55,7 +55,7 @@ export const Avatar: React.FC<{ img?: string; rank?: string }> = ({
   if (rank === "1st") {
     return (
       <img
-        className="rounded-full w-[156px] h-[156px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] mb-[15px]"
+        className="rounded-full sm:w-[156px] sm:h-[156px] w-[75px] h-[75px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] sm:mb-[15px]"
         src="../src/assets/rankings/anchor.png"
         alt="Avatar"
       />
@@ -63,7 +63,7 @@ export const Avatar: React.FC<{ img?: string; rank?: string }> = ({
   }
   return (
     <img
-      className="rounded-full w-[126px] h-[126px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+      className="rounded-full sm:w-[126px] w-[51px] sm:h-[126px] h-[51px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       src="../src/assets/rankings/anchor.png"
       alt="Avatar"
     />
@@ -71,9 +71,19 @@ export const Avatar: React.FC<{ img?: string; rank?: string }> = ({
 };
 
 export const Rank: React.FC<{ rank: string }> = ({ rank }) => {
+  if (rank === "1st") {
+    return (
+      <img
+        className="absolute sm:top-[-33px] sm:left-[18px] top-[-12px] left-[10px] z-10 w-[40px] h-[59px] sm:w-[114px] sm:h-[158px]"
+        src={`../src/assets/rankings/${rank}.png`}
+        alt={`${rank}`}
+      />
+    );
+  }
+
   return (
     <img
-      className="absolute top-[-33px] left-[18px] z-10"
+      className="absolute sm:top-[-33px] sm:left-[18px] top-[-15px] left-[10px] z-10 w-[40px] h-[59px] sm:w-[90px] sm:h-[126px]"
       src={`../src/assets/rankings/${rank}.png`}
       alt={`${rank}`}
     />
@@ -139,9 +149,9 @@ export const Tabs: React.FC<{ isSelected: string }> = ({ isSelected }) => {
 
 const SubTabsConfig = {
   isSelected:
-    "rounded-[60px] bg-[#FFED82] w-[79px] h-[32px] items-center flex text-black justify-center",
+    "rounded-[60px] bg-[#FFED82] sm:w-[79px] sm:h-[32px] w-[48px] h-[17px] items-center flex text-black justify-center",
   notSelected:
-    "text-[#FFED82] w-[79px] h-[32px] items-center flex justify-center",
+    "text-[#FFED82] sm:w-[79px] sm:h-[32px] w-[48px] h-[17px] items-center flex justify-center",
 };
 
 export const SubTabs: React.FC<{
@@ -149,7 +159,7 @@ export const SubTabs: React.FC<{
   setSelected: Dispatch<SetStateAction<string>>;
 }> = ({ selected, setSelected }) => {
   return (
-    <div className="flex justify-between w-[175px] mt-[10px] text-[14px]">
+    <div className="flex sm:justify-between justify-center sm:w-[175px] mt-[10px] sm:text-[14px] text-[9px]">
       <button
         className={`${
           SubTabsConfig[selected === "month" ? "isSelected" : "notSelected"]
@@ -174,30 +184,43 @@ export const SimpleCardAvatar: React.FC<{ img?: string }> = ({ img }) => {
   if (img) {
     return (
       <img
-        className="rounded-full w-[50px] h-[50px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] bg-white"
+        className="rounded-full sm:w-[50px] sm:h-[50px] w-[18px] h-[18px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] bg-white"
         src="../src/assets/rankings/anchor.png"
         alt="Avatar"
       />
     );
   }
-  return <div className="w-[50px] h-[50px] i-heroicons-user-circle-solid" />;
+  return (
+    <div className="sm:w-[50px] sm:h-[50px] w-[18px] h-[18px] i-heroicons-user-circle-solid" />
+  );
 };
 
 export const SimpleCardName: React.FC<{ name: string }> = ({ name }) => {
-  return <div className="text-[20px] ml-[10px]">{name}</div>;
+  return (
+    <div className="sm:text-[20px] text-[10px] sm:ml-[10px] ml-[5px]">
+      {name}
+    </div>
+  );
 };
 
-export const SimpleCardPoint: React.FC<{ point: number }> = ({ point }) => {
-  return (
-    <div className="text-[#FCD140] text-[64px] italic font-black">{point}</div>
-  );
+const SimpleCardPointConfig = {
+  "1st": "text-[#FCD140] sm:text-[64px] text-[24px] italic font-black",
+  "2nd": "text-[#CCCCCC] sm:text-[64px] text-[24px] italic font-black",
+  "3rd": "text-[#D0AA89] sm:text-[64px] text-[24px] italic font-black",
+};
+
+export const SimpleCardPoint: React.FC<{
+  point: number;
+  rank: "1st" | "2nd" | "3rd";
+}> = ({ point, rank }) => {
+  return <div className={`${SimpleCardPointConfig[rank]}`}>{point}</div>;
 };
 
 export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
   if (rank === "3rd") {
     return (
       <img
-        className="absolute top-[-52px] right-[89px] z-10"
+        className="absolute sm:top-[-52px] top-[-27px] sm:right-[89px] right-[22px] z-10 w-[75px] sm:w-[142px]"
         src={`../src/assets/rankings/${rank}-lg.png`}
         alt={`${rank}`}
       />
@@ -207,7 +230,7 @@ export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
   if (rank === "2nd") {
     return (
       <img
-        className="absolute top-[-51px] right-[89px] z-10"
+        className="absolute sm:top-[-51px] sm:right-[89px] top-[-27px] right-[22px] z-10 w-[75px] sm:w-[142px]"
         src={`../src/assets/rankings/${rank}-lg.png`}
         alt={`${rank}`}
       />
@@ -216,7 +239,7 @@ export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
 
   return (
     <img
-      className="absolute top-[-53px] right-[72px] z-10"
+      className="absolute sm:top-[-53px] sm:right-[72px] top-[-22px] right-[22px] z-10 w-[75px] sm:w-[178px]"
       src={`../src/assets/rankings/${rank}-lg.png`}
       alt={`${rank}`}
     />
@@ -232,33 +255,33 @@ const RankingTableFtRow: React.FC<{
 }> = ({ rank, name, point, index, length }) => {
   if (index === 0) {
     return (
-      <div className="bg-[#262626] w-11/12 h-[59px] flex items-center justify-between border-b border-[#505050] rounded-t-[20px]">
-        <div className="text-[14px] bg-[#D9D9D9] rounded-full w-[40px] h-[40px] text-[#505050] flex items-center justify-center ml-[71px]">
+      <div className="bg-[#262626] w-11/12 h-[59px] flex items-center justify-between sm:border-b sm:border-[#505050] sm:rounded-t-[20px] sm:rounded-b-[0px] rounded-[5px] sm:mb-[0px] mb-[6px]">
+        <div className="sm:text-[14px] text-[11px] bg-[#D9D9D9] rounded-full sm:w-[40px] sm:h-[40px] w-[30px] h-[30px] text-[#505050] flex items-center justify-center sm:ml-[71px] ml-[10px]">
           {rank}
         </div>
         <div className="text-[14px]">{name}</div>
-        <div className="mr-[210px] text-[14px]">{point}</div>
+        <div className="sm:mr-[210px] mr-[10px] text-[14px]">{point}</div>
       </div>
     );
   }
   if (index + 1 === length) {
     return (
-      <div className="bg-[#262626] w-11/12 h-[59px] flex items-center justify-between rounded-b-[20px]">
-        <div className="text-[14px] bg-[#D9D9D9] rounded-full w-[40px] h-[40px] text-[#505050] flex items-center justify-center ml-[71px]">
+      <div className="bg-[#262626] w-11/12 h-[59px] flex items-center justify-between sm:rounded-b-[20px] sm:rounded-t-[0px] rounded-[5px]">
+        <div className="sm:text-[14px] text-[11px] bg-[#D9D9D9] rounded-full sm:w-[40px] sm:h-[40px] w-[30px] h-[30px] text-[#505050] flex items-center justify-center sm:ml-[71px] ml-[10px]">
           {rank}
         </div>
         <div className="text-[14px]">{name}</div>
-        <div className="mr-[210px] text-[14px]">{point}</div>
+        <div className="sm:mr-[210px] mr-[10px] text-[14px]">{point}</div>
       </div>
     );
   }
   return (
-    <div className="bg-[#262626] w-11/12 h-[52px] flex items-center justify-between border-b border-[#505050]">
-      <div className="text-[14px] bg-[#D9D9D9] rounded-full w-[40px] h-[40px] text-[#505050] flex items-center justify-center ml-[71px]">
+    <div className="bg-[#262626] w-11/12 h-[52px] flex items-center justify-between sm:border-b sm:border-[#505050] sm:mb-[0px] mb-[6px] rounded-[5px] sm:rounded-[0px]">
+      <div className="sm:text-[14px] text-[11px] bg-[#D9D9D9] rounded-full sm:w-[40px] sm:h-[40px] w-[30px] h-[30px] text-[#505050] flex items-center justify-center sm:ml-[71px] ml-[10px]">
         {rank}
       </div>
       <div className="text-[14px]">{name}</div>
-      <div className="mr-[210px] text-[14px]">{point}</div>
+      <div className="sm:mr-[210px] mr-[10px] text-[14px]">{point}</div>
     </div>
   );
 };
