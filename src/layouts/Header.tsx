@@ -1,9 +1,9 @@
-import { clsx as cx } from 'clsx'
-import { useAuth } from '@/hooks/useAuth'
-import { useSetup } from '@/hooks/useSetup'
-import { RightSidebarButton } from '@/components/Button'
-import { useEffect, useRef, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { clsx as cx } from "clsx";
+import { useAuth } from "@/hooks/useAuth";
+import { useSetup } from "@/hooks/useSetup";
+import { RightSidebarButton } from "@/components/Button";
+import { useEffect, useRef, useState } from "react";
+import { FormattedMessage } from "react-intl";
 
 const icons = {
   heart: cx`i-heroicons-heart-solid text-2xl hover:text-pink-500`,
@@ -19,32 +19,32 @@ const icons = {
   info: cx`i-heroicons-information-circle-solid text-2xl`,
   phone: cx`i-heroicons-phone-arrow-up-right-solid text-2xl`,
   sexy: cx`i-mdi-head-heart-outline text-2xl`,
-}
+};
 
 const Header = () => {
-  const { logout } = useAuth()
-  const { openModal } = useSetup()
-  const [toggle, setToggle] = useState(false)
-  const sidebarRef = useRef<HTMLButtonElement>(null)
+  const { logout } = useAuth();
+  const { openModal } = useSetup();
+  const [toggle, setToggle] = useState(false);
+  const sidebarRef = useRef<HTMLButtonElement>(null);
   const onToggle = () => {
-    setToggle((toggle) => !toggle)
-  }
+    setToggle((toggle) => !toggle);
+  };
 
-  const onCloseSide = () => setToggle(false)
-  const stopProp = (e: React.MouseEvent) => e.stopPropagation()
+  const onCloseSide = () => setToggle(false);
+  const stopProp = (e: React.MouseEvent) => e.stopPropagation();
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (!sidebarRef.current?.contains(e.target as Node | null)) {
-        setToggle(false)
+        setToggle(false);
       }
-    }
+    };
 
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [sidebarRef, toggle])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [sidebarRef, toggle]);
 
   return (
     <header className="relative" ref={sidebarRef} onClick={onCloseSide}>
@@ -64,7 +64,7 @@ const Header = () => {
       <div className="relative w-full">
         <div
           className={`${
-            toggle ? 'h-[343px] opacity-100' : 'h-0 opacity-0'
+            toggle ? "h-[343px] opacity-100" : "h-0 opacity-0"
           } fixed w-[17.5rem] max-w-fit min-h-fit max-h-fit top-12 right-4 z-40 transition-all duration-200 ease-in-out bg-theme-50/80 border border-theme-75 border-y-transparent`}
         >
           <div className="block w-full" onClick={stopProp}>
@@ -77,7 +77,11 @@ const Header = () => {
                 />
               </p>
             </RightSidebarButton>
-            <RightSidebarButton href="" isTarget={false} onClick={() => null}>
+            <RightSidebarButton
+              href="/home/profile"
+              isTarget={false}
+              onClick={() => null}
+            >
               <i className={icons.user}></i>
               <p>
                 <FormattedMessage
@@ -140,7 +144,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

@@ -42,7 +42,7 @@ const LeftSidebar = () => {
                 defaultMessage="Following"
               />
             </LinkButton>
-            <LinkButton href="/home/tables" isTarget={false}>
+            <LinkButton href="/home/profile" isTarget={false}>
               <FormattedMessage id="layout.tables" defaultMessage="Tables" />
             </LinkButton>
             <LinkButton href="/home/rankings" isTarget={false}>

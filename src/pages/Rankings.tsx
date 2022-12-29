@@ -9,7 +9,7 @@ import { Tabs } from "../components/rankings/Utilities";
 
 const Rankings = () => {
   return (
-    <div className="mx-6 my-3">
+    <div className="sm:mx-6 sm:my-3">
       <Tabs isSelected="rankings" />
       <div className="flex justify-between items-end sm:mt-[10px] m-auto sm:w-[1020px] w-[388px]">
         <RankingCard2 />

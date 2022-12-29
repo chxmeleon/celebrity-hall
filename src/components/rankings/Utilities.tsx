@@ -1,6 +1,14 @@
 import React, { useState, Dispatch, SetStateAction } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
+import heart from "@/assets/rankings/heart.png";
+import anchor from "@/assets/rankings/anchor.png";
+import first from "@/assets/rankings/1st.png";
+import second from "@/assets/rankings/2nd.png";
+import third from "@/assets/rankings/3rd.png";
+import firstLg from "@/assets/rankings/1st-lg.png";
+import secondLg from "@/assets/rankings/2nd-lg.png";
+import thirdLg from "@/assets/rankings/3rd-lg.png";
 
 export const Name: React.FC<{ name: string }> = ({ name }) => {
   return <div className="sm:text-[24px] text-[10px] mt-[5px]">{name}</div>;
@@ -24,7 +32,9 @@ export const Timetable: React.FC<{ start: string; end: string }> = ({
   return (
     <div className="flex items-center">
       <span className="flex items-center justify-center rounded-[5px] border-[0.5px] sm:w-[35px] w-[28px] sm:h-[18px] h-[15px] leading-[15px]">
-        <span className="sm:text-[12px] text-[9px]">時段</span>
+        <span className="sm:text-[12px] text-[9px]">
+          <FormattedMessage id="ranking.card.timetable" defaultMessage="時段" />
+        </span>
       </span>
       <span className="sm:text-[18px] text-[10px] sm:pl-[6px] pl-[2px]">
         {start} - {end}
@@ -39,7 +49,7 @@ export const Heart: React.FC<{ like: number }> = ({ like }) => {
       <span className="rounded-full bg-[#FF5F85] sm:w-[30px] w-[17px] sm:h-[30px] h-[17px] flex">
         <img
           className="m-auto w-[8.44px] h-[7.51px] sm:w-[15.65px] sm:h-[13.92px]"
-          src="../src/assets/rankings/heart.png"
+          src={heart}
           alt="heart"
         />
       </span>
@@ -56,7 +66,7 @@ export const Avatar: React.FC<{ img?: string; rank?: string }> = ({
     return (
       <img
         className="rounded-full sm:w-[156px] sm:h-[156px] w-[75px] h-[75px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] sm:mb-[15px]"
-        src="../src/assets/rankings/anchor.png"
+        src={anchor}
         alt="Avatar"
       />
     );
@@ -64,7 +74,7 @@ export const Avatar: React.FC<{ img?: string; rank?: string }> = ({
   return (
     <img
       className="rounded-full sm:w-[126px] w-[51px] sm:h-[126px] h-[51px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-      src="../src/assets/rankings/anchor.png"
+      src={anchor}
       alt="Avatar"
     />
   );
@@ -75,7 +85,7 @@ export const Rank: React.FC<{ rank: string }> = ({ rank }) => {
     return (
       <img
         className="absolute sm:top-[-33px] sm:left-[18px] top-[-12px] left-[10px] z-10 w-[40px] h-[59px] sm:w-[114px] sm:h-[158px]"
-        src={`../src/assets/rankings/${rank}.png`}
+        src={first}
         alt={`${rank}`}
       />
     );
@@ -84,7 +94,7 @@ export const Rank: React.FC<{ rank: string }> = ({ rank }) => {
   return (
     <img
       className="absolute sm:top-[-33px] sm:left-[18px] top-[-15px] left-[10px] z-10 w-[40px] h-[59px] sm:w-[90px] sm:h-[126px]"
-      src={`../src/assets/rankings/${rank}.png`}
+      src={rank === "2nd" ? second : third}
       alt={`${rank}`}
     />
   );
@@ -98,7 +108,7 @@ const buttonConfig = {
 export const Tabs: React.FC<{ isSelected: string }> = ({ isSelected }) => {
   const [subTabSelected, setSubTabSelected] = useState("month");
   return (
-    <div className="mt-[10px]">
+    <div className="mt-[10px] mx-[10px]">
       <div className="flex justify-between sm:w-[500px] w-full sm:text-[30px] text-[15px] text-white">
         <Link
           to="/home/rankings"
@@ -185,7 +195,7 @@ export const SimpleCardAvatar: React.FC<{ img?: string }> = ({ img }) => {
     return (
       <img
         className="rounded-full sm:w-[50px] sm:h-[50px] w-[18px] h-[18px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] bg-white"
-        src="../src/assets/rankings/anchor.png"
+        src={anchor}
         alt="Avatar"
       />
     );
@@ -221,7 +231,7 @@ export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
     return (
       <img
         className="absolute sm:top-[-52px] top-[-27px] sm:right-[89px] right-[22px] z-10 w-[75px] sm:w-[142px]"
-        src={`../src/assets/rankings/${rank}-lg.png`}
+        src={thirdLg}
         alt={`${rank}`}
       />
     );
@@ -231,7 +241,7 @@ export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
     return (
       <img
         className="absolute sm:top-[-51px] sm:right-[89px] top-[-27px] right-[22px] z-10 w-[75px] sm:w-[142px]"
-        src={`../src/assets/rankings/${rank}-lg.png`}
+        src={secondLg}
         alt={`${rank}`}
       />
     );
@@ -240,7 +250,7 @@ export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
   return (
     <img
       className="absolute sm:top-[-53px] sm:right-[72px] top-[-22px] right-[22px] z-10 w-[75px] sm:w-[178px]"
-      src={`../src/assets/rankings/${rank}-lg.png`}
+      src={thirdLg}
       alt={`${rank}`}
     />
   );

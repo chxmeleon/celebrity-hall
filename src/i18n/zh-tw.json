@@ -496,5 +496,13 @@
   "ranking.Tab.board": "局數榜",
   "ranking.Tab.point": "勝點榜",
   "ranking.Tab.contribute": "貢獻榜",
-  "ranking.Tab.anchor": "主播榜"
+  "ranking.Tab.anchor": "主播榜",
+  "profile.button.edit": "修改暱稱",
+  "profile.button.password": "修改密碼",
+  "profile.button.logout": "帳號登出",
+  "profile.info.points":"上下分",
+  "profile.info.betting":"有效投注",
+  "profile.info.dividend" :"紅利",
+  "profile.info.balance" :"餘額",
+  "ranking.card.timetable": "時段"
 }
