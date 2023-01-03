@@ -1,5 +1,4 @@
 import { useSetup } from '@/context/LanguageContext'
-import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 const Modal = () => {
@@ -18,7 +17,7 @@ const Modal = () => {
               onClick={(e) => {
                 e.stopPropagation()
               }}
-              className="p-4 m-auto w-[620px] bg-gradient-to-br rounded-md border min-h-fit border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md"
+              className="p-4 m-auto bg-gradient-to-br rounded-md border w-[620px] min-h-fit border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md"
             >
               <div className="flex justify-end">
                 <button
