@@ -23,9 +23,11 @@ const sendRequest = (url: string, { arg }: any) => {
 }
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const apiEndpoint = process.env.RESTFULAPI_ENDPOINT
+  const [auth, setAuth] = useLocalStorage<string | null>('user', null)
+  const navigate = useNavigate()
+  const api = process.env.API_ENDPOINT
 
-  const { trigger: onLogin } = useSWRMutation(apiEndpoint, sendRequest, {
+  const { trigger: onLogin } = useSWRMutation(`${api}login`, sendRequest, {
     onSuccess: (result) => {
       if (result?.token !== undefined) {
         setAuth(result?.token)
@@ -36,9 +38,6 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       console.log(err)
     },
   })
-
-  const [auth, setAuth] = useLocalStorage<string | null>('user', null)
-  const navigate = useNavigate()
 
   const login = async (account: string, password: string) => {
     onLogin({
