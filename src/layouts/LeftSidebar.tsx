@@ -19,7 +19,7 @@ const LeftSidebar = () => {
           </div>
         </section>
         <hr className="border-t border-t-theme-75" />
-        <section className="my-2 w-full h-[430px]">
+        <section className="my-2 w-full h-[360px]">
           <div className="flex flex-col justify-evenly w-full h-full">
             <LinkButton href="/home/rooms" isTarget={false}>
               <FormattedMessage id="layout.all" defaultMessage="Explore" />
@@ -42,9 +42,9 @@ const LeftSidebar = () => {
                 defaultMessage="Following"
               />
             </LinkButton>
-            <LinkButton href="/home/profile" isTarget={false}>
-              <FormattedMessage id="layout.tables" defaultMessage="Tables" />
-            </LinkButton>
+            {/* <LinkButton href="/home/profile" isTarget={false}> */}
+            {/*   <FormattedMessage id="layout.tables" defaultMessage="Tables" /> */}
+            {/* </LinkButton> */}
             <LinkButton href="/home/rankings" isTarget={false}>
               <FormattedMessage
                 id="layout.rankings"
@@ -57,12 +57,12 @@ const LeftSidebar = () => {
                 defaultMessage="Streamers"
               />
             </LinkButton>
-            <LinkButton href="https://google.com/" isTarget={true}>
-              <FormattedMessage
-                id="layout.appdownload"
-                defaultMessage="App Download"
-              />
-            </LinkButton>
+            {/* <LinkButton href="https://google.com/" isTarget={true}> */}
+            {/*   <FormattedMessage */}
+            {/*     id="layout.appdownload" */}
+            {/*     defaultMessage="App Download" */}
+            {/*   /> */}
+            {/* </LinkButton> */}
             <LinkButton href="/home/rooms/001" isTarget={false}>
               <p>rooms</p>
             </LinkButton>

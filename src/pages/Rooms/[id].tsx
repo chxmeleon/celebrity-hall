@@ -105,7 +105,11 @@ const Room = () => {
                   )}
                 </div>
               </button>
-              <div className="px-2">投注 | 0</div>
+              <div className="inline-flex px-2">
+                <FormattedMessage id="screens.room.bet" />
+                <p className="px-2">|</p>
+                <p className="px-2">0</p>
+              </div>
             </div>
             <div className="flex flex-grow justify-around items-center">
               {chipsButton}
