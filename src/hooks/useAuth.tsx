@@ -2,6 +2,7 @@ import {
   createContext,
   PropsWithChildren,
   useContext,
+  useEffect,
   useMemo,
 } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -9,14 +10,14 @@ import { useLocalStorage } from 'usehooks-ts'
 import useSWRMutation from 'swr/mutation'
 
 interface AuthContextData {
-  auth: string 
+  auth: string | null
   login: (account: string, password: string) => Promise<void>
   logout: () => void
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
-async function sendRequest(url: string, { arg }: any) {
+const sendRequest = (url: string, { arg }: any) => {
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -24,45 +25,56 @@ async function sendRequest(url: string, { arg }: any) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(arg),
+  }).then((res) => res.json())
+}
+
+const graphQlFetcher = async (url: string, { arg }: any) => {
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: arg ? `Bearer ${arg}` : '',
+    },
   })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error('Network response was not ok.')
-      }
-      return res.json()
-    })
-    .then((finalData) => finalData)
-    .catch((err) => err)
 }
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { trigger } = useSWRMutation(
+  const { trigger: onLogin } = useSWRMutation(
     'https://staging.vvip99.net/login',
-    sendRequest
+    sendRequest,
+    {
+      onSuccess: (result) => {
+        if (result?.token !== undefined) {
+          setAuth(result?.token)
+        }
+        navigate('/home/rooms')
+      },
+      onError: (err) => {
+        console.log(err)
+      },
+    }
   )
 
-  const [auth, setAuth] = useLocalStorage('user', '') 
+  const { trigger: onFetchGraphQl } = useSWRMutation(
+    'https://staging.vvip99.net/graphql',
+    graphQlFetcher
+  )
+
+  const [auth, setAuth] = useLocalStorage<string | null>('user', null)
   const navigate = useNavigate()
 
+  const requestAllData = async (auth: any) => {
+    const result = await onFetchGraphQl(auth)
+  }
+
   const login = async (account: string, password: string) => {
-    try {
-      const result = await trigger({
-        identity: account,
-        password: password,
-      })
-      localStorage.setItem('user', result?.token)
-      if (result?.token !== undefined) {
-        setAuth(result.token)
-      }
-      navigate('/home/rooms')
-    } catch (error) {
-      error
-    }
+    onLogin({
+      identity: account,
+      password: password,
+    })
   }
 
   const logout = () => {
-    setAuth('')
-    localStorage.setItem('user', '')
+    setAuth(null)
     navigate('/')
   }
 
