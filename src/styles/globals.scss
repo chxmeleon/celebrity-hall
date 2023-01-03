@@ -6,7 +6,39 @@
   html {
     @apply scroll-smooth;
     & body {
-      @apply overscroll-none bg-[#050505] text-gray-300;
+      @apply overscroll-none bg-gradient-to-br bg-theme-50  text-gray-300;
+    }
+  }
+
+  .bet-skew {
+    transform: scaleY(1.1) scaleX(0.96) perspective(2.6rem) rotateX(2.864deg)
+      translate(0px, -2px);
+  }
+
+  .bet-no-skew {
+    transform: scaleY(1.2) scaleX(0.993) perspective(1.9rem) rotateX(-0.6deg)
+      translate(0px, 4px);
+    perspective-origin: top;
+  }
+
+  .bet-table-skew {
+    transform: scaleY(1.1) perspective(2.65rem) rotateX(3.93deg)
+      translate(0px, 16px);
+  }
+
+  .switch-btn {
+    @apply absolute w-8 h-8 left-1 bottom-1 transition-all ease-in-out duration-[475ms] delay-75 rounded-full;
+  }
+
+  .switch {
+    @apply relative inline-block w-20 h-10 rounded-3xl;
+
+    .switch-btn-on {
+      @apply switch-btn bg-theme-50 translate-x-0  ;
+    }
+
+    .switch-btn-off {
+      @apply switch-btn bg-yellow-400 translate-x-10;
     }
   }
 }

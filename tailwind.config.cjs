@@ -13,7 +13,7 @@ module.exports = {
           70: '#252525',
           75: '#333333',
           100: '#373737',
-          150: '#4A4A4B', 
+          150: '#4A4A4B',
           200: '#9c6c0e',
           300: '#FCED95',
           400: '#de9b16',
@@ -30,10 +30,27 @@ module.exports = {
           201: '#3A3A3A',
           300: '#CBA686',
           301: '#675749',
-        }
+        },
+        grid: {
+          100: '#FF5F85',
+          200: '#FFC25F',
+          300: '#7AC943',
+          400: '#3FA9F5',
+        },
       },
       backgroundImage: {
         'link-button-54': 'linear-gradient(54deg, #FCED95, #9c6c0e, #FCED95)',
+        'great-theme':
+          'linear-gradient(56deg, #FCED9510, #9c6c0e60, #FCED9510)',
+      },
+      aspectRatio: {
+        '4/3': '4 / 3',
+        film: '2 / 1',
+        cinema: '2.35 / 1',
+      },
+      screens: {
+        '1.5xl': '1440px',
+        '3xl': '1520px',
       },
     },
   },

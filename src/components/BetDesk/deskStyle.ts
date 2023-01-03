@@ -1,0 +1,85 @@
+import { cva, VariantProps } from 'class-variance-authority'
+
+export type DeskProps = VariantProps<typeof deskStyle>
+
+export const deskStyle = cva('font-medium border border-gray-300/50', {
+  variants: {
+    intent: {
+      htop: 'border-t-2 hover:bg-gray-100/10 text-xl [&_p]:text-sm ',
+      center: 'hover:bg-gray-100/10 text-2xl',
+      bottom: 'border-b-2 text-xl',
+      hbottom: 'border-b-2 hover:bg-gray-100/10',
+      hycenter: 'border-y-2 hover:bg-gray-100/10',
+      userHBottom: 'border-b-2 bg-theme-50/20',
+      userLBottom: 'border-L-2 bg-theme-50/20',
+      userRBottom: 'border-R-2 bg-theme-50/20',
+    },
+    side: {
+      full: 'rounded-full',
+      tlFull: 'rounded-tl-full border-l-2',
+      trFull: 'rounded-tr-full border-r-2',
+      blFull: 'rounded-bl-full border-l-2',
+      brFull: 'rounded-br-full border-r-2',
+      lside: 'border-l-2',
+      rside: 'border-r-2',
+      halfWSide: 'w-1/2',
+      halfWLSide: 'w-1/2 border-l-2',
+      halfWRSide: 'w-1/2 border-r-2',
+      halfHSide: 'h-1/2 w-full',
+      none: '',
+    },
+    span: {
+      col2: 'col-span-2',
+      col3: 'col-span-3',
+      col4: 'col-span-4',
+      col5: 'col-span-5',
+      row2: 'row-span-2',
+      row3: 'row-span-3',
+      none: '',
+    },
+  },
+  compoundVariants: [
+    {
+      intent: 'htop',
+      side: 'full',
+      span: 'col2',
+    },
+  ],
+  defaultVariants: {
+    intent: 'htop',
+    side: 'full',
+    span: 'col2',
+  },
+})
+
+export const btnIdx = {
+  tl2: deskStyle({ intent: 'htop', side: 'lside', span: 'col2' }),
+  tn2: deskStyle({ intent: 'htop', side: 'none', span: 'col2' }),
+  tn3: deskStyle({ intent: 'htop', side: 'none', span: 'col3' }),
+  tr2: deskStyle({ intent: 'htop', side: 'rside', span: 'col2' }),
+  cl4: deskStyle({ intent: 'center', side: 'lside', span: 'col4' }),
+  cn3: deskStyle({ intent: 'center', side: 'none', span: 'col3' }),
+  cr4: deskStyle({ intent: 'center', side: 'rside', span: 'col4' }),
+  bln: deskStyle({ intent: 'bottom', side: 'blFull', span: 'none' }),
+  bnn: deskStyle({ intent: 'bottom', side: 'none', span: 'none' }),
+  brn: deskStyle({ intent: 'bottom', side: 'brFull', span: 'none' }),
+  tn4: deskStyle({ intent: 'htop', side: 'none', span: 'col4' }),
+  tl5: deskStyle({ intent: 'htop', side: 'lside', span: 'col5' }),
+  tr5: deskStyle({ intent: 'htop', side: 'rside', span: 'col5' }),
+  cn4: deskStyle({ intent: 'center', side: 'none', span: 'col4' }),
+  cl5: deskStyle({ intent: 'center', side: 'lside', span: 'col5' }),
+  cr5: deskStyle({ intent: 'center', side: 'rside', span: 'col5' }),
+  thn: deskStyle({ intent: 'htop', side: 'halfWSide', span: 'none' }),
+  bhn: deskStyle({ intent: 'bottom', side: 'halfWLSide', span: 'none' }),
+  bhln: deskStyle({ intent: 'bottom', side: 'halfWLSide', span: 'none' }),
+  hbhn: deskStyle({ intent: 'hbottom', side: 'halfWLSide', span: 'none' }),
+  hbhln: deskStyle({ intent: 'hbottom', side: 'halfWLSide', span: 'none' }),
+  hbhrn: deskStyle({ intent: 'hbottom', side: 'halfWRSide', span: 'none' }),
+  bn4: deskStyle({ intent: 'hbottom', side: 'none', span: 'col4' }),
+  thhn: deskStyle({ intent: 'htop', side: 'halfHSide', span: 'none' }),
+  bhhn: deskStyle({ intent: 'hbottom', side: 'halfHSide', span: 'none' }),
+  ynn: deskStyle({ intent: 'hycenter', side: 'none', span: 'none' }),
+  isUserL: deskStyle({ intent: 'userLBottom', side: 'blFull', span: 'none' }),
+  isUserN: deskStyle({ intent: 'userHBottom', side: 'none', span: 'none' }),
+  isUserR: deskStyle({ intent: 'userRBottom', side: 'brFull', span: 'none' }),
+}
