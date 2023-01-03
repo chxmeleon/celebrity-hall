@@ -23,21 +23,25 @@ const sendRequest = (url: string, { arg }: any) => {
 }
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  const apiEndpoint = process.env.URL_ENDPOINT
+
   const [auth, setAuth] = useLocalStorage<string | null>('user', null)
   const navigate = useNavigate()
-  const api = process.env.API_ENDPOINT
-
-  const { trigger: onLogin } = useSWRMutation(`${api}login`, sendRequest, {
-    onSuccess: (result) => {
-      if (result?.token !== undefined) {
-        setAuth(result?.token)
-      }
-      navigate('/home/rooms')
-    },
-    onError: (err) => {
-      console.log(err)
-    },
-  })
+  const { trigger: onLogin } = useSWRMutation(
+    `${apiEndpoint}/login`,
+    sendRequest,
+    {
+      onSuccess: (result) => {
+        if (result?.token !== undefined) {
+          setAuth(result?.token)
+        }
+        navigate('/home/rooms')
+      },
+      onError: (err) => {
+        console.log(err)
+      },
+    }
+  )
 
   const login = async (account: string, password: string) => {
     onLogin({

@@ -11,7 +11,7 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const httpLink = createHttpLink({ uri: process.env.GRAPHQL_ENDPOINT })
+const httpLink = createHttpLink({ uri: `${process.env.URL_ENDPOINT}/graphql` })
 
 export const createApolloClient = () => {
   const apolloClient = new ApolloClient({
