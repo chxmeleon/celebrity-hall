@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
 import Header from './Header'
 import LeftSidebar from './LeftSidebar'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/context/AuthContext'
 import Modal from '@/components/Modal'
 
 const ProtectedLayout: React.FC = () => {

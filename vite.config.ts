@@ -6,6 +6,9 @@ import presetIcons from '@unocss/preset-icons'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    'process.env': process.env,
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -16,5 +19,5 @@ export default defineConfig({
     Unocss({
       presets: [presetIcons({})],
     }),
-  ]
+  ],
 })

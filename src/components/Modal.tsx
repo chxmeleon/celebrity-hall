@@ -1,4 +1,4 @@
-import { useSetup } from '@/hooks/useSetup'
+import { useSetup } from '@/context/LanguageContext'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 

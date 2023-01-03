@@ -1,6 +1,6 @@
 import { btnIdx } from './deskStyle'
 import { FormattedMessage } from 'react-intl'
-import { useSetup } from '@/hooks/useSetup'
+import { useSetup } from '@/context/LanguageContext'
 
 export const SinglePlayer = () => {
   const { isRegular } = useSetup()

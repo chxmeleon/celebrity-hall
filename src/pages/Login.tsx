@@ -1,7 +1,7 @@
 import React from 'react'
 import LogoImg from '@/assets/login_logo.webp'
 import LoginForm from '@/components/LoginForm'
-import { useSetup } from '@/hooks/useSetup'
+import { useSetup } from '@/context/LanguageContext'
 
 const Login: React.FC = () => {
   const { openModal } = useSetup()

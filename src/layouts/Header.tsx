@@ -1,6 +1,6 @@
 import { clsx as cx } from 'clsx'
-import { useAuth } from '@/hooks/useAuth'
-import { useSetup } from '@/hooks/useSetup'
+import { useAuth } from '@/context/AuthContext'
+import { useSetup } from '@/context/LanguageContext'
 import { RightSidebarButton } from '@/components/Button'
 import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'

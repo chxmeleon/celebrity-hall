@@ -1,8 +1,8 @@
 import Router from '@/router'
 import { ResponsiveProvider, Responsive } from '@/hooks/useResponsive'
 import { BrowserRouter, MemoryRouter } from 'react-router-dom'
-import { AuthProvider } from '@/hooks/useAuth'
-import { SetupProvider } from '@/hooks/useSetup'
+import { AuthProvider } from '@/context/AuthContext'
+import { SetupProvider } from '@/context/LanguageContext'
 
 function App() {
   return (

@@ -1,21 +1,15 @@
-import {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useEffect,
-  useMemo,
-} from 'react'
+import { createContext, PropsWithChildren, useContext, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from 'usehooks-ts'
 import useSWRMutation from 'swr/mutation'
 
-interface AuthContextData {
+type AuthProps = {
   auth: string | null
   login: (account: string, password: string) => Promise<void>
   logout: () => void
 }
 
-const AuthContext = createContext<AuthContextData>({} as AuthContextData)
+const AuthContext = createContext<AuthProps>({} as AuthProps)
 
 const sendRequest = (url: string, { arg }: any) => {
   return fetch(url, {
@@ -28,18 +22,12 @@ const sendRequest = (url: string, { arg }: any) => {
   }).then((res) => res.json())
 }
 
-const graphQlFetcher = async (url: string, { arg }: any) => {
-  return fetch(url, {
-    method: 'POST',
-    headers: {
-      Authorization: arg ? `Bearer ${arg}` : '',
-    },
-  })
-}
-
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
+
+  const api = process.env.API_ENDPOINT
+  
   const { trigger: onLogin } = useSWRMutation(
-    'https://staging.vvip99.net/login',
+    `${api}login`,
     sendRequest,
     {
       onSuccess: (result) => {
@@ -54,17 +42,8 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
   )
 
-  const { trigger: onFetchGraphQl } = useSWRMutation(
-    'https://staging.vvip99.net/graphql',
-    graphQlFetcher
-  )
-
   const [auth, setAuth] = useLocalStorage<string | null>('user', null)
   const navigate = useNavigate()
-
-  const requestAllData = async (auth: any) => {
-    const result = await onFetchGraphQl(auth)
-  }
 
   const login = async (account: string, password: string) => {
     onLogin({
@@ -90,6 +69,4 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-export const useAuth = () => {
-  return useContext(AuthContext)
-}
+export const useAuth = () => useContext(AuthContext)

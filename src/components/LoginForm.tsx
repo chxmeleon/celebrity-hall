@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { useState } from 'react'
 import { LoginButton } from './Button'
 import { clsx as cx } from 'clsx'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/context/AuthContext'
 import { useIntl } from 'react-intl'
 
 type Inputs = {
