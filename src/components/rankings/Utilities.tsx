@@ -250,7 +250,7 @@ export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
   return (
     <img
       className="absolute sm:top-[-53px] sm:right-[72px] top-[-22px] right-[22px] z-10 w-[75px] sm:w-[178px]"
-      src={thirdLg}
+      src={firstLg}
       alt={`${rank}`}
     />
   );
