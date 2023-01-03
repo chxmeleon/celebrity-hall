@@ -8,11 +8,14 @@ import { useState } from 'react'
 import { BetButton } from '@/components/Button'
 import { chipsImg } from '@/components/BetDesk/chips'
 
+const bgImage = cx`
+  absolute bg-cover bg-center w-full h-full bg-no-repeat bg-[url('../assets/room-bg-2.webp')]
+  before:absolute before:w-full before:h-full before:bg-great-theme blur-[2px] before:content-['']`
+
 const Room = () => {
   const [isToggle, setIsToggle] = useState<boolean>(false)
   const onToggle = () => setIsToggle((isToggle) => !isToggle)
   const { handleRegularToggle, isRegular } = useSetup()
-
   const [betPrice, setBetPrice] = useState('chips_10')
   const handleSelectBetPrice = (e: React.MouseEvent) => {
     const chipImgSrc = (e.target as HTMLImageElement).src
@@ -34,20 +37,15 @@ const Room = () => {
         key={idx}
         onClick={handleSelectBetPrice}
         className={`${
-          isActive ? 'shadow-md shadow-theme-300' : 'shadow shadow-theme-50/80'
+          isActive
+            ? 'shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
+            : 'shadow shadow-theme-50/80'
         } rounded-full relative hover:cursor-pointer`}
       >
-        {isActive && (
-          <div className="absolute left-1 top-2 w-7 h-4 rounded-full bg-theme-300 blur-md"></div>
-        )}
         <img src={item} alt="bet image" className="w-9" />
       </button>
     )
   })
-
-  const bgImage = cx`
-    absolute bg-cover bg-center w-full h-full bg-no-repeat bg-[url('../assets/room-bg-2.webp')]
-    before:absolute before:w-full before:h-full before:bg-great-theme blur-[2px] before:content-['']`
 
   return (
     <div className="relative w-full h-full">
