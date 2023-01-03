@@ -19,18 +19,11 @@ const LoginForm: React.FC = () => {
   } = useForm<Inputs>()
 
   const { login } = useAuth()
+  const { formatMessage } = useIntl()
 
-  // const onSubmit: SubmitHandler<Inputs> = (data) => {
-  //   login({
-  //     email: data.email,
-  //     password: data.password,
-  //   })
-  // }
-
-  const onSubmit = () => {
-    login()
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    login(data.email, data.password)
   }
-
   const isError = errors.password?.type === 'required'
   const [notify, setNotify] = useState<boolean>(false)
   const handleNotify = () => {
@@ -50,14 +43,13 @@ const LoginForm: React.FC = () => {
     transition-all duration-500 ease-in-out fixed top-10 right-10 px-4 py-3 
     text-red-800 bg-red-200 rounded-sm border-l-4 border-l-red-500`)
 
-  const { formatMessage } = useIntl()
 
   return (
     <div className="relative pt-5 w-full">
       <div className="flex justify-center w-full">
         <div className="w-[23rem]">
           <form
-            onSubmit={onSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col justify-between h-[19rem]"
           >
             <div className="relative w-full">

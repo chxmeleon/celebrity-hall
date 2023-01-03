@@ -17,7 +17,7 @@ const ProtectedLayout: React.FC = () => {
      before:absolute before:w-full before:h-full before:bg-black/20 before:content-['']`
 
   return (
-    <main >
+    <main>
       <Modal />
       <section className="relative m-auto h-screen aspect-video border-theme-70 border-x">
         <div className={bgImage}></div>
