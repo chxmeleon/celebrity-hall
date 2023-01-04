@@ -18,7 +18,7 @@ const LoginForm: React.FC = () => {
     formState: { errors },
   } = useForm<Inputs>()
 
-  const { login } = useAuth()
+  const { login, auth } = useAuth()
   const { formatMessage } = useIntl()
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {

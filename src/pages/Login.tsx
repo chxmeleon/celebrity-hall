@@ -2,14 +2,16 @@ import React from 'react'
 import LogoImg from '@/assets/login_logo.webp'
 import LoginForm from '@/components/auth/LoginForm'
 import { useSetup } from '@/contexts/SetupContext'
+import AuthAlert from '@/components/auth/AuthAlert'
 
 const Login: React.FC = () => {
   const { openSetup } = useSetup()
 
   return (
-    <div>
+    <div className="relative">
+      <AuthAlert />
       <div className="flex justify-center pt-32 w-full h-full">
-        <div className="w-full ">
+        <div className="w-full">
           <div className="flex flex-col items-center">
             <div className="pb-8">
               <img src={LogoImg} alt="logo image" className="w-24" />

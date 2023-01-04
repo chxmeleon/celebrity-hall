@@ -1,10 +1,18 @@
-import { createContext, PropsWithChildren, useContext, useMemo } from 'react'
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from 'usehooks-ts'
 import useSWRMutation from 'swr/mutation'
 
 type AuthProps = {
   auth: string | null
+  isError: boolean
   login: (account: string, password: string) => Promise<void>
   logout: () => void
 }
@@ -31,22 +39,27 @@ const sendRequest = async (url: string, { arg }: any) => {
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [auth, setAuth] = useLocalStorage<string | null>('user', null)
+  const [isError, setIsError] = useState<boolean>(false)
   const navigate = useNavigate()
-  const { trigger: onLogin } = useSWRMutation(
+  const { trigger: onLogin, data } = useSWRMutation(
     import.meta.env.VITE_RESTFUL_ENDPOINT,
     sendRequest,
     {
       onSuccess: (result) => {
         if (result?.token !== undefined) {
           setAuth(result?.token)
+          navigate('/home/rooms')
         }
-        navigate('/home/rooms')
       },
       onError: (err) => {
         console.log(err)
+        setIsError(true)
       },
     }
   )
+  
+  console.log(isError);
+  
 
   const login = async (account: string, password: string) => {
     onLogin({
@@ -63,6 +76,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const value = useMemo(
     () => ({
       auth,
+      isError,
       login,
       logout,
     }),
