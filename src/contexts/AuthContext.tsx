@@ -26,7 +26,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [auth, setAuth] = useLocalStorage<string | null>('user', null)
   const navigate = useNavigate()
   const { trigger: onLogin } = useSWRMutation(
-    import.meta.env.RESTFUL_ENDPOINT,
+    import.meta.env.VITE_RESTFUL_ENDPOINT,
     sendRequest,
     {
       onSuccess: (result) => {
