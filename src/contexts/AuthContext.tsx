@@ -23,12 +23,10 @@ const sendRequest = (url: string, { arg }: any) => {
 }
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const apiEndpoint = process.env.URL_ENDPOINT
-
   const [auth, setAuth] = useLocalStorage<string | null>('user', null)
   const navigate = useNavigate()
   const { trigger: onLogin } = useSWRMutation(
-    `${apiEndpoint}/login`,
+    process.env.RESTFUL_ENDPOINT,
     sendRequest,
     {
       onSuccess: (result) => {

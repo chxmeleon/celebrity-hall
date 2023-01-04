@@ -27,14 +27,12 @@ const authLink = setContext((_, { headers }) => {
 /*   if (networkError) console.error('[Network error]:', networkError) */
 /* }) */
 
-
-
-const httpLink = createHttpLink({ uri: `${process.env.URL_ENDPOINT}/graphql` })
+const httpLink = createHttpLink({ uri: process.env.GRAPHQL_ENDPOINT })
 
 export const createApolloClient = () => {
   const apolloClient = new ApolloClient({
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
   })
   return apolloClient
 }
