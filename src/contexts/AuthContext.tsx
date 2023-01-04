@@ -11,15 +11,22 @@ type AuthProps = {
 
 const AuthContext = createContext<AuthProps>({} as AuthProps)
 
-const sendRequest = (url: string, { arg }: any) => {
-  return fetch(url, {
+const sendRequest = async (url: string, { arg }: any) => {
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       Accept: '*/*',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(arg),
-  }).then((res) => res.json())
+  })
+  const data = await response.json()
+
+  if (response.ok) {
+    return data
+  } else {
+    throw new Error(data.error)
+  }
 }
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
