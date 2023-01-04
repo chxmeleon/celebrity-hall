@@ -1,20 +1,24 @@
 import Router from '@/router'
 import { ResponsiveProvider, Responsive } from '@/hooks/useResponsive'
 import { BrowserRouter, MemoryRouter } from 'react-router-dom'
-import { AuthProvider } from '@/context/AuthContext'
-import { SetupProvider } from '@/context/LanguageContext'
+import { AuthProvider } from '@/contexts/AuthContext'
+import { LanguageProvider } from '@/contexts/LanguageContext'
+import { ApiProvider } from '@/contexts/ApiContext'
+import { SetupProvider } from './contexts/SetupContext'
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <SetupProvider>
-          <ResponsiveProvider>
-            <Responsive.Media>
-              <Router />
-            </Responsive.Media>
-          </ResponsiveProvider>
-        </SetupProvider>
+        <ApiProvider>
+          <LanguageProvider>
+            <SetupProvider>
+              <ResponsiveProvider>
+                <Router />
+              </ResponsiveProvider>
+            </SetupProvider>
+          </LanguageProvider>
+        </ApiProvider>
       </AuthProvider>
     </BrowserRouter>
   )

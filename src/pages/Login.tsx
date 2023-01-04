@@ -1,10 +1,10 @@
 import React from 'react'
 import LogoImg from '@/assets/login_logo.webp'
-import LoginForm from '@/components/LoginForm'
-import { useSetup } from '@/context/LanguageContext'
+import LoginForm from '@/components/auth/LoginForm'
+import { useSetup } from '@/contexts/SetupContext'
 
 const Login: React.FC = () => {
-  const { openModal } = useSetup()
+  const { openSetup } = useSetup()
 
   return (
     <div>
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
               <img src={LogoImg} alt="logo image" className="w-24" />
             </div>
             <div className="flex justify-end px-1 pb-2 text-2xl w-[25rem]">
-              <button onClick={openModal}>
+              <button onClick={openSetup}>
                 <div className="i-heroicons-cog-6-tooth-solid"></div>
               </button>
               <button className="ml-6">

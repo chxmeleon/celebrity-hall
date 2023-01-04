@@ -2,8 +2,9 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
 import Header from './Header'
 import LeftSidebar from './LeftSidebar'
-import { useAuth } from '@/context/AuthContext'
-import Modal from '@/components/Modal'
+import { useAuth } from '@/contexts/AuthContext'
+import SetupModal from '@/components/setup/SetupModal'
+import NoticeModal from '@/components/setup/NoticeModal'
 
 const ProtectedLayout: React.FC = () => {
   const { auth } = useAuth()
@@ -18,7 +19,8 @@ const ProtectedLayout: React.FC = () => {
 
   return (
     <main>
-      <Modal />
+      <SetupModal />
+      <NoticeModal />
       <section className="relative m-auto h-screen aspect-video border-theme-70 border-x">
         <div className={bgImage}></div>
         <Header />

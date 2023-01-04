@@ -1,5 +1,5 @@
 import LogoImg from "@/assets/login_logo.webp";
-import { LinkButton } from "@/components/Button";
+import { LinkButton } from "@/components/common/Button";
 import { FormattedMessage } from "react-intl";
 
 const LeftSidebar = () => {

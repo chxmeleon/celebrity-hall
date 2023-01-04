@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
-import Modal from '@/components/Modal'
+import SetupModal from '@/components/setup/SetupModal'
 
 const PublicLayout: React.FC = () => {
   const bgImage = cx`
@@ -11,7 +11,7 @@ const PublicLayout: React.FC = () => {
 
   return (
     <main>
-      <Modal />
+      <SetupModal />
       <div className="relative">
         <div className={bgImage}></div>
       </div>

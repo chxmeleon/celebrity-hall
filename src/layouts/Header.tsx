@@ -1,7 +1,7 @@
 import { clsx as cx } from 'clsx'
-import { useAuth } from '@/context/AuthContext'
-import { useSetup } from '@/context/LanguageContext'
-import { RightSidebarButton } from '@/components/Button'
+import { useAuth } from '@/contexts/AuthContext'
+import { useSetup } from '@/contexts/SetupContext'
+import { RightSidebarButton } from '@/components/common/Button'
 import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -23,7 +23,7 @@ const icons = {
 
 const Header = () => {
   const { logout } = useAuth()
-  const { openModal } = useSetup()
+  const { openSetup, openNotice } = useSetup()
   const [toggle, setToggle] = useState(false)
   const sidebarRef = useRef<HTMLButtonElement>(null)
   const onToggle = () => {
@@ -70,7 +70,7 @@ const Header = () => {
                   <RightSidebarButton
                     href=""
                     isTarget={false}
-                    onClick={() => null}
+                    onClick={openNotice}
                   >
                     <i className={icons.notice}></i>
                     <p>
@@ -122,7 +122,7 @@ const Header = () => {
                   <RightSidebarButton
                     href=""
                     isTarget={false}
-                    onClick={openModal}
+                    onClick={openSetup}
                   >
                     <i className={icons.gear}></i>
                     <p>
@@ -147,12 +147,10 @@ const Header = () => {
                   </RightSidebarButton>
                   <RightSidebarButton href="" isTarget={false} onClick={logout}>
                     <i className={icons.out}></i>
-                    <p>
-                      <FormattedMessage
-                        id="dropdown.logout"
-                        defaultMessage="Logout"
-                      />
-                    </p>
+                    <FormattedMessage
+                      id="dropdown.logout"
+                      defaultMessage="Logout"
+                    />
                   </RightSidebarButton>
                 </div>
               </div>
