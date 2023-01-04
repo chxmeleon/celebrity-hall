@@ -1,11 +1,12 @@
 import RoomTestImage from '@/assets/test.webp'
-import BetDesk from '@/components/BetDesk'
-import ChatRoom from '@/components/Chatroom'
+import BetDesk from '@/components/room/BetDesk'
+import ChatRoom from '@/components/room/Chatroom'
+import BeadPlate from '@/components/room/Roadmap/BeadPlate'
 import { FormattedMessage } from 'react-intl'
 import { clsx as cx } from 'clsx'
 import { useState } from 'react'
 import { BetButton } from '@/components/common/Button'
-import { chipsImg } from '@/components/BetDesk/chips'
+import { chipsImg } from '@/components/room/BetDesk/chips'
 import { useSetup } from '@/contexts/SetupContext'
 
 const bgImage = cx`
@@ -139,7 +140,9 @@ const Room = () => {
       </div>
       <div className="flex w-full h-1/5 bg-gray-800">
         <div className="flex flex-grow justify-start">
-          <div className="w-1/3">bead plate</div>
+          <div className="w-1/3 flex-shrink-0 flex-grow-0">
+            <BeadPlate />
+          </div>
           <div className="flex w-2/3">
             <div className="block flex-grow w-full">
               <div className="h-2/3"></div>
