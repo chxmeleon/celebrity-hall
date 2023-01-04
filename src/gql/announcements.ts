@@ -13,3 +13,17 @@ export const GET_ANNOUNCEMENTS = gql`
     }
   }
 `
+
+export const GET_STREAMERS = gql`
+  query Annoncements {
+    streamers(withDisabled: true) {
+      avatar
+      id
+      likesCount
+      nickname
+      online
+      username
+      winRate
+    }
+  }
+`
