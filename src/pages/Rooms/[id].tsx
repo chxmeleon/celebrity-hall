@@ -3,20 +3,22 @@ import BetDesk from '@/components/BetDesk'
 import ChatRoom from '@/components/Chatroom'
 import { FormattedMessage } from 'react-intl'
 import { clsx as cx } from 'clsx'
-import { useSetup } from '@/contexts/LanguageContext'
 import { useState } from 'react'
-import { BetButton } from '@/components/Button'
+import { BetButton } from '@/components/common/Button'
 import { chipsImg } from '@/components/BetDesk/chips'
+import { useSetup } from '@/contexts/SetupContext'
 
 const bgImage = cx`
   absolute bg-cover bg-center w-full h-full bg-no-repeat bg-[url('../assets/room-bg-2.webp')]
   before:absolute before:w-full before:h-full before:bg-great-theme blur-[2px] before:content-['']`
 
 const Room = () => {
-  const [isToggle, setIsToggle] = useState<boolean>(false)
-  const onToggle = () => setIsToggle((isToggle) => !isToggle)
-  const { handleRegularToggle, isRegular } = useSetup()
+  const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
   const [betPrice, setBetPrice] = useState('chips_10')
+  const { isRegular, handleRegularToggle } = useSetup()
+
+  const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
+
   const handleSelectBetPrice = (e: React.MouseEvent) => {
     const chipImgSrc = (e.target as HTMLImageElement).src
       ?.split('/')
@@ -68,21 +70,21 @@ const Room = () => {
             </div>
           </div>
           <div className="flex-grow flex-shrink-0 w-full">
-            <BetDesk isToggle={isToggle} />
+            <BetDesk isToggle={isChangedDesk} />
           </div>
           <div className="flex justify-between items-center px-2 my-2 w-full h-10">
             <div className="flex items-center w-[24%]">
               <button
-                onClick={onToggle}
+                onClick={handleSwitchDesk}
                 className={`${
-                  isToggle
+                  isChangedDesk
                     ? 'text-theme-70 bg-theme-300 '
                     : 'bg-theme-70 text-theme-300'
                 } inline-flex p-2 text-2xl rounded-full `}
               >
                 <div
                   className={`${
-                    isToggle
+                    isChangedDesk
                       ? 'i-heroicons-user-solid'
                       : 'i-heroicons-user-group-20-solid'
                   } text-2xl `}

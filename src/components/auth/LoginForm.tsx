@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useState } from 'react'
-import { LoginButton } from './Button'
+import { LoginButton } from '@/components/common/Button'
 import { clsx as cx } from 'clsx'
 import { useAuth } from '@/contexts/AuthContext'
 import { useIntl } from 'react-intl'

@@ -30,8 +30,8 @@ export const Heart: React.FC<{ like: number }> = ({ like }) => {
 const StreamersCard: React.FC<{ data: Array<any> }> = ({ data }) => {
   return (
     <>
-      {data.map((item) => (
-        <div className="sm:mr-[40px] sm:mb-[55px] mb-[35px]">
+      {data.map((item, idx) => (
+        <div key={idx} className="sm:mr-[40px] sm:mb-[55px] mb-[35px]">
           <img
             className="sm:w-[401px] sm:h-[355px] w-[278px] h-[246px]"
             src={streamer}

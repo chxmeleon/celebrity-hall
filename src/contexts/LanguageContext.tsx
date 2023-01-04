@@ -1,59 +1,38 @@
-import React, { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import { IntlProvider } from 'react-intl'
 import message from '@/i18n'
 import { useLocalStorage } from 'usehooks-ts'
 
-interface SetupContextData {
-  isShow: boolean
-  isRegular: boolean
-  setIsShow: React.Dispatch<React.SetStateAction<boolean>>
+interface LanguageContextData {
   locale: string
   isSelected: string
-  openModal: () => void
-  closeModal: () => void
   handleSelectValue: (e: React.ChangeEvent<HTMLSelectElement>) => void
-  handleRegularToggle: () => void
 }
 
-const SetupContext = createContext<SetupContextData>({} as SetupContextData)
+const LanguageContext = createContext<LanguageContextData>(
+  {} as LanguageContextData
+)
 
-export const SetupProvider = ({ children }: { children: JSX.Element }) => {
-  const [isShow, setIsShow] = useState<boolean>(false)
+export const LanguageProvider: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
   const locale = navigator.language.toLowerCase()
   const [isSelected, setIsSelected] = useLocalStorage('lang', locale)
-  const [isRegular, setIsRegular] = useState(false)
-
-  const handleRegularToggle = () => setIsRegular((isRegular) => !isRegular)
-
   const handleSelectValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setIsSelected(e.target.value)
   }
 
-  const openModal = () => {
-    setIsShow(true)
-  }
-
-  const closeModal = () => {
-    setIsShow(false)
-  }
-
   const value = useMemo(
     () => ({
-      isShow,
-      isRegular,
-      setIsShow,
       locale,
       isSelected,
-      openModal,
-      closeModal,
       handleSelectValue,
-      handleRegularToggle,
     }),
-    [isShow, setIsShow, locale, isSelected, isRegular]
+    [locale, isSelected, handleSelectValue]
   )
 
   return (
-    <SetupContext.Provider value={value}>
+    <LanguageContext.Provider value={value}>
       <IntlProvider
         locale={locale}
         key={locale}
@@ -62,10 +41,8 @@ export const SetupProvider = ({ children }: { children: JSX.Element }) => {
       >
         {children}
       </IntlProvider>
-    </SetupContext.Provider>
+    </LanguageContext.Provider>
   )
 }
 
-export const useSetup = () => {
-  return useContext(SetupContext)
-}
+export const useLanguage = () => useContext(LanguageContext)

@@ -1,7 +1,7 @@
 import { btnIdx } from './deskStyle'
 import { FormattedMessage } from 'react-intl'
 import MultiGrid from './Grid'
-import { useSetup } from '@/contexts/LanguageContext'
+import { useSetup } from '@/contexts/SetupContext'
 
 const userData = [
   { id: 0, username: 'A', balance: 1889 },
