@@ -9,17 +9,17 @@ import { SetupProvider } from './contexts/SetupContext'
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <ApiProvider>
-          <LanguageProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <ApiProvider>
             <SetupProvider>
               <ResponsiveProvider>
                 <Router />
               </ResponsiveProvider>
             </SetupProvider>
-          </LanguageProvider>
-        </ApiProvider>
-      </AuthProvider>
+          </ApiProvider>
+        </AuthProvider>
+      </LanguageProvider>
     </BrowserRouter>
   )
 }
