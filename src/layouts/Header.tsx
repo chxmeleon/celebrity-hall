@@ -60,11 +60,10 @@ const Header = () => {
             <div className="inline-block relative mt-1.5">
               <button className={icons.bar} onClick={onToggle}></button>
               <div
-                className={`${
-                  toggle
-                    ? 'h-fit opacity-100 scale-y-100 translate-y-2'
+                className={`${toggle
+                    ? 'h-fit opacity-100 scale-y-100 translate-y-0'
                     : 'h-0 opacity-0 scale-y-[28%] -translate-y-36'
-                } absolute w-[17.5rem] min-h-fit max-h-fit  -translate-x-[16rem] -z-10 transition-all duration-300 ease-in-out bg-theme-50/95 border border-theme-75 border-y-transparent`}
+                  } absolute w-[17.5rem] min-h-fit max-h-fit  -translate-x-[16rem] -z-10 transition-all duration-300 ease-in-out bg-theme-50/95 border border-theme-75 border-y-transparent`}
               >
                 <div className="inline-block w-full text-lg" onClick={stopProp}>
                   <RightSidebarButton
@@ -147,10 +146,12 @@ const Header = () => {
                   </RightSidebarButton>
                   <RightSidebarButton href="" isTarget={false} onClick={logout}>
                     <i className={icons.out}></i>
-                    <FormattedMessage
-                      id="dropdown.logout"
-                      defaultMessage="Logout"
-                    />
+                    <p>
+                      <FormattedMessage
+                        id="dropdown.logout"
+                        defaultMessage="Logout"
+                      />
+                    </p>
                   </RightSidebarButton>
                 </div>
               </div>
