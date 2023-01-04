@@ -2,6 +2,8 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
 import SetupModal from '@/components/setup/SetupModal'
+import AuthAlert from '@/components/auth/AuthAlert'
+
 
 const PublicLayout: React.FC = () => {
   const bgImage = cx`
@@ -12,6 +14,7 @@ const PublicLayout: React.FC = () => {
   return (
     <main>
       <SetupModal />
+      <AuthAlert />
       <div className="relative">
         <div className={bgImage}></div>
       </div>

@@ -9,8 +9,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from 'usehooks-ts'
 import useSWRMutation from 'swr/mutation'
-import { showAlert } from '@/components/common/Alert'
-import { useIntl } from 'react-intl'
+import axios from 'axios'
 
 type AuthProps = {
   auth: string | null
@@ -40,12 +39,10 @@ const sendRequest = async (url: string, { arg }: any) => {
 }
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { formatMessage } = useIntl()
   const [auth, setAuth] = useLocalStorage<string | null>('user', null)
   const [isError, setIsError] = useState<boolean>(false)
   const navigate = useNavigate()
-
-  const { trigger: onLogin, data } = useSWRMutation(
+  const { trigger: onLogin } = useSWRMutation(
     import.meta.env.VITE_RESTFUL_ENDPOINT,
     sendRequest,
     {
@@ -56,12 +53,11 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
         }
       },
       onError: (err) => {
-        showAlert(
-          formatMessage({
-            id: 'screens.login.wrongPassword',
-            defaultMessage: 'password or auount is wrong',
-          })
-        )
+        setIsError(true)
+        setTimeout(() => {
+          setIsError(false)
+        }, 2800)
+        console.log(err.message)
       },
     }
   )
@@ -85,7 +81,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       login,
       logout,
     }),
-    [auth]
+    [auth, isError]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

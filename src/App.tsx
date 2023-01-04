@@ -9,8 +9,8 @@ import { SetupProvider } from './contexts/SetupContext'
 function App() {
   return (
     <BrowserRouter>
-      <LanguageProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <LanguageProvider>
           <ApiProvider>
             <SetupProvider>
               <ResponsiveProvider>
@@ -18,8 +18,8 @@ function App() {
               </ResponsiveProvider>
             </SetupProvider>
           </ApiProvider>
-        </AuthProvider>
-      </LanguageProvider>
+        </LanguageProvider>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

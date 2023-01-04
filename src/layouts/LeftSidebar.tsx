@@ -19,23 +19,23 @@ const LeftSidebar = () => {
           </div>
         </section>
         <hr className="border-t border-t-theme-75" />
-        <section className="my-2 w-full h-[360px]">
+        <section className="my-2 w-full h-[290px]">
           <div className="flex flex-col justify-evenly w-full h-full">
             <LinkButton href="/home/rooms" isTarget={false}>
               <FormattedMessage id="layout.all" defaultMessage="Explore" />
             </LinkButton>
-            <LinkButton href="/home/liverooms" isTarget={false}>
-              <FormattedMessage
-                id="layout.liverooms"
-                defaultMessage="Live Rooms"
-              />
-            </LinkButton>
-            <LinkButton href="/home/mutualrooms" isTarget={false}>
-              <FormattedMessage
-                id="layout.mutualrooms"
-                defaultMessage="Mutual Rooms"
-              />
-            </LinkButton>
+            {/* <LinkButton href="/home/liverooms" isTarget={false}> */}
+            {/*   <FormattedMessage */}
+            {/*     id="layout.liverooms" */}
+            {/*     defaultMessage="Live Rooms" */}
+            {/*   /> */}
+            {/* </LinkButton> */}
+            {/* <LinkButton href="/home/mutualrooms" isTarget={false}> */}
+            {/*   <FormattedMessage */}
+            {/*     id="layout.mutualrooms" */}
+            {/*     defaultMessage="Mutual Rooms" */}
+            {/*   /> */}
+            {/* </LinkButton> */}
             <LinkButton href="/home/following" isTarget={false}>
               <FormattedMessage
                 id="layout.following"
