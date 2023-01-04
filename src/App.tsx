@@ -1,9 +1,9 @@
 import Router from '@/router'
 import { ResponsiveProvider, Responsive } from '@/hooks/useResponsive'
 import { BrowserRouter, MemoryRouter } from 'react-router-dom'
-import { AuthProvider } from '@/context/AuthContext'
-import { SetupProvider } from '@/context/LanguageContext'
-import { ApiProvider } from '@/context/ApiContext'
+import { AuthProvider } from '@/contexts/AuthContext'
+import { SetupProvider } from '@/contexts/LanguageContext'
+import { ApiProvider } from '@/contexts/ApiContext'
 
 function App() {
   return (

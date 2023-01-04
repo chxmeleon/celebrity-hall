@@ -1,4 +1,4 @@
-import { useSetup } from '@/context/LanguageContext'
+import { useSetup } from '@/contexts/LanguageContext'
 import { FormattedMessage } from 'react-intl'
 
 const Modal = () => {

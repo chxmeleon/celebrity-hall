@@ -1,4 +1,4 @@
-import { useSetup } from '@/context/LanguageContext'
+import { useSetup } from '@/contexts/LanguageContext'
 
 const CustomModal: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { isShow, closeModal } = useSetup()

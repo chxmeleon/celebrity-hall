@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
 import Header from './Header'
 import LeftSidebar from './LeftSidebar'
-import { useAuth } from '@/context/AuthContext'
+import { useAuth } from '@/contexts/AuthContext'
 import Modal from '@/components/Modal'
 import NoticeModal from '@/components/NoticeModal'
 
