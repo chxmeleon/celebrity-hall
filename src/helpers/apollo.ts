@@ -27,8 +27,7 @@ const authLink = setContext((_, { headers }) => {
 /*   if (networkError) console.error('[Network error]:', networkError) */
 /* }) */
 
-const httpLink = createHttpLink({ uri: process.env.GRAPHQL_ENDPOINT })
-
+const httpLink = createHttpLink({ uri: import.meta.env.GRAPHQL_ENDPOINT })
 export const createApolloClient = () => {
   const apolloClient = new ApolloClient({
     link: authLink.concat(httpLink),

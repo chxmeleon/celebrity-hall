@@ -14,9 +14,7 @@ function App() {
           <LanguageProvider>
             <SetupProvider>
               <ResponsiveProvider>
-                <Responsive.Media>
-                  <Router />
-                </Responsive.Media>
+                <Router />
               </ResponsiveProvider>
             </SetupProvider>
           </LanguageProvider>
