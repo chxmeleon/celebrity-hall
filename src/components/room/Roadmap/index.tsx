@@ -1,6 +1,7 @@
 import * as Road from './road'
 import { clsx as cx } from 'clsx'
 import { FormattedMessage } from 'react-intl'
+import { askMapper } from './data'
 
 export const BeadPlate: React.FC = () => {
   return (
@@ -14,28 +15,28 @@ export const BeadPlate: React.FC = () => {
 
 export const BigRoad: React.FC = () => {
   return (
-    <Road.BaseGrid>
-      {Road.winRecord.map((item, idx) => {
+    <Road.BigRoadGrid>
+      {Road.bigArray.map((item, idx) => {
         return <Road.BigRecordTile key={`big-${idx}`} status={item} />
       })}
-    </Road.BaseGrid>
+    </Road.BigRoadGrid>
   )
 }
 
-export const SmallRoad = () => {
+export const SmallRoad: React.FC = () => {
   return (
-    <Road.BaseGrid>
-      {Road.winRecord.map((item, idx) => {
+    <Road.SmallRoadGrid>
+      {Road.smallArray.map((item, idx) => {
         return <Road.SmallRecordTile key={`small-${idx}`} status={item} />
       })}
-    </Road.BaseGrid>
+    </Road.SmallRoadGrid>
   )
 }
 
 export const BigEyeRoad: React.FC = () => {
   return (
     <Road.BaseGrid>
-      {Road.winRecord.map((item, idx) => {
+      {Road.smallArray.map((item, idx) => {
         return <Road.BigEyeRecordTile key={`big-eye-${idx}`} status={item} />
       })}
     </Road.BaseGrid>
@@ -45,47 +46,14 @@ export const BigEyeRoad: React.FC = () => {
 export const CockroachRoad = () => {
   return (
     <Road.BaseGrid>
-      {Road.winRecord.map((item, idx) => {
-        return <Road.CockroachRecordTile key={`cockroach-${idx}`} status={item} />
+      {Road.smallArray.map((item, idx) => {
+        return (
+          <Road.CockroachRecordTile key={`cockroach-${idx}`} status={item} />
+        )
       })}
     </Road.BaseGrid>
   )
 }
-
-const askMapper = [
-  { contentId: 'common.dealer', default: 'Dealer', className: 'text-red-500' },
-  { contentId: 'common.player', default: 'Player', className: 'text-blue-500' },
-  { contentId: 'common.tie', default: 'Tie', className: 'text-teal-500' },
-  {
-    contentId: 'common.dealerPair',
-    default: 'Dealer Pair',
-    className: 'text-red-500'
-  },
-  {
-    contentId: 'common.playerPair',
-    default: 'Player Pair',
-    className: 'text-blue-500'
-  },
-  {
-    contentId: 'common.totalCount',
-    default: 'Total',
-    className: 'text-amber-500'
-  },
-  {
-    contentId: 'common.dealerAsk',
-    default: 'Dealer Ask',
-    className: 'text-red-500',
-    roundStyle: 'bg-red-500',
-    borderStyle: 'border-red-500 border-2'
-  },
-  {
-    contentId: 'common.playerAsk',
-    default: 'Player Ask',
-    className: 'text-blue-500',
-    roundStyle: 'bg-blue-500',
-    borderStyle: 'border-blue-500 border-2'
-  }
-]
 
 export const AskGrid: React.FC = () => {
   const totalCount = [...new Array(8)].map(() => 1)
@@ -95,7 +63,8 @@ export const AskGrid: React.FC = () => {
       {totalCount.map((item, idx) => {
         const askGridContent = cx(
           'w-full h-full text-xs font-bold border-b border-gray-400 px-1.5 flex justify-between items-center',
-          askMapper[idx].className
+          askMapper[idx].className,
+          idx > 5 ? ' hover:cursor-pointer hover:bg-neutral-100 active:bg-neutral-300' : ''
         )
 
         const askRoundStyle = cx(

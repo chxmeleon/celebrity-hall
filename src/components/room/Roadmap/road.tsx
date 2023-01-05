@@ -1,33 +1,9 @@
 import { clsx as cx } from 'clsx'
 import { FormattedMessage } from 'react-intl'
-
+import { fullRecordMapper, outlineRecordMapper } from './data'
 
 type TileProps = {
   status: string
-}
-
-type MapperData = {
-  className: string
-  contentId: string
-}
-
-type MapperProps = {
-  b: MapperData
-  p: MapperData
-  t: MapperData
-}
-
-
-const fullRecordMapper: any = {
-  b: { className: 'bg-red-500', contentId: 'screens.baccaratRoom.dealer' },
-  p: { className: 'bg-blue-500', contentId: 'screens.baccaratRoom.player' },
-  t: { className: 'bg-teal-500', contentId: 'screens.baccaratRoom.tie' },
-}
-
-const outlineRecordMapper: any = {
-  b: { className: 'border-red-500', contentId: 'screens.baccaratRoom.dealer' },
-  p: { className: 'border-blue-500', contentId: 'screens.baccaratRoom.player' },
-  t: { className: 'border-teal-500', contentId: 'screens.baccaratRoom.tie' },
 }
 
 const tileContainer = cx(
@@ -112,6 +88,26 @@ export const BaseGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
   </div>
 )
 
+export const BigRoadGrid: React.FC<React.PropsWithChildren> = ({
+  children
+}) => (
+  <div className="relative w-full h-full border-r border-b border-gray-500/90">
+    <div className="grid grid-rows-6 grid-flow-col auto-cols-fr w-full h-full grid-cols-25">
+      {children}
+    </div>
+  </div>
+)
+
+export const SmallRoadGrid: React.FC<React.PropsWithChildren> = ({
+  children
+}) => (
+  <div className="relative w-full h-full border-r border-b border-gray-500/90">
+    <div className="grid grid-rows-6 grid-flow-col auto-cols-fr w-full h-full grid-cols-15">
+      {children}
+    </div>
+  </div>
+)
+
 export const winRecord = [
   'p',
   't',
@@ -172,7 +168,7 @@ export const winRecord = [
   '',
   '',
   '',
-  '',
+  ''
 ]
 
 export const fakeData = [
@@ -235,5 +231,9 @@ export const fakeData = [
   't',
   'b',
   't',
-  'b',
+  'b'
 ]
+
+
+export const bigArray = [...new Array(150)].map(() => '')
+export const smallArray = [...new Array(90)].map(() => '')
