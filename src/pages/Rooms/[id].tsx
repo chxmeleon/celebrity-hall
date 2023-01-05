@@ -46,10 +46,11 @@ const Room = () => {
       <button
         key={idx}
         onClick={handleSelectBetPrice}
-        className={`${isActive
+        className={`${
+          isActive
             ? 'shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
             : 'shadow shadow-theme-50/80'
-          } rounded-full relative hover:cursor-pointer`}
+        } rounded-full relative hover:cursor-pointer`}
       >
         <img src={item} alt="bet image" className="w-9" />
       </button>
@@ -58,7 +59,7 @@ const Room = () => {
 
   return (
     <div className="relative flex-col w-full h-full felx">
-      <div className="relative w-full h-[75%]">
+      <div className="relative w-full h-4/5">
         <div className={bgImage}></div>
         <div className="flex absolute flex-col w-full h-full">
           <div className="relative w-full h-[25%]"></div>
@@ -83,24 +84,27 @@ const Room = () => {
             <div className="flex items-center w-[24%]">
               <button
                 onClick={handleSwitchDesk}
-                className={`${isChangedDesk
+                className={`${
+                  isChangedDesk
                     ? 'text-theme-70 bg-theme-300 '
                     : 'bg-theme-70 text-theme-300'
-                  } inline-flex p-2 text-2xl rounded-full `}
+                } inline-flex p-2 text-2xl rounded-full `}
               >
                 <div
-                  className={`${isChangedDesk
+                  className={`${
+                    isChangedDesk
                       ? 'i-heroicons-user-solid'
                       : 'i-heroicons-user-group-20-solid'
-                    } text-2xl `}
+                  } text-2xl `}
                 ></div>
               </button>
               <button onClick={handleRegularToggle} className="px-1 ml-2">
                 <div
-                  className={`${isRegular
+                  className={`${
+                    isRegular
                       ? 'bg-theme-300 text-theme-70'
                       : 'bg-theme-70 text-theme-300'
-                    } py-1.5 px-3 font-bold rounded-full `}
+                  } py-1.5 px-3 font-bold rounded-full `}
                 >
                   {isRegular ? (
                     <FormattedMessage id="common.noFee" />
@@ -141,7 +145,7 @@ const Room = () => {
           </div>
         </div>
       </div>
-      <div className="flex w-full h-[25%] bg-gray-50">
+      <div className="flex w-full h-1/5 bg-gray-50">
         <div className="flex flex-grow justify-start">
           <div className="flex-grow-0 flex-shrink-0 w-1/3">
             <BeadPlate />
@@ -168,8 +172,8 @@ const Room = () => {
             </div>
           </div>
         </div>
-        <div></div>
-        <div className="w-2/6">
+        {/* <div className="w-[11%] h-full flex-shrink-0"></div> */}
+        <div className="w-2/6 h-full">
           <ChatRoom />
         </div>
       </div>
