@@ -1,17 +1,23 @@
-import RoomTestImage from '@/assets/test.webp'
-import BetDesk from '@/components/room/BetDesk'
-import ChatRoom from '@/components/room/Chatroom'
-import BeadPlate from '@/components/room/Roadmap/BeadPlate'
 import { FormattedMessage } from 'react-intl'
 import { clsx as cx } from 'clsx'
 import { useState } from 'react'
 import { BetButton } from '@/components/common/Button'
 import { chipsImg } from '@/components/room/BetDesk/chips'
 import { useSetup } from '@/contexts/SetupContext'
+import RoomTestImage from '@/assets/test.webp'
+import BetDesk from '@/components/room/BetDesk'
+import ChatRoom from '@/components/room/Chatroom'
+import BigRoad from '@/components/room/Roadmap/BigRoad'
+import BeadPlate from '@/components/room/Roadmap/BeadPlate'
+import BigEyeRoad from '@/components/room/Roadmap/BigEyeRoad'
+import SmallRoad from '@/components/room/Roadmap/SmallRoad'
+import CockroachRoad from '@/components/room/Roadmap/CockroachRoad'
+
 
 const bgImage = cx`
   absolute bg-cover bg-center w-full h-full bg-no-repeat bg-[url('../assets/room-bg-2.webp')]
   before:absolute before:w-full before:h-full before:bg-great-theme blur-[2px] before:content-['']`
+
 
 const Room = () => {
   const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
@@ -51,10 +57,10 @@ const Room = () => {
   })
 
   return (
-    <div className="relative w-full h-full">
-      <div className="relative w-full h-4/5">
+    <div className="relative w-full h-full felx flex-col">
+      <div className="relative w-full h-[75%]">
         <div className={bgImage}></div>
-        <div className="flex absolute flex-col w-full h-full outline outline-theme-50">
+        <div className="flex absolute flex-col w-full h-full">
           <div className="relative w-full h-[25%]"></div>
           <div className="overflow-hidden relative flex-grow w-full">
             <div className="relative w-full h-full bg-[#3C4141] rounded-t-[50%] bet-table-skew border-[50px] border-theme-50/80 border-b-0 shadow-inner shadow-black"></div>
@@ -138,21 +144,40 @@ const Room = () => {
           </div>
         </div>
       </div>
-      <div className="flex w-full h-1/5 bg-gray-800">
+      <div className="flex w-full h-[25%] bg-gray-50">
         <div className="flex flex-grow justify-start">
           <div className="w-1/3 flex-shrink-0 flex-grow-0">
             <BeadPlate />
           </div>
           <div className="flex w-2/3">
             <div className="block flex-grow w-full">
-              <div className="h-2/3"></div>
+              <div className="h-2/3">
+                <BigRoad />
+              </div>
               <div className="flex w-full h-1/3">
-                <div className="w-1/3"></div>
-                <div className="w-1/3"></div>
-                <div className="w-1/3"></div>
+                <div className="w-1/3">
+                  <BigEyeRoad />
+                </div>
+                <div className="w-1/3">
+                  <SmallRoad />
+                </div>
+                <div className="w-1/3">
+                  <CockroachRoad />
+                </div>
               </div>
             </div>
-            <div className="w-1/4"></div>
+            <div className="w-1/4 h-full">
+              <div className="grid grid-rows-8 w-full h-full border-r border-b border-gray-500/90 ">
+                <div className="border-b border-gray-400"></div>
+                <div className="border-b border-gray-400"></div>
+                <div className="border-b border-gray-400"></div>
+                <div className="border-b border-gray-400"></div>
+                <div className="border-b border-gray-400"></div>
+                <div className="border-b border-gray-400"></div>
+                <div className="border-b border-gray-400"></div>
+                <div className="border-b border-gray-400"></div>
+              </div>
+            </div>
           </div>
         </div>
         <div></div>
