@@ -1,72 +1,112 @@
-import { PropsWithChildren } from 'react'
-import { useIntl } from 'react-intl'
+import { clsx as cx } from 'clsx'
+import { FormattedMessage } from 'react-intl'
 
-interface TileProps {
+
+type TileProps = {
   status: string
 }
 
-export const WinRecordTile: React.FC<TileProps> = ({ status }) => {
-  const { formatMessage } = useIntl()
+type MapperData = {
+  className: string
+  contentId: string
+}
 
+type MapperProps = {
+  b: MapperData
+  p: MapperData
+  t: MapperData
+}
+
+
+const fullRecordMapper: any = {
+  b: { className: 'bg-red-500', contentId: 'screens.baccaratRoom.dealer' },
+  p: { className: 'bg-blue-500', contentId: 'screens.baccaratRoom.player' },
+  t: { className: 'bg-teal-500', contentId: 'screens.baccaratRoom.tie' },
+}
+
+const outlineRecordMapper: any = {
+  b: { className: 'border-red-500', contentId: 'screens.baccaratRoom.dealer' },
+  p: { className: 'border-blue-500', contentId: 'screens.baccaratRoom.player' },
+  t: { className: 'border-teal-500', contentId: 'screens.baccaratRoom.tie' },
+}
+
+const tileContainer = cx(
+  'flex w-full h-full text-sm font-light text-gray-50 border-r border-b border-gray-400 aspect-square'
+)
+
+export const WinRecordTile: React.FC<TileProps> = ({ status }) => {
+  const winRecordTileStyle = cx(
+    'flex justify-center items-center m-auto w-5/6 h-5/6 rounded-full aspect-square',
+    fullRecordMapper[status]?.className
+  )
   return (
-    <div className="flex w-full h-full text-sm font-light text-gray-50 border-r border-b border-gray-400 aspect-square">
-      {status === 'b' ? (
-        <div className="flex justify-center items-center m-auto w-5/6 h-5/6 bg-red-500 rounded-full aspect-square">
-          {formatMessage({
-            id: 'screens.baccaratRoom.dealer',
-            defaultMessage: 'b',
-          })}
-        </div>
-      ) : status === 'p' ? (
-        <div className="flex justify-center items-center m-auto w-5/6 h-5/6 bg-blue-500 rounded-full aspect-square">
-          {formatMessage({
-            id: 'screens.baccaratRoom.player',
-            defaultMessage: 'b',
-          })}
-        </div>
-      ) : status === 't' ? (
-        <div className="flex justify-center items-center m-auto w-5/6 h-5/6 bg-teal-500 rounded-full aspect-square">
-          {formatMessage({
-            id: 'screens.baccaratRoom.tie',
-            defaultMessage: 'b',
-          })}
-        </div>
-      ) : (
-        <div className="flex justify-center items-center m-auto w-5/6 h-5/6 text-transparent rounded-full aspect-square">
-          <p>n</p>
-        </div>
-      )}
+    <div className={tileContainer}>
+      <div className={winRecordTileStyle}>
+        {status !== '' ? (
+          <FormattedMessage
+            id={fullRecordMapper[status]?.contentId}
+            defaultMessage={status}
+          />
+        ) : null}
+      </div>
     </div>
   )
 }
 
 export const BigRecordTile: React.FC<TileProps> = ({ status }) => {
+  const bigRecordTileStyle = cx(
+    'flex justify-center items-center m-auto w-5/6 h-5/6 rounded-full aspect-square border-2',
+    outlineRecordMapper[status]?.className ?? 'border-transparent'
+  )
+
   return (
-    <div className="flex w-full h-full text-sm font-light border-r border-b border-gray-400 aspect-square"></div>
+    <div className={tileContainer}>
+      <div className={bigRecordTileStyle}></div>
+    </div>
   )
 }
 
 export const BigEyeRecordTile: React.FC<TileProps> = ({ status }) => {
+  const bigRecordTileStyle = cx(
+    'flex justify-center items-center m-auto w-5/6 h-5/6 rounded-full aspect-square border-2',
+    outlineRecordMapper[status]?.className ?? 'border-transparent'
+  )
   return (
-    <div className="flex w-full h-full text-sm font-light border-r border-b border-gray-400 aspect-square"></div>
+    <div className={tileContainer}>
+      <div className={bigRecordTileStyle}></div>
+    </div>
   )
 }
 
 export const SmallRecordTile: React.FC<TileProps> = ({ status }) => {
+  const smallRecordTileStyle = cx(
+    'flex justify-center items-center m-auto w-[84%] h-[84%] rounded-full aspect-square',
+    fullRecordMapper[status]?.className
+  )
+
   return (
-    <div className="flex w-full h-full text-sm font-light border-r border-b border-gray-400 aspect-square"></div>
+    <div className={tileContainer}>
+      <div className={smallRecordTileStyle}></div>
+    </div>
   )
 }
 
 export const CockroachRecordTile: React.FC<TileProps> = ({ status }) => {
+  const cockroachRecordTileStyle = cx(
+    'flex justify-center items-center m-auto w-[80%] h-[1px] -rotate-45 translate-y-0 aspect-square',
+    fullRecordMapper[status]?.className
+  )
+
   return (
-    <div className="flex w-full h-full text-sm font-light border-r border-b border-gray-400 aspect-square"></div>
+    <div className={tileContainer}>
+      <div className={cockroachRecordTileStyle}></div>
+    </div>
   )
 }
 
-export const BaseGrid: React.FC<PropsWithChildren> = ({ children }) => (
+export const BaseGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
   <div className="relative w-full h-full border-r border-b border-gray-500/90">
-    <div className="grid grid-rows-6 grid-flow-col auto-cols-fr w-full h-full">
+    <div className="grid grid-cols-10 grid-rows-6 grid-flow-col auto-cols-fr w-full h-full">
       {children}
     </div>
   </div>
@@ -99,6 +139,7 @@ export const winRecord = [
   'b',
   'p',
   't',
+  't',
   '',
   '',
   '',
@@ -127,4 +168,72 @@ export const winRecord = [
   '',
   '',
   '',
+  '',
+  '',
+  '',
+  '',
+  '',
+]
+
+export const fakeData = [
+  't',
+  't',
+  'b',
+  'b',
+  't',
+  'b',
+  'p',
+  't',
+  'b',
+  't',
+  't',
+  't',
+  't',
+  'p',
+  't',
+  'p',
+  't',
+  'b',
+  'p',
+  'b',
+  'p',
+  'p',
+  'b',
+  'p',
+  't',
+  'b',
+  'p',
+  't',
+  't',
+  'p',
+  'b',
+  'p',
+  'p',
+  'b',
+  'p',
+  'b',
+  'b',
+  'p',
+  'b',
+  'p',
+  'p',
+  't',
+  't',
+  'b',
+  't',
+  't',
+  'b',
+  'p',
+  'b',
+  't',
+  'p',
+  't',
+  'b',
+  't',
+  'b',
+  'p',
+  't',
+  'b',
+  't',
+  'b',
 ]
