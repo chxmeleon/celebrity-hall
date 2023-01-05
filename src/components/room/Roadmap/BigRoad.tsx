@@ -1,7 +1,13 @@
-import React from 'react'
+import { winRecord, BigRecordTile, BaseGrid } from './road'
 
 const BigRoad: React.FC = () => {
-  return <div>BigRoad</div>
+  return (
+    <BaseGrid>
+      {winRecord.map((item, idx) => {
+        return <BigRecordTile key={idx} status={item} />
+      })}
+    </BaseGrid>
+  )
 }
 
 export default BigRoad
