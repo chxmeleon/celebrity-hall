@@ -7,17 +7,18 @@ import { useSetup } from '@/contexts/SetupContext'
 import RoomTestImage from '@/assets/test.webp'
 import BetDesk from '@/components/room/BetDesk'
 import ChatRoom from '@/components/room/Chatroom'
-import BigRoad from '@/components/room/Roadmap/BigRoad'
-import BeadPlate from '@/components/room/Roadmap/BeadPlate'
-import BigEyeRoad from '@/components/room/Roadmap/BigEyeRoad'
-import SmallRoad from '@/components/room/Roadmap/SmallRoad'
-import CockroachRoad from '@/components/room/Roadmap/CockroachRoad'
-
+import {
+  BeadPlate,
+  BigRoad,
+  BigEyeRoad,
+  SmallRoad,
+  CockroachRoad,
+  AskGrid
+} from '@/components/room/Roadmap'
 
 const bgImage = cx`
   absolute bg-cover bg-center w-full h-full bg-no-repeat bg-[url('../assets/room-bg-2.webp')]
   before:absolute before:w-full before:h-full before:bg-great-theme blur-[2px] before:content-['']`
-
 
 const Room = () => {
   const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
@@ -45,11 +46,10 @@ const Room = () => {
       <button
         key={idx}
         onClick={handleSelectBetPrice}
-        className={`${
-          isActive
+        className={`${isActive
             ? 'shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
             : 'shadow shadow-theme-50/80'
-        } rounded-full relative hover:cursor-pointer`}
+          } rounded-full relative hover:cursor-pointer`}
       >
         <img src={item} alt="bet image" className="w-9" />
       </button>
@@ -57,7 +57,7 @@ const Room = () => {
   })
 
   return (
-    <div className="relative w-full h-full felx flex-col">
+    <div className="relative flex-col w-full h-full felx">
       <div className="relative w-full h-[75%]">
         <div className={bgImage}></div>
         <div className="flex absolute flex-col w-full h-full">
@@ -83,27 +83,24 @@ const Room = () => {
             <div className="flex items-center w-[24%]">
               <button
                 onClick={handleSwitchDesk}
-                className={`${
-                  isChangedDesk
+                className={`${isChangedDesk
                     ? 'text-theme-70 bg-theme-300 '
                     : 'bg-theme-70 text-theme-300'
-                } inline-flex p-2 text-2xl rounded-full `}
+                  } inline-flex p-2 text-2xl rounded-full `}
               >
                 <div
-                  className={`${
-                    isChangedDesk
+                  className={`${isChangedDesk
                       ? 'i-heroicons-user-solid'
                       : 'i-heroicons-user-group-20-solid'
-                  } text-2xl `}
+                    } text-2xl `}
                 ></div>
               </button>
               <button onClick={handleRegularToggle} className="px-1 ml-2">
                 <div
-                  className={`${
-                    isRegular
+                  className={`${isRegular
                       ? 'bg-theme-300 text-theme-70'
                       : 'bg-theme-70 text-theme-300'
-                  } py-1.5 px-3 font-bold rounded-full `}
+                    } py-1.5 px-3 font-bold rounded-full `}
                 >
                   {isRegular ? (
                     <FormattedMessage id="common.noFee" />
@@ -146,7 +143,7 @@ const Room = () => {
       </div>
       <div className="flex w-full h-[25%] bg-gray-50">
         <div className="flex flex-grow justify-start">
-          <div className="w-1/3 flex-shrink-0 flex-grow-0">
+          <div className="flex-grow-0 flex-shrink-0 w-1/3">
             <BeadPlate />
           </div>
           <div className="flex w-2/3">
@@ -167,16 +164,7 @@ const Room = () => {
               </div>
             </div>
             <div className="w-1/4 h-full">
-              <div className="grid grid-rows-8 w-full h-full border-r border-b border-gray-500/90 ">
-                <div className="border-b border-gray-400"></div>
-                <div className="border-b border-gray-400"></div>
-                <div className="border-b border-gray-400"></div>
-                <div className="border-b border-gray-400"></div>
-                <div className="border-b border-gray-400"></div>
-                <div className="border-b border-gray-400"></div>
-                <div className="border-b border-gray-400"></div>
-                <div className="border-b border-gray-400"></div>
-              </div>
+              <AskGrid />
             </div>
           </div>
         </div>
