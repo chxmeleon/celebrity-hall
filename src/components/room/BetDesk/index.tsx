@@ -9,6 +9,7 @@ const BetDesk: React.FC<BetDeskProps> = ({ isToggle }) => {
   return (
     <div className="relative h-full">
       <SinglePlayer />
+      {/* {isTggle ? <SinglePlayer /> : <MultiplePlayers />} */}
     </div>
   )
 }

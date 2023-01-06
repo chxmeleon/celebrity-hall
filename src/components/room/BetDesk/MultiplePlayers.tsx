@@ -1,7 +1,25 @@
 import { btnIdx } from './deskStyle'
 import { FormattedMessage } from 'react-intl'
-import MultiGrid from './Grid'
 import { useSetup } from '@/contexts/SetupContext'
+
+type MultiProps = {
+  isActive: boolean
+  idx: number
+}
+
+const MultiGrid: React.FC<MultiProps> = ({ isActive, idx }) => {
+  return (
+    <>
+      {idx === 0 ? (
+        <div className={isActive ? btnIdx.isUserL : btnIdx.bln} />
+      ) : idx === 6 ? (
+        <div className={isActive ? btnIdx.isUserR : btnIdx.brn} />
+      ) : (
+        <div className={isActive ? btnIdx.isUserN : btnIdx.bnn} />
+      )}
+    </>
+  )
+}
 
 const userData = [
   { id: 0, username: 'A', balance: 1889 },
@@ -10,7 +28,7 @@ const userData = [
   { id: '', username: '', balance: '' },
   { id: 4, username: 'ewpe', balance: 12 },
   { id: 5, username: 'eeasdf', balance: 21 },
-  { id: '', username: '', balance: '' },
+  { id: '', username: '', balance: '' }
 ]
 
 const multipleGrid = userData.map((item: any, idx: number) => {
