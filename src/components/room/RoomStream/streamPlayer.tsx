@@ -52,7 +52,9 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
   videoOn,
   autoSize
 }) => {
-  const [remoteStream, setRemoteStream] = useState<MediaStream | MediaSource | null>(null)
+  const [remoteStream, setRemoteStream] = useState<
+    MediaStream | MediaSource | null
+  >(null)
   const pc = new RTCPeerConnection()
 
   useEffect(() => {
@@ -84,16 +86,15 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
     }
 
     requestStream()
-    /* const video = document.querySelector('video') */
-    pc.ontrack = (e: RTCTrackEvent) => {
-      setRemoteStream(e.streams[0])
-      /* video?.srcObject = e.streams[0] */
-      /* video?.play() */
-    }
-    console.log(remoteStream);
   }, [streamName, streamKey])
 
-
+  /* const video = document.querySelector('video') */
+  pc.ontrack = (e: RTCTrackEvent) => {
+    setRemoteStream(e.streams[0])
+    /* video?.srcObject = e.streams[0] */
+    /* video?.play() */
+  }
+  console.log(remoteStream)
 
   return (
     <div className="flex absolute z-0 flex-col w-full h-full">
