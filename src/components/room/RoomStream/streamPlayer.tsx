@@ -1,5 +1,5 @@
-import axios from 'axios'
 import React, { useEffect, useRef } from 'react'
+import axios from 'axios'
 
 export interface RoomStreamProps {
   streamName?: string
@@ -53,40 +53,53 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
   autoSize
 }) => {
   const videoRef = useRef(null)
+
   useEffect(() => {
     const peer = new RTCPeerConnection()
+    const requestStream = async () => {
+      peer.addTransceiver('audio', { direction: 'recvonly' })
+      peer.addTransceiver('video', { direction: 'recvonly' })
+      /* peer.addEventListener('track', (e) => { */
+      /*   videoRef.current?.src = e.streams */
+      /* }) */
 
-    /* ;(async function () { */
-    /*   peer.addTransceiver('audio', { direction: 'recvonly' }) */
-    /*   peer.addTransceiver('video', { direction: 'recvonly' }) */
-    /*   peer.addEventListener('addstream', (e) => { */
-    /*     videoRef.current?.srcObject = e.stream */
-    /*     videoRef.current?.play() */
-    /*   }) */
-    /*   const offerOptions = { */
-    /*     offerToReceiveAudio: true, */
-    /*     offerToReceiveVideo: true */
-    /*   } */
-    /*   const offer = await peer.createOffer(offerOptions) */
-    /*   peer.setLocalDescription(offer) */
-    /*   const request = JSON.stringify({ */
-    /*     version: 'v1.0', */
-    /*     sessionId: Date.now().toString(), */
-    /*     localSdp: offer */
-    /*   }) */
-    /*   const response = await axios.post(`https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`, request) */
-    /*   const { */
-    /*     data: { remoteSdp } */
-    /*   } = response */
-    /*   peer.setRemoteDescription(new RTCSessionDescription(remoteSdp)) */
-    /* })() */
-  }, [videoRef])
+      const offerOptions = {
+        offerToReceiveAudio: true,
+        offerToReceiveVideo: true
+      }
+
+      const offer = await peer.createOffer(offerOptions)
+      peer.setLocalDescription(offer)
+
+      const request = JSON.stringify({
+        version: 'v1.0',
+        sessionId: Date.now().toString(),
+        localSdp: offer
+      })
+
+      const response = await axios.post(
+        `https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`,
+        request
+      )
+
+      const {
+        data: { remoteSdp }
+      } = response
+
+      peer.setRemoteDescription(new RTCSessionDescription(remoteSdp))
+    }
+    requestStream()
+  }, [videoRef, streamName, streamKey])
+
+  
+
 
   return (
     <div className="flex absolute z-0 flex-col w-full h-full">
       <div className="overflow-hidden relative w-full h-full">
         <video
-          id={`video-${streamName}-${streamKey}`}
+          id={`rtc-${streamName}-${streamKey}`}
+          playsInline
           ref={videoRef}
           className="w-full h-auto aspect-film"
         />
