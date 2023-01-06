@@ -1,6 +1,6 @@
 import { useAuth } from '@/contexts/AuthContext'
 import { useIntl } from 'react-intl'
-import Alert from '../common/Alert'
+import Alert from './Alert'
 
 const AuthAlert: React.FC = () => {
   const { formatMessage } = useIntl()
