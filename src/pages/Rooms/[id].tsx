@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { BetButton } from '@/components/common/Button'
 import { chipsImg } from '@/components/room/BetDesk/chips'
 import { useSetup } from '@/contexts/SetupContext'
-import RoomTestImage from '@/assets/test.webp'
 import BetDesk from '@/components/room/BetDesk'
 import ChatRoom from '@/components/room/Chatroom'
+import RoomStream from '@/components/room/RoomStream'
 import {
   BeadPlate,
   BigRoad,
@@ -16,11 +16,16 @@ import {
   AskGrid
 } from '@/components/room/Roadmap'
 
-const bgImage = cx`
-  absolute bg-cover bg-center w-full h-full bg-no-repeat bg-[url('../assets/room-bg-2.webp')]
-  before:absolute before:w-full before:h-full before:bg-great-theme blur-[2px] before:content-['']`
+import { useQuery } from '@apollo/client'
+import { GET_ROOM_STREAM } from '@/gql/stream'
 
 const Room = () => {
+  const { data } = useQuery(GET_ROOM_STREAM)
+  const streamName =
+    data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom?.streamName
+  const streamKey =
+    data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom?.streamKey
+
   const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
   const [betPrice, setBetPrice] = useState('chips_10')
   const { isRegular, handleRegularToggle } = useSetup()
@@ -58,21 +63,11 @@ const Room = () => {
   })
 
   return (
-    <div className="relative flex-col w-full h-full felx">
+    <div className="flex relative flex-col w-full h-full">
       <div className="relative w-full h-4/5">
-        <div className="flex absolute flex-col w-full h-full">
-          <div className="overflow-hidden relative shadow-2xl aspect-film drop-shadow-xl shadow-amber-100/20">
-            <div className="w-full h-full absolute bg-teal-900 top-0 z-10"></div>
-            {/* <img
-              src={RoomTestImage}
-              alt="test image"
-              className="absolute w-full -translate-y-12 "
-            /> */}
-          </div>
-        </div>
-        <div className="flex relative flex-col justify-between items-center w-full h-full z-[2]">
-          <div className="w-full h-[63%] flex justify-center">
-          </div>
+        <RoomStream streamName={streamName} streamKey={streamKey} videoOn={true} />
+        <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
+          <div className="w-full h-[63%] flex justify-center"></div>
           <div className="flex-grow flex-shrink-0 w-full">
             <BetDesk isToggle={isChangedDesk} />
           </div>
