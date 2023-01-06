@@ -105,7 +105,7 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
           ref={setVideoRef}
           playsInline
           autoPlay
-          className="w-full h-auto aspect-film"
+          className="w-full h-auto aspect-film object-fill"
         />
       </div>
     </div>
