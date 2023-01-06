@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import {NodePlayerStream, RoomStreamProps } from './streamPlayer'
+import { NodePlayerStream, RoomStreamProps, WebRTCStream } from './streamPlayer'
 
 const RoomStream: React.FC<RoomStreamProps> = ({
   streamName,
@@ -9,7 +9,7 @@ const RoomStream: React.FC<RoomStreamProps> = ({
   videoOn,
   autoSize
 }) => {
-  return <NodePlayerStream streamName={streamName} streamKey={streamKey}/>
+  return <WebRTCStream streamName={streamName} streamKey={streamKey}/>
 }
 
 export default RoomStream
