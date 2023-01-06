@@ -52,57 +52,59 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
   videoOn,
   autoSize
 }) => {
-  const [remoteStream, setRemoteStream] = useState<
-    MediaStream | MediaSource | null
-  >(null)
+  const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null)
   const pc = new RTCPeerConnection()
 
   useEffect(() => {
     const requestStream = async () => {
+      if (!videoRef) return
+
       try {
+        pc.addTransceiver('audio', { direction: 'recvonly' })
+        pc.addTransceiver('video', { direction: 'recvonly' })
+        pc.addEventListener('addstream', (e: any) => {
+          videoRef.srcObject = e.stream
+          if (!videoRef.paused) {
+            videoRef.play()
+          }
+        })
+
         const offerOptions = {
           offerToReceiveAudio: true,
           offerToReceiveVideo: true
         }
         const offer = await pc.createOffer(offerOptions)
-        await pc.setLocalDescription(offer)
-
-        const request = JSON.stringify({
-          version: 'v1.0',
-          sessionId: Date.now().toString(),
-          localSdp: offer
-        })
-
-        const response = await axios.post(
-          `https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`,
-          request
-        )
-
-        const answer = new RTCSessionDescription(response.data.remoteSdp)
-        await pc.setRemoteDescription(answer)
+        await Promise.all([
+          pc.setLocalDescription(offer),
+          axios
+            .post(
+              `https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`,
+              JSON.stringify({
+                version: 'v1.0',
+                sessionId: Date.now().toString(),
+                localSdp: offer
+              })
+            )
+            .then(({ data }) => {
+              const answer = new RTCSessionDescription(data.remoteSdp)
+              return pc.setRemoteDescription(answer)
+            })
+        ])
       } catch (error) {
         console.log('error:', error)
       }
     }
 
     requestStream()
-  }, [streamName, streamKey])
-
-  /* const video = document.querySelector('video') */
-  pc.ontrack = (e: RTCTrackEvent) => {
-    setRemoteStream(e.streams[0])
-    /* video?.srcObject = e.streams[0] */
-    /* video?.play() */
-  }
-  console.log(remoteStream)
+  }, [videoRef, streamName, streamKey])
 
   return (
     <div className="flex absolute z-0 flex-col w-full h-full">
       <div className="overflow-hidden relative w-full h-full">
         <video
-          /* src={URL.createObjectURL(remoteStream)} */
-          id={`rtc-${streamName}-${streamKey}`}
+          ref={setVideoRef}
           playsInline
+          autoPlay
           className="w-full h-auto aspect-film"
         />
       </div>
