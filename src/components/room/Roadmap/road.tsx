@@ -7,7 +7,7 @@ type TileProps = {
 }
 
 const tileContainer = cx(
-  'flex w-full h-full text-sm font-light text-gray-50 border-r border-b border-gray-400 aspect-square'
+  'flex w-full h-full text-xs font-light text-gray-50 border-r border-b border-gray-400 aspect-square'
 )
 
 export const WinRecordTile: React.FC<TileProps> = ({ status }) => {
