@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 
 export interface RoomStreamProps {
@@ -52,55 +52,56 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
   videoOn,
   autoSize
 }) => {
-  const videoRef = useRef(null)
+  const [remoteStream, setRemoteStream] = useState<MediaStream | MediaSource | null>(null)
+  const pc = new RTCPeerConnection()
 
   useEffect(() => {
-    const peer = new RTCPeerConnection()
     const requestStream = async () => {
-      peer.addTransceiver('audio', { direction: 'recvonly' })
-      peer.addTransceiver('video', { direction: 'recvonly' })
-      /* peer.addEventListener('track', (e) => { */
-      /*   videoRef.current?.src = e.streams */
-      /* }) */
+      try {
+        const offerOptions = {
+          offerToReceiveAudio: true,
+          offerToReceiveVideo: true
+        }
+        const offer = await pc.createOffer(offerOptions)
+        await pc.setLocalDescription(offer)
 
-      const offerOptions = {
-        offerToReceiveAudio: true,
-        offerToReceiveVideo: true
+        const request = JSON.stringify({
+          version: 'v1.0',
+          sessionId: Date.now().toString(),
+          localSdp: offer
+        })
+
+        const response = await axios.post(
+          `https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`,
+          request
+        )
+
+        const answer = new RTCSessionDescription(response.data.remoteSdp)
+        await pc.setRemoteDescription(answer)
+      } catch (error) {
+        console.log('error:', error)
       }
-
-      const offer = await peer.createOffer(offerOptions)
-      peer.setLocalDescription(offer)
-
-      const request = JSON.stringify({
-        version: 'v1.0',
-        sessionId: Date.now().toString(),
-        localSdp: offer
-      })
-
-      const response = await axios.post(
-        `https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`,
-        request
-      )
-
-      const {
-        data: { remoteSdp }
-      } = response
-
-      peer.setRemoteDescription(new RTCSessionDescription(remoteSdp))
     }
-    requestStream()
-  }, [videoRef, streamName, streamKey])
 
-  
+    requestStream()
+    /* const video = document.querySelector('video') */
+    pc.ontrack = (e: RTCTrackEvent) => {
+      setRemoteStream(e.streams[0])
+      /* video?.srcObject = e.streams[0] */
+      /* video?.play() */
+    }
+    console.log(remoteStream);
+  }, [streamName, streamKey])
+
 
 
   return (
     <div className="flex absolute z-0 flex-col w-full h-full">
       <div className="overflow-hidden relative w-full h-full">
         <video
+          /* src={URL.createObjectURL(remoteStream)} */
           id={`rtc-${streamName}-${streamKey}`}
           playsInline
-          ref={videoRef}
           className="w-full h-auto aspect-film"
         />
       </div>
