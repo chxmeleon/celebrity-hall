@@ -60,29 +60,26 @@ const Room = () => {
   return (
     <div className="relative flex-col w-full h-full felx">
       <div className="relative w-full h-4/5">
-        <div className={bgImage}></div>
         <div className="flex absolute flex-col w-full h-full">
-          <div className="relative w-full h-[25%]"></div>
-          <div className="overflow-hidden relative flex-grow w-full">
-            <div className="relative w-full h-full bg-[#3C4141] rounded-t-[50%] bet-table-skew border-[50px] border-theme-50/80 border-b-0 shadow-inner shadow-black"></div>
+          <div className="overflow-hidden relative shadow-2xl aspect-film drop-shadow-xl shadow-amber-100/20">
+            <div className="w-full h-full absolute bg-teal-900 top-0 z-10"></div>
+            {/* <img
+              src={RoomTestImage}
+              alt="test image"
+              className="absolute w-full -translate-y-12 "
+            /> */}
           </div>
         </div>
         <div className="flex relative flex-col justify-between items-center w-full h-full z-[2]">
           <div className="w-full h-[63%] flex justify-center">
-            <div className="overflow-hidden relative shadow-2xl aspect-film drop-shadow-xl shadow-amber-100/20">
-              <img
-                src={RoomTestImage}
-                alt="test image"
-                className="absolute w-full -translate-y-12"
-              />
-            </div>
           </div>
           <div className="flex-grow flex-shrink-0 w-full">
             <BetDesk isToggle={isChangedDesk} />
           </div>
           <div className="flex justify-between items-center px-2 my-2 w-full h-10">
             <div className="flex items-center w-[24%]">
-              <button
+              {/* gameplay's switch */}
+              {/* <button
                 onClick={handleSwitchDesk}
                 className={`${
                   isChangedDesk
@@ -97,7 +94,7 @@ const Room = () => {
                       : 'i-heroicons-user-group-20-solid'
                   } text-2xl `}
                 ></div>
-              </button>
+              </button> */}
               <button onClick={handleRegularToggle} className="px-1 ml-2">
                 <div
                   className={`${
