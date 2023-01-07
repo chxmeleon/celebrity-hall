@@ -25,6 +25,13 @@ const Room = () => {
     data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom?.streamName
   const streamKey =
     data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom?.streamKey
+  const secoundStreamName =
+    data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom?.streams[0].name
+  const secoundStreamKey =
+    data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom?.streams[0].key
+  /* console.log(secoundStreamName, secoundStreamKey) */
+  console.log(data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom);
+  
 
   const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
   const [betPrice, setBetPrice] = useState('chips_10')
@@ -65,7 +72,11 @@ const Room = () => {
   return (
     <div className="flex relative flex-col w-full h-full">
       <div className="relative w-full h-4/5">
-        <RoomStream streamName={streamName} streamKey={streamKey} videoOn={true} />
+        <RoomStream
+          streamName={streamName}
+          streamKey={streamKey}
+          videoOn={true}
+        />
         <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
           <div className="w-full h-[63%] flex justify-center"></div>
           <div className="flex-grow flex-shrink-0 w-full">
