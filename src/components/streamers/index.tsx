@@ -1,5 +1,10 @@
+import { Dispatch, SetStateAction } from 'react'
 import heart from '@/assets/rankings/heart.png'
+import { streamType } from '@/pages/Streamers/index'
 import { FormattedMessage } from 'react-intl'
+import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { ResponsiveContext } from '@/hooks/useResponsive'
 
 const Win: React.FC<{ percent: number }> = ({ percent }) => {
   return (
@@ -31,31 +36,68 @@ const Heart: React.FC<{ like: number }> = ({ like }) => {
   )
 }
 
-export const StreamersCard: React.FC<{ data: Array<any> }> = ({ data }) => {
+export const StreamersCard: React.FC<{
+  item: any
+  onStreamChanged: Dispatch<SetStateAction<streamType>>
+}> = ({ item, onStreamChanged }) => {
+  return (
+    <div
+      key={item.id}
+      className={`sm:mr-[40px] sm:mb-[55px] mb-[35px] relative ${
+        item.online ? 'cursor-pointer' : 'pointer-events-none'
+      }`}
+      onClick={() =>
+        onStreamChanged({
+          name: item.stream.name,
+          key: item.stream.key
+        })
+      }
+    >
+      {item.online && (
+        <div className="absolute bg-[#FF0A18] w-[53px] h-[20px] text-[13px] text-center right-[12px] top-[12px]">
+          <div>● Live</div>
+        </div>
+      )}
+      <img
+        className="sm:w-[401px] sm:h-[355px] w-[278px] h-[246px] object-contain"
+        src={item.avatar}
+      />
+      <div className="flex items-center justify-between">
+        <div className="sm:text-[32px] text-[24px]">{item.nickname}</div>
+        <div className="flex">
+          <Win percent={item.winRate} />
+          <Heart like={item.likesCount} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export const StreamersCards: React.FC<{
+  data: Array<any>
+  onStreamChanged: Dispatch<SetStateAction<streamType>>
+}> = ({ data, onStreamChanged }) => {
+  const { isMobile } = useContext(ResponsiveContext)
+
+  if (isMobile) {
+    return (
+      <>
+        {data.map((item) => (
+          <Link
+            to={`/home/streamers/${item.id}`}
+            className={!item.online ? `pointer-events-none` : ''}
+          >
+            <StreamersCard item={item} onStreamChanged={onStreamChanged} />
+          </Link>
+        ))}
+      </>
+    )
+  }
+
   return (
     <>
       {data.map((item) => (
-        <div
-          key={item.id}
-          className="sm:mr-[40px] sm:mb-[55px] mb-[35px] relative"
-        >
-          {item.online && (
-            <div className="absolute bg-[#FF0A18] w-[53px] h-[20px] text-[13px] text-center right-[12px] top-[12px]">
-              <div>● Live</div>
-            </div>
-          )}
-          <img
-            className="sm:w-[401px] sm:h-[355px] w-[278px] h-[246px] object-contain"
-            src={item.avatar}
-          />
-          <div className="flex items-center justify-between">
-            <div className="sm:text-[32px] text-[24px]">{item.nickname}</div>
-            <div className="flex">
-              <Win percent={item.winRate} />
-              <Heart like={item.likesCount} />
-            </div>
-          </div>
-        </div>
+        <StreamersCard item={item} onStreamChanged={onStreamChanged} />
       ))}
     </>
   )

@@ -8,6 +8,7 @@ export interface RoomStreamProps {
   soundOn?: boolean
   videoOn?: boolean
   autoSize?: boolean
+  className?: string
 }
 
 export const NodePlayerStream: React.FC<RoomStreamProps> = ({
@@ -47,6 +48,7 @@ export const NodePlayerStream: React.FC<RoomStreamProps> = ({
 export const WebRTCStream: React.FC<RoomStreamProps> = ({
   streamName,
   streamKey,
+  className,
   resolution,
   soundOn,
   videoOn,
@@ -99,13 +101,13 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
   }, [videoRef, streamName, streamKey])
 
   return (
-    <div className="flex absolute z-0 flex-col w-full h-full">
+    <div className={`flex absolute z-0 flex-col w-full h-full ${className}`}>
       <div className="overflow-hidden relative w-full h-full">
         <video
           ref={setVideoRef}
           playsInline
           autoPlay
-          className="w-full h-auto aspect-film object-fill"
+          className={`w-full h-auto aspect-film object-fill`}
         />
       </div>
     </div>
