@@ -93,14 +93,14 @@ const ChatRoom = () => {
         onSubmit={handleSendMessage}
         className="flex relative flex-grow justify-between items-center px-2 mt-1 mb-2 w-full"
       >
-        <div className="inline-flex relative items-center px-0.5 mx-2 w-full h-full bg-gray-200 rounded-lg text-theme-50">
+        <div className="inline-flex relative items-center px-0.5 mx-1 w-full h-full bg-gray-200 rounded-lg text-theme-50">
           <input
             id="chat-input"
             type="text"
             placeholder="Send message"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            className="py-2 pl-3 pr-2 w-full h-full outline-transparent"
+            className="py-2 pl-3 pr-2 w-full h-full outline-0 rounded-md bg-gray-200"
             autoComplete="off"
           />
 
