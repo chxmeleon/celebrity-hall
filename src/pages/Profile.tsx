@@ -1,12 +1,16 @@
-import { Tabs, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, TabPanel } from '@chakra-ui/react'
 import {
   Info,
   Button,
   I18nTab,
-  I18nTable,
-} from "../components/profile/Utilities";
+  I18nTable
+} from '../components/profile/Utilities'
+import { useQuery } from '@apollo/client'
+import { GET_PROFILE } from '@/gql/profile'
 
 const Profile: React.FC = () => {
+  const { loading, data } = useQuery(GET_PROFILE)
+
   return (
     <div className="m-[10px]">
       <div className="sm:w-[1226px] m-auto sm:mt-[30px]">
@@ -90,7 +94,7 @@ const Profile: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

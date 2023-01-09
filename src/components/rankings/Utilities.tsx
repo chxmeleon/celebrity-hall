@@ -1,33 +1,33 @@
-import React, { useState, Dispatch, SetStateAction } from "react";
-import { FormattedMessage } from "react-intl";
-import { Link } from "react-router-dom";
-import heart from "@/assets/rankings/heart.png";
-import anchor from "@/assets/rankings/anchor.png";
-import first from "@/assets/rankings/1st.png";
-import second from "@/assets/rankings/2nd.png";
-import third from "@/assets/rankings/3rd.png";
-import firstLg from "@/assets/rankings/1st-lg.png";
-import secondLg from "@/assets/rankings/2nd-lg.png";
-import thirdLg from "@/assets/rankings/3rd-lg.png";
+import React, { useState, Dispatch, SetStateAction } from 'react'
+import { FormattedMessage } from 'react-intl'
+import { Link } from 'react-router-dom'
+import heart from '@/assets/rankings/heart.png'
+import anchor from '@/assets/rankings/anchor.png'
+import first from '@/assets/rankings/1st.png'
+import second from '@/assets/rankings/2nd.png'
+import third from '@/assets/rankings/3rd.png'
+import firstLg from '@/assets/rankings/1st-lg.png'
+import secondLg from '@/assets/rankings/2nd-lg.png'
+import thirdLg from '@/assets/rankings/3rd-lg.png'
 
 export const Name: React.FC<{ name: string }> = ({ name }) => {
-  return <div className="sm:text-[24px] text-[10px] mt-[5px]">{name}</div>;
-};
+  return <div className="sm:text-[24px] text-[10px] mt-[5px]">{name}</div>
+}
 
 export const BodyShape: React.FC<{ height: number; weight: number }> = ({
   height,
-  weight,
+  weight
 }) => {
   return (
     <div className="sm:text-[13px] text-[9px]">
       {height} cm / {weight} kg
     </div>
-  );
-};
+  )
+}
 
 export const Timetable: React.FC<{ start: string; end: string }> = ({
   start,
-  end,
+  end
 }) => {
   return (
     <div className="flex items-center">
@@ -40,8 +40,8 @@ export const Timetable: React.FC<{ start: string; end: string }> = ({
         {start} - {end}
       </span>
     </div>
-  );
-};
+  )
+}
 
 export const Heart: React.FC<{ like: number }> = ({ like }) => {
   return (
@@ -55,58 +55,72 @@ export const Heart: React.FC<{ like: number }> = ({ like }) => {
       </span>
       <span className="ml-[7px] sm:text-[32px] text-[15px]">{like}</span>
     </div>
-  );
-};
+  )
+}
 
-export const Avatar: React.FC<{ img?: string; rank?: string }> = ({
+export const Avatar: React.FC<{ img: string | null; rank?: string }> = ({
   img,
-  rank,
+  rank
 }) => {
-  if (rank === "1st") {
+  if (rank === '1st') {
+    if (img) {
+      return (
+        <img
+          className="rounded-full sm:w-[156px] sm:h-[156px] w-[75px] h-[75px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] sm:mb-[15px]"
+          src={anchor}
+          alt="Avatar"
+        />
+      )
+    }
+    return (
+      <div className="sm:w-[156px] sm:h-[156px] w-[75px] h-[75px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] sm:mb-[15px] i-heroicons-user-circle-solid" />
+    )
+  }
+
+  if (img) {
     return (
       <img
-        className="rounded-full sm:w-[156px] sm:h-[156px] w-[75px] h-[75px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] sm:mb-[15px]"
+        className="rounded-full sm:w-[126px] w-[51px] sm:h-[126px] h-[51px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
         src={anchor}
         alt="Avatar"
       />
-    );
+    )
   }
   return (
-    <img
-      className="rounded-full sm:w-[126px] w-[51px] sm:h-[126px] h-[51px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-      src={anchor}
-      alt="Avatar"
-    />
-  );
-};
+    <div className="sm:w-[126px] w-[51px] sm:h-[126px] h-[51px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] i-heroicons-user-circle-solid" />
+  )
+}
 
 export const Rank: React.FC<{ rank: string }> = ({ rank }) => {
-  if (rank === "1st") {
+  if (rank === '1st') {
     return (
       <img
         className="absolute sm:top-[-33px] sm:left-[18px] top-[-12px] left-[10px] z-10 w-[40px] h-[59px] sm:w-[114px] sm:h-[158px]"
         src={first}
         alt={`${rank}`}
       />
-    );
+    )
   }
 
   return (
     <img
       className="absolute sm:top-[-33px] sm:left-[18px] top-[-15px] left-[10px] z-10 w-[40px] h-[59px] sm:w-[90px] sm:h-[126px]"
-      src={rank === "2nd" ? second : third}
+      src={rank === '2nd' ? second : third}
       alt={`${rank}`}
     />
-  );
-};
+  )
+}
 
 const buttonConfig = {
-  isSelected: "border-white border-b-[3px]",
-  notSelected: "opacity-40",
-};
+  isSelected: 'border-white border-b-[3px]',
+  notSelected: 'opacity-40'
+}
 
-export const Tabs: React.FC<{ isSelected: string }> = ({ isSelected }) => {
-  const [subTabSelected, setSubTabSelected] = useState("month");
+export const Tabs: React.FC<{
+  isSelected: string
+  subTabSelected: string
+  onSubTabSelected: Dispatch<SetStateAction<string>>
+}> = ({ isSelected, subTabSelected, onSubTabSelected }) => {
   return (
     <div className="mt-[10px] mx-[10px]">
       <div className="flex justify-between sm:w-[500px] w-full sm:text-[30px] text-[15px] text-white">
@@ -114,17 +128,17 @@ export const Tabs: React.FC<{ isSelected: string }> = ({ isSelected }) => {
           to="/home/rankings"
           className={`${
             buttonConfig[
-              isSelected === "rankings" ? "isSelected" : "notSelected"
+              isSelected === 'rankings' ? 'isSelected' : 'notSelected'
             ]
           }`}
         >
           <FormattedMessage id="ranking.Tab.anchor" defaultMessage="主播榜" />
         </Link>
         <Link
-          to="/home/contribute-ranking"
+          to="/home/contribution-ranking"
           className={`${
             buttonConfig[
-              isSelected === "contribute-ranking" ? "isSelected" : "notSelected"
+              isSelected === 'contribution' ? 'isSelected' : 'notSelected'
             ]
           }`}
         >
@@ -133,64 +147,64 @@ export const Tabs: React.FC<{ isSelected: string }> = ({ isSelected }) => {
             defaultMessage="貢獻榜"
           />
         </Link>
-        <div
+        <Link
+          to="/home/win_points-ranking"
           className={`${
             buttonConfig[
-              isSelected === "point-ranking" ? "isSelected" : "notSelected"
+              isSelected === 'win_points' ? 'isSelected' : 'notSelected'
             ]
           }`}
         >
           <FormattedMessage id="ranking.Tab.point" defaultMessage="勝點榜" />
-        </div>
-        <div
+        </Link>
+        <Link
+          to="/home/rounds-ranking"
           className={`${
-            buttonConfig[
-              isSelected === "board-ranking" ? "isSelected" : "notSelected"
-            ]
+            buttonConfig[isSelected === 'rounds' ? 'isSelected' : 'notSelected']
           }`}
         >
           <FormattedMessage id="ranking.Tab.board" defaultMessage="局數榜" />
-        </div>
+        </Link>
       </div>
-      <SubTabs selected={subTabSelected} setSelected={setSubTabSelected} />
+      <SubTabs selected={subTabSelected} setSelected={onSubTabSelected} />
     </div>
-  );
-};
+  )
+}
 
 const SubTabsConfig = {
   isSelected:
-    "rounded-[60px] bg-[#FFED82] sm:w-[79px] sm:h-[32px] w-[48px] h-[17px] items-center flex text-black justify-center",
+    'rounded-[60px] bg-[#FFED82] sm:w-[79px] sm:h-[32px] w-[48px] h-[17px] items-center flex text-black justify-center',
   notSelected:
-    "text-[#FFED82] sm:w-[79px] sm:h-[32px] w-[48px] h-[17px] items-center flex justify-center",
-};
+    'text-[#FFED82] sm:w-[79px] sm:h-[32px] w-[48px] h-[17px] items-center flex justify-center'
+}
 
 export const SubTabs: React.FC<{
-  selected: string;
-  setSelected: Dispatch<SetStateAction<string>>;
+  selected: string
+  setSelected: Dispatch<SetStateAction<string>>
 }> = ({ selected, setSelected }) => {
   return (
     <div className="flex sm:justify-between justify-center sm:w-[175px] mt-[10px] sm:text-[14px] text-[9px]">
       <button
         className={`${
-          SubTabsConfig[selected === "month" ? "isSelected" : "notSelected"]
+          SubTabsConfig[selected === 'month' ? 'isSelected' : 'notSelected']
         }`}
-        onClick={() => setSelected("month")}
+        onClick={() => setSelected('month')}
       >
         <FormattedMessage id="ranking.period.month" defaultMessage="月榜" />
       </button>
       <button
         className={`${
-          SubTabsConfig[selected === "week" ? "isSelected" : "notSelected"]
+          SubTabsConfig[selected === 'week' ? 'isSelected' : 'notSelected']
         }`}
-        onClick={() => setSelected("week")}
+        onClick={() => setSelected('week')}
       >
         <FormattedMessage id="ranking.period.week" defaultMessage="週榜" />
       </button>
     </div>
-  );
-};
+  )
+}
 
-export const SimpleCardAvatar: React.FC<{ img?: string }> = ({ img }) => {
+export const SimpleCardAvatar: React.FC<{ img: string | null }> = ({ img }) => {
   if (img) {
     return (
       <img
@@ -198,53 +212,53 @@ export const SimpleCardAvatar: React.FC<{ img?: string }> = ({ img }) => {
         src={anchor}
         alt="Avatar"
       />
-    );
+    )
   }
   return (
     <div className="sm:w-[50px] sm:h-[50px] w-[18px] h-[18px] i-heroicons-user-circle-solid" />
-  );
-};
+  )
+}
 
 export const SimpleCardName: React.FC<{ name: string }> = ({ name }) => {
   return (
     <div className="sm:text-[20px] text-[10px] sm:ml-[10px] ml-[5px]">
       {name}
     </div>
-  );
-};
+  )
+}
 
 const SimpleCardPointConfig = {
-  "1st": "text-[#FCD140] sm:text-[64px] text-[24px] italic font-black",
-  "2nd": "text-[#CCCCCC] sm:text-[64px] text-[24px] italic font-black",
-  "3rd": "text-[#D0AA89] sm:text-[64px] text-[24px] italic font-black",
-};
+  '1st': 'text-[#FCD140] sm:text-[64px] text-[24px] italic font-black',
+  '2nd': 'text-[#CCCCCC] sm:text-[64px] text-[24px] italic font-black',
+  '3rd': 'text-[#D0AA89] sm:text-[64px] text-[24px] italic font-black'
+}
 
 export const SimpleCardPoint: React.FC<{
-  point: number;
-  rank: "1st" | "2nd" | "3rd";
+  point: number
+  rank: '1st' | '2nd' | '3rd'
 }> = ({ point, rank }) => {
-  return <div className={`${SimpleCardPointConfig[rank]}`}>{point}</div>;
-};
+  return <div className={`${SimpleCardPointConfig[rank]}`}>{point}</div>
+}
 
 export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
-  if (rank === "3rd") {
+  if (rank === '3rd') {
     return (
       <img
         className="absolute sm:top-[-52px] top-[-27px] sm:right-[89px] right-[22px] z-10 w-[75px] sm:w-[142px]"
         src={thirdLg}
         alt={`${rank}`}
       />
-    );
+    )
   }
 
-  if (rank === "2nd") {
+  if (rank === '2nd') {
     return (
       <img
         className="absolute sm:top-[-51px] sm:right-[89px] top-[-27px] right-[22px] z-10 w-[75px] sm:w-[142px]"
         src={secondLg}
         alt={`${rank}`}
       />
-    );
+    )
   }
 
   return (
@@ -253,15 +267,15 @@ export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
       src={firstLg}
       alt={`${rank}`}
     />
-  );
-};
+  )
+}
 
 const RankingTableFtRow: React.FC<{
-  rank: number;
-  name: string;
-  point: number;
-  index: number;
-  length: number;
+  rank: number
+  name: string
+  point: number
+  index: number
+  length: number
 }> = ({ rank, name, point, index, length }) => {
   if (index === 0) {
     return (
@@ -272,7 +286,7 @@ const RankingTableFtRow: React.FC<{
         <div className="text-[14px]">{name}</div>
         <div className="sm:mr-[210px] mr-[10px] text-[14px]">{point}</div>
       </div>
-    );
+    )
   }
   if (index + 1 === length) {
     return (
@@ -283,7 +297,7 @@ const RankingTableFtRow: React.FC<{
         <div className="text-[14px]">{name}</div>
         <div className="sm:mr-[210px] mr-[10px] text-[14px]">{point}</div>
       </div>
-    );
+    )
   }
   return (
     <div className="bg-[#262626] w-11/12 h-[52px] flex items-center justify-between sm:border-b sm:border-[#505050] sm:mb-[0px] mb-[6px] rounded-[5px] sm:rounded-[0px]">
@@ -293,18 +307,18 @@ const RankingTableFtRow: React.FC<{
       <div className="text-[14px]">{name}</div>
       <div className="sm:mr-[210px] mr-[10px] text-[14px]">{point}</div>
     </div>
-  );
-};
+  )
+}
 
 export const RankingTable: React.FC<{
-  data: Array<{ rank: number; name: string; point: number }>;
+  data: any[]
 }> = ({ data }) => {
   return (
     <>
       {data.map((element, index) => (
         <RankingTableFtRow
-          rank={element.rank}
-          name={element.name}
+          rank={index + 4}
+          name={element.username}
           point={element.point}
           length={data.length}
           index={index}
@@ -312,5 +326,5 @@ export const RankingTable: React.FC<{
         />
       ))}
     </>
-  );
-};
+  )
+}
