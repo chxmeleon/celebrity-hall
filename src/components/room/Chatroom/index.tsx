@@ -17,24 +17,26 @@ const ChatRoom = () => {
   const [messageRef, setMessageRef] = useState<HTMLDivElement | null>(null)
 
   const { cable } = useActionCable()
-
-  const [onChannel, setOnChannel] = useState(null)
-
   useEffect(() => {
     const newChannel = cable.subscriptions.create(
       { channel: 'ChatroomChannel', roomType: 'BaccaratRoom', roomId: 10 },
       {
         received: (meg: string) => {
           
-          setMessages([...messages, meg])
+          console.log(meg);
+          
+          setMessages((messages) => [...messages, meg])
         }
       }
     )
 
-    setOnChannel(newChannel)
-  }, [messages, setMessages, setOnChannel])
+    console.log(newChannel);
+
+  }, [cable])
   
 
+  
+  
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
     setIsPickerShow(!isPickerShow)

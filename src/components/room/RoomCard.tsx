@@ -8,7 +8,7 @@ type RoomDataProps = {
 }
 
 const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
-  console.log(data?.waitingBetSeconds)
+  console.log(data)
 
   const href = `/home/rooms/${data?.id}`
   const girl = data?.girl
@@ -37,34 +37,37 @@ const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
               />
             </div>
           </div>
-          <div className="flex justify-between px-3 w-full h-12">
-            <div className="flex justify-between items-center w-1/2 h-full">
-              <div className="py-1 px-2 bg-grid-100 rounded-full">
-                <FormattedMessage
-                  id="screens.baccaratRoom.dealer"
-                  defaultMessage="B"
-                />
-              </div>
-              <div className="py-1 px-2 bg-grid-400">
-                <FormattedMessage
-                  id="screens.baccaratRoom.player"
-                  defaultMessage="B"
-                />
+          <div className="flex justify-between px-3 w-full h-12 ">
+            <div className="flex justify-between items-center w-1/2 h-full text-white font-light text-lg">
+              <div className="inline-flex items-center">
+                <div className="py-0.5 px-1.5 rounded-full bg-grid-100">
+                  <FormattedMessage
+                    id="common.dealer"
+                    defaultMessage="B"
+                  />
+                </div>
+                <p>{data?.roads.dealer_count}</p>
               </div>
 
-              <div className="py-1 px-2 bg-grid-300">
-                <FormattedMessage
-                  id="screens.baccaratRoom.tie"
-                  defaultMessage="B"
-                />
+              <div className="inline-flex items-center">
+                <div className="py-0.5 px-1.5 rounded-full bg-grid-400">
+                  <FormattedMessage
+                    id="common.player"
+                    defaultMessage="B"
+                  />
+                </div>
+                <p>{data?.roads.player_count}</p>
+              </div>
+              <div className="inline-flex items-center">
+                <div className="py-0.5 px-1.5 rounded-full bg-grid-200">
+                  <FormattedMessage
+                    id="common.tie"
+                    defaultMessage="B"
+                  />
+                </div>
+                <p>{data?.roads.tie_count}</p>
               </div>
 
-              <div className="py-1 px-2 bg-grid-200">
-                <FormattedMessage
-                  id="screens.baccaratRoom.total"
-                  defaultMessage="B"
-                />
-              </div>
             </div>
             <div className="flex w-1/4">
               <button className="p-1 m-auto w-full font-medium text-gray-800 bg-gradient-to-r rounded-full hover:via-amber-200 from-theme-200 via-theme-300 to-theme-200 hover:from-theme-400 hover:to-theme-400">

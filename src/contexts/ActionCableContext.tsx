@@ -16,11 +16,14 @@ export const ActionCableProvider = ({
   children: JSX.Element
 }) => {
   const { auth } = useAuth()
-  const cable = ActionCable.createConsumer(
-    `ws://staging.vvip99.net/cable?token=${auth}`
+  const value = useMemo(
+    () => ({
+      cable: ActionCable.createConsumer(
+        `ws://staging.vvip99.net/cable?token=${auth}`
+      )
+    }),
+    [auth]
   )
-
-  const value = useMemo(() => ({ cable }), [cable])
 
   return (
     <ActionCableContext.Provider value={value}>
