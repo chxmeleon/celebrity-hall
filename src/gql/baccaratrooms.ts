@@ -69,3 +69,21 @@ export const GET_BACCARATROOMS = gql`
     }
   }
 `
+
+export const GET_CURRENT_BACCARAT_ROOM = gql`
+  query BaccaratRoom($baccaratRoomId: ID!) {
+    baccaratRoom(id: $baccaratRoomId) {
+      roads
+      streamKey
+      streamName
+      status
+      streams {
+        createdAt
+        id
+        key
+        name
+        updatedAt
+      }
+    }
+  }
+`

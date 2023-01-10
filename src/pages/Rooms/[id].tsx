@@ -16,19 +16,21 @@ import {
   AskGrid
 } from '@/components/room/Roadmap'
 
+import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { GET_ROOM_STREAM } from '@/gql/stream'
 
 const Room = () => {
-  const { data } = useQuery(GET_ROOM_STREAM)
-  const streamName =
-    data?.activeBaccaratRooms[1]?.currentGame?.baccaratRoom?.streamName
-  const streamKey =
-    data?.activeBaccaratRooms[1]?.currentGame?.baccaratRoom?.streamKey
-  const secoundStreamName =
-    data?.activeBaccaratRooms[1]?.currentGame?.baccaratRoom?.streams[0].name
-  const secoundStreamKey =
-    data?.activeBaccaratRooms[1]?.currentGame?.baccaratRoom?.streams[0].key
+  const roomId = useParams()
+  const id = Number(roomId?.id)
+  const { data } = useQuery(GET_ROOM_STREAM, {
+    variables: { baccaratRoomId: id }
+  })
+  console.log(data)
+  const streamName = data?.baccaratRoom?.streamName
+  const streamKey = data?.baccaratRoom?.streamKey
+  const secoundStreamName = data?.baccaratRoom?.streams[0].name
+  const secoundStreamKey = data?.baccaratRoom?.streams[0].key
 
   const [isSecondCam, setIsSecondCam] = useState(false)
   const handleSwitchCam = () => setIsSecondCam(!isSecondCam)
@@ -76,15 +78,15 @@ const Room = () => {
       <div className="relative w-full h-4/5">
         {isSecondCam ? (
           <RoomStream
-            streamName={streamName}
-            streamKey={streamKey}
+            streamName={secoundStreamName}
+            streamKey={secoundStreamKey}
             videoOn={true}
             isWebRTC={isWebRTC}
           />
         ) : (
           <RoomStream
-            streamName={secoundStreamName}
-            streamKey={secoundStreamKey}
+            streamName={streamName}
+            streamKey={streamKey}
             videoOn={true}
             isWebRTC={isWebRTC}
           />

@@ -33,37 +33,3 @@ export const ActionCableProvider = ({
 }
 
 export const useActionCable = () => useContext(ActionCableContext)
-
-/* interface ActionCableConsumerProp { */
-/*   children: any */
-/*   channel: any  */
-/*   onReceive: () => void */
-/*   onConnected: () => void */
-/*   onDisconnected: () => void */
-/*   onRejected: () => void */
-/*   onInitialized: () => void */
-/* } */
-/**/
-/* export const ActionCableConsumer: React.FC<ActionCableConsumerProp> = ({ */
-/*   children, */
-/*   channel, */
-/*   onReceive, */
-/* }) => { */
-/*   const { cable } = useActionCable() */
-/*   const [onChannel, setOnChannel] = useState(null) */
-/**/
-/*   useEffect(() => { */
-/*     const newChannel = cable.subscriptions.create( */
-/*       { channel }, */
-/*       { onReceive } */
-/*     ) */
-/**/
-/*     setOnChannel(newChannel) */
-/**/
-/*     return () => { */
-/*       newChannel.unsubscribe() */
-/*     } */
-/*   }, [channel, onReceive]) */
-/**/
-/*   return <ActionCableContext.Consumer>{children}</ActionCableContext.Consumer> */
-/* } */

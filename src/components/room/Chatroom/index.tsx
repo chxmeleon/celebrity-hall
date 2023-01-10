@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 import { useParams } from 'react-router-dom'
 import { useActionCable } from '@/contexts/ActionCableContext'
-import { receiveMessageOnPort } from 'worker_threads'
+import { useIntl } from 'react-intl'
 
 // interface ChatRoomProps {
 //   roomId: number
@@ -15,24 +15,25 @@ const ChatRoom = () => {
   const [isPickerShow, setIsPickerShow] = useState(false)
   const [clickRef, setClickRef] = useState<HTMLDivElement | null>(null)
   const [messageRef, setMessageRef] = useState<HTMLDivElement | null>(null)
+  const { formatMessage } = useIntl()
 
-  const { cable } = useActionCable()
-  useEffect(() => {
-    const newChannel = cable.subscriptions.create(
-      { channel: 'ChatroomChannel', roomType: 'BaccaratRoom', roomId: 10 },
-      {
-        received: (meg: string) => {
-          console.log(meg)
-
-          setMessages((messages) => [...messages, meg])
-        }
-      }
-    )
-
-    return () => {
-      newChannel.unsubscribe()
-    }
-  }, [cable])
+  /* const { cable } = useActionCable() */
+  /* useEffect(() => { */
+  /*   const newChannel = cable.subscriptions.create( */
+  /*     { channel: 'ChatroomChannel', roomType: 'BaccaratRoom', roomId: 10 }, */
+  /*     { */
+  /*       received: (meg: string) => { */
+  /*         console.log(meg) */
+  /**/
+  /*         setMessages((messages) => [...messages, meg]) */
+  /*       } */
+  /*     } */
+  /*   ) */
+  /**/
+  /*   return () => { */
+  /*     newChannel.unsubscribe() */
+  /*   } */
+  /* }, [cable]) */
 
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -89,22 +90,22 @@ const ChatRoom = () => {
           {messages.map((item, idx) => {
             return (
               <div
-                className="flex justify-start items-start py-1 px-2.5 w-full h-auto text-theme-50"
+                className="flex justify-start items-center py-1 px-2.5 w-full h-auto text-xs text-theme-50"
                 key={idx}
               >
                 <div className="flex-shrink-0 pr-1.5 pt-[1.5px]">
                   <div className="w-6 h-6 bg-gray-400 rounded-full"></div>
                 </div>
-                <p className="pr-2">username</p>
+                <p className="pr-2 text-sm">username</p>
                 <div className="inline-flex justify-start items-start">
                   <div className="w-2 rounded-t-lg translate-y-2 -rotate-[9deg] -translate-x-[1px]">
                     <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[20px] border-b-transparent border-r-[20px] border-r-neutral-200"></div>
                   </div>
                   <div className="break-all rounded-lg border-r-2 border-b-2 bg-neutral-200 drop-shadow-sm border-b-theme-50/10">
-                    <p className="py-2 px-4">{item}</p>
+                    <p className="py-1 px-2 text-sm">{item}</p>
                   </div>
                 </div>
-                <p className="self-end pl-3 text-gray-400">time</p>
+                <p className="self-end pl-3 text-xs text-gray-400">time</p>
               </div>
             )
           })}
@@ -118,7 +119,7 @@ const ChatRoom = () => {
           <input
             id="chat-input"
             type="text"
-            placeholder="Send message"
+            placeholder={formatMessage({id: "common.sendMessage", defaultMessage: "Send Message"})}
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             className="py-2 pr-2 pl-3 w-full h-full bg-gray-200 rounded-md outline-0"
@@ -127,9 +128,8 @@ const ChatRoom = () => {
 
           <div ref={setClickRef}>
             <div
-              className={`${
-                isPickerShow ? '' : 'hidden'
-              } absolute bottom-10 right-0 z-30`}
+              className={`${isPickerShow ? '' : 'hidden'
+                } absolute bottom-10 right-0 z-30`}
             >
               <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
             </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { buttonStyle as bts } from '@/components/common/buttonStyle'
 import { FormattedMessage } from 'react-intl'
+import { BigRoad, BeadPlate } from './Roadmap'
 
 type RoomDataProps = {
   data: any
@@ -9,10 +9,8 @@ type RoomDataProps = {
 
 const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
   console.log(data)
-
   const href = `/home/rooms/${data?.id}`
   const girl = data?.girl
-
   return (
     <Link to={href} key={href}>
       <div className="w-full h-full rounded-2xl p-[1.4px] bg-link-button-54">
@@ -28,46 +26,63 @@ const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
             </div>
           </div>
           <div className="flex flex-grow flex-shrink-0 justify-start items-center px-3 w-full">
-            <div className="w-3/4 h-full bg-gray-100 rounded-tl-sm rounded-bl-sm"></div>
-            <div className="overflow-hidden w-1/4 bg-gray-100 rounded-tr-sm rounded-br-sm border-l-2 border-l-theme-50/50 h-[180px]">
-              <img
-                src={girl?.avatar}
-                alt="Dealer avatar"
-                className="object-fill object-top w-full h-full"
-              />
+            <div className="flex w-3/4 h-full bg-gray-100 rounded-tl-sm rounded-bl-sm">
+              <BigRoad />
+            </div>
+            <div className="relative w-1/4 bg-gray-100 rounded-tr-sm rounded-br-sm h-[165px]">
+              <div className="absolute bottom-0 w-full">
+                <div className="flex justify-end">
+                  <div className="absolute right-0 top-4">
+                    <div className="p-1 text-lg font-medium text-gray-50">
+                      {data?.currentGame?.status === 'opening' ? (
+                        <FormattedMessage
+                          id="status.baccarat.waitingBet"
+                          defaultMessage="Open"
+                        />
+                      ) : (
+                        <FormattedMessage
+                          id="status.baccarat.openingCard"
+                          defaultMessage="Close"
+                        />
+                      )}
+                    </div>
+                  </div>
+                  <div className="border-b-[#F9A415] border-b-[50px] border-l-[57px] border-transparent"></div>
+                </div>
+                <div className="w-full font-medium tracking-widest text-center p-[1px] bg-theme-50/75">
+                  {girl.name}
+                </div>
+              </div>
+              <div className="overflow-hidden w-full h-full">
+                <img
+                  src={girl?.avatar}
+                  alt="Dealer avatar"
+                  className="object-cover object-top w-full h-full"
+                />
+              </div>
             </div>
           </div>
-          <div className="flex justify-between px-3 w-full h-12 ">
-            <div className="flex justify-between items-center w-1/2 h-full text-white font-light text-lg">
-              <div className="inline-flex items-center">
+          <div className="flex justify-between px-3 w-full h-12">
+            <div className="flex justify-between items-center w-1/2 h-full text-lg font-light text-white">
+              <div className="inline-flex items-center [&_p]:pl-3">
                 <div className="py-0.5 px-1.5 rounded-full bg-grid-100">
-                  <FormattedMessage
-                    id="common.dealer"
-                    defaultMessage="B"
-                  />
+                  <FormattedMessage id="common.dealer" defaultMessage="B" />
                 </div>
                 <p>{data?.roads.dealer_count}</p>
               </div>
 
-              <div className="inline-flex items-center">
+              <div className="inline-flex items-center [&_p]:pl-3">
                 <div className="py-0.5 px-1.5 rounded-full bg-grid-400">
-                  <FormattedMessage
-                    id="common.player"
-                    defaultMessage="B"
-                  />
+                  <FormattedMessage id="common.player" defaultMessage="P" />
                 </div>
                 <p>{data?.roads.player_count}</p>
               </div>
-              <div className="inline-flex items-center">
-                <div className="py-0.5 px-1.5 rounded-full bg-grid-200">
-                  <FormattedMessage
-                    id="common.tie"
-                    defaultMessage="B"
-                  />
+              <div className="inline-flex items-center [&_p]:pl-3">
+                <div className="py-0.5 px-1.5 rounded-full bg-grid-300">
+                  <FormattedMessage id="common.tie" defaultMessage="T" />
                 </div>
                 <p>{data?.roads.tie_count}</p>
               </div>
-
             </div>
             <div className="flex w-1/4">
               <button className="p-1 m-auto w-full font-medium text-gray-800 bg-gradient-to-r rounded-full hover:via-amber-200 from-theme-200 via-theme-300 to-theme-200 hover:from-theme-400 hover:to-theme-400">
