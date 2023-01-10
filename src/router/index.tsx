@@ -13,7 +13,7 @@ import Tables from '@/pages/Tables'
 import Liverooms from '@/pages/Liverooms'
 import Mutualrooms from '@/pages/Mutualrooms'
 import Following from '@/pages/Following'
-import ContributeRanking from '@/pages/ContributeRanking'
+import UserRanking from '@/pages/UserRanking'
 
 const Router: React.FC = () => {
   return (
@@ -33,7 +33,15 @@ const Router: React.FC = () => {
         <Route path="tables" element={<Tables />} />
         <Route path="following" element={<Following />} />
         <Route path="rankings" element={<Rankings />} />
-        <Route path="contribute-ranking" element={<ContributeRanking />} />
+        <Route
+          path="contribution-ranking"
+          element={<UserRanking type="contribution" />}
+        />
+        <Route
+          path="win_points-ranking"
+          element={<UserRanking type="win_points" />}
+        />
+        <Route path="rounds-ranking" element={<UserRanking type="rounds" />} />
         <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
