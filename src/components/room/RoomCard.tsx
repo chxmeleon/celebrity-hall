@@ -13,7 +13,9 @@ const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
   const girl = data?.girl
   return (
     <Link to={href} key={href}>
-      <div className="w-full h-full rounded-2xl p-[1.4px] bg-link-button-54">
+      <div
+        className="w-full h-full rounded-2xl hover:shadow-lg p-[1.4px] bg-link-button-54 hover:shadow-theme-300/60"
+      >
         <div className="flex flex-col w-full h-full rounded-2xl bg-theme-50">
           <div className="flex justify-start items-center pl-4 w-full h-12">
             <div className="rounded-sm p-[1.1px] bg-link-button-54">
@@ -29,7 +31,7 @@ const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
             <div className="flex w-3/4 h-full bg-gray-100 rounded-tl-sm rounded-bl-sm">
               <BigRoad />
             </div>
-            <div className="relative w-1/4 bg-gray-100 rounded-tr-sm rounded-br-sm h-[165px]">
+            <div className="relative w-1/4 bg-gray-100 rounded-tr-sm rounded-br-sm h-[170px]">
               <div className="absolute bottom-0 w-full">
                 <div className="flex justify-end">
                   <div className="absolute right-0 top-4">

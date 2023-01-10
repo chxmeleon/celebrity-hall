@@ -42,7 +42,7 @@ const LeftSidebar = () => {
                 defaultMessage="Following"
               />
             </LinkButton>
-            {/* <LinkButton href="/home/profile" isTarget={false}> */}
+            {/* <LinkButton href="/home/tables" isTarget={false}> */}
             {/*   <FormattedMessage id="layout.tables" defaultMessage="Tables" /> */}
             {/* </LinkButton> */}
             <LinkButton href="/home/rankings" isTarget={false}>
@@ -63,9 +63,6 @@ const LeftSidebar = () => {
             {/*     defaultMessage="App Download" */}
             {/*   /> */}
             {/* </LinkButton> */}
-            <LinkButton href="/home/rooms/001" isTarget={false}>
-              <p>rooms</p>
-            </LinkButton>
           </div>
         </section>
       </div>

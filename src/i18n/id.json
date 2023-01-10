@@ -457,6 +457,8 @@
   "status.baccaratRichman.player_third_opening": "Nhà con bù bài xác nhận",
   "status.baccaratRichman.dealer_third_opening": "Nhà cái bù bài xác nhận",
   "status.baccaratRichman.dealer_third_opening_confirmed": "Nhà cái bù bài",
+  "status.baccarat.waitingBet": "开",
+  "status.baccarat.openingCard": "结",
   "status.baccaratRichman.closed": "Kết toán ván này",
   "status.baccaratRichman.returned": "Hủy bỏ ván bài",
   "status.baccaratRichman.sos": "Mạng của Nhà viễn thông bất thường, kỹ sư đang sửa chữa, vui lòng chờ!",

@@ -407,6 +407,8 @@
   "status.baccarat.DEALER_DRAW_THIRD_CONFIRMED": "开牌中",
   "status.baccarat.waiting_for_bet": "开始下注",
   "status.baccarat.opening": "结束下注",
+  "status.baccarat.waitingBet": "开",
+  "status.baccarat.openingCard": "结",
   "status.baccarat.player_opening": "闲家开牌",
   "status.baccarat.dealer_opening": "庄家开牌",
   "status.baccarat.player_third_opening": "闲家补牌",

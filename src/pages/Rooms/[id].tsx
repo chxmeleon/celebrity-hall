@@ -22,11 +22,9 @@ import { GET_ROOM_STREAM } from '@/gql/stream'
 
 const Room = () => {
   const roomId = useParams()
-  const id = Number(roomId?.id)
   const { data } = useQuery(GET_ROOM_STREAM, {
-    variables: { baccaratRoomId: id }
+    variables: { baccaratRoomId: Number(roomId?.id) }
   })
-  console.log(data)
   const streamName = data?.baccaratRoom?.streamName
   const streamKey = data?.baccaratRoom?.streamKey
   const secoundStreamName = data?.baccaratRoom?.streams[0].name
@@ -94,7 +92,7 @@ const Room = () => {
 
         <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
           <div className="flex absolute top-0 right-0 justify-end p-2 w-full">
-            <div className="flex justify-between items-end w-[5.5rem]">
+            <div className="flex flex-col items-end w-[5.5rem]">
               <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
                 <button
                   onClick={handleSwitchCam}

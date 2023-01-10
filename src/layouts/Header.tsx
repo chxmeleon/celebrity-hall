@@ -51,11 +51,11 @@ const Header = () => {
       <nav className="absolute top-0 left-0 z-40 w-full h-12 border-b bg-theme-50 border-b-theme-75">
         <div className="flex justify-end items-center px-3 w-full h-full bg-theme-50">
           <div
-            className="flex justify-around items-center w-[12rem] bg-theme-50"
+            className="flex justify-around items-center w-[5rem] bg-theme-50"
             onClick={stopProp}
           >
-            <button className={icons.heart}></button>
-            <button className={icons.chart}></button>
+            {/* <button className={icons.heart}></button> */}
+            {/* <button className={icons.chart}></button> */}
             <button className={icons.refresh}></button>
             <div className="inline-block relative mt-1.5">
               <button className={icons.bar} onClick={onToggle}></button>

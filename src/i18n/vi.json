@@ -439,6 +439,8 @@
   "status.baccarat.DEALER_DRAW_THIRD_CONFIRMED": "Đang mở bài",
   "status.baccarat.waiting_for_bet": "Bắt đầu đặt cược",
   "status.baccarat.opening": "Kết thúc đặt cược",
+  "status.baccarat.waitingBet": "开",
+  "status.baccarat.openingCard": "结",
   "status.baccarat.player_opening": "Nhà con mở bài",
   "status.baccarat.dealer_opening": "Nhà cái mở bài",
   "status.baccarat.player_third_opening": "Nhà con bù bài",

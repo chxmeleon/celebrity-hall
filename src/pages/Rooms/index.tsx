@@ -7,7 +7,7 @@ const Rooms: React.FC = () => {
   const activeBaccaratRooms = data?.activeBaccaratRooms
 
   return (
-    <div className="p-16 w-full h-full">
+    <div className="p-16 w-full h-full overflow-y-auto ">
       <RoomList roomsData={activeBaccaratRooms} />
     </div>
   )

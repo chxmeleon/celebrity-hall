@@ -439,6 +439,8 @@
   "status.baccarat.DEALER_DRAW_THIRD_CONFIRMED": "กำลังเปิดไพ่",
   "status.baccarat.waiting_for_bet": "เริ่มวางเดิมพัน",
   "status.baccarat.opening": "สิ้นสุดวางเดิมพัน",
+  "status.baccarat.waitingBet": "开",
+  "status.baccarat.openingCard": "结",
   "status.baccarat.player_opening": "ผู้เล่นเปิดไพ่",
   "status.baccarat.dealer_opening": "เจ้ามือเปิดไพ่",
   "status.baccarat.player_third_opening": "ผู้เล่นจั่วไพ่",

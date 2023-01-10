@@ -61,7 +61,7 @@ export const SinglePlayer = () => {
                     <p>1:0.96</p>
                   </div>
                   <div>
-                    <FormattedMessage id="screens.baccaratRoom.playerPair" />
+                    <FormattedMessage id="screens.baccaratRoom.playerSingle" />
                   </div>
                 </div>
               </button>
@@ -71,7 +71,7 @@ export const SinglePlayer = () => {
                     <p>1:0.9</p>
                   </div>
                   <div>
-                    <FormattedMessage id="screens.baccaratRoom.playerPair" />
+                    <FormattedMessage id="screens.baccaratRoom.playerDouble" />
                   </div>
                 </div>
               </button>
@@ -186,7 +186,7 @@ export const SinglePlayer = () => {
               <button className={btnIdx.hbhn}>
                 <div className="text-xs flex justify-between items-center px-2 text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                   <div>
-                    <FormattedMessage id="screens.baccaratRoom.playerPair" />
+                    <FormattedMessage id="screens.baccaratRoom.playerDouble" />
                   </div>
                   <div>
                     <p>1:0.94</p>
@@ -196,7 +196,7 @@ export const SinglePlayer = () => {
               <button className={btnIdx.hbhrn}>
                 <div className="text-xs flex justify-between items-center px-2 text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                   <div>
-                    <FormattedMessage id="screens.baccaratRoom.playerPair" />
+                    <FormattedMessage id="screens.baccaratRoom.playerSingle" />
                   </div>
                   <div>
                     <p>1:0.94</p>
