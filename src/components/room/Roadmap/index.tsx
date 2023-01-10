@@ -64,7 +64,8 @@ export const AskGrid: React.FC = () => {
         const askGridContent = cx(
           'w-full h-full text-xs font-bold border-b border-gray-400 px-1.5 flex justify-between items-center',
           askMapper[idx].className,
-          idx > 5 ? ' hover:cursor-pointer hover:bg-neutral-100 active:bg-neutral-300' : ''
+          idx === 6 ? ' hover:cursor-pointer hover:bg-red-100 active:bg-red-200' : '',
+          idx === 7 ? ' hover:cursor-pointer hover:bg-blue-100 active:bg-blue-200' : ''
         )
 
         const askRoundStyle = cx(

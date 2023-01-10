@@ -22,16 +22,19 @@ import { GET_ROOM_STREAM } from '@/gql/stream'
 const Room = () => {
   const { data } = useQuery(GET_ROOM_STREAM)
   const streamName =
-    data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom?.streamName
+    data?.activeBaccaratRooms[1]?.currentGame?.baccaratRoom?.streamName
   const streamKey =
-    data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom?.streamKey
+    data?.activeBaccaratRooms[1]?.currentGame?.baccaratRoom?.streamKey
   const secoundStreamName =
-    data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom?.streams[0].name
+    data?.activeBaccaratRooms[1]?.currentGame?.baccaratRoom?.streams[0].name
   const secoundStreamKey =
-    data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom?.streams[0].key
-  /* console.log(secoundStreamName, secoundStreamKey) */
-  console.log(data?.activeBaccaratRooms[0]?.currentGame?.baccaratRoom);
-  
+    data?.activeBaccaratRooms[1]?.currentGame?.baccaratRoom?.streams[0].key
+
+  const [isSecondCam, setIsSecondCam] = useState(false)
+  const handleSwitchCam = () => setIsSecondCam(!isSecondCam)
+
+  const [isWebRTC, setIsWebRTC] = useState(false)
+  const handleSwitchStream = () => setIsWebRTC(!isWebRTC)
 
   const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
   const [betPrice, setBetPrice] = useState('chips_10')
@@ -58,11 +61,10 @@ const Room = () => {
       <button
         key={idx}
         onClick={handleSelectBetPrice}
-        className={`${
-          isActive
+        className={`${isActive
             ? 'shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
             : 'shadow shadow-theme-50/80'
-        } rounded-full relative hover:cursor-pointer`}
+          } rounded-full relative hover:cursor-pointer`}
       >
         <img src={item} alt="bet image" className="w-9" />
       </button>
@@ -72,18 +74,47 @@ const Room = () => {
   return (
     <div className="flex relative flex-col w-full h-full">
       <div className="relative w-full h-4/5">
-        <RoomStream
-          streamName={streamName}
-          streamKey={streamKey}
-          videoOn={true}
-        />
+        {isSecondCam ? (
+          <RoomStream
+            streamName={streamName}
+            streamKey={streamKey}
+            videoOn={true}
+            isWebRTC={isWebRTC}
+          />
+        ) : (
+          <RoomStream
+            streamName={secoundStreamName}
+            streamKey={secoundStreamKey}
+            videoOn={true}
+            isWebRTC={isWebRTC}
+          />
+        )}
+
         <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
+          <div className="flex absolute top-0 right-0 justify-end p-2 w-full">
+            <div className="flex justify-between items-end w-[5.5rem]">
+              <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
+                <button
+                  onClick={handleSwitchCam}
+                  className={`${isSecondCam ? 'text-theme-300' : ''
+                    } m-auto text-2xl i-heroicons-video-camera-20-solid`}
+                ></button>
+              </div>
+              <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
+                <button
+                  onClick={handleSwitchStream}
+                  className={`${isWebRTC ? 'text-theme-300' : ''
+                    } m-auto text-2xl i-heroicons-wifi-20-solid`}
+                ></button>
+              </div>
+            </div>
+          </div>
           <div className="w-full h-[63%] flex justify-center"></div>
           <div className="flex-grow flex-shrink-0 w-full">
             <BetDesk isToggle={isChangedDesk} />
           </div>
           <div className="flex justify-between items-center px-2 my-2 w-full h-10">
-            <div className="flex items-center w-[24%]">
+            <div className="flex items-center w-[30%]">
               {/* gameplay's switch */}
               {/* <button
                 onClick={handleSwitchDesk}
@@ -103,11 +134,10 @@ const Room = () => {
               </button> */}
               <button onClick={handleRegularToggle} className="px-1 ml-2">
                 <div
-                  className={`${
-                    isRegular
+                  className={`${isRegular
                       ? 'bg-theme-300 text-theme-70'
                       : 'bg-theme-70 text-theme-300'
-                  } py-1.5 px-3 font-bold rounded-full `}
+                    } py-1.5 px-3 font-bold rounded-full `}
                 >
                   {isRegular ? (
                     <FormattedMessage id="common.noFee" />
@@ -124,12 +154,12 @@ const Room = () => {
             </div>
             <div className="flex flex-grow justify-around items-center">
               {chipsButton}
-              <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/50 text-theme-300">
-                <button className="text-xl i-heroicons-play-pause-solid" />
-              </div>
-              <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/50 text-theme-300">
-                <button className="text-xl i-heroicons-pencil-square-20-solid" />
-              </div>
+              {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
+              {/*   <button className="text-xl i-heroicons-play-pause-solid" /> */}
+              {/* </div> */}
+              {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
+              {/*   <button className="text-xl i-heroicons-pencil-square-20-solid" /> */}
+              {/* </div> */}
             </div>
             <div className="flex pl-5 w-[36%] text-theme-300">
               <BetButton onClick={() => null}>

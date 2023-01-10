@@ -8,7 +8,8 @@ export interface RoomStreamProps {
   soundOn?: boolean
   videoOn?: boolean
   autoSize?: boolean
-  className?: string
+  isWebRTC?: boolean
+  isLoading?: boolean
 }
 
 export const NodePlayerStream: React.FC<RoomStreamProps> = ({
@@ -17,7 +18,8 @@ export const NodePlayerStream: React.FC<RoomStreamProps> = ({
   resolution,
   soundOn,
   videoOn,
-  autoSize
+  autoSize,
+  isLoading
 }) => {
   useEffect(() => {
     const player = new NodePlayer()
@@ -48,20 +50,20 @@ export const NodePlayerStream: React.FC<RoomStreamProps> = ({
 export const WebRTCStream: React.FC<RoomStreamProps> = ({
   streamName,
   streamKey,
-  className,
   resolution,
   soundOn,
   videoOn,
-  autoSize
+  autoSize,
+  isLoading
 }) => {
   const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null)
-  const pc = new RTCPeerConnection()
 
   useEffect(() => {
     const requestStream = async () => {
       if (!videoRef) return
 
       try {
+        const pc = new RTCPeerConnection()
         pc.addTransceiver('audio', { direction: 'recvonly' })
         pc.addTransceiver('video', { direction: 'recvonly' })
         pc.addEventListener('addstream', (e: any) => {
@@ -101,15 +103,21 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
   }, [videoRef, streamName, streamKey])
 
   return (
-    <div className={`flex absolute z-0 flex-col w-full h-full ${className}`}>
-      <div className="overflow-hidden relative w-full h-full">
-        <video
-          ref={setVideoRef}
-          playsInline
-          autoPlay
-          className={`w-full h-auto aspect-film object-fill`}
-        />
-      </div>
-    </div>
+    <>
+      {isLoading ? (
+        <p>loading</p>
+      ) : (
+        <div className="flex absolute z-0 flex-col w-full h-full">
+          <div className="overflow-hidden relative w-full h-full">
+            <video
+              ref={setVideoRef}
+              playsInline
+              autoPlay
+              className="object-fill w-full h-auto aspect-film"
+            />
+          </div>
+        </div>
+      )}
+    </>
   )
 }

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
+import { useParams } from 'react-router-dom'
+import { useActionCable } from '@/contexts/ActionCableContext'
+import { receiveMessageOnPort } from 'worker_threads'
 
 // interface ChatRoomProps {
 //   roomId: number
@@ -12,6 +15,25 @@ const ChatRoom = () => {
   const [isPickerShow, setIsPickerShow] = useState(false)
   const [clickRef, setClickRef] = useState<HTMLDivElement | null>(null)
   const [messageRef, setMessageRef] = useState<HTMLDivElement | null>(null)
+
+  const { cable } = useActionCable()
+
+  const [onChannel, setOnChannel] = useState(null)
+
+  useEffect(() => {
+    const newChannel = cable.subscriptions.create(
+      { channel: 'ChatroomChannel', roomType: 'BaccaratRoom', roomId: 10 },
+      {
+        received: (meg: string) => {
+          
+          setMessages([...messages, meg])
+        }
+      }
+    )
+
+    setOnChannel(newChannel)
+  }, [messages, setMessages, setOnChannel])
+  
 
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -100,15 +122,14 @@ const ChatRoom = () => {
             placeholder="Send message"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            className="py-2 pl-3 pr-2 w-full h-full outline-0 rounded-md bg-gray-200"
+            className="py-2 pr-2 pl-3 w-full h-full bg-gray-200 rounded-md outline-0"
             autoComplete="off"
           />
 
           <div ref={setClickRef}>
             <div
-              className={`${
-                isPickerShow ? '' : 'hidden'
-              } absolute bottom-10 right-0 z-30`}
+              className={`${isPickerShow ? '' : 'hidden'
+                } absolute bottom-10 right-0 z-30`}
             >
               <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
             </div>

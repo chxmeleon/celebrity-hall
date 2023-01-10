@@ -4,6 +4,7 @@ export const GET_ROOM_STREAM = gql`
   query ActiveBaccaratRooms {
     activeBaccaratRooms {
       webhookUrl
+      id
       currentGame {
         baccaratRoom {
           name
