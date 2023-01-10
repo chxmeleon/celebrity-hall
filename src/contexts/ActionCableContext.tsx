@@ -3,7 +3,7 @@ import ActionCable from 'actioncable'
 import { useAuth } from './AuthContext'
 
 interface ActionCableContextData {
-  cable: any
+  cable: ActionCable.Cable
 }
 
 const ActionCableContext = createContext<ActionCableContextData>(

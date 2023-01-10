@@ -22,21 +22,18 @@ const ChatRoom = () => {
       { channel: 'ChatroomChannel', roomType: 'BaccaratRoom', roomId: 10 },
       {
         received: (meg: string) => {
-          
-          console.log(meg);
-          
+          console.log(meg)
+
           setMessages((messages) => [...messages, meg])
         }
       }
     )
 
-    console.log(newChannel);
-
+    return () => {
+      newChannel.unsubscribe()
+    }
   }, [cable])
-  
 
-  
-  
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
     setIsPickerShow(!isPickerShow)
@@ -130,8 +127,9 @@ const ChatRoom = () => {
 
           <div ref={setClickRef}>
             <div
-              className={`${isPickerShow ? '' : 'hidden'
-                } absolute bottom-10 right-0 z-30`}
+              className={`${
+                isPickerShow ? '' : 'hidden'
+              } absolute bottom-10 right-0 z-30`}
             >
               <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
             </div>
