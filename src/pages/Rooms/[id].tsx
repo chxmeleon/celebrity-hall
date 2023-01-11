@@ -7,7 +7,8 @@ import { useSetup } from '@/contexts/SetupContext'
 import BetDesk from '@/components/room/BetDesk'
 import ChatRoom from '@/components/room/Chatroom'
 import RoomStream from '@/components/room/RoomStream'
-import Countdown from '@/components/room/Countdown'
+import Timer from '@/components/room/Timer'
+import PockerResult from '@/components/room/PockerResult'
 
 import {
   BeadPlate,
@@ -22,7 +23,6 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { GET_ROOM_STREAM } from '@/gql/stream'
 import { GET_CURRENT_BACCARAT_ROOM } from '@/gql/baccaratrooms'
-import OpenCard from '@/components/room/OpenCard'
 
 const Room = () => {
   const roomId = useParams()
@@ -33,9 +33,6 @@ const Room = () => {
   const { data: currentGame } = useQuery(GET_CURRENT_BACCARAT_ROOM, {
     variables: { baccaratRoomId: Number(roomId?.id) }
   })
-  console.log(currentGame?.baccaratRoom?.currentGame);
-  
-
 
   const streamName = data?.baccaratRoom?.streamName
   const streamKey = data?.baccaratRoom?.streamKey
@@ -124,13 +121,13 @@ const Room = () => {
           <div className="relative w-full h-[63%] grid grid-cols-3">
             <div className="flex justify-start items-center pl-8">
               <div className="w-[326px] h-[57%]">
-                <OpenCard />
+                <PockerResult />
               </div>
             </div>
             <div className="flex"></div>
             <div className="flex">
               <div className="m-auto h-32 aspect-square">
-                <Countdown />
+                <Timer />
               </div>
             </div>
           </div>
