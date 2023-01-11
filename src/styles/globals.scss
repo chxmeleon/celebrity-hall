@@ -34,11 +34,49 @@
     @apply relative inline-block w-20 h-10 rounded-3xl;
 
     .switch-btn-on {
-      @apply switch-btn bg-theme-50 translate-x-0  ;
+      @apply switch-btn bg-theme-50 translate-x-0;
     }
 
     .switch-btn-off {
       @apply switch-btn bg-yellow-400 translate-x-10;
     }
   }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .countdown-progress {
+    animation: spin 1.4s linear infinite;
+  }
+
+  @keyframes fliper {
+    0% {
+      transform: rotateY(-90deg);
+    }
+    100% {
+      transform: rotateY(0deg);
+    }
+  }
+
+  .fliper-card {
+    animation: fliper 1s infinite;
+  }
+
+  @keyframes fliper-horizontal {
+    0% {
+      transform: rotateX(90deg);
+    }
+    100% {
+      transform: rotateX(0deg);
+    }
+  }
+
+  .fliper-h-card {
+    animation: fliper-horizontal 1s infinite;
+  }
+
+
 }

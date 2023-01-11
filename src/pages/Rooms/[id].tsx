@@ -7,6 +7,8 @@ import { useSetup } from '@/contexts/SetupContext'
 import BetDesk from '@/components/room/BetDesk'
 import ChatRoom from '@/components/room/Chatroom'
 import RoomStream from '@/components/room/RoomStream'
+import Countdown from '@/components/room/Countdown'
+
 import {
   BeadPlate,
   BigRoad,
@@ -19,12 +21,22 @@ import {
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { GET_ROOM_STREAM } from '@/gql/stream'
+import { GET_CURRENT_BACCARAT_ROOM } from '@/gql/baccaratrooms'
+import OpenCard from '@/components/room/OpenCard'
 
 const Room = () => {
   const roomId = useParams()
   const { data } = useQuery(GET_ROOM_STREAM, {
     variables: { baccaratRoomId: Number(roomId?.id) }
   })
+
+  const { data: currentGame } = useQuery(GET_CURRENT_BACCARAT_ROOM, {
+    variables: { baccaratRoomId: Number(roomId?.id) }
+  })
+  console.log(currentGame?.baccaratRoom?.currentGame);
+  
+
+
   const streamName = data?.baccaratRoom?.streamName
   const streamKey = data?.baccaratRoom?.streamKey
   const secoundStreamName = data?.baccaratRoom?.streams[0].name
@@ -91,7 +103,7 @@ const Room = () => {
         )}
 
         <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
-          <div className="flex absolute top-0 right-0 justify-end p-2 w-full">
+          <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
             <div className="flex flex-col items-end w-[5.5rem]">
               <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
                 <button
@@ -109,7 +121,19 @@ const Room = () => {
               </div>
             </div>
           </div>
-          <div className="w-full h-[63%] flex justify-center"></div>
+          <div className="relative w-full h-[63%] grid grid-cols-3">
+            <div className="flex justify-start items-center pl-8">
+              <div className="w-[326px] h-[57%]">
+                <OpenCard />
+              </div>
+            </div>
+            <div className="flex"></div>
+            <div className="flex">
+              <div className="m-auto h-32 aspect-square">
+                <Countdown />
+              </div>
+            </div>
+          </div>
           <div className="flex-grow flex-shrink-0 w-full">
             <BetDesk isToggle={isChangedDesk} />
           </div>

@@ -8,7 +8,6 @@ type RoomDataProps = {
 }
 
 const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
-  console.log(data)
   const href = `/home/rooms/${data?.id}`
   const girl = data?.girl
   return (

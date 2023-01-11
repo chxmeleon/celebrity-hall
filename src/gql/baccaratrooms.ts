@@ -84,6 +84,31 @@ export const GET_CURRENT_BACCARAT_ROOM = gql`
         name
         updatedAt
       }
+      currentGame {
+        id
+        baccaratRoomId
+        playerWin
+        dealerWin
+        tieWin
+        playerPairWin
+        dealerPairWin
+        dealerPoints
+        playerPoints
+        gameNo
+        status
+        playerCards
+        dealerCards
+        shuffle
+        playerNeedAnother
+        dealerNeedAnother
+        dealerAmount
+        playerAmount
+        dealerPairAmount
+        playerPairAmount
+        tieAmount
+        updatedAt
+        endAt
+      }
     }
   }
 `

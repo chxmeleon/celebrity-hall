@@ -1,4 +1,40 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+const rotate3d = plugin(function({ addUtilities }) {
+  addUtilities({
+    '.rotate-x-0': {
+      transform: 'rotateX(0deg)'
+    },
+    '.rotate-x-90': {
+      transform: 'rotateX(90deg)'
+    },
+    '.-rotate-x-90': {
+      transform: 'rotateX(-90deg)'
+    },
+    '.rotate-x-180': {
+      transform: 'rotateX(180deg)'
+    },
+    '.-rotate-x-180': {
+      transform: 'rotateX(-180deg)'
+    },
+    '.rotate-y-0': {
+      transform: 'rotateY(0deg)'
+    },
+    '.rotate-y-90': {
+      transform: 'rotateY(90deg)'
+    },
+    '.-rotate-y-90': {
+      transform: 'rotateY(-90deg)'
+    },
+    '.rotate-y-180': {
+      transform: 'rotateY(180deg)'
+    },
+    '.-rotate-y-180': {
+      transform: 'rotateY(-180deg)'
+    }
+  })
+})
+
 module.exports = {
   content: [
     './index.html',
@@ -59,5 +95,5 @@ module.exports = {
       }
     }
   },
-  plugins: []
+  plugins: [rotate3d]
 }
