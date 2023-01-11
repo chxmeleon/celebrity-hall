@@ -70,9 +70,15 @@ const ChatRoom = () => {
   // useCallbacks hooks make scrollToBottom not work
   const scrollToBottom = useCallback(() => {
     if (messageRef) {
-      messageRef.scrollIntoView({ behavior: 'smooth' })
+      messageRef.scrollIntoView(false)
     }
   }, [messageRef])
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      scrollToBottom()
+    }
+  }, [messages.length, scrollToBottom])
 
   const onPicked = (emoji: EmojiClickData, event: MouseEvent) => {
     setNewMessage(newMessage + emoji.emoji)
@@ -80,6 +86,7 @@ const ChatRoom = () => {
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault()
+
     if (newMessage === '') {
       e.stopPropagation()
     } else {
@@ -94,17 +101,17 @@ const ChatRoom = () => {
 
   return (
     <div className="flex flex-col w-full h-full bg-gray-50 border-b-2 border-gray-500">
-      <div className="flex overflow-x-hidden flex-col-reverse flex-grow-0 w-full h-screen">
+      <div className="flex overflow-x-hidden flex-col-reverse flex-grow-0 w-full h-screen scroll-smooth">
         <div
           id="chat-content"
           className="flex flex-col justify-end w-full h-full"
+          ref={setMessageRef}
         >
           {messages.map((item, idx) => {
             return (
               <div
                 className="flex justify-start items-center py-1 px-2.5 w-full h-auto text-xs text-theme-50"
                 key={idx}
-                ref={idx === messages.length - 1 ? setMessageRef : undefined}
               >
                 <div className="flex-shrink-0 pr-1.5 pt-[1.5px]">
                   <div className="w-6 h-6 bg-gray-400 rounded-full"></div>
