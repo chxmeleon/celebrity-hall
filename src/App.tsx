@@ -6,6 +6,7 @@ import { LanguageProvider } from '@/contexts/LanguageContext'
 import { ApiProvider } from '@/contexts/ApiContext'
 import { SetupProvider } from './contexts/SetupContext'
 import { ActionCableProvider } from './contexts/ActionCableContext'
+import { StreamLatencyProvider } from './contexts/StreamLatencyContext'
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
             <ApiProvider>
               <SetupProvider>
                 <ResponsiveProvider>
-                  <Router />
+                  <StreamLatencyProvider>
+                    <Router />
+                  </StreamLatencyProvider>
                 </ResponsiveProvider>
               </SetupProvider>
             </ApiProvider>

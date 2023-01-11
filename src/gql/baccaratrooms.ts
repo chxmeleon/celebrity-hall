@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const GET_BACCARATROOMS = gql`
-  query getBaccaratRooms {
+  query GET_BACCARATROOMS {
     activeBaccaratRooms {
       id
       name
@@ -71,7 +71,7 @@ export const GET_BACCARATROOMS = gql`
 `
 
 export const GET_CURRENT_BACCARAT_ROOM = gql`
-  query BaccaratRoom($baccaratRoomId: ID!) {
+  query GET_CURRENT_BACCARAT_ROOM($baccaratRoomId: ID!) {
     baccaratRoom(id: $baccaratRoomId) {
       roads
       streamKey
@@ -114,7 +114,7 @@ export const GET_CURRENT_BACCARAT_ROOM = gql`
 `
 
 export const GET_CURRENT_ROOM_STREAM = gql`
-  query BaccaratRoom($baccaratRoomId: ID!) {
+  query GET_CURRENT_ROOM_STREAM($baccaratRoomId: ID!) {
     baccaratRoom(id: $baccaratRoomId) {
       name
       waitingBetSeconds
@@ -135,9 +135,10 @@ export const GET_CURRENT_ROOM_STREAM = gql`
 `
 
 export const GET_CURRENT_COUNTDOWN = gql`
-  query BaccaratRoom($baccaratRoomId: ID!) {
+  query GET_CURRENT_COUNTDOWN($baccaratRoomId: ID!) {
     baccaratRoom(id: $baccaratRoomId) {
       id
+      latency
       waitingBetSeconds
       currentGame {
         id
@@ -148,5 +149,3 @@ export const GET_CURRENT_COUNTDOWN = gql`
     }
   }
 `
-
-

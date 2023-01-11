@@ -6,7 +6,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: authToken ? `Bearer ${authToken}` : '',
+      authorization: authToken ? `UserBearer ${authToken}` : '',
     },
   }
 })
