@@ -57,11 +57,11 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
   isLoading
 }) => {
   const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null)
-
+  
   useEffect(() => {
     const requestStream = async () => {
       if (!videoRef) return
-
+      
       try {
         const pc = new RTCPeerConnection()
         pc.addTransceiver('audio', { direction: 'recvonly' })

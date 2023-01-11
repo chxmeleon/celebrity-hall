@@ -41,7 +41,7 @@ export const SetupProvider = ({ children }: { children: JSX.Element }) => {
       closeNotice,
       handleRegularToggle,
     }),
-    [isShowSetup, isShowNotice, isRegular]
+    [isShowSetup, isShowNotice, isRegular, openSetup, closeSetup, openNotice, closeNotice]
   )
 
   return <SetupContext.Provider value={value}>{children}</SetupContext.Provider>

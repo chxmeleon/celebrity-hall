@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 import { useParams } from 'react-router-dom'
 import { useActionCable } from '@/contexts/ActionCableContext'
@@ -53,11 +53,11 @@ const ChatRoom = () => {
     }
   }, [clickRef, isPickerShow])
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     if (messageRef) {
       messageRef.scrollIntoView({ behavior: 'smooth' })
     }
-  }
+  }, [messageRef])
 
   useEffect(() => {
     scrollToBottom()

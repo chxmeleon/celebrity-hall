@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react'
 import ActionCable from 'actioncable'
 import { useAuth } from './AuthContext'
 
@@ -10,10 +16,8 @@ const ActionCableContext = createContext<ActionCableContextData>(
   {} as ActionCableContextData
 )
 
-export const ActionCableProvider = ({
+export const ActionCableProvider: React.FC<React.PropsWithChildren> = ({
   children
-}: {
-  children: JSX.Element
 }) => {
   const { auth } = useAuth()
   const value = useMemo(
