@@ -7870,6 +7870,18 @@ export type GET_CURRENT_COUNTDOWNVariables = Exact<{
 
 export type GET_CURRENT_COUNTDOWN = { baccaratRoom: { __typename: 'BaccaratRoom', id: string, latency: number | null, waitingBetSeconds: number | null, currentGame: { __typename: 'BaccaratGame', id: string, status: string | null, updatedAt: any | null, endAt: any | null } | null } | null };
 
+export type CREATE_BACCARAT_MESSAGEVariables = Exact<{
+  input: CreateBaccaratMessageInput;
+}>;
+
+
+export type CREATE_BACCARAT_MESSAGE = { createBaccaratMessage: { __typename: 'CreateBaccaratMessagePayload', baccaratMessage: { __typename: 'BaccaratMessage', id: string, type: string | null, body: string | null, createdAt: any | null, gift: string | null, user: { __typename: 'User', id: string, username: string | null, avatar: string | null } | null } | null, errors: Array<{ __typename: 'ModelError', message: string, attribute: string }> | null } | null };
+
+export type GET_PROFILEVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GET_PROFILE = { profile: { __typename: 'Profile', id: string, balance: number | null, username: string | null, avatar: string | null, totalEffectiveAmount: number | null, totalEffectiveXimaAmount: number | null, ximaTotal: number | null, winLimit: number | null, totalWinAmount: number | null, hideWinPoints: boolean | null, dividend: number | null, nickname: string | null, tableLimitMin: number | null, tableLimitMax: number | null, beta: boolean | null, isTrial: boolean, lineNotifyToken: string | null, dragonCount: number | null, jwtToken: string | null, platformDisableAdult: boolean | null, platformDisableCustomerService: boolean | null } | null };
+
 export type GET_ROOM_STREAMVariables = Exact<{
   baccaratRoomId: Scalars['ID'];
 }>;

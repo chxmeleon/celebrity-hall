@@ -5,19 +5,15 @@ import { useCurrentGameState } from '@/hooks/rooms'
 import FlipCard from './FlipCard'
 
 type cardsMapperProps = {
-  dealer: {
+  [key: string]: {
     contentId: string
     default: string
     className: string
-  }
-  player: {
-    contentId: string
-    default: string
-    className: string
+    side: string
   }
 }
 
-const cardsMapper: any = {
+const cardsMapper: cardsMapperProps = {
   dealer: {
     contentId: 'common.dealer',
     default: 'Dealer',
@@ -34,20 +30,16 @@ const cardsMapper: any = {
 
 interface CardProps {
   role: string
-  open: boolean
   /* isWin: boolean */
   /* isTie: boolean */
 }
 
-const CardWidget: React.FC<CardProps> = ({ role, open = true }) => {
+const CardWidget: React.FC<CardProps> = ({ role }) => {
   const { currentGameState } = useCurrentGameState()
-  const [isOpen, setIsOpen] = useState(false)
 
-  useEffect(() => {
-    setIsOpen(open)
-  }, [open])
 
-  const isWin = currentGameState?.[`${role}Win`]
+  /* const isWin = currentGameState?.[`${role}Win`]  */
+  const isWin = true
 
   const titleStyle = cx(
     'flex justify-center items-center w-8 h-8 text-lg font-medium text-gray-50 rounded-full',
@@ -75,10 +67,10 @@ const CardWidget: React.FC<CardProps> = ({ role, open = true }) => {
           />
         </div>
         <div className="flex pl-3 text-center text-gray-50">
-          <p>{currentGameState?.[`${role}Points`]}</p>
+          {/* <p>{currentGameState?.[`${role}Points`]}</p> */}
         </div>
       </div>
-      <FlipCard data={currentGameState?.[`${role}Cards`]} isOpen={isOpen} />
+      {/* <FlipCard data={currentGameState?.[`${role}Cards`]} /> */}
       <div className={winResultImg}>
         <img src="/win.svg" alt="win image" />
         <FormattedMessage id="common.win" defaultMessage="Win" />

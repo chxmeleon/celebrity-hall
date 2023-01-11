@@ -3,6 +3,10 @@ import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 import { useParams } from 'react-router-dom'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import { useIntl } from 'react-intl'
+import { useMutation } from '@apollo/client'
+import { CREATE_BACCARAT_MESSAGE } from '@/gql/chatroom'
+import { GET_PROFILE } from '@/gql/profile'
+import types from '@/types'
 
 // interface ChatRoomProps {
 //   roomId: number
@@ -16,24 +20,34 @@ const ChatRoom = () => {
   const [clickRef, setClickRef] = useState<HTMLDivElement | null>(null)
   const [messageRef, setMessageRef] = useState<HTMLDivElement | null>(null)
   const { formatMessage } = useIntl()
+  const [data, setData] = useState<object>({})
 
+  const [createBaccaratMessage] = useMutation<
+    types.CREATE_BACCARAT_MESSAGE,
+    types.CREATE_BACCARAT_MESSAGEVariables
+  >(CREATE_BACCARAT_MESSAGE)
+
+  /* const roomId = useParams() */
   /* const { cable } = useActionCable() */
   /* useEffect(() => { */
-  /*   const newChannel = cable.subscriptions.create( */
-  /*     { channel: 'ChatroomChannel', roomType: 'BaccaratRoom', roomId: 10 }, */
+  /*   const subscription = cable.subscriptions.create( */
   /*     { */
-  /*       received: (meg: string) => { */
-  /*         console.log(meg) */
-  /**/
-  /*         setMessages((messages) => [...messages, meg]) */
+  /*       channel: 'ChatroomChannel', */
+  /*       roomId: roomId.id, */
+  /*       roomType: 'BaccaratRoom' */
+  /*     }, */
+  /*     { */
+  /*       received: (message) => { */
+  /*         setData(message) */
   /*       } */
   /*     } */
   /*   ) */
-  /**/
   /*   return () => { */
-  /*     newChannel.unsubscribe() */
+  /*     subscription.unsubscribe() */
   /*   } */
-  /* }, [cable]) */
+  /* }, [cable, roomId, data]) */
+  /**/
+  /* console.log(data) */
 
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -53,15 +67,12 @@ const ChatRoom = () => {
     }
   }, [clickRef, isPickerShow])
 
+  // useCallbacks hooks make scrollToBottom not work
   const scrollToBottom = useCallback(() => {
     if (messageRef) {
       messageRef.scrollIntoView({ behavior: 'smooth' })
     }
   }, [messageRef])
-
-  useEffect(() => {
-    scrollToBottom()
-  }, [scrollToBottom])
 
   const onPicked = (emoji: EmojiClickData, event: MouseEvent) => {
     setNewMessage(newMessage + emoji.emoji)
@@ -75,6 +86,8 @@ const ChatRoom = () => {
       setTimeout(() => {
         setMessages((messages) => [...messages, newMessage])
       }, 150)
+      /* createBaccaratMessage({ variables: { input: newMessage } }) */
+      scrollToBottom()
     }
     setNewMessage('')
   }
@@ -119,7 +132,10 @@ const ChatRoom = () => {
           <input
             id="chat-input"
             type="text"
-            placeholder={formatMessage({id: "common.sendMessage", defaultMessage: "Send Message"})}
+            placeholder={formatMessage({
+              id: 'common.sendMessage',
+              defaultMessage: 'Send Message'
+            })}
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             className="py-2 pr-2 pl-3 w-full h-full bg-gray-200 rounded-md outline-0"
@@ -128,8 +144,9 @@ const ChatRoom = () => {
 
           <div ref={setClickRef}>
             <div
-              className={`${isPickerShow ? '' : 'hidden'
-                } absolute bottom-10 right-0 z-30`}
+              className={`${
+                isPickerShow ? '' : 'hidden'
+              } absolute bottom-10 right-0 z-30`}
             >
               <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
             </div>

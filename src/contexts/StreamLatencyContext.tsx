@@ -15,7 +15,6 @@ export const StreamLatencyProvider: React.FC<React.PropsWithChildren> = ({
   children
 }) => {
   const [latency, setLatency] = useState(0)
-
   const { cable } = useActionCable()
   useEffect(() => {
     const subscription = cable.subscriptions.create(

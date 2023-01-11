@@ -1,31 +1,55 @@
 import React, { useEffect, useState } from 'react'
 import CardWidget from './CardWidget'
 import { useCurrentGameState } from '@/hooks/rooms'
+import { useParams } from 'react-router-dom'
+import { useActionCable } from '@/contexts/ActionCableContext'
 
 const PockerResult: React.FC = () => {
   const { currentGameState } = useCurrentGameState()
-  console.log(currentGameState?.status)
   const [show, setShow] = useState(true)
-  const isOpenCard = currentGameState?.status === 'closed'
+  const isOpenCard =
+    currentGameState?.status !== 'waiting_for_bet' &&
+    currentGameState?.status !== 'closed'
 
+  const [gameState, setGameState] = useState<any | null>(null)
+  const roomId = useParams()
+  const { cable } = useActionCable()
   useEffect(() => {
-    if (isOpenCard) {
-      setTimeout(() => {
-        setShow(false)
-      }, 7000)
+    const subscription = cable.subscriptions.create(
+      { channel: 'NewBaccaratGameChannel', roomId: roomId.id },
+      {
+        received: (data: any) => {
+          setGameState(data)
+        }
+      }
+    )
+    return () => {
+      subscription.unsubscribe()
     }
-  }, [show, isOpenCard])
+  }, [cable, roomId, gameState])
+
+  const [isOpen, setIsOpen] = useState(false)
+  useEffect(() => {
+    if (gameState?.command !== 'START_BET' && gameState?.command !== 'CLOSE') {
+      setIsOpen(true)
+    } else {
+      setIsOpen(false)
+    }
+  }, [isOpen, gameState])
+
+
 
   return (
-    <>
-      {isOpenCard && show ? (
-        <div className="flex w-full h-full rounded-xl border shadow-lg bg-theme-50/80 backdrop-blur-sm border-theme-150">
-          <CardWidget role="player" open />
-          <div className="w-1 h-full bg-theme-150"></div>
-          <CardWidget role="dealer" open />
-        </div>
-      ) : null}
-    </>
+    <div
+      className={`${
+        isOpen ? '' : 'opacity-0'
+      } duration-200 ease-in-out flex w-full h-full rounded-xl border shadow-lg bg-theme-50/80 backdrop-blur-sm border-theme-150
+`}
+    >
+      <CardWidget role="player" />
+      <div className="w-1 h-full bg-theme-150"></div>
+      <CardWidget role="dealer" />
+    </div>
   )
 }
 

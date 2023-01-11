@@ -14,7 +14,7 @@ interface SetupContextData {
 
 const SetupContext = createContext<SetupContextData>({} as SetupContextData)
 
-export const SetupProvider = ({ children }: { children: JSX.Element }) => {
+export const SetupProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const {
     isShow: isShowSetup,
     onOpenModal: openSetup,

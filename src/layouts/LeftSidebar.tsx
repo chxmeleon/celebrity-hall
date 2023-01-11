@@ -2,7 +2,17 @@ import LogoImg from "@/assets/login_logo.webp";
 import { LinkButton } from "@/components/common/Button";
 import { FormattedMessage } from "react-intl";
 
+import { useQuery } from '@apollo/client'
+import { GET_PROFILE } from '@/gql/profile'
+
+
+
+
 const LeftSidebar = () => {
+
+  const {data: user} = useQuery(GET_PROFILE)
+  console.log(user);
+  
   return (
     <div className="flex flex-shrink-0 py-5 px-7 w-52 text-center border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full">

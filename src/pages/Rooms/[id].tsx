@@ -119,7 +119,7 @@ const Room = () => {
             </div>
           </div>
           <div className="relative w-full h-[63%] grid grid-cols-3">
-            <div className="flex justify-start items-center pl-8">
+            <div className="flex justify-start items-end pb-2 pl-4">
               <div className="w-[326px] h-[57%]">
                 <PockerResult />
               </div>

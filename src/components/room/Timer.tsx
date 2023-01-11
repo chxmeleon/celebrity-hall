@@ -16,32 +16,34 @@ const Timer: React.FC = () => {
   })
 
   const [counter, setCounter] = useState<number | undefined>()
-  const startCount = data?.baccaratRoom?.currentGame?.status === 'opening'
+  const startCount =
+    data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet'
 
-  const isLeftTen = counter && counter < 11
+  const isLeftTen = counter !== undefined && counter < 11
   const countDownStyle = cx(
-    'w-[84%] h-[84%] rounded-full absolute border-[6px] border-l-transparent border-t-transparent inset-0 m-auto transition-all ease-in-out countdown-progress',
-    isLeftTen ? 'border-[#ff0015]' : 'border-theme-300'
+    'w-[82%] h-[82%] rounded-full absolute border-t-[7px] border-r-[2px] border-transparent inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
+    isLeftTen ? 'border-t-[#ff0015]' : 'border-t-theme-300'
   )
 
   const streamLatency = useContext(StreamLatencyContext)
   useEffect(() => {
     const isCountDownStarted =
-      data?.baccaratRoom?.currentGame?.status === 'opening'
+      data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet'
 
     if (!counter && data?.baccaratRoom?.currentGame && isCountDownStarted) {
       const { currentGame, latency } = data.baccaratRoom
       const endAt = new Date(currentGame.endAt)
       console.log(endAt)
-      const timeLeft =
+      const timeLeft = Math.floor(
         (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency
+      )
       setCounter(timeLeft)
     }
   }, [counter, data, streamLatency])
 
   useEffect(() => {
     let timeout: number | null = null
-    if (counter !== undefined && counter > 0) {
+    if (counter !== undefined && counter >= 0) {
       timeout = window.setTimeout(() => {
         setCounter(counter - 1)
       }, 1000)
@@ -55,7 +57,7 @@ const Timer: React.FC = () => {
   return (
     <div
       className={`${
-        startCount && counter && counter >= 0 ? '' : 'hidden'
+        startCount && counter !== undefined && counter >= 0 ? '' : 'hidden'
       } flex relative w-full h-full`}
     >
       <div className="flex relative m-auto w-full h-full rounded-full bg-theme-50/80 backdrop-blur-sm">
@@ -65,15 +67,13 @@ const Timer: React.FC = () => {
             isLeftTen ? 'border-[#ff0015]' : 'border-theme-300'
           }`}
         >
-          {counter && (
-            <p
-              className={`text-5xl ${
-                isLeftTen ? 'text-[#ff0015]' : 'text-theme-300'
-              }`}
-            >
-              {counter}
-            </p>
-          )}
+          <p
+            className={`text-[50px] font-medium ${
+              isLeftTen ? 'text-[#ff0015]' : 'text-theme-300'
+            }`}
+          >
+            {counter}
+          </p>
         </div>
       </div>
     </div>
