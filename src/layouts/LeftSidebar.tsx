@@ -1,18 +1,14 @@
-import LogoImg from "@/assets/login_logo.webp";
-import { LinkButton } from "@/components/common/Button";
-import { FormattedMessage } from "react-intl";
-
+import LogoImg from '@/assets/login_logo.webp'
+import { LinkButton } from '@/components/common/Button'
+import { FormattedMessage } from 'react-intl'
 import { useQuery } from '@apollo/client'
 import { GET_PROFILE } from '@/gql/profile'
-
-
-
+import defaultAvatar from '/user.png'
 
 const LeftSidebar = () => {
+  const { data: user } = useQuery(GET_PROFILE)
+  console.log(user?.profile)
 
-  const {data: user} = useQuery(GET_PROFILE)
-  console.log(user);
-  
   return (
     <div className="flex flex-shrink-0 py-5 px-7 w-52 text-center border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full">
@@ -20,11 +16,23 @@ const LeftSidebar = () => {
           <div className="flex">
             <img src={LogoImg} alt="logo image" className="m-auto w-24" />
           </div>
-          <div className="flex justify-around items-center pt-3 w-full">
-            <div className="mt-1.5 w-11 h-11 i-heroicons-user-circle-solid"></div>
-            <div className="text-left">
-              <p className="text-xl">username</p>
-              <p className="text-theme-300">points</p>
+          <div className="flex justify-between items-center pt-3 w-full">
+            <div className="w-1/2 pl-2">
+              <div className="flex overflow-hidden w-11 h-11 rounded-full">
+                <img
+                  src={user?.profile?.avatar ?? defaultAvatar}
+                  alt="user avatar"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            </div>
+            <div className="m-auto w-2/3 h-11 text-sm">
+              <div className="m-auto w-2/3">
+                <p className="truncate">{user?.profile.nickname}</p>
+              </div>
+              <p className="pt-1 truncate text-theme-300">
+                {user?.profile.balance}
+              </p>
             </div>
           </div>
         </section>
@@ -77,7 +85,7 @@ const LeftSidebar = () => {
         </section>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LeftSidebar;
+export default LeftSidebar
