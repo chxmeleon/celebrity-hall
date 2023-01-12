@@ -80,7 +80,7 @@ export const buttonStyle = cva('text-center m-auto', {
         'px-4',
         'font-bold',
         'flex',
-        'bg-theme-70/50',
+        'bg-theme-70/90',
         'justify-around',
         'items-center',
         'border',

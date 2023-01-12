@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from 'react'
+import { createContext, useCallback, useContext, useMemo } from 'react'
 import { IntlProvider } from 'react-intl'
 import message from '@/i18n'
 import { useLocalStorage } from 'usehooks-ts'
@@ -18,9 +18,9 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const locale = navigator.language.toLowerCase()
   const [isSelected, setIsSelected] = useLocalStorage('lang', locale)
-  const handleSelectValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectValue = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
     setIsSelected(e.target.value)
-  }
+  }, [setIsSelected])
 
   const value = useMemo(
     () => ({

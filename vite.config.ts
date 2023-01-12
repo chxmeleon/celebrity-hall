@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import Unocss from '@unocss/vite'
 import presetIcons from '@unocss/preset-icons'
-import VitePluginHtmlEnv from 'vite-plugin-html-env'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,7 +15,6 @@ export default defineConfig({
     react(),
     Unocss({
       presets: [presetIcons({})]
-    }),
-    VitePluginHtmlEnv()
+    })
   ]
 })

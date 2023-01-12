@@ -2,7 +2,17 @@ import LogoImg from "@/assets/login_logo.webp";
 import { LinkButton } from "@/components/common/Button";
 import { FormattedMessage } from "react-intl";
 
+import { useQuery } from '@apollo/client'
+import { GET_PROFILE } from '@/gql/profile'
+
+
+
+
 const LeftSidebar = () => {
+
+  const {data: user} = useQuery(GET_PROFILE)
+  console.log(user);
+  
   return (
     <div className="flex flex-shrink-0 py-5 px-7 w-52 text-center border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full">
@@ -19,7 +29,7 @@ const LeftSidebar = () => {
           </div>
         </section>
         <hr className="border-t border-t-theme-75" />
-        <section className="my-2 w-full h-[290px]">
+        <section className="my-2 w-full h-[190px]">
           <div className="flex flex-col justify-evenly w-full h-full">
             <LinkButton href="/home/rooms" isTarget={false}>
               <FormattedMessage id="layout.all" defaultMessage="Explore" />
@@ -36,13 +46,13 @@ const LeftSidebar = () => {
             {/*     defaultMessage="Mutual Rooms" */}
             {/*   /> */}
             {/* </LinkButton> */}
-            <LinkButton href="/home/following" isTarget={false}>
-              <FormattedMessage
-                id="layout.following"
-                defaultMessage="Following"
-              />
-            </LinkButton>
-            {/* <LinkButton href="/home/profile" isTarget={false}> */}
+            {/* <LinkButton href="/home/following" isTarget={false}> */}
+            {/*   <FormattedMessage */}
+            {/*     id="layout.following" */}
+            {/*     defaultMessage="Following" */}
+            {/*   /> */}
+            {/* </LinkButton> */}
+            {/* <LinkButton href="/home/tables" isTarget={false}> */}
             {/*   <FormattedMessage id="layout.tables" defaultMessage="Tables" /> */}
             {/* </LinkButton> */}
             <LinkButton href="/home/rankings" isTarget={false}>
@@ -63,9 +73,6 @@ const LeftSidebar = () => {
             {/*     defaultMessage="App Download" */}
             {/*   /> */}
             {/* </LinkButton> */}
-            <LinkButton href="/home/rooms/001" isTarget={false}>
-              <p>rooms</p>
-            </LinkButton>
           </div>
         </section>
       </div>

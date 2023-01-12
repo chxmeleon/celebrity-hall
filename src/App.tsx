@@ -5,20 +5,26 @@ import { AuthProvider } from '@/contexts/AuthContext'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { ApiProvider } from '@/contexts/ApiContext'
 import { SetupProvider } from './contexts/SetupContext'
+import { ActionCableProvider } from './contexts/ActionCableContext'
+import { StreamLatencyProvider } from './contexts/StreamLatencyContext'
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <LanguageProvider>
-          <ApiProvider>
-            <SetupProvider>
-              <ResponsiveProvider>
-                <Router />
-              </ResponsiveProvider>
-            </SetupProvider>
-          </ApiProvider>
-        </LanguageProvider>
+        <ActionCableProvider>
+          <LanguageProvider>
+            <ApiProvider>
+              <SetupProvider>
+                <ResponsiveProvider>
+                  <StreamLatencyProvider>
+                    <Router />
+                  </StreamLatencyProvider>
+                </ResponsiveProvider>
+              </SetupProvider>
+            </ApiProvider>
+          </LanguageProvider>
+        </ActionCableProvider>
       </AuthProvider>
     </BrowserRouter>
   )

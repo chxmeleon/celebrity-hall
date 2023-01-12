@@ -13,6 +13,8 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
@@ -20,6 +22,10 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src", "codegen.ts"],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

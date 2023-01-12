@@ -7,9 +7,18 @@ const RoomStream: React.FC<RoomStreamProps> = ({
   resolution,
   soundOn,
   videoOn,
-  autoSize
+  autoSize,
+  isWebRTC,
 }) => {
-  return <WebRTCStream streamName={streamName} streamKey={streamKey}/>
+  return (
+    <>
+      {isWebRTC ? (
+        <WebRTCStream streamName={streamName} streamKey={streamKey} />
+      ) : (
+        <NodePlayerStream streamName={streamName} streamKey={streamKey} />
+      )}
+    </>
+  )
 }
 
 export default RoomStream

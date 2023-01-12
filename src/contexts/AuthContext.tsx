@@ -1,10 +1,11 @@
 import {
   createContext,
   PropsWithChildren,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useState
 } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from 'usehooks-ts'
@@ -25,9 +26,9 @@ const sendRequest = async (url: string, { arg }: any) => {
     method: 'POST',
     headers: {
       Accept: '*/*',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(arg),
+    body: JSON.stringify(arg)
   })
   const data = await response.json()
 
@@ -58,30 +59,33 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
           setIsError(false)
         }, 2800)
         console.log(err.message)
-      },
+      }
     }
   )
 
-  const login = async (account: string, password: string) => {
-    onLogin({
-      identity: account,
-      password: password,
-    })
-  }
+  const login = useCallback(
+    async (account: string, password: string) => {
+      onLogin({
+        identity: account,
+        password: password
+      })
+    },
+    [onLogin]
+  )
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setAuth(null)
     navigate('/')
-  }
+  }, [navigate, setAuth])
 
   const value = useMemo(
     () => ({
       auth,
       isError,
       login,
-      logout,
+      logout
     }),
-    [auth, isError]
+    [auth, isError, login, logout]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

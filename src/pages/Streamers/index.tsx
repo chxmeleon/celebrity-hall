@@ -17,17 +17,15 @@ const Streamers = () => {
   }
 
   return (
-    <div className="m-[50px] flex">
+    <div className="flex m-[50px]">
       <div className="flex flex-wrap sm:w-[900px]">
         <StreamersCards data={data.streamers} onStreamChanged={setStream} />
       </div>
-      <div className="sm:block hidden">
+      <div className="hidden sm:block">
         {stream.name && stream.key && (
-          <WebRTCStream
-            className="w-[calc(100vw-1200px)] h-[calc((100vw-1200px)*1.78)]"
-            streamName={stream.name}
-            streamKey={stream.key}
-          />
+          <div className="w-[calc(100vw-1200px)] h-[calc((100vw-1200px)*1.78)]">
+            <WebRTCStream streamName={stream.name} streamKey={stream.key} />
+          </div>
         )}
       </div>
     </div>

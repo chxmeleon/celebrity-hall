@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const GET_PROFILE = gql`
-  query Profile {
+  query GET_PROFILE {
     profile {
       id
 	    balance
