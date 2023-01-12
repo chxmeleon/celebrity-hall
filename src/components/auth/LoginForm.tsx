@@ -45,9 +45,9 @@ const LoginForm: React.FC = () => {
 
 
   return (
-    <div className="relative pt-5 w-full">
+    <div className="relative pt-5 w-2/3 md:w-[23rem]">
       <div className="flex justify-center w-full">
-        <div className="w-[23rem]">
+        <div className="w-full">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col justify-between h-[19rem]"

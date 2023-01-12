@@ -1,7 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority'
 
 export type ButtonProps = VariantProps<typeof buttonStyle>
-export const buttonStyle = cva('text-center m-auto', {
+export const buttonStyle = cva('w-full text-center m-auto', {
   variants: {
     intent: {
       linerSlope: [
@@ -51,7 +51,6 @@ export const buttonStyle = cva('text-center m-auto', {
         'flex',
         'justify-center',
         'text-gray-800',
-        'text-theme-50',
         'items-center',
         'back',
         'bg-gradient-to-tr',

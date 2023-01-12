@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { GET_CURRENT_BACCARAT_ROOM } from '@/gql/baccaratrooms'
-import { useEffect, useMemo, useState } from 'react'
+import StreamLatencyContext from '@/contexts/StreamLatencyContext'
+import { GET_CURRENT_COUNTDOWN } from '@/gql/baccaratrooms'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import types from '@/types'
 
@@ -59,12 +61,56 @@ export const useCurrentGameState = () => {
     variables: { baccaratRoomId: roomId?.id ?? '' }
   })
 
-
-
   const currentGameState = useMemo(
-    () => ( data?.baccaratRoom?.currentGame ),
+    () => data?.baccaratRoom?.currentGame,
     [data]
   )
 
   return { currentGameState }
+}
+
+export const useTimeLeft = (roomId: string) => {
+  const { data, refetch } = useQuery<
+    types.GET_CURRENT_COUNTDOWN,
+    types.GET_CURRENT_COUNTDOWNVariables
+  >(GET_CURRENT_COUNTDOWN, {
+    variables: { baccaratRoomId: roomId ?? '' }
+  })
+
+  const [counter, setCounter] = useState<number | undefined>()
+  const startCount =
+    data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet'
+
+  const isLeftTen = counter !== undefined && counter < 11
+
+  const streamLatency = useContext(StreamLatencyContext)
+  useEffect(() => {
+    const isCountDownStarted =
+      data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet'
+
+    if (!counter && data?.baccaratRoom?.currentGame && isCountDownStarted) {
+      const { currentGame, latency } = data.baccaratRoom
+      const endAt = new Date(currentGame.endAt)
+      console.log(endAt)
+      const timeLeft = Math.floor(
+        (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency
+      )
+      setCounter(timeLeft)
+    }
+  }, [counter, data, streamLatency])
+
+  useEffect(() => {
+    let timeout: number | null = null
+    if (counter !== undefined && counter >= 0) {
+      timeout = window.setTimeout(() => {
+        setCounter(counter - 1)
+      }, 1000)
+    }
+
+    return () => {
+      if (timeout) clearTimeout(timeout)
+    }
+  }, [counter])
+
+  return { counter, isLeftTen, startCount }
 }

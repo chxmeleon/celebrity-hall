@@ -6,10 +6,8 @@ const Rooms: React.FC = () => {
   const { data } = useQuery(GET_BACCARATROOMS)
   const activeBaccaratRooms = data?.activeBaccaratRooms
 
-  console.log('rooms',data)
-
   return (
-    <div className="overflow-y-auto p-16 w-full h-full">
+    <div className="overflow-y-auto p-4 md:p-16 w-full h-full">
       <RoomList roomsData={activeBaccaratRooms} />
     </div>
   )

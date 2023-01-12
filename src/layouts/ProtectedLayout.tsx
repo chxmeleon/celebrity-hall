@@ -18,15 +18,15 @@ const ProtectedLayout: React.FC = () => {
      before:absolute before:w-full before:h-full before:bg-black/20 before:content-['']`
 
   return (
-    <main>
+    <main className="w-full h-full">
       <SetupModal />
       <NoticeModal />
-      <section className="relative m-auto h-screen aspect-video border-theme-70 border-x">
+      <section className="relative m-auto w-full h-screen aspect-video border-theme-70 border-x">
         <div className={bgImage}></div>
         <Header />
-        <div className="flex justify-start pt-12 h-full">
+        <div className="flex justify-start pt-12 w-full h-full">
           <LeftSidebar />
-          <div className="relative w-full bg-black">
+          <div className="relative w-full h-full bg-black">
             <Outlet />
           </div>
         </div>
