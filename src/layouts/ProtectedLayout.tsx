@@ -7,9 +7,9 @@ import SetupModal from '@/components/setup/SetupModal'
 import NoticeModal from '@/components/setup/NoticeModal'
 
 const ProtectedLayout: React.FC = () => {
-  const { auth } = useAuth()
+  const { auth, isExpired } = useAuth()
 
-  if (!auth) {
+  if (!auth || isExpired) {
     return <Navigate to="/login" replace />
   }
 

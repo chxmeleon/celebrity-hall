@@ -6,7 +6,7 @@ const Rooms: React.FC = () => {
   const { data } = useQuery(GET_BACCARATROOMS)
   const activeBaccaratRooms = data?.activeBaccaratRooms
 
-  console.log(data)
+  console.log('rooms',data)
 
   return (
     <div className="overflow-y-auto p-16 w-full h-full">

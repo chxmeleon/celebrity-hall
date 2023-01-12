@@ -33,6 +33,10 @@ export const NodePlayerStream: React.FC<RoomStreamProps> = ({
     player.on('error', (err) => {
       console.error('playerError', err)
     })
+
+    return () => {
+      player.release(false)
+    }
   }, [streamName, streamKey])
 
   return (
@@ -57,13 +61,14 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
   isLoading
 }) => {
   const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null)
-  
+
   useEffect(() => {
+    let pc: RTCPeerConnection | null = null
     const requestStream = async () => {
       if (!videoRef) return
-      
+
       try {
-        const pc = new RTCPeerConnection()
+        pc = new RTCPeerConnection()
         pc.addTransceiver('audio', { direction: 'recvonly' })
         pc.addTransceiver('video', { direction: 'recvonly' })
         pc.addEventListener('addstream', (e: any) => {
@@ -91,7 +96,7 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
             )
             .then(({ data }) => {
               const answer = new RTCSessionDescription(data.remoteSdp)
-              return pc.setRemoteDescription(answer)
+              return pc?.setRemoteDescription(answer)
             })
         ])
       } catch (error) {
@@ -100,6 +105,11 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
     }
 
     requestStream()
+    return () => {
+      if (pc) {
+        pc.close()
+      }
+    }
   }, [videoRef, streamName, streamKey])
 
   return (
