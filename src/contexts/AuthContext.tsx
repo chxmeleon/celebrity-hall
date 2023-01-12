@@ -14,6 +14,7 @@ import axios from 'axios'
 
 type AuthProps = {
   auth: string | null
+  isExpired: boolean
   isError: boolean
   login: (account: string, password: string) => Promise<void>
   logout: () => void
@@ -41,6 +42,10 @@ const sendRequest = async (url: string, { arg }: any) => {
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [auth, setAuth] = useLocalStorage<string | null>('user', null)
+  const [expiredTime, setExpiredTime] = useLocalStorage<string | number | Date>(
+    'exp',
+    ' '
+  )
   const [isError, setIsError] = useState<boolean>(false)
   const navigate = useNavigate()
   const { trigger: onLogin } = useSWRMutation(
@@ -50,6 +55,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       onSuccess: (result) => {
         if (result?.token !== undefined) {
           setAuth(result?.token)
+          setExpiredTime(result?.exp)
           navigate('/home/rooms')
         }
       },
@@ -75,19 +81,29 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const logout = useCallback(() => {
     setAuth(null)
+    setExpiredTime('')
     navigate('/')
-  }, [navigate, setAuth])
+  }, [navigate, setAuth, setExpiredTime])
 
-  const value = useMemo(
-    () => ({
-      auth,
-      isError,
-      login,
-      logout
-    }),
-    [auth, isError, login, logout]
-  )
+  const [isExpired, setIsExpired] = useState(false)
 
+  useEffect(() => {
+    const expired = new Date(expiredTime)
+    if (Date.now() >= expired.getTime()) {
+      setIsExpired(true)
+    }
+    return () => {
+      setIsExpired(false)
+    }
+  }, [expiredTime])
+
+  const value = {
+    auth,
+    isExpired,
+    isError,
+    login,
+    logout
+  }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
