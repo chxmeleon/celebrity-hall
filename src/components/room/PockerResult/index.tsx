@@ -28,6 +28,8 @@ const PockerResult: React.FC = () => {
     }
   }, [cable, roomId, gameState])
 
+  console.log(gameState);
+  
   const [isOpen, setIsOpen] = useState(false)
   useEffect(() => {
     if (gameState?.command !== 'START_BET' && gameState?.command !== 'CLOSE') {
@@ -35,7 +37,7 @@ const PockerResult: React.FC = () => {
     } else {
       setIsOpen(false)
     }
-  }, [isOpen, gameState])
+  }, [gameState])
 
 
 

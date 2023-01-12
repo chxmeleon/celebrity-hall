@@ -38,8 +38,8 @@ const CardWidget: React.FC<CardProps> = ({ role }) => {
   const { currentGameState } = useCurrentGameState()
 
 
-  /* const isWin = currentGameState?.[`${role}Win`]  */
-  const isWin = true
+  const isWin = currentGameState?.[`${role}Win`] 
+  /* const isWin = true */
 
   const titleStyle = cx(
     'flex justify-center items-center w-8 h-8 text-lg font-medium text-gray-50 rounded-full',
@@ -67,10 +67,10 @@ const CardWidget: React.FC<CardProps> = ({ role }) => {
           />
         </div>
         <div className="flex pl-3 text-center text-gray-50">
-          {/* <p>{currentGameState?.[`${role}Points`]}</p> */}
+          <p>{currentGameState?.[`${role}Points`]}</p>
         </div>
       </div>
-      {/* <FlipCard data={currentGameState?.[`${role}Cards`]} /> */}
+      <FlipCard data={currentGameState?.[`${role}Cards`]} />
       <div className={winResultImg}>
         <img src="/win.svg" alt="win image" />
         <FormattedMessage id="common.win" defaultMessage="Win" />

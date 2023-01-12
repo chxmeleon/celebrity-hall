@@ -5,11 +5,11 @@ import RoomList from '@/components/room/RoomList'
 const Rooms: React.FC = () => {
   const { data } = useQuery(GET_BACCARATROOMS)
   const activeBaccaratRooms = data?.activeBaccaratRooms
-  console.log(data);
-  
+
+  console.log(data)
 
   return (
-    <div className="p-16 w-full h-full overflow-y-auto ">
+    <div className="overflow-y-auto p-16 w-full h-full">
       <RoomList roomsData={activeBaccaratRooms} />
     </div>
   )

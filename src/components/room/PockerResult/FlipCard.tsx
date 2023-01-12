@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-type CardProps = {
-  data: string[]
-}
-
 const Card: React.FC<{
   item: string
   rotate90?: boolean
@@ -41,7 +37,9 @@ const Card: React.FC<{
   )
 }
 
-const FlipCard: React.FC<CardProps> = ({ data }) => {
+const FlipCard: React.FC<{
+  data: string[]
+}> = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {

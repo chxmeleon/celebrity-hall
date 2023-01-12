@@ -68,11 +68,11 @@ const ChatRoom = () => {
   }, [clickRef, isPickerShow])
 
   // useCallbacks hooks make scrollToBottom not work
-  const scrollToBottom = useCallback(() => {
+  const scrollToBottom = () => {
     if (messageRef) {
       messageRef.scrollIntoView(false)
     }
-  }, [messageRef])
+  }
 
   useEffect(() => {
     if (messages.length > 0) {
