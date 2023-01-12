@@ -17,18 +17,22 @@ type ToggleButtonProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-
-export const BetButton: React.FC<React.PropsWithChildren<LoginButtonProps>> = ({children, onClick}) => {
+export const BetButton: React.FC<React.PropsWithChildren<LoginButtonProps>> = ({
+  children,
+  onClick
+}) => {
   return (
-    <button className={bts({intent: 'outlineButton', round: 'full', size: 'little'})}>
+    <button
+      className={bts({
+        intent: 'outlineButton',
+        round: 'full',
+        size: 'little'
+      })}
+    >
       {children}
     </button>
   )
-  
 }
-
-
-
 
 export const LoginButton: React.FC<
   React.PropsWithChildren<LoginButtonProps>
@@ -39,7 +43,7 @@ export const LoginButton: React.FC<
       className={bts({
         intent: 'linerSlope',
         round: 'full',
-        size: 'medium',
+        size: 'medium'
       })}
       onClick={onClick}
     >
@@ -51,7 +55,7 @@ export const LoginButton: React.FC<
 export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
   children,
   href,
-  isTarget,
+  isTarget
 }) => {
   const location = useLocation()
   const currentPath = location.pathname
@@ -65,14 +69,14 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
             className={bts({
               intent: 'slopeOutline',
               round: 'sm',
-              size: 'full',
+              size: 'full'
             })}
           >
             <div
               className={bts({
                 intent: 'slopeOutlineBg',
                 round: 'sm',
-                size: 'full',
+                size: 'full'
               })}
             >
               <p className="font-medium text-md">{children}</p>
@@ -87,7 +91,7 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
                 ? 'activedSlopeOutline'
                 : 'slopeOutline',
               round: 'sm',
-              size: 'full',
+              size: 'full'
             })}
           >
             <div
@@ -96,10 +100,15 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
                   ? 'activedSlopeBg'
                   : 'slopeOutlineBg',
                 round: 'sm',
-                size: 'full',
+                size: 'full'
               })}
             >
-              <p className="font-medium text-md">{children}</p>
+              <p
+                className={`font-medium text-md ${isCurrentPath(href) ? 'invert opacity-75 text-gray-200' : ''
+                  }`}
+              >
+                {children}
+              </p>
             </div>
           </div>
         </Link>
@@ -118,7 +127,7 @@ export const RightSidebarButton: React.FC<
           className={bts({
             intent: 'grayFill',
             round: 'sm',
-            size: 'full',
+            size: 'full'
           })}
         >
           <a href={href} target="_blank" rel="noopener noreferrer">
@@ -130,7 +139,7 @@ export const RightSidebarButton: React.FC<
           className={bts({
             intent: 'grayFill',
             round: 'sm',
-            size: 'full',
+            size: 'full'
           })}
           onClick={onClick}
         >

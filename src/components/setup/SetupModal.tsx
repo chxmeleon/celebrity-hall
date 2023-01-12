@@ -12,13 +12,13 @@ const SetupModal: React.FC = () => {
     >
       <div
         onClick={closeSetup}
-        className="flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center h-screen bg-black/30 backdrop-blur-sm"
+        className="flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center w-full h-screen bg-black/30 backdrop-blur-sm"
       >
         <div
           onClick={(e) => {
             e.stopPropagation()
           }}
-          className="p-4 m-auto bg-gradient-to-br rounded-md border w-[620px] min-h-fit border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md"
+          className="p-4 m-auto bg-gradient-to-br rounded-md border w-5/6 md:w-[620px] min-h-fit border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md"
         >
           <div className="flex justify-end">
             <button
@@ -29,7 +29,7 @@ const SetupModal: React.FC = () => {
           <h1 className="pt-3 pb-6 text-2xl font-semibold text-center">
             <FormattedMessage id="setting.setting" defaultMessage="Setting" />
           </h1>
-          <div className="flex justify-between p-3 w-full">
+          <div className="flex justify-between p-3 w-full h-auto">
             <div className="flex-grow py-2.5 pl-1 font-medium tracking-wider text-md">
               <FormattedMessage
                 id="setting.chooseacountry"
@@ -37,7 +37,7 @@ const SetupModal: React.FC = () => {
               />
             </div>
             <select
-              className="w-1/2 text-sm text-center text-gray-100 rounded-md border-r-[16px] border-theme-150 bg-theme-150 focus:outline-0"
+              className="relative w-1/2 text-sm text-center text-gray-100 rounded-md border-r-[16px] border-theme-150 bg-theme-150 focus:outline-0"
               defaultValue={locale}
               onChange={handleSelectValue}
             >
