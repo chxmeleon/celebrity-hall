@@ -23,7 +23,7 @@ export const ActionCableProvider: React.FC<React.PropsWithChildren> = ({
   const value = useMemo(
     () => ({
       cable: ActionCable.createConsumer(
-        `ws://staging.vvip99.net/cable?token=${auth}`
+        `wss://staging.vvip99.net/cable?token=${auth}`
       )
     }),
     [auth]
