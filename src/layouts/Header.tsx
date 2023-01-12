@@ -4,6 +4,8 @@ import { useSetup } from '@/contexts/SetupContext'
 import { RightSidebarButton } from '@/components/common/Button'
 import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
+import logoImgMobile from '/logo_m.webp'
+import { Link } from 'react-router-dom'
 
 const icons = {
   heart: cx`i-heroicons-heart-solid text-2xl hover:text-pink-500 `,
@@ -18,7 +20,7 @@ const icons = {
   notice: cx`i-heroicons-megaphone-solid text-2xl`,
   info: cx`i-heroicons-information-circle-solid text-2xl`,
   phone: cx`i-heroicons-phone-arrow-up-right-solid text-2xl`,
-  sexy: cx`i-mdi-head-heart-outline text-2xl`,
+  sexy: cx`i-mdi-head-heart-outline text-2xl`
 }
 
 const Header = () => {
@@ -49,110 +51,122 @@ const Header = () => {
   return (
     <header className="relative" ref={sidebarRef} onClick={onCloseSide}>
       <nav className="absolute top-0 left-0 z-40 w-full h-12 border-b bg-theme-50 border-b-theme-75">
-        <div className="flex justify-end items-center px-3 w-full h-full bg-theme-50">
-          <div
-            className="flex justify-around items-center w-[5rem] bg-theme-50"
-            onClick={stopProp}
-          >
-            {/* <button className={icons.heart}></button> */}
-            {/* <button className={icons.chart}></button> */}
-            <button className={icons.refresh}></button>
-            <div className="inline-block relative mt-1.5">
-              <button className={icons.bar} onClick={onToggle}></button>
-              <div
-                className={`${toggle
-                    ? 'h-fit opacity-100 scale-y-100 translate-y-0'
-                    : 'h-0 opacity-0 scale-y-[28%] -translate-y-36'
-                  } absolute w-[17.5rem] min-h-fit max-h-fit  -translate-x-[16rem] -z-10 transition-all duration-300 ease-in-out bg-theme-50/95 border border-theme-75 border-y-transparent`}
-              >
-                <div className="inline-block w-full text-lg" onClick={stopProp}>
-                  <RightSidebarButton
-                    href=""
-                    isTarget={false}
-                    onClick={openNotice}
+        <div className="flex justify-between items-center w-full h-full">
+          <a href="/home/rooms" className="flex ml-1 w-full h-full md:hidden">
+            <img src={logoImgMobile} alt="logo img" className="my-auto w-auto h-6" />
+          </a>
+          <div className="flex justify-end items-center px-3 w-full h-full bg-theme-50">
+            <div
+              className="flex justify-around items-center w-[5rem] bg-theme-50"
+              onClick={stopProp}
+            >
+              {/* <button className={icons.heart}></button> */}
+              {/* <button className={icons.chart}></button> */}
+              <button className={icons.refresh}></button>
+              <div className="inline-block relative mt-1.5">
+                <button className={icons.bar} onClick={onToggle}></button>
+                <div
+                  className={`${toggle
+                      ? 'h-fit opacity-100 scale-y-100 translate-y-0'
+                      : 'h-0 opacity-0 scale-y-[28%] -translate-y-36'
+                    } absolute w-[17.5rem] min-h-fit max-h-fit  -translate-x-[16rem] -z-10 transition-all duration-300 ease-in-out bg-theme-50/95 border border-theme-75 border-y-transparent`}
+                >
+                  <div
+                    className="inline-block w-full text-lg"
+                    onClick={stopProp}
                   >
-                    <i className={icons.notice}></i>
-                    <p>
-                      <FormattedMessage
-                        id="dropdown.notice"
-                        defaultMessage="Notice"
-                      />
-                    </p>
-                  </RightSidebarButton>
-                  <RightSidebarButton
-                    href=""
-                    isTarget={false}
-                    onClick={() => null}
-                  >
-                    <i className={icons.user}></i>
-                    <p>
-                      <FormattedMessage
-                        id="dropdown.profile"
-                        defaultMessage="Profile"
-                      />
-                    </p>
-                  </RightSidebarButton>
-                  <RightSidebarButton
-                    href=""
-                    isTarget={false}
-                    onClick={() => null}
-                  >
-                    <i className={icons.info}></i>
-                    <p>
-                      <FormattedMessage
-                        id="dropdown.info"
-                        defaultMessage="info"
-                      />
-                    </p>
-                  </RightSidebarButton>
-                  <RightSidebarButton
-                    href="https://page.line.me/?accountId=315xktcy"
-                    isTarget={true}
-                    onClick={() => null}
-                  >
-                    <i className={icons.phone}></i>
-                    <p>
-                      <FormattedMessage
-                        id="dropdown.service"
-                        defaultMessage="service"
-                      />
-                    </p>
-                  </RightSidebarButton>
-                  <RightSidebarButton
-                    href=""
-                    isTarget={false}
-                    onClick={openSetup}
-                  >
-                    <i className={icons.gear}></i>
-                    <p>
-                      <FormattedMessage
-                        id="setting.setting"
-                        defaultMessage="Setting"
-                      />
-                    </p>
-                  </RightSidebarButton>
-                  <RightSidebarButton
-                    href="https://t.me/richman5888"
-                    isTarget={true}
-                    onClick={() => null}
-                  >
-                    <i className={icons.sexy}></i>
-                    <p>
-                      <FormattedMessage
-                        id="dropdown.porn"
-                        defaultMessage="Adult Video"
-                      />
-                    </p>
-                  </RightSidebarButton>
-                  <RightSidebarButton href="" isTarget={false} onClick={logout}>
-                    <i className={icons.out}></i>
-                    <p>
-                      <FormattedMessage
-                        id="dropdown.logout"
-                        defaultMessage="Logout"
-                      />
-                    </p>
-                  </RightSidebarButton>
+                    <RightSidebarButton
+                      href=""
+                      isTarget={false}
+                      onClick={openNotice}
+                    >
+                      <i className={icons.notice}></i>
+                      <p>
+                        <FormattedMessage
+                          id="dropdown.notice"
+                          defaultMessage="Notice"
+                        />
+                      </p>
+                    </RightSidebarButton>
+                    <RightSidebarButton
+                      href=""
+                      isTarget={false}
+                      onClick={() => null}
+                    >
+                      <i className={icons.user}></i>
+                      <p>
+                        <FormattedMessage
+                          id="dropdown.profile"
+                          defaultMessage="Profile"
+                        />
+                      </p>
+                    </RightSidebarButton>
+                    <RightSidebarButton
+                      href=""
+                      isTarget={false}
+                      onClick={() => null}
+                    >
+                      <i className={icons.info}></i>
+                      <p>
+                        <FormattedMessage
+                          id="dropdown.info"
+                          defaultMessage="info"
+                        />
+                      </p>
+                    </RightSidebarButton>
+                    <RightSidebarButton
+                      href="https://page.line.me/?accountId=315xktcy"
+                      isTarget={true}
+                      onClick={() => null}
+                    >
+                      <i className={icons.phone}></i>
+                      <p>
+                        <FormattedMessage
+                          id="dropdown.service"
+                          defaultMessage="service"
+                        />
+                      </p>
+                    </RightSidebarButton>
+                    <RightSidebarButton
+                      href=""
+                      isTarget={false}
+                      onClick={openSetup}
+                    >
+                      <i className={icons.gear}></i>
+                      <p>
+                        <FormattedMessage
+                          id="setting.setting"
+                          defaultMessage="Setting"
+                        />
+                      </p>
+                    </RightSidebarButton>
+                    <RightSidebarButton
+                      href="https://t.me/richman5888"
+                      isTarget={true}
+                      onClick={() => null}
+                    >
+                      <i className={icons.sexy}></i>
+                      <p>
+                        <FormattedMessage
+                          id="dropdown.porn"
+                          defaultMessage="Adult Video"
+                        />
+                      </p>
+                    </RightSidebarButton>
+                    <RightSidebarButton
+                      href=""
+                      isTarget={false}
+                      onClick={logout}
+                    >
+                      <i className={icons.out}></i>
+                      <p>
+                        <FormattedMessage
+                          id="dropdown.logout"
+                          defaultMessage="Logout"
+                        />
+                      </p>
+                    </RightSidebarButton>
+                  </div>
                 </div>
               </div>
             </div>
