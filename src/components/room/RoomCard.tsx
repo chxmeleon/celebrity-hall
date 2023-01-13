@@ -9,7 +9,9 @@ type RoomDataProps = {
 }
 
 const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
-  const { counter, startCount, isLeftTen } = useTimeLeft(data?.id)
+  const { counter, startCount, isLeftTen, isOpening } = useTimeLeft(
+    data?.id
+  )
   const href = `/home/rooms/${data?.id}`
   const girl = data?.girl
 
@@ -33,6 +35,13 @@ const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
                   >
                     {counter}
                   </p>
+                ) : isOpening ? (
+                  <div className="text-theme-300">
+                    <FormattedMessage
+                      id="status.baccarat.waitingBet"
+                      defaultMessage="Open"
+                    />
+                  </div>
                 ) : (
                   <div className="text-theme-300">
                     <FormattedMessage
@@ -47,16 +56,16 @@ const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
               {data?.name}
             </div>
           </div>
-          <div className="flex flex-grow flex-shrink-0 justify-start items-center px-3 w-full text-xs">
+          <div className="flex flex-grow-0 flex-shrink-0 justify-start items-center px-3 w-full text-xs">
             <div className="flex w-3/4 h-full bg-gray-100 rounded-tl-sm rounded-bl-sm">
               <BigRoad />
             </div>
-            <div className="relative w-1/4 h-20 bg-gray-100 rounded-tr-sm rounded-br-sm md:h-[170px]">
+            <div className="relative w-1/4 h-20 bg-gray-100 rounded-tr-sm rounded-br-sm md:h-[160px]">
               <div className="absolute bottom-0 w-full">
                 <div className="flex justify-end">
                   <div className="absolute right-0 top-4">
                     <div className="p-1 text-lg font-medium text-gray-50">
-                      {data?.currentGame?.status === 'opening' ? (
+                      {isOpening ? (
                         <FormattedMessage
                           id="status.baccarat.waitingBet"
                           defaultMessage="Open"
@@ -84,7 +93,7 @@ const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
               </div>
             </div>
           </div>
-          <div className="flex justify-between px-3 w-full h-12">
+          <div className="flex justify-between px-3 w-full h-14">
             <div className="flex justify-between items-center w-1/2 h-full md:text-lg font-light [&_p]:pl-1 md:[&_p]:pl-3 text-white text-xs">
               <div className="inline-flex items-center">
                 <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[3px] bg-grid-100">
@@ -105,8 +114,8 @@ const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
                 <p>{data?.roads.tie_count}</p>
               </div>
             </div>
-            <div className="flex w-1/4">
-              <button className="p-1 m-auto w-full text-xs font-medium text-gray-800 bg-gradient-to-r rounded-full hover:via-amber-200 from-theme-200 via-theme-300 to-theme-200 md:text-[1rem] hover:from-theme-400 hover:to-theme-400">
+            <div className="flex w-1/4 h-full">
+              <button className="p-1 py-2 m-auto w-full text-xs font-medium text-gray-800 bg-gradient-to-r rounded-full hover:via-amber-200 from-theme-200 via-theme-300 to-theme-200 md:text-[1rem] hover:from-theme-400 hover:to-theme-400">
                 <FormattedMessage
                   id="screens.rooms.enterGame"
                   defaultMessage="Enter"

@@ -3,7 +3,13 @@ import { clsx as cx } from 'clsx'
 import { FormattedMessage } from 'react-intl'
 import { askMapper } from './data'
 
+import { useCurrentGame } from '@/hooks/rooms'
+
 export const BeadPlate: React.FC = () => {
+
+  const { currentGame } = useCurrentGame()
+  const beadRoadData = currentGame?.baccaratRoom?.roads?.bead_road ?? ''
+
   return (
     <Road.BaseGrid>
       {Road.winRecord.map((item, idx) => {
@@ -57,15 +63,22 @@ export const CockroachRoad = () => {
 
 export const AskGrid: React.FC = () => {
   const totalCount = [...new Array(8)].map(() => 1)
+  const { currentGame } = useCurrentGame()
+  const roadsTotalData = currentGame?.baccaratRoom?.roads ?? ''
 
   return (
     <div className="grid grid-cols-1 w-full h-full border-r border-b grid-rows-8 border-gray-500/90">
-      {totalCount.map((item, idx) => {
+      {totalCount?.map((item, idx) => {
+        const key = askMapper[idx].value
         const askGridContent = cx(
           'w-full h-full text-xs font-bold border-b border-gray-400 px-1.5 flex justify-between items-center',
           askMapper[idx].className,
-          idx === 6 ? ' hover:cursor-pointer hover:bg-red-100 active:bg-red-200' : '',
-          idx === 7 ? ' hover:cursor-pointer hover:bg-blue-100 active:bg-blue-200' : ''
+          idx === 6
+            ? ' hover:cursor-pointer hover:bg-red-100 active:bg-red-200'
+            : '',
+          idx === 7
+            ? ' hover:cursor-pointer hover:bg-blue-100 active:bg-blue-200'
+            : ''
         )
 
         const askRoundStyle = cx(
@@ -90,7 +103,7 @@ export const AskGrid: React.FC = () => {
               defaultMessage={askMapper[idx].default}
             />
             {idx < 6 ? (
-              <p>{item}</p>
+              <p>{roadsTotalData?.[key as string]}</p>
             ) : (
               <div className="w-[44%] h-full flex justify-between items-center">
                 <div className={askBorderStyle}></div>

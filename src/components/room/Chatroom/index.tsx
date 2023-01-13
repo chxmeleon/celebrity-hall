@@ -8,46 +8,85 @@ import { CREATE_BACCARAT_MESSAGE } from '@/gql/chatroom'
 import { GET_PROFILE } from '@/gql/profile'
 import types from '@/types'
 
+import { v4 as uuidV4 } from 'uuid'
 // interface ChatRoomProps {
 //   roomId: number
 //   contents: ChatContent[]
 // }
 
 const ChatRoom = () => {
-  const [messages, setMessages] = useState<Array<string>>([])
+  type ContentProps = {
+    avatar: string
+    nickname: string
+    message: string
+    time: string | undefined
+  }
+  const [messages, setMessages] = useState<Array<ContentProps>>([
+    {
+      avatar: '',
+      nickname: '',
+      message: '',
+      time: ''
+    }
+  ])
+  const [content, setContent] = useState<ContentProps>({
+    avatar: '',
+    nickname: '',
+    message: '',
+    time: ''
+  })
   const [newMessage, setNewMessage] = useState('')
   const [isPickerShow, setIsPickerShow] = useState(false)
   const [clickRef, setClickRef] = useState<HTMLDivElement | null>(null)
   const [messageRef, setMessageRef] = useState<HTMLDivElement | null>(null)
   const { formatMessage } = useIntl()
-  const [data, setData] = useState<object>({})
-
+  const [data, setData] = useState<any>({})
   const [createBaccaratMessage] = useMutation<
     types.CREATE_BACCARAT_MESSAGE,
     types.CREATE_BACCARAT_MESSAGEVariables
   >(CREATE_BACCARAT_MESSAGE)
 
-  /* const roomId = useParams() */
-  /* const { cable } = useActionCable() */
-  /* useEffect(() => { */
-  /*   const subscription = cable.subscriptions.create( */
-  /*     { */
-  /*       channel: 'ChatroomChannel', */
-  /*       roomId: roomId.id, */
-  /*       roomType: 'BaccaratRoom' */
-  /*     }, */
-  /*     { */
-  /*       received: (message) => { */
-  /*         setData(message) */
-  /*       } */
-  /*     } */
-  /*   ) */
-  /*   return () => { */
-  /*     subscription.unsubscribe() */
-  /*   } */
-  /* }, [cable, roomId, data]) */
-  /**/
-  /* console.log(data) */
+  const roomId = useParams()
+  const { cable } = useActionCable()
+
+  useEffect(() => {
+    const formatTime = (date: string) => {
+      if (data !== undefined) {
+        return (
+          new Date(date).getHours().toString() +
+          ':' +
+          new Date(date).getMinutes().toString()
+        )
+      }
+    }
+
+    const subscription = cable.subscriptions.create(
+      {
+        channel: 'ChatroomChannel',
+        roomId: roomId.id,
+        roomType: 'BaccaratRoom'
+      },
+      {
+        received: (data) => {
+          setData(data.message)
+          setContent({
+            avatar: data?.message?.avatar,
+            nickname: data?.message?.nickname,
+            message: data?.message?.body,
+            time: formatTime(data?.message?.createdAt)
+          })
+        }
+      }
+    )
+    return () => {
+      subscription.unsubscribe()
+    }
+  }, [cable, roomId, data])
+
+  const time =
+    new Date(data?.createdAt).getHours().toString() +
+    ':' +
+    new Date(data?.createdAt).getMinutes().toString()
 
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -67,7 +106,6 @@ const ChatRoom = () => {
     }
   }, [clickRef, isPickerShow])
 
-  // useCallbacks hooks make scrollToBottom not work
   const scrollToBottom = () => {
     if (messageRef) {
       messageRef.scrollIntoView(false)
@@ -84,20 +122,30 @@ const ChatRoom = () => {
     setNewMessage(newMessage + emoji.emoji)
   }
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (newMessage === '') {
       e.stopPropagation()
     } else {
       setTimeout(() => {
-        setMessages((messages) => [...messages, newMessage])
+        setMessages((messages) => [...messages, content])
       }, 150)
-      /* createBaccaratMessage({ variables: { input: newMessage } }) */
+      await createBaccaratMessage({
+        variables: {
+          input: {
+            baccaratRoomId: roomId.id ?? '',
+            content: newMessage,
+            uuid: uuidV4()
+          }
+        }
+      })
       scrollToBottom()
     }
     setNewMessage('')
   }
+
+  console.log(messages)
 
   return (
     <div className="flex flex-col w-full h-full bg-gray-50 border-b-2 border-gray-500">
@@ -107,25 +155,39 @@ const ChatRoom = () => {
           className="flex flex-col justify-end w-full h-full"
           ref={setMessageRef}
         >
-          {messages.map((item, idx) => {
+          {messages.slice(2)?.map((content, idx) => {
             return (
               <div
                 className="flex justify-start items-center py-1 px-2.5 w-full h-auto text-xs text-theme-50"
-                key={idx}
+                key={`message-${idx}`}
               >
                 <div className="flex-shrink-0 pr-1.5 pt-[1.5px]">
-                  <div className="w-6 h-6 bg-gray-400 rounded-full"></div>
+                  <div className="overflow-hidden w-6 h-6 bg-orange-400 rounded-full">
+                    {content?.avatar === null ? (
+                      <div className="flex w-full h-full">
+                        <p className="m-auto text-gray-50 font-bold text-[12px]">{content.nickname.slice(0,1)}</p>
+                      </div>
+                    ) : (
+                      <img
+                        src={content?.avatar}
+                        alt="avatar img"
+                        className="object-cover w-full h-full"
+                      />
+                    )}
+                  </div>
                 </div>
-                <p className="pr-2 text-sm">username</p>
+                <p className="pr-2 text-sm">{content?.nickname}</p>
                 <div className="inline-flex justify-start items-start">
                   <div className="w-2 rounded-t-lg translate-y-2 -rotate-[9deg] -translate-x-[1px]">
                     <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[20px] border-b-transparent border-r-[20px] border-r-neutral-200"></div>
                   </div>
                   <div className="break-all rounded-lg border-r-2 border-b-2 bg-neutral-200 drop-shadow-sm border-b-theme-50/10">
-                    <p className="py-1 px-2 text-sm">{item}</p>
+                    <p className="py-1 px-2 text-sm">{content?.message}</p>
                   </div>
                 </div>
-                <p className="self-end pl-3 text-xs text-gray-400">time</p>
+                <p className="self-end pl-3 text-xs text-gray-400">
+                  {content?.time}
+                </p>
               </div>
             )
           })}
@@ -151,9 +213,8 @@ const ChatRoom = () => {
 
           <div ref={setClickRef}>
             <div
-              className={`${
-                isPickerShow ? '' : 'hidden'
-              } absolute bottom-10 right-0 z-30`}
+              className={`${isPickerShow ? '' : 'hidden'
+                } absolute bottom-10 right-0 z-30`}
             >
               <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
             </div>

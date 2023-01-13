@@ -101,7 +101,7 @@ const Room = () => {
 
         <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
           <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
-            <div className="flex flex-col items-end w-[5.5rem]">
+            <div className="flex flex-col justify-around h-24 items-end w-[5.5rem]">
               <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
                 <button
                   onClick={handleSwitchCam}

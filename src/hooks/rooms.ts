@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
-import { GET_CURRENT_BACCARAT_ROOM } from '@/gql/baccaratrooms'
+import {
+  GET_CURRENT_BACCARAT_ROOM,
+  GET_CURRENT_COUNTDOWN,
+} from '@/gql/baccaratrooms'
 import StreamLatencyContext from '@/contexts/StreamLatencyContext'
-import { GET_CURRENT_COUNTDOWN } from '@/gql/baccaratrooms'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import types from '@/types'
@@ -74,31 +76,48 @@ export const useTimeLeft = (roomId: string) => {
     types.GET_CURRENT_COUNTDOWN,
     types.GET_CURRENT_COUNTDOWNVariables
   >(GET_CURRENT_COUNTDOWN, {
-    variables: { baccaratRoomId: roomId ?? '' }
+    variables: { baccaratRoomId: roomId }
   })
 
+  const [gameState, setGameState] = useState<any | null>(null)
+  const { cable } = useActionCable()
+  useEffect(() => {
+    const subscription = cable.subscriptions.create(
+      { channel: 'NewBaccaratGameChannel', roomId: roomId },
+      {
+        received: (data: any) => {
+          setGameState(data)
+        }
+      }
+    )
+    return () => {
+      subscription.unsubscribe()
+    }
+  }, [cable, roomId, gameState])
+
+
+  const isOpening = gameState?.command !== 'CLOSE'
   const [counter, setCounter] = useState<number | undefined>()
   const startCount =
-    data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet'
+    data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet' && gameState?.command === 'START_BET'  
 
   const isLeftTen = counter !== undefined && counter < 11
 
   const streamLatency = useContext(StreamLatencyContext)
   useEffect(() => {
-    const isCountDownStarted =
-      data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet'
-
-    if (!counter && data?.baccaratRoom?.currentGame && isCountDownStarted) {
-      const { currentGame, latency } = data.baccaratRoom
-      const endAt = new Date(currentGame.endAt)
-      console.log(endAt)
+    const isCountDownStarted = gameState?.command === 'START_BET'
+    if (data?.baccaratRoom?.currentGame && isCountDownStarted) {
+      const { latency } = data.baccaratRoom
+      const endAt = new Date(gameState?.data?.endAt)
       const timeLeft = Math.floor(
-        (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency
+        (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency - 7 
       )
+
       setCounter(timeLeft)
     }
-  }, [counter, data, streamLatency])
+  }, [counter, data, streamLatency, gameState])
 
+  
   useEffect(() => {
     let timeout: number | null = null
     if (counter !== undefined && counter >= 0) {
@@ -112,5 +131,5 @@ export const useTimeLeft = (roomId: string) => {
     }
   }, [counter])
 
-  return { counter, isLeftTen, startCount }
+  return { counter, isLeftTen, startCount, isOpening }
 }

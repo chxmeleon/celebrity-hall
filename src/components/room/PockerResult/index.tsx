@@ -5,15 +5,11 @@ import { useParams } from 'react-router-dom'
 import { useActionCable } from '@/contexts/ActionCableContext'
 
 const PockerResult: React.FC = () => {
-  const { currentGameState } = useCurrentGameState()
-  const [show, setShow] = useState(true)
-  const isOpenCard =
-    currentGameState?.status !== 'waiting_for_bet' &&
-    currentGameState?.status !== 'closed'
-
-  const [gameState, setGameState] = useState<any | null>(null)
   const roomId = useParams()
   const { cable } = useActionCable()
+  const { currentGameState } = useCurrentGameState()
+  const [gameState, setGameState] = useState<any | null>(currentGameState?.status)
+
   useEffect(() => {
     const subscription = cable.subscriptions.create(
       { channel: 'NewBaccaratGameChannel', roomId: roomId.id },
@@ -28,24 +24,28 @@ const PockerResult: React.FC = () => {
     }
   }, [cable, roomId, gameState])
 
-  console.log(gameState);
-  
+
+
   const [isOpen, setIsOpen] = useState(false)
   useEffect(() => {
-    if (gameState?.command !== 'START_BET' && gameState?.command !== 'CLOSE') {
+    if (
+      gameState !== 'START_BET' &&
+      gameState !== 'CLOSE' &&
+      gameState !== 'UPDATE_AMOUNT' &&
+      gameState !== 'SHUFFLE'
+    ) {
+      setIsOpen(true)
+    } else if (gameState === 'waiting_for_bet') {
       setIsOpen(true)
     } else {
       setIsOpen(false)
     }
   }, [gameState])
 
-
-
   return (
     <div
-      className={`${
-        isOpen ? '' : 'opacity-0'
-      } duration-200 ease-in-out flex w-full h-full rounded-xl border shadow-lg bg-theme-50/80 backdrop-blur-sm border-theme-150
+      className={`${isOpen ? '' : 'opacity-0'
+        } duration-200 ease-in-out flex w-full h-full rounded-xl border shadow-lg bg-theme-50/80 backdrop-blur-sm border-theme-150
 `}
     >
       <CardWidget role="player" />
