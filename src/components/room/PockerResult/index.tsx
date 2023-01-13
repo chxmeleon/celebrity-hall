@@ -8,14 +8,16 @@ const PockerResult: React.FC = () => {
   const roomId = useParams()
   const { cable } = useActionCable()
   const { currentGameState } = useCurrentGameState()
-  const [gameState, setGameState] = useState<any | null>(currentGameState?.status)
+  const [gameState, setGameState] = useState<any | null>(
+    currentGameState?.status
+  )
 
   useEffect(() => {
     const subscription = cable.subscriptions.create(
       { channel: 'NewBaccaratGameChannel', roomId: roomId.id },
       {
         received: (data: any) => {
-          setGameState(data)
+          setGameState(data.command)
         }
       }
     )
@@ -23,8 +25,6 @@ const PockerResult: React.FC = () => {
       subscription.unsubscribe()
     }
   }, [cable, roomId, gameState])
-
-
 
   const [isOpen, setIsOpen] = useState(false)
   useEffect(() => {
@@ -42,10 +42,13 @@ const PockerResult: React.FC = () => {
     }
   }, [gameState])
 
+  console.log(gameState)
+
   return (
     <div
-      className={`${isOpen ? '' : 'opacity-0'
-        } duration-200 ease-in-out flex w-full h-full rounded-xl border shadow-lg bg-theme-50/80 backdrop-blur-sm border-theme-150
+      className={`${
+        isOpen ? '' : 'opacity-0'
+      } transition-opacity duration-300 ease-in flex w-full h-full rounded-xl border shadow-lg bg-theme-50/80 backdrop-blur-sm border-theme-150
 `}
     >
       <CardWidget role="player" />

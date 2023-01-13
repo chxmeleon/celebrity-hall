@@ -7,35 +7,18 @@ import { useMutation } from '@apollo/client'
 import { CREATE_BACCARAT_MESSAGE } from '@/gql/chatroom'
 import { GET_PROFILE } from '@/gql/profile'
 import types from '@/types'
-
 import { v4 as uuidV4 } from 'uuid'
-// interface ChatRoomProps {
-//   roomId: number
-//   contents: ChatContent[]
-// }
+
+type ContentProps = {
+  avatar: string
+  nickname: string
+  body: string
+  createdAt: string | undefined
+}
 
 const ChatRoom = () => {
-  type ContentProps = {
-    avatar: string
-    nickname: string
-    message: string
-    time: string | undefined
-  }
-  const [messages, setMessages] = useState<Array<ContentProps>>([
-    {
-      avatar: '',
-      nickname: '',
-      message: '',
-      time: ''
-    }
-  ])
-  const [content, setContent] = useState<ContentProps>({
-    avatar: '',
-    nickname: '',
-    message: '',
-    time: ''
-  })
   const [newMessage, setNewMessage] = useState('')
+  const [messages, setMessages] = useState<Array<ContentProps | null>>([])
   const [isPickerShow, setIsPickerShow] = useState(false)
   const [clickRef, setClickRef] = useState<HTMLDivElement | null>(null)
   const [messageRef, setMessageRef] = useState<HTMLDivElement | null>(null)
@@ -49,17 +32,15 @@ const ChatRoom = () => {
   const roomId = useParams()
   const { cable } = useActionCable()
 
-  useEffect(() => {
-    const formatTime = (date: string) => {
-      if (data !== undefined) {
-        return (
-          new Date(date).getHours().toString() +
-          ':' +
-          new Date(date).getMinutes().toString()
-        )
-      }
-    }
+  const formatTime = useCallback((date: any) => {
+    return (
+      new Date(date).getHours().toString() +
+      ':' +
+      new Date(date).getMinutes().toString()
+    )
+  }, [])
 
+  useEffect(() => {
     const subscription = cable.subscriptions.create(
       {
         channel: 'ChatroomChannel',
@@ -68,25 +49,21 @@ const ChatRoom = () => {
       },
       {
         received: (data) => {
+          if (data.message !== undefined) {
+            setMessages((messages) => [...messages, data.message])
+          }
           setData(data.message)
-          setContent({
-            avatar: data?.message?.avatar,
-            nickname: data?.message?.nickname,
-            message: data?.message?.body,
-            time: formatTime(data?.message?.createdAt)
-          })
         }
       }
     )
+
     return () => {
       subscription.unsubscribe()
     }
-  }, [cable, roomId, data])
+  }, [cable, roomId, data, messages])
 
-  const time =
-    new Date(data?.createdAt).getHours().toString() +
-    ':' +
-    new Date(data?.createdAt).getMinutes().toString()
+  console.log(newMessage)
+  console.log(messages)
 
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -128,9 +105,6 @@ const ChatRoom = () => {
     if (newMessage === '') {
       e.stopPropagation()
     } else {
-      setTimeout(() => {
-        setMessages((messages) => [...messages, content])
-      }, 150)
       await createBaccaratMessage({
         variables: {
           input: {
@@ -145,8 +119,6 @@ const ChatRoom = () => {
     setNewMessage('')
   }
 
-  console.log(messages)
-
   return (
     <div className="flex flex-col w-full h-full bg-gray-50 border-b-2 border-gray-500">
       <div className="flex overflow-x-hidden flex-col-reverse flex-grow-0 w-full h-screen scroll-smooth">
@@ -155,7 +127,7 @@ const ChatRoom = () => {
           className="flex flex-col justify-end w-full h-full"
           ref={setMessageRef}
         >
-          {messages.slice(2)?.map((content, idx) => {
+          {messages?.map((content, idx) => {
             return (
               <div
                 className="flex justify-start items-center py-1 px-2.5 w-full h-auto text-xs text-theme-50"
@@ -165,7 +137,9 @@ const ChatRoom = () => {
                   <div className="overflow-hidden w-6 h-6 bg-orange-400 rounded-full">
                     {content?.avatar === null ? (
                       <div className="flex w-full h-full">
-                        <p className="m-auto text-gray-50 font-bold text-[12px]">{content.nickname.slice(0,1)}</p>
+                        <p className="m-auto font-bold text-gray-50 text-[12px]">
+                          {content.nickname?.slice(0, 1)}
+                        </p>
                       </div>
                     ) : (
                       <img
@@ -182,11 +156,11 @@ const ChatRoom = () => {
                     <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[20px] border-b-transparent border-r-[20px] border-r-neutral-200"></div>
                   </div>
                   <div className="break-all rounded-lg border-r-2 border-b-2 bg-neutral-200 drop-shadow-sm border-b-theme-50/10">
-                    <p className="py-1 px-2 text-sm">{content?.message}</p>
+                    <p className="py-1 px-2 text-sm">{content?.body}</p>
                   </div>
                 </div>
                 <p className="self-end pl-3 text-xs text-gray-400">
-                  {content?.time}
+                  {formatTime(content?.createdAt)}
                 </p>
               </div>
             )
@@ -207,7 +181,7 @@ const ChatRoom = () => {
             })}
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            className="py-2 pr-2 pl-3 w-full h-full bg-gray-200 rounded-md outline-0"
+            className="py-2 pr-2 pl-3 w-full h-full bg-gray-200 rounded-md outline-0 focus:outline-0"
             autoComplete="off"
           />
 
