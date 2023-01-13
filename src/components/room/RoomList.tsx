@@ -17,7 +17,7 @@ interface RoomListProps<T> {
 
 const RoomList: React.FC<RoomListProps<DataRows>> = ({ roomsData }) => {
   return (
-    <div className="grid md:grid-cols-2 grid-cols-1 grid-flow-row auto-rows-fr gap-5 w-full h-4/5">
+    <div className="grid grid-cols-1 grid-flow-row auto-rows-fr gap-5 w-full h-auto md:grid-cols-2">
       {roomsData?.map((item, idx) => {
         return (
           <div key={`active-room-${idx}`}>

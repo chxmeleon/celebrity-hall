@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { clsx as cx } from 'clsx'
 import types from '@/types'
 import StreamLatencyContext from '@/contexts/StreamLatencyContext'
+import { useActionCable } from '@/contexts/ActionCableContext'
 
 const Timer: React.FC = () => {
   const roomId = useParams()
@@ -15,9 +16,26 @@ const Timer: React.FC = () => {
     variables: { baccaratRoomId: roomId?.id ?? '' }
   })
 
+  const [gameState, setGameState] = useState<any | null>(null)
+  const { cable } = useActionCable()
+  useEffect(() => {
+    const subscription = cable.subscriptions.create(
+      { channel: 'NewBaccaratGameChannel', roomId: roomId.id },
+      {
+        received: (data: any) => {
+          setGameState(data)
+        }
+      }
+    )
+    return () => {
+      subscription.unsubscribe()
+    }
+  }, [cable, roomId, gameState])
+  /* console.log(gameState); */
+
   const [counter, setCounter] = useState<number | undefined>()
   const startCount =
-    data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet'
+    data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet' || gameState?.command === 'START_BET'  
 
   const isLeftTen = counter !== undefined && counter < 11
   const countDownStyle = cx(
@@ -27,20 +45,21 @@ const Timer: React.FC = () => {
 
   const streamLatency = useContext(StreamLatencyContext)
   useEffect(() => {
-    const isCountDownStarted =
-      data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet'
-
-    if (!counter && data?.baccaratRoom?.currentGame && isCountDownStarted) {
-      const { currentGame, latency } = data.baccaratRoom
-      const endAt = new Date(currentGame.endAt)
-      console.log(endAt)
+    const isCountDownStarted = gameState?.command === 'START_BET'
+    if (data?.baccaratRoom?.currentGame && isCountDownStarted) {
+      const { latency } = data.baccaratRoom
+      const endAt = new Date(gameState?.data?.endAt)
+      /* console.log(gameState?.data?.endAt); */
+      /* console.log(endAt) */
       const timeLeft = Math.floor(
-        (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency
+        (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency - 7  
       )
+
       setCounter(timeLeft)
     }
-  }, [counter, data, streamLatency])
+  }, [counter, data, streamLatency, gameState])
 
+  
   useEffect(() => {
     let timeout: number | null = null
     if (counter !== undefined && counter >= 0) {

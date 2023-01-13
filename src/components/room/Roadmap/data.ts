@@ -1,21 +1,40 @@
 export const askMapper = [
-  { contentId: 'common.dealer', default: 'Dealer', className: 'text-red-600' },
-  { contentId: 'common.player', default: 'Player', className: 'text-blue-600' },
-  { contentId: 'common.tie', default: 'Tie', className: 'text-teal-600' },
+  {
+    contentId: 'common.dealer',
+    default: 'Dealer',
+    className: 'text-red-600',
+    value: 'dealer_count'
+  },
+  {
+    contentId: 'common.player',
+    default: 'Player',
+    className: 'text-blue-600',
+    value: 'player_count'
+  },
+  {
+    contentId: 'common.tie',
+    default: 'Tie',
+    className: 'text-teal-600',
+    value: 'tie_count'
+  },
   {
     contentId: 'common.dealerPair',
     default: 'Dealer Pair',
-    className: 'text-red-600'
+    className: 'text-red-600',
+    value: 'dealer_pair_count'
   },
   {
     contentId: 'common.playerPair',
     default: 'Player Pair',
-    className: 'text-blue-600'
+    className: 'text-blue-600',
+    value: 'player_pair_count'
+
   },
   {
     contentId: 'common.totalCount',
     default: 'Total',
-    className: 'text-amber-600'
+    className: 'text-amber-600',
+    value: 'total_count'
   },
   {
     contentId: 'common.dealerAsk',
