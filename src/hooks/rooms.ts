@@ -9,7 +9,7 @@ import { useContext, useEffect, useMemo, useState } from 'react'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import types from '@/types'
 
-const convertStatus = (status: string) => {
+export const convertStatus = (status: string) => {
   switch (status) {
     case 'waiting_for_bet':
       return 'START_BET'
@@ -110,7 +110,7 @@ export const useTimeLeft = (roomId: string) => {
       const { latency } = data.baccaratRoom
       const endAt = new Date(gameState?.data?.endAt)
       const timeLeft = Math.floor(
-        (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency - 7 
+        (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency 
       )
 
       setCounter(timeLeft)

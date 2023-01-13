@@ -7,10 +7,8 @@ import defaultAvatar from '/user.png'
 
 const LeftSidebar = () => {
   const { data: user } = useQuery(GET_PROFILE)
-  console.log(user)
-
   return (
-    <div className="flex flex-shrink-0 md:py-5 px-1.5 w-14 text-center md:px-7 md:w-52 border-r-[0.5px] border-r-theme-75">
+    <div className="flex flex-shrink-0 px-1.5 w-14 text-center md:py-5 md:px-7 md:w-52 border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full">
         <section className="hidden pb-6 w-full md:block">
           <div className="flex">
@@ -36,7 +34,7 @@ const LeftSidebar = () => {
             </div>
           </div>
         </section>
-        <hr className="hidden md:block border-t border-t-theme-75" />
+        <hr className="hidden border-t md:block border-t-theme-75" />
         <section className="my-2 w-full h-[190px]">
           <div className="flex flex-col justify-evenly w-full h-full">
             <LinkButton href="/home/rooms" isTarget={false}>

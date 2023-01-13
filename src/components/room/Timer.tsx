@@ -31,7 +31,7 @@ const Timer: React.FC = () => {
       subscription.unsubscribe()
     }
   }, [cable, roomId, gameState])
-  /* console.log(gameState); */
+  console.log(gameState);
 
   const [counter, setCounter] = useState<number | undefined>()
   const startCount =
@@ -49,20 +49,23 @@ const Timer: React.FC = () => {
     if (data?.baccaratRoom?.currentGame && isCountDownStarted) {
       const { latency } = data.baccaratRoom
       const endAt = new Date(gameState?.data?.endAt)
-      /* console.log(gameState?.data?.endAt); */
-      /* console.log(endAt) */
+      console.log(gameState?.data?.endAt);
+      console.log(new Date(Date.now()));
+      console.log(endAt)
+      
       const timeLeft = Math.floor(
-        (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency - 7  
+        (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency  
       )
+      
 
       setCounter(timeLeft)
     }
   }, [counter, data, streamLatency, gameState])
 
-  
+
   useEffect(() => {
     let timeout: number | null = null
-    if (counter !== undefined && counter >= 0) {
+    if (counter !== undefined && counter > 0) {
       timeout = window.setTimeout(() => {
         setCounter(counter - 1)
       }, 1000)
@@ -76,8 +79,8 @@ const Timer: React.FC = () => {
   return (
     <div
       className={`${
-        startCount && counter !== undefined && counter >= 0 ? '' : 'hidden'
-      } flex relative w-full h-full`}
+        startCount && counter !== undefined && counter > 0 ? '' : 'opacity-0'
+      } flex relative w-full h-full duration-300 ease-in-out transition-opacity`}
     >
       <div className="flex relative m-auto w-full h-full rounded-full bg-theme-50/80 backdrop-blur-sm">
         <div className={countDownStyle}></div>
