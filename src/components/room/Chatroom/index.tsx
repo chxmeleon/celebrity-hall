@@ -8,6 +8,7 @@ import { CREATE_BACCARAT_MESSAGE } from '@/gql/chatroom'
 import { GET_PROFILE } from '@/gql/profile'
 import types from '@/types'
 import { v4 as uuidV4 } from 'uuid'
+import defaultAvatar from '/user.png'
 
 type ContentProps = {
   avatar: string
@@ -32,14 +33,6 @@ const ChatRoom = () => {
   const roomId = useParams()
   const { cable } = useActionCable()
 
-  const formatTime = useCallback((date: any) => {
-    return (
-      new Date(date).getHours().toString() +
-      ':' +
-      new Date(date).getMinutes().toString()
-    )
-  }, [])
-
   useEffect(() => {
     const subscription = cable.subscriptions.create(
       {
@@ -62,9 +55,8 @@ const ChatRoom = () => {
     }
   }, [cable, roomId, data, messages])
 
-  console.log(newMessage)
-  console.log(messages)
-
+  console.log(data);
+  
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
     setIsPickerShow(!isPickerShow)
@@ -128,24 +120,26 @@ const ChatRoom = () => {
           ref={setMessageRef}
         >
           {messages?.map((content, idx) => {
+            console.log(content?.nickname?.slice(0, 1));
+            
             return (
               <div
                 className="flex justify-start items-center py-1 px-2.5 w-full h-auto text-xs text-theme-50"
                 key={`message-${idx}`}
               >
                 <div className="flex-shrink-0 pr-1.5 pt-[1.5px]">
-                  <div className="overflow-hidden w-6 h-6 bg-orange-400 rounded-full">
+                  <div className="overflow-hidden w-6 h-6 bg-slate-200 rounded-full">
                     {content?.avatar === null ? (
-                      <div className="flex w-full h-full">
-                        <p className="m-auto font-bold text-gray-50 text-[12px]">
-                          {content.nickname?.slice(0, 1)}
-                        </p>
-                      </div>
+                      <img
+                        src={defaultAvatar}
+                        alt="avatar img"
+                        className="object-cover object-center w-full h-full"
+                      />
                     ) : (
                       <img
-                        src={content?.avatar}
+                        src={content?.avatar ?? defaultAvatar}
                         alt="avatar img"
-                        className="object-cover w-full h-full"
+                        className="object-cover object-center w-full h-full"
                       />
                     )}
                   </div>
@@ -160,7 +154,7 @@ const ChatRoom = () => {
                   </div>
                 </div>
                 <p className="self-end pl-3 text-xs text-gray-400">
-                  {formatTime(content?.createdAt)}
+                  {content?.createdAt?.slice(11, 16)}
                 </p>
               </div>
             )
@@ -187,8 +181,9 @@ const ChatRoom = () => {
 
           <div ref={setClickRef}>
             <div
-              className={`${isPickerShow ? '' : 'hidden'
-                } absolute bottom-10 right-0 z-30`}
+              className={`${
+                isPickerShow ? '' : 'hidden'
+              } absolute bottom-10 right-0 z-30`}
             >
               <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
             </div>

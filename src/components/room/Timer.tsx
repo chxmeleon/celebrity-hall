@@ -9,7 +9,7 @@ import { useActionCable } from '@/contexts/ActionCableContext'
 
 const Timer: React.FC = () => {
   const roomId = useParams()
-  const { data, refetch } = useQuery<
+  const { data } = useQuery<
     types.GET_CURRENT_COUNTDOWN,
     types.GET_CURRENT_COUNTDOWNVariables
   >(GET_CURRENT_COUNTDOWN, {
@@ -31,37 +31,27 @@ const Timer: React.FC = () => {
       subscription.unsubscribe()
     }
   }, [cable, roomId, gameState])
-  console.log(gameState);
 
   const [counter, setCounter] = useState<number | undefined>()
   const startCount =
-    data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet' || gameState?.command === 'START_BET'  
+    data?.baccaratRoom?.currentGame?.status === 'waiting_for_bet' ||
+    gameState?.command === 'START_BET' ||
+    gameState?.command === 'UPDATE_AMOUNT'
 
   const isLeftTen = counter !== undefined && counter < 11
-  const countDownStyle = cx(
-    'w-[82%] h-[82%] rounded-full absolute border-t-[7px] border-r-[2px] border-transparent inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
-    isLeftTen ? 'border-t-[#ff0015]' : 'border-t-theme-300'
-  )
-
   const streamLatency = useContext(StreamLatencyContext)
   useEffect(() => {
     const isCountDownStarted = gameState?.command === 'START_BET'
     if (data?.baccaratRoom?.currentGame && isCountDownStarted) {
       const { latency } = data.baccaratRoom
       const endAt = new Date(gameState?.data?.endAt)
-      console.log(gameState?.data?.endAt);
-      console.log(new Date(Date.now()));
-      console.log(endAt)
-      
       const timeLeft = Math.floor(
-        (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency  
+        (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency
       )
-      
 
       setCounter(timeLeft)
     }
   }, [counter, data, streamLatency, gameState])
-
 
   useEffect(() => {
     let timeout: number | null = null
@@ -75,6 +65,11 @@ const Timer: React.FC = () => {
       if (timeout) clearTimeout(timeout)
     }
   }, [counter])
+
+  const countDownStyle = cx(
+    'w-[82%] h-[82%] rounded-full absolute border-t-[3px] border-r-[6px] border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
+    isLeftTen ? 'border-[#ff0015] ' : 'border-theme-300 '
+  )
 
   return (
     <div

@@ -1,8 +1,8 @@
 import { clsx as cx } from 'clsx'
 import { FormattedMessage } from 'react-intl'
-import { useEffect, useState } from 'react'
-import { useCurrentGameState } from '@/hooks/rooms'
 import FlipCard from './FlipCard'
+import { useParams } from 'react-router-dom'
+import { usePockerUpdate } from '@/hooks/pocker'
 
 type cardsMapperProps = {
   [key: string]: {
@@ -30,16 +30,13 @@ const cardsMapper: cardsMapperProps = {
 
 interface CardProps {
   role: string
-  /* isWin: boolean */
-  /* isTie: boolean */
 }
 
 const CardWidget: React.FC<CardProps> = ({ role }) => {
-  const { currentGameState } = useCurrentGameState()
-
-
-  const isWin = currentGameState?.[`${role}Win`] 
-  /* const isWin = true */
+  const { id } = useParams()
+  const { currentGameState } = usePockerUpdate(id)
+  const { gameResult, roads, pockerState } = currentGameState
+  const isWin = pockerState?.result?.[`${role}Win`]
 
   const titleStyle = cx(
     'flex justify-center items-center w-8 h-8 text-lg font-medium text-gray-50 rounded-full',
@@ -67,10 +64,10 @@ const CardWidget: React.FC<CardProps> = ({ role }) => {
           />
         </div>
         <div className="flex pl-3 text-center text-gray-50">
-          <p>{currentGameState?.[`${role}Points`]}</p>
+          <p>{pockerState?.[`${role}Points`] ?? 0}</p>
         </div>
       </div>
-      <FlipCard data={currentGameState?.[`${role}Cards`]} />
+      <FlipCard data={pockerState?.[`${role}Cards`]} />
       <div className={winResultImg}>
         <img src="/win.svg" alt="win image" />
         <FormattedMessage id="common.win" defaultMessage="Win" />
