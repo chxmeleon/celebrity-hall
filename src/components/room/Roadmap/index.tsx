@@ -2,14 +2,13 @@ import * as Road from './road'
 import { clsx as cx } from 'clsx'
 import { FormattedMessage } from 'react-intl'
 import { askMapper } from './data'
-
 import { useCurrentGame } from '@/hooks/rooms'
+import { useParams } from 'react-router-dom'
 
 export const BeadPlate: React.FC = () => {
-
-  const { currentGame } = useCurrentGame()
-  const beadRoadData = currentGame?.baccaratRoom?.roads?.bead_road ?? ''
-
+  const { id } = useParams()
+  const { currentGame } = useCurrentGame(id)
+  const beadRoadData = currentGame?.baccaratRoom?.roads?.bead_road
   return (
     <Road.BaseGrid>
       {Road.winRecord.map((item, idx) => {
@@ -63,7 +62,8 @@ export const CockroachRoad = () => {
 
 export const AskGrid: React.FC = () => {
   const totalCount = [...new Array(8)].map(() => 1)
-  const { currentGame } = useCurrentGame()
+  const { id } = useParams()
+  const { currentGame } = useCurrentGame(id)
   const roadsTotalData = currentGame?.baccaratRoom?.roads ?? ''
 
   return (

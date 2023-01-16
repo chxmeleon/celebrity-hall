@@ -53,7 +53,11 @@ const Header = () => {
       <nav className="absolute top-0 left-0 z-40 w-full h-12 border-b bg-theme-50 border-b-theme-75">
         <div className="flex justify-between items-center w-full h-full">
           <a href="/home/rooms" className="flex ml-1 w-full h-full md:hidden">
-            <img src={logoImgMobile} alt="logo img" className="my-auto w-auto h-6" />
+            <img
+              src={logoImgMobile}
+              alt="logo img"
+              className="my-auto w-auto h-6"
+            />
           </a>
           <div className="flex justify-end items-center px-3 w-full h-full bg-theme-50">
             <div
@@ -62,14 +66,18 @@ const Header = () => {
             >
               {/* <button className={icons.heart}></button> */}
               {/* <button className={icons.chart}></button> */}
-              <button className={icons.refresh}></button>
+              <button
+                onClick={(e) => window.location.reload()}
+                className={icons.refresh}
+              ></button>
               <div className="inline-block relative mt-1.5">
                 <button className={icons.bar} onClick={onToggle}></button>
                 <div
-                  className={`${toggle
+                  className={`${
+                    toggle
                       ? 'h-fit opacity-100 scale-y-100 translate-y-0'
                       : 'h-0 opacity-0 scale-y-[28%] -translate-y-36'
-                    } absolute w-[17.5rem] min-h-fit max-h-fit  -translate-x-[16rem] -z-10 transition-all duration-300 ease-in-out bg-theme-50/95 border border-theme-75 border-y-transparent`}
+                  } absolute w-[17.5rem] min-h-fit max-h-fit  -translate-x-[16rem] -z-10 transition-all duration-300 ease-in-out bg-theme-50/95 border border-theme-75 border-y-transparent`}
                 >
                   <div
                     className="inline-block w-full text-lg"

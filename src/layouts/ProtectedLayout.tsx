@@ -5,11 +5,11 @@ import LeftSidebar from './LeftSidebar'
 import { useAuth } from '@/contexts/AuthContext'
 import SetupModal from '@/components/setup/SetupModal'
 import NoticeModal from '@/components/setup/NoticeModal'
+import { useActivedTab } from '@/hooks/rooms'
 
 const ProtectedLayout: React.FC = () => {
   const { auth, isExpired } = useAuth()
-
-  if (!auth || isExpired) {
+  if (!auth || isExpired ) {
     return <Navigate to="/login" replace />
   }
 

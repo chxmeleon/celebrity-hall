@@ -7,6 +7,7 @@ import defaultAvatar from '/user.png'
 
 const LeftSidebar = () => {
   const { data: user } = useQuery(GET_PROFILE)
+
   return (
     <div className="flex flex-shrink-0 px-1.5 w-14 text-center md:py-5 md:px-7 md:w-52 border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full">
@@ -14,25 +15,29 @@ const LeftSidebar = () => {
           <div className="flex">
             <img src={LogoImg} alt="logo image" className="m-auto w-24" />
           </div>
-          <div className="flex justify-between items-center pt-3 w-full">
-            <div className="pl-2 w-1/2">
-              <div className="flex overflow-hidden w-11 h-11 rounded-full">
-                <img
-                  src={user?.profile?.avatar ?? defaultAvatar}
-                  alt="user avatar"
-                  className="object-cover w-full h-full"
-                />
+          {user?.profile !== null ? (
+            <div className="flex justify-between items-center pt-3 w-full">
+              <div className="pl-2 w-1/2">
+                <div className="flex overflow-hidden w-11 h-11 rounded-full">
+                  <img
+                    src={user?.profile?.avatar ?? defaultAvatar}
+                    alt="user avatar"
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              </div>
+              <div className="m-auto w-2/3 h-11 text-sm">
+                <div className="m-auto w-2/3 text-left">
+                  <p className="truncate">{user?.profile?.nickname}</p>
+                  <p className="pt-1 truncate text-theme-300">
+                    {user?.profile?.balance}
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="m-auto w-2/3 h-11 text-sm">
-              <div className="m-auto w-2/3 text-left">
-                <p className="truncate">{user?.profile?.nickname}</p>
-                <p className="pt-1 truncate text-theme-300">
-                  {user?.profile?.balance}
-                </p>
-              </div>
-            </div>
-          </div>
+          ) : 
+          <div className="h-[56px]"></div>
+        }
         </section>
         <hr className="hidden border-t md:block border-t-theme-75" />
         <section className="my-2 w-full h-[190px]">
@@ -77,7 +82,6 @@ const LeftSidebar = () => {
                   defaultMessage="Rankings"
                 />
               </div>
-
               <div className="w-full h-full md:hidden">
                 <img
                   src="/icons/rankings.png"

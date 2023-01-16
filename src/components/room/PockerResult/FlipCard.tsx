@@ -18,15 +18,15 @@ const Card: React.FC<{
   }, [index, isOpen])
 
   return (
-    <div className={rotate90 ? 'rotate-90' : ''}>
+    <div className={rotate90 ? 'rotate-90 col-span-2 m-auto' : ''}>
       <div
         className={`${
           isCardOpen ? 'rotate-y-0' : '-rotate-y-180'
-        } transition-all duration-300 ease-in relative w-10`}
+        } transition-all duration-150 ease-in relative w-10 m-auto`}
       >
         <img src={`/cards/${item}.webp`} alt="pocker image" />
         <div
-          className={`absolute top-0 left-0 transition-all duration-300 ease-in ${
+          className={`absolute top-0 left-0 transition-all duration-150 ease-in ${
             isCardOpen ? 'z-[-1] rotate-y-90' : 'z-0 rotate-y-0'
           }`}
         >
@@ -54,7 +54,7 @@ const FlipCard: React.FC<{
 
   return (
     <div className="flex flex-grow justify-center pt-2 w-full">
-      <div className="flex flex-wrap justify-evenly w-5/6">
+      <div className="grid grid-cols-2 grid-flow-row auto-cols-fr px-2 w-full h-full">
         {data?.map((item, idx) => (
           <Card
             key={idx}

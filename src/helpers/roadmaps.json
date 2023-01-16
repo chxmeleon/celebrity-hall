@@ -1,0 +1,1225 @@
+{
+  "bead_road": {
+    "array": [
+      [
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "dealer",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "none",
+          "result": null
+        },
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "game_result": "player",
+          "pair_result": "dealer",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "player",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "player",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "game_result": "tie",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "player",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "tie",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "game_result": "dealer",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "dealer",
+          "pair_result": "none",
+          "result": null
+        },
+        {
+          "game_result": "player",
+          "pair_result": "none",
+          "result": null
+        },
+        null,
+        null,
+        null,
+        null
+      ]
+    ]
+  },
+  "big_eye_road": {
+    "graph": [
+      [
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        null,
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "repetition": false
+        },
+        {
+          "repetition": false
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "prediction": {
+      "dealer": false,
+      "player": true
+    }
+  },
+  "big_road": {
+    "array": [
+      [
+        {
+          "game_result": "player",
+          "order": 0,
+          "pair_result": "none",
+          "result": 7,
+          "tie_count": 0
+        },
+        {
+          "game_result": "dealer",
+          "order": 4,
+          "pair_result": "none",
+          "result": 5,
+          "tie_count": 0
+        },
+        {
+          "game_result": "player",
+          "order": 6,
+          "pair_result": "none",
+          "result": 8,
+          "tie_count": 0
+        },
+        {
+          "game_result": "dealer",
+          "order": 7,
+          "pair_result": "none",
+          "result": 9,
+          "tie_count": 0
+        },
+        {
+          "game_result": "player",
+          "order": 10,
+          "pair_result": "none",
+          "result": 9,
+          "tie_count": 0
+        },
+        {
+          "game_result": "dealer",
+          "order": 11,
+          "pair_result": "dealer",
+          "result": 8,
+          "tie_count": 0
+        },
+        {
+          "game_result": "player",
+          "order": 13,
+          "pair_result": "player",
+          "result": 8,
+          "tie_count": 0
+        },
+        {
+          "game_result": "dealer",
+          "order": 14,
+          "pair_result": "player",
+          "result": 9,
+          "tie_count": 0
+        },
+        {
+          "game_result": "player",
+          "order": 15,
+          "pair_result": "none",
+          "result": 5,
+          "tie_count": 0
+        },
+        {
+          "game_result": "dealer",
+          "order": 17,
+          "pair_result": "none",
+          "result": 9,
+          "tie_count": 0
+        },
+        {
+          "game_result": "player",
+          "order": 18,
+          "pair_result": "none",
+          "result": 6,
+          "tie_count": 0
+        },
+        {
+          "game_result": "dealer",
+          "order": 20,
+          "pair_result": "none",
+          "result": 9,
+          "tie_count": 0
+        },
+        {
+          "game_result": "player",
+          "order": 21,
+          "pair_result": "none",
+          "result": 8,
+          "tie_count": 0
+        },
+        {
+          "game_result": "dealer",
+          "order": 26,
+          "pair_result": "none",
+          "result": 8,
+          "tie_count": 1
+        },
+        {
+          "game_result": "player",
+          "order": 28,
+          "pair_result": "none",
+          "result": 7,
+          "tie_count": 0
+        },
+        {
+          "game_result": "dealer",
+          "order": 29,
+          "pair_result": "none",
+          "result": 8,
+          "tie_count": 0
+        },
+        {
+          "game_result": "player",
+          "order": 30,
+          "pair_result": "none",
+          "result": 9,
+          "tie_count": 0
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "game_result": "player",
+          "order": 1,
+          "pair_result": "none",
+          "result": 6,
+          "tie_count": 0
+        },
+        {
+          "game_result": "dealer",
+          "order": 5,
+          "pair_result": "none",
+          "result": 8,
+          "tie_count": 0
+        },
+        null,
+        {
+          "game_result": "dealer",
+          "order": 8,
+          "pair_result": "none",
+          "result": 8,
+          "tie_count": 0
+        },
+        null,
+        {
+          "game_result": "dealer",
+          "order": 12,
+          "pair_result": "none",
+          "result": 7,
+          "tie_count": 0
+        },
+        null,
+        null,
+        {
+          "game_result": "player",
+          "order": 16,
+          "pair_result": "none",
+          "result": 7,
+          "tie_count": 0
+        },
+        null,
+        {
+          "game_result": "player",
+          "order": 19,
+          "pair_result": "player",
+          "result": 3,
+          "tie_count": 0
+        },
+        null,
+        {
+          "game_result": "player",
+          "order": 22,
+          "pair_result": "none",
+          "result": 3,
+          "tie_count": 0
+        },
+        {
+          "game_result": "dealer",
+          "order": 27,
+          "pair_result": "none",
+          "result": 8,
+          "tie_count": 0
+        },
+        null,
+        null,
+        {
+          "game_result": "player",
+          "order": 31,
+          "pair_result": "none",
+          "result": 8,
+          "tie_count": 0
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "game_result": "player",
+          "order": 2,
+          "pair_result": "dealer",
+          "result": 9,
+          "tie_count": 1
+        },
+        null,
+        null,
+        {
+          "game_result": "dealer",
+          "order": 9,
+          "pair_result": "none",
+          "result": 9,
+          "tie_count": 0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "game_result": "player",
+          "order": 23,
+          "pair_result": "none",
+          "result": 9,
+          "tie_count": 0
+        },
+        null,
+        null,
+        null,
+        {
+          "game_result": "player",
+          "order": 32,
+          "pair_result": "none",
+          "result": 6,
+          "tie_count": 0
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "game_result": "player",
+          "order": 3,
+          "pair_result": "none",
+          "result": 9,
+          "tie_count": 0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "game_result": "player",
+          "order": 24,
+          "pair_result": "none",
+          "result": 6,
+          "tie_count": 0
+        },
+        null,
+        null,
+        null,
+        {
+          "game_result": "player",
+          "order": 33,
+          "pair_result": "none",
+          "result": 7,
+          "tie_count": 0
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "game_result": "player",
+          "order": 25,
+          "pair_result": "none",
+          "result": 8,
+          "tie_count": 0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "nice_road": null,
+    "real_array": [
+      {
+        "count": 4,
+        "game_result": "player"
+      },
+      {
+        "count": 2,
+        "game_result": "dealer"
+      },
+      {
+        "count": 1,
+        "game_result": "player"
+      },
+      {
+        "count": 3,
+        "game_result": "dealer"
+      },
+      {
+        "count": 1,
+        "game_result": "player"
+      },
+      {
+        "count": 2,
+        "game_result": "dealer"
+      },
+      {
+        "count": 1,
+        "game_result": "player"
+      },
+      {
+        "count": 1,
+        "game_result": "dealer"
+      },
+      {
+        "count": 2,
+        "game_result": "player"
+      },
+      {
+        "count": 1,
+        "game_result": "dealer"
+      },
+      {
+        "count": 2,
+        "game_result": "player"
+      },
+      {
+        "count": 1,
+        "game_result": "dealer"
+      },
+      {
+        "count": 5,
+        "game_result": "player"
+      },
+      {
+        "count": 2,
+        "game_result": "dealer"
+      },
+      {
+        "count": 1,
+        "game_result": "player"
+      },
+      {
+        "count": 1,
+        "game_result": "dealer"
+      },
+      {
+        "count": 4,
+        "game_result": "player"
+      }
+    ]
+  },
+  "cockroach_road": {
+    "graph": [
+      [
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        null,
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        null,
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "prediction": {
+      "dealer": false,
+      "player": true
+    }
+  },
+  "dealer_count": 13,
+  "dealer_pair_count": 2,
+  "natural_count": 0,
+  "player_count": 21,
+  "player_pair_count": 3,
+  "small_road": {
+    "graph": [
+      [
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        null,
+        {
+          "repetition": true
+        },
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "repetition": false
+        },
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "repetition": true
+        },
+        null,
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "repetition": false
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "prediction": {
+      "dealer": false,
+      "player": true
+    }
+  },
+  "super_6_count": 0,
+  "tie_count": 2,
+  "total_count": 36
+}
