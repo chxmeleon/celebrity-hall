@@ -7854,7 +7854,7 @@ export type GET_CURRENT_BACCARAT_ROOMVariables = Exact<{
 }>;
 
 
-export type GET_CURRENT_BACCARAT_ROOM = { baccaratRoom: { __typename: 'BaccaratRoom', roads: any | null, streamKey: string | null, streamName: string | null, status: string | null, streams: Array<{ __typename: 'Stream', createdAt: any | null, id: string, key: string | null, name: string | null, updatedAt: any | null }> | null, currentGame: { __typename: 'BaccaratGame', id: string, baccaratRoomId: string | null, playerWin: boolean | null, dealerWin: boolean | null, tieWin: boolean | null, playerPairWin: boolean | null, dealerPairWin: boolean | null, dealerPoints: number | null, playerPoints: number | null, gameNo: string | null, status: string | null, playerCards: Array<number> | null, dealerCards: Array<number> | null, shuffle: boolean | null, playerNeedAnother: boolean | null, dealerNeedAnother: boolean | null, dealerAmount: number | null, playerAmount: number | null, dealerPairAmount: number | null, playerPairAmount: number | null, tieAmount: number | null, updatedAt: any | null, endAt: any | null } | null, currentBaccaratBetRecord: { __typename: 'CurrentBaccaratBetRecord', id: string, playerAmount: number | null, playerDiffAmount: number | null, dealerAmount: number | null, dealerDiffAmount: number | null, tieAmount: number | null, tieDiffAmount: number | null, playerPairAmount: number | null, playerPairDiffAmount: number | null, dealerPairAmount: number | null, dealerPairDiffAmount: number | null, totalAmount: number | null, totalDiffAmount: number | null, hasResult: boolean | null, winLossAmount: number | null, gameNo: string | null, roomName: string | null } | null } | null };
+export type GET_CURRENT_BACCARAT_ROOM = { baccaratRoom: { __typename: 'BaccaratRoom', roads: any | null, streamKey: string | null, streamName: string | null, status: string | null, girl: { __typename: 'Girl', id: string, name: string | null, avatar: string | null } | null, streams: Array<{ __typename: 'Stream', createdAt: any | null, id: string, key: string | null, name: string | null, updatedAt: any | null }> | null, currentGame: { __typename: 'BaccaratGame', id: string, baccaratRoomId: string | null, playerWin: boolean | null, dealerWin: boolean | null, tieWin: boolean | null, playerPairWin: boolean | null, dealerPairWin: boolean | null, dealerPoints: number | null, playerPoints: number | null, gameNo: string | null, status: string | null, playerCards: Array<number> | null, dealerCards: Array<number> | null, shuffle: boolean | null, playerNeedAnother: boolean | null, dealerNeedAnother: boolean | null, dealerAmount: number | null, playerAmount: number | null, dealerPairAmount: number | null, playerPairAmount: number | null, tieAmount: number | null, updatedAt: any | null, endAt: any | null } | null, currentBaccaratBetRecord: { __typename: 'CurrentBaccaratBetRecord', id: string, playerAmount: number | null, playerDiffAmount: number | null, dealerAmount: number | null, dealerDiffAmount: number | null, tieAmount: number | null, tieDiffAmount: number | null, playerPairAmount: number | null, playerPairDiffAmount: number | null, dealerPairAmount: number | null, dealerPairDiffAmount: number | null, totalAmount: number | null, totalDiffAmount: number | null, hasResult: boolean | null, winLossAmount: number | null, gameNo: string | null, roomName: string | null } | null } | null };
 
 export type GET_CURRENT_ROOM_STREAMVariables = Exact<{
   baccaratRoomId: Scalars['ID'];
@@ -7883,6 +7883,13 @@ export type CREATE_BACCARAT_MESSAGEVariables = Exact<{
 
 
 export type CREATE_BACCARAT_MESSAGE = { createBaccaratMessage: { __typename: 'CreateBaccaratMessagePayload', baccaratMessage: { __typename: 'BaccaratMessage', id: string, type: string | null, body: string | null, createdAt: any | null, gift: string | null, user: { __typename: 'User', id: string, username: string | null, avatar: string | null } | null } | null, errors: Array<{ __typename: 'ModelError', message: string, attribute: string }> | null } | null };
+
+export type SEND_GIFTVariables = Exact<{
+  input: SendGiftInput;
+}>;
+
+
+export type SEND_GIFT = { sendGift: { __typename: 'SendGiftPayload', errors: Array<{ __typename: 'ModelError', attribute: string, message: string }> | null } | null };
 
 export type GET_PROFILEVariables = Exact<{ [key: string]: never; }>;
 

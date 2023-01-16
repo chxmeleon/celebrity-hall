@@ -45,7 +45,8 @@ export const initialValue = {
   playerPoints: 0,
   dealerCards: [],
   dealerPoints: 0,
-  result: ''
+  result: '',
+  status: ''
 }
 
 export const usePockerUpdate = (roomId: string | undefined) => {
@@ -56,20 +57,29 @@ export const usePockerUpdate = (roomId: string | undefined) => {
   >(GET_CURRENT_BACCARAT_ROOM, {
     variables: { baccaratRoomId: roomId ?? '' }
   })
-  
+
+  useEffect(() => {
+    refetch()
+  }, [refetch])
+
   const roads = data?.baccaratRoom?.roads
   const currentGame = useMemo(() => {
     return data?.baccaratRoom?.currentGame
   }, [data])
 
-  const [gameResult, setGameResult] = useState<any | null>(null)
-  const [gameState, setGameState] = useState<string | null | undefined>(null)
-  const [pockerState, dispatch] = useReducer(pockerReducer, gameResult)
-  console.log(pockerState)
+  const gqlData = {
+    playerCards: currentGame?.playerCards,
+    playerPoints: currentGame?.playerPoints,
+    dealerCards: currentGame?.dealerCards,
+    dealerPoints: currentGame?.dealerPoints,
+    result: '',
+    status: convertStatus(currentGame?.status)
+  }
 
-  useEffect(() => {
-    refetch()
-  }, [refetch])
+  const [gameState, setGameState] = useState<string | null | undefined>(
+    gqlData.status
+  )
+  const [pockerState, dispatch] = useReducer(pockerReducer, gqlData)
 
   useEffect(() => {
     const subscription = cable.subscriptions.create(
@@ -124,12 +134,12 @@ export const usePockerUpdate = (roomId: string | undefined) => {
 
   const currentGameState = useMemo(
     () => ({
+      data,
       gameState,
-      gameResult,
       roads,
       pockerState
     }),
-    [gameState, gameResult, roads, pockerState]
+    [data, gameState, roads, pockerState]
   )
 
   return { currentGameState }

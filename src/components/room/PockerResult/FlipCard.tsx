@@ -11,7 +11,7 @@ const Card: React.FC<{
     if (isOpen) {
       setTimeout(() => {
         setIsCardOpen(true)
-      }, 1000 * index + 1)
+      }, 500 * (index + 1))
     } else {
       setIsCardOpen(false)
     }
@@ -47,7 +47,7 @@ const FlipCard: React.FC<{
       data?.map((val, idx) => {
         setTimeout(() => {
           setIsOpen(true)
-        }, 1000 * idx + 1)
+        }, 500 * (idx + 1))
       })
     }
   }, [data, isOpen])

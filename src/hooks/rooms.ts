@@ -38,12 +38,12 @@ export const convertStatus = (status: string | null | undefined) => {
   }
 }
 
-export const useCurrentGame = (roomId: string | any) => {
+export const useCurrentGame = (roomId: string | undefined) => {
   const { data } = useQuery<
     types.GET_CURRENT_BACCARAT_ROOM,
     types.GET_CURRENT_BACCARAT_ROOMVariables
   >(GET_CURRENT_BACCARAT_ROOM, {
-    variables: { baccaratRoomId: roomId }
+    variables: { baccaratRoomId: roomId ?? '' }
   })
 
   const currentGame = useMemo(() => {
