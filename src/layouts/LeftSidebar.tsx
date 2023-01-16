@@ -7,7 +7,7 @@ import defaultAvatar from '/user.png'
 
 const LeftSidebar = () => {
   const { data: user } = useQuery(GET_PROFILE)
-
+  
   return (
     <div className="flex flex-shrink-0 px-1.5 w-14 text-center md:py-5 md:px-7 md:w-52 border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full">

@@ -109,6 +109,25 @@ export const GET_CURRENT_BACCARAT_ROOM = gql`
         updatedAt
         endAt
       }
+      currentBaccaratBetRecord {
+        id
+        playerAmount
+        playerDiffAmount
+        dealerAmount
+        dealerDiffAmount
+        tieAmount
+        tieDiffAmount
+        playerPairAmount
+        playerPairDiffAmount
+        dealerPairAmount
+        dealerPairDiffAmount
+        totalAmount
+        totalDiffAmount
+        hasResult
+        winLossAmount
+        gameNo
+        roomName
+      }
     }
   }
 `
@@ -145,6 +164,21 @@ export const GET_CURRENT_COUNTDOWN = gql`
         status
         updatedAt
         endAt
+      }
+    }
+  }
+`
+
+export const CREATE_BACCARAT_BET = gql`
+  mutation CREATE_BACCARAT_BET($input: CreateBaccaratBetInput!) {
+    createBaccaratBet(input: $input) {
+      errors {
+        attribute
+        message
+      }
+      wallet {
+        id
+        balance
       }
     }
   }
