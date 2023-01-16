@@ -26,7 +26,7 @@ const Rankings = () => {
         subTabSelected={subTabSelected}
         onSubTabSelected={setSubTabSelected}
       />
-      <div className="flex justify-between items-end sm:mt-[10px] m-auto sm:w-[1020px] w-[388px]">
+      <div className="flex justify-between items-end sm:mt-[10px] m-auto sm:w-[1020px] w-full">
         {data.newStreamerRanking[1] && (
           <RankingCard2
             username={data.newStreamerRanking[1].nickname}
@@ -49,7 +49,7 @@ const Rankings = () => {
           />
         )}
       </div>
-      <div className="flex sm:flex-row flex-col sm:mt-[60px] mt-[16px] m-auto sm:w-[1445px] w-[388px]">
+      <div className="flex sm:flex-row flex-col sm:mt-[60px] mt-[16px] m-auto sm:w-[1445px] w-full px-[6px]">
         {data.newStreamerRanking[3] && (
           <RankingCardOther
             rank={4}
