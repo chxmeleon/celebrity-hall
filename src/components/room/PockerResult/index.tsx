@@ -23,6 +23,7 @@ const PockerResult: React.FC = () => {
     }
   }, [gameState])
   
+  
   const resultContainerStyle = cx(
     'transition-opacity duration-300 ease-in flex w-full h-full rounded-xl border bg-theme-50/80 backdrop-blur-sm border-theme-150',
     isShowPocker ? '' : 'opacity-0',

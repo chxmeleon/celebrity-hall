@@ -50,13 +50,13 @@ export const initialValue = {
 
 export const usePockerUpdate = (roomId: string | undefined) => {
   const { cable } = useActionCable()
-  const { data } = useQuery<
+  const { data, refetch } = useQuery<
     types.GET_CURRENT_BACCARAT_ROOM,
     types.GET_CURRENT_BACCARAT_ROOMVariables
   >(GET_CURRENT_BACCARAT_ROOM, {
     variables: { baccaratRoomId: roomId ?? '' }
   })
-
+  
   const roads = data?.baccaratRoom?.roads
   const currentGame = useMemo(() => {
     return data?.baccaratRoom?.currentGame
@@ -65,13 +65,11 @@ export const usePockerUpdate = (roomId: string | undefined) => {
   const [gameResult, setGameResult] = useState<any | null>(null)
   const [gameState, setGameState] = useState<string | null | undefined>(null)
   const [pockerState, dispatch] = useReducer(pockerReducer, gameResult)
+  console.log(pockerState)
 
   useEffect(() => {
-    if (data) {
-      setGameResult(currentGame)
-      setGameState(convertStatus(currentGame?.status))
-    }
-  }, [data, currentGame])
+    refetch()
+  }, [refetch])
 
   useEffect(() => {
     const subscription = cable.subscriptions.create(

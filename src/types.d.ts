@@ -7854,7 +7854,7 @@ export type GET_CURRENT_BACCARAT_ROOMVariables = Exact<{
 }>;
 
 
-export type GET_CURRENT_BACCARAT_ROOM = { baccaratRoom: { __typename: 'BaccaratRoom', roads: any | null, streamKey: string | null, streamName: string | null, status: string | null, streams: Array<{ __typename: 'Stream', createdAt: any | null, id: string, key: string | null, name: string | null, updatedAt: any | null }> | null, currentGame: { __typename: 'BaccaratGame', id: string, baccaratRoomId: string | null, playerWin: boolean | null, dealerWin: boolean | null, tieWin: boolean | null, playerPairWin: boolean | null, dealerPairWin: boolean | null, dealerPoints: number | null, playerPoints: number | null, gameNo: string | null, status: string | null, playerCards: Array<number> | null, dealerCards: Array<number> | null, shuffle: boolean | null, playerNeedAnother: boolean | null, dealerNeedAnother: boolean | null, dealerAmount: number | null, playerAmount: number | null, dealerPairAmount: number | null, playerPairAmount: number | null, tieAmount: number | null, updatedAt: any | null, endAt: any | null } | null } | null };
+export type GET_CURRENT_BACCARAT_ROOM = { baccaratRoom: { __typename: 'BaccaratRoom', roads: any | null, streamKey: string | null, streamName: string | null, status: string | null, streams: Array<{ __typename: 'Stream', createdAt: any | null, id: string, key: string | null, name: string | null, updatedAt: any | null }> | null, currentGame: { __typename: 'BaccaratGame', id: string, baccaratRoomId: string | null, playerWin: boolean | null, dealerWin: boolean | null, tieWin: boolean | null, playerPairWin: boolean | null, dealerPairWin: boolean | null, dealerPoints: number | null, playerPoints: number | null, gameNo: string | null, status: string | null, playerCards: Array<number> | null, dealerCards: Array<number> | null, shuffle: boolean | null, playerNeedAnother: boolean | null, dealerNeedAnother: boolean | null, dealerAmount: number | null, playerAmount: number | null, dealerPairAmount: number | null, playerPairAmount: number | null, tieAmount: number | null, updatedAt: any | null, endAt: any | null } | null, currentBaccaratBetRecord: { __typename: 'CurrentBaccaratBetRecord', id: string, playerAmount: number | null, playerDiffAmount: number | null, dealerAmount: number | null, dealerDiffAmount: number | null, tieAmount: number | null, tieDiffAmount: number | null, playerPairAmount: number | null, playerPairDiffAmount: number | null, dealerPairAmount: number | null, dealerPairDiffAmount: number | null, totalAmount: number | null, totalDiffAmount: number | null, hasResult: boolean | null, winLossAmount: number | null, gameNo: string | null, roomName: string | null } | null } | null };
 
 export type GET_CURRENT_ROOM_STREAMVariables = Exact<{
   baccaratRoomId: Scalars['ID'];
@@ -7870,6 +7870,13 @@ export type GET_CURRENT_COUNTDOWNVariables = Exact<{
 
 export type GET_CURRENT_COUNTDOWN = { baccaratRoom: { __typename: 'BaccaratRoom', id: string, latency: number | null, waitingBetSeconds: number | null, currentGame: { __typename: 'BaccaratGame', id: string, status: string | null, updatedAt: any | null, endAt: any | null } | null } | null };
 
+export type CREATE_BACCARAT_BETVariables = Exact<{
+  input: CreateBaccaratBetInput;
+}>;
+
+
+export type CREATE_BACCARAT_BET = { createBaccaratBet: { __typename: 'CreateBaccaratBetPayload', errors: Array<{ __typename: 'ModelError', attribute: string, message: string }> | null, wallet: { __typename: 'Wallet', id: string, balance: number | null } } | null };
+
 export type CREATE_BACCARAT_MESSAGEVariables = Exact<{
   input: CreateBaccaratMessageInput;
 }>;
@@ -7882,9 +7889,36 @@ export type GET_PROFILEVariables = Exact<{ [key: string]: never; }>;
 
 export type GET_PROFILE = { profile: { __typename: 'Profile', id: string, balance: number | null, username: string | null, avatar: string | null, totalEffectiveAmount: number | null, totalEffectiveXimaAmount: number | null, ximaTotal: number | null, winLimit: number | null, totalWinAmount: number | null, hideWinPoints: boolean | null, dividend: number | null, nickname: string | null, tableLimitMin: number | null, tableLimitMax: number | null, beta: boolean | null, isTrial: boolean, lineNotifyToken: string | null, dragonCount: number | null, jwtToken: string | null, platformDisableAdult: boolean | null, platformDisableCustomerService: boolean | null } | null };
 
+export type getStreamerRankingVariables = Exact<{
+  range: Scalars['String'];
+}>;
+
+
+export type getStreamerRanking = { newStreamerRanking: Array<{ __typename: 'Streamer', id: string, nickname: string, likesCount: number, avatar: string | null }> | null };
+
+export type getUserRankingVariables = Exact<{
+  type: Scalars['String'];
+  range: Scalars['String'];
+}>;
+
+
+export type getUserRanking = { userRanking: any | null };
+
 export type GET_ROOM_STREAMVariables = Exact<{
   baccaratRoomId: Scalars['ID'];
 }>;
 
 
 export type GET_ROOM_STREAM = { baccaratRoom: { __typename: 'BaccaratRoom', name: string | null, waitingBetSeconds: number | null, streamName: string | null, streamKey: string | null, webhookUrl: string | null, zoomType: string | null, id: string, streams: Array<{ __typename: 'Stream', createdAt: any | null, id: string, key: string | null, name: string | null, updatedAt: any | null }> | null } | null };
+
+export type StreamersVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Streamers = { streamers: Array<{ __typename: 'Streamer', avatar: string | null, id: string, likesCount: number, nickname: string, online: boolean, username: string, winRate: number, stream: { __typename: 'Stream', id: string, key: string | null, name: string | null } }> };
+
+export type StreamerVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type Streamer = { streamer: { __typename: 'Streamer', avatar: string | null, id: string, likesCount: number, nickname: string, online: boolean, username: string, winRate: number, stream: { __typename: 'Stream', id: string, key: string | null, name: string | null } } };
