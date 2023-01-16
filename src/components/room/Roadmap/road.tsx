@@ -81,7 +81,7 @@ export const CockroachRecordTile: React.FC<TileProps> = ({ status }) => {
 }
 
 export const BaseGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <div className="relative w-full h-full border-r border-b border-gray-500/90">
+  <div className="relative w-full h-full border-r border-gray-500/90">
     <div className="grid grid-cols-10 grid-rows-6 grid-flow-col auto-cols-fr w-full h-full">
       {children}
     </div>
@@ -101,7 +101,7 @@ export const BigRoadGrid: React.FC<React.PropsWithChildren> = ({
 export const SmallRoadGrid: React.FC<React.PropsWithChildren> = ({
   children
 }) => (
-  <div className="relative w-full h-full border-r border-b border-gray-500/90">
+  <div className="relative w-full h-full border-r border-gray-500/90">
     <div className="grid grid-rows-6 grid-flow-col auto-cols-fr w-full h-full grid-cols-15">
       {children}
     </div>

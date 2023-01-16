@@ -40,23 +40,23 @@ export const SmallRoad: React.FC = () => {
 
 export const BigEyeRoad: React.FC = () => {
   return (
-    <Road.BaseGrid>
+    <Road.SmallRoadGrid>
       {Road.smallArray.map((item, idx) => {
         return <Road.BigEyeRecordTile key={`big-eye-${idx}`} status={item} />
       })}
-    </Road.BaseGrid>
+    </Road.SmallRoadGrid>
   )
 }
 
 export const CockroachRoad = () => {
   return (
-    <Road.BaseGrid>
+    <Road.SmallRoadGrid>
       {Road.smallArray.map((item, idx) => {
         return (
           <Road.CockroachRecordTile key={`cockroach-${idx}`} status={item} />
         )
       })}
-    </Road.BaseGrid>
+    </Road.SmallRoadGrid>
   )
 }
 
@@ -67,7 +67,7 @@ export const AskGrid: React.FC = () => {
   const roadsTotalData = currentGame?.baccaratRoom?.roads ?? ''
 
   return (
-    <div className="grid grid-cols-1 w-full h-full border-r border-b grid-rows-8 border-gray-500/90">
+    <div className="grid grid-cols-1 w-full h-full border-r grid-rows-8 border-gray-500/90">
       {totalCount?.map((item, idx) => {
         const key = askMapper[idx].value
         const askGridContent = cx(

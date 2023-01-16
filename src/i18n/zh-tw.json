@@ -93,7 +93,7 @@
   "common.inputMessage": "輸入對話",
   "common.setNickname": "設定暱稱",
   "common.giftSent": "禮物已送出",
-  "common.insufficientBalance": "餘額不足，剩餘{{ balance }}",
+  "common.insufficientBalance": "餘額不足，剩餘",
   "common.gamesCount": "局數",
   "common.search": "搜尋",
   "common.today": "今日",

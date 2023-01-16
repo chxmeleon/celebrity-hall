@@ -35,7 +35,7 @@ interface CardProps {
 const CardWidget: React.FC<CardProps> = ({ role }) => {
   const { id } = useParams()
   const { currentGameState } = usePockerUpdate(id)
-  const { gameResult, roads, pockerState } = currentGameState
+  const { pockerState } = currentGameState
   const isWin = pockerState?.result?.[`${role}Win`]
 
   const titleStyle = cx(
@@ -50,7 +50,7 @@ const CardWidget: React.FC<CardProps> = ({ role }) => {
   )
 
   const winResultImg = cx(
-    'flex flex-shrink-0 justify-evenly items-center px-4 w-full h-1/6 text-2xl font-medium text-[#eddc6a] transition-all duration-300 ease-in-out',
+    'flex flex-shrink-0 justify-evenly items-center px-4 pb-1 w-full h-1/6 text-2xl font-medium text-[#eddc6a] transition-all duration-300 ease-in-out',
     isWin ? '' : 'opacity-0'
   )
 

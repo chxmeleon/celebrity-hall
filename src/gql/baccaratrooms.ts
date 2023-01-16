@@ -77,6 +77,11 @@ export const GET_CURRENT_BACCARAT_ROOM = gql`
       streamKey
       streamName
       status
+      girl {
+        id
+        name
+        avatar
+      }
       streams {
         createdAt
         id

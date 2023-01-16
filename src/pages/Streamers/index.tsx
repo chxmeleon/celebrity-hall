@@ -17,8 +17,8 @@ const Streamers = () => {
   }
 
   return (
-    <div className="flex m-[50px]">
-      <div className="flex flex-wrap sm:w-[900px]">
+    <div className="flex p-[50px] h-full w-full bg-red-400">
+      <div className="flex flex-wrap sm:w-[900px] h-full ">
         <StreamersCards data={data.streamers} onStreamChanged={setStream} />
       </div>
       <div className="hidden sm:block">
