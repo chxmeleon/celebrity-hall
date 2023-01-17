@@ -13,8 +13,8 @@ const icons = {
   document: cx`i-heroicons-document-text-solid text-2xl hover:text-amber-200`,
   chart: cx`i-heroicons-chart-pie-solid text-[24px] hover:text-amber-200`,
   global: cx`i-heroicons-cog-8-tooth text-2xl hover:text-amber-200`,
-  refresh: cx`i-mdi-refresh text-2xl hover:text-amber-200 mt-0.5`,
-  bar: cx`i-heroicons-bars-3-solid text-2xl hover:text-amber-200 `,
+  refresh: cx`i-mdi-refresh text-2xl hover:text-amber-200`,
+  bar: cx`i-heroicons-bars-3-solid text-2xl hover:text-amber-200 mt-1.5`,
   out: cx`i-heroicons-arrow-right-on-rectangle-solid text-2xl`,
   gear: cx`i-heroicons-cog-6-tooth-solid text-2xl`,
   notice: cx`i-heroicons-megaphone-solid text-2xl`,
@@ -70,7 +70,7 @@ const Header = () => {
                 onClick={(e) => window.location.reload()}
                 className={icons.refresh}
               ></button>
-              <div className="inline-block relative mt-1.5">
+              <div className="relative">
                 <button className={icons.bar} onClick={onToggle}></button>
                 <div
                   className={`${

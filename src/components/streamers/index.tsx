@@ -8,13 +8,13 @@ import { ResponsiveContext } from '@/hooks/useResponsive'
 
 const Win: React.FC<{ percent: number }> = ({ percent }) => {
   return (
-    <div className="flex items-center sm:mr-[32px] mr-[10px]">
+    <div className="flex items-center mr-[10px] sm:mr-[32px]">
       <span className="rounded-full bg-[#FF5F85] w-[25px] h-[25px] flex">
         <div className="m-auto text-[14px]">
           <FormattedMessage id="streamers.win" defaultMessage="勝" />
         </div>
       </span>
-      <span className="sm:ml-[10px] ml-[5px] text-[16px]">
+      <span className="ml-[5px] text-[16px] sm:ml-[10px]">
         {Math.round(percent * 100) / 100}%
       </span>
     </div>
@@ -31,7 +31,7 @@ const Heart: React.FC<{ like: number }> = ({ like }) => {
           alt="heart"
         />
       </span>
-      <span className="sm:ml-[10px] ml-[5px] text-[16px]">{like}</span>
+      <span className="ml-[5px] text-[16px] sm:ml-[10px]">{like}</span>
     </div>
   )
 }
@@ -40,11 +40,13 @@ export const StreamersCard: React.FC<{
   item: any
   onStreamChanged: Dispatch<SetStateAction<streamType>>
 }> = ({ item, onStreamChanged }) => {
+  console.log(item?.online)
+
   return (
     <div
       key={item.id}
-      className={`sm:mr-[40px] sm:mb-[55px] mb-[35px] relative ${
-        item.online ? 'cursor-pointer' : 'pointer-events-none'
+      className={`px-2 relative ${
+        item.online ? 'cursor-pointer' : 'cursor-not-allowed'
       }`}
       onClick={() =>
         onStreamChanged({
@@ -58,12 +60,17 @@ export const StreamersCard: React.FC<{
           <div>● Live</div>
         </div>
       )}
-      <img
-        className="sm:w-[401px] sm:h-[355px] w-[278px] h-[246px] object-contain"
-        src={item.avatar}
-      />
-      <div className="flex items-center justify-between">
-        <div className="sm:text-[32px] text-[24px]">{item.nickname}</div>
+      <div className="relative">
+        {!item?.online && (
+          <div className="absolute w-full h-full bg-black/60 pointer-events-none"></div>
+        )}
+        <img
+          className="object-cover object-center w-[278px] h-[246px] sm:w-[401px] sm:h-[355px]"
+          src={item.avatar}
+        />
+      </div>
+      <div className="flex justify-between items-center py-1 px-4">
+        <div className="text-[24px] sm:text-[32px]">{item.nickname}</div>
         <div className="flex">
           <Win percent={item.winRate} />
           <Heart like={item.likesCount} />
@@ -82,8 +89,8 @@ export const StreamersCards: React.FC<{
   if (isMobile) {
     return (
       <>
-        {data.map((item) => (
-          <Link
+        {data.map((item, idx) => (
+          <Link key={idx}
             to={`/home/streamers/${item.id}`}
             className={!item.online ? `pointer-events-none` : ''}
           >
@@ -96,8 +103,8 @@ export const StreamersCards: React.FC<{
 
   return (
     <>
-      {data.map((item) => (
-        <StreamersCard item={item} onStreamChanged={onStreamChanged} />
+      {data.map((item, idx) => (
+        <StreamersCard key={idx} item={item} onStreamChanged={onStreamChanged} />
       ))}
     </>
   )

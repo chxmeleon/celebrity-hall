@@ -81,7 +81,8 @@ module.exports = {
       aspectRatio: {
         '4/3': '4 / 3',
         film: '2 / 1',
-        cinema: '2.35 / 1'
+        cinema: '2.35 / 1',
+        portrait: '9 / 16'
       },
       screens: {
         '1.5xl': '1440px',

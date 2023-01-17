@@ -4,10 +4,30 @@ import { FormattedMessage } from 'react-intl'
 import { useQuery } from '@apollo/client'
 import { GET_PROFILE } from '@/gql/profile'
 import defaultAvatar from '/user.png'
+import { useProfile } from '@/hooks/profile'
+import { useActionCable } from '@/contexts/ActionCableContext'
+import { useEffect, useState } from 'react'
 
 const LeftSidebar = () => {
   const { data: user } = useQuery(GET_PROFILE)
-  
+  const { cable } = useActionCable()
+  const [userData, setUserData] = useState('')
+
+  useEffect(() => {
+    const subscription = cable.subscriptions.create(
+      { channel: 'ProfileChannel', profileId: '3143' },
+      {
+        received: (data: any) => {
+          console.log(data);
+          
+        }
+      }
+    )
+    return () => {
+      subscription.unsubscribe()
+    }
+  }, [cable])
+
   return (
     <div className="flex flex-shrink-0 px-1.5 w-14 text-center md:py-5 md:px-7 md:w-52 border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full">
@@ -35,9 +55,9 @@ const LeftSidebar = () => {
                 </div>
               </div>
             </div>
-          ) : 
-          <div className="h-[56px]"></div>
-        }
+          ) : (
+            <div className="h-[56px]"></div>
+          )}
         </section>
         <hr className="hidden border-t md:block border-t-theme-75" />
         <section className="my-2 w-full h-[190px]">

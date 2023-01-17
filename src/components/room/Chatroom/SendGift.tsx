@@ -16,11 +16,6 @@ interface GiftPorps {
   onClick: React.MouseEventHandler<HTMLDivElement>
 }
 
-type InputProps = {
-  baccaratRoomId: string | undefined
-  gift: string
-}
-
 const SendGift: React.FC<GiftPorps> = ({
   clickRef,
   onClick,
@@ -46,15 +41,18 @@ const SendGift: React.FC<GiftPorps> = ({
       e.preventDefault()
     } else {
       setIsDisable(false)
-      const result = await createGift({
-        variables: {
-          input: {
-            baccaratRoomId: roomId.id ?? '',
-            gift: gift
+      try {
+        await createGift({
+          variables: {
+            input: {
+              baccaratRoomId: roomId.id ?? '',
+              gift: gift
+            }
           }
-        }
-      })
-      console.log(result)
+        })
+      } catch (error) {
+        console.log(error)
+      }
     }
     setIsShow(false)
   }
@@ -124,7 +122,9 @@ const SendGift: React.FC<GiftPorps> = ({
                     id="creditRecord.send_gift"
                     defaultMessage="Send Gift"
                   />
-                  <FormattedMessage id={`gift.${gift}`} defaultMessage=" " />
+                  <p className="px-1.5 font-medium text-rose-500">
+                    <FormattedMessage id={`gift.${gift}`} defaultMessage=" " />
+                  </p>
                   <FormattedMessage id="common.for" defaultMessage="for" />
                   <p>{streamer?.name}</p>
                 </>
