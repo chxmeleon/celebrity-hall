@@ -45,7 +45,7 @@ const CardWidget: React.FC<CardProps> = ({ role }) => {
 
   const pockerContainer = cx(
     'flex flex-col items-center py-1 px-2 w-full h-full  border-2',
-    isWin ? 'border-theme-300 bg-theme-300/20' : 'border-transparent',
+    isWin ? 'border-theme-300 bg-theme-300/20 win-shadow' : 'border-transparent',
     cardsMapper[role].side
   )
 

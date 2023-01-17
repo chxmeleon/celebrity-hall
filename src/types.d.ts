@@ -7891,6 +7891,13 @@ export type SEND_GIFTVariables = Exact<{
 
 export type SEND_GIFT = { sendGift: { __typename: 'SendGiftPayload', errors: Array<{ __typename: 'ModelError', attribute: string, message: string }> | null } | null };
 
+export type SEND_BACCARAT_GIFTVariables = Exact<{
+  input: SendBaccaratGiftInput;
+}>;
+
+
+export type SEND_BACCARAT_GIFT = { sendBaccaratGift: { __typename: 'SendBaccaratGiftPayload', errors: Array<{ __typename: 'ModelError', message: string, attribute: string }> | null } | null };
+
 export type GET_PROFILEVariables = Exact<{ [key: string]: never; }>;
 
 

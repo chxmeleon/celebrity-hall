@@ -33,3 +33,14 @@ export const SEND_GIFT = gql`
     }
   }
 `
+
+export const SEND_BACCARAT_GIFT = gql`
+  mutation SEND_BACCARAT_GIFT($input: SendBaccaratGiftInput!) {
+    sendBaccaratGift(input: $input) {
+      errors {
+        message
+        attribute
+      }
+    }
+  }
+`
