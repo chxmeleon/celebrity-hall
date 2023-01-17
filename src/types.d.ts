@@ -7901,7 +7901,32 @@ export type SEND_BACCARAT_GIFT = { sendBaccaratGift: { __typename: 'SendBaccarat
 export type GET_PROFILEVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GET_PROFILE = { profile: { __typename: 'Profile', id: string, balance: number | null, username: string | null, avatar: string | null, totalEffectiveAmount: number | null, totalEffectiveXimaAmount: number | null, ximaTotal: number | null, winLimit: number | null, totalWinAmount: number | null, hideWinPoints: boolean | null, dividend: number | null, nickname: string | null, tableLimitMin: number | null, tableLimitMax: number | null, beta: boolean | null, isTrial: boolean, lineNotifyToken: string | null, dragonCount: number | null, jwtToken: string | null, platformDisableAdult: boolean | null, platformDisableCustomerService: boolean | null } | null };
+export type GET_PROFILE = { profile: { __typename: 'Profile', id: string, balance: number | null, username: string | null, avatar: string | null, totalEffectiveAmount: number | null, dividend: number | null, nickname: string | null, creditBalance: number | null } | null };
+
+export type GET_WALLETVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GET_WALLET = { wallet: { __typename: 'Wallet', id: string, balance: number | null, creditBalance: number | null, totalEffectiveAmount: number | null, totalEffectiveXimaAmount: number | null } | null };
+
+export type liveBaccaratBetRecordsVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>;
+  perPage?: InputMaybe<Scalars['Int']>;
+  startDate: Scalars['ISO8601DateTime'];
+  endDate: Scalars['ISO8601DateTime'];
+}>;
+
+
+export type liveBaccaratBetRecords = { liveBaccaratBetRecords: { __typename: 'BaccaratBetRecordCollection', totalPages: number | null, currentPage: number | null, records: Array<{ __typename: 'BaccaratBetRecord', id: string, betNo: string | null, totalBet: number | null, winLossAmount: number | null, createdAt: any | null, totalWinAmount: number | null }> | null } | null };
+
+export type GET_SENDGIFTRECORDSVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>;
+  perPage?: InputMaybe<Scalars['Int']>;
+  startDate: Scalars['ISO8601DateTime'];
+  endDate: Scalars['ISO8601DateTime'];
+}>;
+
+
+export type GET_SENDGIFTRECORDS = { sendGiftRecords: { __typename: 'SendGiftRecordCollection', totalCount: number | null, totalPages: number | null, currentCount: number | null, currentPage: number | null, records: Array<{ __typename: 'SendGift', id: string, info: any | null, createdAt: any | null }> | null } | null };
 
 export type getStreamerRankingVariables = Exact<{
   range: Scalars['String'];

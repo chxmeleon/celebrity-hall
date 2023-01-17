@@ -3,22 +3,21 @@ import { FormattedMessage } from 'react-intl'
 import { usePockerUpdate } from '@/hooks/pocker'
 import { useParams } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
-import { useContext, useEffect, useState } from 'react'
-import GameStateContext from '@/contexts/GameStateContext'
+import { useEffect, useState } from 'react'
 
 const PockerResult: React.FC = () => {
   const { id } = useParams()
   const { currentGameState } = usePockerUpdate(id)
   const { pockerState, gameState } = currentGameState
   const [isShowPocker, setIsShowPocker] = useState(false)
-  const { room11 } = useContext(GameStateContext)
 
   useEffect(() => {
     if (
       gameState !== 'START_BET' &&
       gameState !== 'STOP_BET' &&
       gameState !== 'UPDATE_AMOUNT' &&
-      gameState !== 'SHUFFLE'
+      gameState !== 'SHUFFLE' &&
+      gameState !== undefined || null  
     ) {
       setIsShowPocker(true)
     } else {

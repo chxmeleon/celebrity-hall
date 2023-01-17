@@ -23,6 +23,7 @@ export const BetButton: React.FC<React.PropsWithChildren<LoginButtonProps>> = ({
 }) => {
   return (
     <button
+      onClick={onClick}
       className={bts({
         intent: 'outlineButton',
         round: 'full',

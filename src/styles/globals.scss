@@ -5,6 +5,7 @@
 @layer components {
   html {
     @apply scroll-smooth;
+
     & body {
       @apply overscroll-none bg-gradient-to-br bg-theme-50  text-gray-300;
     }
@@ -78,7 +79,7 @@
     animation: fliper-horizontal 1s infinite;
   }
 
-  .tie-win {
+  .win-shadow {
     box-shadow: rgba(252, 237, 149, 0.96) 0px 0px 23px 4px;
   }
 }

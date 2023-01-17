@@ -18,14 +18,20 @@ export const pockerReducer = (state: any, action: any) => {
     case 'PLAYER_DRAW_THIRD':
       return {
         ...state,
-        playerCards: [...state.playerCards, action?.playload?.playerCards[2]],
+        playerCards: [
+          ...(state?.playerCards || []),
+          action?.playload?.playerCards[2]
+        ],
         playerPoints: action?.playload?.playerPoints
       }
 
     case 'DEALER_DRAW_THIRD':
       return {
         ...state,
-        dealerCards: [...state.dealerCards, action?.playload?.dealerCards[2]],
+        dealerCards: [
+          ...(state?.dealerCards || []),
+          action?.playload?.dealerCards[2]
+        ],
         dealerPoints: action?.playload?.dealerPoints
       }
 
@@ -37,6 +43,9 @@ export const pockerReducer = (state: any, action: any) => {
 
     case 'RESET':
       return initialValue
+
+    default:
+      return state
   }
 }
 

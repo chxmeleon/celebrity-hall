@@ -18,11 +18,11 @@ const Card: React.FC<{
   }, [index, isOpen])
 
   return (
-    <div className={rotate90 ? 'rotate-90 col-span-2 m-auto' : ''}>
+    <div className={rotate90 ? 'rotate-90 col-span-2 m-auto pl-1' : ''}>
       <div
         className={`${
           isCardOpen ? 'rotate-y-0' : '-rotate-y-180'
-        } transition-all duration-150 ease-in relative w-10 m-auto`}
+        } transition-all duration-150 ease-in relative w-12 m-auto`}
       >
         <img src={`/cards/${item}.webp`} alt="pocker image" />
         <div

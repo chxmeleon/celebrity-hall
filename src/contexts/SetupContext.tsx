@@ -14,17 +14,19 @@ interface SetupContextData {
 
 const SetupContext = createContext<SetupContextData>({} as SetupContextData)
 
-export const SetupProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const SetupProvider: React.FC<React.PropsWithChildren> = ({
+  children
+}) => {
   const {
     isShow: isShowSetup,
     onOpenModal: openSetup,
-    onCloseModal: closeSetup,
+    onCloseModal: closeSetup
   } = useModal()
 
   const {
     isShow: isShowNotice,
     onOpenModal: openNotice,
-    onCloseModal: closeNotice,
+    onCloseModal: closeNotice
   } = useModal()
 
   const [isRegular, setIsRegular] = useState(false)
@@ -39,9 +41,17 @@ export const SetupProvider: React.FC<React.PropsWithChildren> = ({ children }) =
       closeSetup,
       openNotice,
       closeNotice,
-      handleRegularToggle,
+      handleRegularToggle
     }),
-    [isShowSetup, isShowNotice, isRegular, openSetup, closeSetup, openNotice, closeNotice]
+    [
+      isShowSetup,
+      isShowNotice,
+      isRegular,
+      openSetup,
+      closeSetup,
+      openNotice,
+      closeNotice
+    ]
   )
 
   return <SetupContext.Provider value={value}>{children}</SetupContext.Provider>
