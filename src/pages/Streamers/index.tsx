@@ -18,14 +18,12 @@ const Streamers = () => {
 
   return (
     <div className="flex justify-between p-8 w-full h-full">
-      <div className="grid overflow-y-auto grid-cols-1 grid-flow-row gap-4 w-2/3 h-full md:grid-cols-2">
+      <div className="grid overflow-y-auto grid-cols-1 grid-flow-row gap-4 sm:w-2/3 h-full md:grid-cols-2">
         <StreamersCards data={data.streamers} onStreamChanged={setStream} />
       </div>
       <div className="hidden w-1/3 sm:block">
         {stream.name && stream.key && (
-          <div className="overflow-hidden w-auto h-full">
-            <WebRTCStream streamName={stream.name} streamKey={stream.key} />
-          </div>
+          <WebRTCStream streamName={stream.name} streamKey={stream.key} />
         )}
       </div>
     </div>

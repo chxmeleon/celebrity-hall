@@ -10,6 +10,8 @@ export interface RoomStreamProps {
   autoSize?: boolean
   isWebRTC?: boolean
   isLoading?: boolean
+  width?: string
+  height?: string
 }
 
 export const NodePlayerStream: React.FC<RoomStreamProps> = ({
@@ -58,7 +60,9 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
   soundOn,
   videoOn,
   autoSize,
-  isLoading
+  isLoading,
+  height,
+  width
 }) => {
   const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null)
 

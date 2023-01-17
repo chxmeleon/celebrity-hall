@@ -18,7 +18,7 @@ export const RankingCard3: React.FC<{
   avatarUrl: string | null
 }> = ({ likesCount, username, avatarUrl }) => {
   return (
-    <div className="relative rounded-[15px] sm:w-[320px] w-[121px] sm:h-[301px] h-[146px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-300 to-rankingBorder-301">
+    <div className="relative rounded-[15px] sm:w-[320px] w-[101px] sm:h-[301px] h-[146px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-300 to-rankingBorder-301">
       <div className="flex flex-col justify-between h-full bg-gradient-to-tl from-rankingbg-100  via-rankingbg-200 to-rankingbg-300 text-white rounded-[15px]">
         <Rank rank="3rd" />
         <div className="m-auto flex flex-col items-center">
@@ -39,7 +39,7 @@ export const RankingCard2: React.FC<{
   avatarUrl: string | null
 }> = ({ likesCount, username, avatarUrl }) => {
   return (
-    <div className="relative rounded-[15px] sm:w-[320px] w-[121px] sm:h-[329px] h-[156px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-200 to-rankingBorder-201">
+    <div className="relative rounded-[15px] sm:w-[320px] w-[101px] sm:h-[329px] h-[156px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-200 to-rankingBorder-201">
       <div className="flex flex-col justify-between h-full bg-gradient-to-tl from-rankingbg-100  via-rankingbg-200 to-rankingbg-300 text-white rounded-[15px]">
         <Rank rank="2nd" />
         <div className="m-auto flex flex-col items-center">
@@ -60,7 +60,7 @@ export const RankingCard1: React.FC<{
   avatarUrl: string | null
 }> = ({ likesCount, username, avatarUrl }) => {
   return (
-    <div className="relative rounded-[15px] sm:w-[320px] w-[121px] sm:h-[375px] h-[170px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-100 to-rankingBorder-101">
+    <div className="relative rounded-[15px] sm:w-[320px] w-[101px] sm:h-[375px] h-[170px] mx-auto  mt-10 bg-gradient-to-br p-[4px] from-rankingBorder-100 to-rankingBorder-101">
       <div className="flex flex-col justify-between h-full bg-gradient-to-tl from-rankingbg-100  via-rankingbg-200 to-rankingbg-300 text-white rounded-[15px]">
         <Rank rank="1st" />
         <div className="m-auto flex flex-col items-center">
@@ -81,11 +81,11 @@ export const RankingCardOther: React.FC<{
   avatarUrl: string | null
 }> = ({ likesCount, username, avatarUrl, rank }) => {
   return (
-    <div className="sm:w-[468px] sm:h-[215px] w-[382px] h-[64px] flex bg-[#262626] text-white sm:rounded-[20px] rounded-[5px] items-center justify-center mb-[6px] mx-[4px]">
-      <div className="sm:w-[370px] w-[340px] flex justify-between items-center">
+    <div className="sm:w-[468px] sm:h-[215px] w-full h-[64px] flex bg-[#262626] text-white sm:rounded-[20px] rounded-[5px] items-center justify-center mb-[6px] sm:mx-[4px]">
+      <div className="sm:w-[370px] w-11/12 flex justify-between items-center">
         <div className="sm:text-[24px] text-[10px]">{rank}</div>
         <Avatar img={avatarUrl} />
-        <div className="flex sm:items-start items-center justify-between w-[220px] sm:flex-col sm:w-fit">
+        <div className="flex sm:items-start items-center justify-between w-9/12 sm:flex-col sm:w-fit">
           <Name name={username} />
           {/* <div>
             <BodyShape height={162} weight={46} />
