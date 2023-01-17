@@ -18,12 +18,9 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const preLocation = useLocation().pathname
   const [location, setLocation] = useState(preLocation)
-
   const [selectedChip, setSelectedChip] = useState('chips_10')
   const [betState, dispatchBet] = useReducer(chipReducer, betInitialValue)
 
-  console.log(preLocation !== location);
-  
   useEffect(() => {
     if (preLocation !== location) {
       return dispatchBet({ type: 'cancel' })

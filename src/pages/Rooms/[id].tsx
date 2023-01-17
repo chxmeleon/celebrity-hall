@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 import { clsx as cx } from 'clsx'
-import { useContext, useReducer, useState } from 'react'
+import { useContext, useEffect, useReducer, useState } from 'react'
 import { BetButton } from '@/components/common/Button'
 import { chipsImg } from '@/components/room/BetDesk/chips'
 import { useSetup } from '@/contexts/SetupContext'
@@ -22,16 +22,11 @@ import { useQuery } from '@apollo/client'
 import { GET_ROOM_STREAM } from '@/gql/stream'
 import { GET_CURRENT_BACCARAT_ROOM } from '@/gql/baccaratrooms'
 import GamePlayContext from '@/contexts/GamePlayContext'
+import { useCurrentGame, useCurrentGameState } from '@/hooks/rooms'
 
 const Room = () => {
   const roomId = useParams()
-
-
   const { data } = useQuery(GET_ROOM_STREAM, {
-    variables: { baccaratRoomId: Number(roomId?.id) }
-  })
-
-  const { data: currentGame } = useQuery(GET_CURRENT_BACCARAT_ROOM, {
     variables: { baccaratRoomId: Number(roomId?.id) }
   })
 
@@ -50,7 +45,32 @@ const Room = () => {
   const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
 
   const { isRegular, handleRegularToggle } = useSetup()
-  const { selectedChip, setSelectedChip, betState, dispatchBet } = useContext(GamePlayContext)
+  const { selectedChip, setSelectedChip, betState, dispatchBet } =
+    useContext(GamePlayContext)
+
+  const { currentGameState } = useCurrentGameState(roomId.id)
+  const { gameState } = currentGameState
+  const [isDisable, setIsDisable] = useState(false)
+
+  
+  useEffect(() => {
+    if (gameState !== 'START_BET') {
+      setIsDisable(true)
+    } else {
+      setIsDisable(false)
+      dispatchBet({ type: 'newRound' })
+    }
+    return () => setIsDisable(false)
+  }, [gameState, dispatchBet])
+
+  const totalAmount =
+    betState?.playerAmount +
+    betState?.playerPairAmount +
+    betState?.dealerAmount +
+    betState?.dealerPairAmount +
+    betState?.smallAmount +
+    betState?.bigAmount +
+    betState?.tieAmount
 
   const chipsButton = chipsImg.map((item, idx) => {
     const itemName = item?.src
@@ -131,7 +151,7 @@ const Room = () => {
             </div>
           </div>
           <div className="flex-grow flex-shrink-0 w-full">
-            <BetDesk isToggle={isChangedDesk} />
+            <BetDesk isDisabled={isDisable} isToggle={isChangedDesk} />
           </div>
           <div className="flex justify-between items-center px-2 my-2 w-full h-10">
             <div className="flex items-center w-[30%]">
@@ -170,7 +190,7 @@ const Room = () => {
               <div className="inline-flex px-2">
                 <FormattedMessage id="screens.room.bet" />
                 <p className="px-2">|</p>
-                <p className="px-2">0</p>
+                <p className="px-2">{totalAmount}</p>
               </div>
             </div>
             <div className="flex flex-grow justify-around items-center">
@@ -183,15 +203,18 @@ const Room = () => {
               {/* </div> */}
             </div>
             <div className="flex pl-5 w-[36%] text-theme-300">
-              <BetButton onClick={() => dispatchBet({ type: 'cancel' })}>
+              <BetButton
+                isDisabled={isDisable}
+                onClick={() => dispatchBet({ type: 'cancel' })}
+              >
                 <div className="text-2xl i-heroicons-x-mark-solid"></div>
                 <FormattedMessage id="common.cancel" />
               </BetButton>
-              <BetButton onClick={() => null}>
+              <BetButton isDisabled={isDisable} onClick={() => null}>
                 <div className="text-2xl i-heroicons-arrow-path-solid"></div>
                 <FormattedMessage id="common.repeat" />
               </BetButton>
-              <BetButton onClick={() => null}>
+              <BetButton isDisabled={isDisable} onClick={() => null}>
                 <div className="text-2xl i-heroicons-check-solid"></div>
                 <FormattedMessage id="common.confirm" />
               </BetButton>

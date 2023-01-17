@@ -1,9 +1,15 @@
+import { clsx as cx } from 'clsx'
 import React, { PropsWithChildren } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { buttonStyle as bts } from './buttonStyle'
 
 type LoginButtonProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>
+}
+
+type BetButtonProps = {
+  onClick: React.MouseEventHandler<HTMLButtonElement>
+  isDisabled: boolean
 }
 
 type LinkButtonProps = {
@@ -17,18 +23,23 @@ type ToggleButtonProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-export const BetButton: React.FC<React.PropsWithChildren<LoginButtonProps>> = ({
+export const BetButton: React.FC<React.PropsWithChildren<BetButtonProps>> = ({
+  isDisabled,
   children,
   onClick
 }) => {
   return (
     <button
       onClick={onClick}
-      className={bts({
-        intent: 'outlineButton',
-        round: 'full',
-        size: 'little'
-      })}
+      disabled={isDisabled}
+      className={cx(
+        isDisabled ? 'hover:cursor-not-allowed text-theme-400 border-theme-400 bg-red-900' : '',
+        bts({
+          intent: 'outlineButton',
+          round: 'full',
+          size: 'little'
+        })
+      )}
     >
       {children}
     </button>
@@ -105,8 +116,9 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
               })}
             >
               <p
-                className={`font-medium text-md ${isCurrentPath(href) ? 'invert opacity-75 text-gray-200' : ''
-                  }`}
+                className={`font-medium text-md ${
+                  isCurrentPath(href) ? 'invert opacity-75 text-gray-200' : ''
+                }`}
               >
                 {children}
               </p>
