@@ -60,7 +60,7 @@ export const betInitialValue = {
 
 export const chipReducer = (state: BetInitialValueProp, action: any) => {
   switch (action.type) {
-    case 'addChips':
+    case 'addPlayerChips':
       return {
         ...state,
         playerChips: [
@@ -68,6 +68,57 @@ export const chipReducer = (state: BetInitialValueProp, action: any) => {
           action?.playload?.playerChips
         ],
         playerAmount: state?.playerAmount + action?.playload?.playerAmount
+      }
+    case 'addDealerChips':
+      return {
+        ...state,
+        dealerChips: [
+          ...(state?.dealerChips || []),
+          action?.playload?.dealerChips
+        ],
+        dealerAmount: state?.dealerAmount + action?.playload?.dealerAmount
+      }
+
+    case 'addPlayerPairChips':
+      return {
+        ...state,
+        playerPairChips: [
+          ...(state?.playerPairChips || []),
+          action?.playload?.playerPairChips
+        ],
+        playerPairAmount:
+          state?.playerPairAmount + action?.playload?.playerPairAmount
+      }
+    case 'addDealerPairChips':
+      return {
+        ...state,
+        dealerPairChips: [
+          ...(state?.dealerPairChips || []),
+          action?.playload?.dealerPairChips
+        ],
+        dealerPairAmount:
+          state?.dealerPairAmount + action?.playload?.dealerPairAmount
+      }
+    case 'addSmallChips':
+      return {
+        ...state,
+        smallChips: [
+          ...(state?.smallChips || []),
+          action?.playload?.smallChips
+        ],
+        smallAmount: state?.smallAmount + action?.playload?.smallAmount
+      }
+    case 'addBigChips':
+      return {
+        ...state,
+        bigChips: [...(state?.bigChips || []), action?.playload?.bigChips],
+        bigAmount: state?.bigAmount + action?.playload?.bigAmount
+      }
+    case 'addTieChips':
+      return {
+        ...state,
+        tieChips: [...(state?.tieChips || []), action?.playload?.tieChips],
+        tieAmount: state?.tieAmount + action?.playload?.tieAmount
       }
     case 'cancel':
       return betInitialValue

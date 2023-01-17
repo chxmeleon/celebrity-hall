@@ -22,9 +22,19 @@
     perspective-origin: top;
   }
 
-  .bet-table-skew {
-    transform: scaleY(1.1) perspective(2.65rem) rotateX(3.93deg)
-      translate(0px, 16px);
+  .chip-skew {
+    transform: scaleY(0.9) scaleX(0.9) perspective(4.3rem) rotateX(-7.864deg)
+      translate(-2%, -58%);
+  }
+
+  .chip-h-skew {
+    transform: scaleY(0.9) scaleX(0.9) perspective(19.3rem) rotateX(-8deg)
+      translate(-6%, -39%);
+  }
+
+  .chip-hw-skew {
+    transform: scaleY(0.9) scaleX(0.9) perspective(1.9rem) rotateX(-2.864deg) 
+      translate(-6%, -40%);
   }
 
   .switch-btn {
