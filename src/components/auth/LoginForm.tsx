@@ -36,7 +36,7 @@ const LoginForm: React.FC = () => {
   }
 
   const loginFromInput = cx`
-    border-0 outline-0 focus:border focus:border-theme-300 pl-14 w-full h-10 text-gray-100 rounded-full bg-theme-100
+    border-0 outline-none focus:border focus:border-theme-300 pl-14 w-full h-10 text-gray-100 rounded-full bg-theme-100
   `
   const notifyAlert = cx(`
     ${notify ? 'opacity-100' : 'opacity-0 -translate-y-16'} 

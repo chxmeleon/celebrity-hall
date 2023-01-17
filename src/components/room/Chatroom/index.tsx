@@ -59,8 +59,6 @@ const ChatRoom = () => {
       subscription.unsubscribe()
     }
   }, [cable, roomId, data, messages])
-  console.log(data)
-  console.log(messages)
 
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -127,7 +125,7 @@ const ChatRoom = () => {
                     key={`message-${idx}`}
                     className="flex justify-center items-center py-1 w-full"
                   >
-                    <div className="py-0.5 px-1 w-2/3 text-sm tracking-wider text-center bg-amber-400 rounded-full text-theme-50">
+                    <div className="py-0.5 px-1 w-2/3 text-sm tracking-[0.2rem] text-center bg-gradient-to-tr from-rose-400 to-orange-200 rounded-full font-medium text-red-900/90">
                       {content?.body}
                     </div>
                     <p className="self-end pl-1 text-xs text-gray-400">
@@ -177,7 +175,7 @@ const ChatRoom = () => {
       </div>
       <form
         onSubmit={handleSendMessage}
-        className="flex relative flex-grow justify-between items-center px-2 mt-1 mb-2 w-full"
+        className="flex relative flex-grow justify-between items-center px-2 py-1.5 w-full"
       >
         <div className="inline-flex relative items-center px-0.5 mx-1 w-full h-full bg-gray-200 rounded-lg text-theme-50">
           <input
@@ -189,7 +187,7 @@ const ChatRoom = () => {
             })}
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            className="py-2 pr-2 pl-3 w-full h-full bg-gray-200 rounded-md outline-0 focus:outline-0"
+            className="py-1.5 pr-2 pl-3 w-full h-full bg-gray-200 rounded-md outline-none focus:outline-none"
             autoComplete="off"
           />
           <SendGift
