@@ -39,11 +39,15 @@ export const convertStatus = (status: string | null | undefined) => {
 }
 
 export const useCurrentGame = (roomId: string | undefined) => {
-  const { data } = useQuery<
+  const { data, refetch } = useQuery<
     types.GET_CURRENT_BACCARAT_ROOM,
     types.GET_CURRENT_BACCARAT_ROOMVariables
   >(GET_CURRENT_BACCARAT_ROOM, {
     variables: { baccaratRoomId: roomId ?? '' }
+  })
+
+  useEffect(()=> {
+    setInterval(()=> refetch(), 35000)
   })
 
   const currentGame = useMemo(() => {
@@ -61,6 +65,7 @@ export const useCurrentGameState = (roomId: string | undefined) => {
   >(GET_CURRENT_BACCARAT_ROOM, {
     variables: { baccaratRoomId: roomId ?? '' }
   })
+
 
   const currentGame = useMemo(() => {
     return data?.baccaratRoom?.currentGame

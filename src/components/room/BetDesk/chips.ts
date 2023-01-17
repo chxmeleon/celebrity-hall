@@ -8,12 +8,39 @@ import chips_5W from '@/assets/chips/chips_5W.webp'
 import chips_10W from '@/assets/chips/chips_10W.webp'
 
 export const chipsImg = [
-  chips_10,
-  chips_100,
-  chips_500,
-  chips_1K,
-  chips_5K,
-  chips_1W,
-  chips_5W,
-  chips_10W,
+  { src: chips_10, value: 10 },
+  { src: chips_100, value: 100 },
+  { src: chips_500, value: 500 },
+  { src: chips_1K, value: 1000 },
+  { src: chips_5K, value: 5000 },
+  { src: chips_1W, value: 10000 },
+  { src: chips_5W, value: 50000 },
+  { src: chips_10W, value: 100000 }
 ]
+
+export const chipsData = {
+  'chips_10': {
+    src: chips_10, value: 10
+  },
+  'chips_100': {
+    src: chips_100, value: 100
+  },
+  'chips_500': {
+    src: chips_500, value: 500
+  },
+  'chips_1K': {
+    src: chips_1K, value: 1000
+  },
+  'chips_5K': {
+    src: chips_5K, value: 5000
+  },
+  'chips_1W': {
+    src: chips_1W, value: 10000
+  },
+  'chips_5W': {
+    src: chips_5W, value: 50000
+  },
+  'chips_10W': {
+    src: chips_10W, value: 100000
+  },
+}

@@ -4,29 +4,33 @@ import { FormattedMessage } from 'react-intl'
 import { useQuery } from '@apollo/client'
 import { GET_PROFILE } from '@/gql/profile'
 import defaultAvatar from '/user.png'
-import { useProfile } from '@/hooks/profile'
 import { useActionCable } from '@/contexts/ActionCableContext'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const LeftSidebar = () => {
-  const { data: user } = useQuery(GET_PROFILE)
+  const { data: user, refetch } = useQuery(GET_PROFILE)
+
+  useEffect(() => {
+    refetch()
+  }, [refetch])
+
   const { cable } = useActionCable()
-  const [userData, setUserData] = useState('')
 
   useEffect(() => {
     const subscription = cable.subscriptions.create(
-      { channel: 'ProfileChannel', profileId: '3143' },
+      { channel: 'WalletChannel' },
       {
-        received: (data: any) => {
-          console.log(data);
-          
+        received: (data) => {
+          if (data) {
+            refetch()
+          }
         }
       }
     )
     return () => {
       subscription.unsubscribe()
     }
-  }, [cable])
+  }, [cable, refetch])
 
   return (
     <div className="flex flex-shrink-0 px-1.5 w-14 text-center md:py-5 md:px-7 md:w-52 border-r-[0.5px] border-r-theme-75">

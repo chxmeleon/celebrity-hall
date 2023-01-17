@@ -40,7 +40,6 @@ export const StreamersCard: React.FC<{
   item: any
   onStreamChanged: Dispatch<SetStateAction<streamType>>
 }> = ({ item, onStreamChanged }) => {
-  console.log(item?.online)
 
   return (
     <div

@@ -58,8 +58,8 @@ const ChatRoom = () => {
     return () => {
       subscription.unsubscribe()
     }
-  }, [cable, roomId, data, messages])
-
+  }, [cable, roomId])
+  
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
     setIsPickerShow((isPickerShow) => !isPickerShow)
@@ -95,7 +95,7 @@ const ChatRoom = () => {
     if (newMessage === '') {
       e.stopPropagation()
     } else {
-      await createBaccaratMessage({
+      const me = await createBaccaratMessage({
         variables: {
           input: {
             baccaratRoomId: roomId.id ?? '',
@@ -119,13 +119,12 @@ const ChatRoom = () => {
         >
           {messages?.map((content, idx) => {
             return (
-              <>
+              <div key={`message-${idx}`}>
                 {content?.type !== 'Message::User' ? (
                   <div
-                    key={`message-${idx}`}
                     className="flex justify-center items-center py-1 w-full"
                   >
-                    <div className="py-0.5 px-1 w-2/3 text-sm tracking-[0.2rem] text-center bg-gradient-to-tr from-rose-400 to-orange-200 rounded-full font-medium text-red-900/90">
+                    <div className="py-0.5 px-4 text-sm font-medium text-center bg-gradient-to-tr from-rose-400 to-orange-200 rounded-full tracking-[0.2rem] text-red-900/90">
                       {content?.body}
                     </div>
                     <p className="self-end pl-1 text-xs text-gray-400">
@@ -135,7 +134,6 @@ const ChatRoom = () => {
                 ) : (
                   <div
                     className="flex justify-start items-center py-1 px-2.5 w-full h-auto text-xs text-theme-50"
-                    key={`message-${idx}`}
                   >
                     <div className="flex-shrink-0 pr-1.5 pt-[1.5px]">
                       <div className="overflow-hidden w-6 h-6 rounded-full bg-slate-200">
@@ -168,14 +166,14 @@ const ChatRoom = () => {
                     </p>
                   </div>
                 )}
-              </>
+              </div>
             )
           })}
         </div>
       </div>
       <form
         onSubmit={handleSendMessage}
-        className="flex relative flex-grow justify-between items-center px-2 py-1.5 w-full"
+        className="flex relative flex-grow justify-between items-center py-1.5 px-2 w-full"
       >
         <div className="inline-flex relative items-center px-0.5 mx-1 w-full h-full bg-gray-200 rounded-lg text-theme-50">
           <input
@@ -198,9 +196,8 @@ const ChatRoom = () => {
           />
           <div ref={setClickRef}>
             <div
-              className={`${
-                isPickerShow ? '' : 'hidden'
-              } absolute bottom-10 right-0 z-30`}
+              className={`${isPickerShow ? '' : 'hidden'
+                } absolute bottom-10 right-0 z-30`}
             >
               <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
             </div>

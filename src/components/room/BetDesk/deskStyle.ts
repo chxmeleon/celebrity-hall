@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 export type DeskProps = VariantProps<typeof deskStyle>
 
-export const deskStyle = cva('font-medium border border-gray-300/50', {
+export const deskStyle = cva('relative font-medium border border-gray-300/50', {
   variants: {
     intent: {
       htop: 'border-t-2 hover:bg-gray-100/10 text-xl [&_p]:text-sm ',

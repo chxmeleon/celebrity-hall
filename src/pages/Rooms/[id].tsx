@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 import { clsx as cx } from 'clsx'
-import { useState } from 'react'
+import { useContext, useReducer, useState } from 'react'
 import { BetButton } from '@/components/common/Button'
 import { chipsImg } from '@/components/room/BetDesk/chips'
 import { useSetup } from '@/contexts/SetupContext'
@@ -9,7 +9,6 @@ import ChatRoom from '@/components/room/Chatroom'
 import RoomStream from '@/components/room/RoomStream'
 import Timer from '@/components/room/Timer'
 import PockerResult from '@/components/room/PockerResult'
-
 import {
   BeadPlate,
   BigRoad,
@@ -18,14 +17,16 @@ import {
   CockroachRoad,
   AskGrid
 } from '@/components/room/Roadmap'
-
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { GET_ROOM_STREAM } from '@/gql/stream'
 import { GET_CURRENT_BACCARAT_ROOM } from '@/gql/baccaratrooms'
+import GamePlayContext from '@/contexts/GamePlayContext'
 
 const Room = () => {
   const roomId = useParams()
+
+
   const { data } = useQuery(GET_ROOM_STREAM, {
     variables: { baccaratRoomId: Number(roomId?.id) }
   })
@@ -46,36 +47,32 @@ const Room = () => {
   const handleSwitchStream = () => setIsWebRTC(!isWebRTC)
 
   const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
-  const [betPrice, setBetPrice] = useState('chips_10')
-  const { isRegular, handleRegularToggle } = useSetup()
-
   const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
 
-  const handleSelectBetPrice = (e: React.MouseEvent) => {
-    const chipImgSrc = (e.target as HTMLImageElement).src
+  const { isRegular, handleRegularToggle } = useSetup()
+  const { selectedChip, setSelectedChip, betState, dispatchBet } = useContext(GamePlayContext)
+
+  const chipsButton = chipsImg.map((item, idx) => {
+    const itemName = item?.src
       ?.split('/')
       .slice(-1)[0]
       .split('.')
       .slice(0, 1)
       .toString()
-    setBetPrice(chipImgSrc)
-  }
 
-  const chipsButton = chipsImg.map((item, idx) => {
-    const isActive =
-      betPrice ===
-      item?.split('/').slice(-1)[0].split('.').slice(0, 1).toString()
+    const isActive = selectedChip === itemName ?? 'chips_10'
 
     return (
       <button
         key={idx}
-        onClick={handleSelectBetPrice}
-        className={`${isActive
+        onClick={() => setSelectedChip(itemName)}
+        className={`${
+          isActive
             ? 'shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
             : 'shadow shadow-theme-50/80'
-          } rounded-full relative hover:cursor-pointer`}
+        } rounded-full relative hover:cursor-pointer`}
       >
-        <img src={item} alt="bet image" className="w-9" />
+        <img src={item?.src} alt="bet image" className="w-9" />
       </button>
     )
   })
@@ -101,26 +98,28 @@ const Room = () => {
 
         <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
           <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
-            <div className="flex flex-col justify-around h-24 items-end w-[5.5rem]">
+            <div className="flex flex-col justify-around items-end h-24 w-[5.5rem]">
               <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
                 <button
                   onClick={handleSwitchCam}
-                  className={`${isSecondCam ? 'text-theme-300' : ''
-                    } m-auto text-2xl i-heroicons-video-camera-20-solid`}
+                  className={`${
+                    isSecondCam ? 'text-theme-300' : ''
+                  } m-auto text-2xl i-heroicons-video-camera-20-solid`}
                 ></button>
               </div>
               <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
                 <button
                   onClick={handleSwitchStream}
-                  className={`${isWebRTC ? 'text-theme-300' : ''
-                    } m-auto text-2xl i-heroicons-wifi-20-solid`}
+                  className={`${
+                    isWebRTC ? 'text-theme-300' : ''
+                  } m-auto text-2xl i-heroicons-wifi-20-solid`}
                 ></button>
               </div>
             </div>
           </div>
           <div className="relative w-full h-[63%] grid grid-cols-3">
             <div className="flex justify-start items-end pb-2 pl-4">
-              <div className="w-[326px] h-[57%]">
+              <div className="w-[340px] h-[68%]">
                 <PockerResult />
               </div>
             </div>
@@ -155,10 +154,11 @@ const Room = () => {
               </button> */}
               <button onClick={handleRegularToggle} className="px-1 ml-2">
                 <div
-                  className={`${isRegular
+                  className={`${
+                    isRegular
                       ? 'bg-theme-300 text-theme-70'
                       : 'bg-theme-70 text-theme-300'
-                    } py-1.5 px-3 font-bold rounded-full `}
+                  } py-1.5 px-3 font-bold rounded-full `}
                 >
                   {isRegular ? (
                     <FormattedMessage id="common.noFee" />
@@ -183,7 +183,7 @@ const Room = () => {
               {/* </div> */}
             </div>
             <div className="flex pl-5 w-[36%] text-theme-300">
-              <BetButton onClick={() => null}>
+              <BetButton onClick={() => dispatchBet({ type: 'cancel' })}>
                 <div className="text-2xl i-heroicons-x-mark-solid"></div>
                 <FormattedMessage id="common.cancel" />
               </BetButton>
