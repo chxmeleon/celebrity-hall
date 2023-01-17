@@ -17,7 +17,7 @@ const PockerResult: React.FC = () => {
       gameState !== 'STOP_BET' &&
       gameState !== 'UPDATE_AMOUNT' &&
       gameState !== 'SHUFFLE' &&
-      gameState !== undefined || null  
+      gameState !== undefined
     ) {
       setIsShowPocker(true)
     } else {

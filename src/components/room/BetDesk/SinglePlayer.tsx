@@ -1,10 +1,12 @@
 import { btnIdx } from './deskStyle'
 import { FormattedMessage } from 'react-intl'
 import { useSetup } from '@/contexts/SetupContext'
-import { useContext, useReducer } from 'react'
+import { useContext, useEffect, useReducer, useState } from 'react'
 import { chipsData } from './chips'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { clsx as cx } from 'clsx'
+import { useParams } from 'react-router-dom'
+import { useCurrentGameState } from '@/hooks/rooms'
 
 const BetAreaVer: React.FC<{ target: string[] }> = ({ target }) => {
   return (
@@ -12,7 +14,7 @@ const BetAreaVer: React.FC<{ target: string[] }> = ({ target }) => {
       <div className="absolute rotate-180 w-full items-stretch h-[40%] flex flex-col flex-wrap-reverse">
         {target?.map((item: string, idx: number) => {
           return (
-            <div className="-mb-5 w-5 h-auto" key={idx}>
+            <div className="-mb-5 w-6 h-auto" key={idx}>
               <img
                 src={item}
                 alt="chip image"
@@ -32,7 +34,7 @@ const BetAreaHoz: React.FC<{ target: string[] }> = ({ target }) => {
       <div className="absolute rotate-180 w-full items-stretch h-[42%] flex flex-col flex-wrap-reverse">
         {target?.map((item: string, idx: number) => {
           return (
-            <div className="-mb-6 w-5 h-auto" key={idx}>
+            <div className="-mb-6 w-6 h-auto" key={idx}>
               <img
                 src={item}
                 alt="chip image"
@@ -52,7 +54,7 @@ const BetAreaHozL: React.FC<{ target: string[] }> = ({ target }) => {
       <div className="absolute rotate-180 w-full items-stretch h-[42%] flex flex-col flex-wrap-reverse">
         {target?.map((item: string, idx: number) => {
           return (
-            <div className="-mb-7 w-5 h-auto" key={idx}>
+            <div className="-mb-7 w-6 h-auto" key={idx}>
               <img
                 src={item}
                 alt="chip image"
@@ -66,11 +68,11 @@ const BetAreaHozL: React.FC<{ target: string[] }> = ({ target }) => {
   )
 }
 
-export const SinglePlayer = () => {
+export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
+  isDisabled
+}) => {
   const { isRegular } = useSetup()
-
   const { selectedChip, betState, dispatchBet } = useContext(GamePlayContext)
-  console.log(betState)
 
   return (
     <div className="cursor-pointer grid grid-cols-3 m-auto w-[91%] h-full bet-skew px-2 pb-4 pt-0.5 [&_p]:text-lg [&_p]:font-light">
@@ -79,8 +81,8 @@ export const SinglePlayer = () => {
           <button
             disabled
             className={cx(
-              'hover:bg-transparent cursor-not-allowed',
-              btnIdx.tl5
+              btnIdx.tl5,
+              'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed'
             )}
           >
             <div className="text-lg flex justify-between items-center px-3 w-full [&_p]:text-gray-300 [&_p]:text-xs">
@@ -93,6 +95,7 @@ export const SinglePlayer = () => {
             </div>
           </button>
           <button
+            disabled={isDisabled}
             onClick={() =>
               dispatchBet({
                 type: 'addPlayerPairChips',
@@ -102,7 +105,12 @@ export const SinglePlayer = () => {
                 }
               })
             }
-            className={btnIdx.tn4}
+            className={cx(
+              isDisabled
+                ? 'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed'
+                : '',
+              btnIdx.tn4
+            )}
           >
             <BetAreaHoz target={betState?.playerPairChips} />
             <div className="text-lg flex justify-between items-center px-3 w-full text-grid-400 [&_p]:text-gray-300 [&_p]:text-xs">
@@ -117,6 +125,7 @@ export const SinglePlayer = () => {
         </div>
         <div className="grid grid-cols-9">
           <button
+            disabled={isDisabled}
             onClick={() =>
               dispatchBet({
                 type: 'addBigChips',
@@ -126,7 +135,12 @@ export const SinglePlayer = () => {
                 }
               })
             }
-            className={btnIdx.cl5}
+            className={cx(
+              isDisabled
+                ? 'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed'
+                : '',
+              btnIdx.cl5
+            )}
           >
             <BetAreaHozL target={betState?.bigChips} />
             <div className="text-lg flex justify-between items-center px-3 w-full [&_p]:text-gray-300 [&_p]:text-xs">
@@ -141,7 +155,7 @@ export const SinglePlayer = () => {
           <button
             disabled
             className={cx(
-              'hover:bg-transparent cursor-not-allowed',
+              'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed',
               btnIdx.cn4
             )}
           >
@@ -160,7 +174,7 @@ export const SinglePlayer = () => {
             <button
               disabled
               className={cx(
-                'hover:bg-transparent cursor-not-allowed',
+                'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed',
                 btnIdx.hbhln
               )}
             >
@@ -176,7 +190,7 @@ export const SinglePlayer = () => {
             <button
               disabled
               className={cx(
-                'hover:bg-transparent cursor-not-allowed',
+                'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed',
                 btnIdx.hbhn
               )}
             >
@@ -193,7 +207,7 @@ export const SinglePlayer = () => {
           <button
             disabled
             className={cx(
-              'hover:bg-transparent cursor-not-allowed pb-1',
+              'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed pb-1',
               btnIdx.bn4
             )}
           >
@@ -210,6 +224,7 @@ export const SinglePlayer = () => {
       </div>
       <div className="grid grid-cols-3">
         <button
+          disabled={isDisabled}
           onClick={() =>
             dispatchBet({
               type: 'addPlayerChips',
@@ -219,7 +234,12 @@ export const SinglePlayer = () => {
               }
             })
           }
-          className={btnIdx.ynn}
+          className={cx(
+            isDisabled
+              ? 'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed'
+              : '',
+            btnIdx.ynn
+          )}
         >
           <BetAreaVer target={betState?.playerChips} />
           <div className="m-auto w-2/3 text-grid-400">
@@ -233,6 +253,7 @@ export const SinglePlayer = () => {
         </button>
         <div className="flex flex-col h-full">
           <button
+            disabled={isDisabled}
             onClick={() =>
               dispatchBet({
                 type: 'addTieChips',
@@ -242,7 +263,12 @@ export const SinglePlayer = () => {
                 }
               })
             }
-            className={btnIdx.thhn}
+            className={cx(
+              isDisabled
+                ? 'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed'
+                : '',
+              btnIdx.thhn
+            )}
           >
             <BetAreaHoz target={betState?.tieChips} />
             <div className="flex justify-between items-center m-auto w-2/3 text-grid-300">
@@ -257,7 +283,7 @@ export const SinglePlayer = () => {
           <button
             disabled
             className={cx(
-              'hover:bg-transparent cursor-not-allowed',
+              'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed',
               btnIdx.bhhn
             )}
           >
@@ -268,6 +294,7 @@ export const SinglePlayer = () => {
           </button>
         </div>
         <button
+          disabled={isDisabled}
           onClick={() =>
             dispatchBet({
               type: 'addDealerChips',
@@ -277,7 +304,12 @@ export const SinglePlayer = () => {
               }
             })
           }
-          className={btnIdx.ynn}
+          className={cx(
+            isDisabled
+              ? 'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed'
+              : '',
+            btnIdx.ynn
+          )}
         >
           <BetAreaVer target={betState?.dealerChips} />
           <div className="m-auto w-2/3 text-grid-100">
@@ -291,6 +323,7 @@ export const SinglePlayer = () => {
       <div className="grid grid-rows-3">
         <div className="grid grid-cols-9">
           <button
+            disabled={isDisabled}
             onClick={() =>
               dispatchBet({
                 type: 'addDealerPairChips',
@@ -300,7 +333,12 @@ export const SinglePlayer = () => {
                 }
               })
             }
-            className={btnIdx.tn4}
+            className={cx(
+              isDisabled
+                ? 'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed'
+                : '',
+              btnIdx.tn4
+            )}
           >
             <BetAreaHoz target={betState?.dealerPairChips} />
             <div className="text-lg flex justify-between items-center px-3 w-full text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
@@ -315,7 +353,7 @@ export const SinglePlayer = () => {
           <button
             disabled
             className={cx(
-              'hover:bg-transparent cursor-not-allowed',
+              'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed',
               btnIdx.tr5
             )}
           >
@@ -333,7 +371,7 @@ export const SinglePlayer = () => {
           <button
             disabled
             className={cx(
-              'hover:bg-transparent cursor-not-allowed',
+              'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed',
               btnIdx.cn4
             )}
           >
@@ -347,6 +385,7 @@ export const SinglePlayer = () => {
             </div>
           </button>
           <button
+            disabled={isDisabled}
             onClick={() =>
               dispatchBet({
                 type: 'addSmallChips',
@@ -356,7 +395,12 @@ export const SinglePlayer = () => {
                 }
               })
             }
-            className={btnIdx.cr5}
+            className={cx(
+              isDisabled
+                ? 'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed'
+                : '',
+              btnIdx.cr5
+            )}
           >
             <BetAreaHozL target={betState?.smallChips} />
             <div className="text-lg flex justify-between items-center px-3 w-full [&_p]:text-gray-300 [&_p]:text-xs">
@@ -373,7 +417,7 @@ export const SinglePlayer = () => {
           <button
             disabled
             className={cx(
-              'hover:bg-transparent cursor-not-allowed pb-1',
+              'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed pb-1',
               btnIdx.bn4
             )}
           >
@@ -390,7 +434,7 @@ export const SinglePlayer = () => {
             <button
               disabled
               className={cx(
-                'hover:bg-transparent cursor-not-allowed',
+                'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed',
                 btnIdx.hbhn
               )}
             >
@@ -406,7 +450,7 @@ export const SinglePlayer = () => {
             <button
               disabled
               className={cx(
-                'hover:bg-transparent cursor-not-allowed',
+                'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed',
                 btnIdx.hbhrn
               )}
             >
