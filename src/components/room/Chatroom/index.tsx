@@ -9,7 +9,6 @@ import types from '@/types'
 import { v4 as uuidV4 } from 'uuid'
 import defaultAvatar from '/user.png'
 import SendGift from './SendGift'
-import { giftList } from '@/libs/giftlist'
 import { useClickOutside } from '@/hooks/common'
 
 type ContentProps = {
@@ -17,6 +16,8 @@ type ContentProps = {
   nickname: string
   body: string
   createdAt: string | undefined
+  type: string
+  gift: string
 }
 
 const ChatRoom = () => {
@@ -58,6 +59,8 @@ const ChatRoom = () => {
       subscription.unsubscribe()
     }
   }, [cable, roomId, data, messages])
+  console.log(data)
+  console.log(messages)
 
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -108,8 +111,6 @@ const ChatRoom = () => {
     setNewMessage('')
   }
 
-  const isGiftMessage = data?.type === 'Message::Gift'
-
   return (
     <div className="flex flex-col w-full h-full bg-gray-50 border-gray-500 border-b-1">
       <div className="flex overflow-x-hidden flex-col-reverse flex-grow-0 w-full h-screen scroll-smooth">
@@ -121,14 +122,17 @@ const ChatRoom = () => {
           {messages?.map((content, idx) => {
             return (
               <>
-                {isGiftMessage ? (
+                {content?.type !== 'Message::User' ? (
                   <div
                     key={`message-${idx}`}
-                    className="flex justify-center items-center py-1 m-auto w-full"
+                    className="flex justify-center items-center py-1 w-full"
                   >
-                    <div className="p-0.5 m-auto w-2/3 text-center bg-pink-300 rounded-full text-theme-50">
+                    <div className="py-0.5 px-1 w-2/3 text-sm tracking-wider text-center bg-amber-400 rounded-full text-theme-50">
                       {content?.body}
                     </div>
+                    <p className="self-end pl-1 text-xs text-gray-400">
+                      {content?.createdAt?.slice(11, 16)}
+                    </p>
                   </div>
                 ) : (
                   <div
@@ -205,7 +209,7 @@ const ChatRoom = () => {
             <div className="px-1">
               <div
                 onClick={onTrigglerPicker}
-                className="text-2xl i-mdi-emoticon-happy text-theme-50/40"
+                className="text-2xl hover:cursor-pointer i-mdi-emoticon-happy text-theme-50/40"
               ></div>
             </div>
           </div>

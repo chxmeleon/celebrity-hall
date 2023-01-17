@@ -30,7 +30,7 @@ const PockerResult: React.FC = () => {
     'relative transition-opacity duration-300 ease-in flex w-full h-full rounded-xl border bg-theme-50/80 backdrop-blur-sm border-theme-150',
     isShowPocker ? '' : 'opacity-0',
     pockerState?.result?.tieWin
-      ? 'tie-win outline outline-2 outline-theme-300'
+      ? 'win-shadow outline outline-2 outline-theme-300'
       : ''
   )
 
