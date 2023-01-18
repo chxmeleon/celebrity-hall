@@ -3,27 +3,6 @@ import { useMutation } from '@apollo/client'
 import types from '@/types'
 import { useParams } from 'react-router-dom'
 
-export const usePostBetting = () => {
-  const [createBaccaratBet] = useMutation<
-    types.CREATE_BACCARAT_BET,
-    types.CREATE_BACCARAT_BETVariables
-  >(CREATE_BACCARAT_BET)
-  /* createBaccaratBet({ */
-  /*   variables: { */
-  /*     input: { */
-  /*       baccaratRoomId: roomId.id ?? '', */
-  /*       playerAmount: 0, */
-  /*       dealerAmount: 0, */
-  /*       tieAmount: 0, */
-  /*       playerPairAmount: 0, */
-  /*       dealerPairAmount: 0, */
-  /*       deviceInfo: '' */
-  /*     } */
-  /*   } */
-  /* }) */
-  return createBaccaratBet
-}
-
 export type BetInitialValueProp = {
   playerChips: string[]
   playerAmount: number
@@ -39,6 +18,8 @@ export type BetInitialValueProp = {
   bigAmount: number
   smallChips: string[]
   smallAmount: number
+  super6Chips: string[]
+  super6Amount: number
 }
 
 export const betInitialValue = {
@@ -55,7 +36,9 @@ export const betInitialValue = {
   bigChips: [],
   bigAmount: 0,
   smallChips: [],
-  smallAmount: 0
+  smallAmount: 0,
+  super6Chips: [],
+  super6Amount: 0
 }
 
 export const chipReducer = (state: BetInitialValueProp, action: any) => {
@@ -120,11 +103,16 @@ export const chipReducer = (state: BetInitialValueProp, action: any) => {
         tieChips: [...(state?.tieChips || []), action?.playload?.tieChips],
         tieAmount: state?.tieAmount + action?.playload?.tieAmount
       }
-    case 'cancel':
-      return betInitialValue
 
-    case 'confirm':
-      return state
+    case 'addSuper6Chips':
+      return {
+        ...state,
+        super6Chips: [
+          ...(state?.super6Chips || []),
+          action?.playload?.super6Chips
+        ],
+        super6Amount: state?.super6Amount + action?.playload?.super6Amount
+      }
 
     case 'repeat':
       return state

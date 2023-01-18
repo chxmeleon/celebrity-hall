@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 import types from '@/types'
 import { clsx as cx } from 'clsx'
 import { useContext, useEffect, useReducer, useState } from 'react'
-import { BetButton } from '@/components/common/Button'
+import { BetButton, BetRepeat } from '@/components/common/Button'
 import { chipsImg } from '@/components/room/BetDesk/chips'
 import { useSetup } from '@/contexts/SetupContext'
 import BetDesk from '@/components/room/BetDesk'
@@ -49,7 +49,7 @@ const Room = () => {
   const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
 
   const { isRegular, handleRegularToggle } = useSetup()
-  const { selectedChip, setSelectedChip, betState, dispatchBet } =
+  const { selectedChip, setSelectedChip, betState, dispatchBet, wallet } =
     useContext(GamePlayContext)
 
   const { currentGameState } = useCurrentGameState(roomId.id)
@@ -57,13 +57,15 @@ const Room = () => {
   const [isDisable, setIsDisable] = useState(true)
   const { deviceInfo } = useSetup()
 
-  const [createBaccaratBet] = useMutation<types.CREATE_BACCARAT_BET, types.CREATE_BACCARAT_BETVariables>(
-    CREATE_BACCARAT_BET
-  )
+  const [createBaccaratBet] = useMutation<
+    types.CREATE_BACCARAT_BET,
+    types.CREATE_BACCARAT_BETVariables
+  >(CREATE_BACCARAT_BET)
 
   const { cable } = useActionCable()
 
-  const [betData, setBetData] = useState('')
+  const [betData, setBetData] = useState<any>()
+
   useEffect(() => {
     const subscription = cable.subscriptions.create(
       {
@@ -82,10 +84,27 @@ const Room = () => {
     return () => {
       subscription.unsubscribe()
     }
-  }, [cable, roomId])
+  }, [cable, roomId, betState])
+  console.log(betState);
+  
+
+  const formatStrigToNumber = (string: string) => {
+    const result = Math.floor(Number(string))
+    return result
+  }
+
+  const totalAmount =
+    betState?.playerAmount +
+    betState?.playerPairAmount +
+    betState?.dealerAmount +
+    betState?.dealerPairAmount +
+    betState?.smallAmount +
+    betState?.bigAmount +
+    betState?.tieAmount +
+    betState?.super6Amount
 
   const onConfirmBet = async (e: React.MouseEvent) => {
-    if (totalAmount >= 1000) {
+    if (totalAmount >= 1000 && totalAmount <= wallet?.balance) {
       try {
         const result = await createBaccaratBet({
           variables: {
@@ -93,9 +112,12 @@ const Room = () => {
               baccaratRoomId: roomId.id ?? '',
               playerAmount: betState?.playerAmount,
               dealerAmount: betState?.dealerAmount,
-              tieAmount: betState?.tieAmount,
               playerPairAmount: betState?.playerPairAmount,
               dealerPairAmount: betState?.dealerPairAmount,
+              tieAmount: betState?.tieAmount,
+              super6Amount: betState?.super6Amount,
+              smallAmount: betState?.smallAmount,
+              bigAmount: betState?.bigAmount,
               deviceInfo: JSON.stringify(deviceInfo)
             }
           }
@@ -109,23 +131,63 @@ const Room = () => {
     }
   }
 
+  const [isRepeat, setIsRepeat] = useState(false)
+  const onReapet = () => {
+    setIsRepeat((isRepeat) => !isRepeat)
+    /* dispatchBet({type: 'repeat'}) */
+  }
+
+  console.log(betState)
+  /* console.log(isRepeat) */
+
   useEffect(() => {
-    if (gameState === 'START_BET') {
+    const autoPlay = async () => {
+      if (totalAmount >= 1000 && totalAmount <= wallet?.balance) {
+        try {
+          const result = await createBaccaratBet({
+            variables: {
+              input: {
+                baccaratRoomId: roomId.id ?? '',
+                playerAmount: betState?.playerAmount,
+                dealerAmount: betState?.dealerAmount,
+                playerPairAmount: betState?.playerPairAmount,
+                dealerPairAmount: betState?.dealerPairAmount,
+                tieAmount: betState?.tieAmount,
+                super6Amount: betState?.super6Amount,
+                smallAmount: betState?.smallAmount,
+                bigAmount: betState?.bigAmount,
+                deviceInfo: JSON.stringify(deviceInfo)
+              }
+            }
+          })
+          console.log(result)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    }
+    if (isRepeat && gameState === 'START_BET') {
+      autoPlay()
+    }
+  }, [
+    isRepeat,
+    betData,
+    createBaccaratBet,
+    deviceInfo,
+    totalAmount,
+    roomId,
+    wallet,
+    gameState
+  ])
+
+  useEffect(() => {
+    if (gameState === 'START_BET' || gameState === 'UPDATE_AMOUNT') {
       setIsDisable(false)
     } else {
       setIsDisable(true)
       dispatchBet({ type: 'newRound' })
     }
   }, [gameState, dispatchBet])
-
-  const totalAmount =
-    betState?.playerAmount +
-    betState?.playerPairAmount +
-    betState?.dealerAmount +
-    betState?.dealerPairAmount +
-    betState?.smallAmount +
-    betState?.bigAmount +
-    betState?.tieAmount
 
   const chipsButton = chipsImg.map((item, idx) => {
     const itemName = item?.src
@@ -135,7 +197,7 @@ const Room = () => {
       .slice(0, 1)
       .toString()
 
-    const isActive = selectedChip === itemName ?? 'chips_10'
+    const isActive = selectedChip === itemName ?? 'chips_100'
 
     return (
       <button
@@ -265,10 +327,10 @@ const Room = () => {
                 <div className="text-2xl i-heroicons-x-mark-solid"></div>
                 <FormattedMessage id="common.cancel" />
               </BetButton>
-              <BetButton isDisabled={isDisable} onClick={() => null}>
+              <BetRepeat isDisabled={isDisable} onClick={onReapet}>
                 <div className="text-2xl i-heroicons-arrow-path-solid"></div>
                 <FormattedMessage id="common.repeat" />
-              </BetButton>
+              </BetRepeat>
               <BetButton isDisabled={isDisable} onClick={onConfirmBet}>
                 <div className="text-2xl i-heroicons-check-solid"></div>
                 <FormattedMessage id="common.confirm" />

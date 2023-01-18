@@ -281,12 +281,25 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             </div>
           </button>
           <button
-            disabled
+            disabled={isDisabled}
+            onClick={() =>
+              dispatchBet({
+                type: 'addSuper6Chips',
+                playload: {
+                  super6Chips: chipsData?.[selectedChip]?.src,
+                  super6Amount: chipsData?.[selectedChip]?.value
+                }
+              })
+            }
             className={cx(
-              'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed',
+              isDisabled
+                ? 'bg-theme-50/10 hover:bg-theme-50/10 cursor-not-allowed'
+                : '',
               btnIdx.bhhn
             )}
           >
+
+            <BetAreaHoz target={betState?.super6Chips} />
             <div className="m-auto w-2/3 text-grid-200">
               <div className="font-bold">SUPER 6</div>
               <p>1:20</p>

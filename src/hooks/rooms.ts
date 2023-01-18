@@ -159,9 +159,11 @@ export const useTimeLeft = (roomId: string) => {
       subscription.unsubscribe()
     }
   }, [cable, roomId, gameState])
+  
+  
 
   const [counter, setCounter] = useState<number | undefined>()
-  const startCount = gameState?.status === 'START_BET'
+  const startCount = gameState?.status === 'START_BET' || gameState?.status === 'UPDATE_AMOUNT'
 
   const isLeftTen = counter !== undefined && counter < 11
   const streamLatency = useContext(StreamLatencyContext)

@@ -10,7 +10,7 @@ import {
   engineName,
   engineVersion,
   getUA,
-  deviceType
+  deviceType,
 } from 'react-device-detect'
 
 interface SetupContextData {
@@ -42,9 +42,9 @@ export const SetupProvider: React.FC<React.PropsWithChildren> = ({
     onCloseModal: closeNotice
   } = useModal()
 
-  const [isRegular, setIsRegular] = useState(true)
+  const [isRegular, setIsRegular] = useState(false)
   const handleRegularToggle = () => setIsRegular((isRegular) => !isRegular)
-  const deviceInfo = {
+  const deviceInfo = useMemo(() => ({
     osVersion,
     osName,
     fullBrowserVersion,
@@ -55,7 +55,7 @@ export const SetupProvider: React.FC<React.PropsWithChildren> = ({
     engineVersion,
     deviceType,
     userAgent: getUA
-  }
+  }), [])
 
   const value = useMemo(
     () => ({
