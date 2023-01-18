@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react'
-import { SEND_GIFT, SEND_BACCARAT_GIFT } from '@/gql/chatroom'
+import React, { useState } from 'react'
+import { SEND_BACCARAT_GIFT } from '@/gql/chatroom'
 import { useMutation, useQuery } from '@apollo/client'
 import types from '@/types'
 import { giftList } from '@/libs/giftlist'
@@ -42,7 +42,7 @@ const SendGift: React.FC<GiftPorps> = ({
     } else {
       setIsDisable(false)
       try {
-        await createGift({
+        const f = await createGift({
           variables: {
             input: {
               baccaratRoomId: roomId.id ?? '',
@@ -50,6 +50,8 @@ const SendGift: React.FC<GiftPorps> = ({
             }
           }
         })
+        console.log(f);
+        
       } catch (error) {
         console.log(error)
       }

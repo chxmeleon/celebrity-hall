@@ -3,8 +3,7 @@ import { useMutation } from '@apollo/client'
 import types from '@/types'
 import { useParams } from 'react-router-dom'
 
-const useBetting = () => {
-  const roomId = useParams()
+export const usePostBetting = () => {
   const [createBaccaratBet] = useMutation<
     types.CREATE_BACCARAT_BET,
     types.CREATE_BACCARAT_BETVariables
@@ -22,6 +21,7 @@ const useBetting = () => {
   /*     } */
   /*   } */
   /* }) */
+  return createBaccaratBet
 }
 
 export type BetInitialValueProp = {

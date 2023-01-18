@@ -75,7 +75,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
   const { selectedChip, betState, dispatchBet } = useContext(GamePlayContext)
 
   return (
-    <div className="cursor-pointer grid grid-cols-3 m-auto w-[91%] h-full bet-skew px-2 pb-4 pt-0.5 [&_p]:text-lg [&_p]:font-light">
+    <div className="grid grid-cols-3 m-auto w-[91%] h-full bet-skew px-2 pb-4 pt-0.5 [&_p]:text-lg [&_p]:font-light">
       <div className="grid grid-rows-3">
         <div className="grid grid-cols-9">
           <button

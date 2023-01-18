@@ -6,12 +6,12 @@ import { useEffect } from 'react'
 const Rooms: React.FC = () => {
   const { data, refetch } = useQuery(GET_BACCARATROOMS)
   const activeBaccaratRooms = data?.activeBaccaratRooms
-  
+
   useEffect(() => {
-    setInterval(()=> refetch(), 35000)
+    refetch()
   }, [refetch])
 
-
+  
   return (
     <div className="overflow-y-auto p-4 w-full h-full md:p-16">
       <RoomList roomsData={activeBaccaratRooms} />

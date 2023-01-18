@@ -1,4 +1,7 @@
 import { FormattedMessage } from 'react-intl'
+import { CREATE_BACCARAT_BET } from '@/gql/baccaratrooms'
+import { useMutation } from '@apollo/client'
+import types from '@/types'
 import { clsx as cx } from 'clsx'
 import { useContext, useEffect, useReducer, useState } from 'react'
 import { BetButton } from '@/components/common/Button'
@@ -23,6 +26,7 @@ import { GET_ROOM_STREAM } from '@/gql/stream'
 import { GET_CURRENT_BACCARAT_ROOM } from '@/gql/baccaratrooms'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { useCurrentGame, useCurrentGameState } from '@/hooks/rooms'
+import { useActionCable } from '@/contexts/ActionCableContext'
 
 const Room = () => {
   const roomId = useParams()
@@ -50,17 +54,68 @@ const Room = () => {
 
   const { currentGameState } = useCurrentGameState(roomId.id)
   const { gameState } = currentGameState
-  const [isDisable, setIsDisable] = useState(false)
+  const [isDisable, setIsDisable] = useState(true)
+  const { deviceInfo } = useSetup()
 
-  
+  const [createBaccaratBet] = useMutation<types.CREATE_BACCARAT_BET, types.CREATE_BACCARAT_BETVariables>(
+    CREATE_BACCARAT_BET
+  )
+
+  const { cable } = useActionCable()
+
+  const [betData, setBetData] = useState('')
   useEffect(() => {
-    if (gameState !== 'START_BET') {
-      setIsDisable(true)
+    const subscription = cable.subscriptions.create(
+      {
+        channel: 'BaccaratBetChannel',
+        roomId: roomId.id
+      },
+      {
+        received: (data) => {
+          if (data) {
+            setBetData(data)
+          }
+        }
+      }
+    )
+
+    return () => {
+      subscription.unsubscribe()
+    }
+  }, [cable, roomId])
+
+  const onConfirmBet = async (e: React.MouseEvent) => {
+    if (totalAmount >= 1000) {
+      try {
+        const result = await createBaccaratBet({
+          variables: {
+            input: {
+              baccaratRoomId: roomId.id ?? '',
+              playerAmount: betState?.playerAmount,
+              dealerAmount: betState?.dealerAmount,
+              tieAmount: betState?.tieAmount,
+              playerPairAmount: betState?.playerPairAmount,
+              dealerPairAmount: betState?.dealerPairAmount,
+              deviceInfo: JSON.stringify(deviceInfo)
+            }
+          }
+        })
+        console.log(result)
+      } catch (err) {
+        console.log(err)
+      }
     } else {
+      e.preventDefault()
+    }
+  }
+
+  useEffect(() => {
+    if (gameState === 'START_BET') {
       setIsDisable(false)
+    } else {
+      setIsDisable(true)
       dispatchBet({ type: 'newRound' })
     }
-    return () => setIsDisable(false)
   }, [gameState, dispatchBet])
 
   const totalAmount =
@@ -172,7 +227,7 @@ const Room = () => {
                   } text-2xl `}
                 ></div>
               </button> */}
-              <button onClick={handleRegularToggle} className="px-1 ml-2">
+              {/* <button onClick={handleRegularToggle} className="px-1 ml-2">
                 <div
                   className={`${
                     isRegular
@@ -186,7 +241,7 @@ const Room = () => {
                     <FormattedMessage id="common.standard" />
                   )}
                 </div>
-              </button>
+              </button> */}
               <div className="inline-flex px-2">
                 <FormattedMessage id="screens.room.bet" />
                 <p className="px-2">|</p>
@@ -205,7 +260,7 @@ const Room = () => {
             <div className="flex pl-5 w-[36%] text-theme-300">
               <BetButton
                 isDisabled={isDisable}
-                onClick={() => dispatchBet({ type: 'cancel' })}
+                onClick={() => dispatchBet({ type: 'newRound' })}
               >
                 <div className="text-2xl i-heroicons-x-mark-solid"></div>
                 <FormattedMessage id="common.cancel" />
@@ -214,7 +269,7 @@ const Room = () => {
                 <div className="text-2xl i-heroicons-arrow-path-solid"></div>
                 <FormattedMessage id="common.repeat" />
               </BetButton>
-              <BetButton isDisabled={isDisable} onClick={() => null}>
+              <BetButton isDisabled={isDisable} onClick={onConfirmBet}>
                 <div className="text-2xl i-heroicons-check-solid"></div>
                 <FormattedMessage id="common.confirm" />
               </BetButton>

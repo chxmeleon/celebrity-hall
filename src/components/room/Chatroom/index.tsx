@@ -95,7 +95,7 @@ const ChatRoom = () => {
     if (newMessage === '') {
       e.stopPropagation()
     } else {
-      const me = await createBaccaratMessage({
+      await createBaccaratMessage({
         variables: {
           input: {
             baccaratRoomId: roomId.id ?? '',
@@ -122,14 +122,11 @@ const ChatRoom = () => {
               <div key={`message-${idx}`}>
                 {content?.type !== 'Message::User' ? (
                   <div
-                    className="flex justify-center items-center py-1 w-full"
+                    className="flex justify-center items-center py-1 w-3/5 m-auto"
                   >
-                    <div className="py-0.5 px-4 text-sm font-medium text-center bg-gradient-to-tr from-rose-400 to-orange-200 rounded-full tracking-[0.2rem] text-red-900/90">
+                    <div className="py-1.5 px-5 text-sm font-medium text-center bg-gradient-to-tr from-rose-400 to-orange-200 rounded-lg tracking-[0.05rem] text-red-900/90">
                       {content?.body}
                     </div>
-                    <p className="self-end pl-1 text-xs text-gray-400">
-                      {content?.createdAt?.slice(11, 16)}
-                    </p>
                   </div>
                 ) : (
                   <div

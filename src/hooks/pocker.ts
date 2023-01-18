@@ -66,12 +66,6 @@ export const usePockerUpdate = (roomId: string | undefined) => {
   >(GET_CURRENT_BACCARAT_ROOM, {
     variables: { baccaratRoomId: roomId ?? '' }
   })
-
-  useEffect(() => {
-    refetch()
-  }, [refetch])
-
-  const roads = data?.baccaratRoom?.roads
   const currentGame = useMemo(() => {
     return data?.baccaratRoom?.currentGame
   }, [data])
@@ -85,10 +79,15 @@ export const usePockerUpdate = (roomId: string | undefined) => {
     status: convertStatus(currentGame?.status)
   }
 
-  const [gameState, setGameState] = useState<string | null | undefined>(
-    gqlData.status
-  )
+  const [gameState, setGameState] = useState<string | null | undefined>()
   const [pockerState, dispatch] = useReducer(pockerReducer, gqlData)
+
+
+  useEffect(() => {
+    refetch()
+    setGameState(convertStatus(data?.baccaratRoom?.currentGame?.status))
+  }, [refetch, data])
+
 
   useEffect(() => {
     const subscription = cable.subscriptions.create(
@@ -145,10 +144,9 @@ export const usePockerUpdate = (roomId: string | undefined) => {
     () => ({
       data,
       gameState,
-      roads,
       pockerState
     }),
-    [data, gameState, roads, pockerState]
+    [data, gameState, pockerState]
   )
 
   return { currentGameState }
