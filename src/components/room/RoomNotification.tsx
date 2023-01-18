@@ -66,26 +66,26 @@ const RoomNotification: React.FC<NoticeProps> = ({
   gameState
 }) => {
   const { formatMessage } = useIntl()
-
+  
   return (
     <>
       {isConfirmedSuccess || isRepeatSuccess ? (
         <div className="flex w-1/2 h-12 rounded-md bg-teal-600/95">
           <p className="m-auto text-2xl font-medium text-white">
             {formatMessage({
-              id: 'screens.records.betSuccess',
-              defaultMessage: 'Bet Success'
+              defaultMessage: 'Bet Success',
+              id: 'screens.records.betSuccess'
             })}
           </p>
         </div>
       ) : null}
-      {gameState === noticeMapper[gameState]?.state ? (
+      {gameState === noticeMapper?.[gameState]?.state && gameState !== undefined ? (
         <div className="flex w-1/2 h-12 rounded-md bg-yellow-300/95">
           <div className="m-auto text-2xl font-medium text-theme-50">
-            {/* {formatMessage({ */}
-            {/*   id: noticeMapper[gameState]?.id, */}
-            {/*   defaultMessage: noticeMapper[gameState]?.default */}
-            {/* })} */}
+            {formatMessage({
+              defaultMessage: noticeMapper?.[gameState]?.default,
+              id: noticeMapper?.[gameState]?.id
+            })}
           </div>
         </div>
       ) : null}
