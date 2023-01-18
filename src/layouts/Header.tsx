@@ -85,6 +85,7 @@ const Header = () => {
                   >
                     <RightSidebarButton
                       href=""
+                      isLink={false}
                       isTarget={false}
                       onClick={openNotice}
                     >
@@ -98,7 +99,8 @@ const Header = () => {
                     </RightSidebarButton>
                     <RightSidebarButton
                       href="/home/profile"
-                      isTarget={false}
+                      isLink={true}
+                      isTarget={true}
                       onClick={() => null}
                     >
                       <i className={icons.user}></i>
@@ -111,6 +113,7 @@ const Header = () => {
                     </RightSidebarButton>
                     <RightSidebarButton
                       href=""
+                      isLink={false}
                       isTarget={false}
                       onClick={() => null}
                     >
@@ -123,6 +126,7 @@ const Header = () => {
                       </p>
                     </RightSidebarButton>
                     <RightSidebarButton
+                      isLink={false}
                       href="https://page.line.me/?accountId=315xktcy"
                       isTarget={true}
                       onClick={() => null}
@@ -136,6 +140,7 @@ const Header = () => {
                       </p>
                     </RightSidebarButton>
                     <RightSidebarButton
+                      isLink={false}
                       href=""
                       isTarget={false}
                       onClick={openSetup}
@@ -149,6 +154,7 @@ const Header = () => {
                       </p>
                     </RightSidebarButton>
                     <RightSidebarButton
+                      isLink={false}
                       href="https://t.me/richman5888"
                       isTarget={true}
                       onClick={() => null}
@@ -163,6 +169,7 @@ const Header = () => {
                     </RightSidebarButton>
                     <RightSidebarButton
                       href=""
+                      isLink={false}
                       isTarget={false}
                       onClick={logout}
                     >

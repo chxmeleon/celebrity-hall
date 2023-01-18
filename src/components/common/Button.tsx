@@ -12,6 +12,12 @@ type BetButtonProps = {
   isDisabled: boolean
 }
 
+type BetSwitchProps = {
+  onClick: React.MouseEventHandler<HTMLButtonElement>
+  isDisabled: boolean
+  isToggle: boolean
+}
+
 type LinkButtonProps = {
   href: string
   isTarget: boolean
@@ -20,6 +26,7 @@ type LinkButtonProps = {
 type ToggleButtonProps = {
   href: string
   isTarget: boolean
+  isLink: boolean
   onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
@@ -48,9 +55,10 @@ export const BetButton: React.FC<React.PropsWithChildren<BetButtonProps>> = ({
   )
 }
 
-export const BetRepeat: React.FC<React.PropsWithChildren<BetButtonProps>> = ({
+export const BetRepeat: React.FC<React.PropsWithChildren<BetSwitchProps>> = ({
   isDisabled,
   children,
+  isToggle,
   onClick
 }) => {
   return (
@@ -60,19 +68,24 @@ export const BetRepeat: React.FC<React.PropsWithChildren<BetButtonProps>> = ({
       className={cx(
         isDisabled
           ? 'hover:cursor-not-allowed text-theme-400 border-amber-500 bg-red-900'
-          : 'border-theme-300 active:bg-theme-300 active:text-theme-50 ',
-        bts({
-          intent: 'outlineButton',
-          round: 'full',
-          size: 'little'
-        })
+          : 'border-theme-300 active:bg-theme-300 active:text-theme-50',
+        !isToggle
+          ? bts({
+              intent: 'outlineSwitch',
+              round: 'full',
+              size: 'little'
+            })
+          : bts({
+              intent: 'outlineSwitchRev',
+              round: 'full',
+              size: 'little'
+            })
       )}
     >
       {children}
     </button>
   )
 }
-
 
 export const LoginButton: React.FC<
   React.PropsWithChildren<LoginButtonProps>
@@ -160,10 +173,10 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
 
 export const RightSidebarButton: React.FC<
   React.PropsWithChildren<ToggleButtonProps>
-> = ({ children, href, isTarget, onClick }) => {
+> = ({ children, href, isTarget, isLink, onClick }) => {
   return (
     <>
-      {isTarget ? (
+      {isTarget && !isLink ? (
         <button
           className={bts({
             intent: 'grayFill',
@@ -175,6 +188,18 @@ export const RightSidebarButton: React.FC<
             <div className="flex items-center pl-8 [&_p]:pl-5">{children}</div>
           </a>
         </button>
+      ) : isTarget && isLink ? (
+        <Link to={href}>
+          <button
+            className={bts({
+              intent: 'grayFill',
+              round: 'sm',
+              size: 'full'
+            })}
+          >
+            <div className="flex items-center pl-8 [&_p]:pl-5">{children}</div>
+          </button>
+        </Link>
       ) : (
         <button
           className={bts({

@@ -50,8 +50,7 @@ const SendGift: React.FC<GiftPorps> = ({
             }
           }
         })
-        console.log(f);
-        
+        console.log(f)
       } catch (error) {
         console.log(error)
       }
@@ -88,11 +87,11 @@ const SendGift: React.FC<GiftPorps> = ({
           <div className="grid grid-cols-3 grid-rows-2 grid-flow-row gap-2 w-full h-44 hover:cursor-pointer">
             {giftList.map((item, idx) => {
               return (
-                <div
+                <button
                   onClick={() => setGift(item.name)}
                   key={`gift-${idx}`}
                   id={item.name}
-                  className="p-2 m-auto w-20 rounded-md border shadow hover:bg-rose-400 border-gray-300/50 drop-shadow-md shadow-slate-300/50"
+                  className="p-2 m-auto w-20 text-red-800 rounded-md border shadow hover:text-red-50 hover:bg-rose-400 focus:text-red-800 focus:bg-rose-300 active:bg-rose-300 border-gray-300/50 drop-shadow-md shadow-slate-300/50"
                 >
                   <div className="m-auto w-9 h-9">
                     <img
@@ -104,7 +103,7 @@ const SendGift: React.FC<GiftPorps> = ({
                   <div className="pt-2 text-xs font-medium text-center">
                     {item.value}
                   </div>
-                </div>
+                </button>
               )
             })}
           </div>

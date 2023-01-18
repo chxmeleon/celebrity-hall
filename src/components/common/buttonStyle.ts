@@ -85,6 +85,32 @@ export const buttonStyle = cva('w-full text-center m-auto', {
         'border',
         'drop-shadow-2xl',
       ],
+
+      outlineSwitch: [
+        'py-1.5',
+        'px-4',
+        'font-bold',
+        'flex',
+        'bg-theme-70/90',
+        'justify-around',
+        'items-center',
+        'border',
+        'drop-shadow-2xl',
+      ],
+
+      outlineSwitchRev: [
+        'py-1.5',
+        'px-4',
+        'font-bold',
+        'flex',
+        'text-theme-70/90',
+        'justify-around',
+        'items-center',
+        'border',
+        'drop-shadow-2xl',
+        'bg-theme-300'
+      ],
+
     },
     round: {
       full: 'rounded-full',
