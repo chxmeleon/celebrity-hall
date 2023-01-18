@@ -1,30 +1,95 @@
-import { useCurrentGameState } from '@/hooks/rooms'
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
-useCurrentGameState
+import { useIntl } from 'react-intl'
+
+const noticeMapper = {
+  START_BET: {
+    state: 'START_BET',
+    id: 'status.baccarat.START_BET',
+    default: 'Start Bet'
+  },
+  STOP_BET: {
+    state: 'STOP_BET',
+    id: 'status.baccarat.STOP_BET',
+    default: 'Stop Bet'
+  },
+  DRAW: {
+    state: 'DRAW',
+    id: 'status.baccarat.DRAW',
+    default: 'drawing'
+  },
+  CLOSE: {
+    state: 'CLOSE',
+    id: 'status.baccarat.CLOSE',
+    default: 'Closed'
+  },
+  SHUFFLE: {
+    state: 'SHUFFLE',
+    id: 'status.baccarat.SHUFFLE',
+    default: 'Shuffling'
+  },
+  SOS: {
+    state: 'SOS',
+    id: 'status.baccarat.SOS',
+    default: 'Maintaining'
+  },
+  SOS_RECOVER: {
+    state: 'SOS_RECOVER',
+    id: 'status.baccarat.SOS_RECOVER',
+    default: 'Maintain Finished, Shuffling'
+  },
+  MAINTAIN: {
+    state: 'MAINTAIN',
+    id: 'status.baccarat.MAINTAIN',
+    default: 'Maintaining'
+  },
+  PLAYER_DRAW_THIRD: {
+    state: 'PLAYER_DRAW_THIRD',
+    id: 'status.baccarat.player_third_opening',
+    default: 'Drawing'
+  },
+  DEALER_DRAW_THIRD: {
+    state: 'DEALER_DRAW_THIRD',
+    id: 'status.baccarat.dealer_third_opening',
+    default: 'Drawing'
+  }
+}
 
 type NoticeProps = {
   isConfirmedSuccess: boolean
-  isCanceledSuccess: boolean
   isRepeatSuccess: boolean
-  WinAndLoseData: { [key: string]: string }
+  gameState: string | any
 }
 
 const RoomNotification: React.FC<NoticeProps> = ({
   isConfirmedSuccess,
-  isCanceledSuccess,
   isRepeatSuccess,
-  WinAndLoseData
+  gameState
 }) => {
+  const { formatMessage } = useIntl()
+
   return (
-    <div className="flex w-1/2 h-12 bg-gradient-to-r from-green-400 via-teal-500 to-blue-500 rounded-md">
-      <p className="m-auto text-lg text-cyan-50">
-        <FormattedMessage
-          id="screens.records.betSuccess"
-          defaultMessage="Bet Success"
-        />
-      </p>
-    </div>
+    <>
+      {isConfirmedSuccess || isRepeatSuccess ? (
+        <div className="flex w-1/2 h-12 rounded-md bg-teal-600/95">
+          <p className="m-auto text-2xl font-medium text-white">
+            {formatMessage({
+              id: 'screens.records.betSuccess',
+              defaultMessage: 'Bet Success'
+            })}
+          </p>
+        </div>
+      ) : null}
+      {gameState === noticeMapper[gameState]?.state ? (
+        <div className="flex w-1/2 h-12 rounded-md bg-yellow-300/95">
+          <div className="m-auto text-2xl font-medium text-theme-50">
+            {/* {formatMessage({ */}
+            {/*   id: noticeMapper[gameState]?.id, */}
+            {/*   defaultMessage: noticeMapper[gameState]?.default */}
+            {/* })} */}
+          </div>
+        </div>
+      ) : null}
+    </>
   )
 }
 
