@@ -85,8 +85,7 @@ const Room = () => {
       subscription.unsubscribe()
     }
   }, [cable, roomId, betState])
-  console.log(betState);
-  
+  console.log(betState)
 
   const formatStrigToNumber = (string: string) => {
     const result = Math.floor(Number(string))
@@ -205,11 +204,11 @@ const Room = () => {
         onClick={() => setSelectedChip(itemName)}
         className={`${
           isActive
-            ? 'shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
-            : 'shadow shadow-theme-50/80'
+            ? 'brightness-105 backdrop-brightness-110 shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
+            : 'shadow shadow-theme-50/80 brightness-75'
         } rounded-full relative hover:cursor-pointer`}
       >
-        <img src={item?.src} alt="bet image" className="w-9" />
+        <img src={item?.src} alt="bet image" className="w-10" />
       </button>
     )
   })
@@ -310,7 +309,7 @@ const Room = () => {
                 <p className="px-2">{totalAmount}</p>
               </div>
             </div>
-            <div className="flex flex-grow justify-around items-center">
+            <div className="flex w-1/3 justify-around items-center">
               {chipsButton}
               {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
               {/*   <button className="text-xl i-heroicons-play-pause-solid" /> */}
@@ -319,7 +318,7 @@ const Room = () => {
               {/*   <button className="text-xl i-heroicons-pencil-square-20-solid" /> */}
               {/* </div> */}
             </div>
-            <div className="flex pl-5 w-[36%] text-theme-300">
+            <div className="flex pl-24 w-[36%] text-theme-300">
               <BetButton
                 isDisabled={isDisable}
                 onClick={() => dispatchBet({ type: 'newRound' })}
@@ -327,7 +326,11 @@ const Room = () => {
                 <div className="text-2xl i-heroicons-x-mark-solid"></div>
                 <FormattedMessage id="common.cancel" />
               </BetButton>
-              <BetRepeat isDisabled={isDisable} onClick={onReapet}>
+              <BetRepeat
+                isDisabled={isDisable}
+                isToggle={isRepeat}
+                onClick={onReapet}
+              >
                 <div className="text-2xl i-heroicons-arrow-path-solid"></div>
                 <FormattedMessage id="common.repeat" />
               </BetRepeat>
