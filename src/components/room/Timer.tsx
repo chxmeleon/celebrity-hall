@@ -15,7 +15,7 @@ const Timer: React.FC = () => {
     'w-[82%] h-[82%] rounded-full absolute border-t-[3px] border-r-[6px] border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
     isLeftTen ? 'border-[#ff0015] ' : 'border-theme-300 '
   )
-
+  
   return (
     <div
       className={`${

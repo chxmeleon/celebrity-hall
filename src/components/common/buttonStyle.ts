@@ -83,11 +83,8 @@ export const buttonStyle = cva('w-full text-center m-auto', {
         'justify-around',
         'items-center',
         'border',
-        'border-theme-300',
         'drop-shadow-2xl',
-        'active:bg-theme-300',
-        'active:text-theme-50'
-      ]
+      ],
     },
     round: {
       full: 'rounded-full',

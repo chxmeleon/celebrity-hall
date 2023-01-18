@@ -33,7 +33,9 @@ export const BetButton: React.FC<React.PropsWithChildren<BetButtonProps>> = ({
       onClick={onClick}
       disabled={isDisabled}
       className={cx(
-        isDisabled ? 'hover:cursor-not-allowed text-theme-400 border-amber-500 bg-red-900' : '',
+        isDisabled
+          ? 'hover:cursor-not-allowed text-theme-400 border-amber-500 bg-red-900'
+          : 'border-theme-300 active:bg-theme-300 active:text-theme-50 ',
         bts({
           intent: 'outlineButton',
           round: 'full',
@@ -45,6 +47,32 @@ export const BetButton: React.FC<React.PropsWithChildren<BetButtonProps>> = ({
     </button>
   )
 }
+
+export const BetRepeat: React.FC<React.PropsWithChildren<BetButtonProps>> = ({
+  isDisabled,
+  children,
+  onClick
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      disabled={isDisabled}
+      className={cx(
+        isDisabled
+          ? 'hover:cursor-not-allowed text-theme-400 border-amber-500 bg-red-900'
+          : 'border-theme-300 active:bg-theme-300 active:text-theme-50 ',
+        bts({
+          intent: 'outlineButton',
+          round: 'full',
+          size: 'little'
+        })
+      )}
+    >
+      {children}
+    </button>
+  )
+}
+
 
 export const LoginButton: React.FC<
   React.PropsWithChildren<LoginButtonProps>

@@ -97,7 +97,7 @@ const Header = () => {
                       </p>
                     </RightSidebarButton>
                     <RightSidebarButton
-                      href=""
+                      href="/home/profile"
                       isTarget={false}
                       onClick={() => null}
                     >
