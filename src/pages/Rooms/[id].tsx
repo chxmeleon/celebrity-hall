@@ -58,7 +58,6 @@ const Room = () => {
     wallet,
     notice
   } = useContext(GamePlayContext)
-  
 
   const { currentGameState } = useCurrentGameState(roomId.id)
   const { gameState } = currentGameState
@@ -270,8 +269,12 @@ const Room = () => {
                 <PockerResult />
               </div>
             </div>
-            <div className="flex justify-center relative">
-              <WinAndLoseResult />
+            <div className="flex relative justify-center">
+              <WinAndLoseResult
+                isRepeatSuccess={isRepeatSuccess}
+                isConfirmedSuccess={isConfirmSuccess}
+                gameState={gameState}
+              />
             </div>
             <div className="flex flex-col h-full">
               <div className="flex-grow pt-32">
