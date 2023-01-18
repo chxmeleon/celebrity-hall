@@ -115,7 +115,7 @@ export const chipReducer = (state: BetInitialValueProp, action: any) => {
       }
 
     case 'repeat':
-      return state
+      return action.preState 
 
     case 'newRound':
       return betInitialValue
