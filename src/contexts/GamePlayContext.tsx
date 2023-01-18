@@ -11,6 +11,7 @@ type GamePlayContextData = {
   betState: BetInitialValueProp
   dispatchBet: React.Dispatch<any>
   wallet: any
+  notice: any
 }
 
 const GamePlayContext = createContext<GamePlayContextData>(
@@ -26,15 +27,16 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
 
   useEffect(() => {
     if (preLocation !== location) {
-      return dispatchBet({ type: 'cancel' })
+      return dispatchBet({ type: 'newRound' })
     }
   }, [preLocation, location, dispatchBet])
 
   const { data, refetch } = useQuery(GET_WALLET)
   const { cable } = useActionCable()
+  const [notice, setNotice] = useState<any | null>(null)
 
   useEffect(() => {
-    const subscription = cable.subscriptions.create(
+    const walletSubscription = cable.subscriptions.create(
       { channel: 'WalletChannel' },
       {
         received: (data) => {
@@ -44,13 +46,27 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
         }
       }
     )
+
+    const subscription = cable.subscriptions.create(
+      { channel: 'JackpotChannel' },
+      {
+        received: (data) => {
+          if (data) {
+            setNotice(data.jackpot)
+          }
+        }
+      }
+    )
     return () => {
+      walletSubscription.unsubscribe()
       subscription.unsubscribe()
     }
   }, [cable, refetch])
-  const wallet = data?.wallet
 
-  const value = { selectedChip, setSelectedChip, betState, dispatchBet, wallet }
+
+  const wallet = data?.wallet
+  
+  const value = { selectedChip, setSelectedChip, betState, dispatchBet, wallet, notice }
 
   return (
     <GamePlayContext.Provider value={value}>

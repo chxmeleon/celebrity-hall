@@ -233,6 +233,7 @@
   "screens.records.balance": "錢包餘額",
   "screens.records.all": "全部",
   "screens.records.bet": "下注",
+  "screens.records.betSuccess": "下注成功",
   "screens.records.dealer": "上莊",
   "screens.records.gift": "打賞",
   "screens.records.charge": "充值",

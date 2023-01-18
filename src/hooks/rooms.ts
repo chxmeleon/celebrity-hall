@@ -84,7 +84,7 @@ export const useCurrentGameState = (roomId: string | undefined) => {
       {
         received: (data) => {
           if (data) {
-            setGameState(data.command)
+            setGameState(data?.command)
           }
         }
       }

@@ -42,7 +42,7 @@ const SendGift: React.FC<GiftPorps> = ({
     } else {
       setIsDisable(false)
       try {
-        const f = await createGift({
+        await createGift({
           variables: {
             input: {
               baccaratRoomId: roomId.id ?? '',
@@ -50,7 +50,6 @@ const SendGift: React.FC<GiftPorps> = ({
             }
           }
         })
-        console.log(f)
       } catch (error) {
         console.log(error)
       }
