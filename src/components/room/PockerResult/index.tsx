@@ -20,6 +20,8 @@ const PockerResult: React.FC = () => {
       gameState !== undefined
     ) {
       setIsShowPocker(true)
+    } else {
+      setIsShowPocker(false)
     }
     return () => {
       setIsShowPocker(false)

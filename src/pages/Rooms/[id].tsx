@@ -26,6 +26,8 @@ import GamePlayContext from '@/contexts/GamePlayContext'
 import { useCurrentGameState } from '@/hooks/rooms'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import { BetInitialValueProp, betInitialValue } from '@/hooks/bet'
+import RoomNotification from '@/components/room/RoomNotification'
+import WinAndLoseResult from '@/components/room/WinAndLoseResult'
 
 const Room = () => {
   const roomId = useParams()
@@ -56,6 +58,7 @@ const Room = () => {
     wallet,
     notice
   } = useContext(GamePlayContext)
+  
 
   const { currentGameState } = useCurrentGameState(roomId.id)
   const { gameState } = currentGameState
@@ -129,12 +132,17 @@ const Room = () => {
             }
           }
         })
-        setIsConfirmSuccess(result?.errors?.length === 0)
+        setIsConfirmSuccess(
+          result?.data?.createBaccaratBet?.errors?.length === 0
+        )
         setIsConfirmDisabled(true)
         setPreBetState(betState)
       } catch (err) {
         console.log(err)
       }
+      setTimeout(() => {
+        setIsConfirmSuccess(false)
+      }, 3500)
     } else {
       e.preventDefault()
     }
@@ -160,13 +168,16 @@ const Room = () => {
           }
         }
       })
-      setIsRepeatSuccess(result?.errors?.length === 0)
+      setIsRepeatSuccess(result?.data?.createBaccaratBet?.errors?.length === 0)
       setIsCancelDisabled(false)
       setIsRepeatDisabled(true)
       setIsConfirmDisabled(true)
     } catch (err) {
       console.log(err)
     }
+    setTimeout(() => {
+      setIsRepeatSuccess(false)
+    }, 3500)
   }
 
   useEffect(() => {
@@ -259,13 +270,21 @@ const Room = () => {
                 <PockerResult />
               </div>
             </div>
-            <div className="flex relative justify-center items-end">
-              <div className="w-full h-full">
-              </div>
+            <div className="flex justify-center relative">
+              <WinAndLoseResult />
             </div>
-            <div className="flex">
-              <div className="m-auto h-32 aspect-square">
-                <Timer />
+            <div className="flex flex-col h-full">
+              <div className="flex-grow pt-32">
+                <div className="m-auto h-32 aspect-square">
+                  <Timer />
+                </div>
+              </div>
+              <div className="flex justify-center items-end h-12">
+                <RoomNotification
+                  isConfirmedSuccess={isConfirmSuccess}
+                  isRepeatSuccess={isRepeatSuccess}
+                  gameState={gameState}
+                />
               </div>
             </div>
           </div>
