@@ -62,7 +62,7 @@ const SendGift: React.FC<GiftPorps> = ({
       <div
         className={`${
           isShow ? '' : 'hidden'
-        } absolute right-0 bottom-9 z-30 my-1 w-full`}
+        } absolute right-0 bottom-8 z-30 my-1 w-full`}
       >
         <div className="py-1 px-3 w-full h-full bg-white rounded-md border border-gray-300">
           <div className="flex justify-center items-center mb-1 w-full h-12 text-theme-50">

@@ -37,6 +37,7 @@ import {
 } from '@/components/room/RoomStream/streamPlayer'
 import { Responsive } from '@/hooks/useResponsive'
 import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
+import ChatroomMobile from '@/components/room/Chatroom/ChatroomMobile'
 import SinglePlayerMobile from '@/components/room/BetDesk/SinglePlayerMobile'
 import RoomDataContext from '@/contexts/RoomDataContext'
 
@@ -487,6 +488,9 @@ const Room = () => {
             </div>
           </div>
           <div className="flex relative flex-col pt-2 w-full h-1/3">
+            <div className="absolute bottom-0 w-full h-full z-30">
+              <ChatroomMobile />
+            </div>
             <div className="flex flex-grow justify-between w-full h-1/2 bg-gray-50">
               <div className="flex-grow-0 flex-shrink-0 w-2/5">
                 {room && <BeadRoad roads={room.roads.bead_road.array} />}
@@ -518,10 +522,10 @@ const Room = () => {
                 </div>
               </div>
             </div>
-            <div className="h-10">
+            <div className="h-12">
               <AskGridMobile />
             </div>
-            <div className="h-14">input</div>
+            <div className="h-11"></div>
           </div>
         </section>
       </Responsive.Default>
