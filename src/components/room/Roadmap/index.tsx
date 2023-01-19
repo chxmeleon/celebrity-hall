@@ -4,21 +4,22 @@ import { FormattedMessage } from 'react-intl'
 import { askMapper } from './data'
 import { useCurrentGame } from '@/hooks/rooms'
 import { useParams } from 'react-router-dom'
+import { memo } from 'react'
 
 export type GameResultType = 'player' | 'dealer' | 'tie'
-export type PairResultType = 'player' | 'dealer' | 'none'
+export type PairResultType = 'player' | 'dealer' | 'none' | 'both'
 export type BeadRoadProps = {
   result: string | null
   game_result: GameResultType
   pair_result: PairResultType
 }
-export const BeadRoad: React.FC<{ roads: (BeadRoadProps | null)[][] }> = ({
-  roads
-}) => {
+export const BeadRoadComponent: React.FC<{
+  roads: (BeadRoadProps | null)[][]
+}> = ({ roads }) => {
   return (
     <Road.BaseGrid>
       {roads.map((row, idx) => (
-        <div className='flex' key={idx}>
+        <div className="flex" key={idx}>
           {row.map((road, index) => (
             <Road.BeadRoadTile key={index} road={road} />
           ))}
@@ -27,6 +28,10 @@ export const BeadRoad: React.FC<{ roads: (BeadRoadProps | null)[][] }> = ({
     </Road.BaseGrid>
   )
 }
+export const BeadRoad = memo(
+  BeadRoadComponent,
+  (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
+)
 
 export const BigRoad: React.FC = () => {
   return (

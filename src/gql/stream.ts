@@ -5,6 +5,7 @@ export const GET_ROOM_STREAM = gql`
     baccaratRoom(id: $baccaratRoomId) {
       name
       waitingBetSeconds
+      roads
       streamName
       streamKey
       streams {

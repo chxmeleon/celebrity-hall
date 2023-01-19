@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl'
 import { CREATE_BACCARAT_BET, CANCEL_BACCARAT_BET } from '@/gql/baccaratrooms'
 import { useMutation } from '@apollo/client'
 import types from '@/types'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { BetButton } from '@/components/common/Button'
 import { chipsImg } from '@/components/room/BetDesk/chips'
 import { useSetup } from '@/contexts/SetupContext'
@@ -28,17 +28,20 @@ import { useActionCable } from '@/contexts/ActionCableContext'
 import { BetInitialValueProp, betInitialValue } from '@/hooks/bet'
 import RoomNotification from '@/components/room/RoomNotification'
 import WinAndLoseResult from '@/components/room/WinAndLoseResult'
+import RoomDataContext from '@/contexts/RoomDataContext'
 
 const Room = () => {
-  const roomId = useParams()
-  const { data } = useQuery(GET_ROOM_STREAM, {
-    variables: { baccaratRoomId: Number(roomId?.id) }
-  })
+  const { rooms } = useContext(RoomDataContext)
+  const { id: roomId } = useParams<{ id: string }>()
+  const room = useMemo(
+    () => (roomId ? rooms.find((room) => room.id === roomId) : undefined),
+    [roomId, rooms]
+  )
 
-  const streamName = data?.baccaratRoom?.streamName
-  const streamKey = data?.baccaratRoom?.streamKey
-  const secoundStreamName = data?.baccaratRoom?.streams[0].name
-  const secoundStreamKey = data?.baccaratRoom?.streams[0].key
+  const streamName = room?.streamName
+  const streamKey = room?.streamKey
+  const secoundStreamName = room?.streams?.[0].name
+  const secoundStreamKey = room?.streams?.[0].key
 
   const [isSecondCam, setIsSecondCam] = useState(false)
   const handleSwitchCam = () => setIsSecondCam(!isSecondCam)
@@ -50,15 +53,10 @@ const Room = () => {
   const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
 
   const { isRegular, handleRegularToggle } = useSetup()
-  const {
-    selectedChip,
-    setSelectedChip,
-    betState,
-    dispatchBet,
-    wallet,
-  } = useContext(GamePlayContext)
+  const { selectedChip, setSelectedChip, betState, dispatchBet, wallet } =
+    useContext(GamePlayContext)
 
-  const { currentGameState } = useCurrentGameState(roomId.id)
+  const { currentGameState } = useCurrentGameState(roomId ?? '')
   const { gameState } = currentGameState
   const [isDisable, setIsDisable] = useState(true)
   const { deviceInfo } = useSetup()
@@ -96,7 +94,7 @@ const Room = () => {
       const result = await cancelBaccaratBet({
         variables: {
           input: {
-            baccaratRoomId: roomId.id ?? ''
+            baccaratRoomId: roomId ?? ''
           }
         }
       })
@@ -115,7 +113,7 @@ const Room = () => {
         const result = await createBaccaratBet({
           variables: {
             input: {
-              baccaratRoomId: roomId.id ?? '',
+              baccaratRoomId: roomId ?? '',
               playerAmount: betState?.playerAmount,
               dealerAmount: betState?.dealerAmount,
               playerPairAmount: betState?.playerPairAmount,
@@ -155,7 +153,7 @@ const Room = () => {
       const result = await createBaccaratBet({
         variables: {
           input: {
-            baccaratRoomId: roomId.id ?? '',
+            baccaratRoomId: roomId ?? '',
             playerAmount: preBetState?.playerAmount,
             dealerAmount: preBetState?.dealerAmount,
             playerPairAmount: preBetState?.playerPairAmount,
@@ -232,21 +230,21 @@ const Room = () => {
   return (
     <div className="flex relative flex-col w-full h-full">
       <div className="relative w-full h-4/5">
-        {isSecondCam ? (
+        {isSecondCam && secoundStreamName && secoundStreamKey ? (
           <RoomStream
             streamName={secoundStreamName}
             streamKey={secoundStreamKey}
             videoOn={true}
             isWebRTC={isWebRTC}
           />
-        ) : (
+        ) : streamName && streamKey ? (
           <RoomStream
             streamName={streamName}
             streamKey={streamKey}
             videoOn={true}
             isWebRTC={isWebRTC}
           />
-        )}
+        ) : null}
 
         <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
           <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
@@ -366,7 +364,7 @@ const Room = () => {
       <div className="flex w-full h-1/5 bg-gray-50">
         <div className="flex flex-grow justify-start">
           <div className="flex-grow-0 flex-shrink-0 w-1/3">
-            <BeadRoad />
+            {room && <BeadRoad roads={room.roads.bead_road.array} />}
           </div>
           <div className="flex w-2/3">
             <div className="block flex-grow w-full">

@@ -7856,7 +7856,7 @@ export type GIRL_TYPE = { __typename: 'Girl', id: string, name: string | null, a
 export type GET_BACCARATROOMSVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GET_BACCARATROOMS = { activeBaccaratRooms: Array<{ __typename: 'BaccaratRoom', id: string, name: string | null, currentRoadsImage: string | null, waitingBetSeconds: number | null, roads: any | null, alertText: string | null, waitingText: string | null, zoomType: string | null, status: string | null, girl: (
+export type GET_BACCARATROOMS = { activeBaccaratRooms: Array<{ __typename: 'BaccaratRoom', id: string, name: string | null, currentRoadsImage: string | null, waitingBetSeconds: number | null, roads: any | null, alertText: string | null, waitingText: string | null, zoomType: string | null, status: string | null, streamName: string | null, streamKey: string | null, girl: (
       { __typename: 'Girl' }
       & GIRL_TYPE
     ) | null, streams: Array<{ __typename: 'Stream', id: string, name: string | null, key: string | null }> | null, currentGame: { __typename: 'BaccaratGame', id: string, baccaratRoomId: string | null, playerWin: boolean | null, dealerWin: boolean | null, tieWin: boolean | null, playerPairWin: boolean | null, dealerPairWin: boolean | null, dealerPoints: number | null, playerPoints: number | null, gameNo: string | null, status: string | null, playerCards: Array<number> | null, dealerCards: Array<number> | null, shuffle: boolean | null, playerNeedAnother: boolean | null, dealerNeedAnother: boolean | null, dealerAmount: number | null, playerAmount: number | null, dealerPairAmount: number | null, playerPairAmount: number | null, tieAmount: number | null, updatedAt: any | null, endAt: any | null } | null, currentBaccaratBetRecord: { __typename: 'CurrentBaccaratBetRecord', id: string, playerAmount: number | null, playerDiffAmount: number | null, dealerAmount: number | null, dealerDiffAmount: number | null, tieAmount: number | null, tieDiffAmount: number | null, playerPairAmount: number | null, playerPairDiffAmount: number | null, dealerPairAmount: number | null, dealerPairDiffAmount: number | null, totalAmount: number | null, totalDiffAmount: number | null, hasResult: boolean | null, winLossAmount: number | null, gameNo: string | null, roomName: string | null } | null }> | null };
@@ -7967,7 +7967,7 @@ export type GET_ROOM_STREAMVariables = Exact<{
 }>;
 
 
-export type GET_ROOM_STREAM = { baccaratRoom: { __typename: 'BaccaratRoom', name: string | null, waitingBetSeconds: number | null, streamName: string | null, streamKey: string | null, webhookUrl: string | null, zoomType: string | null, id: string, streams: Array<{ __typename: 'Stream', createdAt: any | null, id: string, key: string | null, name: string | null, updatedAt: any | null }> | null } | null };
+export type GET_ROOM_STREAM = { baccaratRoom: { __typename: 'BaccaratRoom', name: string | null, waitingBetSeconds: number | null, roads: any | null, streamName: string | null, streamKey: string | null, webhookUrl: string | null, zoomType: string | null, id: string, streams: Array<{ __typename: 'Stream', createdAt: any | null, id: string, key: string | null, name: string | null, updatedAt: any | null }> | null } | null };
 
 export type StreamersVariables = Exact<{ [key: string]: never; }>;
 

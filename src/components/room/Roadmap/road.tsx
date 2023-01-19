@@ -1,5 +1,5 @@
 import { clsx as cx } from 'clsx'
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { BeadRoadProps } from '.'
 import { fullRecordMapper, outlineRecordMapper, roadTileMapping } from './data'
@@ -8,11 +8,14 @@ type TileProps = {
   status: string
 }
 
+const playerPairLocationClassName = 'right-[2px] bottom-[2px]'
+const dealerPairLocationClassName = 'left-[2px] top-[2px]'
+
 const tileContainer = cx(
   'relative flex w-full h-full text-xs font-light text-gray-50 border-r border-b border-gray-400 aspect-square'
 )
 
-export const BeadRoadTile: React.FC<{
+export const BeadRoadTileComponent: React.FC<{
   road: BeadRoadProps | null
 }> = ({ road }) => {
   const winRecordTileStyle = useMemo(
@@ -30,25 +33,51 @@ export const BeadRoadTile: React.FC<{
         {road?.game_result && (
           <FormattedMessage
             id={roadTileMapping[road.game_result].translationId}
-            defaultMessage={status}
+            defaultMessage={road.game_result}
           />
         )}
 
         {road?.pair_result && road.pair_result !== 'none' && (
-          <div
-            className={cx(
-              'absolute w-[8px] h-[8px] rounded-full',
-              roadTileMapping[road.pair_result].className,
-              road.pair_result === 'player'
-                ? 'right-[2px] bottom-[2px]'
-                : 'left-[2px] top-[2px]'
+          <>
+            {road.pair_result === 'both' ? (
+              <>
+                <div
+                  className={cx(
+                    'absolute w-[8px] h-[8px] rounded-full',
+                    roadTileMapping['player'].className,
+                    playerPairLocationClassName
+                  )}
+                ></div>
+
+                <div
+                  className={cx(
+                    'absolute w-[8px] h-[8px] rounded-full',
+                    roadTileMapping['dealer'].className,
+                    dealerPairLocationClassName
+                  )}
+                ></div>
+              </>
+            ) : (
+              <div
+                className={cx(
+                  'absolute w-[8px] h-[8px] rounded-full',
+                  roadTileMapping[road.pair_result].className,
+                  road.pair_result === 'player'
+                    ? playerPairLocationClassName
+                    : dealerPairLocationClassName
+                )}
+              ></div>
             )}
-          ></div>
+          </>
         )}
       </div>
     </div>
   )
 }
+export const BeadRoadTile = memo(
+  BeadRoadTileComponent,
+  (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
+)
 
 export const BigRecordTile: React.FC<TileProps> = ({ status }) => {
   const bigRecordTileStyle = cx(

@@ -23,6 +23,8 @@ export const GET_BACCARATROOMS = gql`
       waitingText
       zoomType
       status
+      streamName
+      streamKey
       streams {
         id
         name

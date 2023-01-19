@@ -1,19 +1,18 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import { BigRoad, BeadRoad } from './Roadmap'
 import { useTimeLeft } from '@/hooks/rooms'
+import { RoomProps } from '@/types/room'
 
 type RoomDataProps = {
-  room: any
+  room: RoomProps
 }
 
 const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
-  const { counter, startCount, isLeftTen, isOpening } = useTimeLeft(room?.id)
-  const href = `/home/rooms/${room?.id}`
-  const girl = room?.girl
-
-  console.log(room.roads)
+  const { counter, startCount, isLeftTen, isOpening } = useTimeLeft(room.id)
+  const href = `/home/rooms/${room.id}`
+  const girl = room.girl
 
   return (
     <Link to={href} key={href}>
@@ -54,14 +53,11 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
                 )}
               </div>
             </div>
-            <div className="pl-4 font-bold tracking-[0.15rem]">
-              {room?.name}
-            </div>
+            <div className="pl-4 font-bold tracking-[0.15rem]">{room.name}</div>
           </div>
           <div className="flex flex-grow-0 flex-shrink-0 justify-start items-center px-3 w-full text-xs">
             <div className="flex w-3/4 h-full bg-gray-100 rounded-tl-sm rounded-bl-sm">
-              {room && <BeadRoad roads={room.roads.bead_road.array} />}
-              {/* <BigRoad /> */}
+              <BeadRoad roads={room.roads.bead_road.array} />
             </div>
             <div className="relative w-1/4 h-20 bg-gray-100 rounded-tr-sm rounded-br-sm md:h-[160px]">
               <div className="absolute bottom-0 w-full">
@@ -84,15 +80,17 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
                   <div className="border-b-[#F9A415] border-b-[50px] border-l-[57px] border-transparent"></div>
                 </div>
                 <div className="w-full font-medium tracking-widest text-center p-[1px] bg-theme-50/75">
-                  {girl.name}
+                  {girl?.name}
                 </div>
               </div>
               <div className="overflow-hidden w-full h-full">
-                <img
-                  src={girl?.avatar}
-                  alt="Dealer avatar"
-                  className="object-cover object-top w-full h-full"
-                />
+                {girl?.avatar && (
+                  <img
+                    src={girl?.avatar}
+                    alt="Dealer avatar"
+                    className="object-cover object-top w-full h-full"
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -102,19 +100,19 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
                 <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[3px] bg-grid-100">
                   <FormattedMessage id="common.dealer" defaultMessage="B" />
                 </div>
-                <p>{room?.roads.dealer_count}</p>
+                <p>{room.roads.dealer_count}</p>
               </div>
               <div className="inline-flex items-center">
                 <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[3px] bg-grid-400">
                   <FormattedMessage id="common.player" defaultMessage="P" />
                 </div>
-                <p>{room?.roads.player_count}</p>
+                <p>{room.roads.player_count}</p>
               </div>
               <div className="inline-flex items-center">
                 <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[3px] bg-grid-300">
                   <FormattedMessage id="common.tie" defaultMessage="T" />
                 </div>
-                <p>{room?.roads.tie_count}</p>
+                <p>{room.roads.tie_count}</p>
               </div>
             </div>
             <div className="flex w-1/4 h-full">
