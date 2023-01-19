@@ -7883,6 +7883,13 @@ export type CREATE_BACCARAT_BETVariables = Exact<{
 
 export type CREATE_BACCARAT_BET = { createBaccaratBet: { __typename: 'CreateBaccaratBetPayload', errors: Array<{ __typename: 'ModelError', attribute: string, message: string }> | null, wallet: { __typename: 'Wallet', id: string, balance: number | null } } | null };
 
+export type CANCEL_BACCARAT_BETVariables = Exact<{
+  input: CancelBaccaratBetInput;
+}>;
+
+
+export type CANCEL_BACCARAT_BET = { cancelBaccaratBet: { __typename: 'CancelBaccaratBetPayload', errors: Array<{ __typename: 'ModelError', attribute: string, message: string }> | null, wallet: { __typename: 'Wallet', id: string, balance: number | null, creditBalance: number | null, totalEffectiveAmount: number | null, totalEffectiveXimaAmount: number | null } } | null };
+
 export type CREATE_BACCARAT_MESSAGEVariables = Exact<{
   input: CreateBaccaratMessageInput;
 }>;
