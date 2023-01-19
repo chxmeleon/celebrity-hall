@@ -1,4 +1,5 @@
 import { FormattedMessage } from 'react-intl'
+import { clsx as cx } from 'clsx'
 import { CREATE_BACCARAT_BET, CANCEL_BACCARAT_BET } from '@/gql/baccaratrooms'
 import { useMutation } from '@apollo/client'
 import types from '@/types'
@@ -28,6 +29,14 @@ import { useActionCable } from '@/contexts/ActionCableContext'
 import { BetInitialValueProp, betInitialValue } from '@/hooks/bet'
 import RoomNotification from '@/components/room/RoomNotification'
 import WinAndLoseResult from '@/components/room/WinAndLoseResult'
+import StreamMobile from '@/components/room/RoomStream/StreamMobile'
+import {
+  NodePlayerStream,
+  NodePlayerStreamMobile
+} from '@/components/room/RoomStream/streamPlayer'
+import { Responsive } from '@/hooks/useResponsive'
+import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
+import SinglePlayerMobile from '@/components/room/BetDesk/SinglePlayerMobile'
 import RoomDataContext from '@/contexts/RoomDataContext'
 
 const ChipButtonList: React.FC<{
@@ -53,7 +62,7 @@ const ChipButtonList: React.FC<{
             className={`${
               isActive
                 ? 'brightness-105 backdrop-brightness-110 shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
-                : 'shadow shadow-theme-50/80 brightness-[85%] opacity-[80%]'
+                : 'shadow shadow-theme-50/80 brightness-[78%] opacity-[80%]'
             } rounded-full relative hover:cursor-pointer`}
           >
             <img src={item?.src} alt="bet image" className="w-10" />
@@ -237,77 +246,78 @@ const Room = () => {
   }, [gameState, dispatchBet, totalAmount])
 
   return (
-    <div className="flex relative flex-col w-full h-full">
-      <div className="relative w-full h-4/5">
-        {isSecondCam && secoundStreamName && secoundStreamKey ? (
-          <RoomStream
-            streamName={secoundStreamName}
-            streamKey={secoundStreamKey}
-            videoOn={true}
-            isWebRTC={isWebRTC}
-          />
-        ) : streamName && streamKey ? (
-          <RoomStream
-            streamName={streamName}
-            streamKey={streamKey}
-            videoOn={true}
-            isWebRTC={isWebRTC}
-          />
-        ) : null}
-
-        <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
-          <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
-            <div className="flex flex-col justify-around items-end h-24 w-[5.5rem]">
-              <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
-                <button
-                  onClick={handleSwitchCam}
-                  className={`${
-                    isSecondCam ? 'text-theme-300' : ''
-                  } m-auto text-2xl i-heroicons-video-camera-20-solid`}
-                ></button>
-              </div>
-              <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
-                <button
-                  onClick={handleSwitchStream}
-                  className={`${
-                    isWebRTC ? 'text-theme-300' : ''
-                  } m-auto text-2xl i-heroicons-wifi-20-solid`}
-                ></button>
-              </div>
-            </div>
-          </div>
-          <div className="relative w-full h-[63%] grid grid-cols-3">
-            <div className="flex justify-start items-end pb-2 pl-4">
-              <div className="w-[340px] h-[68%]">
-                <PockerResult />
-              </div>
-            </div>
-            <div className="flex relative justify-center">
-              <WinAndLoseResult gameState={gameState} />
-            </div>
-            <div className="flex flex-col h-full">
-              <div className="flex-grow pt-32">
-                <div className="m-auto h-32 aspect-square">
-                  <Timer />
+    <>
+      <Responsive.Desktop>
+        <section className="flex relative flex-col w-full h-[93.6vh]">
+          <div className="relative w-full h-4/5">
+            {isSecondCam && secoundStreamName && secoundStreamKey ? (
+              <RoomStream
+                streamName={secoundStreamName}
+                streamKey={secoundStreamKey}
+                videoOn={true}
+                isWebRTC={isWebRTC}
+              />
+            ) : streamName && streamKey ? (
+              <RoomStream
+                streamName={streamName}
+                streamKey={streamKey}
+                videoOn={true}
+                isWebRTC={isWebRTC}
+              />
+            ) : null}
+            <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
+              <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
+                <div className="flex flex-col justify-around items-end h-24 w-[5.5rem]">
+                  <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
+                    <button
+                      onClick={handleSwitchCam}
+                      className={`${
+                        isSecondCam ? 'text-theme-300' : ''
+                      } m-auto text-2xl i-heroicons-video-camera-20-solid`}
+                    ></button>
+                  </div>
+                  <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
+                    <button
+                      onClick={handleSwitchStream}
+                      className={`${
+                        isWebRTC ? 'text-theme-300' : ''
+                      } m-auto text-2xl i-heroicons-wifi-20-solid`}
+                    ></button>
+                  </div>
                 </div>
               </div>
-              <div className="flex justify-center items-end pb-2 h-12">
-                <RoomNotification
-                  isConfirmedSuccess={isConfirmSuccess}
-                  isConfirmedFailure={isConfirmFailure}
-                  isRepeatSuccess={isRepeatSuccess}
-                  gameState={gameState}
-                />
+              <div className="relative w-full h-[63%] grid grid-cols-3">
+                <div className="flex justify-start items-end pb-2 pl-4">
+                  <div className="w-[340px] h-[68%]">
+                    <PockerResult />
+                  </div>
+                </div>
+                <div className="flex relative justify-center">
+                  <WinAndLoseResult gameState={gameState} />
+                </div>
+                <div className="flex flex-col h-full">
+                  <div className="flex-grow pt-32">
+                    <div className="m-auto h-32 aspect-square">
+                      <Timer />
+                    </div>
+                  </div>
+                  <div className="flex justify-center items-end pb-2 h-12">
+                    <RoomNotification
+                      isConfirmedSuccess={isConfirmSuccess}
+                      isConfirmedFailure={isConfirmFailure}
+                      isRepeatSuccess={isRepeatSuccess}
+                      gameState={gameState}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="flex-grow flex-shrink-0 w-full">
-            <BetDesk isDisabled={isDisable} isToggle={isChangedDesk} />
-          </div>
-          <div className="flex justify-between items-center px-2 my-2 w-full h-10">
-            <div className="flex items-center w-[30%]">
-              {/* gameplay's switch */}
-              {/* <button
+              <div className="flex-grow flex-shrink-0 w-full">
+                <BetDesk isDisabled={isDisable} isToggle={isChangedDesk} />
+              </div>
+              <div className="flex justify-between items-center px-2 my-2 w-full h-10">
+                <div className="flex items-center w-[30%]">
+                  {/* gameplay's switch */}
+                  {/* <button
                 onClick={handleSwitchDesk}
                 className={`${
                   isChangedDesk
@@ -323,7 +333,7 @@ const Room = () => {
                   } text-2xl `}
                 ></div>
               </button> */}
-              {/* <button onClick={handleRegularToggle} className="px-1 ml-2">
+                  {/* <button onClick={handleRegularToggle} className="px-1 ml-2">
                 <div
                   className={`${
                     isRegular
@@ -338,76 +348,150 @@ const Room = () => {
                   )}
                 </div>
               </button> */}
-              <div className="inline-flex px-2">
-                <FormattedMessage id="screens.room.bet" />
-                <p className="px-2">|</p>
-                <p className="px-2">{totalAmount}</p>
-              </div>
-            </div>
-            <div className="flex justify-around items-center w-1/3">
-              <ChipButtonList
-                selectedChip={selectedChip}
-                onSelectedChipChanged={setSelectedChip}
-              />
-              {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
-              {/*   <button className="text-xl i-heroicons-play-pause-solid" /> */}
-              {/* </div> */}
-              {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
-              {/*   <button className="text-xl i-heroicons-pencil-square-20-solid" /> */}
-              {/* </div> */}
-            </div>
-            <div className="flex pl-6 w-[36%] text-theme-300">
-              <BetButton isDisabled={isCancelDisabled} onClick={onCancel}>
-                <div className="text-2xl i-heroicons-x-mark-solid"></div>
-                <FormattedMessage id="common.cancel" />
-              </BetButton>
-              <BetButton isDisabled={isRepeatDisabled} onClick={onRepeat}>
-                <div className="text-2xl i-heroicons-arrow-path-solid"></div>
-                <FormattedMessage id="common.repeat" />
-              </BetButton>
-              <BetButton isDisabled={isConfirmDisabled} onClick={onConfirmBet}>
-                <div className="text-2xl i-heroicons-check-solid"></div>
-                <FormattedMessage id="common.confirm" />
-              </BetButton>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="flex w-full h-1/5 bg-gray-50">
-        <div className="flex flex-grow justify-start">
-          <div className="flex-grow-0 flex-shrink-0 w-[28.6%]">
-            {room && <BeadRoad roads={room.roads.bead_road.array} />}
-          </div>
-
-          <div className="flex w-[71.4%]">
-            <div className="block flex-grow w-full">
-              <div>{room && <BigRoad roads={room.roads.big_road.array} />}</div>
-
-              <div className="flex w-full h-1/3">
-                <div className="w-1/3">
-                  {room && <BigEyeRoad roads={room.roads.big_eye_road.graph} />}
+                  <div className="inline-flex px-2">
+                    <FormattedMessage id="screens.room.bet" />
+                    <p className="px-2">|</p>
+                    <p className="px-2">{totalAmount}</p>
+                  </div>
                 </div>
-                <div className="w-1/3">
-                  {room && <SmallRoad roads={room.roads.small_road.graph} />}
+                <div className="flex justify-around items-center w-1/3">
+                  <ChipButtonList
+                    selectedChip={selectedChip}
+                    onSelectedChipChanged={setSelectedChip}
+                  />
+                  {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
+                  {/*   <button className="text-xl i-heroicons-play-pause-solid" /> */}
+                  {/* </div> */}
+                  {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
+                  {/*   <button className="text-xl i-heroicons-pencil-square-20-solid" /> */}
+                  {/* </div> */}
                 </div>
-                <div className="w-1/3">
-                  {room && (
-                    <CockroachRoad roads={room.roads.cockroach_road.graph} />
-                  )}
+                <div className="flex pl-6 w-[36%] text-theme-300">
+                  <BetButton isDisabled={isCancelDisabled} onClick={onCancel}>
+                    <div className="text-2xl i-heroicons-x-mark-solid"></div>
+                    <FormattedMessage id="common.cancel" />
+                  </BetButton>
+                  <BetButton isDisabled={isRepeatDisabled} onClick={onRepeat}>
+                    <div className="text-2xl i-heroicons-arrow-path-solid"></div>
+                    <FormattedMessage id="common.repeat" />
+                  </BetButton>
+                  <BetButton
+                    isDisabled={isConfirmDisabled}
+                    onClick={onConfirmBet}
+                  >
+                    <div className="text-2xl i-heroicons-check-solid"></div>
+                    <FormattedMessage id="common.confirm" />
+                  </BetButton>
                 </div>
               </div>
             </div>
-            <div className="w-1/4 h-full">
-              <AskGrid />
+          </div>
+          <div className="flex w-full h-1/5 bg-gray-50">
+            <div className="flex flex-grow justify-start">
+              <div className="flex-grow-0 flex-shrink-0 w-[28.6%]">
+                {room && <BeadRoad roads={room.roads.bead_road.array} />}
+              </div>
+
+              <div className="flex w-[71.4%]">
+                <div className="block flex-grow w-full">
+                  <div>
+                    {room && <BigRoad roads={room.roads.big_road.array} />}
+                  </div>
+
+                  <div className="flex w-full h-1/3">
+                    <div className="w-1/3">
+                      {room && (
+                        <BigEyeRoad roads={room.roads.big_eye_road.graph} />
+                      )}
+                    </div>
+                    <div className="w-1/3">
+                      {room && (
+                        <SmallRoad roads={room.roads.small_road.graph} />
+                      )}
+                    </div>
+                    <div className="w-1/3">
+                      {room && (
+                        <CockroachRoad
+                          roads={room.roads.cockroach_road.graph}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="w-1/4 h-full">
+                  <AskGrid />
+                </div>
+              </div>
+            </div>
+            {/* <div className="w-[11%] h-full flex-shrink-0"></div> */}
+            <div className="w-2/6 h-full">
+              <ChatRoom />
             </div>
           </div>
-        </div>
-        {/* <div className="w-[11%] h-full flex-shrink-0"></div> */}
-        <div className="w-2/6 h-full">
-          <ChatRoom />
-        </div>
-      </div>
-    </div>
+        </section>
+      </Responsive.Desktop>
+      <Responsive.Default>
+        <section className="flex flex-col w-full bg-theme-50 375:h-[93vh] 390:h-[94vh] 414:h-[94.3vh]">
+          <div className="relative w-full h-auto aspect-video">
+            <div className="relative w-full h-full">
+              {isSecondCam && secoundStreamName && secoundStreamKey ? (
+                <RoomStream
+                  streamName={secoundStreamName}
+                  streamKey={secoundStreamKey}
+                  videoOn={true}
+                  isWebRTC={isWebRTC}
+                />
+              ) : streamName && streamKey ? (
+                <RoomStream
+                  streamName={streamName}
+                  streamKey={streamKey}
+                  videoOn={true}
+                  isWebRTC={isWebRTC}
+                />
+              ) : null}
+            </div>
+          </div>
+          <div className="inline-flex py-1.5 px-2 text-sm">
+            <FormattedMessage id="screens.room.bet" />
+            <p className="px-2">|</p>
+            <p className="px-2">{totalAmount}</p>
+          </div>
+
+          <div className="flex relative flex-col flex-grow w-full">
+            <SinglePlayerMobile isDisabled={isDisable} />
+            <div className="flex flex-col w-full h-2/5">
+              <div className="flex justify-around py-3 px-2 w-full">
+                <ChipButtonList
+                  selectedChip={selectedChip}
+                  onSelectedChipChanged={setSelectedChip}
+                />
+              </div>
+              <div className="flex flex-grow justify-between items-center px-2 w-full bg-black/75">
+                <BetButton isDisabled={isCancelDisabled} onClick={onCancel}>
+                  <div className="text-2xl i-heroicons-x-mark-solid"></div>
+                  <FormattedMessage id="common.cancel" />
+                </BetButton>
+                <BetButton isDisabled={isRepeatDisabled} onClick={onRepeat}>
+                  <div className="text-2xl i-heroicons-arrow-path-solid"></div>
+                  <FormattedMessage id="common.repeat" />
+                </BetButton>
+                <BetButton
+                  isDisabled={isConfirmDisabled}
+                  onClick={onConfirmBet}
+                >
+                  <div className="text-2xl i-heroicons-check-solid"></div>
+                  <FormattedMessage id="common.confirm" />
+                </BetButton>
+              </div>
+            </div>
+          </div>
+          <div className="flex relative flex-col w-full h-1/3">
+            <div className="flex-grow">road</div>
+            <div className="h-12">input</div>
+          </div>
+        </section>
+      </Responsive.Default>
+    </>
   )
 }
 

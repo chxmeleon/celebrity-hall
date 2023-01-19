@@ -86,7 +86,12 @@ module.exports = {
       },
       screens: {
         '1.5xl': '1440px',
-        '3xl': '1520px'
+        '3xl': '1520px',
+        '375': '375px',
+        '390': '390px',
+        '414': '414px',
+
+
       },
       gridTemplateColumns: {
         15: 'repeat(15, minmax(0, 1fr))',

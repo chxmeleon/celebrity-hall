@@ -6,12 +6,9 @@ import { GET_PROFILE } from '@/gql/profile'
 import defaultAvatar from '/user.png'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
-import { clsx as cx } from 'clsx'
 
-const LeftSidebar = () => {
+const LeftSidebarForRoom = () => {
   const { data: user, refetch } = useQuery(GET_PROFILE)
-  const location = useLocation()
 
   useEffect(() => {
     refetch()
@@ -35,15 +32,9 @@ const LeftSidebar = () => {
     }
   }, [cable, refetch])
 
-  console.log(location.pathname === 'home/room/*');
-  
-  const leftSidebarStyle = cx(
-    'flex flex-shrink-0 px-1.5 w-14 text-center md:py-5 md:px-7 md:w-52 border-r-[0.5px] border-r-theme-75',
-    /* location.pathname === 'home/room/:id' ? 'hidden' : '' */
-  )
 
   return (
-    <div className={leftSidebarStyle}>
+    <div className="hidden md:flex flex-shrink-0 px-1.5 w-0 text-center md:py-5 md:px-7 md:w-52 border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full">
         <section className="hidden pb-6 w-full md:block">
           <div className="flex">
@@ -152,4 +143,4 @@ const LeftSidebar = () => {
   )
 }
 
-export default LeftSidebar
+export default LeftSidebarForRoom

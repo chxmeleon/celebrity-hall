@@ -6,8 +6,9 @@ import { useAuth } from '@/contexts/AuthContext'
 import SetupModal from '@/components/setup/SetupModal'
 import NoticeModal from '@/components/setup/NoticeModal'
 import { useActivedTab } from '@/hooks/rooms'
+import LeftSidebarForRoom from './LeftSidebarForRoom'
 
-const ProtectedLayout: React.FC = () => {
+const ProtectedLayoutForRoom: React.FC = () => {
   const { auth, isExpired } = useAuth()
   if (!auth || isExpired) {
     return <Navigate to="/login" replace />
@@ -21,11 +22,11 @@ const ProtectedLayout: React.FC = () => {
     <main className="w-full h-full">
       <SetupModal />
       <NoticeModal />
-      <section className="relative m-auto w-full h-screen md:w-auto aspect-video border-theme-70 border">
+      <section className="relative m-auto w-full h-screen border md:w-auto aspect-video border-theme-70">
         <div className={bgImage}></div>
         <Header />
         <div className="flex justify-start pt-12 w-full h-full">
-          <LeftSidebar />
+          <LeftSidebarForRoom />
           <div className="relative w-full h-full bg-black">
             <Outlet />
           </div>
@@ -35,4 +36,4 @@ const ProtectedLayout: React.FC = () => {
   )
 }
 
-export default ProtectedLayout
+export default ProtectedLayoutForRoom

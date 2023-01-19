@@ -183,7 +183,7 @@ export const Responsive = {
   },
   Desktop: ({ children }: React.PropsWithChildren) => {
     const { isDesktop } = useContext(ResponsiveContext)
-    return isDesktop ? <ResponsiveMedia greaterThanOrEqual="lg">{children}</ResponsiveMedia> : (null as any)
+    return isDesktop ? <ResponsiveMedia greaterThanOrEqual="xl">{children}</ResponsiveMedia> : (null as any)
   },
   MobilePortrait: ({ children }: React.PropsWithChildren) => {
     const { isMobilePortrait } = useContext(ResponsiveContext)

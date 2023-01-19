@@ -40,7 +40,7 @@ const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState }) => {
   }, [gameState, newNotice, notice])
 
   const noticeStyle = cx(
-    'flex w-2/3 h-9 rounded-md transition-all duration-300 ease-in-out ',
+    'flex w-3/4 h-9 rounded-md transition-all duration-300 ease-in-out px-3 ',
     winLoseStyle[windLoseState()],
     isShow ? 'opacity-100' : 'opacity-0 -translate-y-10'
   )
