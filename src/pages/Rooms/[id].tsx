@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl'
-import { CREATE_BACCARAT_BET } from '@/gql/baccaratrooms'
+import { CREATE_BACCARAT_BET, CANCEL_BACCARAT_BET } from '@/gql/baccaratrooms'
 import { useMutation } from '@apollo/client'
 import types from '@/types'
 import { useContext, useEffect, useState } from 'react'
@@ -56,6 +56,7 @@ const Room = () => {
     betState,
     dispatchBet,
     wallet,
+    notice
   } = useContext(GamePlayContext)
 
   const { currentGameState } = useCurrentGameState(roomId.id)
@@ -68,8 +69,10 @@ const Room = () => {
     types.CREATE_BACCARAT_BETVariables
   >(CREATE_BACCARAT_BET)
 
-  const [preBetState, setPreBetState] =
-    useState<BetInitialValueProp>(betInitialValue)
+  const [cancelBaccaratBet] = useMutation<
+    types.CANCEL_BACCARAT_BET,
+    types.CANCEL_BACCARAT_BETVariables
+  >(CANCEL_BACCARAT_BET)
 
   const totalAmount =
     betState?.playerAmount +
@@ -81,37 +84,20 @@ const Room = () => {
     betState?.tieAmount +
     betState?.super6Amount
 
-  const preTotalAmount =
-    preBetState?.playerAmount +
-    preBetState?.playerPairAmount +
-    preBetState?.dealerAmount +
-    preBetState?.dealerPairAmount +
-    preBetState?.smallAmount +
-    preBetState?.bigAmount +
-    preBetState?.tieAmount +
-    preBetState?.super6Amount
-
   const [isConfirmDisabled, setIsConfirmDisabled] = useState(false)
   const [isCancelDisabled, setIsCancelDisabled] = useState(false)
   const [isRepeatDisabled, setIsRepeatDisabled] = useState(false)
+  const [preBetState, setPreBetState] =
+    useState<BetInitialValueProp>(betInitialValue)
 
   const [isCancelSuccess, setIsCancelSuccess] = useState(false)
   const onCancel = async () => {
     dispatchBet({ type: 'newRound' })
-    if (totalAmount > 0 || !isCancelDisabled) {
-      const result = await createBaccaratBet({
+    if (totalAmount > 0 || isCancelDisabled) {
+      const result = await cancelBaccaratBet({
         variables: {
           input: {
-            baccaratRoomId: roomId.id ?? '',
-            playerAmount: betState?.playerAmount,
-            dealerAmount: betState?.dealerAmount,
-            playerPairAmount: betState?.playerPairAmount,
-            dealerPairAmount: betState?.dealerPairAmount,
-            tieAmount: betState?.tieAmount,
-            super6Amount: betState?.super6Amount,
-            smallAmount: betState?.smallAmount,
-            bigAmount: betState?.bigAmount,
-            deviceInfo: JSON.stringify(deviceInfo)
+            baccaratRoomId: roomId.id ?? ''
           }
         }
       })
@@ -142,8 +128,6 @@ const Room = () => {
             }
           }
         })
-        console.log(result)
-
         if (result?.data?.createBaccaratBet?.errors?.length === 0) {
           setIsConfirmSuccess(true)
         } else {
@@ -183,13 +167,11 @@ const Room = () => {
           }
         }
       })
-
       if (result?.data?.createBaccaratBet?.errors?.length === 0) {
         setIsRepeatSuccess(true)
       } else {
         setIsConfirmFailure(true)
       }
-
       setIsCancelDisabled(false)
       setIsRepeatDisabled(true)
       setIsConfirmDisabled(true)
@@ -205,12 +187,10 @@ const Room = () => {
   useEffect(() => {
     if (gameState === 'START_BET' || gameState === 'UPDATE_AMOUNT') {
       setIsDisable(false)
+      setIsRepeatDisabled(false)
       setIsConfirmDisabled(false)
       if (totalAmount > 0) {
         setIsCancelDisabled(false)
-      }
-      if (preTotalAmount > 0) {
-        setIsRepeatDisabled(false)
       }
     } else if (gameState === 'CLOSE') {
       setIsDisable(true)
@@ -221,7 +201,7 @@ const Room = () => {
       setIsRepeatDisabled(true)
       setIsCancelDisabled(true)
     }
-  }, [gameState, dispatchBet, totalAmount, preTotalAmount])
+  }, [gameState, dispatchBet, totalAmount])
 
   const chipsButton = chipsImg.map((item, idx) => {
     const itemName = item?.src
@@ -365,7 +345,7 @@ const Room = () => {
               {/*   <button className="text-xl i-heroicons-pencil-square-20-solid" /> */}
               {/* </div> */}
             </div>
-            <div className="flex pl-24 w-[45%] text-theme-300">
+            <div className="flex pl-6 w-[36%] text-theme-300">
               <BetButton isDisabled={isCancelDisabled} onClick={onCancel}>
                 <div className="text-2xl i-heroicons-x-mark-solid"></div>
                 <FormattedMessage id="common.cancel" />

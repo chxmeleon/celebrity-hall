@@ -188,3 +188,21 @@ export const CREATE_BACCARAT_BET = gql`
     }
   }
 `
+
+export const CANCEL_BACCARAT_BET = gql`
+  mutation CANCEL_BACCARAT_BET($input: CancelBaccaratBetInput!) {
+    cancelBaccaratBet(input: $input) {
+      errors {
+        attribute
+        message
+      }
+      wallet {
+        id
+        balance
+        creditBalance
+        totalEffectiveAmount
+        totalEffectiveXimaAmount
+      }
+    }
+  }
+`
