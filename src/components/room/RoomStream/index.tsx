@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react'
 import { NodePlayerStream, RoomStreamProps, WebRTCStream } from './streamPlayer'
 
 const RoomStream: React.FC<RoomStreamProps> = ({

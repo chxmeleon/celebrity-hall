@@ -15,6 +15,8 @@ import Liverooms from '@/pages/Liverooms'
 import Mutualrooms from '@/pages/Mutualrooms'
 import Following from '@/pages/Following'
 import UserRanking from '@/pages/UserRanking'
+import ProtectedLayoutForRoom from '@/layouts/ProtectedLayoutForRoom'
+
 
 
 const Router: React.FC = () => {
@@ -24,13 +26,17 @@ const Router: React.FC = () => {
         <Route index element={<Navigate to="login" replace />} />
         <Route path="login" element={<Login />} />
       </Route>
+      <Route path="home" element={<ProtectedLayoutForRoom />}>
+        <Route element={<RoomsLayout />}>
+          <Route path="rooms/:id" element={<Room />} />
+        </Route>
+      </Route>
       <Route path="home" element={<ProtectedLayout />}>
         <Route element={<RoomsLayout />}>
           <Route index element={<Navigate to="rooms" replace />} />
-          <Route path="rooms" element={<Rooms />} />
-          <Route path="rooms/:id" element={<Room />} />
           <Route path="liverooms" element={<Liverooms />} />
           <Route path="mutualrooms" element={<Mutualrooms />} />
+          <Route path="rooms" element={<Rooms />} />
         </Route>
         <Route path="streamers" element={<Streamers />} />
         <Route path="streamers/:id" element={<Streamer />} />
