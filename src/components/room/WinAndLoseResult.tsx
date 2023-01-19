@@ -4,15 +4,10 @@ import GamePlayContext from '@/contexts/GamePlayContext'
 import { clsx as cx } from 'clsx'
 
 type NoticeProps = {
-  isConfirmedSuccess: boolean
-  isRepeatSuccess: boolean
   gameState: string | any
-
 }
 
 const WinAndLoseResult: React.FC<NoticeProps> = ({
-  isRepeatSuccess,
-  isConfirmedSuccess,
   gameState
 }) => {
   const { notice } = useContext(GamePlayContext)
@@ -21,18 +16,15 @@ const WinAndLoseResult: React.FC<NoticeProps> = ({
   const [newNotice, setNewNotice] = useState<any | null>(null)
 
   useEffect(() => {
-    if (gameState === 'CLOSE' && newNotice !== notice) {
+    if (gameState === 'START_BET' && newNotice !== notice) {
       setNewNotice(notice)
-    }
-
-    if (gameState === 'START_BET' && newNotice !== null) {
       setIsShow(true)
     }
 
     setTimeout(() => {
       setIsShow(false)
-    }, 5000)
-  }, [gameState, newNotice, notice, isConfirmedSuccess, isRepeatSuccess])
+    }, 7000)
+  }, [gameState, newNotice, notice])
 
   const noticeStyle = cx(
     'flex w-2/3 h-9 rounded-md transition-all duration-300 ease-in-out ',
