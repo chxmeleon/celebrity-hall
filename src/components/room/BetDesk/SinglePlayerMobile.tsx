@@ -9,11 +9,11 @@ import { useCurrentGameState } from '@/hooks/rooms'
 
 const BetAreaVer: React.FC<{ target: string[] }> = ({ target }) => {
   return (
-    <div className="pointer-events-none flex absolute top-0 z-20 flex-col-reverse px-2 w-full h-[84%] chip-skew">
+    <div className="flex absolute top-0 z-20 flex-col-reverse px-2 w-full h-[84%] overflow-hidden">
       <div className="absolute rotate-180 w-full items-stretch h-[40%] flex flex-col flex-wrap-reverse">
         {target?.map((item: string, idx: number) => {
           return (
-            <div className="-mb-5 w-6 h-auto" key={idx}>
+            <div className="-mb-5 w-4 h-auto" key={idx}>
               <img
                 src={item}
                 alt="chip image"
@@ -45,7 +45,23 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             </div>
           </div>
         </button>
-        <button className="m-1 rounded-md bg-theme-75">
+        <button
+          disabled={isDisabled}
+          onClick={() =>
+            dispatchBet({
+              type: 'addPlayerPairChips',
+              playload: {
+                playerPairChips: chipsData?.[selectedChip]?.src,
+                playerPairAmount: chipsData?.[selectedChip]?.value
+              }
+            })
+          }
+          className={cx(
+            'm-1 rounded-md bg-theme-75',
+            isDisabled ? 'brightness-75' : ''
+          )}
+        >
+          <BetAreaVer target={betState?.playerPairChips} />
           <div className="text-xl px-3 w-full text-grid-400 [&_p]:text-gray-300">
             <FormattedMessage id="screens.baccaratRoom.playerPair" />
             <div>
@@ -53,13 +69,46 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             </div>
           </div>
         </button>
-        <button className="m-1 rounded-md bg-theme-75">
+        <button
+          disabled={isDisabled}
+          onClick={() =>
+            dispatchBet({
+              type: 'addSuper6Chips',
+              playload: {
+                super6Chips: chipsData?.[selectedChip]?.src,
+                super6Amount: chipsData?.[selectedChip]?.value
+              }
+            })
+          }
+          className={cx(
+            'm-1 rounded-md bg-theme-75',
+            isDisabled ? 'brightness-75' : ''
+          )}
+        >
+          <BetAreaVer target={betState?.super6Chips} />
           <div className="px-1 m-auto w-full text-grid-200">
             <div className="font-bold">SUPER 6</div>
             <p className="text-gray-300">1:20</p>
           </div>
         </button>
-        <button className="m-1 rounded-md bg-theme-75">
+        <button
+          disabled={isDisabled}
+          onClick={() =>
+            dispatchBet({
+              type: 'addDealerPairChips',
+              playload: {
+                dealerPairChips: chipsData?.[selectedChip]?.src,
+                dealerPairAmount: chipsData?.[selectedChip]?.value
+              }
+            })
+          }
+          className={cx(
+            'm-1 rounded-md bg-theme-75',
+            isDisabled ? 'brightness-75' : ''
+          )}
+        >
+          <BetAreaVer target={betState?.dealerPairChips} />
+
           <div className="text-xl px-3 w-full text-grid-100 [&_p]:text-gray-300 ">
             <div>
               <FormattedMessage id="screens.baccaratRoom.dealerPair" />
@@ -81,7 +130,23 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         </button>
       </div>
       <div className="grid grid-cols-3 gap-2">
-        <button className="m-0.5 rounded-md bg-theme-75">
+        <button
+          disabled={isDisabled}
+          onClick={() =>
+            dispatchBet({
+              type: 'addPlayerChips',
+              playload: {
+                playerChips: chipsData?.[selectedChip]?.src,
+                playerAmount: chipsData?.[selectedChip]?.value
+              }
+            })
+          }
+          className={cx(
+            'm-0.5 rounded-md bg-theme-75',
+            isDisabled ? 'brightness-75' : ''
+          )}
+        >
+          <BetAreaVer target={betState?.playerChips} />
           <div className="m-auto w-2/3 text-grid-400 [&_p]:text-gray-300">
             <div className="text-4xl font-bold">
               <FormattedMessage id="screens.baccaratRoom.player" />
@@ -91,7 +156,24 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             </div>
           </div>
         </button>
-        <button className="m-0.5 rounded-md bg-theme-75">
+        <button
+          disabled={isDisabled}
+          onClick={() =>
+            dispatchBet({
+              type: 'addTieChips',
+              playload: {
+                tieChips: chipsData?.[selectedChip]?.src,
+                tieAmount: chipsData?.[selectedChip]?.value
+              }
+            })
+          }
+          className={cx(
+            'm-0.5 rounded-md bg-theme-75',
+            isDisabled ? 'brightness-75' : ''
+          )}
+        >
+
+          <BetAreaVer target={betState?.tieChips} />
           <div className="m-auto w-2/3 text-grid-300 [&_p]:text-gray-300">
             <div className="text-4xl font-bold">
               <FormattedMessage id="common.simpleTie" />
@@ -101,7 +183,24 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             </div>
           </div>
         </button>
-        <button className="m-0.5 rounded-md bg-theme-75">
+        <button
+          disabled={isDisabled}
+          onClick={() =>
+            dispatchBet({
+              type: 'addDealerChips',
+              playload: {
+                dealerChips: chipsData?.[selectedChip]?.src,
+                dealerAmount: chipsData?.[selectedChip]?.value
+              }
+            })
+          }
+          className={cx(
+            'm-0.5 rounded-md bg-theme-75',
+            isDisabled ? 'brightness-75' : ''
+          )}
+        >
+          <BetAreaVer target={betState?.dealerChips} />
+
           <div className="m-auto w-2/3 text-grid-100 [&_p]:text-gray-300">
             <div className="text-4xl font-bold">
               <FormattedMessage id="screens.baccaratRoom.dealer" />

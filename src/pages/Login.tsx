@@ -7,6 +7,23 @@ import AuthAlert from '@/components/auth/AuthAlert'
 const Login: React.FC = () => {
   const { openSetup } = useSetup()
 
+  /* const createTrail = async () => { */
+  /*   const result = await create({ */
+  /*     variables: { */
+  /*       input: {}, */
+  /*     }, */
+  /*   }) */
+  /*   const { token } = result.data.createTrialUser */
+  /*   if (token) { */
+  /*     login(token) */
+  /*   } */
+  /* } */
+  /**/
+  /* const showCaptcha = () => { */
+  /*   const captcha = new window.TencentCaptcha('1259693855', createTrail) */
+  /*   captcha.show() */
+  /* } */
+
   return (
     <div className="relative">
       <AuthAlert />
