@@ -12,7 +12,7 @@ import RoomStream from '@/components/room/RoomStream'
 import Timer from '@/components/room/Timer'
 import PockerResult from '@/components/room/PockerResult'
 import {
-  BeadPlate,
+  BeadRoad,
   BigRoad,
   BigEyeRoad,
   SmallRoad,
@@ -366,7 +366,7 @@ const Room = () => {
       <div className="flex w-full h-1/5 bg-gray-50">
         <div className="flex flex-grow justify-start">
           <div className="flex-grow-0 flex-shrink-0 w-1/3">
-            <BeadPlate />
+            <BeadRoad />
           </div>
           <div className="flex w-2/3">
             <div className="block flex-grow w-full">

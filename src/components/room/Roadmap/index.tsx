@@ -5,15 +5,25 @@ import { askMapper } from './data'
 import { useCurrentGame } from '@/hooks/rooms'
 import { useParams } from 'react-router-dom'
 
-export const BeadPlate: React.FC = () => {
-  const { id } = useParams()
-  const { currentGame } = useCurrentGame(id)
-  const beadRoadData = currentGame?.baccaratRoom?.roads?.bead_road
+export type GameResultType = 'player' | 'dealer' | 'tie'
+export type PairResultType = 'player' | 'dealer' | 'none'
+export type BeadRoadProps = {
+  result: string | null
+  game_result: GameResultType
+  pair_result: PairResultType
+}
+export const BeadRoad: React.FC<{ roads: (BeadRoadProps | null)[][] }> = ({
+  roads
+}) => {
   return (
     <Road.BaseGrid>
-      {Road.winRecord.map((item, idx) => {
-        return <Road.WinRecordTile key={`base-grid-${idx}`} status={item} />
-      })}
+      {roads.map((row, idx) => (
+        <div className='flex' key={idx}>
+          {row.map((road, index) => (
+            <Road.BeadRoadTile key={index} road={road} />
+          ))}
+        </div>
+      ))}
     </Road.BaseGrid>
   )
 }

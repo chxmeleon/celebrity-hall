@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
-import { BigRoad, BeadPlate } from './Roadmap'
+import { BigRoad, BeadRoad } from './Roadmap'
 import { useTimeLeft } from '@/hooks/rooms'
 
 type RoomDataProps = {
@@ -9,11 +9,11 @@ type RoomDataProps = {
 }
 
 const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
-  const { counter, startCount, isLeftTen, isOpening } = useTimeLeft(
-    room?.id
-  )
+  const { counter, startCount, isLeftTen, isOpening } = useTimeLeft(room?.id)
   const href = `/home/rooms/${room?.id}`
   const girl = room?.girl
+
+  console.log(room.roads)
 
   return (
     <Link to={href} key={href}>
@@ -21,17 +21,19 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
         <div className="flex flex-col w-full h-full rounded-2xl bg-theme-50">
           <div className="flex justify-start items-center pl-4 w-full h-12">
             <div
-              className={`${isLeftTen && startCount && counter !== undefined && counter > 0
+              className={`${
+                isLeftTen && startCount && counter !== undefined && counter > 0
                   ? 'bg-red-500'
                   : 'bg-link-button-54'
-                }
+              }
               rounded-sm p-[1.1px] `}
             >
               <div className="w-6 h-6 text-center rounded-sm bg-theme-50">
                 {startCount && counter !== undefined && counter > 0 ? (
                   <p
-                    className={`${isLeftTen ? 'text-red-500' : 'text-theme-300'
-                      } font-bold`}
+                    className={`${
+                      isLeftTen ? 'text-red-500' : 'text-theme-300'
+                    } font-bold`}
                   >
                     {counter}
                   </p>
@@ -58,7 +60,8 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
           </div>
           <div className="flex flex-grow-0 flex-shrink-0 justify-start items-center px-3 w-full text-xs">
             <div className="flex w-3/4 h-full bg-gray-100 rounded-tl-sm rounded-bl-sm">
-              <BigRoad />
+              {room && <BeadRoad roads={room.roads.bead_road.array} />}
+              {/* <BigRoad /> */}
             </div>
             <div className="relative w-1/4 h-20 bg-gray-100 rounded-tr-sm rounded-br-sm md:h-[160px]">
               <div className="absolute bottom-0 w-full">

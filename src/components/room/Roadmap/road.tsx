@@ -1,29 +1,50 @@
 import { clsx as cx } from 'clsx'
+import { useMemo } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { fullRecordMapper, outlineRecordMapper } from './data'
+import { BeadRoadProps } from '.'
+import { fullRecordMapper, outlineRecordMapper, roadTileMapping } from './data'
 
 type TileProps = {
   status: string
 }
 
 const tileContainer = cx(
-  'flex w-full h-full text-xs font-light text-gray-50 border-r border-b border-gray-400 aspect-square'
+  'relative flex w-full h-full text-xs font-light text-gray-50 border-r border-b border-gray-400 aspect-square'
 )
 
-export const WinRecordTile: React.FC<TileProps> = ({ status }) => {
-  const winRecordTileStyle = cx(
-    'flex justify-center items-center m-auto w-5/6 h-5/6 rounded-full aspect-square',
-    fullRecordMapper[status]?.className
+export const BeadRoadTile: React.FC<{
+  road: BeadRoadProps | null
+}> = ({ road }) => {
+  const winRecordTileStyle = useMemo(
+    () =>
+      cx(
+        'flex justify-center items-center m-auto w-5/6 h-5/6 rounded-full aspect-square',
+        road?.game_result ? roadTileMapping[road?.game_result]?.className : null
+      ),
+    [road]
   )
+
   return (
     <div className={tileContainer}>
       <div className={winRecordTileStyle}>
-        {status !== '' ? (
+        {road?.game_result && (
           <FormattedMessage
-            id={fullRecordMapper[status]?.contentId}
+            id={roadTileMapping[road.game_result].translationId}
             defaultMessage={status}
           />
-        ) : null}
+        )}
+
+        {road?.pair_result && road.pair_result !== 'none' && (
+          <div
+            className={cx(
+              'absolute w-[8px] h-[8px] rounded-full',
+              roadTileMapping[road.pair_result].className,
+              road.pair_result === 'player'
+                ? 'right-[2px] bottom-[2px]'
+                : 'left-[2px] top-[2px]'
+            )}
+          ></div>
+        )}
       </div>
     </div>
   )
@@ -82,9 +103,7 @@ export const CockroachRecordTile: React.FC<TileProps> = ({ status }) => {
 
 export const BaseGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
   <div className="relative w-full h-full border-r border-gray-500/90">
-    <div className="grid grid-cols-10 grid-rows-6 grid-flow-col auto-cols-fr w-full h-full">
-      {children}
-    </div>
+    {children}
   </div>
 )
 
@@ -233,7 +252,6 @@ export const fakeData = [
   't',
   'b'
 ]
-
 
 export const bigArray = [...new Array(150)].map(() => '')
 export const smallArray = [...new Array(90)].map(() => '')
