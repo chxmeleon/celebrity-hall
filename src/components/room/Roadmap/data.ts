@@ -74,6 +74,19 @@ export type RoadTileProps = {
   className: string
   translationId: string
 }
+
+export const fullRecordMapping: { [key: string]: RoadTileProps } = {
+  dealer: {
+    className: 'bg-red-600',
+    translationId: 'screens.baccaratRoom.dealer'
+  },
+  player: {
+    className: 'bg-blue-600',
+    translationId: 'screens.baccaratRoom.player'
+  },
+  tie: { className: 'bg-teal-600', translationId: 'screens.baccaratRoom.tie' }
+}
+
 export const roadTileMapping: { [key: string]: RoadTileProps } = {
   dealer: {
     className: 'bg-red-600',

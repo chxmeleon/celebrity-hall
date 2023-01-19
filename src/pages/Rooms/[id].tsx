@@ -385,18 +385,19 @@ const Room = () => {
 
           <div className="flex w-[71.4%]">
             <div className="block flex-grow w-full">
-              <div>
-                {room && <BigRoad roads={room.roads.big_road.array} />}
-              </div>
+              <div>{room && <BigRoad roads={room.roads.big_road.array} />}</div>
+
               <div className="flex w-full h-1/3">
                 <div className="w-1/3">
-                  <BigEyeRoad />
+                  {room && <BigEyeRoad roads={room.roads.big_eye_road.graph} />}
                 </div>
                 <div className="w-1/3">
-                  <SmallRoad />
+                  {room && <SmallRoad roads={room.roads.small_road.graph} />}
                 </div>
                 <div className="w-1/3">
-                  <CockroachRoad />
+                  {room && (
+                    <CockroachRoad roads={room.roads.cockroach_road.graph} />
+                  )}
                 </div>
               </div>
             </div>

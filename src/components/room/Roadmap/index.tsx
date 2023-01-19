@@ -64,34 +64,57 @@ export const BigRoad = memo(
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
 )
 
-export const SmallRoad: React.FC = () => {
+export type RepetitionRoadProps = {
+  repetition: boolean
+}
+export const SmallRoadComponent: React.FC<{
+  roads: (RepetitionRoadProps | null)[][]
+}> = ({ roads }) => {
   return (
     <Road.SmallRoadGrid>
-      {Road.smallArray.map((item, idx) => {
-        return <Road.SmallRecordTile key={`small-${idx}`} status={item} />
-      })}
+      {roads.map((row, idx) => (
+        <div className="flex" key={idx}>
+          {row.map((road, index) => (
+            <Road.SmallRecordTile key={index} road={road} />
+          ))}
+        </div>
+      ))}
+    </Road.SmallRoadGrid>
+  )
+}
+export const SmallRoad = memo(
+  SmallRoadComponent,
+  (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
+)
+
+export const BigEyeRoad: React.FC<{
+  roads: (RepetitionRoadProps | null)[][]
+}> = ({ roads }) => {
+  return (
+    <Road.SmallRoadGrid>
+      {roads.map((row, idx) => (
+        <div className="flex" key={idx}>
+          {row.map((road, index) => (
+            <Road.BigEyeRecordTile key={index} road={road} />
+          ))}
+        </div>
+      ))}
     </Road.SmallRoadGrid>
   )
 }
 
-export const BigEyeRoad: React.FC = () => {
+export const CockroachRoad: React.FC<{
+  roads: (RepetitionRoadProps | null)[][]
+}> = ({ roads }) => {
   return (
     <Road.SmallRoadGrid>
-      {Road.smallArray.map((item, idx) => {
-        return <Road.BigEyeRecordTile key={`big-eye-${idx}`} status={item} />
-      })}
-    </Road.SmallRoadGrid>
-  )
-}
-
-export const CockroachRoad = () => {
-  return (
-    <Road.SmallRoadGrid>
-      {Road.smallArray.map((item, idx) => {
-        return (
-          <Road.CockroachRecordTile key={`cockroach-${idx}`} status={item} />
-        )
-      })}
+      {roads.map((row, idx) => (
+        <div className="flex" key={idx}>
+          {row.map((road, index) => (
+            <Road.CockroachRecordTile key={index} road={road} />
+          ))}
+        </div>
+      ))}
     </Road.SmallRoadGrid>
   )
 }

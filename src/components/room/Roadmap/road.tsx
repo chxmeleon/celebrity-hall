@@ -1,9 +1,15 @@
 import { clsx as cx } from 'clsx'
 import { memo, useMemo } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { BeadRoadProps, BigRoadProps } from '.'
+import {
+  BeadRoadProps,
+  BigRoadProps,
+  PairResultType,
+  RepetitionRoadProps
+} from '.'
 import {
   fullRecordMapper,
+  fullRecordMapping,
   outlineRecordMapper,
   outlineTileMapping,
   roadTileMapping
@@ -13,12 +19,53 @@ type TileProps = {
   status: string
 }
 
-const playerPairLocationClassName = 'right-[2px] bottom-[2px]'
-const dealerPairLocationClassName = 'left-[2px] top-[2px]'
+const roadTileDecorationClassName = 'absolute w-[6px] h-[6px] rounded-full'
+const playerPairLocationClassName = 'right-[1px] bottom-[1px]'
+const dealerPairLocationClassName = 'left-[1px] top-[1px]'
 
 const tileContainer = cx(
   'relative flex w-full h-full text-xs font-light text-gray-50 border-r border-b border-gray-400 aspect-square'
 )
+
+export const RoadTileDecoration: React.FC<{
+  pair_result: PairResultType | undefined
+}> = ({ pair_result }) => {
+  return pair_result && pair_result !== 'none' ? (
+    <>
+      {pair_result === 'both' ? (
+        <>
+          <div
+            className={cx(
+              roadTileDecorationClassName,
+              roadTileMapping['player'].className,
+              playerPairLocationClassName
+            )}
+          ></div>
+
+          <div
+            className={cx(
+              roadTileDecorationClassName,
+              roadTileMapping['dealer'].className,
+              dealerPairLocationClassName
+            )}
+          ></div>
+        </>
+      ) : (
+        <div
+          className={cx(
+            roadTileDecorationClassName,
+            roadTileMapping[pair_result].className,
+            pair_result === 'player'
+              ? playerPairLocationClassName
+              : dealerPairLocationClassName
+          )}
+        ></div>
+      )}
+    </>
+  ) : (
+    <></>
+  )
+}
 
 export const BeadRoadTileComponent: React.FC<{
   road: BeadRoadProps | null
@@ -41,40 +88,7 @@ export const BeadRoadTileComponent: React.FC<{
             defaultMessage={road.game_result}
           />
         )}
-
-        {road?.pair_result && road.pair_result !== 'none' && (
-          <>
-            {road.pair_result === 'both' ? (
-              <>
-                <div
-                  className={cx(
-                    'absolute w-[8px] h-[8px] rounded-full',
-                    roadTileMapping['player'].className,
-                    playerPairLocationClassName
-                  )}
-                ></div>
-
-                <div
-                  className={cx(
-                    'absolute w-[8px] h-[8px] rounded-full',
-                    roadTileMapping['dealer'].className,
-                    dealerPairLocationClassName
-                  )}
-                ></div>
-              </>
-            ) : (
-              <div
-                className={cx(
-                  'absolute w-[8px] h-[8px] rounded-full',
-                  roadTileMapping[road.pair_result].className,
-                  road.pair_result === 'player'
-                    ? playerPairLocationClassName
-                    : dealerPairLocationClassName
-                )}
-              ></div>
-            )}
-          </>
-        )}
+        <RoadTileDecoration pair_result={road?.pair_result} />
       </div>
     </div>
   )
@@ -97,14 +111,19 @@ export const BigRecordTile: React.FC<{
   return (
     <div className={tileContainer}>
       <div className={bigRecordTileStyle}></div>
+      <RoadTileDecoration pair_result={road?.pair_result} />
     </div>
   )
 }
 
-export const BigEyeRecordTile: React.FC<TileProps> = ({ status }) => {
+export const BigEyeRecordTile: React.FC<{
+  road: RepetitionRoadProps | null
+}> = ({ road }) => {
   const bigRecordTileStyle = cx(
     'flex justify-center items-center m-auto w-5/6 h-5/6 rounded-full aspect-square border-2',
-    outlineRecordMapper[status]?.className ?? 'border-transparent'
+    road
+      ? outlineTileMapping[road.repetition ? 'dealer' : 'player'].className
+      : 'border-transparent'
   )
   return (
     <div className={tileContainer}>
@@ -113,10 +132,14 @@ export const BigEyeRecordTile: React.FC<TileProps> = ({ status }) => {
   )
 }
 
-export const SmallRecordTile: React.FC<TileProps> = ({ status }) => {
+export const SmallRecordTile: React.FC<{
+  road: RepetitionRoadProps | null
+}> = ({ road }) => {
   const smallRecordTileStyle = cx(
     'flex justify-center items-center m-auto w-[84%] h-[84%] rounded-full aspect-square',
-    fullRecordMapper[status]?.className
+    road
+      ? fullRecordMapping[road.repetition ? 'dealer' : 'player'].className
+      : null
   )
 
   return (
@@ -126,10 +149,14 @@ export const SmallRecordTile: React.FC<TileProps> = ({ status }) => {
   )
 }
 
-export const CockroachRecordTile: React.FC<TileProps> = ({ status }) => {
+export const CockroachRecordTile: React.FC<{
+  road: RepetitionRoadProps | null
+}> = ({ road }) => {
   const cockroachRecordTileStyle = cx(
     'flex justify-center items-center m-auto w-[80%] h-[1px] -rotate-45 translate-y-0 aspect-square',
-    fullRecordMapper[status]?.className
+    road
+      ? fullRecordMapping[road.repetition ? 'dealer' : 'player'].className
+      : null
   )
 
   return (
@@ -140,9 +167,7 @@ export const CockroachRecordTile: React.FC<TileProps> = ({ status }) => {
 }
 
 export const BaseGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <div className="relative w-full h-full border-gray-500/90">
-    {children}
-  </div>
+  <div className="relative w-full h-full border-gray-500/90">{children}</div>
 )
 
 export const BigRoadGrid: React.FC<React.PropsWithChildren> = ({
@@ -156,11 +181,7 @@ export const BigRoadGrid: React.FC<React.PropsWithChildren> = ({
 export const SmallRoadGrid: React.FC<React.PropsWithChildren> = ({
   children
 }) => (
-  <div className="relative w-full h-full border-r border-gray-500/90">
-    <div className="grid grid-rows-6 grid-flow-col auto-cols-fr w-full h-full grid-cols-15">
-      {children}
-    </div>
-  </div>
+  <div className="relative w-full h-full border-gray-500/90">{children}</div>
 )
 
 export const winRecord = [
