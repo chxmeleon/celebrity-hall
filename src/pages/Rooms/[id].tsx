@@ -112,8 +112,9 @@ const Room = () => {
   }
 
   const [isConfirmSuccess, setIsConfirmSuccess] = useState(false)
+  const [isConfirmFailure, setIsConfirmFailure] = useState(false)
   const onConfirmBet = async (e: React.MouseEvent) => {
-    if (totalAmount >= 1000 && totalAmount <= wallet?.balance) {
+    if (totalAmount >= 0 && totalAmount <= wallet?.balance) {
       try {
         const result = await createBaccaratBet({
           variables: {
@@ -131,9 +132,11 @@ const Room = () => {
             }
           }
         })
-        setIsConfirmSuccess(
-          result?.data?.createBaccaratBet?.errors?.length === 0
-        )
+        if (result?.data?.createBaccaratBet?.errors?.length === 0) {
+          setIsConfirmSuccess(true)
+        } else {
+          setIsConfirmFailure(true)
+        }
         setIsConfirmDisabled(true)
         setPreBetState(betState)
       } catch (err) {
@@ -141,6 +144,7 @@ const Room = () => {
       }
       setTimeout(() => {
         setIsConfirmSuccess(false)
+        setIsConfirmFailure(false)
       }, 3500)
     } else {
       e.preventDefault()
@@ -167,7 +171,11 @@ const Room = () => {
           }
         }
       })
-      setIsRepeatSuccess(result?.data?.createBaccaratBet?.errors?.length === 0)
+      if (result?.data?.createBaccaratBet?.errors?.length === 0) {
+        setIsRepeatSuccess(true)
+      } else {
+        setIsConfirmFailure(true)
+      }
       setIsCancelDisabled(false)
       setIsRepeatDisabled(true)
       setIsConfirmDisabled(true)
@@ -176,6 +184,7 @@ const Room = () => {
     }
     setTimeout(() => {
       setIsRepeatSuccess(false)
+      setIsConfirmFailure(false)
     }, 3500)
   }
 
@@ -281,6 +290,7 @@ const Room = () => {
               <div className="flex justify-center items-end pb-2 h-12">
                 <RoomNotification
                   isConfirmedSuccess={isConfirmSuccess}
+                  isConfirmedFailure={isConfirmFailure}
                   isRepeatSuccess={isRepeatSuccess}
                   gameState={gameState}
                 />

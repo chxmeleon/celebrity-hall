@@ -234,6 +234,7 @@
   "screens.records.all": "全部",
   "screens.records.bet": "下注",
   "screens.records.betSuccess": "下注成功",
+  "screens.records.betfailed": "下注失敗，小於限紅",
   "screens.records.dealer": "上莊",
   "screens.records.gift": "打賞",
   "screens.records.charge": "充值",
