@@ -56,7 +56,6 @@ const Room = () => {
     betState,
     dispatchBet,
     wallet,
-    notice
   } = useContext(GamePlayContext)
 
   const { currentGameState } = useCurrentGameState(roomId.id)
@@ -141,7 +140,7 @@ const Room = () => {
       setTimeout(() => {
         setIsConfirmSuccess(false)
         setIsConfirmFailure(false)
-      }, 3500)
+      }, 1500)
     } else {
       e.preventDefault()
     }
@@ -181,7 +180,7 @@ const Room = () => {
     setTimeout(() => {
       setIsRepeatSuccess(false)
       setIsConfirmFailure(false)
-    }, 3500)
+    }, 1500)
   }
 
   useEffect(() => {

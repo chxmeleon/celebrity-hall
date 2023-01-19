@@ -36,7 +36,7 @@ const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState }) => {
 
     setTimeout(() => {
       setIsShow(false)
-    }, 7000)
+    }, 6000)
   }, [gameState, newNotice, notice])
 
   const noticeStyle = cx(
