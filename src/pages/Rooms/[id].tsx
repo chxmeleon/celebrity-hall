@@ -146,6 +146,8 @@ const Room = () => {
             }
           }
         })
+        console.log(result);
+        
         if (result?.data?.createBaccaratBet?.errors?.length === 0) {
           setIsConfirmSuccess(true)
         }
