@@ -56,7 +56,6 @@ const Room = () => {
     betState,
     dispatchBet,
     wallet,
-    notice
   } = useContext(GamePlayContext)
 
   const { currentGameState } = useCurrentGameState(roomId.id)
@@ -125,9 +124,6 @@ const Room = () => {
   const [isConfirmSuccess, setIsConfirmSuccess] = useState(false)
   const [isConfirmFailure, setIsConfirmFailure] = useState(false)
   const onConfirmBet = async (e: React.MouseEvent) => {
-    if (totalAmount < 1000) {
-      setIsConfirmFailure(true)
-    }
     if (totalAmount >= 0 && totalAmount <= wallet?.balance) {
       try {
         const result = await createBaccaratBet({
@@ -146,10 +142,12 @@ const Room = () => {
             }
           }
         })
-        console.log(result);
-        
+        console.log(result)
+
         if (result?.data?.createBaccaratBet?.errors?.length === 0) {
           setIsConfirmSuccess(true)
+        } else {
+          setIsConfirmFailure(true)
         }
         setIsConfirmDisabled(true)
         setPreBetState(betState)
@@ -188,9 +186,7 @@ const Room = () => {
 
       if (result?.data?.createBaccaratBet?.errors?.length === 0) {
         setIsRepeatSuccess(true)
-      }
-
-      if (totalAmount < 1000) {
+      } else {
         setIsConfirmFailure(true)
       }
 
