@@ -16,6 +16,9 @@ generates:
       nonOptionalTypename: true
       skipTypeNameForRoot: true
       omitOperationSuffix: true
+      exportFragmentSpreadSubTypes: true
+      inlineFragmentTypes: combine
+      wrapFieldDefinitions: true
     plugins:
       - typescript
       - typescript-operations

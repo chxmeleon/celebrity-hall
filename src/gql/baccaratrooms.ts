@@ -1,14 +1,20 @@
 import { gql } from '@apollo/client'
 
+export const GIRL_TYPE = gql`
+  fragment GIRL_TYPE on Girl {
+    id
+    name
+    avatar
+  }
+`
+
 export const GET_BACCARATROOMS = gql`
   query GET_BACCARATROOMS {
     activeBaccaratRooms {
       id
       name
       girl {
-        id
-        name
-        avatar
+        ...GIRL_TYPE
       }
       currentRoadsImage
       waitingBetSeconds
@@ -68,6 +74,7 @@ export const GET_BACCARATROOMS = gql`
       }
     }
   }
+  ${GIRL_TYPE}
 `
 
 export const GET_CURRENT_BACCARAT_ROOM = gql`

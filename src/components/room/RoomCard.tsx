@@ -5,15 +5,15 @@ import { BigRoad, BeadPlate } from './Roadmap'
 import { useTimeLeft } from '@/hooks/rooms'
 
 type RoomDataProps = {
-  data: any
+  room: any
 }
 
-const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
+const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
   const { counter, startCount, isLeftTen, isOpening } = useTimeLeft(
-    data?.id
+    room?.id
   )
-  const href = `/home/rooms/${data?.id}`
-  const girl = data?.girl
+  const href = `/home/rooms/${room?.id}`
+  const girl = room?.girl
 
   return (
     <Link to={href} key={href}>
@@ -53,7 +53,7 @@ const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
               </div>
             </div>
             <div className="pl-4 font-bold tracking-[0.15rem]">
-              {data?.name}
+              {room?.name}
             </div>
           </div>
           <div className="flex flex-grow-0 flex-shrink-0 justify-start items-center px-3 w-full text-xs">
@@ -99,19 +99,19 @@ const RoomCard: React.FC<RoomDataProps> = ({ data }) => {
                 <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[3px] bg-grid-100">
                   <FormattedMessage id="common.dealer" defaultMessage="B" />
                 </div>
-                <p>{data?.roads.dealer_count}</p>
+                <p>{room?.roads.dealer_count}</p>
               </div>
               <div className="inline-flex items-center">
                 <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[3px] bg-grid-400">
                   <FormattedMessage id="common.player" defaultMessage="P" />
                 </div>
-                <p>{data?.roads.player_count}</p>
+                <p>{room?.roads.player_count}</p>
               </div>
               <div className="inline-flex items-center">
                 <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[3px] bg-grid-300">
                   <FormattedMessage id="common.tie" defaultMessage="T" />
                 </div>
-                <p>{data?.roads.tie_count}</p>
+                <p>{room?.roads.tie_count}</p>
               </div>
             </div>
             <div className="flex w-1/4 h-full">
