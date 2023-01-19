@@ -103,6 +103,7 @@ const Room = () => {
       setIsCancelSuccess(result.errors?.length === 0)
     }
     setIsConfirmDisabled(false)
+    setIsRepeatDisabled(false)
     setIsCancelDisabled(true)
   }
 
@@ -133,6 +134,7 @@ const Room = () => {
           setIsConfirmFailure(true)
         }
         setIsConfirmDisabled(true)
+        setIsRepeatDisabled(true)
         setPreBetState(betState)
       } catch (err) {
         console.log(err)

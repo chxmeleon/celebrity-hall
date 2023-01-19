@@ -78,6 +78,7 @@ export const useCurrentGameState = (roomId: string | undefined) => {
     setGameState(gameStatus)
   }, [gameStatus, refetch])
 
+  
   useEffect(() => {
     const subscription = cable.subscriptions.create(
       { channel: 'NewBaccaratGameChannel', roomId },
