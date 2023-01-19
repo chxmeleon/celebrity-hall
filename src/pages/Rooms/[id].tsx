@@ -21,7 +21,7 @@ import {
   AskGrid,
   AskGridMobile
 } from '@/components/room/Roadmap'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { GET_ROOM_STREAM } from '@/gql/stream'
 import GamePlayContext from '@/contexts/GamePlayContext'
@@ -290,7 +290,7 @@ const Room = () => {
               </div>
               <div className="relative w-full h-[63%] grid grid-cols-3">
                 <div className="flex justify-start items-end pb-2 pl-4">
-                  <div className="w-[340px] h-[68%]">
+                  <div className="w-[340px] md:h-[71%] xl:h-[82%]">
                     <PockerResult />
                   </div>
                 </div>
@@ -350,7 +350,7 @@ const Room = () => {
                   )}
                 </div>
               </button> */}
-                  <div className="inline-flex px-2">
+                  <div className="inline-flex items-center px-2">
                     <FormattedMessage id="screens.room.bet" />
                     <p className="px-2">|</p>
                     <p className="px-2">{totalAmount}</p>
@@ -432,9 +432,54 @@ const Room = () => {
           </div>
         </section>
       </Responsive.Desktop>
+
       <Responsive.Default>
         <section className="flex flex-col w-full bg-theme-50 375:h-[93vh] 390:h-[94vh] 414:h-[94.3vh]">
-          <div className="relative w-full h-auto aspect-video">
+          <div className="relative flex-grow flex-shrink-0 w-full h-auto aspect-video">
+            <div className="grid absolute z-20 grid-cols-3 grid-rows-2 w-full h-full">
+              <div className="flex pl-1">
+                <div className="flex flex-col justify-around items-end h-23">
+                  <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
+                    <Link
+                      to="/home/rooms"
+                      className="m-auto text-xl i-heroicons-arrow-uturn-left-20-solid"
+                    ></Link>
+                  </div>
+
+                  <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
+                    <button
+                      onClick={handleSwitchCam}
+                      className={`${
+                        isSecondCam ? 'text-theme-300' : ''
+                      } m-auto text-xl i-heroicons-video-camera-20-solid`}
+                    ></button>
+                  </div>
+                  <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
+                    <button
+                      onClick={handleSwitchStream}
+                      className={`${
+                        isWebRTC ? 'text-theme-300' : ''
+                      } m-auto text-xl i-heroicons-wifi-20-solid`}
+                    ></button>
+                  </div>
+                </div>
+              </div>
+              <div></div>
+              <div className="flex m-auto w-14 aspect-square">
+                <Timer />
+              </div>
+              <div></div>
+              <div className="col-span-2 flex  justify-end pb-1 w-full h-full">
+                <div className="w-2/3 flex flex-col justify-end">
+                  <RoomNotification
+                    isConfirmedSuccess={isConfirmSuccess}
+                    isConfirmedFailure={isConfirmFailure}
+                    isRepeatSuccess={isRepeatSuccess}
+                    gameState={gameState}
+                  />
+                </div>
+              </div>
+            </div>
             <div className="relative w-full h-full">
               {isSecondCam && secoundStreamName && secoundStreamKey ? (
                 <RoomStream
@@ -453,13 +498,24 @@ const Room = () => {
               ) : null}
             </div>
           </div>
-          <div className="inline-flex py-1.5 px-2 text-sm">
-            <FormattedMessage id="screens.room.bet" />
-            <p className="px-2">|</p>
-            <p className="px-2">{totalAmount}</p>
+
+          <div className="relative w-full h-10">
+            <div className="flex absolute justify-center w-full z-30 top-1.5 pointer-events-none">
+              <WinAndLoseResult gameState={gameState} />
+            </div>
+            <div className="inline-flex items-center py-1.5 px-2 h-full text-sm">
+              <FormattedMessage id="screens.room.bet" />
+              <p className="px-2">|</p>
+              <p className="px-2 pt-0.5">{totalAmount}</p>
+            </div>
           </div>
 
           <div className="flex relative flex-col flex-grow w-full">
+            <div className="absolute z-30 w-full h-full pointer-events-none">
+              <div className="py-1 px-2 w-full h-full">
+                <PockerResult />
+              </div>
+            </div>
             <SinglePlayerMobile isDisabled={isDisable} />
             <div className="flex flex-col w-full h-2/5">
               <div className="flex justify-around py-3 px-2 w-full">
@@ -488,7 +544,7 @@ const Room = () => {
             </div>
           </div>
           <div className="flex relative flex-col pt-2 w-full h-1/3">
-            <div className="absolute bottom-0 w-full h-full z-30">
+            <div className="absolute bottom-0 z-30 w-full h-full">
               <ChatroomMobile />
             </div>
             <div className="flex flex-grow justify-between w-full h-1/2 bg-gray-50">

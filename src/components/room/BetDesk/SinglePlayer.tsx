@@ -14,7 +14,7 @@ const BetAreaVer: React.FC<{ target: string[] }> = ({ target }) => {
       <div className="absolute rotate-180 w-full items-stretch h-[40%] flex flex-col flex-wrap-reverse">
         {target?.map((item: string, idx: number) => {
           return (
-            <div className="-mb-5 w-6 h-auto" key={idx}>
+            <div className="-mb-5 w-7 h-auto" key={idx}>
               <img
                 src={item}
                 alt="chip image"
@@ -34,7 +34,7 @@ const BetAreaHoz: React.FC<{ target: string[] }> = ({ target }) => {
       <div className="absolute rotate-180 w-full items-stretch h-[42%] flex flex-col flex-wrap-reverse">
         {target?.map((item: string, idx: number) => {
           return (
-            <div className="-mb-6 w-6 h-auto" key={idx}>
+            <div className="-mb-6 w-7 h-auto" key={idx}>
               <img
                 src={item}
                 alt="chip image"
@@ -54,7 +54,7 @@ const BetAreaHozL: React.FC<{ target: string[] }> = ({ target }) => {
       <div className="absolute rotate-180 w-full items-stretch h-[42%] flex flex-col flex-wrap-reverse">
         {target?.map((item: string, idx: number) => {
           return (
-            <div className="-mb-7 w-6 h-auto" key={idx}>
+            <div className="-mb-7 w-7 h-auto" key={idx}>
               <img
                 src={item}
                 alt="chip image"

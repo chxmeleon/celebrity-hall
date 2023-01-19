@@ -14,13 +14,15 @@ interface GiftPorps {
   isShow: boolean
   setIsShow: React.Dispatch<React.SetStateAction<boolean>>
   onClick: React.MouseEventHandler<HTMLDivElement>
+  setFocused: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const SendGift: React.FC<GiftPorps> = ({
   clickRef,
   onClick,
   isShow,
-  setIsShow
+  setIsShow,
+  setFocused
 }) => {
   const [gift, setGift] = useState('rose')
   const [createGift] = useMutation<
@@ -41,6 +43,7 @@ const SendGift: React.FC<GiftPorps> = ({
       e.preventDefault()
     } else {
       setIsDisable(false)
+      setFocused(true)
       try {
         await createGift({
           variables: {
@@ -50,11 +53,13 @@ const SendGift: React.FC<GiftPorps> = ({
             }
           }
         })
+        setTimeout(() => {
+          setIsShow(false)
+        }, 1200);
       } catch (error) {
         console.log(error)
       }
     }
-    setIsShow(false)
   }
 
   return (
