@@ -18,7 +18,8 @@ import {
   BigEyeRoad,
   SmallRoad,
   CockroachRoad,
-  AskGrid
+  AskGrid,
+  AskGridMobile
 } from '@/components/room/Roadmap'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
@@ -485,9 +486,42 @@ const Room = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative flex-col w-full h-1/3">
-            <div className="flex-grow">road</div>
-            <div className="h-12">input</div>
+          <div className="flex relative flex-col pt-2 w-full h-1/3">
+            <div className="flex flex-grow justify-between w-full h-1/2 bg-gray-50">
+              <div className="flex-grow-0 flex-shrink-0 w-2/5">
+                {room && <BeadRoad roads={room.roads.bead_road.array} />}
+              </div>
+              <div className="flex w-3/5">
+                <div className="block flex-grow w-full">
+                  <div className="h-3/5">
+                    {room && <BigRoad roads={room.roads.big_road.array} />}
+                  </div>
+                  <div className="flex w-full h-2/5">
+                    <div className="w-1/3">
+                      {room && (
+                        <BigEyeRoad roads={room.roads.big_eye_road.graph} />
+                      )}
+                    </div>
+                    <div className="w-1/3">
+                      {room && (
+                        <SmallRoad roads={room.roads.small_road.graph} />
+                      )}
+                    </div>
+                    <div className="w-1/3">
+                      {room && (
+                        <CockroachRoad
+                          roads={room.roads.cockroach_road.graph}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="h-10">
+              <AskGridMobile />
+            </div>
+            <div className="h-14">input</div>
           </div>
         </section>
       </Responsive.Default>
