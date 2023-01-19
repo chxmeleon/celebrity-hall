@@ -30,6 +30,40 @@ import RoomNotification from '@/components/room/RoomNotification'
 import WinAndLoseResult from '@/components/room/WinAndLoseResult'
 import RoomDataContext from '@/contexts/RoomDataContext'
 
+const ChipButtonList: React.FC<{
+  selectedChip: string
+  onSelectedChipChanged?: (selectedChip: string) => void
+}> = ({ selectedChip, onSelectedChipChanged }) => {
+  return (
+    <>
+      {chipsImg.map((item, idx) => {
+        const itemName = item?.src
+          ?.split('/')
+          .slice(-1)[0]
+          .split('.')
+          .slice(0, 1)
+          .toString()
+
+        const isActive = selectedChip === itemName ?? 'chips_100'
+
+        return (
+          <button
+            key={idx}
+            onClick={() => onSelectedChipChanged?.(itemName)}
+            className={`${
+              isActive
+                ? 'brightness-105 backdrop-brightness-110 shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
+                : 'shadow shadow-theme-50/80 brightness-[85%] opacity-[80%]'
+            } rounded-full relative hover:cursor-pointer`}
+          >
+            <img src={item?.src} alt="bet image" className="w-10" />
+          </button>
+        )
+      })}
+    </>
+  )
+}
+
 const Room = () => {
   const { rooms } = useContext(RoomDataContext)
   const { id: roomId } = useParams<{ id: string }>()
@@ -202,31 +236,6 @@ const Room = () => {
     }
   }, [gameState, dispatchBet, totalAmount])
 
-  const chipsButton = chipsImg.map((item, idx) => {
-    const itemName = item?.src
-      ?.split('/')
-      .slice(-1)[0]
-      .split('.')
-      .slice(0, 1)
-      .toString()
-
-    const isActive = selectedChip === itemName ?? 'chips_100'
-
-    return (
-      <button
-        key={idx}
-        onClick={() => setSelectedChip(itemName)}
-        className={`${
-          isActive
-            ? 'brightness-105 backdrop-brightness-110 shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
-            : 'shadow shadow-theme-50/80 brightness-[85%]'
-        } rounded-full relative hover:cursor-pointer`}
-      >
-        <img src={item?.src} alt="bet image" className="w-10" />
-      </button>
-    )
-  })
-
   return (
     <div className="flex relative flex-col w-full h-full">
       <div className="relative w-full h-4/5">
@@ -336,7 +345,10 @@ const Room = () => {
               </div>
             </div>
             <div className="flex justify-around items-center w-1/3">
-              {chipsButton}
+              <ChipButtonList
+                selectedChip={selectedChip}
+                onSelectedChipChanged={setSelectedChip}
+              />
               {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
               {/*   <button className="text-xl i-heroicons-play-pause-solid" /> */}
               {/* </div> */}
