@@ -3,15 +3,28 @@ import { useContext, useEffect, useState } from 'react'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { clsx as cx } from 'clsx'
 
+const winLoseStyle = {
+  isLose: 'bg-red-700/95 text-red-200',
+  isWin: 'bg-theme-300/95 text-theme-50',
+  isTie: 'bg-green-400/95 text-teal-900'
+}
+
 type NoticeProps = {
   gameState: string | any
 }
 
-const WinAndLoseResult: React.FC<NoticeProps> = ({
-  gameState
-}) => {
+const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState }) => {
   const { notice } = useContext(GamePlayContext)
-  const isLose = Math.floor(Number(notice?.winLossAmount)) < 0
+  const windLoseState = () => {
+    if (Math.floor(Number(notice?.winLossAmount)) < 0) {
+      return 'isLose'
+    } else if (Math.floor(Number(notice?.winLossAmount)) === 0) {
+      return 'isTie'
+    } else {
+      return 'isWin'
+    }
+  }
+
   const [isShow, setIsShow] = useState(false)
   const [newNotice, setNewNotice] = useState<any | null>(null)
 
@@ -28,7 +41,7 @@ const WinAndLoseResult: React.FC<NoticeProps> = ({
 
   const noticeStyle = cx(
     'flex w-2/3 h-9 rounded-md transition-all duration-300 ease-in-out ',
-    isLose ? 'bg-red-900/95 text-red-300' : 'bg-theme-300/95 text-theme-50',
+    winLoseStyle[windLoseState()],
     isShow ? 'opacity-100' : 'opacity-0 -translate-y-10'
   )
 

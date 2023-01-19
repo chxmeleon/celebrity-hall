@@ -84,8 +84,8 @@ const RoomNotification: React.FC<NoticeProps> = ({
         </div>
       ) : isConfirmedFailure ? (
         <div className="flex w-1/2 h-12">
-          <div className="flex p-2 py-3 m-auto w-3/4 rounded-md bg-red-800/95">
-            <p className="m-auto font-medium text-red-400">
+          <div className="flex p-2 py-3 m-auto w-3/4 rounded-md bg-red-700/95">
+            <p className="m-auto font-medium text-red-200">
               {formatMessage({
                 defaultMessage: 'Bet Failed',
                 id: 'screens.records.betfailed'

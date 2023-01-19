@@ -69,6 +69,9 @@ const Room = () => {
     types.CREATE_BACCARAT_BETVariables
   >(CREATE_BACCARAT_BET)
 
+  const [preBetState, setPreBetState] =
+    useState<BetInitialValueProp>(betInitialValue)
+
   const totalAmount =
     betState?.playerAmount +
     betState?.playerPairAmount +
@@ -79,16 +82,24 @@ const Room = () => {
     betState?.tieAmount +
     betState?.super6Amount
 
+  const preTotalAmount =
+    preBetState?.playerAmount +
+    preBetState?.playerPairAmount +
+    preBetState?.dealerAmount +
+    preBetState?.dealerPairAmount +
+    preBetState?.smallAmount +
+    preBetState?.bigAmount +
+    preBetState?.tieAmount +
+    preBetState?.super6Amount
+
   const [isConfirmDisabled, setIsConfirmDisabled] = useState(false)
   const [isCancelDisabled, setIsCancelDisabled] = useState(false)
   const [isRepeatDisabled, setIsRepeatDisabled] = useState(false)
-  const [preBetState, setPreBetState] =
-    useState<BetInitialValueProp>(betInitialValue)
 
   const [isCancelSuccess, setIsCancelSuccess] = useState(false)
   const onCancel = async () => {
     dispatchBet({ type: 'newRound' })
-    if (totalAmount > 0 || isCancelDisabled) {
+    if (totalAmount > 0 || !isCancelDisabled) {
       const result = await createBaccaratBet({
         variables: {
           input: {
@@ -114,6 +125,9 @@ const Room = () => {
   const [isConfirmSuccess, setIsConfirmSuccess] = useState(false)
   const [isConfirmFailure, setIsConfirmFailure] = useState(false)
   const onConfirmBet = async (e: React.MouseEvent) => {
+    if (totalAmount < 1000) {
+      setIsConfirmFailure(true)
+    }
     if (totalAmount >= 0 && totalAmount <= wallet?.balance) {
       try {
         const result = await createBaccaratBet({
@@ -134,8 +148,6 @@ const Room = () => {
         })
         if (result?.data?.createBaccaratBet?.errors?.length === 0) {
           setIsConfirmSuccess(true)
-        } else {
-          setIsConfirmFailure(true)
         }
         setIsConfirmDisabled(true)
         setPreBetState(betState)
@@ -171,11 +183,15 @@ const Room = () => {
           }
         }
       })
+
       if (result?.data?.createBaccaratBet?.errors?.length === 0) {
         setIsRepeatSuccess(true)
-      } else {
+      }
+
+      if (totalAmount < 1000) {
         setIsConfirmFailure(true)
       }
+
       setIsCancelDisabled(false)
       setIsRepeatDisabled(true)
       setIsConfirmDisabled(true)
@@ -191,10 +207,12 @@ const Room = () => {
   useEffect(() => {
     if (gameState === 'START_BET' || gameState === 'UPDATE_AMOUNT') {
       setIsDisable(false)
-      setIsRepeatDisabled(false)
       setIsConfirmDisabled(false)
       if (totalAmount > 0) {
         setIsCancelDisabled(false)
+      }
+      if (preTotalAmount > 0) {
+        setIsRepeatDisabled(false)
       }
     } else if (gameState === 'CLOSE') {
       setIsDisable(true)
@@ -205,7 +223,7 @@ const Room = () => {
       setIsRepeatDisabled(true)
       setIsCancelDisabled(true)
     }
-  }, [gameState, dispatchBet, totalAmount])
+  }, [gameState, dispatchBet, totalAmount, preTotalAmount])
 
   const chipsButton = chipsImg.map((item, idx) => {
     const itemName = item?.src
