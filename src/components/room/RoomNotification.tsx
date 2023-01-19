@@ -1,4 +1,3 @@
-import React from 'react'
 import { useIntl } from 'react-intl'
 
 const noticeMapper = {
@@ -72,7 +71,7 @@ const RoomNotification: React.FC<NoticeProps> = ({
   return (
     <>
       {isConfirmedSuccess || isRepeatSuccess ? (
-        <div className="flex w-1/2 h-12">
+        <div className="flex w-2/3 h-12">
           <div className="flex p-2 py-1 m-auto w-3/4 rounded-md bg-green-400/95">
             <p className="m-auto text-2xl font-medium text-teal-900">
               {formatMessage({
@@ -83,9 +82,9 @@ const RoomNotification: React.FC<NoticeProps> = ({
           </div>
         </div>
       ) : isConfirmedFailure ? (
-        <div className="flex w-1/2 h-12">
-          <div className="flex p-2 py-3 m-auto w-3/4 rounded-md bg-red-700/95">
-            <p className="m-auto font-medium text-red-200">
+        <div className="flex w-2/3 h-12">
+          <div className="flex p-2 py-3 m-auto w-3/4 rounded-md bg-red-800/95">
+            <p className="m-auto font-medium text-red-400">
               {formatMessage({
                 defaultMessage: 'Bet Failed',
                 id: 'screens.records.betfailed'
