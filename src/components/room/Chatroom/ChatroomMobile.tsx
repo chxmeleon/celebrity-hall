@@ -130,7 +130,7 @@ const ChatroomMobile = () => {
     <div className="flex flex-col w-full h-full border-gray-500 border-b-1">
       <div
         className={cx(
-          'flex overflow-x-hidden flex-col-reverse flex-grow-0 w-full h-screen scroll-smooth',
+          'flex overflow-x-hidden overflow-y-scroll flex-col-reverse flex-grow-0 w-full h-screen scroll-smooth',
           focused || isPickerShow || isGiftShow
             ? 'opacity-100 bg-gray-50'
             : 'opacity-0 '
@@ -145,7 +145,7 @@ const ChatroomMobile = () => {
             return (
               <div key={`message-${idx}`}>
                 {content?.type !== 'Message::User' ? (
-                  <div className="flex justify-center items-center py-1 m-auto w-3/5">
+                  <div className="flex justify-center items-center py-1 m-auto w-4/5">
                     <div className="py-1.5 px-5 text-sm font-medium text-center bg-gradient-to-tr from-rose-400 to-orange-200 rounded-lg tracking-[0.05rem] text-red-900/90">
                       {content?.body}
                     </div>
@@ -213,6 +213,7 @@ const ChatroomMobile = () => {
             isShow={isGiftShow}
             setIsShow={setIsGiftShow}
             onClick={onTrigglerGift}
+            setFocused={setFocused}
           />
           <div ref={setClickRef}>
             <div

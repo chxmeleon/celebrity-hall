@@ -71,9 +71,9 @@ const RoomNotification: React.FC<NoticeProps> = ({
   return (
     <>
       {isConfirmedSuccess || isRepeatSuccess ? (
-        <div className="flex w-2/3 h-12">
+        <div className="flex w-full md:w-2/3 h-12">
           <div className="flex p-2 py-1 m-auto w-3/4 rounded-md bg-green-400/95">
-            <p className="m-auto text-2xl font-medium text-teal-900">
+            <p className="m-auto text-lg md:text-2xl font-medium text-teal-900">
               {formatMessage({
                 defaultMessage: 'Bet Success',
                 id: 'screens.records.betSuccess'
@@ -82,9 +82,9 @@ const RoomNotification: React.FC<NoticeProps> = ({
           </div>
         </div>
       ) : isConfirmedFailure ? (
-        <div className="flex w-2/3 h-12">
+        <div className="flex w-full md:w-2/3 h-12">
           <div className="flex p-2 py-3 m-auto w-3/4 rounded-md bg-red-800/95">
-            <p className="m-auto font-medium text-red-400">
+            <p className="m-auto text-xs md:text-[14px] font-medium text-red-400">
               {formatMessage({
                 defaultMessage: 'Bet Failed',
                 id: 'screens.records.betfailed'
@@ -94,9 +94,9 @@ const RoomNotification: React.FC<NoticeProps> = ({
         </div>
       ) : gameState === noticeMapper?.[gameState]?.state &&
         gameState !== undefined ? (
-        <div className="flex w-1/2 h-12">
+        <div className="flex w-full md:w-1/2 h-12">
           <div className="flex py-1 m-auto w-3/4 rounded-md bg-yellow-400/95">
-            <div className="m-auto text-2xl font-medium text-theme-50">
+            <div className="m-auto text-lg md:text-2xl font-medium text-theme-50">
               {formatMessage({
                 defaultMessage: noticeMapper?.[gameState]?.default,
                 id: noticeMapper?.[gameState]?.id

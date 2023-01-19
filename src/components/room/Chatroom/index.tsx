@@ -122,7 +122,7 @@ const ChatRoom = () => {
               <div key={`message-${idx}`}>
                 {content?.type !== 'Message::User' ? (
                   <div
-                    className="flex justify-center items-center py-1 w-3/5 m-auto"
+                    className="flex justify-center items-center py-1 w-4/5 m-auto"
                   >
                     <div className="py-1.5 px-5 text-sm font-medium text-center bg-gradient-to-tr from-rose-400 to-orange-200 rounded-lg tracking-[0.05rem] text-red-900/90">
                       {content?.body}
@@ -190,6 +190,7 @@ const ChatRoom = () => {
             isShow={isGiftShow}
             setIsShow={setIsGiftShow}
             onClick={onTrigglerGift}
+            setFocused={() => null}
           />
           <div ref={setClickRef}>
             <div

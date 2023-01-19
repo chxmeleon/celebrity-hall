@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import logoImgMobile from '/logo_m.webp'
 import { Link } from 'react-router-dom'
+import { useWallet } from '@/hooks/profile'
 
 const icons = {
   heart: cx`i-heroicons-heart-solid text-2xl hover:text-pink-500 `,
@@ -24,6 +25,7 @@ const icons = {
 }
 
 const Header = () => {
+  const { user } = useWallet()
   const { logout } = useAuth()
   const { openSetup, openNotice } = useSetup()
   const [toggle, setToggle] = useState(false)
@@ -59,7 +61,16 @@ const Header = () => {
               className="my-auto w-auto h-6"
             />
           </a>
-          <div className="flex justify-end items-center px-3 w-full h-full bg-theme-50">
+          <div className=" flex justify-end items-center px-3 w-full h-full bg-theme-50">
+            <div className="md:hidden m-auto w-2/3 text-xs">
+              <div className="m-auto w-2/3 text-left">
+                <p className="truncate">{user?.profile?.nickname}</p>
+                <p className="inline-flex pt-1 truncate text-theme-300">
+                  <div>$</div>
+                  <div>{user?.profile?.balance}</div>
+                </p>
+              </div>
+            </div>
             <div
               className="flex justify-around items-center w-[5rem] bg-theme-50"
               onClick={stopProp}

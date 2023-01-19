@@ -12,7 +12,7 @@ const Timer: React.FC = () => {
   const roomId = useParams()
   const {counter, isLeftTen, startCount} = useTimeLeft(roomId.id ?? '')
   const countDownStyle = cx(
-    'w-[82%] h-[82%] rounded-full absolute border-t-[3px] border-r-[6px] border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
+    'w-[82%] h-[82%] rounded-full absolute border-t-[1px] border-r-[3px] md:border-t-[3px] md:border-r-[6px] border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
     isLeftTen ? 'border-[#ff0015] ' : 'border-theme-300 '
   )
   
@@ -30,7 +30,7 @@ const Timer: React.FC = () => {
           }`}
         >
           <p
-            className={`text-[50px] font-medium ${
+            className={`md:text-[50px]  text-2xl font-medium ${
               isLeftTen ? 'text-[#ff0015]' : 'text-theme-300'
             }`}
           >
