@@ -215,7 +215,7 @@ const Room = () => {
         className={`${
           isActive
             ? 'brightness-105 backdrop-brightness-110 shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
-            : 'shadow shadow-theme-50/80 brightness-75'
+            : 'shadow shadow-theme-50/80 brightness-[85%]'
         } rounded-full relative hover:cursor-pointer`}
       >
         <img src={item?.src} alt="bet image" className="w-10" />
@@ -270,11 +270,7 @@ const Room = () => {
               </div>
             </div>
             <div className="flex relative justify-center">
-              <WinAndLoseResult
-                isRepeatSuccess={isRepeatSuccess}
-                isConfirmedSuccess={isConfirmSuccess}
-                gameState={gameState}
-              />
+              <WinAndLoseResult gameState={gameState} />
             </div>
             <div className="flex flex-col h-full">
               <div className="flex-grow pt-32">
@@ -282,7 +278,7 @@ const Room = () => {
                   <Timer />
                 </div>
               </div>
-              <div className="flex justify-center items-end h-12">
+              <div className="flex justify-center items-end pb-2 h-12">
                 <RoomNotification
                   isConfirmedSuccess={isConfirmSuccess}
                   isRepeatSuccess={isRepeatSuccess}
