@@ -56,12 +56,14 @@ const noticeMapper = {
 
 type NoticeProps = {
   isConfirmedSuccess: boolean
+  isConfirmedFailure: boolean
   isRepeatSuccess: boolean
   gameState: string | any
 }
 
 const RoomNotification: React.FC<NoticeProps> = ({
   isConfirmedSuccess,
+  isConfirmedFailure,
   isRepeatSuccess,
   gameState
 }) => {
@@ -71,11 +73,22 @@ const RoomNotification: React.FC<NoticeProps> = ({
     <>
       {isConfirmedSuccess || isRepeatSuccess ? (
         <div className="flex w-1/2 h-12">
-          <div className="flex p-2 py-1 m-auto w-3/4 rounded-md bg-gradient-to-r from-teal-600/95 to-green-300">
-            <p className="m-auto text-2xl font-medium text-white">
+          <div className="flex p-2 py-1 m-auto w-3/4 rounded-md bg-green-400/95">
+            <p className="m-auto text-2xl font-medium text-teal-900">
               {formatMessage({
                 defaultMessage: 'Bet Success',
                 id: 'screens.records.betSuccess'
+              })}
+            </p>
+          </div>
+        </div>
+      ) : isConfirmedFailure ? (
+        <div className="flex w-1/2 h-12">
+          <div className="flex p-2 py-3 m-auto w-3/4 rounded-md bg-red-800/95">
+            <p className="m-auto font-medium text-red-400">
+              {formatMessage({
+                defaultMessage: 'Bet Failed',
+                id: 'screens.records.betfailed'
               })}
             </p>
           </div>
