@@ -228,16 +228,20 @@ export const SimpleCardName: React.FC<{ name: string }> = ({ name }) => {
 }
 
 const SimpleCardPointConfig = {
-  '1st': 'text-[#FCD140] sm:text-[64px] text-[24px] italic font-black',
-  '2nd': 'text-[#CCCCCC] sm:text-[64px] text-[24px] italic font-black',
-  '3rd': 'text-[#D0AA89] sm:text-[64px] text-[24px] italic font-black'
+  '1st': 'text-[#FCD140] sm:text-[48px] text-[24px] italic font-black',
+  '2nd': 'text-[#CCCCCC] sm:text-[48px] text-[24px] italic font-black',
+  '3rd': 'text-[#D0AA89] sm:text-[48px] text-[24px] italic font-black'
 }
 
 export const SimpleCardPoint: React.FC<{
   point: number
   rank: '1st' | '2nd' | '3rd'
 }> = ({ point, rank }) => {
-  return <div className={`${SimpleCardPointConfig[rank]}`}>{point}</div>
+  return (
+    <div className={`${SimpleCardPointConfig[rank]}`}>
+      {point.toLocaleString()}
+    </div>
+  )
 }
 
 export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
@@ -319,7 +323,7 @@ export const RankingTable: React.FC<{
         <RankingTableFtRow
           rank={index + 4}
           name={element.username}
-          point={element.point}
+          point={element.point.toLocaleString()}
           length={data.length}
           index={index}
           key={index}
