@@ -1,8 +1,13 @@
 import { clsx as cx } from 'clsx'
 import { memo, useMemo } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { BeadRoadProps } from '.'
-import { fullRecordMapper, outlineRecordMapper, roadTileMapping } from './data'
+import { BeadRoadProps, BigRoadProps } from '.'
+import {
+  fullRecordMapper,
+  outlineRecordMapper,
+  outlineTileMapping,
+  roadTileMapping
+} from './data'
 
 type TileProps = {
   status: string
@@ -79,10 +84,14 @@ export const BeadRoadTile = memo(
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
 )
 
-export const BigRecordTile: React.FC<TileProps> = ({ status }) => {
+export const BigRecordTile: React.FC<{
+  road: BigRoadProps | null
+}> = ({ road }) => {
   const bigRecordTileStyle = cx(
     'flex justify-center items-center m-auto w-5/6 h-5/6 rounded-full aspect-square border-2',
-    outlineRecordMapper[status]?.className ?? 'border-transparent'
+    road?.game_result
+      ? outlineTileMapping[road.game_result]?.className
+      : 'border-transparent'
   )
 
   return (
@@ -131,7 +140,7 @@ export const CockroachRecordTile: React.FC<TileProps> = ({ status }) => {
 }
 
 export const BaseGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <div className="relative w-full h-full border-r border-gray-500/90">
+  <div className="relative w-full h-full border-gray-500/90">
     {children}
   </div>
 )
@@ -139,10 +148,8 @@ export const BaseGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
 export const BigRoadGrid: React.FC<React.PropsWithChildren> = ({
   children
 }) => (
-  <div className="relative w-full h-full border-r border-b border-gray-500/90">
-    <div className="grid grid-rows-6 grid-flow-col auto-cols-fr w-full h-full grid-cols-25">
-      {children}
-    </div>
+  <div className="relative w-full h-full border-gray-500/90">
+    <div>{children}</div>
   </div>
 )
 

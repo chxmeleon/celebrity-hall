@@ -6,6 +6,8 @@ import { useCurrentGame } from '@/hooks/rooms'
 import { useParams } from 'react-router-dom'
 import { memo } from 'react'
 
+const bigRoadLength = 30
+
 export type GameResultType = 'player' | 'dealer' | 'tie'
 export type PairResultType = 'player' | 'dealer' | 'none' | 'both'
 export type BeadRoadProps = {
@@ -33,15 +35,34 @@ export const BeadRoad = memo(
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
 )
 
-export const BigRoad: React.FC = () => {
+export type BigRoadProps = {
+  game_result: GameResultType
+  pair_result: PairResultType
+  order: number
+  result: number
+  tie_count: number
+}
+export const BigRoadComponent: React.FC<{
+  roads: (BigRoadProps | null)[][]
+}> = ({ roads }) => {
   return (
     <Road.BigRoadGrid>
-      {Road.bigArray.map((item, idx) => {
-        return <Road.BigRecordTile key={`big-${idx}`} status={item} />
-      })}
+      {roads.map((row, idx) => (
+        <div className="flex" key={idx}>
+          {[...row, ...Array(bigRoadLength - row.length).fill(null)].map(
+            (road, index) => (
+              <Road.BigRecordTile key={index} road={road} />
+            )
+          )}
+        </div>
+      ))}
     </Road.BigRoadGrid>
   )
 }
+export const BigRoad = memo(
+  BigRoadComponent,
+  (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
+)
 
 export const SmallRoad: React.FC = () => {
   return (

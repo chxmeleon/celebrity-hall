@@ -236,6 +236,10 @@ const Room = () => {
     }
   }, [gameState, dispatchBet, totalAmount])
 
+  useEffect(() => {
+    console.log(room?.roads)
+  }, [room?.roads])
+
   return (
     <div className="flex relative flex-col w-full h-full">
       <div className="relative w-full h-4/5">
@@ -375,13 +379,14 @@ const Room = () => {
       </div>
       <div className="flex w-full h-1/5 bg-gray-50">
         <div className="flex flex-grow justify-start">
-          <div className="flex-grow-0 flex-shrink-0 w-1/3">
+          <div className="flex-grow-0 flex-shrink-0 w-[28.6%]">
             {room && <BeadRoad roads={room.roads.bead_road.array} />}
           </div>
-          <div className="flex w-2/3">
+
+          <div className="flex w-[71.4%]">
             <div className="block flex-grow w-full">
-              <div className="h-2/3">
-                <BigRoad />
+              <div>
+                {room && <BigRoad roads={room.roads.big_road.array} />}
               </div>
               <div className="flex w-full h-1/3">
                 <div className="w-1/3">

@@ -86,6 +86,21 @@ export const roadTileMapping: { [key: string]: RoadTileProps } = {
   tie: { className: 'bg-teal-600', translationId: 'screens.baccaratRoom.tie' }
 }
 
+export const outlineTileMapping: { [key: string]: RoadTileProps } = {
+  dealer: {
+    className: 'border-red-600',
+    translationId: 'screens.baccaratRoom.dealer'
+  },
+  player: {
+    className: 'border-blue-600',
+    translationId: 'screens.baccaratRoom.player'
+  },
+  tie: {
+    className: 'border-teal-600',
+    translationId: 'screens.baccaratRoom.tie'
+  }
+}
+
 export const outlineRecordMapper: { [key: string]: MapperData } = {
   b: { className: 'border-red-600', contentId: 'screens.baccaratRoom.dealer' },
   p: { className: 'border-blue-600', contentId: 'screens.baccaratRoom.player' },
