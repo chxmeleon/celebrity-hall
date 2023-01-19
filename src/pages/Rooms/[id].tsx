@@ -236,10 +236,6 @@ const Room = () => {
     }
   }, [gameState, dispatchBet, totalAmount])
 
-  useEffect(() => {
-    console.log(room?.roads)
-  }, [room?.roads])
-
   return (
     <div className="flex relative flex-col w-full h-full">
       <div className="relative w-full h-4/5">
