@@ -1,7 +1,7 @@
 import * as Road from './road'
 import { clsx as cx } from 'clsx'
 import { FormattedMessage } from 'react-intl'
-import { askMapper } from './data'
+import { askMapper, askMapperMobile } from './data'
 import { useCurrentGame } from '@/hooks/rooms'
 import { useParams } from 'react-router-dom'
 import { memo } from 'react'
@@ -193,6 +193,30 @@ export const AskGrid: React.FC = () => {
                 <div className={askLineStyle}> </div>
               </div>
             )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+export const AskGridMobile = () => {
+  const { id } = useParams()
+  const { currentGame } = useCurrentGame(id)
+  const roadsTotalData = currentGame?.baccaratRoom?.roads ?? ''
+  console.log(roadsTotalData);
+  
+
+  return (
+    <div className="flex justify-between items-center w-full h-full bg-blue-800/20">
+      {askMapperMobile.map((item, idx) => {
+        return (
+          <div key={`ask-${idx}`} className={cx('flex h-full items-center text-sm', item.className)}>
+            <FormattedMessage
+              id={item.contentId}
+              defaultMessage={item.default}
+            />
+            <p className="pl-1 text-gray-100">{roadsTotalData?.[item?.value as string]}</p>
           </div>
         )
       })}
