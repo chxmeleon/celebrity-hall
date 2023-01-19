@@ -1,7 +1,13 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
-import { BigRoad, BeadRoad } from './Roadmap'
+import {
+  BigRoad,
+  BeadRoad,
+  BigEyeRoad,
+  SmallRoad,
+  CockroachRoad
+} from './Roadmap'
 import { useTimeLeft } from '@/hooks/rooms'
 import { RoomProps } from '@/types/room'
 
@@ -56,8 +62,39 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
             <div className="pl-4 font-bold tracking-[0.15rem]">{room.name}</div>
           </div>
           <div className="flex flex-grow-0 flex-shrink-0 justify-start items-center px-3 w-full text-xs">
-            <div className="flex w-3/4 h-full bg-gray-100 rounded-tl-sm rounded-bl-sm">
-              <BeadRoad roads={room.roads.bead_road.array} />
+            <div className="w-3/4 h-full bg-gray-100 rounded-tl-sm rounded-bl-sm">
+              {room && (
+                <>
+                  <div className="w-full">
+                    <BigRoad roads={room.roads.big_road.array} />
+                  </div>
+
+                  <div className="w-full">
+                    <BigEyeRoad
+                      roads={room.roads.big_eye_road.graph}
+                      roadLength={30}
+                      maxRowSize={3}
+                    />
+                  </div>
+
+                  <div className="w-full flex">
+                    <div className="w-1/2">
+                      <SmallRoad
+                        roads={room.roads.small_road.graph}
+                        maxColumnSize={15}
+                        maxRowSize={3}
+                      />
+                    </div>
+                    <div className="w-1/2">
+                      <CockroachRoad
+                        roads={room.roads.cockroach_road.graph}
+                        maxColumnSize={15}
+                        maxRowSize={3}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
             <div className="relative w-1/4 h-20 bg-gray-100 rounded-tr-sm rounded-br-sm md:h-[160px]">
               <div className="absolute bottom-0 w-full">

@@ -53,23 +53,6 @@ export const askMapper = [
   }
 ]
 
-export type MapperData = {
-  className: string
-  contentId: string
-}
-
-export type MapperProps = {
-  b: MapperData
-  p: MapperData
-  t: MapperData
-}
-
-export const fullRecordMapper: { [key: string]: MapperData } = {
-  b: { className: 'bg-red-600', contentId: 'screens.baccaratRoom.dealer' },
-  p: { className: 'bg-blue-600', contentId: 'screens.baccaratRoom.player' },
-  t: { className: 'bg-teal-600', contentId: 'screens.baccaratRoom.tie' }
-}
-
 export type RoadTileProps = {
   className: string
   translationId: string
@@ -112,10 +95,4 @@ export const outlineTileMapping: { [key: string]: RoadTileProps } = {
     className: 'border-teal-600',
     translationId: 'screens.baccaratRoom.tie'
   }
-}
-
-export const outlineRecordMapper: { [key: string]: MapperData } = {
-  b: { className: 'border-red-600', contentId: 'screens.baccaratRoom.dealer' },
-  p: { className: 'border-blue-600', contentId: 'screens.baccaratRoom.player' },
-  t: { className: 'border-teal-600', contentId: 'screens.baccaratRoom.tie' }
 }

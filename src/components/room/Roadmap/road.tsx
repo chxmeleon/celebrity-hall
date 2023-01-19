@@ -8,9 +8,7 @@ import {
   RepetitionRoadProps
 } from '.'
 import {
-  fullRecordMapper,
   fullRecordMapping,
-  outlineRecordMapper,
   outlineTileMapping,
   roadTileMapping
 } from './data'
@@ -167,13 +165,13 @@ export const CockroachRecordTile: React.FC<{
 }
 
 export const BaseGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <div className="relative w-full h-full border-gray-500/90">{children}</div>
+  <div className="relative w-full border-gray-500/90">{children}</div>
 )
 
 export const BigRoadGrid: React.FC<React.PropsWithChildren> = ({
   children
 }) => (
-  <div className="relative w-full h-full border-gray-500/90">
+  <div className="relative w-full border-gray-500/90">
     <div>{children}</div>
   </div>
 )
@@ -181,7 +179,7 @@ export const BigRoadGrid: React.FC<React.PropsWithChildren> = ({
 export const SmallRoadGrid: React.FC<React.PropsWithChildren> = ({
   children
 }) => (
-  <div className="relative w-full h-full border-gray-500/90">{children}</div>
+  <div className="relative w-full border-gray-500/90">{children}</div>
 )
 
 export const winRecord = [

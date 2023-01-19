@@ -44,12 +44,13 @@ export type BigRoadProps = {
 }
 export const BigRoadComponent: React.FC<{
   roads: (BigRoadProps | null)[][]
-}> = ({ roads }) => {
+  roadLength?: number
+}> = ({ roads, roadLength = bigRoadLength }) => {
   return (
     <Road.BigRoadGrid>
       {roads.map((row, idx) => (
         <div className="flex" key={idx}>
-          {[...row, ...Array(bigRoadLength - row.length).fill(null)].map(
+          {[...row, ...Array(roadLength - row.length).fill(null)].map(
             (road, index) => (
               <Road.BigRecordTile key={index} road={road} />
             )
@@ -67,14 +68,46 @@ export const BigRoad = memo(
 export type RepetitionRoadProps = {
   repetition: boolean
 }
-export const SmallRoadComponent: React.FC<{
+
+export const BigEyeRoadComponent: React.FC<{
   roads: (RepetitionRoadProps | null)[][]
-}> = ({ roads }) => {
+  roadLength?: number
+  maxRowSize?: number
+}> = ({ roads, roadLength, maxRowSize }) => {
   return (
     <Road.SmallRoadGrid>
-      {roads.map((row, idx) => (
+      {roads.slice(0, maxRowSize).map((row, idx) => {
+        const rowSize = row.length
+
+        return (
+          <div className="flex" key={idx}>
+            {[
+              ...row,
+              ...Array((roadLength ?? rowSize) - rowSize).fill(null)
+            ].map((road, index) => (
+              <Road.BigEyeRecordTile key={index} road={road} />
+            ))}
+          </div>
+        )
+      })}
+    </Road.SmallRoadGrid>
+  )
+}
+export const BigEyeRoad = memo(
+  BigEyeRoadComponent,
+  (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
+)
+
+export const SmallRoadComponent: React.FC<{
+  roads: (RepetitionRoadProps | null)[][]
+  maxColumnSize?: number
+  maxRowSize?: number
+}> = ({ roads, maxColumnSize, maxRowSize }) => {
+  return (
+    <Road.SmallRoadGrid>
+      {roads.slice(0, maxRowSize).map((row, idx) => (
         <div className="flex" key={idx}>
-          {row.map((road, index) => (
+          {row.slice(0, maxColumnSize).map((road, index) => (
             <Road.SmallRecordTile key={index} road={road} />
           ))}
         </div>
@@ -87,30 +120,16 @@ export const SmallRoad = memo(
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
 )
 
-export const BigEyeRoad: React.FC<{
+export const CockroachRoadComponent: React.FC<{
   roads: (RepetitionRoadProps | null)[][]
-}> = ({ roads }) => {
+  maxColumnSize?: number
+  maxRowSize?: number
+}> = ({ roads, maxColumnSize, maxRowSize }) => {
   return (
     <Road.SmallRoadGrid>
-      {roads.map((row, idx) => (
+      {roads.slice(0, maxRowSize).map((row, idx) => (
         <div className="flex" key={idx}>
-          {row.map((road, index) => (
-            <Road.BigEyeRecordTile key={index} road={road} />
-          ))}
-        </div>
-      ))}
-    </Road.SmallRoadGrid>
-  )
-}
-
-export const CockroachRoad: React.FC<{
-  roads: (RepetitionRoadProps | null)[][]
-}> = ({ roads }) => {
-  return (
-    <Road.SmallRoadGrid>
-      {roads.map((row, idx) => (
-        <div className="flex" key={idx}>
-          {row.map((road, index) => (
+          {row.slice(0, maxColumnSize).map((road, index) => (
             <Road.CockroachRecordTile key={index} road={road} />
           ))}
         </div>
@@ -118,6 +137,10 @@ export const CockroachRoad: React.FC<{
     </Road.SmallRoadGrid>
   )
 }
+export const CockroachRoad = memo(
+  CockroachRoadComponent,
+  (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
+)
 
 export const AskGrid: React.FC = () => {
   const totalCount = [...new Array(8)].map(() => 1)
