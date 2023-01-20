@@ -25,7 +25,6 @@ const ProtectedLayoutForRoom: React.FC = () => {
       <section className="relative w-full h-full border aspect-video border-theme-70">
         <div className={bgImage}></div>
         <Header />
-        
         <div className="relative flex pt-12 justify-start w-full h-full">
           <LeftSidebarForRoom />
           <div className="relative w-full h-full bg-black">

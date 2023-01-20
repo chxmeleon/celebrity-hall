@@ -27,7 +27,7 @@ const Card: React.FC<{
         <img src={`/cards/${item}.webp`} alt="pocker image" />
         <div
           className={`absolute top-0 left-0 transition-all duration-200 ease-in-out ${
-            isCardOpen ? 'z-[-1] rotate-y-90' : 'z-0 rotate-y-0'
+            isCardOpen ? 'rotate-y-90 opacity-0' : 'rotate-y-0'
           }`}
         >
           <img src="/cards/card_b.webp" alt="card back" />
