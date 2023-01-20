@@ -33,16 +33,12 @@ function App() {
       )
 
       let scaling = 1
-      let offsetTop = 0
-      let offsetLeft = 0
       let width = ''
       if (!isMobile) {
         if (windowHeight / bodyHeight > windowWidth / displayWidth) {
           scaling = windowWidth / displayWidth
-          offsetTop = (windowHeight - bodyHeight * scaling) / 2
         } else {
           scaling = windowHeight / bodyHeight
-          offsetLeft = (windowWidth - displayWidth * scaling) / 2
 
           if (displayWidth * scaling > windowWidth) {
             width = `${(1 / scaling) * 100}%`
@@ -52,8 +48,6 @@ function App() {
 
       document.body.style.transform = `scale(${scaling})`
       document.body.style.width = width
-      document.documentElement.style.paddingTop = `${offsetTop}px`
-      document.documentElement.style.paddingLeft = `${offsetLeft}px`
     }
 
     onResizeWindow()
