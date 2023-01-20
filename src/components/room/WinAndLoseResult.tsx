@@ -55,7 +55,10 @@ const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState }) => {
             defaultMessage="winLoss"
           />
           <span>:</span>
-          <p className="pl-1">{Math.floor(Number(newNotice?.balance))}</p>
+
+          {newNotice && (
+            <p className="pl-1">{Math.floor(Number(newNotice.balance))}</p>
+          )}
         </div>
         <div className="flex">
           <FormattedMessage
@@ -63,7 +66,12 @@ const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState }) => {
             defaultMessage="winLoss"
           />
           <span>:</span>
-          <p className="pl-1">{Math.floor(Number(newNotice?.winLossAmount))}</p>
+
+          {newNotice && (
+            <p className="pl-1">
+              {Math.floor(Number(newNotice.winLossAmount))}
+            </p>
+          )}
         </div>
       </div>
     </div>
