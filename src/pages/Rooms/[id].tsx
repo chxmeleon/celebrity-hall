@@ -388,50 +388,60 @@ const Room = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-full h-1/5 bg-gray-50">
+
+          <div className="flex w-full h-[20%] bg-gray-50">
             <div className="flex flex-grow justify-start">
-              <div className="flex-grow-0 flex-shrink-0 w-[28.6%]">
-                {room && <BeadRoad roads={room.roads.bead_road.array} />}
+              {room && (
+                <BeadRoad
+                  className="w-[242px]"
+                  roads={room.roads.bead_road.array}
+                />
+              )}
+
+              <div className="w-[436px]">
+                <div>
+                  {room && (
+                    <BigRoad
+                      columnSize={27}
+                      roads={room.roads.big_road.array}
+                    />
+                  )}
+                </div>
+
+                <div className="flex w-full">
+                  {room && (
+                    <BigEyeRoad
+                      className="w-1/3"
+                      columnSize={18}
+                      roads={room.roads.big_eye_road.graph}
+                    />
+                  )}
+
+                  {room && (
+                    <SmallRoad
+                      className="w-1/3"
+                      columnSize={18}
+                      roads={room.roads.small_road.graph}
+                    />
+                  )}
+
+                  {room && (
+                    <CockroachRoad
+                      className="w-1/3"
+                      columnSize={18}
+                      roads={room.roads.cockroach_road.graph}
+                    />
+                  )}
+                </div>
               </div>
 
-              <div className="flex w-[71.4%]">
-                <div className="block flex-grow w-full">
-                  <div>
-                    {room && (
-                      <BigRoad
-                        columnSize={30}
-                        roads={room.roads.big_road.array}
-                      />
-                    )}
-                  </div>
-
-                  <div className="flex w-full h-1/3">
-                    <div className="w-1/3">
-                      {room && (
-                        <BigEyeRoad roads={room.roads.big_eye_road.graph} />
-                      )}
-                    </div>
-                    <div className="w-1/3">
-                      {room && (
-                        <SmallRoad roads={room.roads.small_road.graph} />
-                      )}
-                    </div>
-                    <div className="w-1/3">
-                      {room && (
-                        <CockroachRoad
-                          roads={room.roads.cockroach_road.graph}
-                        />
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="w-1/4 h-full">
-                  <AskGrid />
-                </div>
+              <div className="w-[128px] h-full">
+                <AskGrid />
               </div>
             </div>
             {/* <div className="w-[11%] h-full flex-shrink-0"></div> */}
-            <div className="w-2/6 h-full">
+
+            <div className="w-[30%] h-full">
               <ChatRoom />
             </div>
           </div>

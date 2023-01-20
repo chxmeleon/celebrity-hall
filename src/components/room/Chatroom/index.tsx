@@ -73,11 +73,11 @@ const ChatRoom = () => {
   useClickOutside(clickRef, isPickerShow, setIsPickerShow)
   useClickOutside(giftRef, isGiftShow, setIsGiftShow)
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     if (messageRef) {
       messageRef.scrollIntoView(false)
     }
-  }
+  }, [messageRef])
 
   useEffect(() => {
     if (messages.length > 0) {
