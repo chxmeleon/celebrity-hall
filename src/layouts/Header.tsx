@@ -87,7 +87,7 @@ const Header = () => {
                   className={`${
                     toggle
                       ? 'h-fit opacity-100 scale-y-100 translate-y-0'
-                      : 'h-0 opacity-0 scale-y-[28%] -translate-y-36'
+                      : 'h-0 opacity-0 scale-y-[28%] -translate-y-52 hidden'
                   } absolute w-[17.5rem] min-h-fit max-h-fit  -translate-x-[16rem] -z-10 transition-all duration-300 ease-in-out bg-theme-50/95 border border-theme-75 border-y-transparent`}
                 >
                   <div
