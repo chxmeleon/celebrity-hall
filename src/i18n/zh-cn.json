@@ -339,6 +339,8 @@
   "components.incomingMessages.chatWithMe": "点我跟我聊天❤",
   "components.stream.line1": "线路1",
   "components.stream.line2": "线路2",
+  "components.stream.streamSwitch": "切換線路",
+  "components.stream.camSwitch": "切換鏡位",
   "components.footer.rooms": "大厅",
   "components.footer.streamers": "美女主播",
   "components.footer.service": "客服",

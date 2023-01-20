@@ -109,7 +109,7 @@ const Header = () => {
                       href="/home/profile"
                       isLink={true}
                       isTarget={true}
-                      onClick={() => null}
+                      onClick={() => setToggle(false)}
                     >
                       <i className={icons.user}></i>
                       <p>
@@ -137,7 +137,7 @@ const Header = () => {
                       isLink={false}
                       href="https://page.line.me/?accountId=315xktcy"
                       isTarget={true}
-                      onClick={() => null}
+                      onClick={() => setToggle(false)}
                     >
                       <i className={icons.phone}></i>
                       <p>
@@ -165,7 +165,7 @@ const Header = () => {
                       isLink={false}
                       href="https://t.me/richman5888"
                       isTarget={true}
-                      onClick={() => null}
+                      onClick={() => setToggle(false)}
                     >
                       <i className={icons.sexy}></i>
                       <p>
