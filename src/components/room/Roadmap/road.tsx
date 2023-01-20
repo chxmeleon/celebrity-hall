@@ -7,23 +7,15 @@ import {
   PairResultType,
   RepetitionRoadProps
 } from '.'
-import {
-  fullRecordMapping,
-  outlineTileMapping,
-  roadTileMapping
-} from './data'
-
-type TileProps = {
-  status: string
-}
+import { fullRecordMapping, outlineTileMapping, roadTileMapping } from './data'
 
 const roadTileDecorationClassName = 'absolute w-[6px] h-[6px] rounded-full'
 const playerPairLocationClassName = 'right-[1px] bottom-[1px]'
 const dealerPairLocationClassName = 'left-[1px] top-[1px]'
 
-const tileContainer = cx(
-  'relative flex w-full h-full text-xs font-light text-gray-50 border-r border-b border-gray-400 aspect-square'
-)
+export const roadBorderClassName = 'box-border border-gray-400'
+const tileContainerClassName =
+  'relative flex w-full h-full text-xs font-light text-gray-50 border-r border-b aspect-square'
 
 export const RoadTileDecoration: React.FC<{
   pair_result: PairResultType | undefined
@@ -78,7 +70,7 @@ export const BeadRoadTileComponent: React.FC<{
   )
 
   return (
-    <div className={tileContainer}>
+    <div className={cx(tileContainerClassName, roadBorderClassName)}>
       <div className={winRecordTileStyle}>
         {road?.game_result && (
           <FormattedMessage
@@ -96,7 +88,7 @@ export const BeadRoadTile = memo(
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
 )
 
-export const BigRecordTile: React.FC<{
+export const BigRecordTileComponent: React.FC<{
   road: BigRoadProps | null
 }> = ({ road }) => {
   const bigRecordTileStyle = cx(
@@ -107,14 +99,18 @@ export const BigRecordTile: React.FC<{
   )
 
   return (
-    <div className={tileContainer}>
+    <div className={cx(tileContainerClassName, roadBorderClassName)}>
       <div className={bigRecordTileStyle}></div>
       <RoadTileDecoration pair_result={road?.pair_result} />
     </div>
   )
 }
+export const BigRecordTile = memo(
+  BigRecordTileComponent,
+  (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
+)
 
-export const BigEyeRecordTile: React.FC<{
+export const BigEyeRecordTileComponent: React.FC<{
   road: RepetitionRoadProps | null
 }> = ({ road }) => {
   const bigRecordTileStyle = cx(
@@ -124,13 +120,17 @@ export const BigEyeRecordTile: React.FC<{
       : 'border-transparent'
   )
   return (
-    <div className={tileContainer}>
+    <div className={cx(tileContainerClassName, roadBorderClassName)}>
       <div className={bigRecordTileStyle}></div>
     </div>
   )
 }
+export const BigEyeRecordTile = memo(
+  BigEyeRecordTileComponent,
+  (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
+)
 
-export const SmallRecordTile: React.FC<{
+export const SmallRecordTileComponent: React.FC<{
   road: RepetitionRoadProps | null
 }> = ({ road }) => {
   const smallRecordTileStyle = cx(
@@ -141,11 +141,15 @@ export const SmallRecordTile: React.FC<{
   )
 
   return (
-    <div className={tileContainer}>
+    <div className={cx(tileContainerClassName, roadBorderClassName)}>
       <div className={smallRecordTileStyle}></div>
     </div>
   )
 }
+export const SmallRecordTile = memo(
+  SmallRecordTileComponent,
+  (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
+)
 
 export const CockroachRecordTile: React.FC<{
   road: RepetitionRoadProps | null
@@ -158,155 +162,24 @@ export const CockroachRecordTile: React.FC<{
   )
 
   return (
-    <div className={tileContainer}>
+    <div className={cx(tileContainerClassName, roadBorderClassName)}>
       <div className={cockroachRecordTileStyle}></div>
     </div>
   )
 }
 
-export const BaseGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <div className="relative w-full border-gray-500/90">{children}</div>
-)
-
-export const BigRoadGrid: React.FC<React.PropsWithChildren> = ({
-  children
-}) => (
-  <div className="relative w-full border-gray-500/90">
-    <div>{children}</div>
+const roadGridClassName = 'relative w-full'
+type GridProps = React.PropsWithChildren<{
+  className?: string
+}>
+export const BaseGrid: React.FC<GridProps> = ({ className, children }) => (
+  <div className={cx(roadGridClassName, roadBorderClassName, className)}>
+    {children}
   </div>
 )
-
+export const BigRoadGrid: React.FC<React.PropsWithChildren> = ({
+  children
+}) => <div className={cx(roadGridClassName)}>{children}</div>
 export const SmallRoadGrid: React.FC<React.PropsWithChildren> = ({
   children
-}) => (
-  <div className="relative w-full border-gray-500/90">{children}</div>
-)
-
-export const winRecord = [
-  'p',
-  't',
-  'p',
-  'b',
-  'p',
-  't',
-  'b',
-  't',
-  'p',
-  't',
-  't',
-  't',
-  'b',
-  'p',
-  'p',
-  'b',
-  'b',
-  'p',
-  't',
-  'p',
-  'b',
-  'b',
-  'b',
-  'b',
-  'p',
-  't',
-  't',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  ''
-]
-
-export const fakeData = [
-  't',
-  't',
-  'b',
-  'b',
-  't',
-  'b',
-  'p',
-  't',
-  'b',
-  't',
-  't',
-  't',
-  't',
-  'p',
-  't',
-  'p',
-  't',
-  'b',
-  'p',
-  'b',
-  'p',
-  'p',
-  'b',
-  'p',
-  't',
-  'b',
-  'p',
-  't',
-  't',
-  'p',
-  'b',
-  'p',
-  'p',
-  'b',
-  'p',
-  'b',
-  'b',
-  'p',
-  'b',
-  'p',
-  'p',
-  't',
-  't',
-  'b',
-  't',
-  't',
-  'b',
-  'p',
-  'b',
-  't',
-  'p',
-  't',
-  'b',
-  't',
-  'b',
-  'p',
-  't',
-  'b',
-  't',
-  'b'
-]
-
-export const bigArray = [...new Array(150)].map(() => '')
-export const smallArray = [...new Array(90)].map(() => '')
+}) => <div className={cx(roadGridClassName)}>{children}</div>

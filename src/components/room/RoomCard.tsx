@@ -10,6 +10,8 @@ import {
 } from './Roadmap'
 import { useTimeLeft } from '@/hooks/rooms'
 import { RoomProps } from '@/types/room'
+import { cx } from 'class-variance-authority'
+import { roadBorderClassName } from './Roadmap/road'
 
 type RoomDataProps = {
   room: RoomProps
@@ -65,33 +67,31 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
             <div className="w-3/4 h-full bg-gray-100 rounded-tl-sm rounded-bl-sm">
               {room && (
                 <>
-                  <div className="w-full">
+                  <div className={cx('w-full border-b-2', roadBorderClassName)}>
                     <BigRoad roads={room.roads.big_road.array} />
                   </div>
 
-                  <div className="w-full">
-                    <BigEyeRoad
-                      roads={room.roads.big_eye_road.graph}
-                      roadLength={30}
-                      maxRowSize={3}
-                    />
-                  </div>
+                  <BigEyeRoad
+                    className={cx('w-full border-b-2', roadBorderClassName)}
+                    roads={room.roads.big_eye_road.graph}
+                    roadLength={30}
+                    maxRowSize={3}
+                  />
 
                   <div className="w-full flex">
-                    <div className="w-1/2">
-                      <SmallRoad
-                        roads={room.roads.small_road.graph}
-                        maxColumnSize={15}
-                        maxRowSize={3}
-                      />
-                    </div>
-                    <div className="w-1/2">
-                      <CockroachRoad
-                        roads={room.roads.cockroach_road.graph}
-                        maxColumnSize={15}
-                        maxRowSize={3}
-                      />
-                    </div>
+                    <SmallRoad
+                      className={cx('w-1/2 border-r', roadBorderClassName)}
+                      roads={room.roads.small_road.graph}
+                      maxColumnSize={15}
+                      maxRowSize={3}
+                    />
+
+                    <CockroachRoad
+                      className={cx('w-1/2 border-l', roadBorderClassName)}
+                      roads={room.roads.cockroach_road.graph}
+                      maxColumnSize={15}
+                      maxRowSize={3}
+                    />
                   </div>
                 </>
               )}
