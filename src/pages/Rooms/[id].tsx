@@ -397,7 +397,12 @@ const Room = () => {
               <div className="flex w-[71.4%]">
                 <div className="block flex-grow w-full">
                   <div>
-                    {room && <BigRoad roads={room.roads.big_road.array} />}
+                    {room && (
+                      <BigRoad
+                        columnSize={30}
+                        roads={room.roads.big_road.array}
+                      />
+                    )}
                   </div>
 
                   <div className="flex w-full h-1/3">
@@ -543,37 +548,47 @@ const Room = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative flex-col pt-2 w-full h-1/3">
+          <div className="flex relative flex-col pt-2 w-full">
             <div className="absolute bottom-0 z-30 w-full h-full">
               <ChatroomMobile />
             </div>
-            <div className="flex flex-grow justify-between w-full h-1/2 bg-gray-50">
-              <div className="flex-grow-0 flex-shrink-0 w-2/5">
-                {room && <BeadRoad roads={room.roads.bead_road.array} />}
+
+            <div className="flex w-full bg-gray-50">
+              <div className="w-[37.5%]">
+                {room && (
+                  <BeadRoad columnSize={6} roads={room.roads.bead_road.array} />
+                )}
               </div>
-              <div className="flex w-3/5">
-                <div className="block flex-grow w-full">
-                  <div className="h-3/5">
-                    {room && <BigRoad roads={room.roads.big_road.array} />}
+
+              <div className="w-[62.5%]">
+                {room && (
+                  <BigRoad columnSize={15} roads={room.roads.big_road.array} />
+                )}
+
+                <div className="flex w-full h-2/5">
+                  <div className="w-1/3">
+                    {room && (
+                      <BigEyeRoad
+                        columnSize={10}
+                        roads={room.roads.big_eye_road.graph}
+                      />
+                    )}
                   </div>
-                  <div className="flex w-full h-2/5">
-                    <div className="w-1/3">
-                      {room && (
-                        <BigEyeRoad roads={room.roads.big_eye_road.graph} />
-                      )}
-                    </div>
-                    <div className="w-1/3">
-                      {room && (
-                        <SmallRoad roads={room.roads.small_road.graph} />
-                      )}
-                    </div>
-                    <div className="w-1/3">
-                      {room && (
-                        <CockroachRoad
-                          roads={room.roads.cockroach_road.graph}
-                        />
-                      )}
-                    </div>
+                  <div className="w-1/3">
+                    {room && (
+                      <SmallRoad
+                        columnSize={10}
+                        roads={room.roads.small_road.graph}
+                      />
+                    )}
+                  </div>
+                  <div className="w-1/3">
+                    {room && (
+                      <CockroachRoad
+                        columnSize={10}
+                        roads={room.roads.cockroach_road.graph}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

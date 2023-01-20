@@ -4,18 +4,62 @@ import { FormattedMessage } from 'react-intl'
 import { askMapper, askMapperMobile } from './data'
 import { useCurrentGame } from '@/hooks/rooms'
 import { useParams } from 'react-router-dom'
-import { memo } from 'react'
-
-const bigRoadLength = 30
+import React, { memo } from 'react'
 
 export type GameResultType = 'player' | 'dealer' | 'tie'
 export type PairResultType = 'player' | 'dealer' | 'none' | 'both'
 export type RoadComponentProps<T> = {
   roads: (T | null)[][]
   className?: string
-  roadLength?: number
-  maxColumnSize?: number
-  maxRowSize?: number
+  columnSize?: number
+  rowSize?: number
+}
+export type BaseRoadComponentProps<T> = {
+  roads: (T | null)[][]
+  size?: 'small' | 'default'
+  className?: string
+  columnSize?: number
+  rowSize?: number
+  TileComponent: React.FC<{
+    road: T | null
+    rightBorder?: boolean
+    bottomBorder?: boolean
+  }>
+}
+function BaseRoadComponent<T>({
+  roads,
+  size,
+  className,
+  columnSize,
+  rowSize,
+  TileComponent
+}: BaseRoadComponentProps<T>) {
+  return (
+    <Road.BaseGrid className={className}>
+      {roads.slice(0, rowSize).map((row, idx) => {
+        const emptyTileLength = (columnSize ?? row.length) - row.length
+        const emptyTileSize = emptyTileLength >= 0 ? emptyTileLength : 0
+
+        return (
+          <div className="flex" key={idx}>
+            {[...row, ...Array(emptyTileSize).fill(null)]
+              .slice(0, columnSize)
+              .map((road, index) => {
+                const tileProps =
+                  size === 'small'
+                    ? {
+                        road,
+                        rightBorder: index % 2 === 1,
+                        bottomBorder: idx % 2 === 1
+                      }
+                    : { road }
+                return <TileComponent key={index} {...tileProps} />
+              })}
+          </div>
+        )
+      })}
+    </Road.BaseGrid>
+  )
 }
 
 export type BeadRoadProps = {
@@ -23,22 +67,10 @@ export type BeadRoadProps = {
   game_result: GameResultType
   pair_result: PairResultType
 }
-export const BeadRoadComponent: React.FC<RoadComponentProps<BeadRoadProps>> = ({
-  className,
-  roads
-}) => {
-  return (
-    <Road.BaseGrid className={className}>
-      {roads.map((row, idx) => (
-        <div className="flex" key={idx}>
-          {row.map((road, index) => (
-            <Road.BeadRoadTile key={index} road={road} />
-          ))}
-        </div>
-      ))}
-    </Road.BaseGrid>
-  )
-}
+
+export const BeadRoadComponent: React.FC<RoadComponentProps<BeadRoadProps>> = (
+  props
+) => <BaseRoadComponent {...props} TileComponent={Road.BeadRoadTile} />
 export const BeadRoad = memo(
   BeadRoadComponent,
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
@@ -51,25 +83,10 @@ export type BigRoadProps = {
   result: number
   tie_count: number
 }
-export const BigRoadComponent: React.FC<RoadComponentProps<BigRoadProps>> = ({
-  className,
-  roads,
-  roadLength = bigRoadLength
-}) => {
-  return (
-    <Road.BaseGrid className={className}>
-      {roads.map((row, idx) => (
-        <div className="flex" key={idx}>
-          {[...row, ...Array(roadLength - row.length).fill(null)].map(
-            (road, index) => (
-              <Road.BigRecordTile key={index} road={road} />
-            )
-          )}
-        </div>
-      ))}
-    </Road.BaseGrid>
-  )
-}
+export const BigRoadComponent: React.FC<RoadComponentProps<BigRoadProps>> = (
+  props
+) => <BaseRoadComponent {...props} TileComponent={Road.BigRecordTile} />
+
 export const BigRoad = memo(
   BigRoadComponent,
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
@@ -81,26 +98,13 @@ export type RepetitionRoadProps = {
 
 export const BigEyeRoadComponent: React.FC<
   RoadComponentProps<RepetitionRoadProps>
-> = ({ roads, roadLength, maxRowSize, className }) => {
-  return (
-    <Road.BaseGrid className={className}>
-      {roads.slice(0, maxRowSize).map((row, idx) => {
-        const rowSize = row.length
-
-        return (
-          <div className="flex" key={idx}>
-            {[
-              ...row,
-              ...Array((roadLength ?? rowSize) - rowSize).fill(null)
-            ].map((road, index) => (
-              <Road.BigEyeRecordTile key={index} road={road} />
-            ))}
-          </div>
-        )
-      })}
-    </Road.BaseGrid>
-  )
-}
+> = (props) => (
+  <BaseRoadComponent
+    {...props}
+    size="small"
+    TileComponent={Road.BigEyeRecordTile}
+  />
+)
 export const BigEyeRoad = memo(
   BigEyeRoadComponent,
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
@@ -108,19 +112,13 @@ export const BigEyeRoad = memo(
 
 export const SmallRoadComponent: React.FC<
   RoadComponentProps<RepetitionRoadProps>
-> = ({ roads, maxColumnSize, maxRowSize, className }) => {
-  return (
-    <Road.BaseGrid className={className}>
-      {roads.slice(0, maxRowSize).map((row, idx) => (
-        <div className="flex" key={idx}>
-          {row.slice(0, maxColumnSize).map((road, index) => (
-            <Road.SmallRecordTile key={index} road={road} />
-          ))}
-        </div>
-      ))}
-    </Road.BaseGrid>
-  )
-}
+> = (props) => (
+  <BaseRoadComponent
+    {...props}
+    size="small"
+    TileComponent={Road.SmallRecordTile}
+  />
+)
 export const SmallRoad = memo(
   SmallRoadComponent,
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
@@ -128,19 +126,13 @@ export const SmallRoad = memo(
 
 export const CockroachRoadComponent: React.FC<
   RoadComponentProps<RepetitionRoadProps>
-> = ({ roads, maxColumnSize, maxRowSize, className }) => {
-  return (
-    <Road.BaseGrid className={className}>
-      {roads.slice(0, maxRowSize).map((row, idx) => (
-        <div className="flex" key={idx}>
-          {row.slice(0, maxColumnSize).map((road, index) => (
-            <Road.CockroachRecordTile key={index} road={road} />
-          ))}
-        </div>
-      ))}
-    </Road.BaseGrid>
-  )
-}
+> = (props) => (
+  <BaseRoadComponent
+    {...props}
+    size="small"
+    TileComponent={Road.CockroachRecordTile}
+  />
+)
 export const CockroachRoad = memo(
   CockroachRoadComponent,
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
@@ -213,12 +205,17 @@ export const AskGridMobile = () => {
     <div className="flex justify-between items-center w-full h-full bg-blue-800/20 ">
       {askMapperMobile.map((item, idx) => {
         return (
-          <div key={`ask-${idx}`} className={cx('flex h-full items-center text-sm', item.className)}>
+          <div
+            key={`ask-${idx}`}
+            className={cx('flex h-full items-center text-sm', item.className)}
+          >
             <FormattedMessage
               id={item.contentId}
               defaultMessage={item.default}
             />
-            <p className="pl-1 text-gray-100">{roadsTotalData?.[item?.value as string]}</p>
+            <p className="pl-1 text-gray-100">
+              {roadsTotalData?.[item?.value as string]}
+            </p>
           </div>
         )
       })}

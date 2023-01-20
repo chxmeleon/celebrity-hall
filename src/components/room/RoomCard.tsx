@@ -69,29 +69,32 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
               {room && (
                 <>
                   <div className={cx('w-full border-b-2', roadBorderClassName)}>
-                    <BigRoad roads={room.roads.big_road.array} />
+                    <BigRoad
+                      roads={room.roads.big_road.array}
+                      columnSize={20}
+                    />
                   </div>
 
                   <BigEyeRoad
                     className={cx('w-full border-b-2', roadBorderClassName)}
                     roads={room.roads.big_eye_road.graph}
-                    roadLength={30}
-                    maxRowSize={3}
+                    columnSize={40}
+                    rowSize={6}
                   />
 
                   <div className="w-full flex">
                     <SmallRoad
                       className={cx('w-1/2 border-r', roadBorderClassName)}
                       roads={room.roads.small_road.graph}
-                      maxColumnSize={15}
-                      maxRowSize={3}
+                      columnSize={20}
+                      rowSize={6}
                     />
 
                     <CockroachRoad
                       className={cx('w-1/2 border-l', roadBorderClassName)}
                       roads={room.roads.cockroach_road.graph}
-                      maxColumnSize={15}
-                      maxRowSize={3}
+                      columnSize={20}
+                      rowSize={6}
                     />
                   </div>
                 </>

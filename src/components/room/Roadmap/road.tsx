@@ -13,9 +13,10 @@ const roadTileDecorationClassName = 'absolute w-[6px] h-[6px] rounded-full'
 const playerPairLocationClassName = 'right-[1px] bottom-[1px]'
 const dealerPairLocationClassName = 'left-[1px] top-[1px]'
 
-export const roadBorderClassName = 'box-border border-gray-400'
+export const roadBorderClassName = 'box-content border-gray-400'
 const tileContainerClassName =
-  'relative flex w-full h-full text-xs font-light text-gray-50 border-r border-b aspect-square'
+  'relative flex justify-center items-center w-full h-full text-xs font-light text-gray-50 aspect-square'
+const tileContainerBorderClassName = 'border-r border-b'
 
 export const RoadTileDecoration: React.FC<{
   pair_result: PairResultType | undefined
@@ -70,7 +71,13 @@ export const BeadRoadTileComponent: React.FC<{
   )
 
   return (
-    <div className={cx(tileContainerClassName, roadBorderClassName)}>
+    <div
+      className={cx(
+        tileContainerClassName,
+        tileContainerBorderClassName,
+        roadBorderClassName
+      )}
+    >
       <div className={winRecordTileStyle}>
         {road?.game_result && (
           <FormattedMessage
@@ -99,7 +106,13 @@ export const BigRecordTileComponent: React.FC<{
   )
 
   return (
-    <div className={cx(tileContainerClassName, roadBorderClassName)}>
+    <div
+      className={cx(
+        tileContainerClassName,
+        tileContainerBorderClassName,
+        roadBorderClassName
+      )}
+    >
       <div className={bigRecordTileStyle}></div>
       <RoadTileDecoration pair_result={road?.pair_result} />
     </div>
@@ -110,17 +123,31 @@ export const BigRecordTile = memo(
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
 )
 
-export const BigEyeRecordTileComponent: React.FC<{
+type SmallRoadTileProps = {
   road: RepetitionRoadProps | null
-}> = ({ road }) => {
+  rightBorder?: boolean
+  bottomBorder?: boolean
+}
+export const BigEyeRecordTileComponent: React.FC<SmallRoadTileProps> = ({
+  road,
+  rightBorder,
+  bottomBorder
+}) => {
   const bigRecordTileStyle = cx(
-    'flex justify-center items-center m-auto w-5/6 h-5/6 rounded-full aspect-square border-2',
+    'w-5/6 rounded-full aspect-square border',
     road
       ? outlineTileMapping[road.repetition ? 'dealer' : 'player'].className
       : 'border-transparent'
   )
   return (
-    <div className={cx(tileContainerClassName, roadBorderClassName)}>
+    <div
+      className={cx(
+        tileContainerClassName,
+        roadBorderClassName,
+        rightBorder && 'border-r',
+        bottomBorder && 'border-b'
+      )}
+    >
       <div className={bigRecordTileStyle}></div>
     </div>
   )
@@ -130,9 +157,11 @@ export const BigEyeRecordTile = memo(
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
 )
 
-export const SmallRecordTileComponent: React.FC<{
-  road: RepetitionRoadProps | null
-}> = ({ road }) => {
+export const SmallRecordTileComponent: React.FC<SmallRoadTileProps> = ({
+  road,
+  rightBorder,
+  bottomBorder
+}) => {
   const smallRecordTileStyle = cx(
     'flex justify-center items-center m-auto w-[84%] h-[84%] rounded-full aspect-square',
     road
@@ -141,7 +170,14 @@ export const SmallRecordTileComponent: React.FC<{
   )
 
   return (
-    <div className={cx(tileContainerClassName, roadBorderClassName)}>
+    <div
+      className={cx(
+        tileContainerClassName,
+        roadBorderClassName,
+        rightBorder && 'border-r',
+        bottomBorder && 'border-b'
+      )}
+    >
       <div className={smallRecordTileStyle}></div>
     </div>
   )
@@ -151,9 +187,11 @@ export const SmallRecordTile = memo(
   (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
 )
 
-export const CockroachRecordTile: React.FC<{
-  road: RepetitionRoadProps | null
-}> = ({ road }) => {
+export const CockroachRecordTile: React.FC<SmallRoadTileProps> = ({
+  road,
+  rightBorder,
+  bottomBorder
+}) => {
   const cockroachRecordTileStyle = cx(
     'flex justify-center items-center m-auto w-[80%] h-[1px] -rotate-45 translate-y-0 aspect-square',
     road
@@ -162,7 +200,14 @@ export const CockroachRecordTile: React.FC<{
   )
 
   return (
-    <div className={cx(tileContainerClassName, roadBorderClassName)}>
+    <div
+      className={cx(
+        tileContainerClassName,
+        roadBorderClassName,
+        rightBorder && 'border-r',
+        bottomBorder && 'border-b'
+      )}
+    >
       <div className={cockroachRecordTileStyle}></div>
     </div>
   )
