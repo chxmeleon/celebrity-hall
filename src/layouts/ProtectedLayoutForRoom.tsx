@@ -22,10 +22,11 @@ const ProtectedLayoutForRoom: React.FC = () => {
     <main className="w-full h-full">
       <SetupModal />
       <NoticeModal />
-      <section className="relative m-auto w-full h-screen border md:w-auto aspect-video border-theme-70">
+      <section className="relative w-full h-full border aspect-video border-theme-70">
         <div className={bgImage}></div>
         <Header />
-        <div className="flex justify-start pt-12 w-full h-full">
+        
+        <div className="relative flex pt-12 justify-start w-full h-full">
           <LeftSidebarForRoom />
           <div className="relative w-full h-full bg-black">
             <Outlet />

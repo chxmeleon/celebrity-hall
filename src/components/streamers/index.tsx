@@ -4,7 +4,7 @@ import { streamType } from '@/pages/Streamers/index'
 import { FormattedMessage } from 'react-intl'
 import { Link } from 'react-router-dom'
 import React, { useContext } from 'react'
-import { ResponsiveContext } from '@/hooks/useResponsive'
+import { Responsive, ResponsiveContext } from '@/hooks/useResponsive'
 
 const Win: React.FC<{ percent: number }> = ({ percent }) => {
   return (
@@ -40,7 +40,6 @@ export const StreamersCard: React.FC<{
   item: any
   onStreamChanged: Dispatch<SetStateAction<streamType>>
 }> = ({ item, onStreamChanged }) => {
-
   return (
     <div
       key={item.id}
@@ -83,28 +82,29 @@ export const StreamersCards: React.FC<{
   data: Array<any>
   onStreamChanged: Dispatch<SetStateAction<streamType>>
 }> = ({ data, onStreamChanged }) => {
-  const { isMobile } = useContext(ResponsiveContext)
-
-  if (isMobile) {
-    return (
-      <>
+  return (
+    <>
+      <Responsive.Default>
         {data.map((item, idx) => (
-          <Link key={idx}
+          <Link
+            key={idx}
             to={`/home/streamers/${item.id}`}
             className={!item.online ? `pointer-events-none` : ''}
           >
             <StreamersCard item={item} onStreamChanged={onStreamChanged} />
           </Link>
         ))}
-      </>
-    )
-  }
+      </Responsive.Default>
 
-  return (
-    <>
-      {data.map((item, idx) => (
-        <StreamersCard key={idx} item={item} onStreamChanged={onStreamChanged} />
-      ))}
+      <Responsive.Desktop>
+        {data.map((item, idx) => (
+          <StreamersCard
+            key={idx}
+            item={item}
+            onStreamChanged={onStreamChanged}
+          />
+        ))}
+      </Responsive.Desktop>
     </>
   )
 }

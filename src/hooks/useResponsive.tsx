@@ -11,7 +11,7 @@ export const BREAK_POINTS: { [key in ResponsiveMediaSizeType]: number } = {
   md: 768,
   lg: 992,
   xl: 1200,
-  xxl: 1400,
+  xxl: 1400
 }
 
 const StyledResponsiveStyle = createGlobalStyle`
@@ -65,46 +65,45 @@ const StyledResponsiveStyle = createGlobalStyle`
       }
     }
   }
-  .responsive {
-    &-portrait, &-landscape {
-      display: none;
-    }
-    &-portrait {
-      @media (orientation: portrait) {
-        display: block;
-      }
-    }
-    &-landscape {
-      @media (orientation: landscape) {
-        display: block;
-      }
-    }
-  }
 `
 
 export type ResponsiveMediaSizeType = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 export type ResponsiveOrientationType = 'portrait' | 'landscape'
 
 type ResponsiveMediaProps = React.PropsWithChildren<{
+  className?: string
   lessThan?: ResponsiveMediaSizeType
   greaterThanOrEqual?: ResponsiveMediaSizeType
   orientation?: ResponsiveOrientationType
 }>
 
-const ResponsiveMedia: React.FC<ResponsiveMediaProps> = ({ lessThan, greaterThanOrEqual, orientation, children }) => {
-  let className = ''
-  if (lessThan) className += `responsive-lt-${lessThan} `
-  if (greaterThanOrEqual) className += `responsive-gte-${greaterThanOrEqual} `
-  if (orientation) className += `responsive-${orientation} `
+const ResponsiveMedia: React.FC<ResponsiveMediaProps> = ({
+  className: defaultClassName = '',
+  lessThan,
+  greaterThanOrEqual,
+  orientation,
+  children
+}) => {
+  let className = defaultClassName
+  if (lessThan) className += ` responsive-lt-${lessThan}`
+  if (greaterThanOrEqual) className += ` responsive-gte-${greaterThanOrEqual} `
+  if (orientation) className += ` responsive-${orientation} `
 
   return <div className={className}>{children}</div>
 }
 
-export const DefaultResponsiveMedia: React.FC<ResponsiveMediaProps> = props => {
+export const DefaultResponsiveMedia: React.FC<ResponsiveMediaProps> = (
+  props
+) => {
   const mediaQueries: string[] = []
-  if (props.lessThan) mediaQueries.push(`(max-width: ${BREAK_POINTS[props.lessThan] - 1}px)`)
-  if (props.greaterThanOrEqual) mediaQueries.push(`(min-width: ${BREAK_POINTS[props.greaterThanOrEqual]}px)`)
-  if (props.orientation) mediaQueries.push(`(orientation: ${props.orientation})`)
+  if (props.lessThan)
+    mediaQueries.push(`(max-width: ${BREAK_POINTS[props.lessThan] - 1}px)`)
+  if (props.greaterThanOrEqual)
+    mediaQueries.push(
+      `(min-width: ${BREAK_POINTS[props.greaterThanOrEqual]}px)`
+    )
+  if (props.orientation)
+    mediaQueries.push(`(orientation: ${props.orientation})`)
 
   const [isVisible, setIsVisible] = useState(true)
   const mediaQueryString = mediaQueries.join(' and ')
@@ -125,40 +124,28 @@ export const DefaultResponsiveMedia: React.FC<ResponsiveMediaProps> = props => {
 export const ResponsiveContext = React.createContext<{
   isMobile: boolean
   isDesktop: boolean
-  isPortrait: boolean
-  isMobilePortrait: boolean
-  isMobileLandscape: boolean
-  isMobileLandscapeToolbar: boolean
 }>({
   isMobile: true,
-  isDesktop: true,
-  isPortrait: true,
-  isMobilePortrait: true,
-  isMobileLandscape: false,
-  isMobileLandscapeToolbar: false,
+  isDesktop: true
 })
 
-export const ResponsiveProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const ResponsiveProvider: React.FC<React.PropsWithChildren> = ({
+  children
+}) => {
   const [isMobile, setIsMobile] = useState(true)
   const [isDesktop, setIsDesktop] = useState(true)
-  const [isPortrait, setIsPortrait] = useState(true)
-  const [isMobileLandscapeToolbar, setIsMobileLandscapeToolbar] = useState(false)
-  const isMobilePortrait = isMobile && isPortrait
-  const isMobileLandscape = isMobile && !isPortrait
 
   useEffect(() => {
     const onWindowResize = () => {
-      const { matches: matchesMobile } = window.matchMedia(`(max-width: ${BREAK_POINT - 1}px)`)
-      const { matches: matchesDesktop } = window.matchMedia(`(min-width: ${BREAK_POINT}px)`)
-      const { matches: matchesPortrait } = window.matchMedia('(orientation: portrait)')
-      const { matches: matchesMobileLandscapeToolbar } = window.matchMedia(
-        `(max-width: ${BREAK_POINT - 1}px) and (max-height: 300px) and (orientation: landscape)`,
+      const { matches: matchesMobile } = window.matchMedia(
+        `(max-width: ${BREAK_POINT - 1}px)`
+      )
+      const { matches: matchesDesktop } = window.matchMedia(
+        `(min-width: ${BREAK_POINT}px)`
       )
 
       setIsMobile(matchesMobile)
       setIsDesktop(matchesDesktop)
-      setIsPortrait(matchesPortrait)
-      setIsMobileLandscapeToolbar(matchesMobileLandscapeToolbar)
     }
 
     onWindowResize()
@@ -167,9 +154,7 @@ export const ResponsiveProvider: React.FC<React.PropsWithChildren> = ({ children
   }, [])
 
   return (
-    <ResponsiveContext.Provider
-      value={{ isMobile, isDesktop, isPortrait, isMobilePortrait, isMobileLandscape, isMobileLandscapeToolbar }}
-    >
+    <ResponsiveContext.Provider value={{ isMobile, isDesktop }}>
       <StyledResponsiveStyle />
       {children}
     </ResponsiveContext.Provider>
@@ -177,23 +162,31 @@ export const ResponsiveProvider: React.FC<React.PropsWithChildren> = ({ children
 }
 
 export const Responsive = {
-  Default: ({ children }: React.PropsWithChildren) => {
+  Default: ({
+    className,
+    children
+  }: React.PropsWithChildren<{ className?: string }>) => {
     const { isMobile } = useContext(ResponsiveContext)
-    return isMobile ? <ResponsiveMedia lessThan="lg">{children}</ResponsiveMedia> : (null as any)
-  },
-  Desktop: ({ children }: React.PropsWithChildren) => {
-    const { isDesktop } = useContext(ResponsiveContext)
-    return isDesktop ? <ResponsiveMedia greaterThanOrEqual="xl">{children}</ResponsiveMedia> : (null as any)
-  },
-  MobilePortrait: ({ children }: React.PropsWithChildren) => {
-    const { isMobilePortrait } = useContext(ResponsiveContext)
-    return isMobilePortrait ? (
-      <ResponsiveMedia lessThan="lg" orientation="portrait">
+    return isMobile ? (
+      <ResponsiveMedia className={className} lessThan="md">
         {children}
       </ResponsiveMedia>
     ) : (
       (null as any)
     )
   },
-  Media: DefaultResponsiveMedia,
+  Desktop: ({
+    className,
+    children
+  }: React.PropsWithChildren<{ className?: string }>) => {
+    const { isDesktop } = useContext(ResponsiveContext)
+    return isDesktop ? (
+      <ResponsiveMedia className={className} greaterThanOrEqual="md">
+        {children}
+      </ResponsiveMedia>
+    ) : (
+      (null as any)
+    )
+  },
+  Media: DefaultResponsiveMedia
 }

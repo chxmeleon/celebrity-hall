@@ -249,8 +249,8 @@ const Room = () => {
 
   return (
     <>
-      <Responsive.Desktop>
-        <section className="flex relative flex-col w-full h-[93.6vh]">
+      <Responsive.Desktop className="h-full w-full">
+        <section className="flex relative flex-col h-full w-full">
           <div className="relative w-full h-4/5">
             {isSecondCam && secoundStreamName && secoundStreamKey ? (
               <RoomStream
@@ -389,62 +389,55 @@ const Room = () => {
             </div>
           </div>
 
-          <div className="flex w-full h-[20%] bg-gray-50">
-            <div className="flex flex-grow justify-start">
-              {room && (
+          {room && (
+            <div className="flex w-full h-[20%] bg-gray-50">
+              <div className="flex flex-grow justify-start">
                 <BeadRoad
-                  className="w-[242px]"
+                  columnSize={8}
+                  className="w-[200px]"
                   roads={room.roads.bead_road.array}
                 />
-              )}
 
-              <div className="w-[436px]">
-                <div>
-                  {room && (
+                <div className="w-[400px]">
+                  <div>
                     <BigRoad
-                      columnSize={27}
+                      columnSize={24}
                       roads={room.roads.big_road.array}
                     />
-                  )}
-                </div>
+                  </div>
 
-                <div className="flex w-full">
-                  {room && (
+                  <div className="flex w-full">
                     <BigEyeRoad
                       className="w-1/3"
-                      columnSize={18}
+                      columnSize={16}
                       roads={room.roads.big_eye_road.graph}
                     />
-                  )}
 
-                  {room && (
                     <SmallRoad
                       className="w-1/3"
-                      columnSize={18}
+                      columnSize={16}
                       roads={room.roads.small_road.graph}
                     />
-                  )}
 
-                  {room && (
                     <CockroachRoad
                       className="w-1/3"
-                      columnSize={18}
+                      columnSize={16}
                       roads={room.roads.cockroach_road.graph}
                     />
-                  )}
+                  </div>
+                </div>
+
+                <div className="w-[148px] h-full">
+                  <AskGrid />
                 </div>
               </div>
+              {/* <div className="w-[11%] h-full flex-shrink-0"></div> */}
 
-              <div className="w-[128px] h-full">
-                <AskGrid />
+              <div className="w-[30%] h-full">
+                <ChatRoom />
               </div>
             </div>
-            {/* <div className="w-[11%] h-full flex-shrink-0"></div> */}
-
-            <div className="w-[30%] h-full">
-              <ChatRoom />
-            </div>
-          </div>
+          )}
         </section>
       </Responsive.Desktop>
 
