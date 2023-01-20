@@ -53,6 +53,57 @@ export const askMapper = [
   }
 ]
 
+export const askMapperMobile = [
+  {
+    contentId: 'common.playerAsk',
+    default: 'Player Ask',
+    className: 'brightness-50 text-blue-300 pl-1 bg-blue-600',
+    onClick: () => null
+  },
+  {
+    contentId: 'common.totalCount',
+    default: 'Total',
+    className: 'text-theme-300',
+    value: 'total_count'
+  },
+  {
+    contentId: 'common.dealer',
+    default: 'Dealer',
+    className: 'text-red-400',
+    value: 'dealer_count'
+  },
+  {
+    contentId: 'common.player',
+    default: 'Player',
+    className: 'text-blue-400',
+    value: 'player_count'
+  },
+  {
+    contentId: 'common.tie',
+    default: 'Tie',
+    className: 'text-teal-400',
+    value: 'tie_count'
+  },
+  {
+    contentId: 'common.dealerPair',
+    default: 'Dealer Pair',
+    className: 'text-red-400',
+    value: 'dealer_pair_count'
+  },
+  {
+    contentId: 'common.playerPair',
+    default: 'Player Pair',
+    className: 'text-blue-400',
+    value: 'player_pair_count'
+  },
+  {
+    contentId: 'common.dealerAsk',
+    default: 'Dealer Ask',
+    className: 'text-red-100 bg-red-600 brightness-50 pl-1',
+    onClick: () => null
+  }
+]
+
 export type RoadTileProps = {
   className: string
   translationId: string

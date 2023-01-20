@@ -72,7 +72,6 @@ const ChatroomMobile = () => {
       inputRef?.blur()
     }
   }, [focused, inputRef])
-  console.log(focused)
 
   const onFocus = () => setFocused(true)
   const onBlur = () => setFocused(false)

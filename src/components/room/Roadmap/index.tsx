@@ -208,11 +208,9 @@ export const AskGridMobile = () => {
   const { id } = useParams()
   const { currentGame } = useCurrentGame(id)
   const roadsTotalData = currentGame?.baccaratRoom?.roads ?? ''
-  console.log(roadsTotalData);
-  
 
   return (
-    <div className="flex justify-between items-center w-full h-full bg-blue-800/20">
+    <div className="flex justify-between items-center w-full h-full bg-blue-800/20 ">
       {askMapperMobile.map((item, idx) => {
         return (
           <div key={`ask-${idx}`} className={cx('flex h-full items-center text-sm', item.className)}>
