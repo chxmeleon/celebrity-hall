@@ -63,8 +63,9 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
             </div>
             <div className="pl-4 font-bold tracking-[0.15rem]">{room.name}</div>
           </div>
+
           <div className="flex flex-grow-0 flex-shrink-0 justify-start items-center px-3 w-full text-xs">
-            <div className="w-3/4 h-full bg-gray-100 rounded-tl-sm rounded-bl-sm">
+            <div className="w-3/4 bg-gray-100 rounded-tl-sm rounded-bl-sm">
               {room && (
                 <>
                   <div className={cx('w-full border-b-2', roadBorderClassName)}>
@@ -96,7 +97,8 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
                 </>
               )}
             </div>
-            <div className="relative w-1/4 h-20 bg-gray-100 rounded-tr-sm rounded-br-sm md:h-[160px]">
+
+            <div className="relative w-1/4 h-[94px] bg-gray-100 rounded-tr-sm rounded-br-sm md:h-[154px]">
               <div className="absolute bottom-0 w-full">
                 <div className="flex justify-end">
                   <div className="absolute right-0 top-4">
