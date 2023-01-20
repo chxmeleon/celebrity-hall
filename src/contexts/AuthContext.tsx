@@ -18,6 +18,7 @@ type AuthProps = {
   isError: boolean
   login: (account: string, password: string) => Promise<void>
   logout: () => void
+  traitLogin: (token: string) => void
 }
 
 const AuthContext = createContext<AuthProps>({} as AuthProps)
@@ -79,6 +80,18 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     [onLogin]
   )
 
+  const traitLogin = useCallback(
+    (token: string) => {
+      const tomorrow = new Date(Date.now() + 86400000)
+      if (token !== undefined) {
+        setAuth(token)
+        setExpiredTime(tomorrow)
+        navigate('/home/rooms')
+      }
+    },
+    [setAuth, setExpiredTime, navigate]
+  )
+
   const logout = useCallback(() => {
     setAuth(null)
     setExpiredTime('')
@@ -102,7 +115,8 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     isExpired,
     isError,
     login,
-    logout
+    logout,
+    traitLogin
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

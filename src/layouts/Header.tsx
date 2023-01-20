@@ -63,7 +63,7 @@ const Header = () => {
           </a>
           <div className=" flex justify-end items-center px-3 w-full h-full bg-theme-50">
             <div className="md:hidden m-auto w-2/3 text-xs">
-              <div className="m-auto w-2/3 text-left">
+              <div className="m-auto w-2/3 text-right">
                 <p className="truncate">{user?.profile?.nickname}</p>
                 <p className="inline-flex pt-1 truncate text-theme-300">
                   <div>$</div>
@@ -72,7 +72,7 @@ const Header = () => {
               </div>
             </div>
             <div
-              className="flex justify-around items-center w-[5rem] bg-theme-50"
+              className="flex justify-around items-center w-[5rem]  bg-theme-50"
               onClick={stopProp}
             >
               {/* <button className={icons.heart}></button> */}

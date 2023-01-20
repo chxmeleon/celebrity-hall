@@ -4,36 +4,21 @@ import LoginForm from '@/components/auth/LoginForm'
 import { useSetup } from '@/contexts/SetupContext'
 import AuthAlert from '@/components/auth/AuthAlert'
 
+
 const Login: React.FC = () => {
   const { openSetup } = useSetup()
 
-  /* const createTrail = async () => { */
-  /*   const result = await create({ */
-  /*     variables: { */
-  /*       input: {}, */
-  /*     }, */
-  /*   }) */
-  /*   const { token } = result.data.createTrialUser */
-  /*   if (token) { */
-  /*     login(token) */
-  /*   } */
-  /* } */
-  /**/
-  /* const showCaptcha = () => { */
-  /*   const captcha = new window.TencentCaptcha('1259693855', createTrail) */
-  /*   captcha.show() */
-  /* } */
 
   return (
     <div className="relative">
       <AuthAlert />
-      <div className="flex justify-center pt-20 md:pt-32 w-full h-full">
+      <div className="flex justify-center pt-20 w-full h-full md:pt-32">
         <div className="w-full">
           <div className="flex flex-col items-center">
             <div className="pb-8">
               <img src={LogoImg} alt="logo image" className="w-24" />
             </div>
-            <div className="flex justify-end px-1 pb-2 text-2xl w-2/3 md:w-[25rem] ">
+            <div className="flex justify-end px-1 pb-2 w-2/3 text-2xl md:w-[25rem]">
               <button onClick={openSetup}>
                 <div className="i-heroicons-cog-6-tooth-solid"></div>
               </button>
