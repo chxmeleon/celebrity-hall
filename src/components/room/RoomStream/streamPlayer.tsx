@@ -42,10 +42,14 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
   }, [streamName, streamKey])
 
   return (
+    <div className="flex absolute z-0 flex-col w-full h-full">
+      <div className="overflow-hidden relative w-full h-full">
         <canvas
           id={`video-${streamName}-${streamKey}`}
-          className=" w-auto h-full aspect-video"
+          className="w-auto h-full aspect-video"
         />
+      </div>
+    </div>
   )
 }
 

@@ -195,7 +195,7 @@ const ChatRoom = () => {
           <div ref={setClickRef}>
             <div
               className={`${isPickerShow ? '' : 'hidden'
-                } absolute bottom-10 right-0 z-30`}
+                } absolute bottom-4 -right-6 z-30  scale-75 md:scale-90`}
             >
               <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
             </div>

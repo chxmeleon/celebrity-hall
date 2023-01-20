@@ -368,6 +368,7 @@
   "components.stream.line2": "線路2",
   "components.stream.streamSwitch": "切換線路",
   "components.stream.camSwitch": "切換鏡位",
+  "components.stream.backrooms": "返回大廳",
   "components.footer.rooms": "大廳",
   "components.footer.streamers": "美女主播",
   "components.footer.service": "客服",

@@ -17,6 +17,7 @@ export const RoomDataProvider: React.FC<React.PropsWithChildren> = ({
   const [rooms, setRooms] = useState<RoomProps[]>([])
 
   const { data, refetch } = useQuery<types.GET_BACCARATROOMS>(GET_BACCARATROOMS)
+
   useEffect(() => {
     if (data?.activeBaccaratRooms) {
       setRooms(data.activeBaccaratRooms)
@@ -24,7 +25,9 @@ export const RoomDataProvider: React.FC<React.PropsWithChildren> = ({
   }, [data])
 
   useEffect(() => {
-    refetch()
+    setInterval(()=> {
+      refetch()
+    }, 32000)
   }, [refetch])
 
   return (

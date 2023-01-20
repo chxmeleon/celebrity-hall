@@ -313,7 +313,7 @@ const Room = () => {
               </div>
               <div className="relative w-full h-[63%] grid grid-cols-3">
                 <div className="flex justify-start items-end pb-2 pl-4">
-                  <div className="w-[340px] md:h-[71%] xl:h-[82%]">
+                  <div className="w-[360px] h-[76%]">
                     <PockerResult />
                   </div>
                 </div>
@@ -421,10 +421,10 @@ const Room = () => {
                   roads={room.roads.bead_road.array}
                 />
 
-                <div className="w-[400px]">
+                <div className="w-[500px]">
                   <div>
                     <BigRoad
-                      columnSize={24}
+                      columnSize={30}
                       roads={room.roads.big_road.array}
                     />
                   </div>
@@ -432,19 +432,19 @@ const Room = () => {
                   <div className="flex w-full">
                     <BigEyeRoad
                       className="w-1/3"
-                      columnSize={16}
+                      columnSize={20}
                       roads={room.roads.big_eye_road.graph}
                     />
 
                     <SmallRoad
                       className="w-1/3"
-                      columnSize={16}
+                      columnSize={20}
                       roads={room.roads.small_road.graph}
                     />
 
                     <CockroachRoad
                       className="w-1/3"
-                      columnSize={16}
+                      columnSize={20}
                       roads={room.roads.cockroach_road.graph}
                     />
                   </div>
@@ -471,16 +471,27 @@ const Room = () => {
               <div className="flex pl-1">
                 <div className="flex flex-col justify-around items-end h-23">
                   <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
+                    <Tooltip
+                      label={formatMessage({
+                        id: 'components.stream.backrooms',
+                        defaultMessage: 'Back'
+                      })}
+                      fontSize="x-small"
+                      placement="right"
+                      bg="gray.300"
+                    >
+
                     <Link
                       to="/home/rooms"
                       className="m-auto text-xl i-heroicons-arrow-uturn-left-20-solid"
                     ></Link>
+</Tooltip>
                   </div>
 
                   <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
                     <Tooltip
                       label={formatMessage({
-                        id: 'components.stream.streamSwitch',
+                        id: 'components.stream.camSwitch',
                         defaultMessage: 'Switch Line'
                       })}
                       fontSize="x-small"
@@ -533,14 +544,14 @@ const Room = () => {
             </div>
             <div className="relative w-full h-full">
               {isSecondCam && secoundStreamName && secoundStreamKey ? (
-                <RoomStream
+                <RoomStreamMobile
                   streamName={secoundStreamName}
                   streamKey={secoundStreamKey}
                   videoOn={true}
                   isWebRTC={isWebRTC}
                 />
               ) : streamName && streamKey ? (
-                <RoomStream
+                <RoomStreamMobile
                   streamName={streamName}
                   streamKey={streamKey}
                   videoOn={true}
