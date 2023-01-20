@@ -21,12 +21,12 @@ const Card: React.FC<{
     <div className={rotate90 ? 'rotate-90 col-span-2 m-auto pl-1' : ''}>
       <div
         className={`${
-          isCardOpen ? 'rotate-y-0' : '-rotate-y-180'
+          isCardOpen ? 'md:rotate-y-0' : 'opacity-0 md:-rotate-y-180'
         } transition-all duration-200 ease-in-out relative w-12 390:w-14 m-auto`}
       >
         <img src={`/cards/${item}.webp`} alt="pocker image" />
         <div
-          className={`absolute top-0 left-0 transition-all duration-200 ease-in-out ${
+          className={` hidden md:absolute top-0 left-0 transition-all duration-200 ease-in-out ${
             isCardOpen ? 'rotate-y-90 opacity-0' : 'rotate-y-0'
           }`}
         >
