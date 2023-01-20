@@ -84,10 +84,8 @@ const Header = () => {
                 <button className={icons.bar} onClick={onToggle}></button>
                 <div
                   className={`${
-                    toggle
-                      ? 'h-fit opacity-100 scale-y-100 translate-y-0'
-                      : 'h-0 opacity-0 scale-y-[28%] -translate-y-52 hidden md:block'
-                  } absolute w-[17.5rem] min-h-fit max-h-fit  -translate-x-[16rem] z-50 transition-all duration-300 ease-in-out bg-theme-50/95 border border-theme-75 border-y-transparent`}
+                    toggle ? '' : ' hidden'
+                  } absolute w-[17.5rem] min-h-fit max-h-fit -translate-x-[16rem] z-40 bg-theme-50/95 border border-theme-75 border-y-transparent mt-2`}
                 >
                   <div
                     className="inline-block w-full text-lg"
