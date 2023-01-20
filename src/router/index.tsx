@@ -17,8 +17,6 @@ import Following from '@/pages/Following'
 import UserRanking from '@/pages/UserRanking'
 import ProtectedLayoutForRoom from '@/layouts/ProtectedLayoutForRoom'
 
-
-
 const Router: React.FC = () => {
   return (
     <Routes>

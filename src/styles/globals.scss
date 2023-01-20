@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  transform-origin: 0 0;
+}
+@media screen and (min-width: 769px) {
+  html {
+    overflow: hidden;
+  }
+  body {
+    width: 1200px;
+  }
+}
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 @layer components {
   html {
     @apply scroll-smooth;
