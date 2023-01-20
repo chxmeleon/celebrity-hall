@@ -503,7 +503,7 @@ const Room = () => {
             <div className="flex absolute justify-center w-full z-30 top-1.5 pointer-events-none">
               <WinAndLoseResult gameState={gameState} />
             </div>
-            <div className="inline-flex items-center py-1.5 px-2 h-full text-sm">
+            <div className="inline-flex items-center pb-2 px-2 h-full text-sm">
               <FormattedMessage id="screens.room.bet" />
               <p className="px-2">|</p>
               <p className="px-2 pt-0.5">{totalAmount}</p>
