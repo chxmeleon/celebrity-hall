@@ -16,7 +16,7 @@ const RoomStreamMobile: React.FC<RoomStreamProps> = ({
 }) => {
   return (
     <>
-      {!isWebRTC ? (
+      {isWebRTC ? (
         <WebRTCStreamMobile streamName={streamName} streamKey={streamKey} />
       ) : (
         <NodePlayerStreamMobile streamName={streamName} streamKey={streamKey} />

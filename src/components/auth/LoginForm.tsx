@@ -112,14 +112,14 @@ const LoginForm: React.FC = () => {
                   </p>
                 </div>
                 <p className="px-7">|</p>
-                <button onSubmit={showCaptcha} className="active:text-theme-300 hover:text-theme-400">
+                <div onClick={showCaptcha} className="active:text-theme-300 hover:text-theme-400 hover:cursor-pointer">
                   <p className="text-amber-200">
                     {formatMessage({
                       id: 'screens.login.trialLogin',
                       defaultMessage: 'play for free'
                     })}
                   </p>
-                </button>
+                </div>
               </div>
               <div className="flex justify-center py-2 text-sm">
                 <p>

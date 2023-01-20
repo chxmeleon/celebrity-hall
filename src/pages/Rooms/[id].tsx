@@ -578,7 +578,7 @@ const Room = () => {
                 </div>
               </div>
             </div>
-            <div className="h-12">
+            <div className="h-12 ">
               <AskGridMobile />
             </div>
             <div className="h-11"></div>
