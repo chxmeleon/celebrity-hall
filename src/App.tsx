@@ -20,7 +20,7 @@ function App() {
 
       const bodyHeight = document.body.clientHeight
       const bodyWidth = document.body.clientWidth
-      const displayWidth = bodyWidth > 1200 ? 1200 : bodyWidth
+      const displayWidth = bodyWidth > 1280 ? 1280 : bodyWidth
 
       const windowHeight = window.innerHeight
       const windowWidth = window.innerWidth
