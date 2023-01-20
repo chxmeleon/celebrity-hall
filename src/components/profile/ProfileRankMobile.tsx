@@ -13,8 +13,8 @@ const ProfileRankMobile = () => {
   }
 
   return (
-    <div className="flex relative flex-col p-4 w-full h-full">
-      <div className="w-full h-1/2">
+    <div className="flex relative flex-col px-4 mt-6 w-full h-full">
+      <div className="w-full h-1/2 bg-theme-50 p-4 rounded-xl">
         <div className="flex justify-between items-center w-full h-full">
           <div className="flex justify-between items-center w-1/2 h-full">
             {data.profile.avatar ? (
@@ -56,48 +56,48 @@ const ProfileRankMobile = () => {
             </div>
           </div>
         </div>
+        <div className="flex">
+          <div className="w-1/2">
+            <Info
+              i18nId="profile.info.points"
+              data={
+                data.profile.creditBalance
+                  ? data.profile.creditBalance.toLocaleString()
+                  : 0
+              }
+              i18nDefaultMessage="上下分"
+            />
+            <Info
+              i18nId="profile.info.betting"
+              data={
+                data.profile.totalEffectiveAmount
+                  ? data.profile.totalEffectiveAmount.toLocaleString()
+                  : 0
+              }
+              i18nDefaultMessage="有效投注"
+            />
+          </div>
+          <div className="w-1/2">
+            <Info
+              i18nId="profile.info.dividend"
+              data={
+                data.profile.creditBalance
+                  ? data.profile.creditBalance.toLocaleString()
+                  : 0
+              }
+              i18nDefaultMessage="紅利"
+            />
+            <Info
+              i18nId="profile.info.balance"
+              data={
+                data.profile.balance ? data.profile.balance.toLocaleString() : 0
+              }
+              i18nDefaultMessage="餘額"
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="flex">
-        <div className="w-1/2">
-          <Info
-            i18nId="profile.info.points"
-            data={
-              data.profile.creditBalance
-                ? data.profile.creditBalance.toLocaleString()
-                : 0
-            }
-            i18nDefaultMessage="上下分"
-          />
-          <Info
-            i18nId="profile.info.betting"
-            data={
-              data.profile.totalEffectiveAmount
-                ? data.profile.totalEffectiveAmount.toLocaleString()
-                : 0
-            }
-            i18nDefaultMessage="有效投注"
-          />
-        </div>
-        <div className="w-1/2">
-          <Info
-            i18nId="profile.info.dividend"
-            data={
-              data.profile.creditBalance
-                ? data.profile.creditBalance.toLocaleString()
-                : 0
-            }
-            i18nDefaultMessage="紅利"
-          />
-          <Info
-            i18nId="profile.info.balance"
-            data={
-              data.profile.balance ? data.profile.balance.toLocaleString() : 0
-            }
-            i18nDefaultMessage="餘額"
-          />
-        </div>
-      </div>
 
       <div className="py-3 m-auto w-full h-1/2">
         <Tabs variant="unstyled">

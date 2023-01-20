@@ -25,12 +25,12 @@ function App() {
       const windowHeight = window.innerHeight
       const windowWidth = window.innerWidth
 
-      console.log(windowWidth, bodyWidth)
-      console.log(
-        `window size: ${windowWidth}x${windowHeight}`,
-        windowHeight / bodyHeight,
-        windowWidth / bodyWidth
-      )
+      /* console.log(windowWidth, bodyWidth) */
+      /* console.log( */
+      /*   `window size: ${windowWidth}x${windowHeight}`, */
+      /*   windowHeight / bodyHeight, */
+      /*   windowWidth / bodyWidth */
+      /* ) */
 
       let scaling = 1
       let width = ''
