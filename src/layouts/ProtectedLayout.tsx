@@ -21,7 +21,7 @@ const ProtectedLayout: React.FC = () => {
     <main className="w-full h-screen md:h-full">
       <SetupModal />
       <NoticeModal />
-      <section className="relative m-auto w-full h-full aspect-video border-theme-70 border">
+      <section className="relative m-auto w-full h-screen md:h-full aspect-video border-theme-70 border">
         <div className={bgImage}></div>
         <Header />
 

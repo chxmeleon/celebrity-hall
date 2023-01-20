@@ -465,7 +465,7 @@ const Room = () => {
       </Responsive.Desktop>
 
       <Responsive.Default>
-        <section className="flex flex-col w-full bg-theme-50 375:h-[93vh] 390:h-[94vh] 414:h-[94.3vh]">
+        <section className="flex flex-col w-full bg-theme-50  375:h-[93vh] 390:h-[94vh] 414:h-[94.3vh]">
           <div className="relative flex-grow flex-shrink-0 w-full h-auto aspect-video">
             <div className="grid absolute z-20 grid-cols-3 grid-rows-2 w-full h-full">
               <div className="flex pl-1">
