@@ -1,47 +1,8 @@
-import React from 'react'
 import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@chakra-ui/react'
-import { Info, Button, I18nTab, I18nTable } from './Utilities'
+import { Info, Button, I18nTab, GiftPanel, BetPanel } from './Utilities'
 import { useQuery } from '@apollo/client'
-import {
-  GET_PROFILE,
-  GET_USERBETRECORDS,
-  GET_SENDGIFTRECORDS
-} from '@/gql/profile'
+import { GET_PROFILE } from '@/gql/profile'
 import { useAuth } from '@/contexts/AuthContext'
-
-const GiftPanel: React.FC = () => {
-  const { loading, data } = useQuery(GET_SENDGIFTRECORDS, {
-    variables: {
-      startDate: '2022-01-15T13:30:56.681Z',
-      endDate: '2023-01-15T13:30:56.681Z'
-    }
-  })
-  if (loading) {
-    return <div className="m-[50px]">loading</div>
-  }
-  return (
-    <TabPanel>
-      <I18nTable data={data.sendGiftRecords.records} type="gift" />
-    </TabPanel>
-  )
-}
-
-const BetPanel: React.FC = () => {
-  const { loading, data } = useQuery(GET_USERBETRECORDS, {
-    variables: {
-      startDate: '2022-01-15T13:30:56.681Z',
-      endDate: '2023-01-15T13:30:56.681Z'
-    }
-  })
-  if (loading) {
-    return <div className="m-[50px]">loading</div>
-  }
-  return (
-    <TabPanel>
-      <I18nTable data={data.liveBaccaratBetRecords.records} type="bet" />
-    </TabPanel>
-  )
-}
 
 const ProfileRankMobile = () => {
   const { loading, data } = useQuery(GET_PROFILE)
@@ -55,7 +16,7 @@ const ProfileRankMobile = () => {
     <div className="flex relative flex-col p-4 w-full h-full">
       <div className="w-full h-1/2">
         <div className="flex justify-between items-center w-full h-full">
-          <div className="flex  items-center w-1/2 h-full">
+          <div className="flex justify-between items-center w-1/2 h-full">
             {data.profile.avatar ? (
               <div className="overflow-hidden w-12 h-12 rounded-full">
                 <img
@@ -66,7 +27,7 @@ const ProfileRankMobile = () => {
             ) : (
               <div className="w-12 h-12 i-heroicons-user-circle-solid" />
             )}
-            <div className="pl-7 ">
+            <div>
               {data.profile.nikename
                 ? data.profile.nikename
                 : data.profile.username}

@@ -1,5 +1,13 @@
 import { FormattedMessage } from 'react-intl'
 import { Tab } from '@chakra-ui/react'
+import { useQuery } from '@apollo/client'
+import {
+  GET_PROFILE,
+  GET_USERBETRECORDS,
+  GET_SENDGIFTRECORDS
+} from '@/gql/profile'
+import { useAuth } from '@/contexts/AuthContext'
+
 import {
   Table,
   Thead,
@@ -7,7 +15,9 @@ import {
   Tr,
   Th,
   Td,
-  TableContainer
+  TableContainer,
+  TabPanels,
+  TabPanel
 } from '@chakra-ui/react'
 
 export const Info: React.FC<{
@@ -34,7 +44,8 @@ export const Button: React.FC<{
   return (
     <button
       onClick={onClick}
-      className="flex items-center justify-center bg-[#303030] rounded-[30px] sm:w-[140px] sm:h-[30px] w-[117px] h-[25px] sm:mb-[19px] mb-[9px] sm:text-[13px] text-[10px]">
+      className="flex items-center justify-center bg-[#303030] rounded-[30px] sm:w-[140px] sm:h-[30px] w-[117px] h-[25px] sm:mb-[19px] mb-[9px] sm:text-[13px] text-[10px]"
+    >
       <div className={`${iconId} text-lg mr-[6px]`} />
       <div className="text-[13px]">
         <FormattedMessage id={i18nId} defaultMessage={i18nDefaultMessage} />
@@ -63,7 +74,7 @@ export const I18nTable: React.FC<{
 }> = ({ data, type }) => {
   return (
     <TableContainer className="w-full">
-      <Table variant="unstyled" className="m-auto ">
+      <Table variant="unstyled" className="m-auto">
         <Thead className="border-b border-[#A7A7A7] h-[50px]">
           <Tr>
             <Th>
@@ -108,5 +119,39 @@ export const TableBody: React.FC<{
       <Td>{item.createdAt}</Td>
       <Td isNumeric>{point}</Td>
     </Tr>
+  )
+}
+
+export const GiftPanel: React.FC = () => {
+  const { loading, data } = useQuery(GET_SENDGIFTRECORDS, {
+    variables: {
+      startDate: '2022-01-15T13:30:56.681Z',
+      endDate: '2023-01-15T13:30:56.681Z'
+    }
+  })
+  if (loading) {
+    return <div className="m-[50px]">loading</div>
+  }
+  return (
+    <TabPanel>
+      <I18nTable data={data.sendGiftRecords.records} type="gift" />
+    </TabPanel>
+  )
+}
+
+export const BetPanel: React.FC = () => {
+  const { loading, data } = useQuery(GET_USERBETRECORDS, {
+    variables: {
+      startDate: '2022-01-15T13:30:56.681Z',
+      endDate: '2023-01-15T13:30:56.681Z'
+    }
+  })
+  if (loading) {
+    return <div className="m-[50px]">loading</div>
+  }
+  return (
+    <TabPanel>
+      <I18nTable data={data.liveBaccaratBetRecords.records} type="bet" />
+    </TabPanel>
   )
 }
