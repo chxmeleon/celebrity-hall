@@ -146,6 +146,8 @@ export const NodePlayerStream: React.FC<RoomStreamProps> = ({
   isLoading
 }) => {
   useEffect(() => {
+    if (!streamName || !streamKey) return
+
     const player = new NodePlayer()
     NodePlayer.debug(false)
     player.setView(`video-${streamName}-${streamKey}`)
@@ -189,52 +191,44 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
   const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null)
 
   useEffect(() => {
-    let pc: RTCPeerConnection | null = null
-    const requestStream = async () => {
-      if (!videoRef) return
+    if (!videoRef || !streamName || !streamKey) return
 
-      try {
-        pc = new RTCPeerConnection()
-        pc.addTransceiver('audio', { direction: 'recvonly' })
-        pc.addTransceiver('video', { direction: 'recvonly' })
-        pc.addEventListener('addstream', (e: any) => {
-          videoRef.srcObject = e.stream
-          if (!videoRef.paused) {
-            videoRef.play()
-          }
-        })
+    const pc = new RTCPeerConnection()
+    pc.addTransceiver('audio', { direction: 'recvonly' })
+    pc.addTransceiver('video', { direction: 'recvonly' })
+    pc.addEventListener('addstream', (e: any) => {
+      videoRef.srcObject = e.stream
+      if (!videoRef.paused) {
+        videoRef.play()
+      }
+    })
 
-        const offerOptions = {
-          offerToReceiveAudio: true,
-          offerToReceiveVideo: true
-        }
-        const offer = await pc.createOffer(offerOptions)
-        await Promise.all([
+    pc.createOffer({
+      offerToReceiveAudio: true,
+      offerToReceiveVideo: true
+    })
+      .then(async (offer) => {
+        const [_, { data }] = await Promise.all([
           pc.setLocalDescription(offer),
-          axios
-            .post(
-              `https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`,
-              JSON.stringify({
-                version: 'v1.0',
-                sessionId: Date.now().toString(),
-                localSdp: offer
-              })
-            )
-            .then(({ data }) => {
-              const answer = new RTCSessionDescription(data.remoteSdp)
-              return pc?.setRemoteDescription(answer)
+          axios.post(
+            `https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`,
+            JSON.stringify({
+              version: 'v1.0',
+              sessionId: Date.now().toString(),
+              localSdp: offer
             })
+          )
         ])
-      } catch (error) {
-        console.log('error:', error)
-      }
-    }
 
-    requestStream()
+        const answer = new RTCSessionDescription(data.remoteSdp)
+        return pc.setRemoteDescription(answer)
+      })
+      .catch((error) => {
+        console.log('error:', error)
+      })
+
     return () => {
-      if (pc) {
-        pc.close()
-      }
+      pc.close()
     }
   }, [videoRef, streamName, streamKey])
 
