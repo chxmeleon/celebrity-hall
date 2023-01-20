@@ -132,7 +132,7 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
                 size: 'full'
               })}
             >
-              <p className="font-medium text-md">{children}</p>
+              <div className="font-medium text-md">{children}</div>
             </div>
           </div>
         </a>
@@ -156,13 +156,13 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
                 size: 'full'
               })}
             >
-              <p
+              <div
                 className={`font-medium text-md ${
                   isCurrentPath(href) ? 'invert opacity-75 text-gray-200' : ''
                 }`}
               >
                 {children}
-              </p>
+              </div>
             </div>
           </div>
         </Link>

@@ -38,7 +38,9 @@ const LeftSidebar = () => {
             <div className="h-[56px]"></div>
           )}
         </section>
+
         <hr className="hidden border-t md:block border-t-theme-75" />
+
         <section className="my-2 w-full h-[190px]">
           <div className="flex flex-col justify-evenly w-full h-full">
             <LinkButton href="/home/rooms" isTarget={false}>

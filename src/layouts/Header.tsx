@@ -66,8 +66,8 @@ const Header = () => {
               <div className="m-auto w-2/3 text-right">
                 <p className="truncate">{user?.profile?.nickname}</p>
                 <p className="inline-flex pt-1 truncate text-theme-300">
-                  <div>$</div>
-                  <div>{user?.profile?.balance}</div>
+                  <span>$</span>
+                  <span>{user?.profile?.balance}</span>
                 </p>
               </div>
             </div>
