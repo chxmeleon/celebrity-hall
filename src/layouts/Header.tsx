@@ -5,7 +5,6 @@ import { RightSidebarButton } from '@/components/common/Button'
 import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import logoImgMobile from '/logo_m.webp'
-import { Link } from 'react-router-dom'
 import { useWallet } from '@/hooks/profile'
 
 const icons = {
@@ -61,8 +60,8 @@ const Header = () => {
               className="my-auto w-auto h-6"
             />
           </a>
-          <div className=" flex justify-end items-center px-3 w-full h-full bg-theme-50">
-            <div className="md:hidden m-auto w-2/3 text-xs">
+          <div className="flex justify-end items-center px-3 w-full h-full bg-theme-50">
+            <div className="m-auto w-2/3 text-xs md:hidden">
               <div className="m-auto w-2/3 text-right">
                 <p className="truncate">{user?.profile?.nickname}</p>
                 <p className="inline-flex pt-1 truncate text-theme-300">
@@ -72,7 +71,7 @@ const Header = () => {
               </div>
             </div>
             <div
-              className="flex justify-around items-center w-[5rem]  bg-theme-50"
+              className="flex justify-around items-center w-[5rem] bg-theme-50"
               onClick={stopProp}
             >
               {/* <button className={icons.heart}></button> */}
@@ -87,8 +86,8 @@ const Header = () => {
                   className={`${
                     toggle
                       ? 'h-fit opacity-100 scale-y-100 translate-y-0'
-                      : 'h-0 opacity-0 scale-y-[28%] -translate-y-52 hidden'
-                  } absolute w-[17.5rem] min-h-fit max-h-fit  -translate-x-[16rem] -z-10 transition-all duration-300 ease-in-out bg-theme-50/95 border border-theme-75 border-y-transparent`}
+                      : 'h-0 opacity-0 scale-y-[28%] -translate-y-52 hidden md:block'
+                  } absolute w-[17.5rem] min-h-fit max-h-fit  -translate-x-[16rem] z-50 transition-all duration-300 ease-in-out bg-theme-50/95 border border-theme-75 border-y-transparent`}
                 >
                   <div
                     className="inline-block w-full text-lg"
