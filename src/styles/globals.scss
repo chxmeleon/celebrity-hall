@@ -33,7 +33,7 @@
   }
 
   .chip-hw-skew {
-    transform: scaleY(0.9) scaleX(0.9) perspective(1.9rem) rotateX(-2.864deg) 
+    transform: scaleY(0.9) scaleX(0.9) perspective(1.9rem) rotateX(-2.864deg)
       translate(-6%, -40%);
   }
 
@@ -91,5 +91,9 @@
 
   .win-shadow {
     box-shadow: rgba(252, 237, 149, 0.96) 0px 0px 23px 4px;
+  }
+
+  .tcaptcha-transform {
+    transform: scale(0.8);
   }
 }

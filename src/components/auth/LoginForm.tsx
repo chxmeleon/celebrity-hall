@@ -35,9 +35,11 @@ const LoginForm: React.FC = () => {
     traitLogin(token)
   }
 
-
   const showCaptcha = () => {
-    const captcha = new (window as any).TencentCaptcha('1259693855', createTrail)
+    const captcha = new (window as any).TencentCaptcha(
+      '1259693855',
+      createTrail
+    )
     captcha.show()
   }
 
@@ -110,14 +112,14 @@ const LoginForm: React.FC = () => {
                   </p>
                 </div>
                 <p className="px-7">|</p>
-                <p className="text-amber-200">
-                  <button onClick={showCaptcha}>
+                <button onSubmit={showCaptcha} className="active:text-theme-300 hover:text-theme-400">
+                  <p className="text-amber-200">
                     {formatMessage({
                       id: 'screens.login.trialLogin',
                       defaultMessage: 'play for free'
                     })}
-                  </button>
-                </p>
+                  </p>
+                </button>
               </div>
               <div className="flex justify-center py-2 text-sm">
                 <p>
