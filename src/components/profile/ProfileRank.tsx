@@ -1,54 +1,14 @@
-import React from 'react'
 import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@chakra-ui/react'
 import {
   Info,
   Button,
   I18nTab,
-  I18nTable
+  GiftPanel,
+  BetPanel
 } from './Utilities'
 import { useQuery } from '@apollo/client'
-import {
-  GET_PROFILE,
-  GET_USERBETRECORDS,
-  GET_SENDGIFTRECORDS
-} from '@/gql/profile'
+import { GET_PROFILE } from '@/gql/profile'
 import { useAuth } from '@/contexts/AuthContext'
-
-const GiftPanel: React.FC = () => {
-  const { loading, data } = useQuery(GET_SENDGIFTRECORDS, {
-    variables: {
-      startDate: '2022-01-15T13:30:56.681Z',
-      endDate: '2023-01-15T13:30:56.681Z'
-    }
-  })
-  if (loading) {
-    return <div className="m-[50px]">loading</div>
-  }
-  return (
-    <TabPanel>
-      <I18nTable data={data.sendGiftRecords.records} type="gift" />
-    </TabPanel>
-  )
-}
-
-const BetPanel: React.FC = () => {
-  const { loading, data } = useQuery(GET_USERBETRECORDS, {
-    variables: {
-      startDate: '2022-01-15T13:30:56.681Z',
-      endDate: '2023-01-15T13:30:56.681Z'
-    }
-  })
-  if (loading) {
-    return <div className="m-[50px]">loading</div>
-  }
-  return (
-    <TabPanel>
-      <I18nTable data={data.liveBaccaratBetRecords.records} type="bet" />
-    </TabPanel>
-  )
-}
-
-
 
 const ProfileRank = () => {
   const { loading, data } = useQuery(GET_PROFILE)
@@ -59,7 +19,6 @@ const ProfileRank = () => {
   }
 
   return (
-
     <div className="relative p-4 w-full h-full md:p-16">
       <div className="flex justify-between items-center w-full h-1/3">
         <div className="flex justify-between items-center w-[70%] h-full">
