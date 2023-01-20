@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { clsx as cx } from 'clsx'
 import { CREATE_BACCARAT_BET, CANCEL_BACCARAT_BET } from '@/gql/baccaratrooms'
 import { useMutation } from '@apollo/client'
@@ -25,6 +25,7 @@ import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { GET_ROOM_STREAM } from '@/gql/stream'
 import GamePlayContext from '@/contexts/GamePlayContext'
+import { Tooltip } from '@chakra-ui/react'
 import { useCurrentGameState } from '@/hooks/rooms'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import { BetInitialValueProp, betInitialValue } from '@/hooks/bet'
@@ -105,6 +106,8 @@ const Room = () => {
   const { gameState } = currentGameState
   const [isDisable, setIsDisable] = useState(true)
   const { deviceInfo } = useSetup()
+
+  const { formatMessage } = useIntl()
 
   const [createBaccaratBet] = useMutation<
     types.CREATE_BACCARAT_BET,
@@ -270,22 +273,42 @@ const Room = () => {
             <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
               <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
                 <div className="flex flex-col justify-around items-end h-24 w-[5.5rem]">
-                  <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
-                    <button
-                      onClick={handleSwitchCam}
-                      className={`${
-                        isSecondCam ? 'text-theme-300' : ''
-                      } m-auto text-2xl i-heroicons-video-camera-20-solid`}
-                    ></button>
-                  </div>
-                  <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
-                    <button
-                      onClick={handleSwitchStream}
-                      className={`${
-                        isWebRTC ? 'text-theme-300' : ''
-                      } m-auto text-2xl i-heroicons-wifi-20-solid`}
-                    ></button>
-                  </div>
+                  <Tooltip
+                    label={formatMessage({
+                      id: 'components.stream.camSwitch',
+                      defaultMessage: 'Switch Camera'
+                    })}
+                    fontSize="small"
+                    placement="left"
+                    bg="gray.300"
+                  >
+                    <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
+                      <button
+                        onClick={handleSwitchCam}
+                        className={`${
+                          isSecondCam ? 'text-theme-300' : ''
+                        } m-auto text-2xl i-heroicons-video-camera-20-solid`}
+                      ></button>
+                    </div>
+                  </Tooltip>
+                  <Tooltip
+                    label={formatMessage({
+                      id: 'components.stream.streamSwitch',
+                      defaultMessage: 'Switch Line'
+                    })}
+                    fontSize="small"
+                    placement="left"
+                    bg="gray.300"
+                  >
+                    <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
+                      <button
+                        onClick={handleSwitchStream}
+                        className={`${
+                          isWebRTC ? 'text-theme-300' : ''
+                        } m-auto text-2xl i-heroicons-wifi-20-solid`}
+                      ></button>
+                    </div>
+                  </Tooltip>
                 </div>
               </div>
               <div className="relative w-full h-[63%] grid grid-cols-3">
@@ -455,20 +478,40 @@ const Room = () => {
                   </div>
 
                   <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
-                    <button
-                      onClick={handleSwitchCam}
-                      className={`${
-                        isSecondCam ? 'text-theme-300' : ''
-                      } m-auto text-xl i-heroicons-video-camera-20-solid`}
-                    ></button>
+                    <Tooltip
+                      label={formatMessage({
+                        id: 'components.stream.streamSwitch',
+                        defaultMessage: 'Switch Line'
+                      })}
+                      fontSize="x-small"
+                      placement="right"
+                      bg="gray.300"
+                    >
+                      <button
+                        onClick={handleSwitchCam}
+                        className={`${
+                          isSecondCam ? 'text-theme-300' : ''
+                        } m-auto text-xl i-heroicons-video-camera-20-solid`}
+                      ></button>
+                    </Tooltip>
                   </div>
-                  <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
-                    <button
-                      onClick={handleSwitchStream}
-                      className={`${
-                        isWebRTC ? 'text-theme-300' : ''
-                      } m-auto text-xl i-heroicons-wifi-20-solid`}
-                    ></button>
+                  <div className="flex p-1 w-8 h-8 rounded-md bg-theme-50/80">
+                    <Tooltip
+                      label={formatMessage({
+                        id: 'components.stream.streamSwitch',
+                        defaultMessage: 'Switch Line'
+                      })}
+                      fontSize="x-small"
+                      placement="right"
+                      bg="gray.300"
+                    >
+                      <button
+                        onClick={handleSwitchStream}
+                        className={`${
+                          isWebRTC ? 'text-theme-300' : ''
+                        } m-auto text-xl i-heroicons-wifi-20-solid`}
+                      ></button>
+                    </Tooltip>
                   </div>
                 </div>
               </div>
@@ -477,8 +520,8 @@ const Room = () => {
                 <Timer />
               </div>
               <div></div>
-              <div className="col-span-2 flex  justify-end pb-1 w-full h-full">
-                <div className="w-2/3 flex flex-col justify-end">
+              <div className="flex col-span-2 justify-end pb-1 w-full h-full">
+                <div className="flex flex-col justify-end w-2/3">
                   <RoomNotification
                     isConfirmedSuccess={isConfirmSuccess}
                     isConfirmedFailure={isConfirmFailure}
@@ -508,10 +551,10 @@ const Room = () => {
           </div>
 
           <div className="relative w-full h-10">
-            <div className="flex absolute justify-center w-full z-30 top-1.5 pointer-events-none">
+            <div className="flex absolute top-1.5 z-30 justify-center w-full pointer-events-none">
               <WinAndLoseResult gameState={gameState} />
             </div>
-            <div className="inline-flex items-center pb-2 px-2 h-full text-sm">
+            <div className="inline-flex items-center px-2 pb-2 h-full text-sm">
               <FormattedMessage id="screens.room.bet" />
               <p className="px-2">|</p>
               <p className="px-2 pt-0.5">{totalAmount}</p>
@@ -596,7 +639,7 @@ const Room = () => {
                 </div>
               </div>
             </div>
-            <div className="h-12 ">
+            <div className="h-12">
               <AskGridMobile />
             </div>
             <div className="h-11"></div>

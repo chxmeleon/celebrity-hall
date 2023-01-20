@@ -11,6 +11,7 @@ import {
   GET_USERBETRECORDS,
   GET_SENDGIFTRECORDS
 } from '@/gql/profile'
+import { useAuth } from '@/contexts/AuthContext'
 
 const GiftPanel: React.FC = () => {
   const { loading, data } = useQuery(GET_SENDGIFTRECORDS, {
@@ -49,6 +50,7 @@ const BetPanel: React.FC = () => {
 
 const Profile: React.FC = () => {
   const { loading, data } = useQuery(GET_PROFILE)
+  const { logout } = useAuth()
 
   if (loading) {
     return <div className="m-[50px]">loading</div>
@@ -56,24 +58,24 @@ const Profile: React.FC = () => {
 
   return (
     <div className="m-[10px]">
-      <div className="sm:w-[1226px] m-auto sm:mt-[30px]">
+      <div className="m-auto sm:w-[1226px] sm:mt-[30px]">
         <div className="flex sm:items-center relative sm:flex-row flex-col sm:bg-inherit bg-[#1F1F1F] rounded-[10px] sm:pt-[0px] py-[20px] px-[10px]">
           <div className="flex items-center">
             {data.profile.avatar ? (
               <img
-                className="sm:w-[119px] sm:h-[119px] w-[70px] h-[70px] rounded-full"
+                className="rounded-full w-[70px] h-[70px] sm:w-[119px] sm:h-[119px]"
                 src={data.profile.avatar}
               />
             ) : (
-              <div className="sm:w-[119px] sm:h-[119px] w-[70px] h-[70px] i-heroicons-user-circle-solid" />
+              <div className="w-[70px] h-[70px] i-heroicons-user-circle-solid sm:w-[119px] sm:h-[119px]" />
             )}
-            <div className="sm:ml-[50px] sm:text-[40px] text-[24px] ">
+            <div className="text-[24px] sm:ml-[50px] sm:text-[40px]">
               {data.profile.nikename
                 ? data.profile.nikename
                 : data.profile.username}
             </div>
           </div>
-          <div className="flex items-center sm:mt-[0px] mt-[20px]">
+          <div className="flex items-center mt-[20px] sm:mt-[0px]">
             <div className="sm:ml-[100px]">
               <Info
                 i18nId="profile.info.points"
@@ -94,7 +96,7 @@ const Profile: React.FC = () => {
                 i18nDefaultMessage="有效投注"
               />
             </div>
-            <div className="sm:ml-[80px] ml-[50px]">
+            <div className="ml-[50px] sm:ml-[80px]">
               <Info
                 i18nId="profile.info.dividend"
                 data={
@@ -115,18 +117,21 @@ const Profile: React.FC = () => {
               />
             </div>
           </div>
-          <div className="absolute right-[0px] sm:top-[30px] top-[20px] right-[10px]">
+          <div className="absolute right-[0px] top-[20px] right-[10px] sm:top-[30px]">
             <Button
+              onClick={() => null}
               iconId="i-mdi-file-edit-outline"
               i18nId="profile.button.edit"
               i18nDefaultMessage="修改暱稱"
             />
             <Button
+              onClick={() => null}
               iconId="i-mdi-onepassword"
               i18nDefaultMessage="修改密碼"
               i18nId="profile.button.password"
             />
             <Button
+              onClick={logout}
               iconId="i-heroicons-arrow-right-on-rectangle-solid"
               i18nDefaultMessage="帳號登出"
               i18nId="profile.button.logout"

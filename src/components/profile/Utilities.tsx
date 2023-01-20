@@ -26,12 +26,15 @@ export const Info: React.FC<{
 }
 
 export const Button: React.FC<{
+  onClick: React.MouseEventHandler<HTMLButtonElement>
   iconId: string
   i18nDefaultMessage: string
   i18nId: string
-}> = ({ iconId, i18nDefaultMessage, i18nId }) => {
+}> = ({ onClick, iconId, i18nDefaultMessage, i18nId }) => {
   return (
-    <button className="flex items-center justify-center bg-[#303030] rounded-[30px] sm:w-[140px] sm:h-[30px] w-[117px] h-[25px] sm:mb-[19px] mb-[9px] sm:text-[13px] text-[10px]">
+    <button
+      onClick={onClick}
+      className="flex items-center justify-center bg-[#303030] rounded-[30px] sm:w-[140px] sm:h-[30px] w-[117px] h-[25px] sm:mb-[19px] mb-[9px] sm:text-[13px] text-[10px]">
       <div className={`${iconId} text-lg mr-[6px]`} />
       <div className="text-[13px]">
         <FormattedMessage id={i18nId} defaultMessage={i18nDefaultMessage} />
@@ -60,7 +63,7 @@ export const I18nTable: React.FC<{
 }> = ({ data, type }) => {
   return (
     <TableContainer className="sm:py-[40px]">
-      <Table variant="unstyled" className="sm:w-[1172px] m-auto">
+      <Table variant="unstyled" className="m-auto sm:w-[1172px]">
         <Thead className="border-b border-[#A7A7A7] h-[50px]">
           <Tr>
             <Th>
@@ -75,8 +78,8 @@ export const I18nTable: React.FC<{
           </Tr>
         </Thead>
         <Tbody>
-          {data.map((item: any) => (
-            <TableBody item={item} type={type} />
+          {data.map((item: any, idx: number) => (
+            <TableBody item={item} type={type} key={idx} />
           ))}
         </Tbody>
       </Table>

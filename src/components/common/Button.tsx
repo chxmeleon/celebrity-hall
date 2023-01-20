@@ -178,6 +178,7 @@ export const RightSidebarButton: React.FC<
     <>
       {isTarget && !isLink ? (
         <button
+          onClick={onClick}
           className={bts({
             intent: 'grayFill',
             round: 'sm',
@@ -191,6 +192,7 @@ export const RightSidebarButton: React.FC<
       ) : isTarget && isLink ? (
         <Link to={href}>
           <button
+            onClick={onClick}
             className={bts({
               intent: 'grayFill',
               round: 'sm',
