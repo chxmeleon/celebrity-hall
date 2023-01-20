@@ -53,13 +53,15 @@ const Header = () => {
     <header className="relative" ref={sidebarRef} onClick={onCloseSide}>
       <nav className="absolute top-0 left-0 z-40 w-full h-12 border-b bg-theme-50 border-b-theme-75">
         <div className="flex justify-between items-center w-full h-full">
-          <a href="/home/rooms" className="flex ml-1 w-full h-full md:hidden">
-            <img
-              src={logoImgMobile}
-              alt="logo img"
-              className="my-auto w-auto h-6"
-            />
-          </a>
+          <div className="flex ml-1 w-full h-full md:hidden">
+            <a href="/home/rooms" className="my-auto ">
+              <img
+                src={logoImgMobile}
+                alt="logo img"
+                className="w-auto h-6"
+              />
+            </a>
+          </div>
           <div className="flex justify-end items-center px-3 w-full h-full bg-theme-50">
             <div className="m-auto w-2/3 text-xs md:hidden">
               <div className="m-auto w-2/3 text-right">
