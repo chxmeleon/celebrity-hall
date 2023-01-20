@@ -16,11 +16,11 @@ export const Info: React.FC<{
   i18nDefaultMessage: string
 }> = ({ i18nId, data, i18nDefaultMessage }) => {
   return (
-    <div className="border-l-[2px] border-[#6F6F6F] pl-[15px] mt-[30px]">
+    <div className="border-l-[2px] border-[#6F6F6F] pl-3 mb-3">
       <div>
         <FormattedMessage id={i18nId} defaultMessage={i18nDefaultMessage} />
       </div>
-      <div className="text-[#FFEC66] sm:text-[32px] font-bold">{data}</div>
+      <div className="text-[#FFEC66] text-2xl font-bold">{data}</div>
     </div>
   )
 }
@@ -49,7 +49,7 @@ export const I18nTab: React.FC<{
 }> = ({ i18nDefaultMessage, i18nId }) => {
   return (
     <Tab
-      className="bg-[#303030] sm:w-[213px] sm:h-[51px] w-[93px] h-[51px] mr-[6px] rounded-t-[20px]"
+      className="bg-[#303030]  w-36 h-9 py-1 px-2 mr-[6px] rounded-t-2xl"
       _selected={{ bg: '#505050' }}
     >
       <FormattedMessage id={i18nId} defaultMessage={i18nDefaultMessage} />
@@ -62,8 +62,8 @@ export const I18nTable: React.FC<{
   type: string
 }> = ({ data, type }) => {
   return (
-    <TableContainer className="sm:py-[40px]">
-      <Table variant="unstyled" className="m-auto sm:w-[1172px]">
+    <TableContainer className="w-full">
+      <Table variant="unstyled" className="m-auto ">
         <Thead className="border-b border-[#A7A7A7] h-[50px]">
           <Tr>
             <Th>

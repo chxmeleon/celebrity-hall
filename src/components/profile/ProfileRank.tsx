@@ -1,0 +1,174 @@
+import React from 'react'
+import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@chakra-ui/react'
+import {
+  Info,
+  Button,
+  I18nTab,
+  I18nTable
+} from './Utilities'
+import { useQuery } from '@apollo/client'
+import {
+  GET_PROFILE,
+  GET_USERBETRECORDS,
+  GET_SENDGIFTRECORDS
+} from '@/gql/profile'
+import { useAuth } from '@/contexts/AuthContext'
+
+const GiftPanel: React.FC = () => {
+  const { loading, data } = useQuery(GET_SENDGIFTRECORDS, {
+    variables: {
+      startDate: '2022-01-15T13:30:56.681Z',
+      endDate: '2023-01-15T13:30:56.681Z'
+    }
+  })
+  if (loading) {
+    return <div className="m-[50px]">loading</div>
+  }
+  return (
+    <TabPanel>
+      <I18nTable data={data.sendGiftRecords.records} type="gift" />
+    </TabPanel>
+  )
+}
+
+const BetPanel: React.FC = () => {
+  const { loading, data } = useQuery(GET_USERBETRECORDS, {
+    variables: {
+      startDate: '2022-01-15T13:30:56.681Z',
+      endDate: '2023-01-15T13:30:56.681Z'
+    }
+  })
+  if (loading) {
+    return <div className="m-[50px]">loading</div>
+  }
+  return (
+    <TabPanel>
+      <I18nTable data={data.liveBaccaratBetRecords.records} type="bet" />
+    </TabPanel>
+  )
+}
+
+
+
+const ProfileRank = () => {
+  const { loading, data } = useQuery(GET_PROFILE)
+  const { logout } = useAuth()
+
+  if (loading) {
+    return <div className="m-[50px]">loading</div>
+  }
+
+  return (
+
+    <div className="relative p-4 w-full h-full md:p-16">
+      <div className="flex justify-between items-center w-full h-1/3">
+        <div className="flex justify-between items-center w-[70%] h-full">
+          <div className="flex flex-grow items-center mr-11 h-full">
+            {data.profile.avatar ? (
+              <div className="overflow-hidden w-28 h-28 rounded-full">
+                <img
+                  className="object-cover w-full h-full"
+                  src={data.profile.avatar}
+                />
+              </div>
+            ) : (
+              <div className="w-28 h-28 i-heroicons-user-circle-solid" />
+            )}
+            <div className="pl-3 text-2xl">
+              {data.profile.nikename
+                ? data.profile.nikename
+                : data.profile.username}
+            </div>
+          </div>
+
+          <div className="w-1/2">
+            <Info
+              i18nId="profile.info.points"
+              data={
+                data.profile.creditBalance
+                  ? data.profile.creditBalance.toLocaleString()
+                  : 0
+              }
+              i18nDefaultMessage="上下分"
+            />
+            <Info
+              i18nId="profile.info.betting"
+              data={
+                data.profile.totalEffectiveAmount
+                  ? data.profile.totalEffectiveAmount.toLocaleString()
+                  : 0
+              }
+              i18nDefaultMessage="有效投注"
+            />
+          </div>
+
+          <div className="w-1/2">
+            <Info
+              i18nId="profile.info.dividend"
+              data={
+                data.profile.creditBalance
+                  ? data.profile.creditBalance.toLocaleString()
+                  : 0
+              }
+              i18nDefaultMessage="紅利"
+            />
+            <Info
+              i18nId="profile.info.balance"
+              data={
+                data.profile.balance ? data.profile.balance.toLocaleString() : 0
+              }
+              i18nDefaultMessage="餘額"
+            />
+          </div>
+        </div>
+
+        <div className="pt-5">
+          <Button
+            onClick={() => null}
+            iconId="i-mdi-file-edit-outline"
+            i18nId="profile.button.edit"
+            i18nDefaultMessage="修改暱稱"
+          />
+          <Button
+            onClick={() => null}
+            iconId="i-mdi-onepassword"
+            i18nDefaultMessage="修改密碼"
+            i18nId="profile.button.password"
+          />
+          <Button
+            onClick={logout}
+            iconId="i-heroicons-arrow-right-on-rectangle-solid"
+            i18nDefaultMessage="帳號登出"
+            i18nId="profile.button.logout"
+          />
+        </div>
+      </div>
+
+      <div className="py-3 m-auto w-full h-2/3">
+        <Tabs variant="unstyled">
+          <TabList>
+            <I18nTab
+              i18nDefaultMessage="上下紀錄"
+              i18nId="profile.button.updown"
+            />
+            <I18nTab
+              i18nDefaultMessage="下注紀錄"
+              i18nId="profile.button.bet"
+            />
+            <I18nTab
+              i18nDefaultMessage="送禮紀錄"
+              i18nId="profile.button.gift"
+            />
+          </TabList>
+          <TabPanels className="bg-[#505050] h-full">
+            <GiftPanel />
+            <BetPanel />
+            <GiftPanel />
+          </TabPanels>
+        </Tabs>
+      </div>
+    </div>
+  )
+}
+
+export default ProfileRank
