@@ -7947,6 +7947,13 @@ export type GET_SENDGIFTRECORDSVariables = Exact<{
 
 export type GET_SENDGIFTRECORDS = { sendGiftRecords: { __typename: 'SendGiftRecordCollection', totalCount: number | null, totalPages: number | null, currentCount: number | null, currentPage: number | null, records: Array<{ __typename: 'SendGift', id: string, info: any | null, createdAt: any | null }> | null } | null };
 
+export type createTrialUserVariables = Exact<{
+  input: CreateTrialUserInput;
+}>;
+
+
+export type createTrialUser = { createTrialUser: { __typename: 'CreateTrialUserPayload', token: string | null } | null };
+
 export type getStreamerRankingVariables = Exact<{
   range: Scalars['String'];
 }>;

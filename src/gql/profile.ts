@@ -94,3 +94,16 @@ export const GET_SENDGIFTRECORDS = gql`
     }
   }
 `
+
+
+
+export const CREATE_TRIAL = gql`
+  mutation createTrialUser($input: CreateTrialUserInput!) {
+    createTrialUser(input: $input) {
+      token
+    }
+  }
+`
+
+
+
