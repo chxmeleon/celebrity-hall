@@ -26,7 +26,7 @@ const Rankings = () => {
         subTabSelected={subTabSelected}
         onSubTabSelected={setSubTabSelected}
       />
-      <div className="flex justify-between items-end m-auto my-3 w-full md:gap-4 md:w-3/4">
+      <div className="flex justify-between items-end m-auto mt-6 w-full gap-2 md:gap-4 md:w-3/4">
         {data.newStreamerRanking[1] && (
           <div className="w-1/3 h-full md:p-2">
             <RankingCard2
