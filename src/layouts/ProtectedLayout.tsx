@@ -24,7 +24,6 @@ const ProtectedLayout: React.FC = () => {
       <section className="relative m-auto w-full h-full aspect-video border-theme-70 border">
         <div className={bgImage}></div>
         <Header />
-
         <div className="flex justify-start pt-12 w-full h-full">
           <LeftSidebar />
           <div className="relative w-full h-full bg-black">

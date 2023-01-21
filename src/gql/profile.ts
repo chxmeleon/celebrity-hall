@@ -95,8 +95,6 @@ export const GET_SENDGIFTRECORDS = gql`
   }
 `
 
-
-
 export const CREATE_TRIAL = gql`
   mutation createTrialUser($input: CreateTrialUserInput!) {
     createTrialUser(input: $input) {
@@ -105,5 +103,36 @@ export const CREATE_TRIAL = gql`
   }
 `
 
-
-
+export const UPDATE_PROFILE = gql`
+mutation UPDATE_PROFILE($input: UpdateProfileInput!) {
+    updateProfile(input: $input) {
+      profile {
+        id
+		    balance 
+        username 
+		    avatar 
+        totalEffectiveAmount
+		    totalEffectiveXimaAmount
+		    ximaTotal 
+		    winLimit 
+		    totalWinAmount
+		    hideWinPoints 
+		    dividend 
+		    nickname
+		    tableLimitMin
+		    tableLimitMax
+		    beta 
+		    isTrial
+		    lineNotifyToken 
+		    dragonCount 
+		    jwtToken 
+		    platformDisableAdult 
+		    platformDisableCustomerService
+      }
+      errors {
+        message
+        attribute
+      }
+    }
+  }
+`
