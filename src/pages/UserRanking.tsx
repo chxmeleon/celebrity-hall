@@ -21,37 +21,43 @@ const UserRanking = ({ type }: { type: string }) => {
   const dataAfter3rd = mappedData.filter((item, index) => index > 2)
 
   return (
-    <div className="sm:mx-6 sm:my-3">
+    <div className="overflow-y-scroll p-2 w-full h-full md:p-8">
       <Tabs
         isSelected={type}
         subTabSelected={subTabSelected}
         onSubTabSelected={setSubTabSelected}
       />
-      <div className="flex justify-between items-end sm:mt-[10px] m-auto sm:w-[1020px] w-[388px]">
+      <div className="flex gap-2 justify-between items-end m-auto mt-7 w-full md:gap-4 md:w-3/4">
         {mappedData[1] && (
-          <SimpleRankingCard2
-            point={mappedData[1].point}
-            username={mappedData[1].username}
-            avatarUrl={mappedData[1].avatar}
-          />
+          <div className="w-1/3">
+            <SimpleRankingCard2
+              point={mappedData[1].point}
+              username={mappedData[1].username}
+              avatarUrl={mappedData[1].avatar}
+            />
+          </div>
         )}
         {mappedData[0] && (
-          <SimpleRankingCard1
-            point={mappedData[0].point}
-            username={mappedData[0].username}
-            avatarUrl={mappedData[0].avatar}
-          />
+          <div className="w-1/3">
+            <SimpleRankingCard1
+              point={mappedData[0].point}
+              username={mappedData[0].username}
+              avatarUrl={mappedData[0].avatar}
+            />
+          </div>
         )}
         {mappedData[2] && (
-          <SimpleRankingCard3
-            point={mappedData[2].point}
-            username={mappedData[2].username}
-            avatarUrl={mappedData[2].avatar}
-          />
+          <div className="w-1/3">
+            <SimpleRankingCard3
+              point={mappedData[2].point}
+              username={mappedData[2].username}
+              avatarUrl={mappedData[2].avatar}
+            />
+          </div>
         )}
       </div>
       {dataAfter3rd.length > 0 && (
-        <div className="mt-[31px] flex flex-col items-center">
+        <div className="flex flex-col items-center h-full mt-[31px]">
           <RankingTable data={dataAfter3rd} />
         </div>
       )}
