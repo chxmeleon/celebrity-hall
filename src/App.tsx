@@ -25,6 +25,11 @@ function App() {
       const windowHeight = window.innerHeight
       const windowWidth = window.innerWidth
 
+      // Safari 100 VH fix
+      // https://ithelp.ithome.com.tw/articles/10249090
+      const windowsVH = window.innerHeight / 100
+      document.body.style.setProperty('--vh', windowsVH + 'px')
+
       /* console.log(windowWidth, bodyWidth) */
       /* console.log( */
       /*   `window size: ${windowWidth}x${windowHeight}`, */

@@ -10,13 +10,15 @@ const PublicLayout: React.FC = () => {
     before:absolute before:w-full before:h-full before:bg-black/20 before:content-['']`
 
   return (
-    <main id="public-page">
+    <main id="public-page" className='w-full h-full'>
       <SetupModal />
       <AuthAlert />
-      <div className="relative w-full">
+
+      <div className="w-full">
         <div className={bgImage}></div>
       </div>
-      <section className="w-full h-screen">
+
+      <section className="w-full h-full">
         <Outlet />
       </section>
     </main>

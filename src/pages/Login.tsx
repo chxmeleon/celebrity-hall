@@ -10,15 +10,15 @@ const Login: React.FC = () => {
 
 
   return (
-    <div className="relative">
+    <div className="relative flex justify-center items-center h-full">
       <AuthAlert />
-      <div className="flex justify-center pt-20 w-full h-full md:pt-32">
+      <div className="flex justify-center w-full">
         <div className="w-full">
           <div className="flex flex-col items-center">
             <div className="pb-8">
               <img src={LogoImg} alt="logo image" className="w-24" />
             </div>
-            <div className="flex justify-end px-1 pb-2 w-2/3 text-2xl md:w-[25rem]">
+            <div className="flex justify-end px-1 pb-2 w-[240px] text-2xl md:w-[25rem]">
               <button onClick={openSetup}>
                 <div className="i-heroicons-cog-6-tooth-solid"></div>
               </button>
