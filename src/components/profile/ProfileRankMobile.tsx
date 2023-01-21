@@ -110,7 +110,7 @@ const ProfileRankMobile = () => {
             />
           </TabList>
 
-          <div className="bg-[#505050] h-80 overflow-x-hidden overflow-y-auto">
+          <div className="bg-[#505050] h-60 overflow-x-hidden overflow-y-auto">
             <TabPanels className="bg-[#505050] h-full">
               <GiftPanel />
               <BetPanel />
