@@ -112,7 +112,15 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
 }) => {
   const location = useLocation()
   const currentPath = location.pathname
-  const isCurrentPath = (href: string) => href === currentPath && true
+  const isCurrentPath = (href: string) => {
+    if (href.slice(0, 14) === currentPath.slice(0, 14)) {
+      return true
+    } else if (href === currentPath) {
+      return true
+    } else {
+      return false
+    }
+  }
 
   return (
     <>

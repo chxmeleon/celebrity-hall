@@ -221,16 +221,18 @@ export const SimpleCardAvatar: React.FC<{ img: string | null }> = ({ img }) => {
 
 export const SimpleCardName: React.FC<{ name: string }> = ({ name }) => {
   return (
-    <div className="sm:text-[20px] text-[10px] sm:ml-[10px] ml-[5px]">
-      {name}
+    <div className="truncate w-1/2">
+      <p className="sm:text-[20px] text-[10px] sm:ml-[10px] ml-[5px]">
+        {name}
+      </p>
     </div>
   )
 }
 
 const SimpleCardPointConfig = {
-  '1st': 'text-[#FCD140] sm:text-[48px] text-[24px] italic font-black',
-  '2nd': 'text-[#CCCCCC] sm:text-[48px] text-[24px] italic font-black',
-  '3rd': 'text-[#D0AA89] sm:text-[48px] text-[24px] italic font-black'
+  '1st': 'text-[#FCD140] text-xs md:text-3xl  italic font-black',
+  '2nd': 'text-[#CCCCCC] text-xs md:text-3xl  italic font-black',
+  '3rd': 'text-[#D0AA89] text-xs md:text-3xl  italic font-black'
 }
 
 export const SimpleCardPoint: React.FC<{
@@ -238,8 +240,11 @@ export const SimpleCardPoint: React.FC<{
   rank: '1st' | '2nd' | '3rd'
 }> = ({ point, rank }) => {
   return (
+
+    <div className="truncate w-full text-center">
     <div className={`${SimpleCardPointConfig[rank]}`}>
       {point.toLocaleString()}
+    </div>
     </div>
   )
 }
@@ -248,7 +253,7 @@ export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
   if (rank === '3rd') {
     return (
       <img
-        className="absolute sm:top-[-52px] top-[-27px] sm:right-[89px] right-[22px] z-10 w-[75px] sm:w-[142px]"
+        className="absolute md:-top-14 -top-7 z-10 w-[75px] sm:w-[142px]"
         src={thirdLg}
         alt={`${rank}`}
       />
@@ -258,7 +263,7 @@ export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
   if (rank === '2nd') {
     return (
       <img
-        className="absolute sm:top-[-51px] sm:right-[89px] top-[-27px] right-[22px] z-10 w-[75px] sm:w-[142px]"
+        className="absolute md:-top-14 -top-7 z-10 w-[75px] sm:w-[142px]"
         src={secondLg}
         alt={`${rank}`}
       />
@@ -267,7 +272,7 @@ export const SimpleCardRank: React.FC<{ rank: string }> = ({ rank }) => {
 
   return (
     <img
-      className="absolute sm:top-[-53px] sm:right-[72px] top-[-22px] right-[22px] z-10 w-[75px] sm:w-[178px]"
+      className="absolute md:-top-14 -top-6 z-10 w-[75px] sm:w-[178px]"
       src={firstLg}
       alt={`${rank}`}
     />
