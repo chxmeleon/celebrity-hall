@@ -31,7 +31,7 @@ export const BigRoadTie: React.FC<{ tie_count: number | undefined }> = ({
       {tie_count === 1 ? (
         <div className={bigRoadTieClassName}></div>
       ) : (
-        <div className="text-xs font-medium text-teal-600">{tie_count}</div>
+        <div className="absolute flex justify-center items-center m-auto text-xs font-medium text-teal-600">{tie_count}</div>
       )}
     </>
   ) : (
