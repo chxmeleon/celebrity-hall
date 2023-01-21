@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { askMapper, askMapperMobile } from './data'
 import { useCurrentGame } from '@/hooks/rooms'
 import { useParams } from 'react-router-dom'
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 
 export type GameResultType = 'player' | 'dealer' | 'tie'
 export type PairResultType = 'player' | 'dealer' | 'none' | 'both'
@@ -34,16 +34,24 @@ function BaseRoadComponent<T>({
   rowSize,
   TileComponent
 }: BaseRoadComponentProps<T>) {
-
   return (
     <Road.BaseGrid className={className}>
       {roads.slice(0, rowSize).map((row, idx) => {
         const emptyTileLength = (columnSize ?? row.length) - row.length
         const emptyTileSize = emptyTileLength >= 0 ? emptyTileLength : 0
+        let offset = 0
+        if (roads?.[0]?.[columnSize ?? 0 + 1] !== undefined) {
+          offset =  columnSize ?? 0 + offset
+        }
+
         return (
           <div className="flex w-full" key={idx}>
-            {[...row, ...Array(emptyTileSize).fill(null)]
-              .slice(0, columnSize)
+            {[
+              ...row,
+              ...Array(emptyTileSize).fill(null),
+              ...Array(offset).fill(null)
+            ]
+              .slice(offset, columnSize as number + offset)
               .map((road, index) => {
                 const tileProps =
                   size === 'small'
@@ -202,12 +210,15 @@ export const AskGridMobile = () => {
   const roadsTotalData = currentGame?.baccaratRoom?.roads ?? ''
 
   return (
-    <div className="flex justify-between items-center w-full h-full bg-blue-800/20 ">
+    <div className="flex justify-between items-center w-full h-full bg-blue-800/20">
       {askMapperMobile.map((item, idx) => {
         return (
           <div
             key={`ask-${idx}`}
-            className={cx('flex h-full items-center text-xs md:text-sm', item.className)}
+            className={cx(
+              'flex h-full items-center text-xs md:text-sm',
+              item.className
+            )}
           >
             <FormattedMessage
               id={item.contentId}
