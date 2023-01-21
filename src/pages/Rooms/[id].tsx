@@ -154,6 +154,10 @@ const Room = () => {
     setIsCancelDisabled(true)
   }
 
+
+  console.log(room?.roads?.big_road?.array);
+  
+
   const [isConfirmSuccess, setIsConfirmSuccess] = useState(false)
   const [isConfirmFailure, setIsConfirmFailure] = useState(false)
   const onConfirmBet = async (e: React.MouseEvent) => {
