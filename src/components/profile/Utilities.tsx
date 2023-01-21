@@ -7,6 +7,8 @@ import {
   GET_SENDGIFTRECORDS
 } from '@/gql/profile'
 import { useAuth } from '@/contexts/AuthContext'
+import types from '@/types'
+import dayjs from 'dayjs'
 
 import {
   Table,
@@ -19,6 +21,7 @@ import {
   TabPanels,
   TabPanel
 } from '@chakra-ui/react'
+import { useMemo } from 'react'
 
 export const Info: React.FC<{
   i18nId: string
@@ -30,7 +33,9 @@ export const Info: React.FC<{
       <div>
         <FormattedMessage id={i18nId} defaultMessage={i18nDefaultMessage} />
       </div>
-      <div className="text-[#FFEC66] text-2xl font-bold">{data}</div>
+      <div className="text-[#FFEC66] text-2xl font-bold">
+        {data.toLocaleString()}
+      </div>
     </div>
   )
 }
@@ -115,7 +120,7 @@ export const TableBody: React.FC<{
   }
 
   return (
-    <Tr  key={item.id}>
+    <Tr key={item.id}>
       <Td className="w-20 text-left">{item.createdAt}</Td>
       <Td className="text-right" isNumeric>
         {point}
@@ -125,10 +130,16 @@ export const TableBody: React.FC<{
 }
 
 export const GiftPanel: React.FC = () => {
-  const { loading, data } = useQuery(GET_SENDGIFTRECORDS, {
+  const today = useMemo(() => dayjs(), [])
+  const start = useMemo(() => dayjs().subtract(10, 'year'), [])
+
+  const { loading, data } = useQuery<
+    types.GET_SENDGIFTRECORDS,
+    types.GET_SENDGIFTRECORDSVariables
+  >(GET_SENDGIFTRECORDS, {
     variables: {
-      startDate: '2022-01-15T13:30:56.681Z',
-      endDate: '2023-01-15T13:30:56.681Z'
+      startDate: start.toISOString(),
+      endDate: today.toISOString()
     }
   })
   if (loading) {
@@ -136,16 +147,24 @@ export const GiftPanel: React.FC = () => {
   }
   return (
     <TabPanel>
-      <I18nTable data={data.sendGiftRecords.records} type="gift" />
+      {data?.sendGiftRecords && (
+        <I18nTable data={data.sendGiftRecords.records} type="gift" />
+      )}
     </TabPanel>
   )
 }
 
 export const BetPanel: React.FC = () => {
-  const { loading, data } = useQuery(GET_USERBETRECORDS, {
+  const today = useMemo(() => dayjs(), [])
+  const start = useMemo(() => dayjs().subtract(10, 'year'), [])
+
+  const { loading, data } = useQuery<
+    types.GET_USERBETRECORDS,
+    types.GET_USERBETRECORDSVariables
+  >(GET_USERBETRECORDS, {
     variables: {
-      startDate: '2022-01-15T13:30:56.681Z',
-      endDate: '2023-01-15T13:30:56.681Z'
+      startDate: start.toISOString(),
+      endDate: today.toISOString()
     }
   })
   if (loading) {
@@ -153,7 +172,9 @@ export const BetPanel: React.FC = () => {
   }
   return (
     <TabPanel>
-      <I18nTable data={data.liveBaccaratBetRecords.records} type="bet" />
+      {data?.liveBaccaratBetRecords && (
+        <I18nTable data={data.liveBaccaratBetRecords.records} type="bet" />
+      )}
     </TabPanel>
   )
 }

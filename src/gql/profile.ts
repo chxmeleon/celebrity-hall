@@ -43,7 +43,7 @@ export const GET_WALLET = gql`
 // `
 
 export const GET_USERBETRECORDS = gql`
-  query liveBaccaratBetRecords(
+  query GET_USERBETRECORDS(
     $page: Int
     $perPage: Int
     $startDate: ISO8601DateTime!

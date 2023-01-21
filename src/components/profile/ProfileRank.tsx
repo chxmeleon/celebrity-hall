@@ -3,9 +3,10 @@ import { Info, Button, I18nTab, GiftPanel, BetPanel } from './Utilities'
 import { useQuery } from '@apollo/client'
 import { GET_PROFILE } from '@/gql/profile'
 import { useAuth } from '@/contexts/AuthContext'
+import types from '@/types'
 
 const ProfileRank = () => {
-  const { loading, data } = useQuery(GET_PROFILE)
+  const { loading, data } = useQuery<types.GET_PROFILE>(GET_PROFILE)
   const { logout } = useAuth()
 
   if (loading) {
@@ -17,7 +18,7 @@ const ProfileRank = () => {
       <div className="flex justify-between items-center w-full h-1/3">
         <div className="flex justify-between items-center w-[70%] h-full">
           <div className="flex flex-grow items-center mr-11 h-full">
-            {data.profile.avatar ? (
+            {data?.profile?.avatar ? (
               <div className="overflow-hidden w-28 h-28 rounded-full">
                 <img
                   className="object-cover w-full h-full"
@@ -28,9 +29,9 @@ const ProfileRank = () => {
               <div className="w-28 h-28 i-heroicons-user-circle-solid" />
             )}
             <div className="pl-3 text-2xl">
-              {data.profile.nikename
-                ? data.profile.nikename
-                : data.profile.username}
+              {data?.profile?.nickname
+                ? data.profile.nickname
+                : data?.profile?.username}
             </div>
           </div>
 
@@ -38,17 +39,15 @@ const ProfileRank = () => {
             <Info
               i18nId="profile.info.points"
               data={
-                data.profile.creditBalance
-                  ? data.profile.creditBalance.toLocaleString()
-                  : 0
+                data?.profile?.creditBalance ? data.profile.creditBalance : 0
               }
               i18nDefaultMessage="上下分"
             />
             <Info
               i18nId="profile.info.betting"
               data={
-                data.profile.totalEffectiveAmount
-                  ? data.profile.totalEffectiveAmount.toLocaleString()
+                data?.profile?.totalEffectiveAmount
+                  ? data.profile.totalEffectiveAmount
                   : 0
               }
               i18nDefaultMessage="有效投注"
@@ -59,17 +58,13 @@ const ProfileRank = () => {
             <Info
               i18nId="profile.info.dividend"
               data={
-                data.profile.creditBalance
-                  ? data.profile.creditBalance.toLocaleString()
-                  : 0
+                data?.profile?.creditBalance ? data.profile.creditBalance : 0
               }
               i18nDefaultMessage="紅利"
             />
             <Info
               i18nId="profile.info.balance"
-              data={
-                data.profile.balance ? data.profile.balance.toLocaleString() : 0
-              }
+              data={data?.profile?.balance ? data.profile.balance : 0}
               i18nDefaultMessage="餘額"
             />
           </div>

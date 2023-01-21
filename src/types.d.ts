@@ -7927,7 +7927,7 @@ export type GET_WALLETVariables = Exact<{ [key: string]: never; }>;
 
 export type GET_WALLET = { wallet: { __typename: 'Wallet', id: string, balance: number | null, creditBalance: number | null, totalEffectiveAmount: number | null, totalEffectiveXimaAmount: number | null } | null };
 
-export type liveBaccaratBetRecordsVariables = Exact<{
+export type GET_USERBETRECORDSVariables = Exact<{
   page?: InputMaybe<Scalars['Int']>;
   perPage?: InputMaybe<Scalars['Int']>;
   startDate: Scalars['ISO8601DateTime'];
@@ -7935,7 +7935,7 @@ export type liveBaccaratBetRecordsVariables = Exact<{
 }>;
 
 
-export type liveBaccaratBetRecords = { liveBaccaratBetRecords: { __typename: 'BaccaratBetRecordCollection', totalPages: number | null, currentPage: number | null, records: Array<{ __typename: 'BaccaratBetRecord', id: string, betNo: string | null, totalBet: number | null, winLossAmount: number | null, createdAt: any | null, totalWinAmount: number | null }> | null } | null };
+export type GET_USERBETRECORDS = { liveBaccaratBetRecords: { __typename: 'BaccaratBetRecordCollection', totalPages: number | null, currentPage: number | null, records: Array<{ __typename: 'BaccaratBetRecord', id: string, betNo: string | null, totalBet: number | null, winLossAmount: number | null, createdAt: any | null, totalWinAmount: number | null }> | null } | null };
 
 export type GET_SENDGIFTRECORDSVariables = Exact<{
   page?: InputMaybe<Scalars['Int']>;
