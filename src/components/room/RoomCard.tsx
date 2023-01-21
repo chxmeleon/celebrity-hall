@@ -63,9 +63,8 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
             </div>
             <div className="pl-4 font-bold tracking-[0.15rem]">{room.name}</div>
           </div>
-
           <div className="flex px-3 w-full text-xs">
-            <div className="w-3/4 block bg-gray-100 rounded-tl-sm rounded-bl-sm">
+            <div className="block w-3/4 bg-gray-100 rounded-tl-sm rounded-bl-sm">
               {room && (
                 <>
                   <BigRoad
@@ -81,7 +80,7 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
                     rowSize={6}
                   />
 
-                  <div className="w-full flex">
+                  <div className="flex w-full">
                     <SmallRoad
                       className={cx('w-1/2 border-r', roadBorderClassName)}
                       roads={room.roads.small_road.graph}
@@ -99,13 +98,12 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
                 </>
               )}
             </div>
-
             <div className="relative w-1/4 h-full bg-gray-100 rounded-tr-sm rounded-br-sm">
               <div className="absolute bottom-0 w-full">
                 <div className="flex justify-end">
                   <div className="absolute right-0 top-4">
                     <div className="p-1 text-lg font-medium text-gray-50">
-                      {isOpening ? (
+                      {startCount ? null : isOpening ? (
                         <FormattedMessage
                           id="status.baccarat.waitingBet"
                           defaultMessage="Open"
@@ -118,7 +116,7 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
                       )}
                     </div>
                   </div>
-                  <div className="border-b-[#F9A415] border-b-[50px] border-l-[57px] border-transparent"></div>
+                  <div className={cx("border-b-[#F9A415] border-b-[50px] border-l-[57px] border-transparent")}></div>
                 </div>
                 <div className="w-full font-medium tracking-widest text-center p-[1px] bg-theme-50/75">
                   {girl?.name}
