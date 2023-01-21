@@ -1,72 +1,14 @@
 import Router from '@/router'
 import { ResponsiveProvider, Responsive } from '@/hooks/useResponsive'
-import { BrowserRouter, MemoryRouter } from 'react-router-dom'
+import { BrowserRouter, MemoryRouter, useLocation } from 'react-router-dom'
 import { AuthProvider } from '@/contexts/AuthContext'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { ApiProvider } from '@/contexts/ApiContext'
 import { SetupProvider } from './contexts/SetupContext'
 import { ActionCableProvider } from './contexts/ActionCableContext'
 import { StreamLatencyProvider } from './contexts/StreamLatencyContext'
-import { useEffect } from 'react'
 
 function App() {
-  useEffect(() => {
-    const onResizeWindow = () => {
-      const isMobile =
-        window.innerWidth < 768 ||
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        )
-
-      const bodyHeight = document.body.clientHeight
-      const bodyWidth = document.body.clientWidth
-      const displayWidth = bodyWidth > 1440 ? 1440 : bodyWidth
-
-      const windowHeight = window.innerHeight
-      const windowWidth = window.innerWidth
-
-      // Safari 100 VH fix
-      // https://ithelp.ithome.com.tw/articles/10249090
-      const windowsVH = window.innerHeight / 100
-      document.body.style.setProperty('--vh', windowsVH + 'px')
-
-      /* console.log(windowWidth, bodyWidth) */
-      /* console.log( */
-      /*   `window size: ${windowWidth}x${windowHeight}`, */
-      /*   windowHeight / bodyHeight, */
-      /*   windowWidth / bodyWidth */
-      /* ) */
-
-      let scaling = 1
-      let width = ''
-      if (isMobile) {
-        const bodyScrollHeight = document.body.scrollHeight
-        if (bodyScrollHeight > windowHeight) {
-          scaling = windowHeight / bodyScrollHeight
-        }
-      }else {
-        if (windowHeight / bodyHeight > windowWidth / displayWidth) {
-          scaling = windowWidth / displayWidth
-        } else {
-          scaling = windowHeight / bodyHeight
-
-          if (displayWidth * scaling > windowWidth) {
-            width = `${(1 / scaling) * 100}%`
-          }
-        }
-      }
-
-      document.body.style.transform = `scale(${scaling})`
-      document.body.style.width = width
-    }
-
-    onResizeWindow()
-    window.addEventListener('resize', onResizeWindow)
-    return () => {
-      window.removeEventListener('resize', onResizeWindow)
-    }
-  }, [])
-
   return (
     <BrowserRouter>
       <AuthProvider>

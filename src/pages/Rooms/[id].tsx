@@ -35,7 +35,7 @@ import {
   NodePlayerStream,
   NodePlayerStreamMobile
 } from '@/components/room/RoomStream/streamPlayer'
-import { Responsive } from '@/hooks/useResponsive'
+import { Responsive, ResponsiveContext } from '@/hooks/useResponsive'
 import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
 import ChatroomMobile from '@/components/room/Chatroom/ChatroomMobile'
 import SinglePlayerMobile from '@/components/room/BetDesk/SinglePlayerMobile'
@@ -84,6 +84,13 @@ const Room = () => {
     () => (roomId ? rooms.find((room) => room.id === roomId) : undefined),
     [roomId, rooms]
   )
+
+  const { onResizeWindow } = useContext(ResponsiveContext)
+  useEffect(() => {
+    if (room) {
+      onResizeWindow?.()
+    }
+  }, [onResizeWindow, room])
 
   const streamName = room?.streamName
   const streamKey = room?.streamKey

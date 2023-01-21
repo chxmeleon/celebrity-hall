@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
 
 export const BREAK_POINT_SM = 576
@@ -124,6 +124,7 @@ export const DefaultResponsiveMedia: React.FC<ResponsiveMediaProps> = (
 export const ResponsiveContext = React.createContext<{
   isMobile: boolean
   isDesktop: boolean
+  onResizeWindow?: () => void
 }>({
   isMobile: true,
   isDesktop: true
@@ -153,8 +154,65 @@ export const ResponsiveProvider: React.FC<React.PropsWithChildren> = ({
     return () => window.removeEventListener('resize', onWindowResize)
   }, [])
 
+  const onResizeWindow = useCallback(() => {
+    const isMobile =
+      window.innerWidth < 768 ||
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+
+    const bodyHeight = document.body.clientHeight
+    const bodyWidth = document.body.clientWidth
+    const displayWidth = bodyWidth > 1440 ? 1440 : bodyWidth
+
+    const windowHeight = window.innerHeight
+    const windowWidth = window.innerWidth
+
+    // Safari 100 VH fix
+    // https://ithelp.ithome.com.tw/articles/10249090
+    const windowsVH = window.innerHeight / 100
+    document.body.style.setProperty('--vh', windowsVH + 'px')
+
+    /* console.log(windowWidth, bodyWidth) */
+    /* console.log( */
+    /*   `window size: ${windowWidth}x${windowHeight}`, */
+    /*   windowHeight / bodyHeight, */
+    /*   windowWidth / bodyWidth */
+    /* ) */
+
+    let scaling = 1
+    let width = ''
+    if (isMobile) {
+      const bodyScrollHeight = document.body.scrollHeight
+      if (bodyScrollHeight > windowHeight) {
+        scaling = windowHeight / bodyScrollHeight
+      }
+    } else {
+      if (windowHeight / bodyHeight > windowWidth / displayWidth) {
+        scaling = windowWidth / displayWidth
+      } else {
+        scaling = windowHeight / bodyHeight
+
+        if (displayWidth * scaling > windowWidth) {
+          width = `${(1 / scaling) * 100}%`
+        }
+      }
+    }
+
+    document.body.style.transform = `scale(${scaling})`
+    document.body.style.width = width
+  }, [])
+
+  useEffect(() => {
+    onResizeWindow()
+    window.addEventListener('resize', onResizeWindow)
+    return () => {
+      window.removeEventListener('resize', onResizeWindow)
+    }
+  }, [onResizeWindow])
+
   return (
-    <ResponsiveContext.Provider value={{ isMobile, isDesktop }}>
+    <ResponsiveContext.Provider value={{ isMobile, isDesktop, onResizeWindow }}>
       <StyledResponsiveStyle />
       {children}
     </ResponsiveContext.Provider>
