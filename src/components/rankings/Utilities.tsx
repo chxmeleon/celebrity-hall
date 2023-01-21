@@ -125,7 +125,7 @@ export const Tabs: React.FC<{
     <div className="mt-[10px] mx-[10px]">
       <div className="flex justify-between sm:w-[500px] w-full sm:text-[30px] text-[15px] text-white">
         <Link
-          to="/home/rankings"
+          to="/home/rankings/streamers"
           className={`${
             buttonConfig[
               isSelected === 'rankings' ? 'isSelected' : 'notSelected'
@@ -135,7 +135,7 @@ export const Tabs: React.FC<{
           <FormattedMessage id="ranking.Tab.anchor" defaultMessage="主播榜" />
         </Link>
         <Link
-          to="/home/contribution-ranking"
+          to="/home/rankings/contribution"
           className={`${
             buttonConfig[
               isSelected === 'contribution' ? 'isSelected' : 'notSelected'
@@ -148,7 +148,7 @@ export const Tabs: React.FC<{
           />
         </Link>
         <Link
-          to="/home/win_points-ranking"
+          to="/home/rankings/win-points"
           className={`${
             buttonConfig[
               isSelected === 'win_points' ? 'isSelected' : 'notSelected'
@@ -158,7 +158,7 @@ export const Tabs: React.FC<{
           <FormattedMessage id="ranking.Tab.point" defaultMessage="勝點榜" />
         </Link>
         <Link
-          to="/home/rounds-ranking"
+          to="/home/rankings/rounds-leaderboard"
           className={`${
             buttonConfig[isSelected === 'rounds' ? 'isSelected' : 'notSelected']
           }`}

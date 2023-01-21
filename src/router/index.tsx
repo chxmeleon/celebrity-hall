@@ -41,16 +41,19 @@ const Router: React.FC = () => {
         <Route path="streamers/:id" element={<Streamer />} />
         <Route path="tables" element={<Tables />} />
         <Route path="following" element={<Following />} />
-        <Route path="rankings" element={<Rankings />} />
+        <Route path="rankings/streamers" element={<Rankings />} />
         <Route
-          path="contribution-ranking"
+          path="rankings/contribution"
           element={<UserRanking type="contribution" />}
         />
         <Route
-          path="win_points-ranking"
+          path="rankings/win-points"
           element={<UserRanking type="win_points" />}
         />
-        <Route path="rounds-ranking" element={<UserRanking type="rounds" />} />
+        <Route
+          path="rankings/rounds-leaderboard"
+          element={<UserRanking type="rounds" />}
+        />
       </Route>
     </Routes>
   )

@@ -76,7 +76,7 @@ const LeftSidebar = () => {
             {/* <LinkButton href="/home/tables" isTarget={false}> */}
             {/*   <FormattedMessage id="layout.tables" defaultMessage="Tables" /> */}
             {/* </LinkButton> */}
-            <LinkButton href="/home/rankings" isTarget={false}>
+            <LinkButton href="/home/rankings/streamers" isTarget={false}>
               <div className="hidden md:block">
                 <FormattedMessage
                   id="layout.rankings"
