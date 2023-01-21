@@ -25,7 +25,6 @@ import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { GET_ROOM_STREAM } from '@/gql/stream'
 import GamePlayContext from '@/contexts/GamePlayContext'
-import { Tooltip } from '@chakra-ui/react'
 import { useCurrentGameState } from '@/hooks/rooms'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import { BetInitialValueProp, betInitialValue } from '@/hooks/bet'
@@ -42,6 +41,7 @@ import ChatroomMobile from '@/components/room/Chatroom/ChatroomMobile'
 import SinglePlayerMobile from '@/components/room/BetDesk/SinglePlayerMobile'
 import RoomDataContext from '@/contexts/RoomDataContext'
 import Loading from '@/components/room/RoomStream/loading'
+import { Tooltip } from '@material-tailwind/react'
 
 const ChipButtonList: React.FC<{
   selectedChip: string
@@ -277,11 +277,10 @@ const Room = () => {
               <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
                 <div className="flex flex-col justify-around items-end h-24">
                   <Tooltip
-                    label={formatMessage({
+                    content={formatMessage({
                       id: 'components.stream.camSwitch',
                       defaultMessage: 'Switch Camera'
                     })}
-                    fontSize="small"
                     placement="left"
                   >
                     <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
@@ -294,11 +293,10 @@ const Room = () => {
                     </div>
                   </Tooltip>
                   <Tooltip
-                    label={formatMessage({
+                    content={formatMessage({
                       id: 'components.stream.streamSwitch',
                       defaultMessage: 'Switch Line'
                     })}
-                    fontSize="small"
                     placement="left"
                   >
                     <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
@@ -472,31 +470,18 @@ const Room = () => {
               <div className="flex pl-1">
                 <div className="flex flex-col justify-around items-end h-23">
                   <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
-                    <Tooltip
-                      label={formatMessage({
-                        id: 'components.stream.backrooms',
-                        defaultMessage: 'Back'
-                      })}
-                      fontSize="x-small"
-                      placement="right"
-                      bg="gray.300"
-                    >
-                      <Link
-                        to="/home/rooms"
-                        className="m-auto text-xl i-heroicons-arrow-uturn-left-20-solid"
-                      ></Link>
-                    </Tooltip>
+                    <Link
+                      to="/home/rooms"
+                      className="m-auto text-xl i-heroicons-arrow-uturn-left-20-solid"
+                    ></Link>
                   </div>
-
                   <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
                     <Tooltip
-                      label={formatMessage({
+                      content={formatMessage({
                         id: 'components.stream.camSwitch',
                         defaultMessage: 'Switch Line'
                       })}
-                      fontSize="x-small"
                       placement="right"
-                      bg="gray.300"
                     >
                       <button
                         onClick={handleSwitchCam}
@@ -508,13 +493,11 @@ const Room = () => {
                   </div>
                   <div className="flex p-1 w-8 h-8 rounded-md bg-theme-50/80">
                     <Tooltip
-                      label={formatMessage({
+                      content={formatMessage({
                         id: 'components.stream.streamSwitch',
                         defaultMessage: 'Switch Line'
                       })}
-                      fontSize="x-small"
                       placement="right"
-                      bg="gray.300"
                     >
                       <button
                         onClick={handleSwitchStream}
@@ -557,7 +540,9 @@ const Room = () => {
                   videoOn={true}
                   isWebRTC={isWebRTC}
                 />
-              ) : <Loading />}
+              ) : (
+                <Loading />
+              )}
             </div>
           </div>
 

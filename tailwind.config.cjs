@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+
+const withMT = require("@material-tailwind/react/utils/withMT");
 const plugin = require('tailwindcss/plugin')
 const rotate3d = plugin(function({ addUtilities }) {
   addUtilities({
@@ -35,7 +37,7 @@ const rotate3d = plugin(function({ addUtilities }) {
   })
 })
 
-module.exports = {
+module.exports = withMT({
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
@@ -102,4 +104,4 @@ module.exports = {
     }
   },
   plugins: [rotate3d]
-}
+})
