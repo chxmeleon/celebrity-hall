@@ -41,6 +41,7 @@ import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
 import ChatroomMobile from '@/components/room/Chatroom/ChatroomMobile'
 import SinglePlayerMobile from '@/components/room/BetDesk/SinglePlayerMobile'
 import RoomDataContext from '@/contexts/RoomDataContext'
+import Loading from '@/components/room/RoomStream/loading'
 
 const ChipButtonList: React.FC<{
   selectedChip: string
@@ -269,7 +270,9 @@ const Room = () => {
                 videoOn={true}
                 isWebRTC={isWebRTC}
               />
-            ) : null}
+            ) : (
+              <Loading />
+            )}
             <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
               <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
                 <div className="flex flex-col justify-around items-end h-24">
@@ -554,7 +557,7 @@ const Room = () => {
                   videoOn={true}
                   isWebRTC={isWebRTC}
                 />
-              ) : null}
+              ) : <Loading />}
             </div>
           </div>
 

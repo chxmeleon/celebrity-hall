@@ -480,5 +480,6 @@
   "gift.boat": "Du thuyền sang trọng",
   "tong.oddsType.normal": "Bội số bằng",
   "tong.oddsType.double": "Gấp bội",
-  "tong.oddsType.super": "Siêu cấp"
+  "tong.oddsType.super": "Siêu cấp",
+  "streams.loading": "loading"
 }

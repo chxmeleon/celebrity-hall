@@ -485,5 +485,6 @@
   "gift.boat": "豪華遊艇",
   "tong.oddsType.normal": "平倍",
   "tong.oddsType.double": "翻倍",
-  "tong.oddsType.super": "超級"
+  "tong.oddsType.super": "超級",
+  "streams.loading": "loading"
 }

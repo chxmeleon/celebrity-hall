@@ -480,5 +480,6 @@
   "gift.boat": "เรือยอร์ช",
   "tong.oddsType.normal": "ทบเท่า",
   "tong.oddsType.double": "ดับเบิ้ล",
-  "tong.oddsType.super": "ซุปเปอร์"
+  "tong.oddsType.super": "ซุปเปอร์",
+  "streams.loading": "loading"
 }

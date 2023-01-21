@@ -525,5 +525,6 @@
   "profile.info.betting": "有效投注",
   "profile.info.dividend": "紅利",
   "profile.info.balance": "餘額",
-  "ranking.card.timetable": "時段"
+  "ranking.card.timetable": "時段",
+  "streams.loading": "加載中"
 }
