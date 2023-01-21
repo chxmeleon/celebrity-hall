@@ -33,7 +33,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
   const { isRegular } = useSetup()
   const { selectedChip, betState, dispatchBet } = useContext(GamePlayContext)
   return (
-    <div className="px-2 grid gap-1 grid-rows-2 w-full h-3/5 px-1 [&_button]:relative">
+    <div className="px-2 grid gap-1 grid-rows-2 w-full px-1 [&_button]:relative">
       <div className="grid grid-cols-5 gap-1">
         <button disabled className="rounded-md bg-theme-75 brightness-50">
           <div className="text-xs md:text-xl w-full text-grid-400 [&_p]:text-gray-300">
