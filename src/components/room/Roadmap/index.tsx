@@ -41,7 +41,7 @@ function BaseRoadComponent<T>({
         const emptyTileSize = emptyTileLength >= 0 ? emptyTileLength : 0
 
         return (
-          <div className="flex" key={idx}>
+          <div className="flex w-full" key={idx}>
             {[...row, ...Array(emptyTileSize).fill(null)]
               .slice(0, columnSize)
               .map((road, index) => {
