@@ -19,7 +19,7 @@ const ProfileRank = () => {
   }
 
   return (
-    <div className="relative p-4 w-full h-full md:p-16">
+    <div className="relative p-4 w-full h-full md:p-16 ">
       <div className="flex justify-between items-center w-full h-1/3">
         <div className="flex justify-between items-center w-[70%] h-full">
           <div className="flex flex-grow items-center mr-11 h-full">

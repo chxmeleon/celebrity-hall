@@ -18,7 +18,7 @@ const ProtectedLayout: React.FC = () => {
      before:absolute before:w-full before:h-full before:bg-black/20 before:content-['']`
 
   return (
-    <main className="w-full h-screen md:h-full">
+    <main  className="w-full h-screen md:h-full">
       <SetupModal />
       <NoticeModal />
       <section className="relative m-auto w-full h-full aspect-video border-theme-70 border">
