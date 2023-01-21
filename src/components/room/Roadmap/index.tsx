@@ -207,7 +207,7 @@ export const AskGridMobile = () => {
         return (
           <div
             key={`ask-${idx}`}
-            className={cx('flex h-full items-center text-sm', item.className)}
+            className={cx('flex h-full items-center text-xs md:text-sm', item.className)}
           >
             <FormattedMessage
               id={item.contentId}

@@ -56,7 +56,7 @@ const CardWidget: React.FC<CardProps> = ({ role }) => {
 
   return (
     <div className={pockerContainer}>
-      <div className="flex justify-between items-center w-1/2 h-1/4">
+      <div className="flex justify-between items-center px-2 md:px-0 md:w-1/2 h-1/4">
         <div className={titleStyle}>
           <FormattedMessage
             id={cardsMapper[role]?.contentId}

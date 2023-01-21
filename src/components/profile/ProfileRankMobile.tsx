@@ -14,7 +14,7 @@ const ProfileRankMobile = () => {
 
   return (
     <div className="flex relative flex-col px-4 mt-6 w-full h-full">
-      <div className="w-full h-1/2 bg-theme-50 p-4 rounded-xl">
+      <div className="p-4 w-full h-1/2 rounded-xl bg-theme-50">
         <div className="flex justify-between items-center w-full h-full">
           <div className="flex justify-between items-center w-1/2 h-full">
             {data.profile.avatar ? (
@@ -98,7 +98,6 @@ const ProfileRankMobile = () => {
         </div>
       </div>
 
-
       <div className="py-3 m-auto w-full h-1/2">
         <Tabs variant="unstyled">
           <TabList>
@@ -115,11 +114,14 @@ const ProfileRankMobile = () => {
               i18nId="profile.button.gift"
             />
           </TabList>
-          <TabPanels className="bg-[#505050] h-full">
-            <GiftPanel />
-            <BetPanel />
-            <GiftPanel />
-          </TabPanels>
+
+          <div className="bg-[#505050] h-80 overflow-x-hidden overflow-y-auto">
+            <TabPanels className="bg-[#505050] h-full">
+              <GiftPanel />
+              <BetPanel />
+              <GiftPanel />
+            </TabPanels>
+          </div>
         </Tabs>
       </div>
     </div>
