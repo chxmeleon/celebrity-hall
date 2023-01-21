@@ -478,5 +478,6 @@
   "gift.boat": "Yatch",
   "tong.oddsType.normal": "magpapantay",
   "tong.oddsType.double": "Double",
-  "tong.oddsType.super": "Super"
+  "tong.oddsType.super": "Super",
+  "streams.loading": "loading"
 }
