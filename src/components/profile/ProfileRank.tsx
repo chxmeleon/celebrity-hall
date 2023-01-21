@@ -1,11 +1,5 @@
 import { Tabs, Tab, TabList, TabPanels, TabPanel } from '@chakra-ui/react'
-import {
-  Info,
-  Button,
-  I18nTab,
-  GiftPanel,
-  BetPanel
-} from './Utilities'
+import { Info, Button, I18nTab, GiftPanel, BetPanel } from './Utilities'
 import { useQuery } from '@apollo/client'
 import { GET_PROFILE } from '@/gql/profile'
 import { useAuth } from '@/contexts/AuthContext'
@@ -19,7 +13,7 @@ const ProfileRank = () => {
   }
 
   return (
-    <div className="relative p-4 w-full h-full md:p-16 ">
+    <div className="relative p-4 w-full h-full md:p-16">
       <div className="flex justify-between items-center w-full h-1/3">
         <div className="flex justify-between items-center w-[70%] h-full">
           <div className="flex flex-grow items-center mr-11 h-full">
@@ -119,11 +113,14 @@ const ProfileRank = () => {
               i18nId="profile.button.gift"
             />
           </TabList>
-          <TabPanels className="bg-[#505050] h-full">
-            <GiftPanel />
-            <BetPanel />
-            <GiftPanel />
-          </TabPanels>
+
+          <div className="bg-[#505050] h-80 overflow-x-hidden overflow-y-auto">
+            <TabPanels className="bg-[#505050] h-full">
+              <GiftPanel />
+              <BetPanel />
+              <GiftPanel />
+            </TabPanels>
+          </div>
         </Tabs>
       </div>
     </div>

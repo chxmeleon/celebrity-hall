@@ -172,7 +172,6 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             isDisabled ? 'brightness-75' : ''
           )}
         >
-
           <BetAreaVer target={betState?.tieChips} />
           <div className="m-auto w-2/3 text-grid-300 [&_p]:text-gray-300">
             <div className="text-4xl font-bold">
