@@ -127,9 +127,6 @@ export const BigRecordTileComponent: React.FC<{
       ? outlineTileMapping[road.game_result]?.className
       : 'border-transparent'
   )
-
-  console.log(road?.tie_count)
-
   return (
     <div
       className={cx(
@@ -167,8 +164,6 @@ export const BigEyeRecordTileComponent: React.FC<SmallRoadTileProps> = ({
       ? outlineTileMapping[road.repetition ? 'dealer' : 'player'].className
       : 'border-transparent'
   )
-
-  console.log(road)
 
   return (
     <div

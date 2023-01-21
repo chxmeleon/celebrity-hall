@@ -34,12 +34,12 @@ function BaseRoadComponent<T>({
   rowSize,
   TileComponent
 }: BaseRoadComponentProps<T>) {
+
   return (
     <Road.BaseGrid className={className}>
       {roads.slice(0, rowSize).map((row, idx) => {
         const emptyTileLength = (columnSize ?? row.length) - row.length
         const emptyTileSize = emptyTileLength >= 0 ? emptyTileLength : 0
-
         return (
           <div className="flex w-full" key={idx}>
             {[...row, ...Array(emptyTileSize).fill(null)]
