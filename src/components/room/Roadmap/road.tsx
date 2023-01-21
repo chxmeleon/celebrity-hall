@@ -15,7 +15,9 @@ const dealerPairLocationClassName = 'left-[1px] top-[1px]'
 
 export const roadBorderClassName = 'box-content border-gray-400'
 const tileContainerClassName =
-  'relative flex justify-center items-center w-full h-full text-xs font-light text-gray-50 aspect-square'
+  'relative flex-1 text-xs font-light text-gray-50 before:content-[""] before:block before:w-full before:h-[0] before:pb-[100%]'
+const tileWrapperClassName =
+  'absolute w-full h-full top-0 left-0 flex justify-center items-center'
 const tileContainerBorderClassName = 'border-r border-b'
 
 export const RoadTileDecoration: React.FC<{
@@ -78,14 +80,16 @@ export const BeadRoadTileComponent: React.FC<{
         roadBorderClassName
       )}
     >
-      <div className={winRecordTileStyle}>
-        {road?.game_result && (
-          <FormattedMessage
-            id={roadTileMapping[road.game_result].translationId}
-            defaultMessage={road.game_result}
-          />
-        )}
-        <RoadTileDecoration pair_result={road?.pair_result} />
+      <div className={tileWrapperClassName}>
+        <div className={winRecordTileStyle}>
+          {road?.game_result && (
+            <FormattedMessage
+              id={roadTileMapping[road.game_result].translationId}
+              defaultMessage={road.game_result}
+            />
+          )}
+          <RoadTileDecoration pair_result={road?.pair_result} />
+        </div>
       </div>
     </div>
   )
@@ -113,8 +117,10 @@ export const BigRecordTileComponent: React.FC<{
         roadBorderClassName
       )}
     >
-      <div className={bigRecordTileStyle}></div>
-      <RoadTileDecoration pair_result={road?.pair_result} />
+      <div className={tileWrapperClassName}>
+        <div className={bigRecordTileStyle}></div>
+        <RoadTileDecoration pair_result={road?.pair_result} />
+      </div>
     </div>
   )
 }
@@ -148,7 +154,9 @@ export const BigEyeRecordTileComponent: React.FC<SmallRoadTileProps> = ({
         bottomBorder && 'border-b'
       )}
     >
-      <div className={bigRecordTileStyle}></div>
+      <div className={tileWrapperClassName}>
+        <div className={bigRecordTileStyle}></div>
+      </div>
     </div>
   )
 }
@@ -178,7 +186,9 @@ export const SmallRecordTileComponent: React.FC<SmallRoadTileProps> = ({
         bottomBorder && 'border-b'
       )}
     >
-      <div className={smallRecordTileStyle}></div>
+      <div className={tileWrapperClassName}>
+        <div className={smallRecordTileStyle}></div>
+      </div>
     </div>
   )
 }
@@ -208,12 +218,14 @@ export const CockroachRecordTile: React.FC<SmallRoadTileProps> = ({
         bottomBorder && 'border-b'
       )}
     >
-      <div className={cockroachRecordTileStyle}></div>
+      <div className={tileWrapperClassName}>
+        <div className={cockroachRecordTileStyle}></div>
+      </div>
     </div>
   )
 }
 
-const roadGridClassName = 'relative w-full'
+const roadGridClassName = 'relative block w-full'
 type GridProps = React.PropsWithChildren<{
   className?: string
 }>

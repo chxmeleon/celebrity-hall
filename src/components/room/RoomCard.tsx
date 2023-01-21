@@ -64,8 +64,8 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
             <div className="pl-4 font-bold tracking-[0.15rem]">{room.name}</div>
           </div>
 
-          <div className="flex px-3 w-full text-xs overflow-hidden">
-            <div className="w-3/4 relative pb-[100%] mb-[-100%] bg-gray-100 rounded-tl-sm rounded-bl-sm">
+          <div className="flex px-3 w-full text-xs">
+            <div className="w-3/4 block bg-gray-100 rounded-tl-sm rounded-bl-sm">
               {room && (
                 <>
                   <BigRoad
