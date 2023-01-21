@@ -8,6 +8,7 @@ type LoginButtonProps = {
 }
 
 type BetButtonProps = {
+  className?: string
   onClick: React.MouseEventHandler<HTMLButtonElement>
   isDisabled: boolean
 }
@@ -31,6 +32,7 @@ type ToggleButtonProps = {
 }
 
 export const BetButton: React.FC<React.PropsWithChildren<BetButtonProps>> = ({
+  className,
   isDisabled,
   children,
   onClick
@@ -40,6 +42,7 @@ export const BetButton: React.FC<React.PropsWithChildren<BetButtonProps>> = ({
       onClick={onClick}
       disabled={isDisabled}
       className={cx(
+        className,
         isDisabled
           ? 'hover:cursor-not-allowed text-theme-400 border-amber-500 bg-red-900'
           : 'border-theme-300 active:bg-theme-300 active:text-theme-50 ',

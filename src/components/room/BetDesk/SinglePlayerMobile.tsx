@@ -33,10 +33,10 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
   const { isRegular } = useSetup()
   const { selectedChip, betState, dispatchBet } = useContext(GamePlayContext)
   return (
-    <div className="grid grid-rows-2 gap-2 w-full h-3/5 px-1 [&_button]:relative">
-      <div className="grid grid-cols-5">
-        <button disabled className="m-1 rounded-md bg-theme-75 brightness-50">
-          <div className="px-3 w-full text-grid-400 [&_p]:text-gray-300">
+    <div className="px-2 grid gap-1 grid-rows-2 w-full h-3/5 px-1 [&_button]:relative">
+      <div className="grid grid-cols-5 gap-1">
+        <button disabled className="rounded-md bg-theme-75 brightness-50">
+          <div className="text-xs md:text-xl w-full text-grid-400 [&_p]:text-gray-300">
             <div>
               <FormattedMessage id="common.playerDragon" />
             </div>
@@ -45,6 +45,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             </div>
           </div>
         </button>
+
         <button
           disabled={isDisabled}
           onClick={() =>
@@ -57,18 +58,19 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             })
           }
           className={cx(
-            'm-1 rounded-md bg-theme-75',
+            'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
           <BetAreaVer target={betState?.playerPairChips} />
-          <div className="text-xl px-3 w-full text-grid-400 [&_p]:text-gray-300">
+          <div className="text-xs md:text-xl w-full text-grid-400 [&_p]:text-gray-300">
             <FormattedMessage id="screens.baccaratRoom.playerPair" />
             <div>
               <p>1:11</p>
             </div>
           </div>
         </button>
+
         <button
           disabled={isDisabled}
           onClick={() =>
@@ -81,16 +83,17 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             })
           }
           className={cx(
-            'm-1 rounded-md bg-theme-75',
+            'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
           <BetAreaVer target={betState?.super6Chips} />
-          <div className="px-1 m-auto w-full text-grid-200">
+          <div className="text-xs md:text-xl m-auto w-full text-grid-200">
             <div className="font-bold">SUPER 6</div>
             <p className="text-gray-300">1:20</p>
           </div>
         </button>
+
         <button
           disabled={isDisabled}
           onClick={() =>
@@ -103,13 +106,13 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             })
           }
           className={cx(
-            'm-1 rounded-md bg-theme-75',
+            'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
           <BetAreaVer target={betState?.dealerPairChips} />
 
-          <div className="text-xl px-3 w-full text-grid-100 [&_p]:text-gray-300 ">
+          <div className="text-xs md:text-xl w-full text-grid-100 [&_p]:text-gray-300 ">
             <div>
               <FormattedMessage id="screens.baccaratRoom.dealerPair" />
             </div>
@@ -118,8 +121,9 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             </div>
           </div>
         </button>
-        <button disabled className="m-1 rounded-md bg-theme-75 brightness-50">
-          <div className="px-3 w-full text-grid-100 [&_p]:text-gray-300 ">
+
+        <button disabled className="rounded-md bg-theme-75 brightness-50">
+          <div className="text-xs md:text-xl w-full text-grid-100 [&_p]:text-gray-300 ">
             <div className="">
               <FormattedMessage id="common.dealerDragon" />
             </div>
@@ -129,7 +133,8 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
           </div>
         </button>
       </div>
-      <div className="grid grid-cols-3 gap-2">
+
+      <div className="grid grid-cols-3 gap-1">
         <button
           disabled={isDisabled}
           onClick={() =>
@@ -142,20 +147,21 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             })
           }
           className={cx(
-            'm-0.5 rounded-md bg-theme-75',
+            'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
           <BetAreaVer target={betState?.playerChips} />
           <div className="m-auto w-2/3 text-grid-400 [&_p]:text-gray-300">
-            <div className="text-4xl font-bold">
+            <div className="text-xl font-bold">
               <FormattedMessage id="screens.baccaratRoom.player" />
             </div>
-            <div>
+            <div className='text-sm'>
               <p>1:1</p>
             </div>
           </div>
         </button>
+
         <button
           disabled={isDisabled}
           onClick={() =>
@@ -168,16 +174,16 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             })
           }
           className={cx(
-            'm-0.5 rounded-md bg-theme-75',
+            'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
           <BetAreaVer target={betState?.tieChips} />
           <div className="m-auto w-2/3 text-grid-300 [&_p]:text-gray-300">
-            <div className="text-4xl font-bold">
+            <div className="text-xl font-bold">
               <FormattedMessage id="common.simpleTie" />
             </div>
-            <div>
+            <div className='text-sm'>
               <p>1:8</p>
             </div>
           </div>
@@ -194,17 +200,17 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             })
           }
           className={cx(
-            'm-0.5 rounded-md bg-theme-75',
+            'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
           <BetAreaVer target={betState?.dealerChips} />
 
           <div className="m-auto w-2/3 text-grid-100 [&_p]:text-gray-300">
-            <div className="text-4xl font-bold">
+            <div className="text-xl font-bold">
               <FormattedMessage id="screens.baccaratRoom.dealer" />
             </div>
-            <div>{isRegular ? <p>1:1</p> : <p>1:0.95</p>}</div>
+            <div className='text-sm'>{isRegular ? <p>1:1</p> : <p>1:0.95</p>}</div>
           </div>
         </button>
       </div>
