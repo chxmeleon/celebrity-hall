@@ -12,7 +12,7 @@ const Progress: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className="flex relative m-auto w-full h-full rounded-full bg-theme-50/80 backdrop-blur-sm">
       <div className={countDownStyle}></div>
-      <div className="flex justify-center items-center m-auto w-[80%] h-[80%] rounded-full border">
+      <div className="flex justify-center items-center m-auto w-[80%] h-[80%] rounded-full border border-theme-300">
         {children}
       </div>
     </div>
