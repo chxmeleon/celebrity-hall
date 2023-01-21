@@ -20,6 +20,25 @@ const tileWrapperClassName =
   'absolute w-full h-full top-0 left-0 flex justify-center items-center'
 const tileContainerBorderClassName = 'border-r border-b'
 
+const bigRoadTieClassName =
+  'absolute flex justify-center items-center m-auto w-full h-[2.5px] bg-teal-600 -rotate-45 translate-y-0 aspect-square'
+
+export const BigRoadTie: React.FC<{ tie_count: number | undefined }> = ({
+  tie_count
+}) => {
+  return tie_count && tie_count !== 0 ? (
+    <>
+      {tie_count === 1 ? (
+        <div className={bigRoadTieClassName}></div>
+      ) : (
+        <div className="text-xs font-medium text-teal-600">{tie_count}</div>
+      )}
+    </>
+  ) : (
+    <></>
+  )
+}
+
 export const RoadTileDecoration: React.FC<{
   pair_result: PairResultType | undefined
 }> = ({ pair_result }) => {
@@ -109,6 +128,8 @@ export const BigRecordTileComponent: React.FC<{
       : 'border-transparent'
   )
 
+  console.log(road?.tie_count)
+
   return (
     <div
       className={cx(
@@ -120,6 +141,7 @@ export const BigRecordTileComponent: React.FC<{
       <div className={tileWrapperClassName}>
         <div className={bigRecordTileStyle}></div>
         <RoadTileDecoration pair_result={road?.pair_result} />
+        <BigRoadTie tie_count={road?.tie_count} />
       </div>
     </div>
   )
@@ -145,6 +167,9 @@ export const BigEyeRecordTileComponent: React.FC<SmallRoadTileProps> = ({
       ? outlineTileMapping[road.repetition ? 'dealer' : 'player'].className
       : 'border-transparent'
   )
+
+  console.log(road)
+
   return (
     <div
       className={cx(
@@ -229,14 +254,17 @@ const roadGridClassName = 'relative block w-full'
 type GridProps = React.PropsWithChildren<{
   className?: string
 }>
+
 export const BaseGrid: React.FC<GridProps> = ({ className, children }) => (
   <div className={cx(roadGridClassName, roadBorderClassName, className)}>
     {children}
   </div>
 )
+
 export const BigRoadGrid: React.FC<React.PropsWithChildren> = ({
   children
 }) => <div className={cx(roadGridClassName)}>{children}</div>
+
 export const SmallRoadGrid: React.FC<React.PropsWithChildren> = ({
   children
 }) => <div className={cx(roadGridClassName)}>{children}</div>
