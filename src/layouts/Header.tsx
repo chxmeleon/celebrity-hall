@@ -1,4 +1,4 @@
-import { clsx as cx } from 'clsx'
+import clsx, { clsx as cx } from 'clsx'
 import { useAuth } from '@/contexts/AuthContext'
 import { useSetup } from '@/contexts/SetupContext'
 import { RightSidebarButton } from '@/components/common/Button'
@@ -23,7 +23,7 @@ const icons = {
   sexy: cx`i-mdi-head-heart-outline text-2xl`
 }
 
-const Header = () => {
+const Header: React.FC<{ size?: 'small' | 'default' }> = ({ size }) => {
   const { user } = useWallet()
   const { logout } = useAuth()
   const { openSetup, openNotice } = useSetup()
@@ -51,7 +51,12 @@ const Header = () => {
 
   return (
     <header className="relative" ref={sidebarRef} onClick={onCloseSide}>
-      <nav className="absolute top-0 left-0 z-40 w-full h-12 border-b bg-theme-50 border-b-theme-75">
+      <nav
+        className={clsx(
+          'absolute top-0 left-0 z-40 w-full border-b bg-theme-50 border-b-theme-75',
+          size === 'small' ? 'h-9' : 'h-12'
+        )}
+      >
         <div className="flex justify-between items-center w-full h-full">
           <div className="flex ml-1 w-full h-full md:hidden">
             <a href="/home/rooms" className="my-auto ">
@@ -62,14 +67,14 @@ const Header = () => {
             <div className="m-auto w-2/3 text-xs md:hidden">
               <div className="m-auto w-2/3 text-right">
                 <p className="truncate">{user?.profile?.nickname}</p>
-                <p className="inline-flex pt-1 truncate text-theme-300">
+                <p className="inline-flex truncate text-theme-300">
                   <span>$</span>
                   <span>{user?.profile?.balance?.toLocaleString()}</span>
                 </p>
               </div>
             </div>
             <div
-              className="flex justify-around items-center w-[5rem] bg-theme-50"
+              className="flex justify-around items-center w-[5rem]"
               onClick={stopProp}
             >
               {/* <button className={icons.heart}></button> */}
@@ -81,9 +86,11 @@ const Header = () => {
               <div className="relative">
                 <button className={icons.bar} onClick={onToggle}></button>
                 <div
-                  className={`${
-                    toggle ? '' : ' hidden'
-                  } absolute w-[17.5rem] min-h-fit max-h-fit -translate-x-[16rem] z-40 bg-theme-50/95 border border-theme-75 border-y-transparent mt-2`}
+                  className={clsx(
+                    toggle ? '' : ' hidden',
+                    size === 'small' ? '' : 'mt-1',
+                    'absolute w-[17.5rem] min-h-fit max-h-fit -translate-x-[16rem] z-40 bg-theme-50/95 border border-theme-75 border-y-transparent'
+                  )}
                 >
                   <div
                     className="inline-block w-full text-lg"
