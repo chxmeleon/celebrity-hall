@@ -19,7 +19,7 @@ const ProtectedLayoutForRoom: React.FC = () => {
      before:absolute before:w-full before:h-full before:bg-black/20 before:content-['']`
 
   return (
-    <main id='proot' className="w-full h-full">
+    <main className="relative w-full h-full">
       <SetupModal />
       <NoticeModal />
       <section className="relative w-full h-full border aspect-video border-theme-70">

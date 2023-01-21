@@ -8,11 +8,11 @@ const SetupModal: React.FC = () => {
 
   return (
     <div
-      className={`${isShowSetup ? '' : 'hidden'} relative w-full h-full`}
+      className={`${isShowSetup ? '' : 'hidden'}  absolute w-full h-full`}
     >
       <div
         onClick={closeSetup}
-        className="flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center w-full h-screen bg-black/30 backdrop-blur-sm"
+        className="flex overflow-x-hidden overflow-y-hidden absolute inset-0 z-50 justify-center items-center w-full h-screen bg-black/30 backdrop-blur-sm"
       >
         <div
           onClick={(e) => {

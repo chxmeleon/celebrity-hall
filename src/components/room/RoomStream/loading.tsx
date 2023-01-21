@@ -1,7 +1,7 @@
 import { clsx as cx } from 'clsx'
 import { PropsWithChildren } from 'react'
-import LogoImg from '@/assets/login_logo.webp'
-import BgImg from '@/assets/login_bg.avif'
+import LogoImg from '/login_logo.webp'
+import BgImg from '/login_bg.avif'
 import { FormattedMessage } from 'react-intl'
 
 const Progress: React.FC<PropsWithChildren> = ({ children }) => {
@@ -20,10 +20,6 @@ const Progress: React.FC<PropsWithChildren> = ({ children }) => {
 }
 
 const Loading: React.FC = () => {
-  const bgImage = cx`
-    bg-fixed bg-center bg-cover
-    fixed top-0 left-0 w-full h-full bg-no-repeat z-[-1] bg-[url('../assets/login_bg.avif')] 
-    `
 
   return (
     <div className="flex absolute z-50 flex-col w-full h-full">

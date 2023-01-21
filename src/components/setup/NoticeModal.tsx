@@ -15,7 +15,7 @@ const NoticeModal: React.FC = () => {
 
   return (
     <div
-      className={`${isShowNotice ? 'block' : 'hidden'} relative w-full h-full`}
+      className={`${isShowNotice ? 'block' : 'hidden'} absolute w-full h-full`}
     >
       <div
         onClick={closeNotice}
@@ -33,13 +33,27 @@ const NoticeModal: React.FC = () => {
               className="text-2xl i-heroicons-x-circle"
             ></button>
           </div>
-          <div className="h-[90%] w-full pl-3 overflow-y-scroll ">
+          <div className="h-[90%] w-full pl-3 overflow-y-scroll">
             {noticeData.map(
-              (item: { _typrename: string; id: string; content: string }) => {
+              (item: {
+                _typrename: string
+                id: string
+                content: string
+                createdAt: string
+              }) => {
+                const date =
+                  item?.createdAt.slice(0, 10) +
+                  ' ' +
+                  item?.createdAt.slice(11, 16)
                 return (
-                  <div key={item.id}>
-                    <p>{item.id}</p>
-                    <p>{item.content}</p>
+                  <div
+                    className="py-4 px-3 m-auto mb-2 w-full rounded-md border md:py-6 md:px-5 md:w-5/6 border-theme-300/80 bg-theme-50/70"
+                    key={item.id}
+                  >
+                    <div className="flex justify-end pr-3 pb-2 font-medium">
+                      <p>{date}</p>
+                    </div>
+                    <p className="my-3 tracking-wide leading-8 break-words">{item.content}</p>
                   </div>
                 )
               }
