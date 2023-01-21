@@ -39,7 +39,12 @@ function App() {
 
       let scaling = 1
       let width = ''
-      if (!isMobile) {
+      if (isMobile) {
+        const bodyScrollHeight = document.body.scrollHeight
+        if (bodyScrollHeight > windowHeight) {
+          scaling = windowHeight / bodyScrollHeight
+        }
+      }else {
         if (windowHeight / bodyHeight > windowWidth / displayWidth) {
           scaling = windowWidth / displayWidth
         } else {
