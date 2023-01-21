@@ -252,8 +252,8 @@ const Room = () => {
 
   return (
     <>
-      <Responsive.Desktop className="h-full w-full">
-        <section className="flex relative flex-col h-full w-full">
+      <Responsive.Desktop className="w-full h-full">
+        <section className="flex relative flex-col w-full h-full">
           <div className="relative w-full h-4/5">
             {isSecondCam && secoundStreamName && secoundStreamKey ? (
               <RoomStream
@@ -272,7 +272,7 @@ const Room = () => {
             ) : null}
             <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
               <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
-                <div className="flex flex-col justify-around items-end h-24 w-[5.5rem]">
+                <div className="flex flex-col justify-around items-end h-24">
                   <Tooltip
                     label={formatMessage({
                       id: 'components.stream.camSwitch',
@@ -280,7 +280,6 @@ const Room = () => {
                     })}
                     fontSize="small"
                     placement="left"
-                    bg="gray.300"
                   >
                     <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
                       <button
@@ -298,7 +297,6 @@ const Room = () => {
                     })}
                     fontSize="small"
                     placement="left"
-                    bg="gray.300"
                   >
                     <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
                       <button
@@ -450,7 +448,7 @@ const Room = () => {
                   </div>
                 </div>
 
-                <div className="w-[148px] h-full">
+                <div className="h-full w-[148px]">
                   <AskGrid />
                 </div>
               </div>
@@ -465,7 +463,7 @@ const Room = () => {
       </Responsive.Desktop>
 
       <Responsive.Default>
-        <section className="flex flex-col w-full bg-theme-50  375:h-[93vh] 390:h-[94vh] 414:h-[94.3vh]">
+        <section className="flex flex-col w-full bg-theme-50 375:h-[93vh] 390:h-[94vh] 414:h-[94.3vh]">
           <div className="relative flex-grow flex-shrink-0 w-full h-auto aspect-video">
             <div className="grid absolute z-20 grid-cols-3 grid-rows-2 w-full h-full">
               <div className="flex pl-1">
@@ -480,12 +478,11 @@ const Room = () => {
                       placement="right"
                       bg="gray.300"
                     >
-
-                    <Link
-                      to="/home/rooms"
-                      className="m-auto text-xl i-heroicons-arrow-uturn-left-20-solid"
-                    ></Link>
-</Tooltip>
+                      <Link
+                        to="/home/rooms"
+                        className="m-auto text-xl i-heroicons-arrow-uturn-left-20-solid"
+                      ></Link>
+                    </Tooltip>
                   </div>
 
                   <div className="flex w-8 h-8 rounded-md bg-theme-50/80">

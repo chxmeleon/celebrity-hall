@@ -73,14 +73,14 @@ export const I18nTable: React.FC<{
   type: string
 }> = ({ data, type }) => {
   return (
-    <TableContainer className="w-full">
-      <Table variant="unstyled" className="m-auto">
-        <Thead className="border-b border-[#A7A7A7] h-[50px]">
-          <Tr>
-            <Th>
+    <TableContainer className="w-full px-4 overflow-y-scroll">
+      <Table variant="unstyled" className="m-auto w-full">
+        <Thead className="border-b border-[#A7A7A7] h-[49px] ">
+          <Tr className="w-full px-1">
+            <Th className="w-3/4 text-left ">
               <FormattedMessage id="profile.table.time" defaultMessage="時間" />
             </Th>
-            <Th>
+            <Th className="w-1/4 text-right">
               <FormattedMessage
                 id="profile.table.point"
                 defaultMessage="點數"
@@ -88,7 +88,7 @@ export const I18nTable: React.FC<{
             </Th>
           </Tr>
         </Thead>
-        <Tbody>
+        <Tbody className="py-1">
           {data.map((item: any, idx: number) => (
             <TableBody item={item} type={type} key={idx} />
           ))}
@@ -115,9 +115,11 @@ export const TableBody: React.FC<{
   }
 
   return (
-    <Tr key={item.id}>
-      <Td>{item.createdAt}</Td>
-      <Td isNumeric>{point}</Td>
+    <Tr  key={item.id}>
+      <Td className="w-20 text-left">{item.createdAt}</Td>
+      <Td className="text-right" isNumeric>
+        {point}
+      </Td>
     </Tr>
   )
 }
