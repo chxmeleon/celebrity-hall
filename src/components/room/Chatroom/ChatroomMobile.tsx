@@ -89,11 +89,11 @@ const ChatroomMobile = () => {
   useClickOutside(clickRef, isPickerShow, setIsPickerShow)
   useClickOutside(giftRef, isGiftShow, setIsGiftShow)
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     if (messageRef) {
       messageRef.scrollIntoView(false)
     }
-  }
+  },[messageRef])
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -145,7 +145,7 @@ const ChatroomMobile = () => {
               <div key={`message-${idx}`}>
                 {content?.type !== 'Message::User' ? (
                   <div className="flex justify-center items-center py-1 m-auto w-4/5">
-                    <div className="py-1.5 px-5 text-sm font-medium text-center bg-gradient-to-tr from-rose-400 to-orange-200 rounded-lg tracking-[0.05rem] text-red-900/90">
+                    <div className="py-1.5 px-5 text-sm font-medium text-center bg-orange-200 bg-gradient-to-tr from-rose-400 to-orange-200 rounded-lg tracking-[0.05rem] text-red-900/90">
                       {content?.body}
                     </div>
                   </div>
