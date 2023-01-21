@@ -196,19 +196,19 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
     const pc = new RTCPeerConnection()
     pc.addTransceiver('audio', { direction: 'recvonly' })
     pc.addTransceiver('video', { direction: 'recvonly' })
-    pc.addEventListener('addstream', (e: any) => {
-      videoRef.srcObject = e.stream
+    pc.ontrack = (e) => {
+      videoRef.srcObject = e.streams[0]
       if (!videoRef.paused) {
         videoRef.play()
       }
-    })
+    }
 
     pc.createOffer({
       offerToReceiveAudio: true,
       offerToReceiveVideo: true
     })
       .then(async (offer) => {
-        const [_, { data }] = await Promise.all([
+        const [, { data }] = await Promise.all([
           pc.setLocalDescription(offer),
           axios.post(
             `https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`,
@@ -220,7 +220,11 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
           )
         ])
 
-        const answer = new RTCSessionDescription(data.remoteSdp)
+        const { sdp, type } = data.remoteSdp
+        const answer = new RTCSessionDescription({
+          type,
+          sdp
+        })
         return pc.setRemoteDescription(answer)
       })
       .catch((error) => {
