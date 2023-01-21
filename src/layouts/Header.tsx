@@ -55,11 +55,7 @@ const Header = () => {
         <div className="flex justify-between items-center w-full h-full">
           <div className="flex ml-1 w-full h-full md:hidden">
             <a href="/home/rooms" className="my-auto ">
-              <img
-                src={logoImgMobile}
-                alt="logo img"
-                className="w-auto h-6"
-              />
+              <img src={logoImgMobile} alt="logo img" className="w-auto h-6" />
             </a>
           </div>
           <div className="flex justify-end items-center px-3 w-full h-full bg-theme-50">
@@ -68,7 +64,7 @@ const Header = () => {
                 <p className="truncate">{user?.profile?.nickname}</p>
                 <p className="inline-flex pt-1 truncate text-theme-300">
                   <span>$</span>
-                  <span>{user?.profile?.balance}</span>
+                  <span>{user?.profile?.balance?.toLocaleString()}</span>
                 </p>
               </div>
             </div>

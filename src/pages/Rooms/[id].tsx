@@ -375,7 +375,7 @@ const Room = () => {
                   <div className="inline-flex items-center px-2">
                     <FormattedMessage id="screens.room.bet" />
                     <p className="px-2">|</p>
-                    <p className="px-2">{totalAmount}</p>
+                    <p className="px-2">{totalAmount?.toLocaleString()}</p>
                   </div>
                 </div>
                 <div className="flex justify-around items-center w-1/3">
@@ -553,7 +553,7 @@ const Room = () => {
             <div className="inline-flex items-center px-2 pb-2 h-full text-sm">
               <FormattedMessage id="screens.room.bet" />
               <p className="px-2">|</p>
-              <p className="px-2 pt-0.5">{totalAmount}</p>
+              <p className="px-2 pt-0.5">{totalAmount?.toLocaleString()}</p>
             </div>
           </div>
 
