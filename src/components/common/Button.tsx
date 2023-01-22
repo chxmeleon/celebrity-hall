@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { buttonStyle as bts } from './buttonStyle'
 
 type LoginButtonProps = {
-  onClick: React.MouseEventHandler<HTMLButtonElement>
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 type BetButtonProps = {
