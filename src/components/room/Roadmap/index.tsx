@@ -40,10 +40,9 @@ function BaseRoadComponent<T>({
         const emptyTileLength = (columnSize ?? row.length) - row.length
         const emptyTileSize = emptyTileLength >= 0 ? emptyTileLength : 0
         let offset = 0
-        if (roads?.[0]?.[columnSize ?? 0 + 1] !== undefined) {
-          offset =  columnSize ?? 0 + offset
+        if (roads?.[0]?.[columnSize ?? 0 + 1] !== null && undefined) {
+          offset += columnSize ?? 0
         }
-
         return (
           <div className="flex w-full" key={idx}>
             {[
@@ -51,7 +50,7 @@ function BaseRoadComponent<T>({
               ...Array(emptyTileSize).fill(null),
               ...Array(offset).fill(null)
             ]
-              .slice(offset, columnSize as number + offset)
+              .slice(offset, (columnSize as number) + offset)
               .map((road, index) => {
                 const tileProps =
                   size === 'small'

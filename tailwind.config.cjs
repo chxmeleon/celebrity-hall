@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const withMT = require('@material-tailwind/react/utils/withMT')
 const plugin = require('tailwindcss/plugin')
+const colors = require('tailwindcss/colors')
 const rotate3d = plugin(function ({ addUtilities }) {
   addUtilities({
     '.rotate-x-0': {
@@ -45,6 +46,14 @@ module.exports = withMT({
   theme: {
     extend: {
       colors: {
+        rose: colors.rose,
+        slate: colors.slate,
+        stone: colors.stone,
+        sky: colors.sky,
+        cyan: colors.cyan,
+        lime: colors.lime,
+        zinc: colors.zinc,
+        neutral: colors.neutral,
         theme: {
           50: '#131313',
           70: '#252525',
