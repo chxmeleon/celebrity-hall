@@ -16,6 +16,7 @@ type AuthProps = {
   auth: string | null
   isExpired: boolean
   isError: boolean
+  isTrait: boolean
   login: (account: string, password: string) => Promise<void>
   logout: () => void
   traitLogin: (token: string) => void
@@ -47,6 +48,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     'exp',
     ' '
   )
+  const [isTrait, setIsTrait] = useState(false)
   const [isError, setIsError] = useState<boolean>(false)
   const navigate = useNavigate()
   const { trigger: onLogin } = useSWRMutation(
@@ -86,6 +88,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       if (token !== undefined) {
         setAuth(token)
         setExpiredTime(tomorrow)
+        setIsTrait(true)
         navigate('/home/rooms')
       }
     },
@@ -96,7 +99,10 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setAuth(null)
     setExpiredTime('')
     navigate('/')
-  }, [navigate, setAuth, setExpiredTime])
+    if (isTrait) {
+      setIsTrait(false)
+    }
+  }, [navigate, setAuth, setExpiredTime, isTrait])
 
   const [isExpired, setIsExpired] = useState(false)
 
@@ -114,6 +120,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     auth,
     isExpired,
     isError,
+    isTrait,
     login,
     logout,
     traitLogin

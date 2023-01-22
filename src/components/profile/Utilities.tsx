@@ -42,13 +42,15 @@ export const Info: React.FC<{
 
 export const Button: React.FC<{
   onClick: React.MouseEventHandler<HTMLButtonElement>
+  isTrait: boolean
   iconId: string
   i18nDefaultMessage: string
   i18nId: string
-}> = ({ onClick, iconId, i18nDefaultMessage, i18nId }) => {
+}> = ({ onClick, iconId, i18nDefaultMessage, i18nId, isTrait }) => {
   return (
     <button
       onClick={onClick}
+      disabled={isTrait && true}
       className="flex items-center justify-center bg-[#303030] rounded-[30px] sm:w-[140px] sm:h-[30px] w-[117px] h-[25px] sm:mb-[19px] mb-[9px] sm:text-[13px] text-[10px]"
     >
       <div className={`${iconId} text-lg mr-[6px]`} />
