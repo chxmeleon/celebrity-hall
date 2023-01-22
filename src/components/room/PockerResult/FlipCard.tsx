@@ -22,7 +22,7 @@ const Card: React.FC<{
       <div
         className={`${
           isCardOpen ? 'md:rotate-y-0' : ' opacity-0 md:-rotate-y-180'
-        } transition-all duration-200 ease-in-out relative w-14 m-auto will-change-transform`}
+        } transition-all duration-200 ease-in-out relative w-[52px] m-auto will-change-transform`}
       >
         <img src={`/cards/${item}.webp`} alt="pocker image" />
         <div

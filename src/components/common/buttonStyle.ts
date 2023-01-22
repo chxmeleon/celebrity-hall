@@ -125,7 +125,7 @@ export const buttonStyle = cva('w-full text-center m-auto', {
       small: 'text-sm py-1 w-[130px]',
       medium: 'text-lg w-[230px] font-medium',
       none: '',
-      little: 'py-1 px-3'
+      little: 'py-1 px-3 mx-1.5'
     },
   },
   compoundVariants: [

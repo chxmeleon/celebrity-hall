@@ -399,7 +399,7 @@ const Room = () => {
                   {/*   <button className="text-xl i-heroicons-pencil-square-20-solid" /> */}
                   {/* </div> */}
                 </div>
-                <div className="flex pl-6 w-[36%] text-theme-300">
+                <div className="flex justify-around pl-4 w-[33%] text-theme-300">
                   <BetButton isDisabled={isCancelDisabled} onClick={onCancel}>
                     <div className="text-2xl i-heroicons-x-mark-solid"></div>
                     <FormattedMessage id="common.cancel" />

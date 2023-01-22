@@ -35,7 +35,10 @@ function BaseRoadComponent<T>({
   TileComponent
 }: BaseRoadComponentProps<T>) {
   let offset = 0
-  if (roads?.[0]?.[(columnSize ?? 0) + 1] !== null || undefined ) {
+  if (
+    roads?.[0]?.[(columnSize ?? 0) + 1] !== null &&
+    roads?.[0]?.[(columnSize ?? 0) + 1] !== undefined
+  ) {
     offset += columnSize ?? 0
   }
 
