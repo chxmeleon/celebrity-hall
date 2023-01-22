@@ -92,6 +92,17 @@ const Rule = () => {
           </p>
         </div>
 
+        <div className="game-info">
+          <h2>● 免水百家樂規則</h2>
+          <p>免水百家樂的玩法及規則與標準百家樂大致相同，特別之處在於莊家免抽水，即莊贏賠率為1：1(莊家以6點大過閒家，下注莊家贏，賠率1賠0.5)。</p>
+        </div>
+        <div className="game-info">
+          <h2>● 超和遊戲玩法</h2>
+          <p>押注和局開出的點數，不同點數對應不同賠率(押中和局開出的點數予以派彩)</p>
+          <div className="overflow-x-auto py-5 w-full min-w-lg">
+            <RuleTable data={ruleContext?.table1} rows={11} cols={7} span={3} />
+          </div>
+        </div>
         <div className="game-alert">
           <h2>● 請注意！！（勾選不使用確認投注鍵進行投注）</h2>
           <ol>
