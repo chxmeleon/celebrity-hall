@@ -28,7 +28,7 @@ export const RuleTable: React.FC<RuleProps> = ({ data, rows, cols, span }) => {
   return (
     <div
       className={cx(
-        'text-sm grid text-center border border-theme-300/50 rounded-md rule-table',
+        'min-w-[780px] text-sm grid text-center border border-theme-300/50 rounded-md rule-table',
         gridMapper?.rows[rows]
       )}
     >

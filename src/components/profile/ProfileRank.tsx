@@ -8,9 +8,8 @@ import { useSetup } from '@/contexts/SetupContext'
 
 const ProfileRank = () => {
   const { loading, data } = useQuery<types.GET_PROFILE>(GET_PROFILE)
-  const { logout, isTrait } = useAuth()
-  const {openEditPassword, openEditNickname} = useSetup()
-
+  const { logout, isTrial } = useAuth()
+  const { openEditPassword, openEditNickname } = useSetup()
 
   if (loading) {
     return <div className="m-[50px]">loading</div>
@@ -75,22 +74,21 @@ const ProfileRank = () => {
 
         <div className="pt-5">
           <Button
-            isTrait={isTrait}
+            isTrial={isTrial}
             onClick={openEditNickname}
             iconId="i-mdi-file-edit-outline"
             i18nId="profile.button.edit"
             i18nDefaultMessage="修改暱稱"
           />
           <Button
-
-            isTrait={isTrait}
+            isTrial={isTrial}
             onClick={openEditPassword}
             iconId="i-mdi-onepassword"
             i18nDefaultMessage="修改密碼"
             i18nId="profile.button.password"
           />
           <Button
-            isTrait={false}
+            isTrial={false}
             onClick={logout}
             iconId="i-heroicons-arrow-right-on-rectangle-solid"
             i18nDefaultMessage="帳號登出"

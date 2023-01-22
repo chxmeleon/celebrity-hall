@@ -79,14 +79,15 @@ const ChipButtonList: React.FC<{
 }
 
 const Room = () => {
-  const { rooms } = useContext(RoomDataContext)
+  const { rooms, refetchRooms } = useContext(RoomDataContext)
   const { id: roomId } = useParams<{ id: string }>()
   const room = useMemo(
     () => (roomId ? rooms.find((room) => room.id === roomId) : undefined),
     [roomId, rooms]
   )
 
-  const { isTrait } = useAuth()
+
+  const { isTrial } = useAuth()
   const { onResizeWindow } = useContext(ResponsiveContext)
   useEffect(() => {
     if (room) {
@@ -252,13 +253,14 @@ const Room = () => {
     } else if (gameState === 'CLOSE') {
       setIsDisable(true)
       dispatchBet({ type: 'newRound' })
+      refetchRooms?.()
     } else {
       setIsDisable(true)
       setIsConfirmDisabled(true)
       setIsRepeatDisabled(true)
       setIsCancelDisabled(true)
     }
-  }, [gameState, dispatchBet, totalAmount])
+  }, [gameState, dispatchBet, totalAmount, refetchRooms])
 
   return (
     <>
@@ -468,7 +470,7 @@ const Room = () => {
                 <div
                   className={cx(
                     'absolute bottom-0 w-[104%] h-full flex justify-center items-center right-0 bg-theme-50/60 z-50',
-                    isTrait ? 'block' : 'hidden'
+                    isTrial ? 'block' : 'hidden'
                   )}
                 >
                   <div className="text-xl text-white">
@@ -634,7 +636,7 @@ const Room = () => {
             <div
               className={cx(
                 'absolute bottom-0 w-full h-11 flex justify-center items-center right-0 bg-theme-50/60 z-50',
-                isTrait ? 'block' : 'hidden'
+                isTrial ? 'block' : 'hidden'
               )}
             >
               <div className="text-xl text-white">

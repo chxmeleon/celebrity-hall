@@ -4,7 +4,7 @@ import { ruleContext } from '@/libs/ruleContext'
 
 const Rule = () => {
   const mainStyle = cx(
-    'w-4/5 h-full pt-24 px-12',
+    ' w-full md:w-4/5 h-full pt-24 px-7 md:px-12',
     '[&_p]:leading-9',
     '[&_.game-alert]:text-rose-500 [&_.game-alert]:py-10',
     '[&_.game-info>h2]:text-teal-300 [&_.game-info]:py-10',
@@ -54,7 +54,7 @@ const Rule = () => {
         </div>
         <div className="game-info">
           <h2>● 補牌規則</h2>
-          <div className="overflow-x-auto py-5 w-full min-w-lg">
+          <div className="overflow-x-auto py-5 w-full">
             <RuleTable data={ruleContext?.table1} rows={11} cols={7} span={3} />
           </div>
           <p className="waring-note">
@@ -71,7 +71,7 @@ const Rule = () => {
             標準/免水百家樂下注選擇：莊贏、閒贏、和局、莊對、閒對、莊龍寶、閒龍寶、莊例牌、閒例牌、任意一對、完美對子、莊單、莊雙、閒單、閒雙、大、小、Super
             6、超和
           </p>
-          <div className="overflow-x-auto py-5 w-full min-w-lg">
+          <div className="overflow-x-auto py-5 w-full ">
             <RuleTable data={ruleContext?.table2} rows={21} cols={6} span={3} />
           </div>
           <p className="waring-note">
@@ -103,7 +103,7 @@ const Rule = () => {
           <p>
             押注和局開出的點數，不同點數對應不同賠率(押中和局開出的點數予以派彩)
           </p>
-          <div className="overflow-x-auto py-5 w-full min-w-lg">
+          <div className="overflow-x-auto py-5 w-full ">
             <RuleTable data={ruleContext?.table3} rows={11} cols={6} span={4} />
           </div>
         </div>
@@ -133,7 +133,7 @@ const Rule = () => {
 
         <div className="game-info">
           <h2>● 閒龍寶/莊龍寶賠率表</h2>
-          <div className="overflow-x-auto py-5 w-full min-w-lg">
+          <div className="overflow-x-auto py-5 w-full ">
             <RuleTable data={ruleContext?.table4} rows={9} cols={2} span={0} />
           </div>
           <p>比牌舉例說明：</p>

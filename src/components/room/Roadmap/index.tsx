@@ -36,12 +36,11 @@ function BaseRoadComponent<T>({
 }: BaseRoadComponentProps<T>) {
   let offset = 0
   if (
-    roads?.[0]?.[(columnSize ?? 0) + 1] !== null &&
-    roads?.[0]?.[(columnSize ?? 0) + 1] !== undefined
+    roads?.[0]?.[columnSize ?? 0] !== null &&
+    roads?.[0]?.[columnSize ?? 0] !== undefined
   ) {
     offset += columnSize ?? 0
   }
-
   return (
     <Road.BaseGrid className={className}>
       {roads.slice(0, rowSize).map((row, idx) => {

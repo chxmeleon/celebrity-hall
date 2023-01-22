@@ -8,7 +8,7 @@ import { useSetup } from '@/contexts/SetupContext'
 
 const ProfileRankMobile = () => {
   const { loading, data } = useQuery<types.GET_PROFILE>(GET_PROFILE)
-  const { logout, isTrait } = useAuth()
+  const { logout, isTrial } = useAuth()
   const { openEditPassword, openEditNickname } = useSetup()
 
   if (loading) {
@@ -39,21 +39,22 @@ const ProfileRankMobile = () => {
           <div className="flex justify-end w-1/2 h-full">
             <div className="">
               <Button
-                isTrait={isTrait}
+                isTrial={isTrial}
                 onClick={openEditNickname}
                 iconId="i-mdi-file-edit-outline"
                 i18nId="profile.button.edit"
                 i18nDefaultMessage="修改暱稱"
               />
               <Button
-                isTrait={isTrait}
+                isTrial={isTrial}
                 onClick={openEditPassword}
                 iconId="i-mdi-onepassword"
                 i18nDefaultMessage="修改密碼"
                 i18nId="profile.button.password"
               />
               <Button
-                isTrait={false}
+
+                isTrial={false}
                 onClick={logout}
                 iconId="i-heroicons-arrow-right-on-rectangle-solid"
                 i18nDefaultMessage="帳號登出"

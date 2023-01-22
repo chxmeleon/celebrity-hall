@@ -24,12 +24,6 @@ export const RoomDataProvider: React.FC<React.PropsWithChildren> = ({
     }
   }, [data])
 
-  useEffect(() => {
-    setInterval(()=> {
-      refetch()
-    }, 32000)
-  }, [refetch])
-
   return (
     <RoomDataContext.Provider value={{ rooms, refetchRooms: refetch }}>
       {children}

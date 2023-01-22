@@ -29,6 +29,7 @@ const Router: React.FC = () => {
         <Route element={<RoomsLayout />}>
           <Route path="rooms/:id" element={<Room />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="intro-rule" element={<Rule />} />
         </Route>
       </Route>
       <Route path="home" element={<ProtectedLayout />}>
@@ -55,7 +56,6 @@ const Router: React.FC = () => {
           path="rankings/rounds-leaderboard"
           element={<UserRanking type="rounds" />}
         />
-        <Route path="intro-rule" element={<Rule />} />
       </Route>
     </Routes>
   )

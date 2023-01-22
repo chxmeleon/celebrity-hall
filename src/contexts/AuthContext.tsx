@@ -15,7 +15,7 @@ type AuthProps = {
   auth: string | null
   isExpired: boolean
   isError: boolean
-  isTrait: boolean
+  isTrial: boolean
   login: (account: string, password: string) => Promise<void>
   logout: () => void
   traitLogin: (token: string) => void
@@ -47,7 +47,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     'exp',
     ' '
   )
-  const [isTrait, setIsTrait] = useState(false)
+  const [isTrial, setIsTrial] = useLocalStorage<boolean>('isTrial', false)
   const [isError, setIsError] = useState<boolean>(false)
   const navigate = useNavigate()
   const { trigger: onLogin } = useSWRMutation(
@@ -87,21 +87,21 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       if (token !== undefined) {
         setAuth(token)
         setExpiredTime(tomorrow)
-        setIsTrait(true)
+        setIsTrial(true)
         navigate('/home/rooms')
       }
     },
-    [setAuth, setExpiredTime, navigate]
+    [setAuth, setExpiredTime, navigate, setIsTrial]
   )
 
   const logout = useCallback(() => {
     setAuth(null)
     setExpiredTime('')
     navigate('/')
-    if (isTrait) {
-      setIsTrait(false)
+    if (isTrial) {
+      setIsTrial(false)
     }
-  }, [navigate, setAuth, setExpiredTime, isTrait])
+  }, [navigate, setAuth, setExpiredTime, isTrial, setIsTrial])
 
   const [isExpired, setIsExpired] = useState(false)
 
@@ -119,7 +119,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     auth,
     isExpired,
     isError,
-    isTrait,
+    isTrial,
     login,
     logout,
     traitLogin
