@@ -7954,6 +7954,13 @@ export type createTrialUserVariables = Exact<{
 
 export type createTrialUser = { createTrialUser: { __typename: 'CreateTrialUserPayload', token: string | null } | null };
 
+export type UPDATE_PROFILEVariables = Exact<{
+  input: UpdateProfileInput;
+}>;
+
+
+export type UPDATE_PROFILE = { updateProfile: { __typename: 'UpdateProfilePayload', profile: { __typename: 'Profile', id: string, balance: number | null, username: string | null, avatar: string | null, totalEffectiveAmount: number | null, totalEffectiveXimaAmount: number | null, ximaTotal: number | null, winLimit: number | null, totalWinAmount: number | null, hideWinPoints: boolean | null, dividend: number | null, nickname: string | null, tableLimitMin: number | null, tableLimitMax: number | null, beta: boolean | null, isTrial: boolean, lineNotifyToken: string | null, dragonCount: number | null, jwtToken: string | null, platformDisableAdult: boolean | null, platformDisableCustomerService: boolean | null } | null, errors: Array<{ __typename: 'ModelError', message: string, attribute: string }> | null } | null };
+
 export type getStreamerRankingVariables = Exact<{
   range: Scalars['String'];
 }>;

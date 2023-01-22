@@ -5,6 +5,8 @@ import LeftSidebar from './LeftSidebar'
 import { useAuth } from '@/contexts/AuthContext'
 import SetupModal from '@/components/setup/SetupModal'
 import NoticeModal from '@/components/setup/NoticeModal'
+import EditPasswordModal from '@/components/setup/EditPasswordModal'
+import EditNickNameModal from '@/components/setup/EditNickNameModal'
 import { useActivedTab } from '@/hooks/rooms'
 import LeftSidebarForRoom from './LeftSidebarForRoom'
 
@@ -22,10 +24,12 @@ const ProtectedLayoutForRoom: React.FC = () => {
     <main className="relative w-full h-full">
       <SetupModal />
       <NoticeModal />
+      <EditPasswordModal />
+      <EditNickNameModal />
       <section className="relative w-full h-full border aspect-video border-theme-70">
         <div className={bgImage}></div>
-        <Header size='small' />
-        <div className="relative flex pt-9 justify-start w-full h-full">
+        <Header size="small" />
+        <div className="flex relative justify-start pt-9 w-full h-full">
           <LeftSidebarForRoom />
           <div className="relative w-full h-full bg-black">
             <Outlet />

@@ -12,7 +12,7 @@ const SetupModal: React.FC = () => {
     >
       <div
         onClick={closeSetup}
-        className="flex overflow-x-hidden overflow-y-hidden absolute inset-0 z-50 justify-center items-center w-full h-screen bg-black/30 backdrop-blur-sm"
+        className="flex overflow-x-hidden overflow-y-hidden absolute inset-0 z-50 justify-center items-center w-full h-full bg-black/30 backdrop-blur-sm"
       >
         <div
           onClick={(e) => {
