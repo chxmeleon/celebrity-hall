@@ -28,7 +28,7 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
     NodePlayer.debug(false)
     player.setView(`video-${streamName}-${streamKey}`)
     player.setBufferTime(0)
-    player.setScaleMode(1)
+    player.setScaleMode(2)
     player.setVolume(1.0)
     player.setKeepScreenOn()
     player.start(`https://live.vvip99.net/${streamName}/${streamKey}.flv`)
@@ -46,7 +46,7 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
       <div className="overflow-hidden relative w-full h-full">
         <canvas
           id={`video-${streamName}-${streamKey}`}
-          className="w-auto h-full"
+          className="w-auto h-full object-cover aspect-video"
         />
       </div>
     </div>
