@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
-const withMT = require("@material-tailwind/react/utils/withMT");
+const withMT = require('@material-tailwind/react/utils/withMT')
 const plugin = require('tailwindcss/plugin')
-const rotate3d = plugin(function({ addUtilities }) {
+const rotate3d = plugin(function ({ addUtilities }) {
   addUtilities({
     '.rotate-x-0': {
       transform: 'rotateX(0deg)'
@@ -89,11 +89,9 @@ module.exports = withMT({
       screens: {
         '1.5xl': '1440px',
         '3xl': '1520px',
-        '375': '375px',
-        '390': '390px',
-        '414': '414px',
-
-
+        375: '375px',
+        390: '390px',
+        414: '414px'
       },
       gridTemplateColumns: {
         15: 'repeat(15, minmax(0, 1fr))',
@@ -103,5 +101,5 @@ module.exports = withMT({
       }
     }
   },
-  plugins: [rotate3d]
+  plugins: [rotate3d, require('@tailwindcss/typography')]
 })

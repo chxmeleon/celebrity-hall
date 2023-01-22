@@ -16,6 +16,7 @@ import Mutualrooms from '@/pages/Mutualrooms'
 import Following from '@/pages/Following'
 import UserRanking from '@/pages/UserRanking'
 import ProtectedLayoutForRoom from '@/layouts/ProtectedLayoutForRoom'
+import Rule from '@/pages/Rule'
 
 const Router: React.FC = () => {
   return (
@@ -54,6 +55,7 @@ const Router: React.FC = () => {
           path="rankings/rounds-leaderboard"
           element={<UserRanking type="rounds" />}
         />
+        <Route path="intro-rule" element={<Rule />} />
       </Route>
     </Routes>
   )

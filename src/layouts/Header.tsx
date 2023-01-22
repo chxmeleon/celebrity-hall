@@ -125,9 +125,9 @@ const Header: React.FC<{ size?: 'small' | 'default' }> = ({ size }) => {
                       </p>
                     </RightSidebarButton>
                     <RightSidebarButton
-                      href=""
-                      isLink={false}
-                      isTarget={false}
+                      href="/home/intro-rule"
+                      isLink={true}
+                      isTarget={true}
                       onClick={() => null}
                     >
                       <i className={icons.info}></i>
