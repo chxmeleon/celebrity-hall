@@ -1,13 +1,16 @@
+import { RuleTable } from '@/components/common/ruleInfo'
 import { clsx as cx } from 'clsx'
+import { ruleContext } from '@/libs/ruleContext'
 
 const Rule = () => {
   const mainStyle = cx(
     'w-4/5 h-full pt-24 px-12',
     '[&_p]:leading-9',
-    '[&_.game-alert]:text-rose-300 [&_.game-alert]:py-10',
+    '[&_.game-alert]:text-rose-500 [&_.game-alert]:py-10',
     '[&_.game-info>h2]:text-teal-300 [&_.game-info]:py-10',
     '[&_h2]:text-xl [&_h2]:font-semibold [&_h2]:my-3',
-    '[&_ol]:list-decimal [&_ol]:ml-11 '
+    '[&_ol]:list-decimal [&_ol]:ml-11 ',
+    '[&_.waring-note]:text-rose-500 [&_.waring-note]:font-thin'
   )
 
   return (
@@ -18,7 +21,8 @@ const Rule = () => {
         </div>
         <div className="py-5">
           <p>
-            百家樂【Baccarat】是撲克遊戲，亦是賭場中常見的遊戲之一。百家樂源於意大利，十五世紀時期傳入法國，及至十九世紀時盛傳於英法等地。時至今日，百家樂是世界各地賭場中受歡迎的遊戲之一。於澳門的賭場中，百家樂賭桌的數目更是全球賭場之中最多。
+            <strong>百家樂【Baccarat】</strong>{' '}
+            是撲克遊戲，亦是賭場中常見的遊戲之一。百家樂源於意大利，十五世紀時期傳入法國，及至十九世紀時盛傳於英法等地。時至今日，百家樂是世界各地賭場中受歡迎的遊戲之一。於澳門的賭場中，百家樂賭桌的數目更是全球賭場之中最多。
             百家樂特別之處在於採用先發牌後下注玩法，玩家可於荷官發牌後，選擇欲下注方位進行投注，遊戲過程中更具公平、公正性。
           </p>
         </div>
@@ -27,11 +31,41 @@ const Rule = () => {
           <p>
             每局開始荷官會按百家牌例發牌（牌面朝下），「閒家」「莊家」各先派兩張牌，以「閒家」先發，再發2張牌放在補牌區的位置上，如前兩張未分出勝負需再按「牌例」發第三張的牌，最多每方3張牌，誰最接近9點即為勝方，相同點數即和局。如當局只補一張牌，剩餘的牌將作為下一局閒家第一張使用。以此類推，每新開一局，桌面上保持有6張牌在相對應的位置上。
           </p>
-          <p className="text-rose-300">
+          <p className="waring-note">
             ※ 遊戲左下方可切換單人/多人投注模式,
             帶領玩家體驗不同遊戲介面跟投注方位。
           </p>
         </div>
+        <div className="game-info">
+          <h2>● 遊戲規則</h2>
+          <p>
+            發牌員會派出【莊家】和【閒家】兩份牌，總得9點或最接近9點的一家勝出。
+          </p>
+          <p>所有從2到9的牌，其數值就是他們顯示的點數：</p>
+          <p>
+            A當作是1點，K、Q、J、10是0點，而加起來等於10的也當作是0點；當任何一家頭兩張牌的點數總和為8或9，就稱為【天生贏家】。任何一家拿到【天生贏家】，牌局就算結束，不再補牌。9最大，0最小；點數相同則為和。派出兩張牌後，如果需要補牌，將依照補牌規則多發一張牌。
+          </p>
+          <h3 className="pt-3 pb-2 font-medium text-rose-500 text-[17px]">
+            標準百家樂遊戲方法
+          </h3>
+          <p>
+            遊戲大廳進入真人百家樂默認免水百家樂模式，此時可通過標準百家樂按鈕切換至標準百家樂遊戲；在標準百家樂遊戲也可通過免水百家樂按鈕切換回免水百家樂遊戲。未下注時，可以隨時做切換，選擇標準百家樂或免水百家樂進行投注。有下注時，要取消下注或者下注結算完畢才能進行互相切換。
+          </p>
+        </div>
+        <div className="game-info">
+          <h2>● 補牌規則</h2>
+          <div className="overflow-x-auto py-5 w-full min-w-lg">
+            <RuleTable data={ruleContext?.table1} />
+          </div>
+          <p className="waring-note">
+            ※
+            若莊閒兩家（頭兩張牌）為6點或7點，即定輸贏（如雙方同為6點或7點，即為和局）。
+          </p>
+          <p className="waring-note">
+            ※ 莊家補牌備註：閒家第三張牌，意指閒家第三張牌牌面，並非三張牌總計。
+          </p>
+        </div>
+
         <div className="game-alert">
           <h2>● 請注意！！（勾選不使用確認投注鍵進行投注）</h2>
           <ol>

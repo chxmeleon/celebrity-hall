@@ -53,9 +53,7 @@ const SendGift: React.FC<GiftPorps> = ({
             }
           }
         })
-        setTimeout(() => {
-          setIsShow(false)
-        }, 1200);
+        setIsShow(false)
       } catch (error) {
         console.log(error)
       }
