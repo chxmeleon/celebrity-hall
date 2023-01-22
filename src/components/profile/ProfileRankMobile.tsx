@@ -4,10 +4,12 @@ import { useQuery } from '@apollo/client'
 import { GET_PROFILE } from '@/gql/profile'
 import { useAuth } from '@/contexts/AuthContext'
 import types from '@/types'
+import { useSetup } from '@/contexts/SetupContext'
 
 const ProfileRankMobile = () => {
   const { loading, data } = useQuery<types.GET_PROFILE>(GET_PROFILE)
   const { logout } = useAuth()
+  const {openEditPassword, openEditNickname} = useSetup()
 
   if (loading) {
     return <div className="m-[50px]">loading</div>
@@ -37,13 +39,13 @@ const ProfileRankMobile = () => {
           <div className="flex justify-end w-1/2 h-full">
             <div className="">
               <Button
-                onClick={() => null}
+                onClick={openEditNickname}
                 iconId="i-mdi-file-edit-outline"
                 i18nId="profile.button.edit"
                 i18nDefaultMessage="修改暱稱"
               />
               <Button
-                onClick={() => null}
+                onClick={openEditPassword}
                 iconId="i-mdi-onepassword"
                 i18nDefaultMessage="修改密碼"
                 i18nId="profile.button.password"

@@ -19,7 +19,7 @@ const NoticeModal: React.FC = () => {
     >
       <div
         onClick={closeNotice}
-        className="flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center w-full h-screen bg-black/30 backdrop-blur-sm"
+        className="flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center w-full h-full bg-black/30 backdrop-blur-sm"
       >
         <div
           onClick={(e) => {
