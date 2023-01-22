@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-const withMT = require('@material-tailwind/react/utils/withMT')
 const plugin = require('tailwindcss/plugin')
 const colors = require('tailwindcss/colors')
+
 const rotate3d = plugin(function ({ addUtilities }) {
   addUtilities({
     '.rotate-x-0': {
@@ -37,7 +37,7 @@ const rotate3d = plugin(function ({ addUtilities }) {
   })
 })
 
-module.exports = withMT({
+module.exports = {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
@@ -46,14 +46,6 @@ module.exports = withMT({
   theme: {
     extend: {
       colors: {
-        rose: colors.rose,
-        slate: colors.slate,
-        stone: colors.stone,
-        sky: colors.sky,
-        cyan: colors.cyan,
-        lime: colors.lime,
-        zinc: colors.zinc,
-        neutral: colors.neutral,
         theme: {
           50: '#131313',
           70: '#252525',
@@ -99,8 +91,7 @@ module.exports = withMT({
         '3xl': '1520px',
         375: '375px',
         390: '390px',
-        414: '414px',
-        'md': '768px'
+        414: '414px'
       },
       gridTemplateColumns: {
         5: 'repeat(5, minmax(0, 1fr))',
@@ -117,4 +108,4 @@ module.exports = withMT({
     }
   },
   plugins: [rotate3d]
-})
+}
