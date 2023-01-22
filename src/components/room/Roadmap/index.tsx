@@ -38,8 +38,6 @@ function BaseRoadComponent<T>({
   if (roads?.[0]?.[(columnSize ?? 0) + 1] !== null || undefined ) {
     offset += columnSize ?? 0
   }
-  console.log(offset, (columnSize as number) + offset);
-  
 
   return (
     <Road.BaseGrid className={className}>
