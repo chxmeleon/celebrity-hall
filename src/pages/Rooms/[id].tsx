@@ -585,7 +585,7 @@ const Room = () => {
           </div>
 
           <div className="flex relative flex-col w-full">
-            <div className="absolute z-30 w-full h-full pointer-events-none min-h-[256px]">
+            <div className="absolute z-30 w-full h-full pointer-events-none min-h-[298px]">
               <div className="py-1 px-2 w-full h-full">
                 <PockerResult />
               </div>
