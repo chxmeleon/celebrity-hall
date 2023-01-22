@@ -99,7 +99,8 @@ module.exports = withMT({
         '3xl': '1520px',
         375: '375px',
         390: '390px',
-        414: '414px'
+        414: '414px',
+        'md': '768px'
       },
       gridTemplateColumns: {
         5: 'repeat(5, minmax(0, 1fr))',
