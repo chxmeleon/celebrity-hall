@@ -86,7 +86,6 @@ const Room = () => {
     [roomId, rooms]
   )
 
-
   const { isTrait } = useAuth()
   const { onResizeWindow } = useContext(ResponsiveContext)
   useEffect(() => {
@@ -469,7 +468,7 @@ const Room = () => {
                 <div
                   className={cx(
                     'absolute bottom-0 w-[104%] h-full flex justify-center items-center right-0 bg-theme-50/60 z-50',
-                    isTrait ? 'block' : 'hidden' 
+                    isTrait ? 'block' : 'hidden'
                   )}
                 >
                   <div className="text-xl text-white">
@@ -632,6 +631,19 @@ const Room = () => {
           </div>
 
           <div className="flex relative flex-col pt-2 w-full">
+            <div
+              className={cx(
+                'absolute bottom-0 w-full h-11 flex justify-center items-center right-0 bg-theme-50/60 z-50',
+                isTrait ? 'block' : 'hidden'
+              )}
+            >
+              <div className="text-xl text-white">
+                <FormattedMessage
+                  id="common.disabledForTrial"
+                  defaultMessage="Disabled For Trial"
+                />
+              </div>
+            </div>
             <div className="absolute bottom-0 z-30 w-full h-full">
               <ChatroomMobile />
             </div>
