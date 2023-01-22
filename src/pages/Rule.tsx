@@ -5,7 +5,7 @@ import { ruleContext } from '@/libs/ruleContext'
 const Rule = () => {
   const mainStyle = cx(
     'w-4/5 h-full pt-24 px-12',
-    '[&_p]:leading-9',
+    '[&_p]:leading-9 [&_p]:text-sm',
     '[&_.game-alert]:text-rose-500 [&_.game-alert]:py-10',
     '[&_.game-info>h2]:text-teal-300 [&_.game-info]:py-10',
     '[&_h2]:text-xl [&_h2]:font-semibold [&_h2]:my-3',
@@ -55,7 +55,7 @@ const Rule = () => {
         <div className="game-info">
           <h2>● 補牌規則</h2>
           <div className="overflow-x-auto py-5 w-full min-w-lg">
-            <RuleTable data={ruleContext?.table1} />
+            <RuleTable data={ruleContext?.table1} rows={11} cols={7} span={3} />
           </div>
           <p className="waring-note">
             ※
@@ -63,6 +63,32 @@ const Rule = () => {
           </p>
           <p className="waring-note">
             ※ 莊家補牌備註：閒家第三張牌，意指閒家第三張牌牌面，並非三張牌總計。
+          </p>
+        </div>
+        <div className="game-info">
+          <h2>● 標準/免水百家樂賠率表</h2>
+          <p className="waring-note">
+            標準/免水百家樂下注選擇：莊贏、閒贏、和局、莊對、閒對、莊龍寶、閒龍寶、莊例牌、閒例牌、任意一對、完美對子、莊單、莊雙、閒單、閒雙、大、小、Super
+            6、超和
+          </p>
+          <div className="overflow-x-auto py-5 w-full min-w-lg">
+            <RuleTable data={ruleContext?.table2} rows={21} cols={6} span={3} />
+          </div>
+          <p className="waring-note">
+            ● 投注《閒/莊例牌》例牌和局時，退還本金;
+            非例牌和局時，則為輸掉本金。
+          </p>
+          <p className="waring-note">
+            ●
+            投注《任意一對或完美對子》若莊家和閒家開牌結果同時為任意一對或完美對子，只會按照該方位的賠率而派彩一次，不會因為同時間莊/閒都開出，而雙倍派彩。
+          </p>
+          <p className="waring-note">
+            ●
+            大/小、閒單/閒雙、莊單/莊雙、超和，30局以上（不含30局）押注框將反黑，無法進行投注。
+          </p>
+          <p className="waring-note">
+            ●
+            大/小、閒單/閒雙、莊單/莊雙上下限與方位閒/莊一樣；閒龍寶/莊龍寶上下限與方位和一樣。
           </p>
         </div>
 

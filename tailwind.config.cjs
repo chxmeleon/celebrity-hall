@@ -102,6 +102,7 @@ module.exports = withMT({
         414: '414px'
       },
       gridTemplateColumns: {
+        5: 'repeat(5, minmax(0, 1fr))',
         15: 'repeat(15, minmax(0, 1fr))',
         18: 'repeat(18, minmax(0, 1fr))',
         20: 'repeat(20, minmax(0, 1fr))',
@@ -109,6 +110,7 @@ module.exports = withMT({
       },
       gridTemplateRows: {
         11: 'repeat(11, minmax(0, 1fr))',
+        21: 'repeat(21, minmax(0, 1fr))',
       }
 
     }

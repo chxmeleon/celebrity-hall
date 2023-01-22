@@ -1,30 +1,79 @@
 import { clsx as cx } from 'clsx'
-
- 
-type RuleProps = {
-  data: string[][]
+const gridMapper = {
+  rows: {
+    11: 'grid-rows-11',
+    21: 'grid-rows-21'
+  },
+  cols: {
+    6: 'grid-cols-6',
+    7: 'grid-cols-7'
+  },
+  span: {
+    2: 'col-span-2',
+    3: 'col-span-3'
+  }
 }
-export const RuleTable: React.FC<RuleProps> = ({data}) => {
-  return (
 
-    <div className="grid grid-rows-11 text-center border border-theme-300/50 rounded-md rule-table">
+type RuleProps = {
+  data: (string | string[])[][]
+  rows: number
+  cols: number
+  span: number
+}
+export const RuleTable: React.FC<RuleProps> = ({ data, rows, cols, span }) => {
+  return (
+    <div
+      className={cx(
+        'text-sm grid text-center border border-theme-300/50 rounded-md rule-table',
+        gridMapper?.rows[rows]
+      )}
+    >
       {data?.map((item, id) => {
         return (
           <div
             key={id}
-            className={cx('grid grid-cols-6', id === 0 ? 'bg-amber-500/80 text-theme-50 font-bold text-lg': 'bg-amber-500/10')}
+            className={cx(
+              'grid',
+              gridMapper.cols[cols],
+              id === 0
+                ? 'bg-amber-500/80 text-theme-50 font-bold text-lg'
+                : 'bg-amber-500/10'
+            )}
           >
             {item.map((text, idx) => {
-              if (idx === 4) {
+              if (idx === item.length - 1) {
                 return (
-                  <div key={idx} className="px-2 py-4 col-span-2 border-[1px] border-theme-300/50 flex justify-center items-center">
-                    {text}
+                  <div
+                    key={idx}
+                    className={cx(
+                      'flex justify-center items-center py-4 px-3 border-[1px] border-theme-300/50',
+                      gridMapper.span[span]
+                    )}
+                  >
+                    {typeof text === 'object' ? (
+                      <div className="text-left leading-8">
+                        {text[0]} <br /> {text[1]}
+                      </div>
+                    ) : (
+                      <div className="m-auto">{text}</div>
+                    )}
                   </div>
                 )
               }
               return (
-                <div key={idx} className="px-2 py-4 border-[1px] border-theme-300/50 flex justify-center items-center">
-                  {text}
+                <div
+                  key={idx}
+                  className={cx(
+                    'flex justify-center items-center py-4 px-2 border-[1px] border-theme-300/50'
+                  )}
+                >
+                  {typeof text === 'object' ? (
+                    <div className="leading-8 text-left">
+                      {text[0]} <br /> {text[1]}
+                    </div>
+                  ) : (
+                    <div className="m-auto">{text}</div>
+                  )}
                 </div>
               )
             })}
