@@ -1,11 +1,55 @@
+import { clsx as cx } from 'clsx'
+
 const Rule = () => {
+  const mainStyle = cx(
+    'w-4/5 h-full pt-24 px-12',
+    '[&_p]:leading-9',
+    '[&_.game-alert]:text-rose-300 [&_.game-alert]:py-10',
+    '[&_.game-info>h2]:text-teal-300 [&_.game-info]:py-10',
+    '[&_h2]:text-xl [&_h2]:font-semibold [&_h2]:my-3',
+    '[&_ol]:list-decimal [&_ol]:ml-11 '
+  )
+
   return (
-    <section className="flex overflow-y-auto justify-center items-center w-full h-full">
-      <div className="w-3/4 h-full [&_p]:leading-9 [&_h2]:text-teal-300 [&_h2]:text-2xl [&_h2]:my-3}">
-        <div className="py-10"></div>
-        <div className="pb-20">
+    <section className="flex overflow-y-scroll justify-center items-center w-full h-full bg-theme-50/50">
+      <div className={mainStyle}>
+        <div className="text-2xl text-center text-amber-400">
+          <h1>百家樂【Baccarat】</h1>
+        </div>
+        <div className="py-5">
+          <p>
+            百家樂【Baccarat】是撲克遊戲，亦是賭場中常見的遊戲之一。百家樂源於意大利，十五世紀時期傳入法國，及至十九世紀時盛傳於英法等地。時至今日，百家樂是世界各地賭場中受歡迎的遊戲之一。於澳門的賭場中，百家樂賭桌的數目更是全球賭場之中最多。
+            百家樂特別之處在於採用先發牌後下注玩法，玩家可於荷官發牌後，選擇欲下注方位進行投注，遊戲過程中更具公平、公正性。
+          </p>
+        </div>
+        <div className="game-info">
+          <h2>● 百家樂遊戲玩法</h2>
+          <p>
+            每局開始荷官會按百家牌例發牌（牌面朝下），「閒家」「莊家」各先派兩張牌，以「閒家」先發，再發2張牌放在補牌區的位置上，如前兩張未分出勝負需再按「牌例」發第三張的牌，最多每方3張牌，誰最接近9點即為勝方，相同點數即和局。如當局只補一張牌，剩餘的牌將作為下一局閒家第一張使用。以此類推，每新開一局，桌面上保持有6張牌在相對應的位置上。
+          </p>
+          <p className="text-rose-300">
+            ※ 遊戲左下方可切換單人/多人投注模式,
+            帶領玩家體驗不同遊戲介面跟投注方位。
+          </p>
+        </div>
+        <div className="game-alert">
+          <h2>● 請注意！！（勾選不使用確認投注鍵進行投注）</h2>
+          <ol>
+            <li>
+              <p>
+                您在視訊遊戲中，可同時投注其他遊戲，或提款、轉賬到其他平台。投注時間結束時，會判斷當前剩餘額度是否足夠投注，若不夠，則下注不成功。
+              </p>
+            </li>
+            <li>
+              <p>
+                若您剩餘額度只有200，先投注百家樂200點，後投注瞇牌百家樂200點，瞇牌百家樂投注時間先結束，則瞇牌百家樂會投注成功，百家樂投注不成功。
+              </p>
+            </li>
+          </ol>
+        </div>
+        <div className="game-info">
           <h2>● 遊戲狀況規範</h2>
-          <ol className="list-decimal ml-11">
+          <ol>
             <li>
               <p>
                 遊戲中如遇本網站網路不穩造成瞬斷或視訊畫面延遲時，玩家可以選擇停止下注或退出遊戲重新登入，如已下注之注單仍視為有效。
