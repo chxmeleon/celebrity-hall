@@ -10,6 +10,7 @@ import { v4 as uuidV4 } from 'uuid'
 import defaultAvatar from '/user.png'
 import SendGift from './SendGift'
 import { useClickOutside } from '@/hooks/common'
+import { useAuth } from '@/contexts/AuthContext'
 
 type ContentProps = {
   avatar: string
@@ -59,7 +60,7 @@ const ChatRoom = () => {
       subscription.unsubscribe()
     }
   }, [cable, roomId])
-  
+
   const onTrigglerPicker = (e: React.MouseEvent) => {
     e.preventDefault()
     setIsPickerShow((isPickerShow) => !isPickerShow)
@@ -91,7 +92,6 @@ const ChatRoom = () => {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault()
-
     if (newMessage === '') {
       e.stopPropagation()
     } else {
@@ -121,17 +121,13 @@ const ChatRoom = () => {
             return (
               <div key={`message-${idx}`}>
                 {content?.type !== 'Message::User' ? (
-                  <div
-                    className="flex justify-center items-center py-1 w-4/5 m-auto"
-                  >
+                  <div className="flex justify-center items-center py-1 m-auto w-4/5">
                     <div className="py-1.5 px-5 text-sm font-medium text-center bg-gradient-to-tr from-rose-400 to-orange-200 rounded-lg tracking-[0.05rem] text-red-900/90">
                       {content?.body}
                     </div>
                   </div>
                 ) : (
-                  <div
-                    className="flex justify-start items-center py-1 px-2.5 w-full h-auto text-xs text-theme-50"
-                  >
+                  <div className="flex justify-start items-center py-1 px-2.5 w-full h-auto text-xs text-theme-50">
                     <div className="flex-shrink-0 pr-1.5 pt-[1.5px]">
                       <div className="overflow-hidden w-6 h-6 rounded-full bg-slate-200">
                         {content?.avatar === null ? (
@@ -194,8 +190,9 @@ const ChatRoom = () => {
           />
           <div ref={setClickRef}>
             <div
-              className={`${isPickerShow ? '' : 'hidden'
-                } absolute bottom-4 -right-6 z-30  scale-75 md:scale-90`}
+              className={`${
+                isPickerShow ? '' : 'hidden'
+              } absolute bottom-4 -right-6 z-30  scale-75 md:scale-90`}
             >
               <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
             </div>

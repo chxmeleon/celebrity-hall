@@ -31,6 +31,7 @@ import { BetInitialValueProp, betInitialValue } from '@/hooks/bet'
 import RoomNotification from '@/components/room/RoomNotification'
 import WinAndLoseResult from '@/components/room/WinAndLoseResult'
 import StreamMobile from '@/components/room/RoomStream/StreamMobile'
+import { useAuth } from '@/contexts/AuthContext'
 import {
   NodePlayerStream,
   NodePlayerStreamMobile
@@ -85,6 +86,8 @@ const Room = () => {
     [roomId, rooms]
   )
 
+
+  const { isTrait } = useAuth()
   const { onResizeWindow } = useContext(ResponsiveContext)
   useEffect(() => {
     if (room) {
@@ -462,7 +465,20 @@ const Room = () => {
               </div>
               {/* <div className="w-[11%] h-full flex-shrink-0"></div> */}
 
-              <div className="w-[30%] h-full">
+              <div className="relative w-[30%] h-full">
+                <div
+                  className={cx(
+                    'absolute bottom-0 w-[104%] h-full flex justify-center items-center right-0 bg-theme-50/60 z-50',
+                    isTrait ? 'block' : 'hidden' 
+                  )}
+                >
+                  <div className="text-xl text-white">
+                    <FormattedMessage
+                      id="common.disabledForTrial"
+                      defaultMessage="Disabled For Trial"
+                    />
+                  </div>
+                </div>
                 <ChatRoom />
               </div>
             </div>
@@ -560,7 +576,7 @@ const Room = () => {
               <WinAndLoseResult gameState={gameState} />
             </div>
 
-            <div className="text-xs inline-flex items-center px-2 h-full">
+            <div className="inline-flex items-center px-2 h-full text-xs">
               <span>
                 <FormattedMessage id="screens.room.bet" />
               </span>
@@ -569,7 +585,7 @@ const Room = () => {
             </div>
           </div>
 
-          <div className="flex relative flex-col  w-full">
+          <div className="flex relative flex-col w-full">
             <div className="absolute z-30 w-full h-full pointer-events-none min-h-[240px]">
               <div className="py-1 px-2 w-full h-full">
                 <PockerResult />
@@ -588,7 +604,7 @@ const Room = () => {
 
               <div className="flex flex-grow justify-between items-center px-1 w-full">
                 <BetButton
-                  className="text-md mx-1"
+                  className="mx-1 text-md"
                   isDisabled={isCancelDisabled}
                   onClick={onCancel}
                 >
@@ -596,7 +612,7 @@ const Room = () => {
                   <FormattedMessage id="common.cancel" />
                 </BetButton>
                 <BetButton
-                  className="text-md mx-1"
+                  className="mx-1 text-md"
                   isDisabled={isRepeatDisabled}
                   onClick={onRepeat}
                 >
@@ -604,7 +620,7 @@ const Room = () => {
                   <FormattedMessage id="common.repeat" />
                 </BetButton>
                 <BetButton
-                  className="text-md mx-1"
+                  className="mx-1 text-md"
                   isDisabled={isConfirmDisabled}
                   onClick={onConfirmBet}
                 >
