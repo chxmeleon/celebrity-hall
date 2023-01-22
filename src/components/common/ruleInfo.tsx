@@ -1,16 +1,20 @@
 import { clsx as cx } from 'clsx'
 const gridMapper = {
   rows: {
+    9: 'grid-rows-9',
     11: 'grid-rows-11',
     21: 'grid-rows-21'
   },
   cols: {
+    2: 'grid-cols-2',
     6: 'grid-cols-6',
     7: 'grid-cols-7'
   },
   span: {
+    0: '',
     2: 'col-span-2',
-    3: 'col-span-3'
+    3: 'col-span-3',
+    4: 'col-span-4'
   }
 }
 
@@ -51,7 +55,7 @@ export const RuleTable: React.FC<RuleProps> = ({ data, rows, cols, span }) => {
                     )}
                   >
                     {typeof text === 'object' ? (
-                      <div className="text-left leading-8">
+                      <div className="leading-8 text-left">
                         {text[0]} <br /> {text[1]}
                       </div>
                     ) : (
