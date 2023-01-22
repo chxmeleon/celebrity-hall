@@ -7,6 +7,7 @@ import { ApiProvider } from '@/contexts/ApiContext'
 import { SetupProvider } from './contexts/SetupContext'
 import { ActionCableProvider } from './contexts/ActionCableContext'
 import { StreamLatencyProvider } from './contexts/StreamLatencyContext'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
@@ -19,6 +20,13 @@ function App() {
                 <ResponsiveProvider>
                   <StreamLatencyProvider>
                     <Router />
+                    <Toaster
+                      toastOptions={{
+                        error: {
+                          className: 'text-white bg-red-400'
+                        }
+                      }}
+                    />
                   </StreamLatencyProvider>
                 </ResponsiveProvider>
               </SetupProvider>

@@ -10,7 +10,6 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from 'usehooks-ts'
 import useSWRMutation from 'swr/mutation'
-import axios from 'axios'
 
 type AuthProps = {
   auth: string | null

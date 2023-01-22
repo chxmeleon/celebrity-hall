@@ -4,9 +4,11 @@ import App from '@/App'
 import 'uno.css'
 import './styles/globals.scss'
 
+export const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+)
 NodePlayer.load(() => {
-  
-  ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  root.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>
