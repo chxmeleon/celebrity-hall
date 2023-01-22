@@ -136,8 +136,8 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
                 <p>{room.roads.tie_count}</p>
               </div>
             </div>
-            <div className="flex w-1/4 h-full">
-              <button className="p-1 py-2 m-auto w-full text-xs font-medium text-gray-800 bg-gradient-to-r rounded-full hover:via-amber-200 from-theme-200 via-theme-300 to-theme-200 md:text-[1rem] hover:from-theme-400 hover:to-theme-400">
+            <div className="flex md:w-1/4 h-full">
+              <button className="px-3 py-1 md:p-2 m-auto w-full text-xs font-medium text-gray-800 bg-gradient-to-r rounded-full hover:via-amber-200 from-theme-200 via-theme-300 to-theme-200 md:text-[1rem] hover:from-theme-400 hover:to-theme-400">
                 <FormattedMessage
                   id="screens.rooms.enterGame"
                   defaultMessage="Enter"
