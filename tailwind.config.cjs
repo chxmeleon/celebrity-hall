@@ -106,7 +106,11 @@ module.exports = withMT({
         18: 'repeat(18, minmax(0, 1fr))',
         20: 'repeat(20, minmax(0, 1fr))',
         25: 'repeat(25, minmax(0, 1fr))'
+      },
+      gridTemplateRows: {
+        11: 'repeat(11, minmax(0, 1fr))',
       }
+
     }
   },
   plugins: [rotate3d]
