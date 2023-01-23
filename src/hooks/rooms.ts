@@ -168,57 +168,53 @@ export const useTimeLeft = (roomId: string) => {
     }
   }, [cable, roomId, gameState])
 
-  const [counter, setCounter] = useState<number | undefined>()
+  const [counter, setCounter] = useState<number>(0)
+  const [isCountingDown, setIsCountingDown] = useState(false)
   const startCount =
     gameState?.status === 'START_BET' || gameState?.status === 'UPDATE_AMOUNT'
 
+  const isOpening = gameState?.status !== 'CLOSE'
   const isLeftTen = counter !== undefined && counter < 11
   const streamLatency = useContext(StreamLatencyContext)
 
   useEffect(() => {
     const isCountDownStarted = gameState?.status === 'START_BET'
-    if (data?.baccaratRoom?.currentGame && isCountDownStarted) {
+    if (data?.baccaratRoom?.currentGame && isCountDownStarted && counter <= 0) {
       const { latency } = data.baccaratRoom
       const endAt = new Date(gameState?.endAt)
-      const timeLeft = Math.floor(
+
+      const timeLeftRaw =
         (endAt.getTime() - Date.now()) / 1000 + (latency ?? 0) - streamLatency
-      )
+      const timeLeftInt = Math.floor(timeLeftRaw)
+      const timeLeftFraction = timeLeftRaw % 1
 
-      setCounter(timeLeft)
+      setCounter(timeLeftInt)
+      setTimeout(() => {
+        setCounter(timeLeftInt - 1)
+        setIsCountingDown(true)
+      }, timeLeftFraction * 1000)
     }
-  }, [data, streamLatency, gameState])
-
-  const requestRef = useRef<number>(0)
-  const previousTimeRef = useRef<number>(0)
-  const animate = useCallback(
-    (time: any) => {
-      if (
-        previousTimeRef.current != undefined &&
-        counter !== undefined &&
-        counter > 0
-      ) {
-        const deltaTime = time - previousTimeRef.current
-        setCounter((counter) =>
-          Math.floor((counter ?? 0) - ((deltaTime * 0.01) % 100))
-        )
-      }
-      previousTimeRef.current = time
-      requestRef.current = requestAnimationFrame(animate)
-    },
-    [counter]
-  )
+  }, [data, streamLatency, gameState, counter])
 
   useEffect(() => {
-    /* let timeout: number | null = null */
-    if (counter !== undefined && counter > 0) {
-      requestRef.current = requestAnimationFrame(animate)
-    }
-    return () => {
-      cancelAnimationFrame(requestRef.current)
-    }
-  }, [counter, animate])
+    let timeout: number | null = null
+    if (isCountingDown) {
+      timeout = window.setInterval(() => {
+        setCounter((counter) => {
+          const newCounter = counter - 1
+          if (newCounter < 0) setIsCountingDown(false)
 
-  const isOpening = gameState?.status !== 'CLOSE'
+          return newCounter
+        })
+      }, 1000)
+    }
+
+    return () => {
+      if (timeout) {
+        clearInterval(timeout)
+      }
+    }
+  }, [isCountingDown])
 
   return { counter, isLeftTen, startCount, isOpening }
 }
