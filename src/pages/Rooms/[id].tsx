@@ -86,9 +86,6 @@ const Room = () => {
     [roomId, rooms]
   )
 
-
-  console.log(room);
-  
   const { isTrial } = useAuth()
   const { onResizeWindow } = useContext(ResponsiveContext)
   useEffect(() => {
