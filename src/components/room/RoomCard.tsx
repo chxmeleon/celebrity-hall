@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import {
@@ -15,12 +15,20 @@ import { roadBorderClassName } from './Roadmap/road'
 
 type RoomDataProps = {
   room: RoomProps
+  refetch?: () => Promise<any>
 }
 
-const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
-  const { counter, startCount, isLeftTen, isOpening } = useTimeLeft(room.id)
+const RoomCard: React.FC<RoomDataProps> = ({ room, refetch }) => {
+  const { counter, startCount, isLeftTen, isOpening, isClose  } = useTimeLeft(room.id)
   const href = `/home/rooms/${room.id}`
   const girl = room.girl
+
+  useEffect(() => {
+    if(isClose) {
+      refetch?.()
+    }
+  }, [refetch, isClose])
+  
 
   return (
     <Link to={href} key={href}>

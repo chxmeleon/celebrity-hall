@@ -195,8 +195,9 @@ export const useTimeLeft = (roomId: string) => {
   }, [counter])
 
   const isOpening = gameState?.status !== 'CLOSE'
+  const isClose = gameState?.status === 'CLOSE'
 
-  return { counter, isLeftTen, startCount, isOpening }
+  return { counter, isLeftTen, startCount, isOpening, isClose }
 }
 
 export const useActivedTab = () => {

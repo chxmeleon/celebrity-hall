@@ -428,11 +428,11 @@ const Room = () => {
               <div className="flex flex-grow justify-start">
                 <BeadRoad
                   columnSize={8}
-                  className="w-[200px]"
+                  className="w-[204px]"
                   roads={room.roads.bead_road.array}
                 />
 
-                <div className="w-[500px]">
+                <div className="w-[506px]">
                   <div>
                     <BigRoad
                       columnSize={30}
@@ -461,7 +461,7 @@ const Room = () => {
                   </div>
                 </div>
 
-                <div className="h-full w-[148px]">
+                <div className="h-full w-[152px]">
                   <AskGrid />
                 </div>
               </div>
@@ -470,7 +470,7 @@ const Room = () => {
               <div className="relative w-[30%] h-full">
                 <div
                   className={cx(
-                    'absolute bottom-0 w-[104%] h-full flex justify-center items-center right-0 bg-theme-50/60 z-50',
+                    'absolute bottom-0 w-full h-full flex justify-center items-center right-0 bg-theme-50/60 z-50',
                     isTrial ? 'block' : 'hidden'
                   )}
                 >
