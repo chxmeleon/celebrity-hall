@@ -10,19 +10,21 @@ import RoomDataContext from '@/contexts/RoomDataContext'
 
 type RoomDataProps = {
   room: RoomProps
-  refetch?: () => Promise<any>
 }
 
-const RoomCard: React.FC<RoomDataProps> = ({ room, refetch }) => {
-  const { counter, startCount, isLeftTen, isOpening } = useTimeLeft(room.id)
+const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
+  const { counter, startCount, isLeftTen, isOpening, isClose } = useTimeLeft(
+    room.id
+  )
+  const { refetchRooms } = useContext(RoomDataContext)
   const href = `/home/rooms/${room.id}`
   const girl = room.girl
 
   useEffect(() => {
-    if (!isOpening) {
-      refetch?.()
+    if (isClose) {
+      refetchRooms?.()
     }
-  }, [refetch, isOpening])
+  }, [refetchRooms, isClose])
 
   return (
     <Link to={href} key={href}>

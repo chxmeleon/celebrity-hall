@@ -174,6 +174,7 @@ export const useTimeLeft = (roomId: string) => {
     gameState?.status === 'START_BET' || gameState?.status === 'UPDATE_AMOUNT'
 
   const isOpening = gameState?.status !== 'CLOSE'
+  const isClose = gameState?.status === 'CLOSE'
   const isLeftTen = counter !== undefined && counter < 11
   const streamLatency = useContext(StreamLatencyContext)
 
@@ -216,7 +217,7 @@ export const useTimeLeft = (roomId: string) => {
     }
   }, [isCountingDown])
 
-  return { counter, isLeftTen, startCount, isOpening }
+  return { counter, isLeftTen, startCount, isOpening, isClose }
 }
 
 export const useActivedTab = () => {
