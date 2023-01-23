@@ -82,12 +82,12 @@ export const usePockerUpdate = (roomId: string | undefined) => {
   const [gameState, setGameState] = useState<string | null | undefined>()
   const [pockerState, dispatch] = useReducer(pockerReducer, gqlData)
 
-
   useEffect(() => {
-    refetch()
+    if (gameState === 'CLOSE') {
+      refetch()
+    }
     setGameState(convertStatus(data?.baccaratRoom?.currentGame?.status))
-  }, [refetch, data])
-
+  }, [refetch, data, gameState])
 
   useEffect(() => {
     const subscription = cable.subscriptions.create(
@@ -138,15 +138,16 @@ export const usePockerUpdate = (roomId: string | undefined) => {
     return () => {
       subscription.unsubscribe()
     }
-  }, [cable, roomId])
+  }, [cable, roomId, refetch])
 
   const currentGameState = useMemo(
     () => ({
       data,
       gameState,
-      pockerState
+      pockerState,
+      currentGame
     }),
-    [data, gameState, pockerState]
+    [data, gameState, pockerState, currentGame]
   )
 
   return { currentGameState }

@@ -8,14 +8,14 @@ import { useEffect, useState } from 'react'
 const PockerResult: React.FC = () => {
   const { id } = useParams()
   const { currentGameState } = usePockerUpdate(id)
-  const { pockerState, gameState } = currentGameState
+  const { pockerState, gameState, currentGame } = currentGameState
   const [isShowPocker, setIsShowPocker] = useState(false)
-
+  
   useEffect(() => {
     if (
+      !currentGame?.shuffle &&
       gameState !== 'START_BET' &&
       gameState !== 'STOP_BET' &&
-      gameState !== 'SHIFFLE' &&
       gameState !== 'UPDATE_AMOUNT' &&
       gameState !== undefined
     ) {
@@ -26,7 +26,7 @@ const PockerResult: React.FC = () => {
     return () => {
       setIsShowPocker(false)
     }
-  }, [gameState])
+  }, [gameState, currentGame])
 
   const resultContainerStyle = cx(
     'relative transition-opacity duration-300 ease-in flex w-full h-full rounded-xl border bg-theme-50/80 backdrop-blur-sm border-theme-150',

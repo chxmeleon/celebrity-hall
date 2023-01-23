@@ -5,9 +5,17 @@ import {
   GET_CURRENT_COUNTDOWN
 } from '@/gql/baccaratrooms'
 import StreamLatencyContext from '@/contexts/StreamLatencyContext'
-import { useContext, useEffect, useMemo, useState } from 'react'
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import types from '@/types'
+import { useAnimationFrame } from 'framer-motion'
 
 export const convertStatus = (status: string | null | undefined) => {
   switch (status) {
@@ -78,7 +86,6 @@ export const useCurrentGameState = (roomId: string | undefined) => {
     setGameState(gameStatus)
   }, [gameStatus, refetch])
 
-  
   useEffect(() => {
     const subscription = cable.subscriptions.create(
       { channel: 'NewBaccaratGameChannel', roomId },
@@ -160,14 +167,14 @@ export const useTimeLeft = (roomId: string) => {
       subscription.unsubscribe()
     }
   }, [cable, roomId, gameState])
-  
-  
 
   const [counter, setCounter] = useState<number | undefined>()
-  const startCount = gameState?.status === 'START_BET' || gameState?.status === 'UPDATE_AMOUNT'
+  const startCount =
+    gameState?.status === 'START_BET' || gameState?.status === 'UPDATE_AMOUNT'
 
   const isLeftTen = counter !== undefined && counter < 11
   const streamLatency = useContext(StreamLatencyContext)
+
   useEffect(() => {
     const isCountDownStarted = gameState?.status === 'START_BET'
     if (data?.baccaratRoom?.currentGame && isCountDownStarted) {
@@ -181,23 +188,35 @@ export const useTimeLeft = (roomId: string) => {
     }
   }, [data, streamLatency, gameState])
 
+  const requestRef = useRef<number>(0)
+  const previousTimeRef = useRef<number>(0)
+  const animate = useCallback((time: any) => {
+    if (
+      previousTimeRef.current != undefined &&
+      counter !== undefined &&
+      counter > 0
+    ) {
+      const deltaTime = time - previousTimeRef.current
+      setCounter(counter - ((deltaTime * 0.01) % 100))
+    }
+    previousTimeRef.current = time
+    requestRef.current = requestAnimationFrame(animate)
+  },[counter])
+
   useEffect(() => {
-    let timeout: number | null = null
+    /* let timeout: number | null = null */
     if (counter !== undefined && counter > 0) {
-      timeout = window.setTimeout(() => {
-        setCounter(counter - 1)
-      }, 1000)
+      requestRef.current = requestAnimationFrame(animate)
     }
-
     return () => {
-      if (timeout) clearTimeout(timeout)
+      cancelAnimationFrame(requestRef.current)
     }
-  }, [counter])
+  }, [counter, animate])
 
-  const isOpening = gameState?.status !== 'CLOSE'
-  const isClose = gameState?.status === 'CLOSE'
+  const isOpening =
+    gameState?.status !== 'CLOSE' && gameState?.status !== 'SHUFFLE'
 
-  return { counter, isLeftTen, startCount, isOpening, isClose }
+  return { counter, isLeftTen, startCount, isOpening }
 }
 
 export const useActivedTab = () => {
