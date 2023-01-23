@@ -87,6 +87,8 @@ const Room = () => {
   )
 
 
+  console.log(room);
+  
   const { isTrial } = useAuth()
   const { onResizeWindow } = useContext(ResponsiveContext)
   useEffect(() => {
@@ -94,11 +96,10 @@ const Room = () => {
       onResizeWindow?.()
     }
   }, [onResizeWindow, room])
-
-  const streamName = room?.streamName
-  const streamKey = room?.streamKey
-  const secoundStreamName = room?.streams?.[0].name
-  const secoundStreamKey = room?.streams?.[0].key
+  const streamName = room?.streams?.[0].name
+  const streamKey = room?.streams?.[0].key
+  const secoundStreamName = room?.streamName
+  const secoundStreamKey = room?.streamKey
 
   const [isSecondCam, setIsSecondCam] = useState(false)
   const handleSwitchCam = () => setIsSecondCam(!isSecondCam)
