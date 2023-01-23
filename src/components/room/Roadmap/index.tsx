@@ -46,11 +46,15 @@ function BaseRoadComponent<T>({
   const offset = useMemo(() => {
     const minReverseElementDistance = Math.min(
       ...roads
-        .map((road) =>
-          [...road, ...Array(defaultColumnSize - road.length).fill(null)]
+        .map((road) => {
+          const reverseElementIndex = [...road]
             .reverse()
             .findIndex((item) => Boolean(item))
-        )
+
+          return reverseElementIndex === -1
+            ? reverseElementIndex
+            : reverseElementIndex + defaultColumnSize - road.length
+        })
         .filter((min) => min !== -1)
     )
 
