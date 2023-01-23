@@ -1,9 +1,8 @@
-import React, { memo, useEffect } from 'react'
+import React, {  useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import {
   BigRoad,
-  BeadRoad,
   BigEyeRoad,
   SmallRoad,
   CockroachRoad
@@ -12,22 +11,23 @@ import { useTimeLeft } from '@/hooks/rooms'
 import { RoomProps } from '@/types/room'
 import { cx } from 'class-variance-authority'
 import { roadBorderClassName } from './Roadmap/road'
+import RoomDataContext from '@/contexts/RoomDataContext'
 
 type RoomDataProps = {
   room: RoomProps
-  refetch?: () => Promise<any>
 }
 
-const RoomCard: React.FC<RoomDataProps> = ({ room, refetch }) => {
+const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
   const { counter, startCount, isLeftTen, isOpening, isClose  } = useTimeLeft(room.id)
+  const {refetchRooms} = useContext(RoomDataContext)
   const href = `/home/rooms/${room.id}`
   const girl = room.girl
 
   useEffect(() => {
     if(isClose) {
-      refetch?.()
+      refetchRooms?.()
     }
-  }, [refetch, isClose])
+  }, [refetchRooms, isClose])
   
 
   return (

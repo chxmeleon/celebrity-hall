@@ -179,7 +179,7 @@ export const useTimeLeft = (roomId: string) => {
 
       setCounter(timeLeft)
     }
-  }, [counter, data, streamLatency, gameState])
+  }, [data, streamLatency, gameState])
 
   useEffect(() => {
     let timeout: number | null = null
