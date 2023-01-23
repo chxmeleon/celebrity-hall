@@ -34,35 +34,27 @@ function BaseRoadComponent<T>({
   rowSize,
   TileComponent
 }: BaseRoadComponentProps<T>) {
-  const lastColumnSizeIndex = roads?.[0].findIndex(
-    (v) => v === null && v === undefined
+  const defaultColumnSize = Math.max(...roads.map((road) => road.length))
+  const currentColumnSize = columnSize ?? defaultColumnSize
+
+  const minReverseElementDistance = Math.min(
+    ...roads
+      .map((road) =>
+        [...road, ...Array(defaultColumnSize - road.length).fill(null)]
+          .reverse()
+          .findIndex((item) => Boolean(item))
+      )
+      .filter((min) => min !== -1)
   )
 
-  let offsetIndex = (columnSize ?? 0) 
-  if (
-    lastColumnSizeIndex > (columnSize ?? 0) &&
-    lastColumnSizeIndex % (columnSize ?? 0) === 0
-  ) {
-    offsetIndex = lastColumnSizeIndex 
-  }
-
-  let offset = 0
-  if (
-    roads?.[0]?.[offsetIndex] !== null &&
-    roads?.[0]?.[offsetIndex] !== undefined
-  ) {
-    offset += columnSize ?? 0
-  }
-
-  console.log('lastIndex:', lastColumnSizeIndex)
-  console.log('offsetIndex:', offsetIndex)
-  console.log('columnSize:', columnSize)
-  console.log('range:', offset, (columnSize as number) + offset)
+  const defaultColumnOffset =
+    defaultColumnSize - currentColumnSize - minReverseElementDistance
+  const offset = defaultColumnOffset < 0 ? 0 : defaultColumnOffset + 1
 
   return (
     <Road.BaseGrid className={className}>
       {roads.slice(0, rowSize).map((row, idx) => {
-        const emptyTileLength = (columnSize ?? row.length) - row.length
+        const emptyTileLength = currentColumnSize - row.length
         const emptyTileSize = emptyTileLength >= 0 ? emptyTileLength : 0
 
         return (
@@ -72,7 +64,7 @@ function BaseRoadComponent<T>({
               ...Array(emptyTileSize).fill(null),
               ...Array(offset).fill(null)
             ]
-              .slice(offset, (columnSize as number) + offset)
+              .slice(offset, currentColumnSize + offset)
               .map((road, index) => {
                 const tileProps =
                   size === 'small'
