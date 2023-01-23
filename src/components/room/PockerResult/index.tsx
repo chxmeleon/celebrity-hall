@@ -10,12 +10,12 @@ const PockerResult: React.FC = () => {
   const { currentGameState } = usePockerUpdate(id)
   const { pockerState, gameState, currentGame } = currentGameState
   const [isShowPocker, setIsShowPocker] = useState(false)
-  
+
   useEffect(() => {
     if (
-      !currentGame?.shuffle &&
       gameState !== 'START_BET' &&
       gameState !== 'STOP_BET' &&
+      !currentGame?.shuffle &&
       gameState !== 'UPDATE_AMOUNT' &&
       gameState !== undefined
     ) {

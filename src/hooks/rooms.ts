@@ -190,18 +190,23 @@ export const useTimeLeft = (roomId: string) => {
 
   const requestRef = useRef<number>(0)
   const previousTimeRef = useRef<number>(0)
-  const animate = useCallback((time: any) => {
-    if (
-      previousTimeRef.current != undefined &&
-      counter !== undefined &&
-      counter > 0
-    ) {
-      const deltaTime = time - previousTimeRef.current
-      setCounter(counter - ((deltaTime * 0.01) % 100))
-    }
-    previousTimeRef.current = time
-    requestRef.current = requestAnimationFrame(animate)
-  },[counter])
+  const animate = useCallback(
+    (time: any) => {
+      if (
+        previousTimeRef.current != undefined &&
+        counter !== undefined &&
+        counter > 0
+      ) {
+        const deltaTime = time - previousTimeRef.current
+        setCounter((counter) =>
+          Math.floor((counter ?? 0) - ((deltaTime * 0.01) % 100))
+        )
+      }
+      previousTimeRef.current = time
+      requestRef.current = requestAnimationFrame(animate)
+    },
+    [counter]
+  )
 
   useEffect(() => {
     /* let timeout: number | null = null */
@@ -213,8 +218,7 @@ export const useTimeLeft = (roomId: string) => {
     }
   }, [counter, animate])
 
-  const isOpening =
-    gameState?.status !== 'CLOSE' && gameState?.status !== 'SHUFFLE'
+  const isOpening = gameState?.status !== 'CLOSE'
 
   return { counter, isLeftTen, startCount, isOpening }
 }
