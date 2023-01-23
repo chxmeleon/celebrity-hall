@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { askMapper, askMapperMobile } from './data'
 import { useCurrentGame } from '@/hooks/rooms'
 import { useParams } from 'react-router-dom'
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useMemo, useState } from 'react'
 
 export type GameResultType = 'player' | 'dealer' | 'tie'
 export type PairResultType = 'player' | 'dealer' | 'none' | 'both'
@@ -34,22 +34,30 @@ function BaseRoadComponent<T>({
   rowSize,
   TileComponent
 }: BaseRoadComponentProps<T>) {
-  const defaultColumnSize = Math.max(...roads.map((road) => road.length))
-  const currentColumnSize = columnSize ?? defaultColumnSize
-
-  const minReverseElementDistance = Math.min(
-    ...roads
-      .map((road) =>
-        [...road, ...Array(defaultColumnSize - road.length).fill(null)]
-          .reverse()
-          .findIndex((item) => Boolean(item))
-      )
-      .filter((min) => min !== -1)
+  const defaultColumnSize = useMemo(
+    () => Math.max(...roads.map((road) => road.length)),
+    [roads]
+  )
+  const currentColumnSize = useMemo(
+    () => columnSize ?? defaultColumnSize,
+    [columnSize, defaultColumnSize]
   )
 
-  const defaultColumnOffset =
-    defaultColumnSize - currentColumnSize - minReverseElementDistance
-  const offset = defaultColumnOffset < 0 ? 0 : defaultColumnOffset + 1
+  const offset = useMemo(() => {
+    const minReverseElementDistance = Math.min(
+      ...roads
+        .map((road) =>
+          [...road, ...Array(defaultColumnSize - road.length).fill(null)]
+            .reverse()
+            .findIndex((item) => Boolean(item))
+        )
+        .filter((min) => min !== -1)
+    )
+
+    const defaultColumnOffset =
+      defaultColumnSize - currentColumnSize - minReverseElementDistance
+    return defaultColumnOffset < 0 ? 0 : defaultColumnOffset + 1
+  }, [currentColumnSize, defaultColumnSize, roads])
 
   return (
     <Road.BaseGrid className={className}>
