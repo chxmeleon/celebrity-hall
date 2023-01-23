@@ -33,7 +33,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
   const { isRegular } = useSetup()
   const { selectedChip, betState, dispatchBet } = useContext(GamePlayContext)
   return (
-    <div className="px-2 grid gap-1 grid-rows-2 w-full px-1 [&_button]:relative">
+    <div className="px-2 grid gap-1 grid-rows-2 w-full  [&_button]:relative">
       <div className="grid grid-cols-5 gap-1">
         <button disabled className="rounded-md bg-theme-75 brightness-50">
           <div className="text-xs md:text-xl w-full text-grid-400 [&_p]:text-gray-300">
@@ -88,7 +88,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
           )}
         >
           <BetAreaVer target={betState?.super6Chips} />
-          <div className="text-xs md:text-xl m-auto w-full text-grid-200">
+          <div className="m-auto w-full text-xs md:text-xl text-grid-200">
             <div className="font-bold">SUPER 6</div>
             <p className="text-gray-300">1:20</p>
           </div>
@@ -134,7 +134,34 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         </button>
       </div>
 
-      <div className="grid grid-cols-3 gap-1">
+      <div className="grid grid-cols-5 gap-1">
+        <button
+          disabled={isDisabled}
+          onClick={() =>
+            dispatchBet({
+              type: 'addBigChips',
+              playload: {
+                bigChips: chipsData?.[selectedChip]?.src,
+                bigAmount: chipsData?.[selectedChip]?.value
+              }
+            })
+          }
+          className={cx(
+            'rounded-md bg-theme-75',
+            isDisabled ? 'brightness-75' : ''
+          )}
+        >
+          <BetAreaVer target={betState?.bigChips} />
+          <div className="m-auto w-2/3 text-gray-300">
+            <div className="text-xl font-bold">
+              <FormattedMessage id="screens.baccaratRoom.big" />
+            </div>
+            <div className="text-sm">
+              <p>1:0.54</p>
+            </div>
+          </div>
+        </button>
+
         <button
           disabled={isDisabled}
           onClick={() =>
@@ -156,7 +183,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             <div className="text-xl font-bold">
               <FormattedMessage id="screens.baccaratRoom.player" />
             </div>
-            <div className='text-sm'>
+            <div className="text-sm">
               <p>1:1</p>
             </div>
           </div>
@@ -183,7 +210,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             <div className="text-xl font-bold">
               <FormattedMessage id="common.simpleTie" />
             </div>
-            <div className='text-sm'>
+            <div className="text-sm">
               <p>1:8</p>
             </div>
           </div>
@@ -210,7 +237,35 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             <div className="text-xl font-bold">
               <FormattedMessage id="screens.baccaratRoom.dealer" />
             </div>
-            <div className='text-sm'>{isRegular ? <p>1:1</p> : <p>1:0.95</p>}</div>
+            <div className="text-sm">
+              {isRegular ? <p>1:1</p> : <p>1:0.95</p>}
+            </div>
+          </div>
+        </button>
+        <button
+          disabled={isDisabled}
+            onClick={() =>
+              dispatchBet({
+                type: 'addSmallChips',
+                playload: {
+                  smallChips: chipsData?.[selectedChip]?.src,
+                  smallAmount: chipsData?.[selectedChip]?.value
+                }
+              })
+            }
+          className={cx(
+            'rounded-md bg-theme-75',
+            isDisabled ? 'brightness-75' : ''
+          )}
+        >
+          <BetAreaVer target={betState?.smallChips} />
+          <div className="m-auto w-2/3 text-gray-300">
+            <div className="text-xl font-bold">
+              <FormattedMessage id="screens.baccaratRoom.small" />
+            </div>
+            <div className="text-sm">
+              <p>1:1</p>
+            </div>
           </div>
         </button>
       </div>
