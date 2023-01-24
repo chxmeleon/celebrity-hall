@@ -64,7 +64,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         >
           <BetAreaVer target={betState?.playerPairChips} />
           <div className="text-xs md:text-xl w-full text-grid-400 [&_p]:text-gray-300">
-            <FormattedMessage id="screens.baccaratRoom.playerPair" />
+            <FormattedMessage id="common.playerPair" />
             <div>
               <p>1:11</p>
             </div>
@@ -114,7 +114,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
 
           <div className="text-xs md:text-xl w-full text-grid-100 [&_p]:text-gray-300 ">
             <div>
-              <FormattedMessage id="screens.baccaratRoom.dealerPair" />
+              <FormattedMessage id="common.dealerPair" />
             </div>
             <div>
               <p>1:11</p>
@@ -181,7 +181,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
           <BetAreaVer target={betState?.playerChips} />
           <div className="m-auto w-2/3 text-grid-400 [&_p]:text-gray-300">
             <div className="text-xl font-bold">
-              <FormattedMessage id="screens.baccaratRoom.player" />
+              <FormattedMessage id="common.simplePlayer" />
             </div>
             <div className="text-sm">
               <p>1:1</p>
@@ -235,7 +235,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
 
           <div className="m-auto w-2/3 text-grid-100 [&_p]:text-gray-300">
             <div className="text-xl font-bold">
-              <FormattedMessage id="screens.baccaratRoom.dealer" />
+              <FormattedMessage id="common.simpleDealer" />
             </div>
             <div className="text-sm">
               {isRegular ? <p>1:1</p> : <p>1:0.95</p>}

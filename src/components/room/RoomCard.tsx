@@ -122,20 +122,20 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
           <div className="flex justify-between px-3 w-full h-14">
             <div className="flex justify-between items-center w-1/2 h-full md:text-lg font-light [&_p]:pl-1 md:[&_p]:pl-3 text-white text-xs">
               <div className="inline-flex items-center">
-                <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[3px] bg-grid-100">
-                  <FormattedMessage id="common.dealer" defaultMessage="B" />
+                <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[5px] bg-grid-100 m-auto">
+                  <FormattedMessage id="common.simpleDealer" defaultMessage="B" />
                 </div>
                 <p>{room.roads.dealer_count}</p>
               </div>
               <div className="inline-flex items-center">
-                <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[3px] bg-grid-400">
-                  <FormattedMessage id="common.player" defaultMessage="P" />
+                <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[5px] bg-grid-400 m-auto">
+                  <FormattedMessage id="common.simplerPlayer" defaultMessage="P" />
                 </div>
                 <p>{room.roads.player_count}</p>
               </div>
               <div className="inline-flex items-center">
-                <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[3px] bg-grid-300">
-                  <FormattedMessage id="common.tie" defaultMessage="T" />
+                <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[5px] bg-grid-300 m-auto">
+                  <FormattedMessage id="common.simpleTie" defaultMessage="T" />
                 </div>
                 <p>{room.roads.tie_count}</p>
               </div>

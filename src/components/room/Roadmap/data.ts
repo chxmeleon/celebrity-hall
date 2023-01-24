@@ -1,18 +1,18 @@
 export const askMapper = [
   {
-    contentId: 'common.dealer',
+    contentId: 'common.simpleDealer',
     default: 'Dealer',
     className: 'text-red-600',
     value: 'dealer_count'
   },
   {
-    contentId: 'common.player',
+    contentId: 'common.simplePlayer',
     default: 'Player',
     className: 'text-blue-600',
     value: 'player_count'
   },
   {
-    contentId: 'common.tie',
+    contentId: 'common.simpleTie',
     default: 'Tie',
     className: 'text-teal-600',
     value: 'tie_count'
@@ -67,19 +67,19 @@ export const askMapperMobile = [
     value: 'total_count'
   },
   {
-    contentId: 'common.dealer',
+    contentId: 'common.simpleDealer',
     default: 'Dealer',
     className: 'text-red-400',
     value: 'dealer_count'
   },
   {
-    contentId: 'common.player',
+    contentId: 'common.simplePlayer',
     default: 'Player',
     className: 'text-blue-400',
     value: 'player_count'
   },
   {
-    contentId: 'common.tie',
+    contentId: 'common.simpletie',
     default: 'Tie',
     className: 'text-teal-400',
     value: 'tie_count'
@@ -112,38 +112,38 @@ export type RoadTileProps = {
 export const fullRecordMapping: { [key: string]: RoadTileProps } = {
   dealer: {
     className: 'bg-red-600',
-    translationId: 'screens.baccaratRoom.dealer'
+    translationId: 'common.simpleDealer'
   },
   player: {
     className: 'bg-blue-600',
-    translationId: 'screens.baccaratRoom.player'
+    translationId: 'common.simplePlayer'
   },
-  tie: { className: 'bg-teal-600', translationId: 'screens.baccaratRoom.tie' }
+  tie: { className: 'bg-teal-600', translationId: 'common.simpleTie' }
 }
 
 export const roadTileMapping: { [key: string]: RoadTileProps } = {
   dealer: {
     className: 'bg-red-600',
-    translationId: 'screens.baccaratRoom.dealer'
+    translationId: 'common.simpleDealer'
   },
   player: {
     className: 'bg-blue-600',
-    translationId: 'screens.baccaratRoom.player'
+    translationId: 'common.simplePlayer'
   },
-  tie: { className: 'bg-teal-600', translationId: 'screens.baccaratRoom.tie' }
+  tie: { className: 'bg-teal-600', translationId: 'common.simpleTie' }
 }
 
 export const outlineTileMapping: { [key: string]: RoadTileProps } = {
   dealer: {
     className: 'border-red-600',
-    translationId: 'screens.baccaratRoom.dealer'
+    translationId: 'common.simpleDealer'
   },
   player: {
     className: 'border-blue-600',
-    translationId: 'screens.baccaratRoom.player'
+    translationId: 'common.simplePlayer'
   },
   tie: {
     className: 'border-teal-600',
-    translationId: 'screens.baccaratRoom.tie'
+    translationId: 'common.simpleTie'
   }
 }

@@ -15,13 +15,13 @@ type cardsMapperProps = {
 
 const cardsMapper: cardsMapperProps = {
   dealer: {
-    contentId: 'common.dealer',
+    contentId: 'common.simpleDealer',
     default: 'Dealer',
     className: 'bg-grid-100',
     side: 'rounded-r-xl'
   },
   player: {
-    contentId: 'common.player',
+    contentId: 'common.simplePlayer',
     default: 'Player',
     className: 'bg-grid-400',
     side: 'rounded-l-xl'

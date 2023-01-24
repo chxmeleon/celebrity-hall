@@ -43,7 +43,7 @@ const PockerResult: React.FC = () => {
           pockerState?.result?.tieWin ? '' : 'opacity-0'
         } text-theme-300 text-5xl font-medium w-full h-full absolute top-0 left-0 flex justify-center items-center`}
       >
-        <FormattedMessage id="common.tie" defaultMessage="Tie" />
+        <FormattedMessage id="common.simpleTie" defaultMessage="Tie" />
       </div>
       <CardWidget role="player" />
       <div className="w-1 h-full bg-theme-150"></div>
