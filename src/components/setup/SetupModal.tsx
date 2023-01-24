@@ -38,7 +38,7 @@ const SetupModal: React.FC = () => {
             </div>
             <select
               className="relative w-1/2 text-sm text-center text-gray-100 rounded-md border-r-[16px] border-theme-150 bg-theme-150 focus:outline-0"
-              defaultValue={locale}
+              defaultValue={isSelected}
               onChange={handleSelectValue}
             >
               <option value="en-us">

@@ -32,19 +32,17 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
         <div className="flex flex-col w-full h-full rounded-2xl bg-theme-50">
           <div className="flex justify-start items-center pl-4 w-full h-12">
             <div
-              className={`${
-                isLeftTen && startCount && counter !== undefined && counter > 0
+              className={`${isLeftTen && startCount && counter !== undefined && counter > 0
                   ? 'bg-red-500'
                   : 'bg-link-button-54'
-              }
+                }
               rounded-sm p-[1.1px] `}
             >
               <div className="w-6 h-6 text-center rounded-sm bg-theme-50">
                 {startCount && counter !== undefined && counter > 0 ? (
                   <p
-                    className={`${
-                      isLeftTen ? 'text-red-500' : 'text-theme-300'
-                    } font-bold`}
+                    className={`${isLeftTen ? 'text-red-500' : 'text-theme-300'
+                      } font-bold`}
                   >
                     {counter}
                   </p>
@@ -120,28 +118,34 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
             </div>
           </div>
           <div className="flex justify-between px-3 w-full h-14">
-            <div className="flex justify-between items-center w-1/2 h-full md:text-lg font-light [&_p]:pl-1 md:[&_p]:pl-3 text-white text-xs">
+            <div className="flex justify-between items-center  w-1/2 h-full md:text-lg font-light [&_p]:pl-1 md:[&_p]:pl-3 text-white text-[11px]">
               <div className="inline-flex items-center">
-                <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[5px] bg-grid-100 m-auto">
-                  <FormattedMessage id="common.simpleDealer" defaultMessage="B" />
+                <div className="flex justify-center items-center w-5 h-5 rounded-full md:w-8 md:h-8 bg-grid-100">
+                  <FormattedMessage
+                    id="common.simpleDealer"
+                    defaultMessage="B"
+                  />
                 </div>
                 <p>{room.roads.dealer_count}</p>
               </div>
               <div className="inline-flex items-center">
-                <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[5px] bg-grid-400 m-auto">
-                  <FormattedMessage id="common.simplePlayer" defaultMessage="P" />
+                <div className="flex justify-center items-center w-5 h-5 rounded-full md:w-8 md:h-8 bg-grid-400">
+                  <FormattedMessage
+                    id="common.simplePlayer"
+                    defaultMessage="P"
+                  />
                 </div>
                 <p>{room.roads.player_count}</p>
               </div>
               <div className="inline-flex items-center">
-                <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[5px] bg-grid-300 m-auto">
+                <div className="flex justify-center items-center w-5 h-5 rounded-full md:w-8 md:h-8 bg-grid-300">
                   <FormattedMessage id="common.simpleTie" defaultMessage="T" />
                 </div>
                 <p>{room.roads.tie_count}</p>
               </div>
             </div>
-            <div className="flex md:w-1/4 h-full">
-              <button className="px-3 py-1 md:p-2 m-auto w-full text-xs font-medium text-gray-800 bg-gradient-to-r rounded-full hover:via-amber-200 from-theme-200 via-theme-300 to-theme-200 md:text-[1rem] hover:from-theme-400 hover:to-theme-400">
+            <div className="flex h-full md:w-1/4">
+              <button className="py-1 px-3 m-auto w-full text-xs font-medium text-gray-800 bg-gradient-to-r rounded-full md:p-2 hover:via-amber-200 from-theme-200 via-theme-300 to-theme-200 md:text-[1rem] hover:from-theme-400 hover:to-theme-400">
                 <FormattedMessage
                   id="screens.rooms.enterGame"
                   defaultMessage="Enter"
