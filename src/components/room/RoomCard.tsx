@@ -129,7 +129,7 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
               </div>
               <div className="inline-flex items-center">
                 <div className="rounded-full md:py-0.5 md:px-1.5 py-[1px] px-[5px] bg-grid-400 m-auto">
-                  <FormattedMessage id="common.simplerPlayer" defaultMessage="P" />
+                  <FormattedMessage id="common.simplePlayer" defaultMessage="P" />
                 </div>
                 <p>{room.roads.player_count}</p>
               </div>
