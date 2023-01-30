@@ -14,9 +14,11 @@ const UserRanking = ({ type }: { type: string }) => {
   const { loading, data } = useQuery(GET_USERRANKING, {
     variables: { range: subTabSelected, type: type }
   })
+
   if (loading) {
     return <div className="m-[50px]">loading</div>
   }
+
   const mappedData = mapRankingData({ data: data.userRanking, type })
   const dataAfter3rd = mappedData.filter((item, index) => index > 2)
 
