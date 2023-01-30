@@ -122,6 +122,8 @@ html {
   }
 
   .tcaptcha-transform {
-    transform: scale(0.8);
+    left: 50% !important;
+    top: 50% !important;
+    transform: scale(0.85) translate(-55%, -55%);
   }
 }
