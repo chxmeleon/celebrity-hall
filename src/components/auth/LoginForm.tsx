@@ -35,6 +35,7 @@ const LoginForm: React.FC = () => {
     traitLogin(token)
   }
 
+
   const showCaptcha = () => {
     const captcha = new (window as any).TencentCaptcha(
       '1259693855',
