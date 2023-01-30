@@ -453,7 +453,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             >
               <div className="text-xs flex justify-between items-center px-2 text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
-                  <FormattedMessage id="screens.baccaratRoom.playerDouble" />
+                  <FormattedMessage id="screens.baccaratRoom.dealerDouble" />
                 </div>
                 <div>
                   <p>1:0.94</p>
@@ -469,7 +469,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             >
               <div className="text-xs flex justify-between items-center px-2 text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
-                  <FormattedMessage id="screens.baccaratRoom.playerSingle" />
+                  <FormattedMessage id="screens.baccaratRoom.dealerSingle" />
                 </div>
                 <div>
                   <p>1:0.94</p>
