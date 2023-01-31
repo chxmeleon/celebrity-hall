@@ -1,15 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
+import { clsx as cx } from 'clsx'
+import { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
 type ModalProps = {
   isShow: boolean
   onClose: () => void
+  size: string
 }
 
 const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
   children,
   isShow,
-  onClose
+  onClose,
+  size
 }) => {
   return (
     <Portal>
@@ -22,7 +25,10 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
             onClick={(e) => {
               e.stopPropagation()
             }}
-            className="p-1 md:p-6 m-auto w-4/5 md:w-1/2 h-[79%] bg-gradient-to-br rounded-md border border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md"
+            className={cx(
+              'p-1 md:p-6 m-auto bg-gradient-to-br rounded-md border border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md',
+              size
+            )}
           >
             <div className="flex justify-end w-full h-10">
               <button
@@ -43,7 +49,6 @@ export default Modal
 const Portal: React.FC<React.PropsWithChildren> = ({ children }) => {
   const el = document.createElement('div')
 
-  
   useEffect(() => {
     const modalRoot = document.getElementById('modal-root')
     modalRoot?.appendChild(el)
