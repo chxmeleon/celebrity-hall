@@ -19,7 +19,6 @@ import Card_h_2 from '/cards/15.webp'
 import Card_d_2 from '/cards/28.webp'
 import Card_d_3 from '/cards/29.webp'
 
-
 const Rule = () => {
   const mainStyle = cx(
     ' w-full md:w-4/5 h-full pt-24 px-7 md:px-12',
@@ -171,7 +170,11 @@ const Rule = () => {
                 <img src={Card_s_4} alt="pocker card image" className="w-11" />
               </span>
             </div>
-            <p className="pt-1 pb-4">● 閒贏，投注《閒龍寶》勝方以<span className="warning-note">(非例牌)</span>贏4點，則派彩【1賠1】。</p>
+            <p className="pt-1 pb-4">
+              ● 閒贏，投注《閒龍寶》勝方以
+              <span className="warning-note">(非例牌)</span>
+              贏4點，則派彩【1賠1】。
+            </p>
             <div className="inline-flex justify-between items-center w-1/2">
               <p>閒家6點</p>
               <span className="inline-flex w-1/3">
@@ -191,7 +194,11 @@ const Rule = () => {
                 <img src={Card_c_4} alt="pocker card image" className="w-11" />
               </span>
             </div>
-            <p className="pt-1 pb-4">● 莊贏，投注《莊龍寶》投注方以<span className="warning-note">(非例牌)</span>贏3點以下則輸掉投注金。</p>
+            <p className="pt-1 pb-4">
+              ● 莊贏，投注《莊龍寶》投注方以
+              <span className="warning-note">(非例牌)</span>
+              贏3點以下則輸掉投注金。
+            </p>
             <div className="inline-flex justify-between items-center w-1/2">
               <p>閒家9點</p>
               <span className="inline-flex w-1/3">
@@ -216,7 +223,10 @@ const Rule = () => {
                 </div>
               </span>
             </div>
-            <p className="pt-1 pb-4">● 閒贏，投注《閒龍寶》勝方以<span className="warning-note">(例牌)</span>勝出，則派彩【1賠1】。</p>
+            <p className="pt-1 pb-4">
+              ● 閒贏，投注《閒龍寶》勝方以
+              <span className="warning-note">(例牌)</span>勝出，則派彩【1賠1】。
+            </p>
             <div className="inline-flex justify-between items-center w-1/2">
               <p>閒家7點</p>
               <span className="inline-flex w-1/3">
@@ -236,24 +246,38 @@ const Rule = () => {
                 <img src={Card_h_7} alt="pocker card image" className="w-11" />
               </span>
             </div>
-            <p className="pt-1 pb-4">● 和局，投注《閒/莊龍寶》投注方以 <span className="warning-note">(非例牌)</span>和局，則輸掉投注金。</p>
+            <p className="pt-1 pb-4">
+              ● 和局，投注《閒/莊龍寶》投注方以{' '}
+              <span className="warning-note">(非例牌)</span>和局，則輸掉投注金。
+            </p>
             <div className="inline-flex justify-between items-center w-1/2">
               <p>閒家8點</p>
               <span className="inline-flex w-1/3">
                 <img src={Card_h_5} alt="pocker card image" className="w-11" />
                 <div className="pl-1">
-                  <img src={Card_d_3} alt="pocker card image" className="w-11" />
+                  <img
+                    src={Card_d_3}
+                    alt="pocker card image"
+                    className="w-11"
+                  />
                 </div>
               </span>
               <p>莊家8點</p>
               <span className="inline-flex w-1/3">
                 <img src={Card_h_6} alt="pocker card image" className="w-11" />
                 <div className="pl-1">
-                  <img src={Card_h_2} alt="pocker card image" className="w-11" />
+                  <img
+                    src={Card_h_2}
+                    alt="pocker card image"
+                    className="w-11"
+                  />
                 </div>
               </span>
             </div>
-            <p className="pt-1 pb-4">● 和局，投注《閒/莊龍寶》投注方以<span className="warning-note">(例牌)</span>和局，則退回投注金。</p>
+            <p className="pt-1 pb-4">
+              ● 和局，投注《閒/莊龍寶》投注方以
+              <span className="warning-note">(例牌)</span>和局，則退回投注金。
+            </p>
           </div>
         </div>
         <div className="game-info">
@@ -262,116 +286,331 @@ const Rule = () => {
             簡介：所謂百家樂的「路」，是指百家樂開牌結果的記錄。
             通過看前面的牌路，來判斷後面的開牌結果，從而決定下一手下注在莊還是閒，這是大多數百家樂玩家最常用的參考方法。70年代葡京娛樂場的初期，發明了小路。不久之後，70年代中期，葡京娛樂場的荷官於小路發現出了一條新路，發明的新路就取名為&quot大眼路&quot;。之後，有人在大眼路和小路的基礎上，發明了&quot;小強路&quot;。
           </p>
-          <p>
-            一、開牌結果的記錄
+          <div className="py-4 w-full">
+            <img
+              src="/rule/roadbigA.jpeg"
+              alt="rule image"
+              className="w-full"
+            />
+          </div>
+          <p className="py-2">
+            一、開牌結果的記錄<br />
             左上角的紅點標示表示出現了莊對，右下角的藍點標示表示出現了閒對，如果同時出現莊對閒對，則會在左上角和右下角標示紅點和藍點，例牌勝出為實心圓，非例牌勝出則為空心圓。
           </p>
-          <p>
-            二、大路
+          <p className="py-2">
+            二、大路 <br />
             最常用的路，&quot;大路&quot;就是把每一次開牌的結果記錄下來，開[莊]，用紅色表示，而開[閒]則用藍色來表示。按照[莊]、[閒]出現的順序，&quot;大路&quot;中標示為[莊]一列，[閒]一列，[莊]、[閒]交錯分佈，紅色代表莊贏，藍色代表閒贏。左上角的紅點標示表示出現莊對，右下角的藍點標示表示出現閒對，如果同時出現莊對和閒對，則同時在左上角和右下角標示紅點和藍點。如果開[和]的話，則用綠色X在開獎結果中表示，如莊家為【Super
             6】則在開獎結果中，於紅圈中加上數字6表示。
           </p>
-          <p>
-            三、大眼路
+          <p className="py-2">
+            三、大眼路<br />
             根據牌路&quot;大路&quot;延伸出&quot;大眼路&quot;的牌路單。起始標示的參照點是從&quot;大路&quot;的牌路之第2列第2行開始，如果&quot;大路&quot;的牌路該座標上沒有出現[莊]或[閒]，則以第3列第1行開始作為參照點。
           </p>
-          <p>
-            如下圖：
-            <br />{' '}
+          <p>如下圖：</p>
+          <div className="py-4 w-1/3">
+            <img
+              src="/rule/roadbigex1.jpeg"
+              alt="rule image"
+              className="w-full"
+            />
+          </div>
+          <p className="warning-note">
             (優先以座標01為參考點，若座標01無莊或閒，則以座標02為參考點。)
           </p>
         </div>
-
         <div className="game-info">
           <h2>● 大眼路寫法畫藍圈規則</h2>
-          <p>1.直落：</p>
-          <p>2.換列：</p>
-          <p>
-            (以大路的最新參照點，水平方式比對前一列，前一列無結果大眼路畫藍圈。)
-            (以大路的最新參照點，比對前一列與前二列是否齊整，不齊整則大眼路畫藍圈。)
-          </p>
+          <div className="flex gap-4 justify-start w-full h-80">
+            <div className="w-1/3 h-full">
+              <p className="pb-2">1.直落：</p>
+              <div>
+                <img
+                  src="/rule/roadbigblue1.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，水平方式比對前一列，前一列無結果大眼路畫藍圈。)
+                </span>
+              </div>
+            </div>
+            <div className="w-1/3 h-full">
+              <p className="pb-2">2.換列：</p>
+              <div>
+                <img
+                  src="/rule/roadbigblue2.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，比對前一列與前二列是否齊整，不齊整則大眼路畫藍圈。)
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="game-info">
           <h2>● 大眼路寫法畫紅圈規則</h2>
-          <p>1.直落：</p>
-          <p>2.換列：</p>
+          <div className="flex gap-4 justify-between items-center w-full h-80">
+            <div className="w-1/3 h-full">
+              <p className="pb-2">1.直落：</p>
+              <div>
+                <img
+                  src="/rule/roadbigred1.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，水平方式比對前一列，前一列不論結果為莊或閒，則大眼路畫紅圈。)
+                </span>
+              </div>
+            </div>
+            <div className="w-1/3 h-full">
+              <div className="h-11"></div>
+              <div>
+                <img
+                  src="/rule/roadbigred2.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，水平方式比對前一列，前一列若二行或二行以上無結果，則大眼路畫紅圈。)
+                </span>
+              </div>
+            </div>
+            <div className="w-1/3 h-full">
+              <p className="pb-2">2.換列：</p>
+              <div>
+                <img
+                  src="/rule/roadbigred3.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，比對前一列與前二列是否齊整，二列齊整則大眼路畫紅圈。)
+                </span>
+              </div>
+            </div>
+          </div>
           <p>
-            (以大路的最新參照點，水平方式比對前一列，前一列不論結果為莊或閒，則大眼路畫紅圈。)
-            (以大路的最新參照點，水平方式比對前一列，前一列若二行或二行以上無結果，則大眼路畫紅圈。)
-            (以大路的最新參照點，比對前一列與前二列是否齊整，二列齊整則大眼路畫紅圈。)
-          </p>
-          <p>
-            四、小路
+            四、小路<br />
             根據牌路&quot;大路&quot;延伸出&quot;小路&quot;的牌路單。起始標示的參照點是從&quot;大路&quot;的牌路單第三列第2行開始，如果&quot;大路&quot;的牌路該座標上沒有出現[莊]或[閒]，則以第四列第1行開始作為參照點。
           </p>
-          <p>
-            如下圖：
-            <br />{' '}
+          <p>如下圖：</p>
+          <div className="py-4 w-1/3">
+            <img
+              src="/rule/roadsmallex1.jpeg"
+              alt="rule image"
+              className="w-full"
+            />
+          </div>
+          <p className="warning-note">
             (優先以座標01為參照點，若座標01無莊或閒，則以座標02為參照點。)
           </p>
         </div>
         <div className="game-info">
           <h2>● 小路寫法畫藍圈規則</h2>
-          <p>1.直落：</p>
-          <p>2.換列：</p>
-          <p>
-            (以大路的最新參照點，水平方式比對前二列，前二列無結果，則小路畫藍圈。)
-            (以大路的最新參照點，比對前一列與前三列是否齊整，不齊整則小路畫藍圈。)
-          </p>
+          <div className="flex gap-4 justify-start w-full h-80">
+            <div className="w-1/3 h-full">
+              <p className="pb-2">1.直落：</p>
+              <div>
+                <img
+                  src="/rule/roadsmallblue1.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，水平方式比對前二列，前二列無結果，則小路畫藍圈。)
+                </span>
+              </div>
+            </div>
+            <div className="w-1/3 h-full">
+              <p className="pb-2">2.換列：</p>
+              <div>
+                <img
+                  src="/rule/roadsmallblue2.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，比對前一列與前三列是否齊整，不齊整則小路畫藍圈。)
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="game-info">
           <h2>● 小路寫法畫紅圈規則</h2>
-          <p>1.直落：</p>
-          <p>2.換列：</p>
+          <div className="flex gap-4 justify-between items-center w-full h-80">
+            <div className="w-1/3 h-full">
+              <p className="pb-2">1.直落：</p>
+              <div>
+                <img
+                  src="/rule/roadsmallred1.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，水平方式比對前二列，前二列不論結果為莊或閒，則小路畫紅圈。)
+                </span>
+              </div>
+            </div>
+            <div className="w-1/3 h-full">
+              <div className="h-11"></div>
+              <div>
+                <img
+                  src="/rule/roadsmallred2.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，水平方式比對前二列，前二列若二行或二行以上無結果，則小路畫紅圈。)
+                </span>
+              </div>
+            </div>
+            <div className="w-1/3 h-full">
+              <p className="pb-2">2.換列：</p>
+              <div>
+                <img
+                  src="/rule/roadsmallred3.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，比對前一列與前三列是否齊整，二列齊整則小路畫紅圈。)
+                </span>
+              </div>
+            </div>
+          </div>
           <p>
-            (以大路的最新參照點，水平方式比對前二列，前二列不論結果為莊或閒，則小路畫紅圈。)
-            (以大路的最新參照點，水平方式比對前二列，前二列若二行或二行以上無結果，則小路畫紅圈。)
-            (以大路的最新參照點，比對前一列與前三列是否齊整，二列齊整則小路畫紅圈。)
-          </p>
-          <p>
-            五、小強路
+            五、小強路<br />
             根據牌路&quot;大路&quot;延伸出&quot;小強路&quot;的牌路單。起始標示的參照點是從&quot;大路&quot;的牌路單第四列第2行開始，如果&quot;大路&quot;的牌路該座標上沒有出現[莊]或[閒]，則以第五列第1行開始作為參照點。
           </p>
-          <p>
-            如下圖：
-            <br />{' '}
+          <p>如下圖：</p>
+          <div className="py-4 w-1/3">
+            <img src="/rule/roadex3.jpeg" alt="rule image" className="w-full" />
+          </div>
+          <p className="warning-note">
             (優先以座標01為參照點，若座標01無莊或閒，則以座標02為參照點。)
           </p>
         </div>
         <div className="game-info">
           <h2>● 小強路畫藍色斜線規則</h2>
-          <p>1.直落：</p>
-          <p>2.換列：</p>
-          <p>
-            (以大路的最新參照點，水平方式比對前三列，前三列無結果，則小強路畫藍色斜線。)
-            (以大路的最新參照點，比對前一列與前四列是否齊整，不齊整則小強路畫藍色斜線。)
-          </p>
+          <div className="flex gap-4 justify-start w-full h-80">
+            <div className="w-1/3 h-full">
+              <p className="pb-2">1.直落：</p>
+              <div>
+                <img
+                  src="/rule/roadstblue1.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，水平方式比對前三列，前三列無結果，則小強路畫藍色斜線。)
+                </span>
+              </div>
+            </div>
+            <div className="w-1/3 h-full">
+              <p className="pb-2">2.換列：</p>
+              <div>
+                <img
+                  src="/rule/roadstblue2.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，比對前一列與前四列是否齊整，不齊整則小強路畫藍色斜線。)
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="game-info">
           <h2>● 小強路畫紅色斜線規則</h2>
-          <p>1.直落：</p>
-
-          <div className="w-full">
-            <img src="/rule/roadbigB.jpeg" alt="rule image" className="w-full" />
+          <div className="flex gap-4 justify-between items-center w-full h-80">
+            <div className="w-1/3 h-full">
+              <p className="pb-2">1.直落：</p>
+              <div>
+                <img
+                  src="/rule/roadstred1.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，水平方式比對前三列，前三列不論結果為莊或閒，則小強路畫紅色斜線。)
+                </span>
+              </div>
+            </div>
+            <div className="w-1/3 h-full">
+              <div className="h-11"></div>
+              <div>
+                <img
+                  src="/rule/roadstred2.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，水平方式比對前三列，前三列若二行或二行以上無結果，則小強路畫紅色斜線。)
+                </span>
+              </div>
+            </div>
+            <div className="w-1/3 h-full">
+              <p className="pb-2">2.換列：</p>
+              <div className="">
+                <img
+                  src="/rule/roadstred3.jpeg"
+                  alt="rule image"
+                  className="w-full"
+                />
+              </div>
+              <div className="pt-3">
+                <span className="text-xs leading-none">
+                  (以大路的最新參照點，比對前一列與前四列是否齊整，二列齊整則小強路畫紅色斜線。)
+                </span>
+              </div>
+            </div>
           </div>
-          <p>2.換列：</p>
-          <p>
-            (以大路的最新參照點，水平方式比對前三列，前三列不論結果為莊或閒，則小強路畫紅色斜線。)
-            (以大路的最新參照點，水平方式比對前三列，前三列若二行或二行以上無結果，則小強路畫紅色斜線。)
-            (以大路的最新參照點，比對前一列與前四列是否齊整，二列齊整則小強路畫紅色斜線。)
-          </p>
           <p>
             六、莊問路、閒問路
             此功能是用於預測下一局如果開出[閒]或開出[莊]時，大路、大眼路、小路、小強路將會如何延展。方便玩家能更快速的判斷該如何投注下一局。
           </p>
-          <p>
-            如下圖：
-          </p>
+          <p>如下圖：</p>
           <div className="w-full">
-            <img src="/rule/roadbigB.jpeg" alt="rule image" className="w-full" />
+            <img
+              src="/rule/roadbigB.jpeg"
+              alt="rule image"
+              className="w-full"
+            />
           </div>
         </div>
-
         <div className="game-alert">
           <h2>● 請注意！！（勾選不使用確認投注鍵進行投注）</h2>
           <ol>
