@@ -1,6 +1,24 @@
 import { RuleTable } from '@/components/common/ruleInfo'
 import { clsx as cx } from 'clsx'
 import { ruleContext } from '@/libs/ruleContext'
+import Card_h_4 from '/cards/17.webp'
+import Card_d_4 from '/cards/30.webp'
+import Card_s_7 from '/cards/7.webp'
+import Card_s_1 from '/cards/1.webp'
+import Card_c_8 from '/cards/47.webp'
+import Card_c_7 from '/cards/46.webp'
+import Card_h_7 from '/cards/20.webp'
+import Card_c_4 from '/cards/43.webp'
+import Card_s_4 from '/cards/4.webp'
+import Card_h_k from '/cards/26.webp'
+import Card_h_6 from '/cards/19.webp'
+import Card_h_5 from '/cards/18.webp'
+import Card_d_j from '/cards/37.webp'
+import Card_d_5 from '/cards/31.webp'
+import Card_h_2 from '/cards/15.webp'
+import Card_d_2 from '/cards/28.webp'
+import Card_d_3 from '/cards/29.webp'
+
 
 const Rule = () => {
   const mainStyle = cx(
@@ -10,7 +28,7 @@ const Rule = () => {
     '[&_.game-info>h2]:text-teal-300 [&_.game-info]:py-10',
     '[&_h2]:text-xl [&_h2]:font-semibold [&_h2]:my-3',
     '[&_ol]:list-decimal [&_ol]:ml-11 ',
-    '[&_.waring-note]:text-rose-500 [&_.waring-note]:font-thin'
+    '[&_.warning-note]:text-rose-500'
   )
 
   return (
@@ -31,7 +49,7 @@ const Rule = () => {
           <p>
             每局開始荷官會按百家牌例發牌（牌面朝下），「閒家」「莊家」各先派兩張牌，以「閒家」先發，再發2張牌放在補牌區的位置上，如前兩張未分出勝負需再按「牌例」發第三張的牌，最多每方3張牌，誰最接近9點即為勝方，相同點數即和局。如當局只補一張牌，剩餘的牌將作為下一局閒家第一張使用。以此類推，每新開一局，桌面上保持有6張牌在相對應的位置上。
           </p>
-          <p className="waring-note">
+          <p className="warning-note">
             ※ 遊戲左下方可切換單人/多人投注模式,
             帶領玩家體驗不同遊戲介面跟投注方位。
           </p>
@@ -57,36 +75,36 @@ const Rule = () => {
           <div className="overflow-x-auto py-5 w-full">
             <RuleTable data={ruleContext?.table1} rows={11} cols={7} span={3} />
           </div>
-          <p className="waring-note">
+          <p className="warning-note">
             ※
             若莊閒兩家（頭兩張牌）為6點或7點，即定輸贏（如雙方同為6點或7點，即為和局）。
           </p>
-          <p className="waring-note">
+          <p className="warning-note">
             ※ 莊家補牌備註：閒家第三張牌，意指閒家第三張牌牌面，並非三張牌總計。
           </p>
         </div>
         <div className="game-info">
           <h2>● 標準/免水百家樂賠率表</h2>
-          <p className="waring-note">
+          <p className="warning-note">
             標準/免水百家樂下注選擇：莊贏、閒贏、和局、莊對、閒對、莊龍寶、閒龍寶、莊例牌、閒例牌、任意一對、完美對子、莊單、莊雙、閒單、閒雙、大、小、Super
             6、超和
           </p>
-          <div className="overflow-x-auto py-5 w-full ">
+          <div className="overflow-x-auto py-5 w-full">
             <RuleTable data={ruleContext?.table2} rows={21} cols={6} span={3} />
           </div>
-          <p className="waring-note">
+          <p className="warning-note">
             ● 投注《閒/莊例牌》例牌和局時，退還本金;
             非例牌和局時，則為輸掉本金。
           </p>
-          <p className="waring-note">
+          <p className="warning-note">
             ●
             投注《任意一對或完美對子》若莊家和閒家開牌結果同時為任意一對或完美對子，只會按照該方位的賠率而派彩一次，不會因為同時間莊/閒都開出，而雙倍派彩。
           </p>
-          <p className="waring-note">
+          <p className="warning-note">
             ●
             大/小、閒單/閒雙、莊單/莊雙、超和，30局以上（不含30局）押注框將反黑，無法進行投注。
           </p>
-          <p className="waring-note">
+          <p className="warning-note">
             ●
             大/小、閒單/閒雙、莊單/莊雙上下限與方位閒/莊一樣；閒龍寶/莊龍寶上下限與方位和一樣。
           </p>
@@ -98,12 +116,13 @@ const Rule = () => {
             免水百家樂的玩法及規則與標準百家樂大致相同，特別之處在於莊家免抽水，即莊贏賠率為1：1(莊家以6點大過閒家，下注莊家贏，賠率1賠0.5)。
           </p>
         </div>
+
         <div className="game-info">
           <h2>● 超和遊戲玩法</h2>
           <p>
             押注和局開出的點數，不同點數對應不同賠率(押中和局開出的點數予以派彩)
           </p>
-          <div className="overflow-x-auto py-5 w-full ">
+          <div className="overflow-x-auto py-5 w-full">
             <RuleTable data={ruleContext?.table3} rows={11} cols={6} span={4} />
           </div>
         </div>
@@ -120,12 +139,12 @@ const Rule = () => {
               所投注落敗或平手或勝差於三點以下時，即喪失所押注彩金，但若雙方皆為八點或九點(例牌)且雙方平手時，則可取回所投注彩金。
             </li>
           </ol>
-          <p className="waring-note">非例牌:</p>
+          <p className="warning-note">非例牌:</p>
           <ol>
             <li>頭兩張牌點數總和7點(含7點)以下皆屬非例牌。</li>
             <li>所有三張牌的情況亦屬非例牌。</li>
           </ol>
-          <p className="waring-note">例牌:</p>
+          <p className="warning-note">例牌:</p>
           <ol>
             <li>頭兩張牌的點數總和為8或9點。</li>
           </ol>
@@ -133,29 +152,116 @@ const Rule = () => {
 
         <div className="game-info">
           <h2>● 閒龍寶/莊龍寶賠率表</h2>
-          <div className="overflow-x-auto py-5 w-full ">
+          <div className="overflow-x-auto py-5 w-full">
             <RuleTable data={ruleContext?.table4} rows={9} cols={2} span={0} />
           </div>
-          <p>比牌舉例說明：</p>
-          <p>閒家9點 莊家5點 </p>
-          <p>● 閒贏，投注《閒龍寶》勝方以(非例牌)贏4點，則派彩【1賠1】。</p>
-          <p>閒家6點 莊家9點</p>
-          <p>● 莊贏，投注《莊龍寶》投注方以(非例牌)贏3點以下則輸掉投注金。</p>
-          <p>閒家9點 莊家8點</p>
-          <p>● 閒贏，投注《閒龍寶》勝方以(例牌)勝出，則派彩【1賠1】。</p>
-          <p>閒家7點 莊家7點</p>
-          <p>● 和局，投注《閒/莊龍寶》投注方以(非例牌)和局，則輸掉投注金。</p>
-          <p>閒家8點 莊家8點</p>
-          <p>● 和局，投注《閒/莊龍寶》投注方以(例牌)和局，則退回投注金。</p>
+          <div className="w-full min-w-fit">
+            <p className="pt-1 pb-5">比牌舉例說明：</p>
+            <div className="inline-flex justify-between items-center w-1/2">
+              <p>閒家9點</p>
+              <span className="inline-flex justify-around w-1/3">
+                <img src={Card_h_4} alt="pocker card image" className="w-11" />
+                <img src={Card_c_8} alt="pocker card image" className="w-11" />
+                <img src={Card_c_7} alt="pocker card image" className="w-11" />
+              </span>
+              <p>莊家5點</p>
+              <span className="inline-flex justify-around w-1/3">
+                <img src={Card_h_7} alt="pocker card image" className="w-11" />
+                <img src={Card_c_4} alt="pocker card image" className="w-11" />
+                <img src={Card_s_4} alt="pocker card image" className="w-11" />
+              </span>
+            </div>
+            <p className="pt-1 pb-4">● 閒贏，投注《閒龍寶》勝方以<span className="warning-note">(非例牌)</span>贏4點，則派彩【1賠1】。</p>
+            <div className="inline-flex justify-between items-center w-1/2">
+              <p>閒家6點</p>
+              <span className="inline-flex w-1/3">
+                <img src={Card_h_k} alt="pocker card image" className="w-11" />
+                <div className="pl-1">
+                  <img
+                    src={Card_h_6}
+                    alt="pocker card image"
+                    className="w-11"
+                  />
+                </div>
+              </span>
+              <p>莊家9點</p>
+              <span className="inline-flex justify-around w-1/3">
+                <img src={Card_h_7} alt="pocker card image" className="w-11" />
+                <img src={Card_d_j} alt="pocker card image" className="w-11" />
+                <img src={Card_c_4} alt="pocker card image" className="w-11" />
+              </span>
+            </div>
+            <p className="pt-1 pb-4">● 莊贏，投注《莊龍寶》投注方以<span className="warning-note">(非例牌)</span>贏3點以下則輸掉投注金。</p>
+            <div className="inline-flex justify-between items-center w-1/2">
+              <p>閒家9點</p>
+              <span className="inline-flex w-1/3">
+                <img src={Card_h_5} alt="pocker card image" className="w-11" />
+                <div className="pl-1">
+                  <img
+                    src={Card_d_4}
+                    alt="pocker card image"
+                    className="w-11"
+                  />
+                </div>
+              </span>
+              <p>莊家8點</p>
+              <span className="inline-flex w-1/3">
+                <img src={Card_s_7} alt="pocker card image" className="w-11" />
+                <div className="pl-1">
+                  <img
+                    src={Card_s_1}
+                    alt="pocker card image"
+                    className="w-11"
+                  />
+                </div>
+              </span>
+            </div>
+            <p className="pt-1 pb-4">● 閒贏，投注《閒龍寶》勝方以<span className="warning-note">(例牌)</span>勝出，則派彩【1賠1】。</p>
+            <div className="inline-flex justify-between items-center w-1/2">
+              <p>閒家7點</p>
+              <span className="inline-flex w-1/3">
+                <img src={Card_d_5} alt="pocker card image" className="w-11" />
+                <div className="pl-1">
+                  <img
+                    src={Card_h_2}
+                    alt="pocker card image"
+                    className="w-11"
+                  />
+                </div>
+              </span>
+              <p>莊家7點</p>
+              <span className="inline-flex justify-around w-1/3">
+                <img src={Card_c_8} alt="pocker card image" className="w-11" />
+                <img src={Card_d_2} alt="pocker card image" className="w-11" />
+                <img src={Card_h_7} alt="pocker card image" className="w-11" />
+              </span>
+            </div>
+            <p className="pt-1 pb-4">● 和局，投注《閒/莊龍寶》投注方以 <span className="warning-note">(非例牌)</span>和局，則輸掉投注金。</p>
+            <div className="inline-flex justify-between items-center w-1/2">
+              <p>閒家8點</p>
+              <span className="inline-flex w-1/3">
+                <img src={Card_h_5} alt="pocker card image" className="w-11" />
+                <div className="pl-1">
+                  <img src={Card_d_3} alt="pocker card image" className="w-11" />
+                </div>
+              </span>
+              <p>莊家8點</p>
+              <span className="inline-flex w-1/3">
+                <img src={Card_h_6} alt="pocker card image" className="w-11" />
+                <div className="pl-1">
+                  <img src={Card_h_2} alt="pocker card image" className="w-11" />
+                </div>
+              </span>
+            </div>
+            <p className="pt-1 pb-4">● 和局，投注《閒/莊龍寶》投注方以<span className="warning-note">(例牌)</span>和局，則退回投注金。</p>
+          </div>
         </div>
-
         <div className="game-info">
           <h2>● 牌路介紹</h2>
           <p>
             簡介：所謂百家樂的「路」，是指百家樂開牌結果的記錄。
             通過看前面的牌路，來判斷後面的開牌結果，從而決定下一手下注在莊還是閒，這是大多數百家樂玩家最常用的參考方法。70年代葡京娛樂場的初期，發明了小路。不久之後，70年代中期，葡京娛樂場的荷官於小路發現出了一條新路，發明的新路就取名為&quot大眼路&quot;。之後，有人在大眼路和小路的基礎上，發明了&quot;小強路&quot;。
           </p>
-
           <p>
             一、開牌結果的記錄
             左上角的紅點標示表示出現了莊對，右下角的藍點標示表示出現了閒對，如果同時出現莊對閒對，則會在左上角和右下角標示紅點和藍點，例牌勝出為實心圓，非例牌勝出則為空心圓。
@@ -169,7 +275,6 @@ const Rule = () => {
             三、大眼路
             根據牌路&quot;大路&quot;延伸出&quot;大眼路&quot;的牌路單。起始標示的參照點是從&quot;大路&quot;的牌路之第2列第2行開始，如果&quot;大路&quot;的牌路該座標上沒有出現[莊]或[閒]，則以第3列第1行開始作為參照點。
           </p>
-
           <p>
             如下圖：
             <br />{' '}
@@ -245,6 +350,10 @@ const Rule = () => {
         <div className="game-info">
           <h2>● 小強路畫紅色斜線規則</h2>
           <p>1.直落：</p>
+
+          <div className="w-full">
+            <img src="/rule/roadbigB.jpeg" alt="rule image" className="w-full" />
+          </div>
           <p>2.換列：</p>
           <p>
             (以大路的最新參照點，水平方式比對前三列，前三列不論結果為莊或閒，則小強路畫紅色斜線。)
@@ -257,9 +366,10 @@ const Rule = () => {
           </p>
           <p>
             如下圖：
-            <br />{' '}
-            (優先以座標01為參照點，若座標01無莊或閒，則以座標02為參照點。)
           </p>
+          <div className="w-full">
+            <img src="/rule/roadbigB.jpeg" alt="rule image" className="w-full" />
+          </div>
         </div>
 
         <div className="game-alert">
