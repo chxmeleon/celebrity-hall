@@ -43,7 +43,7 @@ export const StreamersCard: React.FC<{
   return (
     <div
       key={item.id}
-      className={`px-2 relative ${
+      className={`px-2 relative w-full ${
         item.online ? 'cursor-pointer' : 'cursor-not-allowed'
       }`}
       onClick={() =>
@@ -54,21 +54,21 @@ export const StreamersCard: React.FC<{
       }
     >
       {item.online && (
-        <div className="absolute bg-[#FF0A18] w-[53px] h-[20px] text-[13px] text-center right-[12px] top-[12px]">
+        <div className="absolute z-20 bg-[#FF0A18] w-[53px] h-[20px] text-[13px] text-center right-[12px] top-[12px]">
           <div>● Live</div>
         </div>
       )}
       <div className="relative">
         {!item?.online && (
-          <div className="absolute w-full h-full bg-black/60 pointer-events-none"></div>
+          <div className="absolute w-full h-full pointer-events-none bg-black/60"></div>
         )}
         <img
           className="object-cover object-center w-[278px] h-[246px] sm:w-[401px] sm:h-[355px]"
           src={item.avatar}
         />
       </div>
-      <div className="flex justify-between items-center py-1 px-4">
-        <div className="text-[24px] sm:text-[32px]">{item.nickname}</div>
+      <div className="w-full flex justify-between items-center p-1">
+        <div className="text-lg md:text-xl truncate">{item.nickname}</div>
         <div className="flex">
           <Win percent={item.winRate} />
           <Heart like={item.likesCount} />
@@ -97,13 +97,15 @@ export const StreamersCards: React.FC<{
       </Responsive.Default>
 
       <Responsive.Desktop>
-        {data.map((item, idx) => (
-          <StreamersCard
-            key={idx}
-            item={item}
-            onStreamChanged={onStreamChanged}
-          />
-        ))}
+        <div className="grid grid-cols-3 auto-rows-fr gap-4 w-full h-full">
+          {data.map((item, idx) => (
+            <StreamersCard
+              key={idx}
+              item={item}
+              onStreamChanged={onStreamChanged}
+            />
+          ))}
+        </div>
       </Responsive.Desktop>
     </>
   )

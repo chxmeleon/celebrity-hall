@@ -12,15 +12,14 @@ const Streamer = () => {
   if (loading) {
     return <div className="m-[50px]">loading</div>
   }
+
   return (
-    <div className="flex justify-center m-[50px]">
+    <div className="flex justify-center py-3 px-2 w-full h-full">
       {data.streamer.stream.name && data.streamer.stream.key && (
-        <div className="w-[56.25vh] h-[100vh]">
-          <WebRTCStream
-            streamName={data.streamer.stream.name}
-            streamKey={data.streamer.stream.key}
-          />
-        </div>
+        <WebRTCStream
+          streamName={data.streamer.stream.name}
+          streamKey={data.streamer.stream.key}
+        />
       )}
     </div>
   )

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_STREAMERS } from '@/gql/streamers'
 import { StreamersCards } from '@/components/streamers/index'
-import { WebRTCStream } from '@/components/room/RoomStream/streamPlayer'
+import { WebRTCStream } from '@/components/streamers/streamPlayer'
 
 export interface streamType {
   name: 'string' | null
@@ -17,16 +17,24 @@ const Streamers = () => {
   }
 
   return (
-    <div className="flex justify-between p-8 w-full h-full">
-      <div className="grid overflow-y-auto grid-cols-1 grid-flow-row gap-4 sm:w-2/3 h-full md:grid-cols-2">
-        <StreamersCards data={data.streamers} onStreamChanged={setStream} />
+    <>
+      <div className="block p-2 py-4 w-full h-full md:hidden">
+        <div className="overflow-y-auto w-full h-full">
+          <StreamersCards data={data.streamers} onStreamChanged={setStream} />
+        </div>
       </div>
-      <div className="hidden w-1/3 sm:block">
-        {stream.name && stream.key && (
-          <WebRTCStream streamName={stream.name} streamKey={stream.key} />
-        )}
+
+      <div className="hidden p-2 w-full h-full md:flex md:justify-between md:p-8">
+        <div className="overflow-y-auto h-full md:overflow-x-hidden w-2/3">
+          <StreamersCards data={data.streamers} onStreamChanged={setStream} />
+        </div>
+        <div className="pl-2 w-1/3 md:block">
+          {stream.name && stream.key && (
+            <WebRTCStream streamName={stream.name} streamKey={stream.key} />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
