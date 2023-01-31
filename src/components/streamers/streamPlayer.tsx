@@ -29,7 +29,7 @@ export const NodePlayerStream: React.FC<RoomStreamProps> = ({
     player.setScaleMode(0)
     player.setVolume(1.0)
     player.setKeepScreenOn()
-    player.start(`https://live.vvip99.net/${streamName}/${streamKey}.flv`)
+    player.start(`https://rtc-tw.vvip99.net/${streamName}/${streamKey}.flv`)
     player.on('error', (err) => {
       console.error('playerError', err)
     })
@@ -82,7 +82,7 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
           pc.setLocalDescription(offer),
           axios
             .post(
-              `https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`,
+              `https://rtc-tw.vvip99.net/${streamName}/${streamKey}.sdp`,
               JSON.stringify({
                 version: 'v1.0',
                 sessionId: Date.now().toString(),

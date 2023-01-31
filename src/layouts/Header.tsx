@@ -23,7 +23,7 @@ const icons = {
   sexy: cx`i-mdi-head-heart-outline text-2xl`
 }
 
-const Header: React.FC<{ size?: 'small' | 'default' }> = ({ size }) => {
+const Header: React.FC = () => {
   const { user } = useWallet()
   const { logout } = useAuth()
   const { openSetup, openNotice } = useSetup()
@@ -53,8 +53,7 @@ const Header: React.FC<{ size?: 'small' | 'default' }> = ({ size }) => {
     <header className="relative" ref={sidebarRef} onClick={onCloseSide}>
       <nav
         className={clsx(
-          'absolute top-0 left-0 z-40 w-full border-b bg-theme-50 border-b-theme-75',
-          size === 'small' ? 'h-9' : 'h-12'
+          'h-9 absolute top-0 left-0 z-40 w-full border-b bg-theme-50 border-b-theme-75'
         )}
       >
         <div className="flex justify-between items-center w-full h-full">
@@ -88,7 +87,6 @@ const Header: React.FC<{ size?: 'small' | 'default' }> = ({ size }) => {
                 <div
                   className={clsx(
                     toggle ? '' : ' hidden',
-                    size === 'small' ? '' : 'mt-1',
                     'absolute w-[17.5rem] min-h-fit max-h-fit -translate-x-[16rem] z-40 bg-theme-50/95 border border-theme-75 border-y-transparent'
                   )}
                 >
