@@ -85,8 +85,6 @@ const Room = () => {
     () => (roomId ? rooms.find((room) => room.id === roomId) : undefined),
     [roomId, rooms]
   )
-  console.log(room);
-  
 
   const { isTrial } = useAuth()
   const { onResizeWindow } = useContext(ResponsiveContext)
