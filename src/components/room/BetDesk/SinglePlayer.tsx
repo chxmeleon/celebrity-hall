@@ -375,7 +375,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 <FormattedMessage id="screens.baccaratRoom.dealerAny" />
               </div>
               <div>
-                <p>1:5</p>
+                <p>1:25</p>
               </div>
             </div>
           </button>

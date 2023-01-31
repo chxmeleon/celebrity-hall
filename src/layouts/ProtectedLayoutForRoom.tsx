@@ -28,7 +28,7 @@ const ProtectedLayoutForRoom: React.FC = () => {
       <EditNickNameModal />
       <section className="relative w-full h-full border aspect-video border-theme-70">
         <div className={bgImage}></div>
-        <Header size="small" />
+        <Header />
         <div className="flex relative justify-start pt-9 w-full h-full">
           <LeftSidebarForRoom />
           <div className="relative w-full h-full bg-black">

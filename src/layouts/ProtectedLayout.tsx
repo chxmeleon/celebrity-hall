@@ -21,10 +21,10 @@ const ProtectedLayout: React.FC = () => {
     <main className="relative w-full h-full">
       <SetupModal />
       <NoticeModal />
-      <section className="relative m-auto w-full h-full aspect-video border-theme-70 border">
+      <section className="relative m-auto w-full h-full border aspect-video border-theme-70">
         <div className={bgImage}></div>
         <Header />
-        <div className="flex justify-start pt-12 w-full h-full">
+        <div className="flex justify-start pt-9 w-full h-full">
           <LeftSidebar />
           <div className="relative w-full h-full bg-black">
             <Outlet />
