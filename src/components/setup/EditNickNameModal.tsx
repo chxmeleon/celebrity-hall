@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import { FormItem } from '../common/Form'
 import { v4 as uuidV4 } from 'uuid'
 import toast from 'react-hot-toast'
+import Modal from '../common/Modal'
 
 const EditNickNameModal: React.FC = () => {
   const { isShowEditNickname, closeEditNickname } = useSetup()
@@ -55,67 +56,49 @@ const EditNickNameModal: React.FC = () => {
   }
 
   return (
-    <div
-      className={`${
-        isShowEditNickname ? 'block' : 'hidden'
-      } absolute w-full h-full`}
+    <Modal
+      isShow={isShowEditNickname}
+      onClose={closeEditNickname}
+      size="w-4/5 md:w-1/2 h-[79%] "
     >
-      <div
-        onClick={closeEditNickname}
-        className="flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center w-full h-full bg-black/80 backdrop-blur-sm"
-      >
-        <div
-          onClick={(e) => {
-            e.stopPropagation()
-          }}
-          className="p-1 md:p-6 m-auto w-4/5 md:w-1/2 h-[79%] bg-gradient-to-br rounded-md border border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md"
-        >
-          <div className="flex justify-end w-full h-10">
-            <button
-              onClick={closeEditNickname}
-              className="text-2xl i-heroicons-x-circle"
-            ></button>
-          </div>
-          <div className="text-2xl text-center py-1">
-            {formatMessage({
-              id: 'screens.profile.editNickname',
-              defaultMessage: 'Edit Nickname'
-            })}
-          </div>
-          <div className="flex justify-center items-start w-full h-4/5">
-            <div className="m-auto w-1/2 min-w-[240px]">
-              <form
-                className="flex flex-col justify-between"
-                onSubmit={handleSubmit(onSubmit)}
-              >
-                <FormItem>
-                  <input
-                    autoComplete="off"
-                    placeholder={formatMessage({
-                      id: 'screens.profile.editNickname',
-                      defaultMessage: 'nickname'
-                    })}
-                    className={loginFromInput}
-                    {...register('nickname')}
-                  />
-                </FormItem>
+      <div className="py-1 text-2xl text-center">
+        {formatMessage({
+          id: 'screens.profile.editNickname',
+          defaultMessage: 'Edit Nickname'
+        })}
+      </div>
+      <div className="flex justify-center items-start w-full h-4/5">
+        <div className="m-auto w-1/2 min-w-[240px]">
+          <form
+            className="flex flex-col justify-between"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <FormItem>
+              <input
+                autoComplete="off"
+                placeholder={formatMessage({
+                  id: 'screens.profile.editNickname',
+                  defaultMessage: 'nickname'
+                })}
+                className={loginFromInput}
+                {...register('nickname')}
+              />
+            </FormItem>
 
-                <div className="flex justify-center">
-                  <LoginButton>
-                    <p>
-                      {formatMessage({
-                        id: 'common.confirm',
-                        defaultMessage: 'Confirm'
-                      })}
-                    </p>
-                  </LoginButton>
-                </div>
-              </form>
+            <div className="flex justify-center pt-20">
+              <LoginButton>
+                <p>
+                  {formatMessage({
+                    id: 'common.confirm',
+                    defaultMessage: 'Confirm'
+                  })}
+                </p>
+              </LoginButton>
             </div>
-          </div>
+          </form>
         </div>
       </div>
-    </div>
+    </Modal>
   )
 }
 

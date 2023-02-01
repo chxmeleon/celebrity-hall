@@ -13,11 +13,9 @@ const PublicLayout: React.FC = () => {
     <main id="public-page" className='w-full h-full'>
       <SetupModal />
       <AuthAlert />
-
       <div className="w-full">
         <div className={bgImage}></div>
       </div>
-
       <section className="w-full h-full">
         <Outlet />
       </section>
