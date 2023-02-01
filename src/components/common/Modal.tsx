@@ -14,48 +14,43 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
   onClose,
   size
 }) => {
+  const modalRoot = document.getElementById('modal-root')
   return (
-    <Portal>
-      <div className={`${isShow ? 'block' : 'hidden'} relative w-full h-full`}>
-        <div
-          onClick={onClose}
-          className="flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center w-full h-full bg-black/30 backdrop-blur-sm"
-        >
-          <div
-            onClick={(e) => {
-              e.stopPropagation()
-            }}
-            className={cx(
-              'p-1 md:p-6 m-auto bg-gradient-to-br rounded-md border border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md',
-              size
-            )}
-          >
-            <div className="flex justify-end w-full h-10">
-              <button
+    <>
+      {isShow && modalRoot
+        ? ReactDOM.createPortal(
+            <div
+              className={`${
+                isShow ? 'block' : 'hidden'
+              } relative w-full h-full`}
+            >
+              <div
                 onClick={onClose}
-                className="text-2xl i-heroicons-x-circle"
-              ></button>
-            </div>
-            {children}
-          </div>
-        </div>
-      </div>
-    </Portal>
+                className="flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center w-full h-full bg-black/30 backdrop-blur-sm"
+              >
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation()
+                  }}
+                  className={cx(
+                    'p-1 md:p-6 m-auto bg-gradient-to-br rounded-md border border-theme-300/50 from-theme-50/75 via-theme-75/90 to-theme-50/50 backdrop-blur-md',
+                    size
+                  )}
+                >
+                  <div className="flex justify-end w-full h-10">
+                    <button
+                      onClick={onClose}
+                      className="text-2xl i-heroicons-x-circle"
+                    ></button>
+                  </div>
+                  {children}
+                </div>
+              </div>
+            </div>,
+            modalRoot
+          )
+        : null}
+    </>
   )
 }
 export default Modal
-
-const Portal: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const node = document.createElement('div')
-
-  useEffect(() => {
-    const modalRoot = document.getElementById('modal-root')
-    modalRoot?.appendChild(node)
-
-    return () => {
-      modalRoot?.removeChild(node)
-    }
-  }, [node])
-
-  return ReactDOM.createPortal(children, node)
-}
