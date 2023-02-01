@@ -51,18 +51,8 @@ html {
   }
 
   .chip-skew {
-    transform: scaleY(0.9) scaleX(0.9) perspective(4.3rem) rotateX(-7.864deg)
-      translate(-2%, -58%);
-  }
-
-  .chip-h-skew {
-    transform: scaleY(0.9) scaleX(0.9) perspective(19.3rem) rotateX(-8deg)
-      translate(-6%, -39%);
-  }
-
-  .chip-hw-skew {
-    transform: scaleY(0.9) scaleX(0.9) perspective(1.9rem) rotateX(-2.864deg)
-      translate(-6%, -40%);
+    transform: scaleY(0.9) scaleX(0.9) perspective(2.9rem) rotateX(8.864deg)
+      translate(0px, -2px);
   }
 
   .switch-btn {
