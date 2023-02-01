@@ -126,7 +126,7 @@ const Header: React.FC = () => {
                       href="/home/intro-rule"
                       isLink={true}
                       isTarget={true}
-                      onClick={() => null}
+                      onClick={() => setToggle(false)}
                     >
                       <i className={icons.info}></i>
                       <p>

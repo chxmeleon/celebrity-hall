@@ -20,18 +20,28 @@ const Login: React.FC = () => {
       >
         <div className="flex h-[69%]">
           <div className="inline-flex justify-evenly items-center m-auto w-2/3">
-            <a href="/" className="hover:text-theme-300">
+            <a
+              href="https://www.instagram.com/game_585858/"
+              target="_blank"
+              rel="noreferrer nooperner"
+              className="hover:text-theme-300 active:text-amber-400"
+            >
               <div className="text-5xl i-fa6-brands-instagram"></div>
             </a>
             <a
-              href="/"
+              href="https://www.facebook.com/AVbaccarat"
               target="_blank"
               rel="noreferrer nooperner"
-              className="hover:text-theme-300"
+              className="hover:text-theme-300 active:text-amber-400"
             >
               <div className="text-5xl i-fa6-brands-facebook"></div>
             </a>
-            <a href="/" className="hover:text-theme-300">
+            <a
+              href="https://www.tiktok.com/@game585858"
+              target="_blank"
+              rel="noreferrer nooperner"
+              className="hover:text-theme-300 active:text-amber-400"
+            >
               <div className="text-5xl i-fa6-brands-tiktok"></div>
             </a>
           </div>
