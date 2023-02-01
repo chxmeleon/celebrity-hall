@@ -43,20 +43,19 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
     </Portal>
   )
 }
-
 export default Modal
 
 const Portal: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const el = document.createElement('div')
+  const node = document.createElement('div')
 
   useEffect(() => {
     const modalRoot = document.getElementById('modal-root')
-    modalRoot?.appendChild(el)
+    modalRoot?.appendChild(node)
 
     return () => {
-      modalRoot?.removeChild(el)
+      modalRoot?.removeChild(node)
     }
-  }, [el])
+  }, [node])
 
-  return ReactDOM.createPortal(children, el)
+  return ReactDOM.createPortal(children, node)
 }
