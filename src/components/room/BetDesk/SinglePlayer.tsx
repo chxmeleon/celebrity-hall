@@ -8,62 +8,43 @@ import { clsx as cx } from 'clsx'
 import { useParams } from 'react-router-dom'
 import { useCurrentGameState } from '@/hooks/rooms'
 
-const BetAreaVer: React.FC<{ target: string[] }> = ({ target }) => {
-  return (
-    <div className="pointer-events-none flex absolute top-0 z-20 flex-col-reverse px-2 w-full h-[84%] chip-skew">
-      <div className="absolute rotate-180 w-full items-stretch h-[40%] flex flex-col flex-wrap-reverse">
-        {target?.map((item: string, idx: number) => {
-          return (
-            <div className="-mb-5 w-7 h-auto" key={idx}>
-              <img
-                src={item}
-                alt="chip image"
-                className="inline-block rotate-180"
-              />
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
+const betAreaMapper = {
+  ver: { firstDiv: 'items-end pb-2', secoundDiv: 'w-12 h-12 text-sm' },
+  hoz: { firstDiv: 'items-center', secoundDiv: 'w-10 h-10 text-[9px]' }
 }
 
-const BetAreaHoz: React.FC<{ target: string[] }> = ({ target }) => {
+const BetArea: React.FC<{ target: number; type: string }> = ({
+  target,
+  type
+}) => {
   return (
-    <div className="pointer-events-none flex absolute top-0 z-20 flex-col-reverse px-2 w-full h-[180%] chip-h-skew">
-      <div className="absolute rotate-180 w-full items-stretch h-[42%] flex flex-col flex-wrap-reverse">
-        {target?.map((item: string, idx: number) => {
-          return (
-            <div className="-mb-6 w-7 h-auto" key={idx}>
-              <img
-                src={item}
-                alt="chip image"
-                className="inline-block rotate-180"
-              />
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
-const BetAreaHozL: React.FC<{ target: string[] }> = ({ target }) => {
-  return (
-    <div className="pointer-events-none flex absolute top-0 z-20 flex-col-reverse px-2 w-full h-[180%] chip-hw-skew">
-      <div className="absolute rotate-180 w-full items-stretch h-[42%] flex flex-col flex-wrap-reverse">
-        {target?.map((item: string, idx: number) => {
-          return (
-            <div className="-mb-7 w-7 h-auto" key={idx}>
-              <img
-                src={item}
-                alt="chip image"
-                className="inline-block rotate-180"
-              />
-            </div>
-          )
-        })}
-      </div>
+    <div
+      className={cx(
+        'flex absolute inset-0 justify-center w-full h-full pointer-events-none',
+        betAreaMapper[type].firstDiv
+      )}
+    >
+      {target > 0 ? (
+        <div
+          className={cx(
+            'relative flex',
+            betAreaMapper[type].secoundDiv
+          )}
+        >
+          <div className={cx("absolute top-0 left-0 flex justify-center items-center  ",
+            betAreaMapper[type].secoundDiv
+          )}>
+            <img src="/chips/chip_null.webp" alt="chip image" />
+          </div>
+          <span className="m-auto text-yellow-300 relative z-20">
+            {target >= 1000 && target < 10000
+              ? target / 1000 + 'K'
+              : target >= 10000
+              ? target / 10000 + 'W'
+              : target}
+          </span>
+        </div>
+      ) : null}
     </div>
   )
 }
@@ -112,7 +93,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               btnIdx.tn4
             )}
           >
-            <BetAreaHoz target={betState?.playerPairChips} />
+            <BetArea target={betState?.playerPairAmount} type="hoz" />
             <div className="text-lg flex justify-between items-center px-3 w-full text-grid-400 [&_p]:text-gray-300 [&_p]:text-xs">
               <div>
                 <p>1:11</p>
@@ -142,7 +123,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               btnIdx.cl5
             )}
           >
-            <BetAreaHozL target={betState?.bigChips} />
+            <BetArea target={betState?.bigAmount} type="hoz" />
             <div className="text-lg flex justify-between items-center px-3 w-full [&_p]:text-gray-300 [&_p]:text-xs">
               <div>
                 <p>1:0.54</p>
@@ -241,7 +222,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             btnIdx.ynn
           )}
         >
-          <BetAreaVer target={betState?.playerChips} />
+          <BetArea target={betState?.playerAmount} type="ver" />
           <div className="m-auto w-2/3 text-grid-400">
             <div className="text-4xl font-bold">
               <FormattedMessage id="common.simplePlayer" />
@@ -270,7 +251,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               btnIdx.thhn
             )}
           >
-            <BetAreaHoz target={betState?.tieChips} />
+            <BetArea target={betState?.tieAmount} type="ver" />
             <div className="flex justify-between items-center m-auto w-2/3 text-grid-300">
               <div className="text-4xl font-bold">
                 <FormattedMessage id="common.simpleTie" />
@@ -298,8 +279,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               btnIdx.bhhn
             )}
           >
-
-            <BetAreaHoz target={betState?.super6Chips} />
+            <BetArea target={betState?.super6Amount} type="ver" />
             <div className="m-auto w-2/3 text-grid-200">
               <div className="font-bold">SUPER 6</div>
               <p>1:20</p>
@@ -324,7 +304,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             btnIdx.ynn
           )}
         >
-          <BetAreaVer target={betState?.dealerChips} />
+          <BetArea target={betState?.dealerAmount} type="ver" />
           <div className="m-auto w-2/3 text-grid-100">
             <div className="text-4xl font-bold">
               <FormattedMessage id="common.simpleDealer" />
@@ -353,7 +333,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               btnIdx.tn4
             )}
           >
-            <BetAreaHoz target={betState?.dealerPairChips} />
+            <BetArea target={betState?.dealerPairAmount} type="hoz" />
             <div className="text-lg flex justify-between items-center px-3 w-full text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
               <div>
                 <FormattedMessage id="common.dealerPair" />
@@ -415,7 +395,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               btnIdx.cr5
             )}
           >
-            <BetAreaHozL target={betState?.smallChips} />
+            <BetArea target={betState?.smallAmount} type="hoz" />
             <div className="text-lg flex justify-between items-center px-3 w-full [&_p]:text-gray-300 [&_p]:text-xs">
               <div>
                 <FormattedMessage id="screens.baccaratRoom.small" />
