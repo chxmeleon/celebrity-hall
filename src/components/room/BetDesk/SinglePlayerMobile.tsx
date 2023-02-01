@@ -7,22 +7,33 @@ import { clsx as cx } from 'clsx'
 import { useParams } from 'react-router-dom'
 import { useCurrentGameState } from '@/hooks/rooms'
 
-const BetAreaVer: React.FC<{ target: string[] }> = ({ target }) => {
+const BetArea: React.FC<{ target: number }> = ({ target }) => {
   return (
-    <div className="flex absolute top-0 z-20 flex-col-reverse px-2 w-full h-[84%] overflow-hidden">
-      <div className="absolute rotate-180 w-full items-stretch h-[40%] flex flex-col flex-wrap-reverse">
-        {target?.map((item: string, idx: number) => {
-          return (
-            <div className="-mb-5 w-7 h-auto" key={idx}>
-              <img
-                src={item}
-                alt="chip image"
-                className="inline-block rotate-180"
-              />
-            </div>
-          )
-        })}
-      </div>
+    <div
+      className={cx(
+        'flex absolute items-center inset-0 justify-center w-full h-full pointer-events-none'
+      )}
+    >
+      {target > 0 ? (
+        <div className={cx('relative flex w-9 h-9 text-[9px]')}>
+          <div
+            className={cx(
+              'w-9 h-9 absolute top-0 left-0 flex justify-center items-center'
+            )}
+          >
+            <img src="/chips/chip_null.webp" alt="chip image" />
+          </div>
+          <span
+            className={cx('relative z-20 m-auto text-yellow-300 font-semibold')}
+          >
+            {target >= 1000 && target < 10000
+              ? target / 1000 + 'K'
+              : target >= 10000
+              ? target / 10000 + 'W'
+              : target}
+          </span>
+        </div>
+      ) : null}
     </div>
   )
 }
@@ -62,7 +73,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetAreaVer target={betState?.playerPairChips} />
+          <BetArea target={betState?.playerPairAmount} />
           <div className="text-xs md:text-xl w-full text-grid-400 [&_p]:text-gray-300">
             <FormattedMessage id="common.playerPair" />
             <div>
@@ -87,7 +98,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetAreaVer target={betState?.super6Chips} />
+          <BetArea target={betState?.super6Amount} />
           <div className="m-auto w-full text-xs md:text-xl text-grid-200">
             <div className="font-bold">SUPER 6</div>
             <p className="text-gray-300">1:20</p>
@@ -110,7 +121,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetAreaVer target={betState?.dealerPairChips} />
+          <BetArea target={betState?.dealerPairAmount} />
 
           <div className="text-xs md:text-xl w-full text-grid-100 [&_p]:text-gray-300 ">
             <div>
@@ -151,7 +162,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetAreaVer target={betState?.bigChips} />
+          <BetArea target={betState?.bigAmount} />
           <div className="m-auto w-2/3 text-gray-300">
             <div className="text-xl font-bold">
               <FormattedMessage id="screens.baccaratRoom.big" />
@@ -178,7 +189,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetAreaVer target={betState?.playerChips} />
+          <BetArea target={betState?.playerAmount} />
           <div className="m-auto w-2/3 text-grid-400 [&_p]:text-gray-300">
             <div className="text-xl font-bold">
               <FormattedMessage id="common.simplePlayer" />
@@ -205,7 +216,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetAreaVer target={betState?.tieChips} />
+          <BetArea target={betState?.tieAmount} />
           <div className="m-auto w-2/3 text-grid-300 [&_p]:text-gray-300">
             <div className="text-xl font-bold">
               <FormattedMessage id="common.simpleTie" />
@@ -231,7 +242,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetAreaVer target={betState?.dealerChips} />
+          <BetArea target={betState?.dealerAmount} />
 
           <div className="m-auto w-2/3 text-grid-100 [&_p]:text-gray-300">
             <div className="text-xl font-bold">
@@ -244,21 +255,21 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         </button>
         <button
           disabled={isDisabled}
-            onClick={() =>
-              dispatchBet({
-                type: 'addSmallChips',
-                playload: {
-                  smallChips: chipsData?.[selectedChip]?.src,
-                  smallAmount: chipsData?.[selectedChip]?.value
-                }
-              })
-            }
+          onClick={() =>
+            dispatchBet({
+              type: 'addSmallChips',
+              playload: {
+                smallChips: chipsData?.[selectedChip]?.src,
+                smallAmount: chipsData?.[selectedChip]?.value
+              }
+            })
+          }
           className={cx(
             'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetAreaVer target={betState?.smallChips} />
+          <BetArea target={betState?.smallAmount} />
           <div className="m-auto w-2/3 text-gray-300">
             <div className="text-xl font-bold">
               <FormattedMessage id="screens.baccaratRoom.small" />
