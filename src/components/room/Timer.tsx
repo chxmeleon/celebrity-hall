@@ -31,7 +31,7 @@ const Timer: React.FC<{ roomId: string }> = ({ roomId }) => {
             className={cx(
               'font-medium ',
               isLeftTen ? 'text-[#ff0015]' : 'text-theme-300',
-              isTable ? 'text-lg' : 'md:text-[50px] text-2xl'
+              isTable ? 'text-[20px]' : 'md:text-[50px] text-2xl'
             )}
           >
             {counter}

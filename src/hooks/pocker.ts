@@ -5,7 +5,7 @@ import { useActionCable } from '@/contexts/ActionCableContext'
 import types from '@/types'
 import { convertStatus } from './rooms'
 
-export const pockerReducer = (state: any, action: any) => {
+export const pokerReducer = (state: PokerStateProps, action: any) => {
   switch (action.type) {
     case 'DRAW':
       return {
@@ -58,7 +58,16 @@ export const initialValue = {
   status: ''
 }
 
-export const usePockerUpdate = (roomId: string | undefined) => {
+export type PokerStateProps = {
+  playerCards: number[] | null | undefined
+  playerPoints: number | null | undefined
+  dealerCards: number[] | null | undefined
+  dealerPoints: number | null | undefined
+  result: string
+  status: string | undefined
+}
+
+export const usePokerUpdate = (roomId: string | undefined) => {
   const { cable } = useActionCable()
   const { data, refetch } = useQuery<
     types.GET_CURRENT_BACCARAT_ROOM,
@@ -70,7 +79,7 @@ export const usePockerUpdate = (roomId: string | undefined) => {
     return data?.baccaratRoom?.currentGame
   }, [data])
 
-  const gqlData = {
+  const gqlData: PokerStateProps = {
     playerCards: currentGame?.playerCards,
     playerPoints: currentGame?.playerPoints,
     dealerCards: currentGame?.dealerCards,
@@ -80,7 +89,7 @@ export const usePockerUpdate = (roomId: string | undefined) => {
   }
 
   const [gameState, setGameState] = useState<string | null | undefined>()
-  const [pockerState, dispatch] = useReducer(pockerReducer, gqlData)
+  const [pokerState, dispatch] = useReducer(pokerReducer, gqlData)
 
   useEffect(() => {
     if (gameState === 'CLOSE') {
@@ -144,10 +153,10 @@ export const usePockerUpdate = (roomId: string | undefined) => {
     () => ({
       data,
       gameState,
-      pockerState,
+      pokerState: pokerState,
       currentGame
     }),
-    [data, gameState, pockerState, currentGame]
+    [data, gameState, pokerState, currentGame]
   )
 
   return { currentGameState }

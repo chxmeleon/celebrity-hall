@@ -1,14 +1,14 @@
 import CardWidget from './CardWidget'
 import { FormattedMessage } from 'react-intl'
-import { usePockerUpdate } from '@/hooks/pocker'
+import { usePokerUpdate } from '@/hooks/pocker'
 import { clsx as cx } from 'clsx'
 import { useContext, useEffect, useState } from 'react'
 import GameStateContext from '@/contexts/GameStateContext'
 
 const PokerResult: React.FC<{ roomId: string }> = ({ roomId }) => {
-  const { currentGameState } = usePockerUpdate(roomId)
+  const { currentGameState } = usePokerUpdate(roomId)
   const { isTable } = useContext(GameStateContext)
-  const { pockerState, gameState, currentGame } = currentGameState
+  const { pokerState: pockerState, gameState, currentGame } = currentGameState
   const [isShowPocker, setIsShowPocker] = useState(false)
 
   useEffect(() => {

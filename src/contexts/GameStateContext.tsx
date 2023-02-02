@@ -8,7 +8,7 @@ import { v4 as uuidV4 } from 'uuid'
 import { useActionCable } from './ActionCableContext'
 import types from '@/types'
 import { convertStatus } from '@/hooks/rooms'
-import { pockerReducer, initialValue, usePockerUpdate } from '@/hooks/pocker'
+import { pokerReducer, initialValue, usePokerUpdate } from '@/hooks/pocker'
 import { useLocation } from 'react-router-dom'
 
 type GameContextData = {
