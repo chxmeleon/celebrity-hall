@@ -1,6 +1,6 @@
 import Router from '@/router'
 import { ResponsiveProvider } from '@/hooks/useResponsive'
-import { BrowserRouter, MemoryRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { AuthProvider } from '@/contexts/AuthContext'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { ApiProvider } from '@/contexts/ApiContext'
@@ -11,7 +11,7 @@ import { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AuthProvider>
         <ActionCableProvider>
           <LanguageProvider>
@@ -34,7 +34,7 @@ function App() {
           </LanguageProvider>
         </ActionCableProvider>
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
