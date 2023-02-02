@@ -3,10 +3,14 @@ import { PropsWithChildren } from 'react'
 import LogoImg from '/login_logo.webp'
 import BgImg from '/login_bg.avif'
 import { FormattedMessage } from 'react-intl'
+import { useContext } from 'react'
+import GameStateContext from '@/contexts/GameStateContext'
 
 const Progress: React.FC<PropsWithChildren> = ({ children }) => {
+  const { isTable } = useContext(GameStateContext)
   const countDownStyle = cx(
-    'border-theme-300 w-[82%] h-[82%] rounded-full absolute border-t-[1px] border-r-[3px] md:border-t-[3px] md:border-r-[6px] border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress'
+    'border-theme-300 w-[82%] h-[82%] rounded-full absolute  border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
+    isTable ? 'border-t-[0.5px] border-r-[2px]' : 'border-t-[1px] border-r-[3px] md:border-t-[3px] md:border-r-[6px]' 
   )
   return (
     <div className="flex relative m-auto w-full h-full rounded-full bg-theme-50/80 backdrop-blur-sm">
@@ -19,23 +23,23 @@ const Progress: React.FC<PropsWithChildren> = ({ children }) => {
 }
 
 const Loading: React.FC = () => {
-
+  const { isTable } = useContext(GameStateContext)
   return (
     <div className="flex absolute z-50 flex-col w-full h-full">
       <div className="absolute overflow-hidden w-full h-full">
         <img src={BgImg} alt="bg image"  className="w-full h-full object-cover" />
       </div>
-      <div className="m-auto md:w-48 md:h-48 w-32 h-32">
+      <div className={cx("m-auto ", isTable ? 'w-28 h-28' : 'md:w-48 md:h-48 w-32 h-32' )}>
         <Progress>
           <div className="flex flex-col justify-center items-center">
-            <div className="md:w-20 md:h-20 w-12 h-12">
+            <div className={cx(isTable ? "w-8" :"md:w-20 md:h-20 w-12 h-12")}>
               <img
                 src={LogoImg}
                 alt="logo image"
                 className="object-cover w-full h-full"
               />
             </div>
-            <div className="text-[9px] sm:text-sm md:text-xl text-theme-300">
+            <div className={cx("text-theme-300", isTable ? 'text-[11px]' : 'text-sm md:text-xl' )}>
               <FormattedMessage id="streams.loading" defaultMessage="Loading" />
             </div>
           </div>

@@ -24,7 +24,7 @@ import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
 import SinglePlayerMobile from '@/components/room/BetDesk/SinglePlayerMobile'
 import Loading from '@/components/room/RoomStream/Loading'
 import { Tooltip } from '@material-tailwind/react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { ChipButtonList } from '@/pages/Rooms/[id]'
 import { useAuth } from '@/contexts/AuthContext'
 import { useSetup } from '@/contexts/SetupContext'
@@ -42,8 +42,8 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
   const { isTrial } = useAuth()
   const streamName = room?.streams?.[0]?.name
   const streamKey = room?.streams?.[0]?.key
-  const secoundStreamName = room?.streamName
-  const secoundStreamKey = room?.streamKey
+  const secoundStreamName = room?.streams?.[1]?.name
+  const secoundStreamKey = room?.streams?.[1]?.key
 
   const [isSecondCam, setIsSecondCam] = useState(false)
   const handleSwitchCam = () => setIsSecondCam(!isSecondCam)
@@ -210,21 +210,21 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
     <div className="flex flex-col w-full h-full">
       <div className="flex justify-between items-center py-1 px-2 w-full h-12 bg-theme-50/10">
         <div className="font-bold text-gray-50">{room.name}</div>
-        <div className="inline-flex justify-between items-center w-[42%]">
-          <div className="flex px-3 rounded-full border border-theme-300 text-theme-300">
-            <Link to={href} key={href} className="m-auto text-center">
-              <FormattedMessage
-                id="screens.baccaratRooms.enterRoom"
-                defaultMessage="Enter"
-              />
-            </Link>
-          </div>
-          <div className="flex px-3 text-gray-100 rounded-full border border-gray-100">
-            <div className="m-auto">
-              <FormattedMessage id="common.tables" defaultMessage="Enter" />
-            </div>
-          </div>
+        <div className="flex px-3 rounded-full border border-theme-300 text-theme-300">
+          <Link to={href} key={href} className="m-auto text-center">
+            <FormattedMessage
+              id="screens.baccaratRooms.enterRoom"
+              defaultMessage="Enter"
+            />
+          </Link>
         </div>
+        {/* <div className="inline-flex justify-between items-center w-[42%]"> */}
+          {/* <div className="flex px-3 text-gray-100 rounded-full border border-gray-100"> */}
+          {/*   <div className="m-auto"> */}
+          {/*     <FormattedMessage id="common.tables" defaultMessage="Enter" /> */}
+          {/*   </div> */}
+          {/* </div> */}
+        {/* </div> */}
       </div>
       <div className="relative w-full h-[251px]">
         <div className="absolute w-full h-full">
@@ -296,7 +296,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
                 videoOn={true}
                 isWebRTC={isWebRTC}
               />
-            ) : null}
+            ) : <Loading />}
           </div>
         </div>
       </div>

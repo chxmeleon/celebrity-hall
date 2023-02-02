@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 import { useContext, useEffect, useState } from 'react'
 import GamePlayContext from '@/contexts/GamePlayContext'
+import GameStateContext from '@/contexts/GameStateContext'
 import { clsx as cx } from 'clsx'
 
 const winLoseStyle = {
@@ -15,6 +16,7 @@ type NoticeProps = {
 
 const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState }) => {
   const { notice } = useContext(GamePlayContext)
+  const { isTable } = useContext(GameStateContext)
   const windLoseState = () => {
     if (Math.floor(Number(notice?.winLossAmount)) < 0) {
       return 'isLose'
@@ -40,9 +42,10 @@ const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState }) => {
   }, [gameState, newNotice, notice])
 
   const noticeStyle = cx(
-    'flex w-3/4 h-7 md:h-9 text-xs md:text-lg rounded-md transition-all duration-300 ease-in-out px-3 ',
+    'flex w-3/4 h-7 md:h-9  rounded-md transition-all duration-300 ease-in-out px-3 ',
     winLoseStyle[windLoseState()],
-    isShow ? 'opacity-100' : 'opacity-0 -translate-y-10'
+    isShow ? 'opacity-100' : 'opacity-0 -translate-y-10',
+    isTable ? 'text-[9px]' : 'text-xs md:text-lg'
   )
 
   return (
