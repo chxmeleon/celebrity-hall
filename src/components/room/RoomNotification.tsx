@@ -1,4 +1,83 @@
 import { useIntl } from 'react-intl'
+import { clsx as cx } from 'clsx'
+import { useContext } from 'react'
+import GameStateContext from '@/contexts/GameStateContext'
+
+type NoticeProps = {
+  isConfirmedSuccess: boolean
+  isConfirmedFailure: boolean
+  isRepeatSuccess: boolean
+  gameState: string | any
+}
+
+const RoomNotification: React.FC<NoticeProps> = ({
+  isConfirmedSuccess,
+  isConfirmedFailure,
+  isRepeatSuccess,
+  gameState
+}) => {
+  const { formatMessage } = useIntl()
+  const { isTable } = useContext(GameStateContext)
+
+  return (
+    <>
+      {isConfirmedSuccess || isRepeatSuccess ? (
+        <div className="flex w-full h-12 md:w-2/3">
+          <div className="flex p-2 py-1 m-auto w-3/4 rounded-md bg-green-400/95">
+            <p
+              className={cx(
+                'm-auto font-medium text-teal-900',
+                isTable ? 'text-sm' : 'text-lg md:text-2xl'
+              )}
+            >
+              {formatMessage({
+                defaultMessage: 'Bet Success',
+                id: 'screens.records.betSuccess'
+              })}
+            </p>
+          </div>
+        </div>
+      ) : isConfirmedFailure ? (
+        <div className="flex w-full h-12 md:w-2/3">
+          <div className="flex p-2 py-3 m-auto w-full rounded-md md:w-3/4 bg-red-800/95">
+            <p
+              className={cx(
+                'm-auto font-medium text-red-400',
+                isTable ? 'text-[9px]' : 'text-xs md:text-[14px]'
+              )}
+            >
+              {formatMessage({
+                defaultMessage: 'Bet Failed',
+                id: 'screens.records.betfailed'
+              })}
+            </p>
+          </div>
+        </div>
+      ) : gameState === noticeMapper?.[gameState]?.state &&
+        gameState !== undefined ? (
+        <div className="flex w-full h-12 md:w-2/3">
+          <div className="flex py-1 m-auto w-3/4 rounded-md bg-yellow-400/95">
+            <div
+              className={cx(
+                'm-auto  font-medium text-theme-50',
+                isTable ? 'text-sm' : 'text-lg md:text-2xl'
+              )}
+            >
+              {formatMessage({
+                defaultMessage: noticeMapper?.[gameState]?.default,
+                id: noticeMapper?.[gameState]?.id
+              })}
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
+  )
+}
+
+export default RoomNotification
+
+
 
 const noticeMapper = {
   START_BET: {
@@ -53,60 +132,4 @@ const noticeMapper = {
   }
 }
 
-type NoticeProps = {
-  isConfirmedSuccess: boolean
-  isConfirmedFailure: boolean
-  isRepeatSuccess: boolean
-  gameState: string | any
-}
 
-const RoomNotification: React.FC<NoticeProps> = ({
-  isConfirmedSuccess,
-  isConfirmedFailure,
-  isRepeatSuccess,
-  gameState
-}) => {
-  const { formatMessage } = useIntl()
-
-  return (
-    <>
-      {isConfirmedSuccess || isRepeatSuccess ? (
-        <div className="flex w-full md:w-2/3 h-12">
-          <div className="flex p-2 py-1 m-auto w-3/4 rounded-md bg-green-400/95">
-            <p className="m-auto text-lg md:text-2xl font-medium text-teal-900">
-              {formatMessage({
-                defaultMessage: 'Bet Success',
-                id: 'screens.records.betSuccess'
-              })}
-            </p>
-          </div>
-        </div>
-      ) : isConfirmedFailure ? (
-        <div className="flex w-full md:w-2/3 h-12">
-          <div className="flex p-2 py-3 m-auto w-full md:w-3/4 rounded-md bg-red-800/95">
-            <p className="m-auto text-xs md:text-[14px] font-medium text-red-400">
-              {formatMessage({
-                defaultMessage: 'Bet Failed',
-                id: 'screens.records.betfailed'
-              })}
-            </p>
-          </div>
-        </div>
-      ) : gameState === noticeMapper?.[gameState]?.state &&
-        gameState !== undefined ? (
-        <div className="flex w-full md:w-2/3 h-12">
-          <div className="flex py-1 m-auto w-3/4 rounded-md bg-yellow-400/95">
-            <div className="m-auto text-lg md:text-2xl font-medium text-theme-50">
-              {formatMessage({
-                defaultMessage: noticeMapper?.[gameState]?.default,
-                id: noticeMapper?.[gameState]?.id
-              })}
-            </div>
-          </div>
-        </div>
-      ) : null}
-    </>
-  )
-}
-
-export default RoomNotification
