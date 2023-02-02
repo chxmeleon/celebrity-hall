@@ -30,17 +30,19 @@ const cardsMapper: cardsMapperProps = {
 
 interface CardProps {
   role: string
+  roomId: string | undefined
+  isTable: boolean
 }
 
-const CardWidget: React.FC<CardProps> = ({ role }) => {
-  const { id } = useParams()
-  const { currentGameState } = usePockerUpdate(id)
+const CardWidget: React.FC<CardProps> = ({ role, roomId, isTable }) => {
+  const { currentGameState } = usePockerUpdate(roomId)
   const { pockerState } = currentGameState
   const isWin = pockerState?.result?.[`${role}Win`]
 
   const titleStyle = cx(
-    'flex justify-center items-center w-8 h-8 text-lg font-medium text-gray-50 rounded-full',
-    cardsMapper[role].className
+    'flex justify-center items-center font-medium text-gray-50 rounded-full',
+    cardsMapper[role].className,
+    isTable ? ' w-7 h-7' :'text-lg w-8 h-8' 
   )
 
   const pockerContainer = cx(
@@ -64,10 +66,10 @@ const CardWidget: React.FC<CardProps> = ({ role }) => {
           />
         </div>
         <div className="flex pl-5 text-center text-gray-50">
-          <p className="text-3xl">{pockerState?.[`${role}Points`] ?? 0}</p>
+          <p className={cx(isTable ? 'text-2xl' :"text-3xl")}>{pockerState?.[`${role}Points`] ?? 0}</p>
         </div>
       </div>
-      <FlipCard data={pockerState?.[`${role}Cards`]} />
+      <FlipCard data={pockerState?.[`${role}Cards`]} isTable={isTable} />
       <div className={winResultImg}>
         <img src="/win.svg" alt="win image" />
         <FormattedMessage id="common.win" defaultMessage="Win" />

@@ -11,7 +11,7 @@ import BetDesk from '@/components/room/BetDesk'
 import ChatRoom from '@/components/room/Chatroom'
 import RoomStream from '@/components/room/RoomStream'
 import Timer from '@/components/room/Timer'
-import PockerResult from '@/components/room/PockerResult'
+import PokerResult from '@/components/room/PockerResult'
 import {
   BeadRoad,
   BigRoad,
@@ -94,8 +94,8 @@ const Room = () => {
 
   const streamName = room?.streams?.[0]?.name
   const streamKey = room?.streams?.[0]?.key
-  const secoundStreamName = room?.streamName
-  const secoundStreamKey = room?.streamKey
+  const secoundStreamName = room?.streams?.[1]?.name
+  const secoundStreamKey = room?.streams?.[1]?.key
 
   const [isSecondCam, setIsSecondCam] = useState(false)
   const handleSwitchCam = () => setIsSecondCam(!isSecondCam)
@@ -293,10 +293,19 @@ const Room = () => {
                   >
                     <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
                       <button
+                        disabled={
+                          secoundStreamKey === undefined &&
+                          secoundStreamName === undefined
+                        }
                         onClick={handleSwitchCam}
-                        className={`${
-                          isSecondCam ? 'text-theme-300' : ''
-                        } m-auto text-2xl i-heroicons-video-camera-20-solid`}
+                        className={cx(
+                          isSecondCam ? 'text-theme-300' : '',
+                          secoundStreamKey === undefined &&
+                            secoundStreamName === undefined
+                            ? 'text-gray-500 hover:cursor-not-allowed'
+                            : '',
+                          'm-auto text-2xl i-heroicons-video-camera-20-solid'
+                        )}
                       ></button>
                     </div>
                   </Tooltip>
@@ -321,7 +330,7 @@ const Room = () => {
               <div className="relative w-full h-[63%] grid grid-cols-3">
                 <div className="flex justify-start items-end pb-2 pl-4">
                   <div className="w-[360px] h-[76%]">
-                    <PockerResult />
+                    <PokerResult roomId={room?.id ?? ''} />
                   </div>
                 </div>
                 <div className="flex relative justify-center">
@@ -330,7 +339,7 @@ const Room = () => {
                 <div className="flex flex-col h-full">
                   <div className="flex-grow pt-32">
                     <div className="m-auto h-32 aspect-square">
-                      <Timer />
+                      <Timer roomId={room?.id ?? ''} />
                     </div>
                   </div>
                   <div className="flex justify-center items-end pb-2 h-12">
@@ -506,10 +515,19 @@ const Room = () => {
                         placement="right"
                       >
                         <button
+                          disabled={
+                            secoundStreamKey === undefined &&
+                            secoundStreamName === undefined
+                          }
                           onClick={handleSwitchCam}
-                          className={`${
-                            isSecondCam ? 'text-theme-300' : ''
-                          } m-auto text-xl i-heroicons-video-camera-20-solid`}
+                          className={cx(
+                            isSecondCam ? 'text-theme-300' : '',
+                            secoundStreamKey === undefined &&
+                              secoundStreamName === undefined
+                              ? 'text-gray-500 hover:cursor-not-allowed'
+                              : '',
+                            'm-auto text-2xl i-heroicons-video-camera-20-solid'
+                          )}
                         ></button>
                       </Tooltip>
                     </div>
@@ -533,7 +551,7 @@ const Room = () => {
                 </div>
                 <div></div>
                 <div className="flex m-auto w-14 aspect-square">
-                  <Timer />
+                  <Timer roomId={room?.id ?? ''} />
                 </div>
                 <div></div>
                 <div className="flex col-span-2 justify-end pb-1 w-full h-full">
@@ -586,7 +604,7 @@ const Room = () => {
           <div className="flex relative flex-col w-full">
             <div className="absolute z-30 w-full h-full pointer-events-none min-h-[298px]">
               <div className="py-1 px-2 w-full h-full">
-                <PockerResult />
+                <PokerResult roomId={room?.id ?? ''} />
               </div>
             </div>
 

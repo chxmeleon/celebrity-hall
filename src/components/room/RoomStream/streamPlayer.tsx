@@ -123,15 +123,13 @@ export const WebRTCStreamMobile: React.FC<RoomStreamProps> = ({
       {isLoading ? (
         <p>loading</p>
       ) : (
-        <div className="flex absolute z-0 flex-col w-full h-full">
-          <div className="overflow-hidden relative w-full h-full">
-            <video
-              ref={setVideoRef}
-              playsInline
-              autoPlay
-              className="object-cover w-full h-auto aspect-video"
-            />
-          </div>
+        <div className="overflow-hidden relative w-full h-full">
+          <video
+            ref={setVideoRef}
+            playsInline
+            autoPlay
+            className="object-cover w-full h-full"
+          />
         </div>
       )}
     </>
