@@ -38,10 +38,10 @@ const Router: React.FC = () => {
           <Route path="liverooms" element={<Liverooms />} />
           <Route path="mutualrooms" element={<Mutualrooms />} />
           <Route path="rooms" element={<Rooms />} />
+          <Route path="tables" element={<Tables />} />
         </Route>
         <Route path="streamers" element={<Streamers />} />
         <Route path="streamers/:id" element={<Streamer />} />
-        <Route path="tables" element={<Tables />} />
         <Route path="following" element={<Following />} />
         <Route path="rankings/streamers" element={<Rankings />} />
         <Route

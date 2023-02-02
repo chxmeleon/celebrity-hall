@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
+import { useLocation } from 'react-router-dom'
+import { clsx as cx } from 'clsx'
 
 export interface RoomStreamProps {
   streamName?: string
@@ -23,12 +25,14 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
   autoSize,
   isLoading
 }) => {
+  const location = useLocation()
+  const isTable = location.pathname === '/home/tables'
   useEffect(() => {
     const player = new NodePlayer()
     NodePlayer.debug(false)
     player.setView(`video-${streamName}-${streamKey}`)
     player.setBufferTime(0)
-    player.setScaleMode(1)
+    player.setScaleMode(isTable ? 2 : 1)
     player.setVolume(1.0)
     player.setKeepScreenOn()
     player.start(`https://live.vvip99.net/${streamName}/${streamKey}.flv`)
@@ -39,16 +43,14 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
     return () => {
       player.release(false)
     }
-  }, [streamName, streamKey])
+  }, [streamName, streamKey, isTable])
 
   return (
-    <div className="flex absolute z-0 flex-col w-full h-full">
-      <div className="overflow-hidden relative w-full h-auto aspect-video">
-        <canvas
-          id={`video-${streamName}-${streamKey}`}
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <div className="overflow-hidden relative w-full h-full">
+      <canvas
+        id={`video-${streamName}-${streamKey}`}
+        className="object-cover w-full h-full"
+      />
     </div>
   )
 }
@@ -170,7 +172,7 @@ export const NodePlayerStream: React.FC<RoomStreamProps> = ({
       <div className="overflow-hidden relative w-full h-auto aspect-film">
         <canvas
           id={`video-${streamName}-${streamKey}`}
-          className="w-full h-full object-cover"
+          className="object-cover w-full h-full"
         />
       </div>
     </div>

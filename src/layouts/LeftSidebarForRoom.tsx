@@ -97,9 +97,18 @@ const LeftSidebarForRoom = () => {
             {/*     defaultMessage="Following" */}
             {/*   /> */}
             {/* </LinkButton> */}
-            {/* <LinkButton href="/home/tables" isTarget={false}> */}
-            {/*   <FormattedMessage id="layout.tables" defaultMessage="Tables" /> */}
-            {/* </LinkButton> */}
+            <LinkButton href="/home/tables" isTarget={false}>
+              <div className="hidden md:block">
+                <FormattedMessage id="layout.tables" defaultMessage="Tables" />
+              </div>
+              <div className="w-full h-full md:hidden">
+                <img
+                  src="/icons/table.png"
+                  alt="all icon"
+                  className="w-7 h-7 object-fit"
+                />
+              </div>
+            </LinkButton>
             <LinkButton href="/home/rankings/streamers" isTarget={false}>
               <div className="hidden md:block">
                 <FormattedMessage
