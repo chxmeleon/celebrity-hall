@@ -39,7 +39,7 @@ import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
 import ChatroomMobile from '@/components/room/Chatroom/ChatroomMobile'
 import SinglePlayerMobile from '@/components/room/BetDesk/SinglePlayerMobile'
 import RoomDataContext from '@/contexts/RoomDataContext'
-import Loading from '@/components/room/RoomStream/loading'
+import Loading from '@/components/room/RoomStream/Loading'
 import { Tooltip } from '@material-tailwind/react'
 
 export const ChipButtonList: React.FC<{
