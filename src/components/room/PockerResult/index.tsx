@@ -1,13 +1,13 @@
 import CardWidget from './CardWidget'
 import { FormattedMessage } from 'react-intl'
 import { usePockerUpdate } from '@/hooks/pocker'
-import { useParams } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import GameStateContext from '@/contexts/GameStateContext'
 
-const PockerResult: React.FC = () => {
-  const { id } = useParams()
-  const { currentGameState } = usePockerUpdate(id)
+const PokerResult: React.FC<{ roomId: string }> = ({ roomId }) => {
+  const { currentGameState } = usePockerUpdate(roomId)
+  const { isTable } = useContext(GameStateContext)
   const { pockerState, gameState, currentGame } = currentGameState
   const [isShowPocker, setIsShowPocker] = useState(false)
 
@@ -17,13 +17,10 @@ const PockerResult: React.FC = () => {
       gameState !== 'STOP_BET' &&
       !currentGame?.shuffle &&
       gameState !== 'UPDATE_AMOUNT' &&
-      gameState !== undefined
+      gameState !== undefined || null
     ) {
       setIsShowPocker(true)
     } else {
-      setIsShowPocker(false)
-    }
-    return () => {
       setIsShowPocker(false)
     }
   }, [gameState, currentGame])
@@ -39,17 +36,19 @@ const PockerResult: React.FC = () => {
   return (
     <div className={resultContainerStyle}>
       <div
-        className={`${
-          pockerState?.result?.tieWin ? '' : 'opacity-0'
-        } text-theme-300 text-5xl font-medium w-full h-full absolute top-0 left-0 flex justify-center items-center`}
+        className={cx(
+          pockerState?.result?.tieWin ? '' : 'opacity-0',
+          'text-theme-300 font-medium w-full h-full absolute top-0 left-0 flex justify-center items-center',
+          isTable ? 'text-3xl' : ' text-5xl'
+        )}
       >
         <FormattedMessage id="common.simpleTie" defaultMessage="Tie" />
       </div>
-      <CardWidget role="player" />
+      <CardWidget role="player" roomId={roomId} isTable={isTable} />
       <div className="w-1 h-full bg-theme-150"></div>
-      <CardWidget role="dealer" />
+      <CardWidget role="dealer" roomId={roomId} isTable={isTable} />
     </div>
   )
 }
 
-export default PockerResult
+export default PokerResult

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { clsx as cx } from 'clsx'
 
 const Card: React.FC<{
   item: string
   rotate90?: boolean
   isOpen: boolean
   index: number
-}> = ({ item, rotate90, index, isOpen }) => {
+  isTable: boolean
+}> = ({ item, rotate90, index, isOpen, isTable }) => {
   const [isCardOpen, setIsCardOpen] = useState(false)
   useEffect(() => {
     if (isOpen) {
@@ -20,9 +22,11 @@ const Card: React.FC<{
   return (
     <div className={rotate90 ? 'rotate-90 col-span-2 m-auto pl-1' : ''}>
       <div
-        className={`${
-          isCardOpen ? 'md:rotate-y-0' : ' opacity-0 md:-rotate-y-180'
-        } transition-all duration-200 ease-in-out relative w-[52px] m-auto will-change-transform`}
+        className={cx(
+          isTable ? 'w-11' : "w-[52px]",
+          isCardOpen ? 'md:rotate-y-0' : ' opacity-0 md:-rotate-y-180',
+          'transition-all duration-200 ease-in-out relative  m-auto will-change-transform'
+        )}
       >
         <img src={`/cards/${item}.webp`} alt="pocker image" />
         <div
@@ -39,7 +43,8 @@ const Card: React.FC<{
 
 const FlipCard: React.FC<{
   data: string[]
-}> = ({ data }) => {
+  isTable: boolean
+}> = ({ data, isTable }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -62,6 +67,7 @@ const FlipCard: React.FC<{
             index={idx}
             item={item}
             rotate90={idx === 2}
+            isTable={isTable}
           />
         ))}
       </div>

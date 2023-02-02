@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client'
 import types from '@/types'
 import { BetButton } from '@/components/common/Button'
 import Timer from '@/components/room/Timer'
-import PockerResult from '@/components/room/PockerResult'
+import PokerResult from '@/components/room/PockerResult'
 import {
   BeadRoad,
   BigRoad,
@@ -24,12 +24,13 @@ import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
 import SinglePlayerMobile from '@/components/room/BetDesk/SinglePlayerMobile'
 import Loading from '@/components/room/RoomStream/loading'
 import { Tooltip } from '@material-tailwind/react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ChipButtonList } from '@/pages/Rooms/[id]'
 import { useAuth } from '@/contexts/AuthContext'
 import { useSetup } from '@/contexts/SetupContext'
 import { useContext, useEffect, useState } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
+
 
 type RoomDataProps = {
   room: RoomProps
@@ -207,9 +208,9 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
 
   return (
     <div className="flex flex-col w-full h-full">
-      <div className="flex justify-between items-center py-1 px-3 w-full h-12 bg-theme-50/10">
-        <div>{room.name}</div>
-        <div className="inline-flex justify-around items-center w-2/4">
+      <div className="flex justify-between items-center py-1 px-2 w-full h-12 bg-theme-50/10">
+        <div className="font-bold text-gray-50">{room.name}</div>
+        <div className="inline-flex justify-between items-center w-[42%]">
           <div className="flex px-3 rounded-full border border-theme-300 text-theme-300">
             <Link to={href} key={href} className="m-auto text-center">
               <FormattedMessage
@@ -229,7 +230,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
         <div className="absolute w-full h-full">
           <div className="grid absolute z-20 grid-cols-3 grid-rows-2 w-full h-full">
             <div className="flex pl-1">
-              <div className="flex flex-col justify-around items-end h-23">
+              <div className="flex flex-col justify-around items-end h-[72px]">
                 <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
                   <Tooltip
                     content={formatMessage({
@@ -266,7 +267,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
             </div>
             <div></div>
             <div className="flex m-auto w-14 aspect-square">
-              <Timer />
+              <Timer roomId={room.id} />
             </div>
             <div></div>
             <div className="flex col-span-2 justify-end pb-1 w-full h-full">
@@ -314,9 +315,9 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
       </div>
 
       <div className="flex relative flex-col w-full">
-        <div className="absolute z-30 w-full h-full pointer-events-none min-h-[298px]">
-          <div className="py-1 px-2 w-full h-full">
-            <PockerResult />
+        <div className="absolute z-30 w-full h-full pointer-events-none">
+          <div className="pb-2 px-2 w-full h-full">
+            <PokerResult roomId={room.id} />
           </div>
         </div>
 
@@ -329,7 +330,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
               onSelectedChipChanged={setSelectedChip}
             />
           </div>
-          <div className="flex justify-between items-center px-1 py-2 w-full">
+          <div className="flex justify-between items-center px-1 pt-1.5 pb-2.5 w-full">
             <BetButton
               className="mx-1 text-md"
               isDisabled={isCancelDisabled}

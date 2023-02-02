@@ -9,17 +9,20 @@ import { useActionCable } from './ActionCableContext'
 import types from '@/types'
 import { convertStatus } from '@/hooks/rooms'
 import { pockerReducer, initialValue, usePockerUpdate } from '@/hooks/pocker'
+import { useLocation } from 'react-router-dom'
 
 type GameContextData = {
-  data: number 
+  isTable: boolean 
 }
+
 
 const GameStateContext = createContext<GameContextData>({} as GameContextData)
 export const GameStateProvider: React.FC<React.PropsWithChildren> = ({
   children
 }) => {
-  const data = 0
-  const value = { data }
+  const location = useLocation()
+  const isTable = location.pathname === '/home/tables'
+  const value = { isTable }
 
   return (
     <GameStateContext.Provider value={value}>
