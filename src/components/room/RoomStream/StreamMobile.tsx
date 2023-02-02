@@ -2,7 +2,6 @@ import {
   NodePlayerStreamMobile,
   RoomStreamProps,
   WebRTCStreamMobile,
-  WebRTCStream
 } from './streamPlayer'
 
 const RoomStreamMobile: React.FC<RoomStreamProps> = ({

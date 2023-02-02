@@ -26,11 +26,9 @@ import { useQuery } from '@apollo/client'
 import { GET_ROOM_STREAM } from '@/gql/stream'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { useCurrentGameState } from '@/hooks/rooms'
-import { useActionCable } from '@/contexts/ActionCableContext'
 import { BetInitialValueProp, betInitialValue } from '@/hooks/bet'
 import RoomNotification from '@/components/room/RoomNotification'
 import WinAndLoseResult from '@/components/room/WinAndLoseResult'
-import StreamMobile from '@/components/room/RoomStream/StreamMobile'
 import { useAuth } from '@/contexts/AuthContext'
 import {
   NodePlayerStream,
@@ -44,7 +42,7 @@ import RoomDataContext from '@/contexts/RoomDataContext'
 import Loading from '@/components/room/RoomStream/loading'
 import { Tooltip } from '@material-tailwind/react'
 
-const ChipButtonList: React.FC<{
+export const ChipButtonList: React.FC<{
   selectedChip: string
   onSelectedChipChanged?: (selectedChip: string) => void
 }> = ({ selectedChip, onSelectedChipChanged }) => {
@@ -85,8 +83,6 @@ const Room = () => {
     () => (roomId ? rooms.find((room) => room.id === roomId) : undefined),
     [roomId, rooms]
   )
-  console.log(room);
-  
 
   const { isTrial } = useAuth()
   const { onResizeWindow } = useContext(ResponsiveContext)

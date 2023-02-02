@@ -79,7 +79,7 @@ export const askMapperMobile = [
     value: 'player_count'
   },
   {
-    contentId: 'common.simpletie',
+    contentId: 'common.simpleTie',
     default: 'Tie',
     className: 'text-teal-400',
     value: 'tie_count'

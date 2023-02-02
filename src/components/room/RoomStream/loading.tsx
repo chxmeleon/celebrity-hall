@@ -8,7 +8,6 @@ const Progress: React.FC<PropsWithChildren> = ({ children }) => {
   const countDownStyle = cx(
     'border-theme-300 w-[82%] h-[82%] rounded-full absolute border-t-[1px] border-r-[3px] md:border-t-[3px] md:border-r-[6px] border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress'
   )
-
   return (
     <div className="flex relative m-auto w-full h-full rounded-full bg-theme-50/80 backdrop-blur-sm">
       <div className={countDownStyle}></div>
@@ -36,7 +35,7 @@ const Loading: React.FC = () => {
                 className="object-cover w-full h-full"
               />
             </div>
-            <div className="text-sm md:text-xl text-theme-300">
+            <div className="text-[9px] sm:text-sm md:text-xl text-theme-300">
               <FormattedMessage id="streams.loading" defaultMessage="Loading" />
             </div>
           </div>
