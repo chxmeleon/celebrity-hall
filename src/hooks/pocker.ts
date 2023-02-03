@@ -75,6 +75,7 @@ export const usePokerUpdate = (roomId: string | undefined) => {
   >(GET_CURRENT_BACCARAT_ROOM, {
     variables: { baccaratRoomId: roomId ?? '' }
   })
+
   const currentGame = useMemo(() => {
     return data?.baccaratRoom?.currentGame
   }, [data])
@@ -97,6 +98,10 @@ export const usePokerUpdate = (roomId: string | undefined) => {
     }
     setGameState(convertStatus(data?.baccaratRoom?.currentGame?.status))
   }, [refetch, data, gameState])
+  /* console.log(convertStatus(data?.baccaratRoom?.currentGame?.status)); */
+  console.log(currentGame);
+  
+  
 
   useEffect(() => {
     const subscription = cable.subscriptions.create(

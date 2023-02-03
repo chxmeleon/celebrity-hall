@@ -1,5 +1,12 @@
-export type BetInitialValueProp = {
+export interface BetInitialValueProp {
   [key: string]: number
+}
+
+export interface ChipAction {
+  type: string
+  target?: string
+  amount?: number
+  preState?: BetInitialValueProp
 }
 
 export const betInitialValue = {
@@ -17,20 +24,14 @@ export const betInitialValue = {
   dealerSingleAmount: 0,
   playerDoubleAmount: 0,
   dealerDoubleAmount: 0,
-  playerNatural: 0,
-  dealerNatural: 0,
-  playerAny: 0,
-  dealerAny: 0
+  playerNaturalAmount: 0,
+  dealerNaturalAmount: 0,
+  playerAnyAmount: 0,
+  dealerAnyAmount: 0
 }
 
-export const chipReducer = (state: BetInitialValueProp, action: any) => {
+export const chipReducer = (state: BetInitialValueProp, action: ChipAction) => {
   switch (action.type) {
-    case 'addChips':
-      return {
-        ...state,
-        [action?.target]: state[action?.target] + action?.amount
-      }
-
     case 'repeat':
       return action.preState
 
@@ -39,5 +40,14 @@ export const chipReducer = (state: BetInitialValueProp, action: any) => {
 
     default:
       return state
+
+    case 'addChips':
+      if (action?.target && action?.amount) {
+        return {
+          ...state,
+          [action?.target]: state[action?.target] + action?.amount
+        }
+      }
+    break
   }
 }

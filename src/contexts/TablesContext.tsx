@@ -1,9 +1,12 @@
 import React, { createContext, useEffect, useReducer, useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { chipReducer, betInitialValue, BetInitialValueProp } from '@/hooks/bet'
+import { chipReducer, betInitialValue, BetInitialValueProp, ChipAction } from '@/hooks/bet'
 import { useLocation } from 'react-router-dom'
 import { useActionCable } from './ActionCableContext'
 import { GET_WALLET } from '@/gql/profile'
+import { CREATE_BACCARAT_BET, CANCEL_BACCARAT_BET } from '@/gql/baccaratrooms'
+import { useMutation } from '@apollo/client'
+import types from '@/types'
 
 type GamePlayContextData = {
   selectedChip: string
@@ -23,7 +26,9 @@ export const TablesProvider: React.FC<React.PropsWithChildren> = ({
   const preLocation = useLocation().pathname
   const [location, setLocation] = useState(preLocation)
   const [selectedChip, setSelectedChip] = useState('chips_100')
-  const [betState, dispatchBet] = useReducer(chipReducer, betInitialValue)
+  const [betState, dispatchBet] = useReducer<
+    (state: BetInitialValueProp, action: ChipAction) => any
+  >(chipReducer, betInitialValue)
 
   useEffect(() => {
     if (preLocation !== location) {
@@ -34,6 +39,7 @@ export const TablesProvider: React.FC<React.PropsWithChildren> = ({
   const { data, refetch } = useQuery(GET_WALLET)
   const { cable } = useActionCable()
   const [notice, setNotice] = useState<any | null>(null)
+  const wallet = data?.wallet
 
   useEffect(() => {
     const walletSubscription = cable.subscriptions.create(
@@ -63,15 +69,29 @@ export const TablesProvider: React.FC<React.PropsWithChildren> = ({
     }
   }, [cable, refetch])
 
+  const [createBaccaratBet] = useMutation<
+    types.CREATE_BACCARAT_BET,
+    types.CREATE_BACCARAT_BETVariables
+  >(CREATE_BACCARAT_BET)
 
-  const wallet = data?.wallet
-  
-  const value = { selectedChip, setSelectedChip, betState, dispatchBet, wallet, notice }
+  const [cancelBaccaratBet] = useMutation<
+    types.CANCEL_BACCARAT_BET,
+    types.CANCEL_BACCARAT_BETVariables
+  >(CANCEL_BACCARAT_BET)
+
+  const totalAmount = Object.values(betState).reduce((a: any, b: any) => a + b)
+
+  const value = {
+    selectedChip,
+    setSelectedChip,
+    betState,
+    dispatchBet,
+    wallet,
+    notice
+  }
 
   return (
-    <TablesContext.Provider value={value}>
-      {children}
-    </TablesContext.Provider>
+    <TablesContext.Provider value={value}>{children}</TablesContext.Provider>
   )
 }
 

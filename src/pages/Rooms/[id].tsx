@@ -60,7 +60,7 @@ export const ChipButtonList: React.FC<{
               isActive
                 ? 'brightness-105 backdrop-brightness-110 shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
                 : 'shadow shadow-theme-50/80 brightness-[78%] opacity-[80%]'
-            } rounded-full relative hover:cursor-pointer`}
+            } m-auto rounded-full relative hover:cursor-pointer`}
           >
             <img src={item?.src} alt="bet image" className="w-10" />
           </button>
@@ -77,7 +77,6 @@ const Room = () => {
     () => (roomId ? rooms.find((room) => room.id === roomId) : undefined),
     [roomId, rooms]
   )
-
   const { isTrial } = useAuth()
   const { onResizeWindow } = useContext(ResponsiveContext)
   useEffect(() => {
@@ -106,8 +105,9 @@ const Room = () => {
 
   const { currentGameState } = useCurrentGameState(roomId ?? '')
   const { gameState } = currentGameState
-  const [isDisable, setIsDisable] = useState(true)
   const { deviceInfo } = useSetup()
+
+  const [isDisable, setIsDisable] = useState(true)
 
   const { formatMessage } = useIntl()
 
@@ -594,7 +594,9 @@ const Room = () => {
               </div>
             </div>
 
-            <SinglePlayerMobile isDisabled={isDisable} />
+            <div>
+              <SinglePlayerMobile isDisabled={isDisable} />
+            </div>
 
             <div className="flex flex-col w-full h-2/5">
               <div className="flex justify-around py-3 px-2 w-full">
@@ -694,7 +696,7 @@ const Room = () => {
             <div className="h-6">
               <AskGridMobile />
             </div>
-            <div className="h-12"></div>
+            <div className="h-10"></div>
           </div>
         </div>
       </Responsive.Default>

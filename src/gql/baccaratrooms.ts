@@ -52,6 +52,7 @@ export const GET_BACCARATROOMS = gql`
         dealerPairAmount
         playerPairAmount
         tieAmount
+        super6Amount
         updatedAt
         endAt
       }
