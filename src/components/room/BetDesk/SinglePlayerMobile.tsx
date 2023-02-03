@@ -3,9 +3,11 @@ import { useSetup } from '@/contexts/SetupContext'
 import { useContext, useEffect, useReducer, useState } from 'react'
 import { chipsData } from './chips'
 import GamePlayContext from '@/contexts/GamePlayContext'
+import RoomDataContext from '@/contexts/RoomDataContext'
 import { clsx as cx } from 'clsx'
 import { useParams } from 'react-router-dom'
 import { useCurrentGameState } from '@/hooks/rooms'
+import TablesContext from '@/contexts/TablesContext'
 
 const BetArea: React.FC<{ target: number }> = ({ target }) => {
   return (
@@ -15,10 +17,10 @@ const BetArea: React.FC<{ target: number }> = ({ target }) => {
       )}
     >
       {target > 0 ? (
-        <div className={cx('relative flex w-9 h-9 text-[9px]')}>
+        <div className={cx('relative flex w-8 h-8 text-[9px]')}>
           <div
             className={cx(
-              'w-9 h-9 absolute top-0 left-0 flex justify-center items-center'
+              'w-8 h-8 absolute top-0 left-0 flex justify-center items-center'
             )}
           >
             <img src="/chips/chip_null.webp" alt="chip image" />
@@ -42,13 +44,56 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
   isDisabled
 }) => {
   const { isRegular } = useSetup()
-  
-  const { selectedChip, betState, dispatchBet } = useContext(GamePlayContext)
+  const { isTable } = useContext(RoomDataContext)
+  const {
+    selectedChip: mobileSelected,
+    betState: mobileBetState,
+    dispatchBet: mobileDispatch
+  } = useContext(GamePlayContext)
+
+  const {
+    selectedChip: tableSelected,
+    betState: tableBetState,
+    dispatchBet: tableDispatch
+  } = useContext(TablesContext)
+
   return (
-    <div className="px-2 grid gap-1 grid-rows-2 w-full  [&_button]:relative">
+    <div className="h-full px-2 grid gap-1 grid-rows-2 w-full [&_button]:relative">
       <div className="grid grid-cols-5 gap-1">
-        <button disabled className="rounded-md bg-theme-75 brightness-50">
-          <div className="text-xs md:text-xl w-full text-grid-400 [&_p]:text-gray-300">
+        <button
+          disabled={isDisabled}
+          onClick={() =>
+            isTable
+              ? tableDispatch({
+                  type: 'addChips',
+                  target: 'playerDragonAmount',
+                  amount: chipsData?.[tableSelected]?.value
+                })
+              : mobileDispatch({
+                  type: 'addChips',
+                  target: 'playerDragonAmount',
+                  amount: chipsData?.[mobileSelected]?.value
+                })
+          }
+          className={cx(
+            'rounded-md bg-theme-75',
+            isDisabled ? 'brightness-75' : ''
+          )}
+        >
+          <BetArea
+            target={
+              isTable
+                ? tableBetState?.playerDragonAmount
+                : mobileBetState?.playerDragonAmount
+            }
+          />
+
+          <div
+            className={cx(
+              'w-full text-grid-400 [&_p]:text-gray-300',
+              isTable ? 'text-sm' : 'text-xs md:text-xl'
+            )}
+          >
             <div>
               <FormattedMessage id="common.playerDragon" />
             </div>
@@ -60,21 +105,36 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         <button
           disabled={isDisabled}
           onClick={() =>
-            dispatchBet({
-              type: 'addPlayerPairChips',
-              playload: {
-                playerPairChips: chipsData?.[selectedChip]?.src,
-                playerPairAmount: chipsData?.[selectedChip]?.value
-              }
-            })
+            isTable
+              ? tableDispatch({
+                  type: 'addChips',
+                  target: 'playerPairAmount',
+                  amount: chipsData?.[tableSelected]?.value
+                })
+              : mobileDispatch({
+                  type: 'addChips',
+                  target: 'playerPairAmount',
+                  amount: chipsData?.[mobileSelected]?.value
+                })
           }
           className={cx(
             'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetArea target={betState?.playerPairAmount} />
-          <div className="text-xs md:text-xl w-full text-grid-400 [&_p]:text-gray-300">
+          <BetArea
+            target={
+              isTable
+                ? tableBetState?.playerPairAmount
+                : mobileBetState?.playerPairAmount
+            }
+          />
+          <div
+            className={cx(
+              'w-full text-grid-400 [&_p]:text-gray-300',
+              isTable ? 'text-sm' : 'text-xs md:text-xl'
+            )}
+          >
             <FormattedMessage id="common.playerPair" />
             <div>
               <p>1:11</p>
@@ -84,21 +144,38 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         <button
           disabled={isDisabled}
           onClick={() =>
-            dispatchBet({
-              type: 'addSuper6Chips',
-              playload: {
-                super6Chips: chipsData?.[selectedChip]?.src,
-                super6Amount: chipsData?.[selectedChip]?.value
-              }
-            })
+            isTable
+              ? tableDispatch({
+                  type: 'addChips',
+                  target: 'super6Amount',
+                  amount: chipsData?.[tableSelected]?.value
+                })
+              : mobileDispatch({
+                  type: 'addChips',
+                  target: 'super6Amount',
+                  amount: chipsData?.[mobileSelected]?.value
+                })
           }
           className={cx(
             'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetArea target={betState?.super6Amount} />
-          <div className="m-auto w-full text-xs md:text-xl text-grid-200">
+          <BetArea
+            target={
+              isTable
+                ? tableBetState?.super6Amount
+                : mobileBetState?.super6Amount
+            }
+          />
+          <div
+            className={cx(
+              'm-auto w-full text-grid-200',
+              isTable
+                ? 'text-[10px] [&_p]:text-sm [&_p]:pt-0.5'
+                : 'text-xs md:text-xl'
+            )}
+          >
             <div className="font-bold">SUPER 6</div>
             <p className="text-gray-300">1:20</p>
           </div>
@@ -106,22 +183,37 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         <button
           disabled={isDisabled}
           onClick={() =>
-            dispatchBet({
-              type: 'addDealerPairChips',
-              playload: {
-                dealerPairChips: chipsData?.[selectedChip]?.src,
-                dealerPairAmount: chipsData?.[selectedChip]?.value
-              }
-            })
+            isTable
+              ? tableDispatch({
+                  type: 'addChips',
+                  target: 'dealerPairAmount',
+                  amount: chipsData?.[tableSelected]?.value
+                })
+              : mobileDispatch({
+                  type: 'addChips',
+                  target: 'dealerPairAmount',
+                  amount: chipsData?.[mobileSelected]?.value
+                })
           }
           className={cx(
             'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetArea target={betState?.dealerPairAmount} />
+          <BetArea
+            target={
+              isTable
+                ? tableBetState?.dealerPairAmount
+                : mobileBetState?.dealerPairAmount
+            }
+          />
 
-          <div className="text-xs md:text-xl w-full text-grid-100 [&_p]:text-gray-300 ">
+          <div
+            className={cx(
+              'w-full text-grid-100 [&_p]:text-gray-300 ',
+              isTable ? 'text-sm' : 'text-xs md:text-xl'
+            )}
+          >
             <div>
               <FormattedMessage id="common.dealerPair" />
             </div>
@@ -130,8 +222,40 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             </div>
           </div>
         </button>
-        <button disabled className="rounded-md bg-theme-75 brightness-50">
-          <div className="text-xs md:text-xl w-full text-grid-100 [&_p]:text-gray-300 ">
+        <button
+          disabled={isDisabled}
+          onClick={() =>
+            isTable
+              ? tableDispatch({
+                  type: 'addChips',
+                  target: 'dealerDragonAmount',
+                  amount: chipsData?.[tableSelected]?.value
+                })
+              : mobileDispatch({
+                  type: 'addChips',
+                  target: 'dealerDragonAmount',
+                  amount: chipsData?.[mobileSelected]?.value
+                })
+          }
+          className={cx(
+            'rounded-md bg-theme-75',
+            isDisabled ? 'brightness-75' : ''
+          )}
+        >
+          <BetArea
+            target={
+              isTable
+                ? tableBetState?.dealerDragonAmount
+                : mobileBetState?.dealerDragonAmount
+            }
+          />
+
+          <div
+            className={cx(
+              'w-full text-grid-100 [&_p]:text-gray-300 ',
+              isTable ? 'text-sm' : 'text-xs md:text-xl'
+            )}
+          >
             <div className="">
               <FormattedMessage id="common.dealerDragon" />
             </div>
@@ -145,20 +269,28 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         <button
           disabled={isDisabled}
           onClick={() =>
-            dispatchBet({
-              type: 'addBigChips',
-              playload: {
-                bigChips: chipsData?.[selectedChip]?.src,
-                bigAmount: chipsData?.[selectedChip]?.value
-              }
-            })
+            isTable
+              ? tableDispatch({
+                  type: 'addChips',
+                  target: 'bigAmount',
+                  amount: chipsData?.[tableSelected]?.value
+                })
+              : mobileDispatch({
+                  type: 'addChips',
+                  target: 'bigAmount',
+                  amount: chipsData?.[mobileSelected]?.value
+                })
           }
           className={cx(
             'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetArea target={betState?.bigAmount} />
+          <BetArea
+            target={
+              isTable ? tableBetState?.bigAmount : mobileBetState?.bigAmount
+            }
+          />
           <div className="m-auto w-2/3 text-gray-300">
             <div className="text-xl font-bold">
               <FormattedMessage id="screens.baccaratRoom.big" />
@@ -172,20 +304,30 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         <button
           disabled={isDisabled}
           onClick={() =>
-            dispatchBet({
-              type: 'addPlayerChips',
-              playload: {
-                playerChips: chipsData?.[selectedChip]?.src,
-                playerAmount: chipsData?.[selectedChip]?.value
-              }
-            })
+            isTable
+              ? tableDispatch({
+                  type: 'addChips',
+                  target: 'playerAmount',
+                  amount: chipsData?.[tableSelected]?.value
+                })
+              : mobileDispatch({
+                  type: 'addChips',
+                  target: 'playerAmount',
+                  amount: chipsData?.[mobileSelected]?.value
+                })
           }
           className={cx(
             'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetArea target={betState?.playerAmount} />
+          <BetArea
+            target={
+              isTable
+                ? tableBetState?.playerAmount
+                : mobileBetState?.playerAmount
+            }
+          />
           <div className="m-auto w-2/3 text-grid-400 [&_p]:text-gray-300">
             <div className="text-xl font-bold">
               <FormattedMessage id="common.simplePlayer" />
@@ -199,20 +341,28 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         <button
           disabled={isDisabled}
           onClick={() =>
-            dispatchBet({
-              type: 'addTieChips',
-              playload: {
-                tieChips: chipsData?.[selectedChip]?.src,
-                tieAmount: chipsData?.[selectedChip]?.value
-              }
-            })
+            isTable
+              ? tableDispatch({
+                  type: 'addChips',
+                  target: 'tieAmount',
+                  amount: chipsData?.[tableSelected]?.value
+                })
+              : mobileDispatch({
+                  type: 'addChips',
+                  target: 'tieAmount',
+                  amount: chipsData?.[mobileSelected]?.value
+                })
           }
           className={cx(
             'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetArea target={betState?.tieAmount} />
+          <BetArea
+            target={
+              isTable ? tableBetState?.tieAmount : mobileBetState?.tieAmount
+            }
+          />
           <div className="m-auto w-2/3 text-grid-300 [&_p]:text-gray-300">
             <div className="text-xl font-bold">
               <FormattedMessage id="common.simpleTie" />
@@ -225,20 +375,30 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         <button
           disabled={isDisabled}
           onClick={() =>
-            dispatchBet({
-              type: 'addDealerChips',
-              playload: {
-                dealerChips: chipsData?.[selectedChip]?.src,
-                dealerAmount: chipsData?.[selectedChip]?.value
-              }
-            })
+            isTable
+              ? tableDispatch({
+                  type: 'addChips',
+                  target: 'dealerAmount',
+                  amount: chipsData?.[tableSelected]?.value
+                })
+              : mobileDispatch({
+                  type: 'addChips',
+                  target: 'smallAmount',
+                  amount: chipsData?.[mobileSelected]?.value
+                })
           }
           className={cx(
             'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetArea target={betState?.dealerAmount} />
+          <BetArea
+            target={
+              isTable
+                ? tableBetState?.dealerAmount
+                : mobileBetState?.dealerAmount
+            }
+          />
 
           <div className="m-auto w-2/3 text-grid-100 [&_p]:text-gray-300">
             <div className="text-xl font-bold">
@@ -252,20 +412,28 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
         <button
           disabled={isDisabled}
           onClick={() =>
-            dispatchBet({
-              type: 'addSmallChips',
-              playload: {
-                smallChips: chipsData?.[selectedChip]?.src,
-                smallAmount: chipsData?.[selectedChip]?.value
-              }
-            })
+            isTable
+              ? tableDispatch({
+                  type: 'addChips',
+                  target: 'smallAmount',
+                  amount: chipsData?.[tableSelected]?.value
+                })
+              : mobileDispatch({
+                  type: 'addChips',
+                  target: 'smallAmount',
+                  amount: chipsData?.[mobileSelected]?.value
+                })
           }
           className={cx(
             'rounded-md bg-theme-75',
             isDisabled ? 'brightness-75' : ''
           )}
         >
-          <BetArea target={betState?.smallAmount} />
+          <BetArea
+            target={
+              isTable ? tableBetState?.smallAmount : mobileBetState?.smallAmount
+            }
+          />
           <div className="m-auto w-2/3 text-gray-300">
             <div className="text-xl font-bold">
               <FormattedMessage id="screens.baccaratRoom.small" />

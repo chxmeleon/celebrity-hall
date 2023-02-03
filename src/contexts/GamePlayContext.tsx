@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useReducer, useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { chipReducer, betInitialValue, BetInitialValueProp } from '@/hooks/bet'
+import { chipReducer, betInitialValue, BetInitialValueProp, ChipAction } from '@/hooks/bet'
 import { useLocation } from 'react-router-dom'
 import { useActionCable } from './ActionCableContext'
 import { GET_WALLET } from '@/gql/profile'
@@ -23,7 +23,9 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
   const preLocation = useLocation().pathname
   const [location, setLocation] = useState(preLocation)
   const [selectedChip, setSelectedChip] = useState('chips_100')
-  const [betState, dispatchBet] = useReducer(chipReducer, betInitialValue)
+  const [betState, dispatchBet] = useReducer<
+    (state: BetInitialValueProp, action: ChipAction) => any
+  >(chipReducer, betInitialValue)
 
   useEffect(() => {
     if (preLocation !== location) {
@@ -34,6 +36,7 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
   const { data, refetch } = useQuery(GET_WALLET)
   const { cable } = useActionCable()
   const [notice, setNotice] = useState<any | null>(null)
+  const wallet = data?.wallet
 
   useEffect(() => {
     const walletSubscription = cable.subscriptions.create(
@@ -63,7 +66,6 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
     }
   }, [cable, refetch])
 
-  const wallet = data?.wallet
   
 
 

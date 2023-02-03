@@ -74,15 +74,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
     types.CANCEL_BACCARAT_BETVariables
   >(CANCEL_BACCARAT_BET)
 
-  const totalAmount =
-    betState?.playerAmount +
-    betState?.playerPairAmount +
-    betState?.dealerAmount +
-    betState?.dealerPairAmount +
-    betState?.smallAmount +
-    betState?.bigAmount +
-    betState?.tieAmount +
-    betState?.super6Amount
+  const totalAmount = Object.values(betState).reduce((a, b) => a + b) 
 
   const [isConfirmDisabled, setIsConfirmDisabled] = useState(false)
   const [isCancelDisabled, setIsCancelDisabled] = useState(false)
@@ -226,7 +218,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
           {/* </div> */}
         {/* </div> */}
       </div>
-      <div className="relative w-full h-[251px]">
+      <div className="relative w-full h-[266px]">
         <div className="absolute w-full h-full">
           <div className="grid absolute z-20 grid-cols-3 grid-rows-2 w-full h-full">
             <div className="flex pl-1">
@@ -314,17 +306,19 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
         </div>
       </div>
 
-      <div className="flex relative flex-col w-full">
+      <div className="flex relative flex-col w-full h-1/2">
         <div className="absolute z-30 w-full h-full pointer-events-none">
-          <div className="pb-2 px-2 w-full h-full">
+          <div className="pb-14 px-2 w-full h-full">
             <PokerResult roomId={room.id} />
           </div>
         </div>
 
-        <SinglePlayerMobile isDisabled={isDisable} />
+        <div className="h-1/2">
+          <SinglePlayerMobile isDisabled={isDisable} />
+        </div>
 
-        <div className="flex flex-col w-full">
-          <div className="flex justify-around p-2 py-2.5 w-full gap-2">
+        <div className="flex flex-col w-full h-1/2">
+          <div className="grid grid-cols-4 grid-rows-2 px-5 py-2.5 w-full gap-2">
             <ChipButtonList
               selectedChip={selectedChip}
               onSelectedChipChanged={setSelectedChip}

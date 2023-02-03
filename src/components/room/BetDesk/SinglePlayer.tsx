@@ -1,12 +1,10 @@
 import { btnIdx, btnIdxNoBorder } from './deskStyle'
 import { FormattedMessage } from 'react-intl'
 import { useSetup } from '@/contexts/SetupContext'
-import { useContext, useEffect, useReducer, useState } from 'react'
+import { useContext } from 'react'
 import { chipsData } from './chips'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { clsx as cx } from 'clsx'
-import { useParams } from 'react-router-dom'
-import { useCurrentGameState } from '@/hooks/rooms'
 
 const betAreaMapper = {
   ver: { firstDiv: 'items-end', secoundDiv: 'w-14 h-14 text-sm' },
@@ -74,25 +72,38 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
       <div className="absolute grid grid-cols-3 m-auto pb-2 w-[89%] h-full inset-0 z-30 pointer-events-none">
         <div className="grid grid-rows-3">
           <div className="grid grid-cols-9">
-            <div className={cx(btnIdxNoBorder.tl5)}></div>
+            <div className={cx(btnIdxNoBorder.tl5)}>
+              <BetArea target={betState?.playerAnyAmount} type="hoz" />
+            </div>
             <div className={cx(btnIdxNoBorder.tn4)}>
               <BetArea target={betState?.playerPairAmount} type="hoz" />
             </div>
           </div>
+
           <div className="grid grid-cols-9">
             <div className={cx(btnIdxNoBorder.cl5)}>
               <BetArea target={betState?.bigAmount} type="hoz" />
             </div>
-            <div className={cx(btnIdxNoBorder.cn4)}></div>
+            <div className={cx(btnIdxNoBorder.cn4)}>
+              <BetArea target={betState?.playerDragonAmount} type="hoz" />
+            </div>
           </div>
+
           <div className="grid grid-cols-9">
             <div className="flex col-span-5">
-              <div className={cx(btnIdxNoBorder.hbhln)}></div>
-              <div className={cx(btnIdxNoBorder.hbhn)}></div>
+              <div className={cx(btnIdxNoBorder.hbhln)}>
+                <BetArea target={betState?.playerSingleAmount} type="hoz" />
+              </div>
+              <div className={cx(btnIdxNoBorder.hbhn)}>
+                <BetArea target={betState?.playerDoubleAmount} type="hoz" />
+              </div>
             </div>
-            <div className={cx(btnIdxNoBorder.bn4)}></div>
+            <div className={cx(btnIdxNoBorder.bn4)}>
+              <BetArea target={betState?.playerNaturalAmount} type="hoz" />
+            </div>
           </div>
         </div>
+
         <div className="grid grid-cols-3">
           <div className={cx(btnIdxNoBorder.ynn)}>
             <BetArea target={betState?.playerAmount} type="ver" />
@@ -109,21 +120,30 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             <BetArea target={betState?.dealerAmount} type="ver" />
           </div>
         </div>
+
         <div className="grid grid-rows-3">
           <div className="grid grid-cols-9">
             <div className={cx(btnIdxNoBorder.tn4)}>
+              <BetArea target={betState?.dealerAnyAmount} type="hoz" />
+            </div>
+            <div className={cx(btnIdxNoBorder.tr5)}>
               <BetArea target={betState?.dealerPairAmount} type="hoz" />
             </div>
-            <div className={cx(btnIdxNoBorder.tr5)}></div>
           </div>
+
           <div className="grid grid-cols-9">
-            <div className={cx(btnIdxNoBorder.cn4)}></div>
+            <div className={cx(btnIdxNoBorder.cn4)}>
+              <BetArea target={betState?.smallAmount} type="hoz" />
+            </div>
             <div className={cx(btnIdxNoBorder.cr5)}>
               <BetArea target={betState?.smallAmount} type="hoz" />
             </div>
           </div>
+
           <div className="grid grid-cols-9">
-            <div className={cx(btnIdxNoBorder.bn4)}></div>
+            <div className={cx(btnIdxNoBorder.bn4)}>
+              <BetArea target={betState?.smallAmount} type="hoz" />
+            </div>
             <div className="flex col-span-5">
               <div className={cx(btnIdxNoBorder.hbhn)}></div>
               <div className={cx(btnIdxNoBorder.hbhrn)}></div>
@@ -363,7 +383,17 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             </button>
           </div>
           <div className="grid grid-cols-9">
-            <button disabled className={cx('bg-theme-50/50  ', btnIdx.cn4)}>
+            <button
+              disabled={isDisabled}
+              onClick={() =>
+                dispatchBet({
+                  type: 'addChips',
+                  target: 'dealerDragonAmount',
+                  amount: chipsData?.[selectedChip]?.value
+                })
+              }
+              className={cx('bg-theme-50/50  ', btnIdx.cn4)}
+            >
               <div className="flex justify-between items-center px-3 w-full text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                 <div className="text-lg">
                   <FormattedMessage id="common.dealerDragon" />
