@@ -18,9 +18,9 @@ const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState }) => {
   const { notice } = useContext(GamePlayContext)
   const { isTable } = useContext(RoomDataContext)
   const windLoseState = () => {
-    if (Math.floor(Number(notice?.winLossAmount)) < 0) {
+    if (~~Number(notice?.winLossAmount) < 0) {
       return 'isLose'
-    } else if (Math.floor(Number(notice?.winLossAmount)) === 0) {
+    } else if (~~Number(notice?.winLossAmount) === 0) {
       return 'isTie'
     } else {
       return 'isWin'

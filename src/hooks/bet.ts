@@ -1,121 +1,38 @@
-import { CREATE_BACCARAT_BET } from '@/gql/baccaratrooms'
-import { useMutation } from '@apollo/client'
-import types from '@/types'
-import { useParams } from 'react-router-dom'
-
 export type BetInitialValueProp = {
-  playerChips: string[]
-  playerAmount: number
-  playerPairChips: string[]
-  playerPairAmount: number
-  dealerChips: string[]
-  dealerAmount: number
-  dealerPairChips: string[]
-  dealerPairAmount: number
-  tieChips: string[]
-  tieAmount: number
-  bigChips: string[]
-  bigAmount: number
-  smallChips: string[]
-  smallAmount: number
-  super6Chips: string[]
-  super6Amount: number
+  [key: string]: number
 }
 
 export const betInitialValue = {
-  playerChips: [],
   playerAmount: 0,
-  playerPairChips: [],
   playerPairAmount: 0,
-  dealerChips: [],
   dealerAmount: 0,
-  dealerPairChips: [],
   dealerPairAmount: 0,
-  tieChips: [],
   tieAmount: 0,
-  bigChips: [],
   bigAmount: 0,
-  smallChips: [],
   smallAmount: 0,
-  super6Chips: [],
-  super6Amount: 0
+  super6Amount: 0,
+  playerDragonAmount: 0,
+  dealerDragonAmount: 0,
+  playerSingleAmount: 0,
+  dealerSingleAmount: 0,
+  playerDoubleAmount: 0,
+  dealerDoubleAmount: 0,
+  playerNatural: 0,
+  dealerNatural: 0,
+  playerAny: 0,
+  dealerAny: 0
 }
 
 export const chipReducer = (state: BetInitialValueProp, action: any) => {
   switch (action.type) {
-    case 'addPlayerChips':
+    case 'addChips':
       return {
         ...state,
-        playerChips: [
-          ...(state?.playerChips || []),
-          action?.playload?.playerChips
-        ],
-        playerAmount: state?.playerAmount + action?.playload?.playerAmount
-      }
-    case 'addDealerChips':
-      return {
-        ...state,
-        dealerChips: [
-          ...(state?.dealerChips || []),
-          action?.playload?.dealerChips
-        ],
-        dealerAmount: state?.dealerAmount + action?.playload?.dealerAmount
-      }
-
-    case 'addPlayerPairChips':
-      return {
-        ...state,
-        playerPairChips: [
-          ...(state?.playerPairChips || []),
-          action?.playload?.playerPairChips
-        ],
-        playerPairAmount:
-          state?.playerPairAmount + action?.playload?.playerPairAmount
-      }
-    case 'addDealerPairChips':
-      return {
-        ...state,
-        dealerPairChips: [
-          ...(state?.dealerPairChips || []),
-          action?.playload?.dealerPairChips
-        ],
-        dealerPairAmount:
-          state?.dealerPairAmount + action?.playload?.dealerPairAmount
-      }
-    case 'addSmallChips':
-      return {
-        ...state,
-        smallChips: [
-          ...(state?.smallChips || []),
-          action?.playload?.smallChips
-        ],
-        smallAmount: state?.smallAmount + action?.playload?.smallAmount
-      }
-    case 'addBigChips':
-      return {
-        ...state,
-        bigChips: [...(state?.bigChips || []), action?.playload?.bigChips],
-        bigAmount: state?.bigAmount + action?.playload?.bigAmount
-      }
-    case 'addTieChips':
-      return {
-        ...state,
-        tieChips: [...(state?.tieChips || []), action?.playload?.tieChips],
-        tieAmount: state?.tieAmount + action?.playload?.tieAmount
-      }
-
-    case 'addSuper6Chips':
-      return {
-        ...state,
-        super6Chips: [
-          ...(state?.super6Chips || []),
-          action?.playload?.super6Chips
-        ],
-        super6Amount: state?.super6Amount + action?.playload?.super6Amount
+        [action?.target]: state[action?.target] + action?.amount
       }
 
     case 'repeat':
-      return action.preState 
+      return action.preState
 
     case 'newRound':
       return betInitialValue
