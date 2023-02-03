@@ -1,7 +1,8 @@
 import { useIntl } from 'react-intl'
 import { clsx as cx } from 'clsx'
 import { useContext } from 'react'
-import GameStateContext from '@/contexts/GameStateContext'
+import RoomDataContext from '@/contexts/RoomDataContext'
+
 
 type NoticeProps = {
   isConfirmedSuccess: boolean
@@ -17,7 +18,7 @@ const RoomNotification: React.FC<NoticeProps> = ({
   gameState
 }) => {
   const { formatMessage } = useIntl()
-  const { isTable } = useContext(GameStateContext)
+  const { isTable } = useContext(RoomDataContext)
 
   return (
     <>

@@ -3,11 +3,12 @@ import { FormattedMessage } from 'react-intl'
 import { usePokerUpdate } from '@/hooks/pocker'
 import { clsx as cx } from 'clsx'
 import { useContext, useEffect, useState } from 'react'
-import GameStateContext from '@/contexts/GameStateContext'
+import RoomDataContext from '@/contexts/RoomDataContext'
+
 
 const PokerResult: React.FC<{ roomId: string }> = ({ roomId }) => {
   const { currentGameState } = usePokerUpdate(roomId)
-  const { isTable } = useContext(GameStateContext)
+  const { isTable } = useContext(RoomDataContext)
   const { pokerState: pockerState, gameState, currentGame } = currentGameState
   const [isShowPocker, setIsShowPocker] = useState(false)
 

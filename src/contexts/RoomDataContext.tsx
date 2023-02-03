@@ -3,19 +3,22 @@ import { RoomProps } from '@/types/room'
 import { useQuery } from '@apollo/client'
 import types from '@/types'
 import { GET_BACCARATROOMS } from '@/gql/baccaratrooms'
+import { useLocation } from 'react-router-dom'
 
 const RoomDataContext = createContext<{
   rooms: RoomProps[]
   refetchRooms?: () => Promise<any>
+  isTable?: boolean
 }>({
-  rooms: []
+  rooms: [],
 })
 
 export const RoomDataProvider: React.FC<React.PropsWithChildren> = ({
   children
 }) => {
+  const location = useLocation()
+  const isTable = location.pathname === '/home/tables'
   const [rooms, setRooms] = useState<RoomProps[]>([])
-
   const { data, refetch } = useQuery<types.GET_BACCARATROOMS>(GET_BACCARATROOMS)
 
   useEffect(() => {
@@ -25,7 +28,7 @@ export const RoomDataProvider: React.FC<React.PropsWithChildren> = ({
   }, [data])
 
   return (
-    <RoomDataContext.Provider value={{ rooms, refetchRooms: refetch }}>
+    <RoomDataContext.Provider value={{ rooms, refetchRooms: refetch, isTable }}>
       {children}
     </RoomDataContext.Provider>
   )

@@ -6,7 +6,7 @@ const Card: React.FC<{
   rotate90?: boolean
   isOpen: boolean
   index: number
-  isTable: boolean
+  isTable?: boolean
 }> = ({ item, rotate90, index, isOpen, isTable }) => {
   const [isCardOpen, setIsCardOpen] = useState(false)
   useEffect(() => {
@@ -43,7 +43,7 @@ const Card: React.FC<{
 
 const FlipCard: React.FC<{
   data: string[]
-  isTable: boolean
+  isTable?: boolean
 }> = ({ data, isTable }) => {
   const [isOpen, setIsOpen] = useState(false)
 

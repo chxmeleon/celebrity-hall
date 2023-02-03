@@ -17,7 +17,6 @@ import {
 } from '@/components/room/Roadmap'
 import RoomNotification from '@/components/room/RoomNotification'
 import WinAndLoseResult from '@/components/room/WinAndLoseResult'
-import GamePlayContext from '@/contexts/GamePlayContext'
 import { useCurrentGameState } from '@/hooks/rooms'
 import { BetInitialValueProp, betInitialValue } from '@/hooks/bet'
 import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
@@ -30,6 +29,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useSetup } from '@/contexts/SetupContext'
 import { useContext, useEffect, useState } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
+import TablesContext from '@/contexts/TablesContext'
 
 
 type RoomDataProps = {
@@ -55,7 +55,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
   const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
 
   const { selectedChip, setSelectedChip, betState, dispatchBet, wallet } =
-    useContext(GamePlayContext)
+    useContext(TablesContext)
 
   const { currentGameState } = useCurrentGameState(room.id)
   const { gameState } = currentGameState

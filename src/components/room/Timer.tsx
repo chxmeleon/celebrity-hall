@@ -3,11 +3,12 @@ import StreamLatencyContext from '@/contexts/StreamLatencyContext'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import { useTimeLeft } from '@/hooks/rooms'
 import { useContext } from 'react'
-import GameStateContext from '@/contexts/GameStateContext'
+import RoomDataContext from '@/contexts/RoomDataContext'
+
 
 const Timer: React.FC<{ roomId: string }> = ({ roomId }) => {
   const { counter, isLeftTen, startCount } = useTimeLeft(roomId ?? '')
-  const { isTable } = useContext(GameStateContext)
+  const { isTable } = useContext(RoomDataContext)
   const countDownStyle = cx(
     'w-[82%] h-[82%] rounded-full absolute  border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
     isLeftTen ? 'border-[#ff0015] ' : 'border-theme-300 ',
