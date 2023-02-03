@@ -4,10 +4,11 @@ import LogoImg from '/login_logo.webp'
 import BgImg from '/login_bg.avif'
 import { FormattedMessage } from 'react-intl'
 import { useContext } from 'react'
-import GameStateContext from '@/contexts/GameStateContext'
+import RoomDataContext from '@/contexts/RoomDataContext'
+
 
 const Progress: React.FC<PropsWithChildren> = ({ children }) => {
-  const { isTable } = useContext(GameStateContext)
+  const { isTable } = useContext(RoomDataContext)
   const countDownStyle = cx(
     'border-theme-300 w-[82%] h-[82%] rounded-full absolute  border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
     isTable ? 'border-t-[0.5px] border-r-[2px]' : 'border-t-[1px] border-r-[3px] md:border-t-[3px] md:border-r-[6px]' 
@@ -23,7 +24,7 @@ const Progress: React.FC<PropsWithChildren> = ({ children }) => {
 }
 
 const Loading: React.FC = () => {
-  const { isTable } = useContext(GameStateContext)
+  const { isTable } = useContext(RoomDataContext)
   return (
     <div className="flex absolute z-50 flex-col w-full h-full">
       <div className="absolute overflow-hidden w-full h-full">

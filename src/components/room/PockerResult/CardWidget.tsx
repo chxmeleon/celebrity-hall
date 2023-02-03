@@ -31,7 +31,7 @@ const cardsMapper: cardsMapperProps = {
 interface CardProps {
   role: string
   roomId: string | undefined
-  isTable: boolean
+  isTable?: boolean
 }
 
 const CardWidget: React.FC<CardProps> = ({ role, roomId, isTable }) => {

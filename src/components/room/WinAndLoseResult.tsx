@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 import { useContext, useEffect, useState } from 'react'
 import GamePlayContext from '@/contexts/GamePlayContext'
-import GameStateContext from '@/contexts/GameStateContext'
+import RoomDataContext from '@/contexts/RoomDataContext'
 import { clsx as cx } from 'clsx'
 
 const winLoseStyle = {
@@ -16,7 +16,7 @@ type NoticeProps = {
 
 const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState }) => {
   const { notice } = useContext(GamePlayContext)
-  const { isTable } = useContext(GameStateContext)
+  const { isTable } = useContext(RoomDataContext)
   const windLoseState = () => {
     if (Math.floor(Number(notice?.winLossAmount)) < 0) {
       return 'isLose'

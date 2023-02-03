@@ -1,17 +1,24 @@
 import { GamePlayProvider } from '@/contexts/GamePlayContext'
-import { GameStateProvider } from '@/contexts/GameStateContext'
 import { RoomDataProvider } from '@/contexts/RoomDataContext'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 
 const RoomsLayout: React.FC = () => {
+  const location = useLocation()
+  const isTable = location.pathname === '/home/tables'
   return (
-    <RoomDataProvider>
-      <GameStateProvider>
-        <GamePlayProvider>
+    <>
+      {isTable ? (
+        <RoomDataProvider>
           <Outlet />
-        </GamePlayProvider>
-      </GameStateProvider>
-    </RoomDataProvider>
+        </RoomDataProvider>
+      ) : (
+        <RoomDataProvider>
+          <GamePlayProvider>
+            <Outlet />
+          </GamePlayProvider>
+        </RoomDataProvider>
+      )}
+    </>
   )
 }
 
