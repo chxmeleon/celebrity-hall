@@ -25,7 +25,12 @@ const BetArea: React.FC<{ target: number; type: string }> = ({
       )}
     >
       {target > 0 ? (
-        <div className={cx('relative flex chip-skew', betAreaMapper[type].secoundDiv)}>
+        <div
+          className={cx(
+            'relative flex chip-skew',
+            betAreaMapper[type].secoundDiv
+          )}
+        >
           <div
             className={cx(
               'absolute top-0 left-0 flex justify-center items-center  ',
@@ -34,10 +39,18 @@ const BetArea: React.FC<{ target: number; type: string }> = ({
           >
             <img src="/chips/chip_null.webp" alt="chip image" />
           </div>
-          <span className={cx("relative z-20 m-auto text-yellow-300 font-semibold",
-            (target /1000).toString().length > 3 && target >= 1000 && target < 10000 ? 'text-[9px] font-bold' 
-            : (target /10000).toString().length > 3 && target >= 10000 ? 'text-[9px] font-bold' : '' 
-          )}>
+          <span
+            className={cx(
+              'relative z-20 m-auto text-yellow-300 font-semibold',
+              (target / 1000).toString().length > 3 &&
+                target >= 1000 &&
+                target < 10000
+                ? 'text-[9px] font-bold'
+                : (target / 10000).toString().length > 3 && target >= 10000
+                ? 'text-[9px] font-bold'
+                : ''
+            )}
+          >
             {target >= 1000 && target < 10000
               ? target / 1000 + 'K'
               : target >= 10000
@@ -136,11 +149,9 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               disabled={isDisabled}
               onClick={() =>
                 dispatchBet({
-                  type: 'addPlayerPairChips',
-                  playload: {
-                    playerPairChips: chipsData?.[selectedChip]?.src,
-                    playerPairAmount: chipsData?.[selectedChip]?.value
-                  }
+                  type: 'addChips',
+                  target: 'playerPairAmount',
+                  amount: chipsData?.[selectedChip]?.value
                 })
               }
               className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.tn4)}
@@ -160,11 +171,9 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               disabled={isDisabled}
               onClick={() =>
                 dispatchBet({
-                  type: 'addBigChips',
-                  playload: {
-                    bigChips: chipsData?.[selectedChip]?.src,
-                    bigAmount: chipsData?.[selectedChip]?.value
-                  }
+                  type: 'addChips',
+                  target: 'bigAmount',
+                  amount: chipsData?.[selectedChip]?.value
                 })
               }
               className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.cl5)}
@@ -232,14 +241,15 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             disabled={isDisabled}
             onClick={() =>
               dispatchBet({
-                type: 'addPlayerChips',
-                playload: {
-                  playerChips: chipsData?.[selectedChip]?.src,
-                  playerAmount: chipsData?.[selectedChip]?.value
-                }
+                type: 'addChips',
+                target: 'playerAmount',
+                amount: chipsData?.[selectedChip]?.value
               })
             }
-            className={cx(isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '', btnIdx.ynn)}
+            className={cx(
+              isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+              btnIdx.ynn
+            )}
           >
             <div className="m-auto w-2/3 text-grid-400">
               <div className="text-4xl font-bold">
@@ -255,14 +265,15 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               disabled={isDisabled}
               onClick={() =>
                 dispatchBet({
-                  type: 'addTieChips',
-                  playload: {
-                    tieChips: chipsData?.[selectedChip]?.src,
-                    tieAmount: chipsData?.[selectedChip]?.value
-                  }
+                  type: 'addChips',
+                  target: 'tieAmount',
+                  amount: chipsData?.[selectedChip]?.value
                 })
               }
-              className={cx(isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '', btnIdx.thhn)}
+              className={cx(
+                isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+                btnIdx.thhn
+              )}
             >
               <div className="flex justify-between items-center m-auto w-2/3 text-grid-300">
                 <div className="text-4xl font-bold">
@@ -277,14 +288,15 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               disabled={isDisabled}
               onClick={() =>
                 dispatchBet({
-                  type: 'addSuper6Chips',
-                  playload: {
-                    super6Chips: chipsData?.[selectedChip]?.src,
-                    super6Amount: chipsData?.[selectedChip]?.value
-                  }
+                  type: 'addChips',
+                  target: 'super6Amount',
+                  amount: chipsData?.[selectedChip]?.value
                 })
               }
-              className={cx(isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '', btnIdx.bhhn)}
+              className={cx(
+                isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+                btnIdx.bhhn
+              )}
             >
               <div className="m-auto w-2/3 text-grid-200">
                 <div className="font-bold">SUPER 6</div>
@@ -296,14 +308,15 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             disabled={isDisabled}
             onClick={() =>
               dispatchBet({
-                type: 'addDealerChips',
-                playload: {
-                  dealerChips: chipsData?.[selectedChip]?.src,
-                  dealerAmount: chipsData?.[selectedChip]?.value
-                }
+                type: 'addChips',
+                target: 'dealerAmount',
+                amount: chipsData?.[selectedChip]?.value
               })
             }
-            className={cx(isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '', btnIdx.ynn)}
+            className={cx(
+              isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+              btnIdx.ynn
+            )}
           >
             <div className="m-auto w-2/3 text-grid-100">
               <div className="text-4xl font-bold">
@@ -319,14 +332,15 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               disabled={isDisabled}
               onClick={() =>
                 dispatchBet({
-                  type: 'addDealerPairChips',
-                  playload: {
-                    dealerPairChips: chipsData?.[selectedChip]?.src,
-                    dealerPairAmount: chipsData?.[selectedChip]?.value
-                  }
+                  type: 'addChips',
+                  target: 'dealerPairAmount',
+                  amount: chipsData?.[selectedChip]?.value
                 })
               }
-              className={cx(isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '', btnIdx.tn4)}
+              className={cx(
+                isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+                btnIdx.tn4
+              )}
             >
               <div className="text-lg flex justify-between items-center px-3 w-full text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
@@ -363,14 +377,15 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               disabled={isDisabled}
               onClick={() =>
                 dispatchBet({
-                  type: 'addSmallChips',
-                  playload: {
-                    smallChips: chipsData?.[selectedChip]?.src,
-                    smallAmount: chipsData?.[selectedChip]?.value
-                  }
+                  type: 'addChips',
+                  target: 'smallAmount',
+                  amount: chipsData?.[selectedChip]?.value
                 })
               }
-              className={cx(isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '', btnIdx.cr5)}
+              className={cx(
+                isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+                btnIdx.cr5
+              )}
             >
               <div className="text-lg flex justify-between items-center px-3 w-full [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>

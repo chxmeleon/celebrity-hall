@@ -63,9 +63,22 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
     }
   }, [cable, refetch])
 
-
   const wallet = data?.wallet
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const value = { selectedChip, setSelectedChip, betState, dispatchBet, wallet, notice }
 
   return (

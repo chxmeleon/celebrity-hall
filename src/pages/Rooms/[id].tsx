@@ -22,18 +22,12 @@ import {
   AskGridMobile
 } from '@/components/room/Roadmap'
 import { Link, useParams } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
-import { GET_ROOM_STREAM } from '@/gql/stream'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { useCurrentGameState } from '@/hooks/rooms'
 import { BetInitialValueProp, betInitialValue } from '@/hooks/bet'
 import RoomNotification from '@/components/room/RoomNotification'
 import WinAndLoseResult from '@/components/room/WinAndLoseResult'
 import { useAuth } from '@/contexts/AuthContext'
-import {
-  NodePlayerStream,
-  NodePlayerStreamMobile
-} from '@/components/room/RoomStream/streamPlayer'
 import { Responsive, ResponsiveContext } from '@/hooks/useResponsive'
 import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
 import ChatroomMobile from '@/components/room/Chatroom/ChatroomMobile'
@@ -127,15 +121,7 @@ const Room = () => {
     types.CANCEL_BACCARAT_BETVariables
   >(CANCEL_BACCARAT_BET)
 
-  const totalAmount =
-    betState?.playerAmount +
-    betState?.playerPairAmount +
-    betState?.dealerAmount +
-    betState?.dealerPairAmount +
-    betState?.smallAmount +
-    betState?.bigAmount +
-    betState?.tieAmount +
-    betState?.super6Amount
+  const totalAmount = Object.values(betState).reduce((a, b) => a + b) 
 
   const [isConfirmDisabled, setIsConfirmDisabled] = useState(false)
   const [isCancelDisabled, setIsCancelDisabled] = useState(false)
