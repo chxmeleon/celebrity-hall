@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useReducer, useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { chipReducer, betInitialValue, BetInitialValueProp, ChipAction } from '@/hooks/bet'
+import { chipReducer, initialChipAmount, BetInitialValueProp, ChipAction } from '@/hooks/bet'
 import { useLocation } from 'react-router-dom'
 import { useActionCable } from './ActionCableContext'
 import { GET_WALLET } from '@/gql/profile'
@@ -28,7 +28,7 @@ export const TablesProvider: React.FC<React.PropsWithChildren> = ({
   const [selectedChip, setSelectedChip] = useState('chips_100')
   const [betState, dispatchBet] = useReducer<
     (state: BetInitialValueProp, action: ChipAction) => any
-  >(chipReducer, betInitialValue)
+  >(chipReducer, initialChipAmount)
 
   useEffect(() => {
     if (preLocation !== location) {
@@ -69,17 +69,6 @@ export const TablesProvider: React.FC<React.PropsWithChildren> = ({
     }
   }, [cable, refetch])
 
-  const [createBaccaratBet] = useMutation<
-    types.CREATE_BACCARAT_BET,
-    types.CREATE_BACCARAT_BETVariables
-  >(CREATE_BACCARAT_BET)
-
-  const [cancelBaccaratBet] = useMutation<
-    types.CANCEL_BACCARAT_BET,
-    types.CANCEL_BACCARAT_BETVariables
-  >(CANCEL_BACCARAT_BET)
-
-  const totalAmount = Object.values(betState).reduce((a: any, b: any) => a + b)
 
   const value = {
     selectedChip,

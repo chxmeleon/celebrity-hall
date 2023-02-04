@@ -15,7 +15,6 @@ import {
 } from 'react'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import types from '@/types'
-import { useAnimationFrame } from 'framer-motion'
 
 export const convertStatus = (status: string | null | undefined) => {
   switch (status) {
@@ -102,23 +101,9 @@ export const useCurrentGameState = (roomId: string | undefined) => {
     }
   }, [cable, roomId, gameState])
 
-  const [isShowPocker, setIsShowPocker] = useState(false)
-  useEffect(() => {
-    if (
-      gameState !== 'START_BET' &&
-      gameState !== 'STOP_BET' &&
-      gameState !== 'UPDATE_AMOUNT' &&
-      gameState !== 'SHUFFLE'
-    ) {
-      setIsShowPocker(true)
-    } else {
-      setIsShowPocker(false)
-    }
-  }, [gameState])
-
   const currentGameState = useMemo(
-    () => ({ currentGame, gameState, isShowPocker }),
-    [currentGame, gameState, isShowPocker]
+    () => ({ currentGame, gameState }),
+    [currentGame, gameState]
   )
 
   return { currentGameState }

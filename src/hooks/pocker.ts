@@ -98,9 +98,6 @@ export const usePokerUpdate = (roomId: string | undefined) => {
     }
     setGameState(convertStatus(data?.baccaratRoom?.currentGame?.status))
   }, [refetch, data, gameState])
-  /* console.log(convertStatus(data?.baccaratRoom?.currentGame?.status)); */
-  console.log(currentGame);
-  
   
 
   useEffect(() => {
@@ -158,7 +155,7 @@ export const usePokerUpdate = (roomId: string | undefined) => {
     () => ({
       data,
       gameState,
-      pokerState: pokerState,
+      pokerState,
       currentGame
     }),
     [data, gameState, pokerState, currentGame]

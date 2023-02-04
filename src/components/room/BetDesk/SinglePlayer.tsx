@@ -22,41 +22,40 @@ const BetArea: React.FC<{ target: number; type: string }> = ({
         betAreaMapper[type].firstDiv
       )}
     >
-      {target > 0 ? (
+      <div
+        className={cx(
+          'relative flex chip-skew',
+          betAreaMapper[type].secoundDiv,
+          target > 0 ? 'block' : 'hidden'
+        )}
+      >
         <div
           className={cx(
-            'relative flex chip-skew',
+            'absolute top-0 left-0 flex justify-center items-center  ',
             betAreaMapper[type].secoundDiv
           )}
         >
-          <div
-            className={cx(
-              'absolute top-0 left-0 flex justify-center items-center  ',
-              betAreaMapper[type].secoundDiv
-            )}
-          >
-            <img src="/chips/chip_null.webp" alt="chip image" />
-          </div>
-          <span
-            className={cx(
-              'relative z-20 m-auto text-yellow-300 font-semibold',
-              (target / 1000).toString().length > 3 &&
-                target >= 1000 &&
-                target < 10000
-                ? 'text-[9px] font-bold'
-                : (target / 10000).toString().length > 3 && target >= 10000
-                ? 'text-[9px] font-bold'
-                : ''
-            )}
-          >
-            {target >= 1000 && target < 10000
-              ? target / 1000 + 'K'
-              : target >= 10000
-              ? target / 10000 + 'W'
-              : target}
-          </span>
+          <img src="/chips/chip_null.webp" alt="chip image" />
         </div>
-      ) : null}
+        <span
+          className={cx(
+            'relative z-20 m-auto text-yellow-300 font-semibold',
+            (target / 1000).toString().length > 3 &&
+              target >= 1000 &&
+              target < 10000
+              ? 'text-[9px] font-bold'
+              : (target / 10000).toString().length > 3 && target >= 10000
+              ? 'text-[9px] font-bold'
+              : ''
+          )}
+        >
+          {target >= 1000 && target < 10000
+            ? (target / 1000).toFixed(2) + 'K'
+            : target >= 10000
+            ? (target / 10000).toFixed(2) + 'W'
+            : target}
+        </span>
+      </div>
     </div>
   )
 }
@@ -73,80 +72,84 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
         <div className="grid grid-rows-3">
           <div className="grid grid-cols-9">
             <div className={cx(btnIdxNoBorder.tl5)}>
-              <BetArea target={betState?.playerAnyAmount} type="hoz" />
+              <BetArea target={betState?.playerAny} type="hoz" />
             </div>
             <div className={cx(btnIdxNoBorder.tn4)}>
-              <BetArea target={betState?.playerPairAmount} type="hoz" />
+              <BetArea target={betState?.playerPair} type="hoz" />
             </div>
           </div>
 
           <div className="grid grid-cols-9">
             <div className={cx(btnIdxNoBorder.cl5)}>
-              <BetArea target={betState?.bigAmount} type="hoz" />
+              <BetArea target={betState?.big} type="hoz" />
             </div>
             <div className={cx(btnIdxNoBorder.cn4)}>
-              <BetArea target={betState?.playerDragonAmount} type="hoz" />
+              <BetArea target={betState?.playerDragon} type="hoz" />
             </div>
           </div>
 
           <div className="grid grid-cols-9">
             <div className="flex col-span-5">
               <div className={cx(btnIdxNoBorder.hbhln)}>
-                <BetArea target={betState?.playerSingleAmount} type="hoz" />
+                <BetArea target={betState?.playerSingle} type="hoz" />
               </div>
               <div className={cx(btnIdxNoBorder.hbhn)}>
-                <BetArea target={betState?.playerDoubleAmount} type="hoz" />
+                <BetArea target={betState?.playerDouble} type="hoz" />
               </div>
             </div>
             <div className={cx(btnIdxNoBorder.bn4)}>
-              <BetArea target={betState?.playerNaturalAmount} type="hoz" />
+              <BetArea target={betState?.playerNatural} type="hoz" />
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-3">
           <div className={cx(btnIdxNoBorder.ynn)}>
-            <BetArea target={betState?.playerAmount} type="ver" />
+            <BetArea target={betState?.player} type="ver" />
           </div>
           <div className="flex flex-col h-full">
             <div className={cx(btnIdxNoBorder.thhn)}>
-              <BetArea target={betState?.tieAmount} type="ver" />
+              <BetArea target={betState?.tie} type="ver" />
             </div>
             <div className={cx(btnIdxNoBorder.bhhn)}>
-              <BetArea target={betState?.super6Amount} type="ver" />
+              <BetArea target={betState?.super6} type="ver" />
             </div>
           </div>
           <div className={cx(btnIdxNoBorder.ynn)}>
-            <BetArea target={betState?.dealerAmount} type="ver" />
+            <BetArea target={betState?.dealer} type="ver" />
           </div>
         </div>
 
         <div className="grid grid-rows-3">
           <div className="grid grid-cols-9">
             <div className={cx(btnIdxNoBorder.tn4)}>
-              <BetArea target={betState?.dealerAnyAmount} type="hoz" />
+              <BetArea target={betState?.dealerPair} type="hoz" />
             </div>
             <div className={cx(btnIdxNoBorder.tr5)}>
-              <BetArea target={betState?.dealerPairAmount} type="hoz" />
+              <BetArea target={betState?.dealerAny} type="hoz" />
             </div>
           </div>
 
           <div className="grid grid-cols-9">
             <div className={cx(btnIdxNoBorder.cn4)}>
-              <BetArea target={betState?.smallAmount} type="hoz" />
+              <BetArea target={betState?.dealerDragon} type="hoz" />
             </div>
             <div className={cx(btnIdxNoBorder.cr5)}>
-              <BetArea target={betState?.smallAmount} type="hoz" />
+              <BetArea target={betState?.small} type="hoz" />
             </div>
           </div>
 
           <div className="grid grid-cols-9">
             <div className={cx(btnIdxNoBorder.bn4)}>
-              <BetArea target={betState?.smallAmount} type="hoz" />
+              <BetArea target={betState?.dealerNatural} type="hoz" />
             </div>
             <div className="flex col-span-5">
-              <div className={cx(btnIdxNoBorder.hbhn)}></div>
-              <div className={cx(btnIdxNoBorder.hbhrn)}></div>
+              <div className={cx(btnIdxNoBorder.hbhn)}>
+                <BetArea target={betState?.dealerDouble} type="hoz" />
+              </div>
+              <div className={cx(btnIdxNoBorder.hbhrn)}>
+                <BetArea target={betState?.dealerSingle} type="hoz" />
+              </div>
             </div>
           </div>
         </div>
@@ -155,7 +158,17 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
       <div className="grid grid-cols-3 m-auto w-[91%] h-full bet-skew px-2 pb-4 pt-0.5 [&_p]:text-lg [&_p]:font-light">
         <div className="grid grid-rows-3">
           <div className="grid grid-cols-9">
-            <button disabled className={cx(btnIdx.tl5, 'bg-theme-50/50')}>
+            <button
+              disabled={isDisabled}
+              onClick={() =>
+                dispatchBet({
+                  type: 'addChips',
+                  target: 'playerAny',
+                  amount: chipsData?.[selectedChip]?.value
+                })
+              }
+              className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.tl5)}
+            >
               <div className="text-lg flex justify-between items-center px-3 w-full [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
                   <p>1:5</p>
@@ -170,7 +183,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               onClick={() =>
                 dispatchBet({
                   type: 'addChips',
-                  target: 'playerPairAmount',
+                  target: 'playerPair',
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
@@ -192,7 +205,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               onClick={() =>
                 dispatchBet({
                   type: 'addChips',
-                  target: 'bigAmount',
+                  target: 'big',
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
@@ -207,7 +220,17 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 </div>
               </div>
             </button>
-            <button disabled className={cx('bg-theme-50/90', btnIdx.cn4)}>
+            <button
+              disabled={isDisabled}
+              onClick={() =>
+                dispatchBet({
+                  type: 'addChips',
+                  target: 'playerDragon',
+                  amount: chipsData?.[selectedChip]?.value
+                })
+              }
+              className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.cn4)}
+            >
               <div className="flex justify-between items-center px-3 w-full text-grid-400 [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
                   <p>1:30</p>
@@ -220,7 +243,17 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
           </div>
           <div className="grid grid-cols-9">
             <div className="flex col-span-5">
-              <button disabled className={cx('bg-theme-50/50  ', btnIdx.hbhln)}>
+              <button
+                disabled={isDisabled}
+                onClick={() =>
+                  dispatchBet({
+                    type: 'addChips',
+                    target: 'playerSingle',
+                    amount: chipsData?.[selectedChip]?.value
+                  })
+                }
+                className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.hbhln)}
+              >
                 <div className="text-xs flex justify-between items-center px-2 text-grid-400 [&_p]:text-gray-300 [&_p]:text-xs">
                   <div>
                     <p>1:0.96</p>
@@ -230,7 +263,17 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   </div>
                 </div>
               </button>
-              <button disabled className={cx('bg-theme-50/50  ', btnIdx.hbhn)}>
+              <button
+                disabled={isDisabled}
+                onClick={() =>
+                  dispatchBet({
+                    type: 'addChips',
+                    target: 'playerDouble',
+                    amount: chipsData?.[selectedChip]?.value
+                  })
+                }
+                className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.hbhn)}
+              >
                 <div className="text-xs flex justify-between items-center px-2 w-full text-grid-400 [&_p]:text-gray-300 [&_p]:text-xs">
                   <div>
                     <p>1:0.9</p>
@@ -242,8 +285,18 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               </button>
             </div>
             <button
-              disabled
-              className={cx('bg-theme-50/50   pb-1', btnIdx.bn4)}
+              disabled={isDisabled}
+              onClick={() =>
+                dispatchBet({
+                  type: 'addChips',
+                  target: 'playerNatural',
+                  amount: chipsData?.[selectedChip]?.value
+                })
+              }
+              className={cx(
+                isDisabled ? 'bg-theme-50/50  pb-1' : '',
+                btnIdx.bn4
+              )}
             >
               <div className="flex justify-between items-center px-3 pt-2 w-full text-grid-400 [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
@@ -262,7 +315,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             onClick={() =>
               dispatchBet({
                 type: 'addChips',
-                target: 'playerAmount',
+                target: 'player',
                 amount: chipsData?.[selectedChip]?.value
               })
             }
@@ -286,7 +339,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               onClick={() =>
                 dispatchBet({
                   type: 'addChips',
-                  target: 'tieAmount',
+                  target: 'tie',
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
@@ -309,7 +362,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               onClick={() =>
                 dispatchBet({
                   type: 'addChips',
-                  target: 'super6Amount',
+                  target: 'super6',
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
@@ -329,7 +382,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             onClick={() =>
               dispatchBet({
                 type: 'addChips',
-                target: 'dealerAmount',
+                target: 'dealer',
                 amount: chipsData?.[selectedChip]?.value
               })
             }
@@ -353,7 +406,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               onClick={() =>
                 dispatchBet({
                   type: 'addChips',
-                  target: 'dealerPairAmount',
+                  target: 'dealerPair',
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
@@ -371,7 +424,17 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 </div>
               </div>
             </button>
-            <button disabled className={cx('bg-theme-50/50  ', btnIdx.tr5)}>
+            <button
+              disabled={isDisabled}
+              onClick={() =>
+                dispatchBet({
+                  type: 'addChips',
+                  target: 'dealerAny',
+                  amount: chipsData?.[selectedChip]?.value
+                })
+              }
+              className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.tr5)}
+            >
               <div className="text-lg flex justify-between items-center px-3 w-full [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
                   <FormattedMessage id="screens.baccaratRoom.dealerAny" />
@@ -388,7 +451,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               onClick={() =>
                 dispatchBet({
                   type: 'addChips',
-                  target: 'dealerDragonAmount',
+                  target: 'dealerDragon',
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
@@ -408,7 +471,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               onClick={() =>
                 dispatchBet({
                   type: 'addChips',
-                  target: 'smallAmount',
+                  target: 'small',
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
@@ -428,7 +491,20 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
             </button>
           </div>
           <div className="grid grid-cols-9">
-            <button disabled className={cx('bg-theme-50/50  pb-1', btnIdx.bn4)}>
+            <button
+              disabled={isDisabled}
+              onClick={() =>
+                dispatchBet({
+                  type: 'addChips',
+                  target: 'dealerNatural',
+                  amount: chipsData?.[selectedChip]?.value
+                })
+              }
+              className={cx(
+                isDisabled ? 'bg-theme-50/50  pb-1' : '',
+                btnIdx.bn4
+              )}
+            >
               <div className="flex justify-between items-center px-3 pt-2 w-full text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                 <div className="text-lg">
                   <FormattedMessage id="common.dealerNatural" />
@@ -439,7 +515,17 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               </div>
             </button>
             <div className="flex col-span-5">
-              <button disabled className={cx('bg-theme-50/50', btnIdx.hbhn)}>
+              <button
+                disabled={isDisabled}
+                onClick={() =>
+                  dispatchBet({
+                    type: 'addChips',
+                    target: 'dealerDouble',
+                    amount: chipsData?.[selectedChip]?.value
+                  })
+                }
+                className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.hbhn)}
+              >
                 <div className="text-xs flex justify-between items-center px-2 text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                   <div>
                     <FormattedMessage id="screens.baccaratRoom.dealerDouble" />
@@ -449,7 +535,17 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   </div>
                 </div>
               </button>
-              <button disabled className={cx('bg-theme-50/50  ', btnIdx.hbhrn)}>
+              <button
+                disabled={isDisabled}
+                onClick={() =>
+                  dispatchBet({
+                    type: 'addChips',
+                    target: 'dealerSingle',
+                    amount: chipsData?.[selectedChip]?.value
+                  })
+                }
+                className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.hbhrn)}
+              >
                 <div className="text-xs flex justify-between items-center px-2 text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                   <div>
                     <FormattedMessage id="screens.baccaratRoom.dealerSingle" />

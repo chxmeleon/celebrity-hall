@@ -27,6 +27,9 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
 }) => {
   const location = useLocation()
   const isTable = location.pathname === '/home/tables'
+
+  const [player, setPlayer] = useState<NodePlayer | null>(null)
+
   useEffect(() => {
     const player = new NodePlayer()
     NodePlayer.debug(false)
@@ -40,6 +43,7 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
       console.error('playerError', err)
     })
 
+    setPlayer(player)
     return () => {
       player.release(false)
     }
@@ -72,7 +76,6 @@ export const WebRTCStreamMobile: React.FC<RoomStreamProps> = ({
     let pc: RTCPeerConnection | null = null
     const requestStream = async () => {
       if (!videoRef) return
-
       try {
         pc = new RTCPeerConnection()
         pc.addTransceiver('audio', { direction: 'recvonly' })

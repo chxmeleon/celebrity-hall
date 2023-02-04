@@ -18,7 +18,7 @@ import {
 import RoomNotification from '@/components/room/RoomNotification'
 import WinAndLoseResult from '@/components/room/WinAndLoseResult'
 import { useCurrentGameState } from '@/hooks/rooms'
-import { BetInitialValueProp, betInitialValue } from '@/hooks/bet'
+import { BetInitialValueProp, initialChipAmount } from '@/hooks/bet'
 import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
 import SinglePlayerMobile from '@/components/room/BetDesk/SinglePlayerMobile'
 import Loading from '@/components/room/RoomStream/StreamLoading'
@@ -30,6 +30,9 @@ import { useSetup } from '@/contexts/SetupContext'
 import { useContext, useEffect, useState } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
 import TablesContext from '@/contexts/TablesContext'
+import GamePlayContext from '@/contexts/GamePlayContext'
+
+
 
 
 type RoomDataProps = {
@@ -54,149 +57,40 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
   const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
   const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
 
-  const { selectedChip, setSelectedChip, betState, dispatchBet, wallet } =
-    useContext(TablesContext)
+  /* const { selectedChip, setSelectedChip, betState, dispatchBet, wallet } = */
+  /*   useContext(TablesContext) */
 
-  const { currentGameState } = useCurrentGameState(room.id)
-  const { gameState } = currentGameState
-  const [isDisable, setIsDisable] = useState(true)
-  const { deviceInfo } = useSetup()
+
+  const {
+    selectedChip,
+    setSelectedChip,
+    onConfirm,
+    onRepeat,
+    onCancel,
+    btnState,
+    dispatchBtn,
+    dispatchBet,
+    totalAmount,
+  } = useContext(GamePlayContext)
+
 
   const { formatMessage } = useIntl()
 
-  const [createBaccaratBet] = useMutation<
-    types.CREATE_BACCARAT_BET,
-    types.CREATE_BACCARAT_BETVariables
-  >(CREATE_BACCARAT_BET)
-
-  const [cancelBaccaratBet] = useMutation<
-    types.CANCEL_BACCARAT_BET,
-    types.CANCEL_BACCARAT_BETVariables
-  >(CANCEL_BACCARAT_BET)
-
-  const totalAmount = Object.values(betState).reduce((a, b) => a + b) 
-
-  const [isConfirmDisabled, setIsConfirmDisabled] = useState(false)
-  const [isCancelDisabled, setIsCancelDisabled] = useState(false)
-  const [isRepeatDisabled, setIsRepeatDisabled] = useState(false)
-  const [preBetState, setPreBetState] =
-    useState<BetInitialValueProp>(betInitialValue)
-
-  const [isCancelSuccess, setIsCancelSuccess] = useState(false)
-  const onCancel = async () => {
-    dispatchBet({ type: 'newRound' })
-    if (totalAmount > 0 || isCancelDisabled) {
-      const result = await cancelBaccaratBet({
-        variables: {
-          input: {
-            baccaratRoomId: room.id
-          }
-        }
-      })
-      setIsCancelSuccess(result.errors?.length === 0)
-    }
-    setIsConfirmDisabled(false)
-    setIsRepeatDisabled(false)
-    setIsCancelDisabled(true)
-  }
-
-  const [isConfirmSuccess, setIsConfirmSuccess] = useState(false)
-  const [isConfirmFailure, setIsConfirmFailure] = useState(false)
-  const onConfirmBet = async (e: React.MouseEvent) => {
-    if (totalAmount >= 0 && totalAmount <= wallet?.balance) {
-      try {
-        const result = await createBaccaratBet({
-          variables: {
-            input: {
-              baccaratRoomId: room.id,
-              playerAmount: betState?.playerAmount,
-              dealerAmount: betState?.dealerAmount,
-              playerPairAmount: betState?.playerPairAmount,
-              dealerPairAmount: betState?.dealerPairAmount,
-              tieAmount: betState?.tieAmount,
-              super6Amount: betState?.super6Amount,
-              smallAmount: betState?.smallAmount,
-              bigAmount: betState?.bigAmount,
-              deviceInfo: JSON.stringify(deviceInfo)
-            }
-          }
-        })
-        if (result?.data?.createBaccaratBet?.errors?.length === 0) {
-          setIsConfirmSuccess(true)
-        } else {
-          setIsConfirmFailure(true)
-        }
-        setIsConfirmDisabled(true)
-        setIsRepeatDisabled(true)
-        setPreBetState(betState)
-      } catch (err) {
-        console.log(err)
-      }
-      setTimeout(() => {
-        setIsConfirmSuccess(false)
-        setIsConfirmFailure(false)
-      }, 1500)
-    } else {
-      e.preventDefault()
-    }
-  }
-
-  const [isRepeatSuccess, setIsRepeatSuccess] = useState(false)
-  const onRepeat = async () => {
-    dispatchBet({ type: 'repeat', preState: preBetState })
-    try {
-      const result = await createBaccaratBet({
-        variables: {
-          input: {
-            baccaratRoomId: room.id,
-            playerAmount: preBetState?.playerAmount,
-            dealerAmount: preBetState?.dealerAmount,
-            playerPairAmount: preBetState?.playerPairAmount,
-            dealerPairAmount: preBetState?.dealerPairAmount,
-            tieAmount: preBetState?.tieAmount,
-            super6Amount: preBetState?.super6Amount,
-            smallAmount: preBetState?.smallAmount,
-            bigAmount: preBetState?.bigAmount,
-            deviceInfo: JSON.stringify(deviceInfo)
-          }
-        }
-      })
-      if (result?.data?.createBaccaratBet?.errors?.length === 0) {
-        setIsRepeatSuccess(true)
-      } else {
-        setIsConfirmFailure(true)
-      }
-      setIsCancelDisabled(false)
-      setIsRepeatDisabled(true)
-      setIsConfirmDisabled(true)
-    } catch (err) {
-      console.log(err)
-    }
-    setTimeout(() => {
-      setIsRepeatSuccess(false)
-      setIsConfirmFailure(false)
-    }, 1500)
-  }
+  const { currentGameState } = useCurrentGameState(room.id)
+  const { gameState } = currentGameState
+  
 
   useEffect(() => {
     if (gameState === 'START_BET' || gameState === 'UPDATE_AMOUNT') {
-      setIsDisable(false)
-      setIsRepeatDisabled(false)
-      setIsConfirmDisabled(false)
-      if (totalAmount > 0) {
-        setIsCancelDisabled(false)
-      }
+      dispatchBtn({ type: 'enableBet', totalAmount: totalAmount })
     } else if (gameState === 'CLOSE') {
-      setIsDisable(true)
+      dispatchBtn({ type: 'setTrue', btnTarget: 'isDisable' })
       dispatchBet({ type: 'newRound' })
       refetchRooms?.()
     } else {
-      setIsDisable(true)
-      setIsConfirmDisabled(true)
-      setIsRepeatDisabled(true)
-      setIsCancelDisabled(true)
+      dispatchBtn({ type: 'disableBet' })
     }
-  }, [gameState, dispatchBet, totalAmount, refetchRooms])
+  }, [gameState, dispatchBet, totalAmount, refetchRooms, dispatchBtn])
 
   return (
     <div className="flex flex-col w-full h-full">
@@ -265,9 +159,9 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
             <div className="flex col-span-2 justify-end pb-1 w-full h-full">
               <div className="flex flex-col justify-end items-end w-full">
                 <RoomNotification
-                  isConfirmedSuccess={isConfirmSuccess}
-                  isConfirmedFailure={isConfirmFailure}
-                  isRepeatSuccess={isRepeatSuccess}
+                  isConfirmedSuccess={btnState.isConfirmSuccess}
+                  isConfirmedFailure={btnState.isConfirmFailure}
+                  isRepeatSuccess={btnState.isRepeatSuccess}
                   gameState={gameState}
                 />
               </div>
@@ -314,7 +208,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
         </div>
 
         <div className="h-1/2">
-          <SinglePlayerMobile isDisabled={isDisable} />
+          <SinglePlayerMobile isDisabled={btnState.isDisable} />
         </div>
 
         <div className="flex flex-col w-full h-1/2">
@@ -327,24 +221,24 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
           <div className="flex justify-between items-center px-1 pt-1.5 pb-2.5 w-full">
             <BetButton
               className="mx-1 text-md"
-              isDisabled={isCancelDisabled}
-              onClick={onCancel}
+              isDisabled={btnState.isCancelDisabled}
+              onClick={() => onCancel(room.id)}
             >
               <div className="i-heroicons-x-mark-solid"></div>
               <FormattedMessage id="common.cancel" />
             </BetButton>
             <BetButton
               className="mx-1 text-md"
-              isDisabled={isRepeatDisabled}
-              onClick={onRepeat}
+              isDisabled={btnState.isRepeatDisabled}
+              onClick={() => onRepeat(room?.id)}
             >
               <div className="i-heroicons-arrow-path-solid"></div>
               <FormattedMessage id="common.repeat" />
             </BetButton>
             <BetButton
               className="mx-1 text-md"
-              isDisabled={isConfirmDisabled}
-              onClick={onConfirmBet}
+              isDisabled={btnState.isConfirmDisabled}
+              onClick={(e) => onConfirm(e, room?.id)}
             >
               <div className="i-heroicons-check-solid"></div>
               <FormattedMessage id="common.confirm" />
