@@ -55,6 +55,7 @@ export const GET_BACCARATROOMS = gql`
         super6Amount
         updatedAt
         endAt
+        targets
       }
       currentBaccaratBetRecord {
         id
@@ -123,6 +124,7 @@ export const GET_CURRENT_BACCARAT_ROOM = gql`
         tieAmount
         updatedAt
         endAt
+        targets
       }
       currentBaccaratBetRecord {
         id

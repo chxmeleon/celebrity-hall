@@ -28,11 +28,7 @@ const BetArea: React.FC<{ target: number }> = ({ target }) => {
           <span
             className={cx('relative z-20 m-auto text-yellow-300 font-semibold')}
           >
-            {target >= 1000 && target < 10000
-              ? target / 1000 + 'K'
-              : target >= 10000
-              ? target / 10000 + 'W'
-              : target}
+            {numberFormmat(target)}
           </span>
         </div>
       ) : null}
@@ -40,412 +36,155 @@ const BetArea: React.FC<{ target: number }> = ({ target }) => {
   )
 }
 
+const numberFormmat = (target: number) =>
+  target >= 1000 && target < 10000 && (target / 1000).toString().length > 3
+    ? (target / 1000).toFixed(1) + 'K'
+    : target >= 1000 && target < 10000
+    ? target / 1000 + 'K'
+    : target >= 10000 && (target / 10000).toString().length > 4
+    ? (target / 10000).toFixed(1) + 'W'
+    : target >= 10000
+    ? target / 10000 + 'W'
+    : target
+
 const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
   isDisabled
 }) => {
   const { isRegular } = useSetup()
   const { isTable } = useContext(RoomDataContext)
-  const {
-    selectedChip: mobileSelected,
-    betState: mobileBetState,
-    dispatchBet: mobileDispatch
-  } = useContext(GamePlayContext)
+  const btnStyle = cx(
+    'rounded-md bg-theme-75 relative w-ful h-full',
+    isDisabled ? 'brightness-75' : ''
+  )
 
-  const {
-    selectedChip: tableSelected,
-    betState: tableBetState,
-    dispatchBet: tableDispatch
-  } = useContext(TablesContext)
+  const { selectedChip, betState, dispatchBet } = useContext(GamePlayContext)
+
+  const betTarget = [
+    ['playerDragon', 'playerPair', 'super6', 'dealerPair', 'dealerDragon'],
+    ['big', 'player', 'tie', 'dealer', 'small']
+  ]
 
   return (
-    <div className="h-full px-2 grid gap-1 grid-rows-2 w-full [&_button]:relative">
-      <div className="grid grid-cols-5 gap-1">
-        <button
-          disabled={isDisabled}
-          onClick={() =>
-            isTable
-              ? tableDispatch({
-                  type: 'addChips',
-                  target: 'playerDragonAmount',
-                  amount: chipsData?.[tableSelected]?.value
-                })
-              : mobileDispatch({
-                  type: 'addChips',
-                  target: 'playerDragonAmount',
-                  amount: chipsData?.[mobileSelected]?.value
-                })
-          }
-          className={cx(
-            'rounded-md bg-theme-75',
-            isDisabled ? 'brightness-75' : ''
-          )}
-        >
-          <BetArea
-            target={
-              isTable
-                ? tableBetState?.playerDragonAmount
-                : mobileBetState?.playerDragonAmount
+    <div className="grid grid-rows-2 gap-1 px-2 w-full h-full">
+      <div className="grid grid-cols-5 gap-1 h-full">
+        {betTarget[0].map((item) => (
+          <button
+            key={item}
+            disabled={isDisabled}
+            onClick={() =>
+              dispatchBet({
+                type: 'addChips',
+                target: item,
+                amount: chipsData?.[selectedChip]?.value
+              })
             }
-          />
-
-          <div
-            className={cx(
-              'w-full text-grid-400 [&_p]:text-gray-300',
-              isTable ? 'text-sm' : 'text-xs md:text-xl'
-            )}
+            className={btnStyle}
           >
-            <div>
-              <FormattedMessage id="common.playerDragon" />
+            <BetArea target={betState[item]} />
+            <div
+              className={cx(
+                betAreaMapper[item].textStyle,
+                isTable ? 'text-sm' : 'text-xs md:text-xl'
+              )}
+            >
+              <div>
+                {item === 'super6' ? (
+                  <p>super 6</p>
+                ) : (
+                  <FormattedMessage id={betAreaMapper[item].id} />
+                )}
+              </div>
+              <div>
+                <p>{betAreaMapper[item].text}</p>
+              </div>
             </div>
-            <div>
-              <p>1:30</p>
-            </div>
-          </div>
-        </button>
-        <button
-          disabled={isDisabled}
-          onClick={() =>
-            isTable
-              ? tableDispatch({
-                  type: 'addChips',
-                  target: 'playerPairAmount',
-                  amount: chipsData?.[tableSelected]?.value
-                })
-              : mobileDispatch({
-                  type: 'addChips',
-                  target: 'playerPairAmount',
-                  amount: chipsData?.[mobileSelected]?.value
-                })
-          }
-          className={cx(
-            'rounded-md bg-theme-75',
-            isDisabled ? 'brightness-75' : ''
-          )}
-        >
-          <BetArea
-            target={
-              isTable
-                ? tableBetState?.playerPairAmount
-                : mobileBetState?.playerPairAmount
-            }
-          />
-          <div
-            className={cx(
-              'w-full text-grid-400 [&_p]:text-gray-300',
-              isTable ? 'text-sm' : 'text-xs md:text-xl'
-            )}
-          >
-            <FormattedMessage id="common.playerPair" />
-            <div>
-              <p>1:11</p>
-            </div>
-          </div>
-        </button>
-        <button
-          disabled={isDisabled}
-          onClick={() =>
-            isTable
-              ? tableDispatch({
-                  type: 'addChips',
-                  target: 'super6Amount',
-                  amount: chipsData?.[tableSelected]?.value
-                })
-              : mobileDispatch({
-                  type: 'addChips',
-                  target: 'super6Amount',
-                  amount: chipsData?.[mobileSelected]?.value
-                })
-          }
-          className={cx(
-            'rounded-md bg-theme-75',
-            isDisabled ? 'brightness-75' : ''
-          )}
-        >
-          <BetArea
-            target={
-              isTable
-                ? tableBetState?.super6Amount
-                : mobileBetState?.super6Amount
-            }
-          />
-          <div
-            className={cx(
-              'm-auto w-full text-grid-200',
-              isTable
-                ? 'text-[10px] [&_p]:text-sm [&_p]:pt-0.5'
-                : 'text-xs md:text-xl'
-            )}
-          >
-            <div className="font-bold">SUPER 6</div>
-            <p className="text-gray-300">1:20</p>
-          </div>
-        </button>
-        <button
-          disabled={isDisabled}
-          onClick={() =>
-            isTable
-              ? tableDispatch({
-                  type: 'addChips',
-                  target: 'dealerPairAmount',
-                  amount: chipsData?.[tableSelected]?.value
-                })
-              : mobileDispatch({
-                  type: 'addChips',
-                  target: 'dealerPairAmount',
-                  amount: chipsData?.[mobileSelected]?.value
-                })
-          }
-          className={cx(
-            'rounded-md bg-theme-75',
-            isDisabled ? 'brightness-75' : ''
-          )}
-        >
-          <BetArea
-            target={
-              isTable
-                ? tableBetState?.dealerPairAmount
-                : mobileBetState?.dealerPairAmount
-            }
-          />
+          </button>
+        ))}
 
-          <div
-            className={cx(
-              'w-full text-grid-100 [&_p]:text-gray-300 ',
-              isTable ? 'text-sm' : 'text-xs md:text-xl'
-            )}
-          >
-            <div>
-              <FormattedMessage id="common.dealerPair" />
-            </div>
-            <div>
-              <p>1:11</p>
-            </div>
-          </div>
-        </button>
-        <button
-          disabled={isDisabled}
-          onClick={() =>
-            isTable
-              ? tableDispatch({
-                  type: 'addChips',
-                  target: 'dealerDragonAmount',
-                  amount: chipsData?.[tableSelected]?.value
-                })
-              : mobileDispatch({
-                  type: 'addChips',
-                  target: 'dealerDragonAmount',
-                  amount: chipsData?.[mobileSelected]?.value
-                })
-          }
-          className={cx(
-            'rounded-md bg-theme-75',
-            isDisabled ? 'brightness-75' : ''
-          )}
-        >
-          <BetArea
-            target={
-              isTable
-                ? tableBetState?.dealerDragonAmount
-                : mobileBetState?.dealerDragonAmount
-            }
-          />
-
-          <div
-            className={cx(
-              'w-full text-grid-100 [&_p]:text-gray-300 ',
-              isTable ? 'text-sm' : 'text-xs md:text-xl'
-            )}
-          >
-            <div className="">
-              <FormattedMessage id="common.dealerDragon" />
-            </div>
-            <div>
-              <p>1:30</p>
-            </div>
-          </div>
-        </button>
-      </div>
-      <div className="grid grid-cols-5 gap-1">
-        <button
-          disabled={isDisabled}
-          onClick={() =>
-            isTable
-              ? tableDispatch({
-                  type: 'addChips',
-                  target: 'bigAmount',
-                  amount: chipsData?.[tableSelected]?.value
-                })
-              : mobileDispatch({
-                  type: 'addChips',
-                  target: 'bigAmount',
-                  amount: chipsData?.[mobileSelected]?.value
-                })
-          }
-          className={cx(
-            'rounded-md bg-theme-75',
-            isDisabled ? 'brightness-75' : ''
-          )}
-        >
-          <BetArea
-            target={
-              isTable ? tableBetState?.bigAmount : mobileBetState?.bigAmount
-            }
-          />
-          <div className="m-auto w-2/3 text-gray-300">
-            <div className="text-xl font-bold">
-              <FormattedMessage id="screens.baccaratRoom.big" />
-            </div>
-            <div className="text-sm">
-              <p>1:0.54</p>
-            </div>
-          </div>
-        </button>
-
-        <button
-          disabled={isDisabled}
-          onClick={() =>
-            isTable
-              ? tableDispatch({
-                  type: 'addChips',
-                  target: 'playerAmount',
-                  amount: chipsData?.[tableSelected]?.value
-                })
-              : mobileDispatch({
-                  type: 'addChips',
-                  target: 'playerAmount',
-                  amount: chipsData?.[mobileSelected]?.value
-                })
-          }
-          className={cx(
-            'rounded-md bg-theme-75',
-            isDisabled ? 'brightness-75' : ''
-          )}
-        >
-          <BetArea
-            target={
-              isTable
-                ? tableBetState?.playerAmount
-                : mobileBetState?.playerAmount
-            }
-          />
-          <div className="m-auto w-2/3 text-grid-400 [&_p]:text-gray-300">
-            <div className="text-xl font-bold">
-              <FormattedMessage id="common.simplePlayer" />
-            </div>
-            <div className="text-sm">
-              <p>1:1</p>
-            </div>
-          </div>
-        </button>
-
-        <button
-          disabled={isDisabled}
-          onClick={() =>
-            isTable
-              ? tableDispatch({
-                  type: 'addChips',
-                  target: 'tieAmount',
-                  amount: chipsData?.[tableSelected]?.value
-                })
-              : mobileDispatch({
-                  type: 'addChips',
-                  target: 'tieAmount',
-                  amount: chipsData?.[mobileSelected]?.value
-                })
-          }
-          className={cx(
-            'rounded-md bg-theme-75',
-            isDisabled ? 'brightness-75' : ''
-          )}
-        >
-          <BetArea
-            target={
-              isTable ? tableBetState?.tieAmount : mobileBetState?.tieAmount
-            }
-          />
-          <div className="m-auto w-2/3 text-grid-300 [&_p]:text-gray-300">
-            <div className="text-xl font-bold">
-              <FormattedMessage id="common.simpleTie" />
-            </div>
-            <div className="text-sm">
-              <p>1:8</p>
-            </div>
-          </div>
-        </button>
-        <button
-          disabled={isDisabled}
-          onClick={() =>
-            isTable
-              ? tableDispatch({
-                  type: 'addChips',
-                  target: 'dealerAmount',
-                  amount: chipsData?.[tableSelected]?.value
-                })
-              : mobileDispatch({
-                  type: 'addChips',
-                  target: 'smallAmount',
-                  amount: chipsData?.[mobileSelected]?.value
-                })
-          }
-          className={cx(
-            'rounded-md bg-theme-75',
-            isDisabled ? 'brightness-75' : ''
-          )}
-        >
-          <BetArea
-            target={
-              isTable
-                ? tableBetState?.dealerAmount
-                : mobileBetState?.dealerAmount
-            }
-          />
-
-          <div className="m-auto w-2/3 text-grid-100 [&_p]:text-gray-300">
-            <div className="text-xl font-bold">
-              <FormattedMessage id="common.simpleDealer" />
-            </div>
-            <div className="text-sm">
-              {isRegular ? <p>1:1</p> : <p>1:0.95</p>}
-            </div>
-          </div>
-        </button>
-        <button
-          disabled={isDisabled}
-          onClick={() =>
-            isTable
-              ? tableDispatch({
-                  type: 'addChips',
-                  target: 'smallAmount',
-                  amount: chipsData?.[tableSelected]?.value
-                })
-              : mobileDispatch({
-                  type: 'addChips',
-                  target: 'smallAmount',
-                  amount: chipsData?.[mobileSelected]?.value
-                })
-          }
-          className={cx(
-            'rounded-md bg-theme-75',
-            isDisabled ? 'brightness-75' : ''
-          )}
-        >
-          <BetArea
-            target={
-              isTable ? tableBetState?.smallAmount : mobileBetState?.smallAmount
-            }
-          />
-          <div className="m-auto w-2/3 text-gray-300">
-            <div className="text-xl font-bold">
-              <FormattedMessage id="screens.baccaratRoom.small" />
-            </div>
-            <div className="text-sm">
-              <p>1:1</p>
-            </div>
-          </div>
-        </button>
+        {/* <div className="grid grid-cols-5 gap-1"> */}
+        {/*   {betTarget[1].map((item) => ( */}
+        {/*     <button */}
+        {/*       key={item} */}
+        {/*       disabled={isDisabled} */}
+        {/*       onClick={() => */}
+        {/*         dispatchBet({ */}
+        {/*           type: 'addChips', */}
+        {/*           target: item, */}
+        {/*           amount: chipsData?.[selectedChip]?.value */}
+        {/*         }) */}
+        {/*       } */}
+        {/*       className={btnStyle} */}
+        {/*     > */}
+        {/*       <BetArea target={betState[item]} /> */}
+        {/*       <div className={betAreaMapper[item].textStyle}> */}
+        {/*         <div className="i18n"> */}
+        {/*           <FormattedMessage id={betAreaMapper[item].id} /> */}
+        {/*         </div> */}
+        {/*         <div> */}
+        {/*           <p>{betAreaMapper[item].text}</p> */}
+        {/*         </div> */}
+        {/*       </div> */}
+        {/*     </button> */}
+        {/*   ))} */}
+        {/* </div> */}
       </div>
     </div>
   )
+}
+
+const betAreaMapper = {
+  player: {
+    textStyle: 'w-full h-full text-grid-400 [&_p]:text-gray-300',
+    id: 'common.simplePlayer',
+    text: '1:1'
+  },
+  playerPair: {
+    textStyle: 'w-full text-grid-400 [&_p]:text-gray-300',
+    id: 'common.playerPair',
+    text: '1:11'
+  },
+  playerDragon: {
+    textStyle: 'w-full text-grid-400 [&_p]:text-gray-300',
+    id: 'common.playerDragon',
+    text: '1:30'
+  },
+  dealer: {
+    textStyle: 'w-full text-grid-100 [&_p]:text-gray-300',
+    id: 'common.simpleDealer',
+    text: '1:1'
+  },
+  dealerPair: {
+    textStyle: 'w-full text-grid-100 [&_p]:text-gray-300',
+    id: 'common.dealerPair',
+    text: '1:11'
+  },
+  dealerDragon: {
+    textStyle: 'w-full text-grid-100 [&_p]:text-gray-300',
+    id: 'common.dealerDragon',
+    text: '1:30'
+  },
+  super6: {
+    textStyle: 'w-full text-grid-200',
+    id: 'common.super6',
+    text: '1:20'
+  },
+  tie: {
+    textStyle: 'm-auto w-2/3 text-grid-300 [&_p]:text-gray-300',
+    id: 'common.simpleTie',
+    text: '1:8'
+  },
+  big: {
+    textStyle:
+      'm-auto w-full text-gray-300 [&_.i18n]:text-xl [&_.i18n]:font-bold [&_p]:text-sm',
+    id: 'screens.baccaratRoom.big',
+    text: '1:0.54'
+  },
+  small: {
+    textStyle:
+      'm-auto w-2/3 text-gray-300 [&_.i18n]:text-xl [&_.i18n]:font-bold [&_p]:text-sm',
+    id: 'screens.baccaratRoom.small',
+    text: '1:30'
+  }
 }
 
 export default SinglePlayerMobile

@@ -26,7 +26,7 @@ const Progress: React.FC<PropsWithChildren> = ({ children }) => {
 const Loading: React.FC = () => {
   const { isTable } = useContext(RoomDataContext)
   return (
-    <div className="flex absolute z-50 flex-col w-full h-full">
+    <div className="flex absolute z-30 flex-col w-full h-full">
       <div className="absolute overflow-hidden w-full h-full">
         <img src={BgImg} alt="bg image"  className="w-full h-full object-cover" />
       </div>

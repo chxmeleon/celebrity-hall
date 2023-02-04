@@ -2,7 +2,7 @@ import TableCard from '@/components/room/Table/TableCard'
 import { useContext } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
 import { TablesProvider } from '@/contexts/TablesContext'
-
+import { GamePlayProvider } from '@/contexts/GamePlayContext'
 
 
 const Tables = () => {
@@ -12,9 +12,9 @@ const Tables = () => {
     <div className="grid grid-cols-4 grid-rows-1 w-full">
       {rooms.slice(4, 8).map((item, idx) => (
         <div key={idx}>
-          <TablesProvider>
+          <GamePlayProvider>
             <TableCard room={item} />
-          </TablesProvider>
+          </GamePlayProvider>
         </div>
       ))}
     </div>
