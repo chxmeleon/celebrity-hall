@@ -29,7 +29,6 @@ import { useAuth } from '@/contexts/AuthContext'
 import { useSetup } from '@/contexts/SetupContext'
 import { useContext, useEffect, useState } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
-import TablesContext from '@/contexts/TablesContext'
 import GamePlayContext from '@/contexts/GamePlayContext'
 
 
@@ -56,9 +55,6 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
 
   const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
   const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
-
-  /* const { selectedChip, setSelectedChip, betState, dispatchBet, wallet } = */
-  /*   useContext(TablesContext) */
 
 
   const {

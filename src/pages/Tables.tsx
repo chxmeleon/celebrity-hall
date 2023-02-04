@@ -1,7 +1,6 @@
 import TableCard from '@/components/room/Table/TableCard'
 import { useContext } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
-import { TablesProvider } from '@/contexts/TablesContext'
 import { GamePlayProvider } from '@/contexts/GamePlayContext'
 
 
