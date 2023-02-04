@@ -7,7 +7,6 @@ import RoomDataContext from '@/contexts/RoomDataContext'
 import { clsx as cx } from 'clsx'
 import { useParams } from 'react-router-dom'
 import { useCurrentGameState } from '@/hooks/rooms'
-import TablesContext from '@/contexts/TablesContext'
 
 const BetArea: React.FC<{ target: number }> = ({ target }) => {
   return (
@@ -52,138 +51,116 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
 }) => {
   const { isRegular } = useSetup()
   const { isTable } = useContext(RoomDataContext)
+
   const btnStyle = cx(
-    'rounded-md bg-theme-75 relative w-ful h-full',
+    'w-full h-full rounded-md bg-theme-75 relative [&_.ratio]:text-gray-300',
     isDisabled ? 'brightness-75' : ''
   )
 
   const { selectedChip, betState, dispatchBet } = useContext(GamePlayContext)
 
   const betTarget = [
-    ['playerDragon', 'playerPair', 'super6', 'dealerPair', 'dealerDragon'],
-    ['big', 'player', 'tie', 'dealer', 'small']
+    'playerDragon',
+    'playerPair',
+    'super6',
+    'dealerPair',
+    'dealerDragon',
+    'big',
+    'player',
+    'tie',
+    'dealer',
+    'small'
   ]
 
   return (
-    <div className="grid grid-rows-2 gap-1 px-2 w-full h-full">
-      <div className="grid grid-cols-5 gap-1 h-full">
-        {betTarget[0].map((item) => (
-          <button
-            key={item}
-            disabled={isDisabled}
-            onClick={() =>
-              dispatchBet({
-                type: 'addChips',
-                target: item,
-                amount: chipsData?.[selectedChip]?.value
-              })
-            }
-            className={btnStyle}
-          >
-            <BetArea target={betState[item]} />
-            <div
-              className={cx(
-                betAreaMapper[item].textStyle,
-                isTable ? 'text-sm' : 'text-xs md:text-xl'
-              )}
-            >
-              <div>
-                {item === 'super6' ? (
-                  <p>super 6</p>
-                ) : (
-                  <FormattedMessage id={betAreaMapper[item].id} />
+    <div className="grid grid-cols-5 grid-rows-2 gap-1 place-items-center px-2 w-full h-full">
+      {betTarget.map((item, idx) => (
+        <button
+          key={item}
+          disabled={isDisabled}
+          onClick={() =>
+            dispatchBet({
+              type: 'addChips',
+              target: item,
+              amount: chipsData?.[selectedChip]?.value
+            })
+          }
+          className={btnStyle}
+        >
+          <BetArea target={betState[item]} />
+          <div className={cx(betAreaMapper[item].textStyle)}>
+            {idx > 4 ? (
+              <div className="text-xl font-bold">
+                <FormattedMessage id={betAreaMapper[item].id} />
+              </div>
+            ) : (
+              <div
+                className={cx(
+                  'font-bold',
+                  isTable ? 'text-[12px]' : 'text-xs md:text-xl'
                 )}
+              >
+                <FormattedMessage id={betAreaMapper[item].id} />
               </div>
-              <div>
-                <p>{betAreaMapper[item].text}</p>
-              </div>
-            </div>
-          </button>
-        ))}
-
-        {/* <div className="grid grid-cols-5 gap-1"> */}
-        {/*   {betTarget[1].map((item) => ( */}
-        {/*     <button */}
-        {/*       key={item} */}
-        {/*       disabled={isDisabled} */}
-        {/*       onClick={() => */}
-        {/*         dispatchBet({ */}
-        {/*           type: 'addChips', */}
-        {/*           target: item, */}
-        {/*           amount: chipsData?.[selectedChip]?.value */}
-        {/*         }) */}
-        {/*       } */}
-        {/*       className={btnStyle} */}
-        {/*     > */}
-        {/*       <BetArea target={betState[item]} /> */}
-        {/*       <div className={betAreaMapper[item].textStyle}> */}
-        {/*         <div className="i18n"> */}
-        {/*           <FormattedMessage id={betAreaMapper[item].id} /> */}
-        {/*         </div> */}
-        {/*         <div> */}
-        {/*           <p>{betAreaMapper[item].text}</p> */}
-        {/*         </div> */}
-        {/*       </div> */}
-        {/*     </button> */}
-        {/*   ))} */}
-        {/* </div> */}
-      </div>
+            )}
+            <p className="ratio">{betAreaMapper[item].text}</p>
+          </div>
+        </button>
+      ))}
     </div>
   )
 }
 
 const betAreaMapper = {
   player: {
-    textStyle: 'w-full h-full text-grid-400 [&_p]:text-gray-300',
+    textStyle: 'w-full text-grid-400 [&_p]:text-sm',
     id: 'common.simplePlayer',
     text: '1:1'
   },
   playerPair: {
-    textStyle: 'w-full text-grid-400 [&_p]:text-gray-300',
+    textStyle: 'w-full text-grid-400',
     id: 'common.playerPair',
     text: '1:11'
   },
   playerDragon: {
-    textStyle: 'w-full text-grid-400 [&_p]:text-gray-300',
+    textStyle: 'w-full text-grid-400',
     id: 'common.playerDragon',
     text: '1:30'
   },
   dealer: {
-    textStyle: 'w-full text-grid-100 [&_p]:text-gray-300',
+    textStyle: 'w-full text-grid-100 [&_p]:text-sm',
     id: 'common.simpleDealer',
     text: '1:1'
   },
   dealerPair: {
-    textStyle: 'w-full text-grid-100 [&_p]:text-gray-300',
+    textStyle: 'w-full text-grid-100',
     id: 'common.dealerPair',
     text: '1:11'
   },
   dealerDragon: {
-    textStyle: 'w-full text-grid-100 [&_p]:text-gray-300',
+    textStyle: 'w-full text-grid-100',
     id: 'common.dealerDragon',
     text: '1:30'
   },
   super6: {
-    textStyle: 'w-full text-grid-200',
+    textStyle: 'w-full text-grid-200 ',
     id: 'common.super6',
     text: '1:20'
   },
   tie: {
-    textStyle: 'm-auto w-2/3 text-grid-300 [&_p]:text-gray-300',
+    textStyle: 'text-grid-300 [&_p]:text-sm',
     id: 'common.simpleTie',
     text: '1:8'
   },
   big: {
-    textStyle:
-      'm-auto w-full text-gray-300 [&_.i18n]:text-xl [&_.i18n]:font-bold [&_p]:text-sm',
+    textStyle: 'text-gray-300  [&_p]:text-sm',
     id: 'screens.baccaratRoom.big',
     text: '1:0.54'
   },
   small: {
-    textStyle:
-      'm-auto w-2/3 text-gray-300 [&_.i18n]:text-xl [&_.i18n]:font-bold [&_p]:text-sm',
+    textStyle: 'text-gray-300  [&_p]:text-sm',
     id: 'screens.baccaratRoom.small',
-    text: '1:30'
+    text: '1:1.15'
   }
 }
 

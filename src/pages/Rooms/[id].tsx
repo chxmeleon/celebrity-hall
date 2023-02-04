@@ -479,7 +479,7 @@ const Room = () => {
               </div>
             </div>
 
-            <div>
+            <div className="">
               <SinglePlayerMobile isDisabled={btnState.isDisable} />
             </div>
 
