@@ -93,7 +93,7 @@ export const usePokerUpdate = (roomId: string | undefined) => {
   const [pokerState, dispatch] = useReducer(pokerReducer, gqlData)
 
   useEffect(() => {
-    if (gameState === 'CLOSE') {
+    if (gameState) {
       refetch()
     }
     setGameState(convertStatus(data?.baccaratRoom?.currentGame?.status))
