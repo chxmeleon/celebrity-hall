@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 import { useContext, useEffect, useState } from 'react'
 import GamePlayContext from '@/contexts/GamePlayContext'
-import RoomDataContext from '@/contexts/RoomDataContext'
 import { clsx as cx } from 'clsx'
 
 const winLoseStyle = {
@@ -12,11 +11,11 @@ const winLoseStyle = {
 
 type NoticeProps = {
   gameState: string | any
+  isTablesPath?: boolean
 }
 
-const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState }) => {
+const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState, isTablesPath }) => {
   const { notice } = useContext(GamePlayContext)
-  const { isTable } = useContext(RoomDataContext)
   const windLoseState = () => {
     if (~~Number(notice?.winLossAmount) < 0) {
       return 'isLose'
@@ -45,7 +44,7 @@ const WinAndLoseResult: React.FC<NoticeProps> = ({ gameState }) => {
     'flex w-3/4 h-7 md:h-9  rounded-md transition-all duration-300 ease-in-out px-3 ',
     winLoseStyle[windLoseState()],
     isShow ? 'opacity-100' : 'opacity-0 -translate-y-10',
-    isTable ? 'text-[9px]' : 'text-xs md:text-lg'
+    isTablesPath ? 'text-[9px]' : 'text-xs md:text-lg'
   )
 
   return (

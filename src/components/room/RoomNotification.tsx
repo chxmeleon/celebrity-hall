@@ -8,6 +8,7 @@ type NoticeProps = {
   isConfirmedSuccess: boolean
   isConfirmedFailure: boolean
   isRepeatSuccess: boolean
+  isTablesPath?: boolean
   gameState: string | any
 }
 
@@ -15,10 +16,10 @@ const RoomNotification: React.FC<NoticeProps> = ({
   isConfirmedSuccess,
   isConfirmedFailure,
   isRepeatSuccess,
+  isTablesPath,
   gameState
 }) => {
   const { formatMessage } = useIntl()
-  const { isTable } = useContext(RoomDataContext)
 
   return (
     <>
@@ -28,7 +29,7 @@ const RoomNotification: React.FC<NoticeProps> = ({
             <p
               className={cx(
                 'm-auto font-medium text-teal-900',
-                isTable ? 'text-sm' : 'text-lg md:text-2xl'
+                isTablesPath ? 'text-sm' : 'text-lg md:text-2xl'
               )}
             >
               {formatMessage({
@@ -44,7 +45,7 @@ const RoomNotification: React.FC<NoticeProps> = ({
             <p
               className={cx(
                 'm-auto font-medium text-red-400',
-                isTable ? 'text-[9px]' : 'text-xs md:text-[14px]'
+                isTablesPath ? 'text-[9px]' : 'text-xs md:text-[14px]'
               )}
             >
               {formatMessage({
@@ -61,7 +62,7 @@ const RoomNotification: React.FC<NoticeProps> = ({
             <div
               className={cx(
                 'm-auto  font-medium text-theme-50',
-                isTable ? 'text-sm' : 'text-lg md:text-2xl'
+                isTablesPath ? 'text-sm' : 'text-lg md:text-2xl'
               )}
             >
               {formatMessage({

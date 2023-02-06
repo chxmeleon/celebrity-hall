@@ -30,14 +30,17 @@ const targetsType = [
 
 type TargetType = typeof targetsType[number]
 
-export const initialChipAmount: Record<TargetType, number> = Object.values(
+export const initialChipAmount: BetInitialValueProp = Object.values(
   targetsType
 ).reduce((acc, key) => {
   acc[key] = 0
   return acc
-}, {} as Record<TargetType, number>)
+}, {} as BetInitialValueProp)
 
-export const chipReducer = (state: BetInitialValueProp, action: ChipAction) => {
+export const chipReducer: (
+  state: BetInitialValueProp,
+  action: ChipAction
+) => BetInitialValueProp = (state, action) => {
   switch (action.type) {
     case 'repeat':
       return action.preState
@@ -45,16 +48,14 @@ export const chipReducer = (state: BetInitialValueProp, action: ChipAction) => {
     case 'newRound':
       return initialChipAmount
 
+    case 'addChips':
+      return {
+        ...state,
+        [action?.target]: state[action?.target] + action?.amount
+      }
+
     default:
       return state
-
-    case 'addChips':
-      if (action?.target && action?.amount) {
-        return {
-          ...state,
-          [action?.target]: state[action?.target] + action?.amount
-        }
-      }
   }
 }
 

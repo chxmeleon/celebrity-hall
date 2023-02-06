@@ -1,12 +1,10 @@
 import { FormattedMessage } from 'react-intl'
 import { useSetup } from '@/contexts/SetupContext'
-import { useContext, useEffect, useReducer, useState } from 'react'
+import { useContext } from 'react'
 import { chipsData } from './chips'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import RoomDataContext from '@/contexts/RoomDataContext'
 import { clsx as cx } from 'clsx'
-import { useParams } from 'react-router-dom'
-import { useCurrentGameState } from '@/hooks/rooms'
 
 const BetArea: React.FC<{ target: number }> = ({ target }) => {
   return (
@@ -50,7 +48,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
   isDisabled
 }) => {
   const { isRegular } = useSetup()
-  const { isTable } = useContext(RoomDataContext)
+  const { isTablesPath } = useContext(RoomDataContext)
 
   const btnStyle = cx(
     'w-full h-full rounded-md bg-theme-75 relative [&_.ratio]:text-gray-300',
@@ -97,7 +95,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
               <div
                 className={cx(
                   'font-bold',
-                  isTable ? 'text-[12px]' : 'text-xs md:text-xl'
+                  isTablesPath ? 'text-[12px]' : 'text-xs md:text-xl'
                 )}
               >
                 <FormattedMessage id={betAreaMapper[item].id} />

@@ -6,9 +6,8 @@ import { useContext, useEffect, useState } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
 
 
-const PokerResult: React.FC<{ roomId: string }> = ({ roomId }) => {
+const PokerResult: React.FC<{ roomId: string, isTablesPath?: boolean }> = ({ roomId, isTablesPath }) => {
   const { currentGameState } = usePokerUpdate(roomId)
-  const { isTable } = useContext(RoomDataContext)
   const { pokerState, gameState, currentGame } = currentGameState
   const [isShowPoker, setIsShowPoker] = useState(false)
   
@@ -43,14 +42,14 @@ const PokerResult: React.FC<{ roomId: string }> = ({ roomId }) => {
         className={cx(
           pokerState?.result?.tieWin ? '' : 'opacity-0',
           'text-theme-300 font-medium w-full h-full absolute top-0 left-0 flex justify-center items-center',
-          isTable ? 'text-3xl' : ' text-5xl'
+          isTablesPath ? 'text-3xl' : ' text-5xl'
         )}
       >
         <FormattedMessage id="common.simpleTie" defaultMessage="Tie" />
       </div>
-      <CardWidget role="player" roomId={roomId} isTable={isTable} />
+      <CardWidget role="player" roomId={roomId} isTable={isTablesPath} />
       <div className="w-1 h-full bg-theme-150"></div>
-      <CardWidget role="dealer" roomId={roomId} isTable={isTable} />
+      <CardWidget role="dealer" roomId={roomId} isTable={isTablesPath} />
     </div>
   )
 }

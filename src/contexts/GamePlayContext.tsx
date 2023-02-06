@@ -57,11 +57,7 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
   const preLocation = useLocation().pathname
   const [location, setLocation] = useState(preLocation)
   const [selectedChip, setSelectedChip] = useState('chips_100')
-
-  const [betState, dispatchBet] = useReducer<
-    (state: BetInitialValueProp, action: ChipAction) => any
-  >(chipReducer, initialChipAmount)
-
+  const [betState, dispatchBet] = useReducer(chipReducer, initialChipAmount)
   const [btnState, dispatchBtn] = useReducer(
     bettingBtnReducer,
     bettingBtnInitalState
@@ -92,7 +88,7 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
   const { data, refetch } = useQuery(GET_WALLET)
   const { cable } = useActionCable()
   const [notice, setNotice] = useState<any | null>(null)
-  const wallet = useMemo(() =>  data?.wallet, [data])
+  const wallet = useMemo(() => data?.wallet, [data])
 
   useEffect(() => {
     const walletSubscription = cable.subscriptions.create(
@@ -133,9 +129,10 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
     types.CANCEL_BACCARAT_BETVariables
   >(CANCEL_BACCARAT_BET)
 
-  const totalAmount: any = useMemo(() => Object.values(betState).reduce(
-    (a: any, b: any) => a + b
-  ), [betState])
+  const totalAmount: any = useMemo(
+    () => Object.values(betState).reduce((a: any, b: any) => a + b),
+    [betState]
+  )
 
   const [preBetState, setPreBetState] =
     useState<BetInitialValueProp>(initialChipAmount)

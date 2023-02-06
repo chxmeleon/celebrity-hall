@@ -1,5 +1,4 @@
-import React, { useMemo } from 'react'
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from '@/pages/Login'
 import Rooms from '@/pages/Rooms'
 import Room from '@/pages/Rooms/[id]'
@@ -17,15 +16,10 @@ import Following from '@/pages/Following'
 import UserRanking from '@/pages/UserRanking'
 import ProtectedLayoutForRoom from '@/layouts/ProtectedLayoutForRoom'
 import Rule from '@/pages/Rule'
+import TablesLayout from '@/layouts/TablesLayout'
 
 
 const Router: React.FC = () => {
-  const location = useLocation()
-  const isTable = useMemo(
-    () => location.pathname === '/home/tables',
-    [location]
-  )
-
   return (
     <Routes>
       <Route element={<PublicLayout />}>
@@ -33,19 +27,21 @@ const Router: React.FC = () => {
         <Route path="login" element={<Login />} />
       </Route>
       <Route path="home" element={<ProtectedLayoutForRoom />}>
-        <Route element={<RoomsLayout isTable={isTable} />}>
+        <Route element={<RoomsLayout />}>
           <Route path="rooms/:id" element={<Room />} />
           <Route path="profile" element={<Profile />} />
           <Route path="intro-rule" element={<Rule />} />
         </Route>
       </Route>
       <Route path="home" element={<ProtectedLayout />}>
-        <Route element={<RoomsLayout isTable={isTable} />}>
+        <Route element={<TablesLayout />}>
+          <Route path="tables" element={<Tables />} />
+        </Route>
+        <Route element={<RoomsLayout />}>
           <Route index element={<Navigate to="rooms" replace />} />
           <Route path="liverooms" element={<Liverooms />} />
           <Route path="mutualrooms" element={<Mutualrooms />} />
           <Route path="rooms" element={<Rooms />} />
-          <Route path="tables" element={<Tables />} />
         </Route>
         <Route path="streamers" element={<Streamers />} />
         <Route path="streamers/:id" element={<Streamer />} />
