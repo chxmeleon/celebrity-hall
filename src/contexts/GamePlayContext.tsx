@@ -46,6 +46,8 @@ type GamePlayContextData = {
   onRepeat: (roomId: string) => Promise<void>
   totalAmount: number
   notice: any
+  isNoFee: boolean
+  handleNoFeeToggle: () => void
 }
 
 const GamePlayContext = createContext<GamePlayContextData>(
@@ -54,6 +56,9 @@ const GamePlayContext = createContext<GamePlayContextData>(
 export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
   children
 }) => {
+  const [isNoFee, setIsNoFee] = useState<boolean>(false)
+  const handleNoFeeToggle = () => setIsNoFee((isNoFee) => !isNoFee)
+
   const preLocation = useLocation().pathname
   const [location, setLocation] = useState(preLocation)
   const [selectedChip, setSelectedChip] = useState('chips_100')
@@ -118,7 +123,6 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
     }
   }, [cable, refetch])
 
-  const [isDisable, setIsDisable] = useState(true)
   const [createBaccaratBet] = useMutation<
     types.CREATE_BACCARAT_BET,
     types.CREATE_BACCARAT_BETVariables
@@ -165,10 +169,21 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
               dealerAmount: betState?.dealer,
               playerPairAmount: betState?.playerPair,
               dealerPairAmount: betState?.dealerPair,
+              playerDragonAmount: betState?.playerDragon,
+              dealerDragonAmount: betState?.dealerDragon,
+              playerSingleAmount: betState?.playerSingle,
+              dealerSingleAmount: betState?.dealerSingle,
+              playerDoubleAmount: betState?.playerDouble,
+              dealerDoubleAmount: betState?.dealerDouble,
+              anyPairAmount: betState?.playerAny,
+              perfectPairAmount: preBetState?.dealerAny,
+              playerKingAmount: betState?.playerNatural,
+              dealerKingAmount: betState?.dealerNatural,
               tieAmount: betState?.tie,
               super6Amount: betState?.super6,
               smallAmount: betState?.small,
               bigAmount: betState?.big,
+              gameType: 'normal',
               deviceInfo: JSON.stringify(deviceInfo)
             }
           }
@@ -200,14 +215,25 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
         variables: {
           input: {
             baccaratRoomId: roomId ?? '',
-            playerAmount: preBetState?.playerAmount,
-            dealerAmount: preBetState?.dealerAmount,
-            playerPairAmount: preBetState?.playerPairAmount,
-            dealerPairAmount: preBetState?.dealerPairAmount,
+            playerAmount: preBetState?.player,
+            dealerAmount: preBetState?.dealer,
+            playerPairAmount: preBetState?.playerPair,
+            dealerPairAmount: preBetState?.dealerPair,
+            playerDragonAmount: preBetState?.playerDragon,
+            dealerDragonAmount: preBetState?.dealerDragon,
+            playerSingleAmount: preBetState?.playerSingle,
+            dealerSingleAmount: preBetState?.dealerSingle,
+            playerDoubleAmount: preBetState?.playerDouble,
+            dealerDoubleAmount: preBetState?.dealerDouble,
+            anyPairAmount: preBetState?.playerAny,
+            perfectPairAmount: preBetState?.dealerAny,
+            playerKingAmount: preBetState?.playerNatural,
+            dealerKingAmount: preBetState?.dealerNatural,
             tieAmount: preBetState?.tieAmount,
             super6Amount: preBetState?.super6Amount,
             smallAmount: preBetState?.smallAmount,
             bigAmount: preBetState?.bigAmount,
+            gameType: 'normal',
             deviceInfo: JSON.stringify(deviceInfo)
           }
         }
@@ -238,7 +264,9 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
     onConfirm,
     onRepeat,
     totalAmount,
-    notice
+    notice,
+    isNoFee,
+    handleNoFeeToggle
   }
 
   return (

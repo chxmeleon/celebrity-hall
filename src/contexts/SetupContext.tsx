@@ -1,24 +1,11 @@
 import { useModal } from '@/hooks/modal'
 import { createContext, useContext, useMemo, useState } from 'react'
-import {
-  osVersion,
-  osName,
-  fullBrowserVersion,
-  browserName,
-  mobileVendor,
-  mobileModel,
-  engineName,
-  engineVersion,
-  getUA,
-  deviceType
-} from 'react-device-detect'
 
 interface SetupContextData {
   isShowSetup: boolean
   isShowNotice: boolean
   isShowEditPassword: boolean
   isShowEditNickname: boolean
-  isRegular: boolean
   openSetup: () => void
   closeSetup: () => void
   openNotice: () => void
@@ -27,8 +14,6 @@ interface SetupContextData {
   closeEditPassword: () => void
   openEditNickname: () => void
   closeEditNickname: () => void
-  handleRegularToggle: () => void
-  deviceInfo: { [key: string]: string }
 }
 
 const SetupContext = createContext<SetupContextData>({} as SetupContextData)
@@ -61,30 +46,12 @@ export const SetupProvider: React.FC<React.PropsWithChildren> = ({
   } = useModal()
 
 
-  const [isRegular, setIsRegular] = useState(false)
-  const handleRegularToggle = () => setIsRegular((isRegular) => !isRegular)
-  const deviceInfo = useMemo(
-    () => ({
-      osVersion,
-      osName,
-      fullBrowserVersion,
-      browserName,
-      mobileVendor,
-      mobileModel,
-      engineName,
-      engineVersion,
-      deviceType,
-      userAgent: getUA
-    }),
-    []
-  )
 
   const value = {
     isShowSetup,
     isShowNotice,
     isShowEditPassword,
     isShowEditNickname,
-    isRegular,
     openSetup,
     closeSetup,
     openNotice,
@@ -93,8 +60,6 @@ export const SetupProvider: React.FC<React.PropsWithChildren> = ({
     closeEditPassword,
     openEditNickname,
     closeEditNickname,
-    handleRegularToggle,
-    deviceInfo
   }
 
   return <SetupContext.Provider value={value}>{children}</SetupContext.Provider>

@@ -25,13 +25,10 @@ import Loading from '@/components/room/RoomStream/StreamLoading'
 import { Tooltip } from '@material-tailwind/react'
 import { Link } from 'react-router-dom'
 import { ChipButtonList } from '@/pages/Rooms/[id]'
-import { useAuth } from '@/contexts/AuthContext'
 import { useSetup } from '@/contexts/SetupContext'
 import { useContext, useEffect, useState } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
 import GamePlayContext from '@/contexts/GamePlayContext'
-
-
 
 
 type RoomDataProps = {
@@ -41,21 +38,16 @@ type RoomDataProps = {
 const TableCard: React.FC<RoomDataProps> = ({ room }) => {
   const { refetchRooms, isTablesPath } = useContext(RoomDataContext)
   const href = `/home/rooms/${room.id}`
-  const { isTrial } = useAuth()
-  const streamName = room?.streams?.[0]?.name
-  const streamKey = room?.streams?.[0]?.key
-  const secoundStreamName = room?.streams?.[1]?.name
-  const secoundStreamKey = room?.streams?.[1]?.key
+  const streamName = room?.streamName ?? room?.streams?.[0]?.name
+  const streamKey = room?.streamKey ?? room?.streams?.[0]?.key
+  const secoundStreamName = room?.streams?.[1]?.name ?? room?.streams?.[0]?.name
+  const secoundStreamKey = room?.streams?.[1]?.key ?? room?.streams?.[0]?.key
 
   const [isSecondCam, setIsSecondCam] = useState(false)
   const handleSwitchCam = () => setIsSecondCam(!isSecondCam)
 
   const [isWebRTC, setIsWebRTC] = useState(false)
   const handleSwitchStream = () => setIsWebRTC(!isWebRTC)
-
-  const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
-  const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
-
 
   const {
     selectedChip,

@@ -1,6 +1,7 @@
 import { btnIdx } from './deskStyle'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { useSetup } from '@/contexts/SetupContext'
+import GamePlayContext from '@/contexts/GamePlayContext'
 
 type MultiProps = {
   isActive: boolean
@@ -51,7 +52,7 @@ const userInfo = userData.map((item, idx) => {
 })
 
 export const MultiplePlayers = () => {
-  const { isRegular } = useSetup()
+  const { selectedChip, betState, dispatchBet, isNoFee } = useContext(GamePlayContext)
 
   return (
     <>
@@ -121,7 +122,7 @@ export const MultiplePlayers = () => {
               <div>
                 <FormattedMessage id="common.dealer" />
               </div>
-              <div>{isRegular ? <p>1:1</p> : <p>1:0.95</p>}</div>
+              <div>{isNoFee ? <p>1:1</p> : <p>1:0.95</p>}</div>
             </div>
           </button>
         </div>

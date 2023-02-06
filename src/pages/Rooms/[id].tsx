@@ -86,10 +86,10 @@ const Room = () => {
     }
   }, [onResizeWindow, room])
 
-  const streamName = room?.streams?.[0]?.name
-  const streamKey = room?.streams?.[0]?.key
-  const secoundStreamName = room?.streams?.[1]?.name
-  const secoundStreamKey = room?.streams?.[1]?.key
+  const streamName = room?.streamName ?? room?.streams?.[0]?.name
+  const streamKey = room?.streamKey ?? room?.streams?.[0]?.key
+  const secoundStreamName = room?.streams?.[1]?.name ?? room?.streams?.[0]?.name
+  const secoundStreamKey = room?.streams?.[1]?.key ?? room?.streams?.[0]?.key
 
   const [isSecondCam, setIsSecondCam] = useState(false)
   const handleSwitchCam = () => setIsSecondCam(!isSecondCam)
@@ -99,8 +99,6 @@ const Room = () => {
 
   const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
   const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
-
-  const { isRegular, handleRegularToggle } = useSetup()
 
   const {
     selectedChip,
@@ -112,6 +110,8 @@ const Room = () => {
     dispatchBtn,
     dispatchBet,
     totalAmount,
+    isNoFee,
+    handleNoFeeToggle
   } = useContext(GamePlayContext)
 
   const { formatMessage } = useIntl()

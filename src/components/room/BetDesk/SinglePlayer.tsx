@@ -63,8 +63,7 @@ const BetArea: React.FC<{ target: number; type: string }> = ({
 export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
   isDisabled
 }) => {
-  const { isRegular } = useSetup()
-  const { selectedChip, betState, dispatchBet } = useContext(GamePlayContext)
+  const { selectedChip, betState, dispatchBet, isNoFee } = useContext(GamePlayContext)
 
   return (
     <div className="relative w-full h-full">
@@ -395,7 +394,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               <div className="text-4xl font-bold">
                 <FormattedMessage id="common.simpleDealer" />
               </div>
-              <div>{isRegular ? <p>1:1</p> : <p>1:0.95</p>}</div>
+              <div>{isNoFee ? <p>1:1</p> : <p>1:0.95</p>}</div>
             </div>
           </button>
         </div>

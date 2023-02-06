@@ -47,7 +47,6 @@ const numberFormmat = (target: number) =>
 const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
   isDisabled
 }) => {
-  const { isRegular } = useSetup()
   const { isTablesPath } = useContext(RoomDataContext)
 
   const btnStyle = cx(
