@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
@@ -26,7 +26,10 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
   isLoading
 }) => {
   const location = useLocation()
-  const isTable = location.pathname === '/home/tables'
+  const isTable = useMemo(
+    () => location.pathname === '/home/tables',
+    [location]
+  )
 
   const [player, setPlayer] = useState<NodePlayer | null>(null)
 
