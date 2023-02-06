@@ -8,11 +8,11 @@ import RoomDataContext from '@/contexts/RoomDataContext'
 
 const Timer: React.FC<{ roomId: string }> = ({ roomId }) => {
   const { counter, isLeftTen, startCount } = useTimeLeft(roomId ?? '')
-  const { isTable } = useContext(RoomDataContext)
+  const { isTablesPath } = useContext(RoomDataContext)
   const countDownStyle = cx(
     'w-[82%] h-[82%] rounded-full absolute  border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
     isLeftTen ? 'border-[#ff0015] ' : 'border-theme-300 ',
-    isTable ? 'border-r-[2.2px]' : 'border-t-[1px] border-r-[3px] md:border-t-[3px] md:border-r-[6px]' 
+    isTablesPath ? 'border-r-[2.2px]' : 'border-t-[1px] border-r-[3px] md:border-t-[3px] md:border-r-[6px]' 
   )
 
   return (
@@ -32,7 +32,7 @@ const Timer: React.FC<{ roomId: string }> = ({ roomId }) => {
             className={cx(
               'font-medium ',
               isLeftTen ? 'text-[#ff0015]' : 'text-theme-300',
-              isTable ? 'text-[20px]' : 'md:text-[50px] text-2xl'
+              isTablesPath ? 'text-[20px]' : 'md:text-[50px] text-2xl'
             )}
           >
             {counter}

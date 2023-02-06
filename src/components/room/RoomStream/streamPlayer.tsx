@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
@@ -14,6 +14,7 @@ export interface RoomStreamProps {
   isLoading?: boolean
   width?: string
   height?: string
+  isTablesPath?: boolean
 }
 
 export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
@@ -23,22 +24,19 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
   soundOn,
   videoOn,
   autoSize,
-  isLoading
+  isLoading,
+  isTablesPath
 }) => {
-  const location = useLocation()
-  const isTable = useMemo(
-    () => location.pathname === '/home/tables',
-    [location]
-  )
-
   const [player, setPlayer] = useState<NodePlayer | null>(null)
+  console.log(isTablesPath);
+  
 
   useEffect(() => {
     const player = new NodePlayer()
     NodePlayer.debug(false)
     player.setView(`video-${streamName}-${streamKey}`)
     player.setBufferTime(0)
-    player.setScaleMode(isTable ? 2 : 1)
+    player.setScaleMode(isTablesPath ? 2 : 1)
     player.setVolume(1.0)
     player.setKeepScreenOn()
     player.start(`https://live.vvip99.net/${streamName}/${streamKey}.flv`)
@@ -50,7 +48,7 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
     return () => {
       player.release(false)
     }
-  }, [streamName, streamKey, isTable])
+  }, [streamName, streamKey, isTablesPath])
 
   return (
     <div className="overflow-hidden relative w-full h-full">

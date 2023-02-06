@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useMemo, useState } from 'react'
 import { RoomProps } from '@/types/room'
 import { useQuery } from '@apollo/client'
 import types from '@/types'
@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom'
 const RoomDataContext = createContext<{
   rooms: RoomProps[]
   refetchRooms?: () => Promise<any>
-  isTable?: boolean
+  isTablesPath?: boolean
 }>({
   rooms: [],
 })
@@ -17,7 +17,7 @@ export const RoomDataProvider: React.FC<React.PropsWithChildren> = ({
   children
 }) => {
   const location = useLocation()
-  const isTable = location.pathname === '/home/tables'
+  const isTablesPath = useMemo(() => location.pathname === '/home/tables', [location])
   const [rooms, setRooms] = useState<RoomProps[]>([])
   const { data, refetch } = useQuery<types.GET_BACCARATROOMS>(GET_BACCARATROOMS)
 
@@ -28,7 +28,7 @@ export const RoomDataProvider: React.FC<React.PropsWithChildren> = ({
   }, [data])
 
   return (
-    <RoomDataContext.Provider value={{ rooms, refetchRooms: refetch, isTable }}>
+    <RoomDataContext.Provider value={{ rooms, refetchRooms: refetch, isTablesPath }}>
       {children}
     </RoomDataContext.Provider>
   )

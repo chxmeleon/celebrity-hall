@@ -11,14 +11,15 @@ const RoomStreamMobile: React.FC<RoomStreamProps> = ({
   soundOn,
   videoOn,
   autoSize,
-  isWebRTC
+  isWebRTC,
+  isTablesPath
 }) => {
   return (
     <>
       {isWebRTC ? (
         <WebRTCStreamMobile streamName={streamName} streamKey={streamKey} />
       ) : (
-        <NodePlayerStreamMobile streamName={streamName} streamKey={streamKey} />
+        <NodePlayerStreamMobile streamName={streamName} streamKey={streamKey} isTablesPath={isTablesPath} />
       )}
     </>
   )

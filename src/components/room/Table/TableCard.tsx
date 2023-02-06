@@ -39,7 +39,7 @@ type RoomDataProps = {
 }
 
 const TableCard: React.FC<RoomDataProps> = ({ room }) => {
-  const { refetchRooms } = useContext(RoomDataContext)
+  const { refetchRooms, isTablesPath } = useContext(RoomDataContext)
   const href = `/home/rooms/${room.id}`
   const { isTrial } = useAuth()
   const streamName = room?.streams?.[0]?.name
@@ -158,6 +158,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
                   isConfirmedSuccess={btnState.isConfirmSuccess}
                   isConfirmedFailure={btnState.isConfirmFailure}
                   isRepeatSuccess={btnState.isRepeatSuccess}
+                  isTablesPath={isTablesPath}
                   gameState={gameState}
                 />
               </div>
@@ -170,6 +171,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
                 streamKey={secoundStreamKey}
                 videoOn={true}
                 isWebRTC={isWebRTC}
+                isTablesPath={isTablesPath}
               />
             ) : streamName && streamKey ? (
               <RoomStreamMobile
@@ -177,6 +179,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
                 streamKey={streamKey}
                 videoOn={true}
                 isWebRTC={isWebRTC}
+                isTablesPath={isTablesPath}
               />
             ) : <Loading />}
           </div>
@@ -199,7 +202,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
       <div className="flex relative flex-col w-full h-1/2">
         <div className="absolute z-30 w-full h-full pointer-events-none">
           <div className="pb-14 px-2 w-full h-full">
-            <PokerResult roomId={room.id} />
+            <PokerResult roomId={room.id} isTablesPath={isTablesPath} />
           </div>
         </div>
 
