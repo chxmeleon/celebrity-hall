@@ -425,6 +425,10 @@ export type AnnoncementCollection = {
 
 export type BaccaratBetRecord = BetInterface & ReferenceRecordInterface & {
   __typename: 'BaccaratBetRecord';
+  /** 押任意對子金額 */
+  anyPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押任意對子派彩 */
+  anyPairDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 遊戲 */
   baccaratGame: FieldWrapper<BaccaratGame>;
   /** 房間 */
@@ -433,7 +437,7 @@ export type BaccaratBetRecord = BetInterface & ReferenceRecordInterface & {
   betNo: Maybe<FieldWrapper<Scalars['String']>>;
   /** 押大金額 */
   bigAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押大輸贏金額 */
+  /** 押大派彩 */
   bigDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** City */
   city: Maybe<FieldWrapper<Scalars['String']>>;
@@ -449,25 +453,29 @@ export type BaccaratBetRecord = BetInterface & ReferenceRecordInterface & {
   currency: Maybe<FieldWrapper<Scalars['String']>>;
   /** 押莊金額 */
   dealerAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押莊輸贏金額 */
+  /** 押莊派彩 */
   dealerDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押莊雙金額 */
   dealerDoubleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押莊雙輸贏金額 */
+  /** 押莊雙派彩 */
   dealerDoubleDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押莊龍寶金額 */
   dealerDragonAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押莊龍寶輸贏金額 */
+  /** 押莊龍寶派彩 */
   dealerDragonDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押閒對金額 */
+  /** 押莊例牌金額 */
+  dealerKingAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押莊例牌派彩 */
+  dealerKingDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押莊對金額 */
   dealerPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押閒對輸贏金額 */
+  /** 押莊對派彩 */
   dealerPairDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押莊單金額 */
   dealerSingleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押莊單輸贏金額 */
+  /** 押莊單派彩 */
   dealerSingleDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 總輸贏 */
+  /** 總派彩 */
   diff: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 有效投注 */
   effectiveAmount: Maybe<FieldWrapper<Scalars['Float']>>;
@@ -484,39 +492,87 @@ export type BaccaratBetRecord = BetInterface & ReferenceRecordInterface & {
   latitude: Maybe<FieldWrapper<Scalars['Float']>>;
   /** Longitude */
   longitude: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押完美對子金額 */
+  perfectPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押完美對子派彩 */
+  perfectPairDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押閒金額 */
   playerAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押閒輸贏金額 */
+  /** 押閒派彩 */
   playerDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押閒雙金額 */
   playerDoubleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押閒雙輸贏金額 */
+  /** 押閒雙派彩 */
   playerDoubleDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押閒龍寶金額 */
   playerDragonAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押閒龍寶輸贏金額 */
+  /** 押閒龍寶派彩 */
   playerDragonDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押莊對金額 */
+  /** 押閒例牌金額 */
+  playerKingAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押閒例牌派彩 */
+  playerKingDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押閒對金額 */
   playerPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押莊對輸贏金額 */
+  /** 押閒對派彩 */
   playerPairDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押閒單金額 */
   playerSingleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押閒單輸贏金額 */
+  /** 押閒單派彩 */
   playerSingleDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** Region */
   region: Maybe<FieldWrapper<Scalars['String']>>;
   /** 押小金額 */
   smallAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押小輸贏金額 */
+  /** 押小派彩 */
   smallDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押幸運6金額 */
   super6Amount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押幸運6輸贏金額 */
+  /** 押幸運6派彩 */
   super6DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押和金額 */
+  /** 押超和0金額 */
+  superTie0Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和0派彩 */
+  superTie0DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和1金額 */
+  superTie1Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和1派彩 */
+  superTie1DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和2金額 */
+  superTie2Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和2派彩 */
+  superTie2DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和3金額 */
+  superTie3Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和3派彩 */
+  superTie3DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和4金額 */
+  superTie4Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和4派彩 */
+  superTie4DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和5金額 */
+  superTie5Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和5派彩 */
+  superTie5DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和6金額 */
+  superTie6Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和6派彩 */
+  superTie6DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和7金額 */
+  superTie7Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和7派彩 */
+  superTie7DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和8金額 */
+  superTie8Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和8派彩 */
+  superTie8DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和9金額 */
+  superTie9Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和9派彩 */
+  superTie9DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** Tie amount */
   tieAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押和輸贏金額 */
+  /** Tie diff amount */
   tieDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 總押注 */
   totalBet: Maybe<FieldWrapper<Scalars['Float']>>;
@@ -552,13 +608,17 @@ export type BaccaratBetRecordCollection = {
 
 export type BaccaratGame = {
   __typename: 'BaccaratGame';
+  /** 押任意對子金額 */
+  anyPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押任意對子是否贏 */
+  anyPairWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** 該局總投注紀錄 */
   baccaratBetRecords: Maybe<FieldWrapper<BaccaratBetRecordCollection>>;
   /** 遊戲房間 */
   baccaratRoom: Maybe<FieldWrapper<BaccaratRoom>>;
   /** Room ID */
   baccaratRoomId: Maybe<FieldWrapper<Scalars['ID']>>;
-  /** 押大總金額 */
+  /** 押大金額 */
   bigAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押大是否贏 */
   bigWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
@@ -568,18 +628,34 @@ export type BaccaratGame = {
   createdAt: Maybe<FieldWrapper<Scalars['ISO8601DateTime']>>;
   /** 當前局數 */
   currentRound: Maybe<FieldWrapper<Scalars['Int']>>;
-  /** 押莊總金額 */
+  /** 押莊金額 */
   dealerAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 莊家牌 */
   dealerCards: Maybe<Array<FieldWrapper<Scalars['Int']>>>;
+  /** 押莊雙金額 */
+  dealerDoubleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押莊雙是否贏 */
+  dealerDoubleWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押莊龍寶金額 */
+  dealerDragonAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押莊龍寶是否贏 */
+  dealerDragonWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押莊例牌金額 */
+  dealerKingAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押莊例牌是否贏 */
+  dealerKingWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** 莊家是否需要補牌 */
   dealerNeedAnother: Maybe<FieldWrapper<Scalars['Boolean']>>;
-  /** 押莊對總金額 */
+  /** 押莊對金額 */
   dealerPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押莊對是否贏 */
   dealerPairWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** 莊家點數 */
   dealerPoints: Maybe<FieldWrapper<Scalars['Int']>>;
+  /** 押莊單金額 */
+  dealerSingleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押莊單是否贏 */
+  dealerSingleWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** 押莊是否贏 */
   dealerWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** 下注截止時間 */
@@ -588,27 +664,47 @@ export type BaccaratGame = {
   gameNo: Maybe<FieldWrapper<Scalars['String']>>;
   /** ID */
   id: FieldWrapper<Scalars['ID']>;
-  /** 押閒總金額 */
+  /** 押完美對子金額 */
+  perfectPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押完美對子是否贏 */
+  perfectPairWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押閒金額 */
   playerAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 閒家牌 */
   playerCards: Maybe<Array<FieldWrapper<Scalars['Int']>>>;
   /** 玩家人數 */
   playerCounts: Maybe<FieldWrapper<Scalars['Int']>>;
+  /** 押閒雙金額 */
+  playerDoubleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押閒雙是否贏 */
+  playerDoubleWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押閒龍寶金額 */
+  playerDragonAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押閒龍寶是否贏 */
+  playerDragonWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押閒例牌金額 */
+  playerKingAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押閒例牌是否贏 */
+  playerKingWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** 閒家是否需要補牌 */
   playerNeedAnother: Maybe<FieldWrapper<Scalars['Boolean']>>;
-  /** 押閒對總金額 */
+  /** 押閒對金額 */
   playerPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押閒對是否贏 */
   playerPairWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** 閒家點數 */
   playerPoints: Maybe<FieldWrapper<Scalars['Int']>>;
+  /** 押閒單金額 */
+  playerSingleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押閒單是否贏 */
+  playerSingleWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** 押閒是否贏 */
   playerWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** 路單 */
   roadImage: Maybe<FieldWrapper<Scalars['String']>>;
   /** 是否洗牌 */
   shuffle: Maybe<FieldWrapper<Scalars['Boolean']>>;
-  /** 押小總金額 */
+  /** 押小金額 */
   smallAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押小是否贏 */
   smallWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
@@ -616,15 +712,55 @@ export type BaccaratGame = {
   startedAt: Maybe<FieldWrapper<Scalars['ISO8601DateTime']>>;
   /** 狀態 */
   status: Maybe<FieldWrapper<Scalars['String']>>;
-  /** 幸運6總金額 */
+  /** 押幸運6金額 */
   super6Amount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押幸運6是否贏 */
   super6Win: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押超和0金額 */
+  superTie0Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和0是否贏 */
+  superTie0Win: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押超和1金額 */
+  superTie1Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和1是否贏 */
+  superTie1Win: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押超和2金額 */
+  superTie2Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和2是否贏 */
+  superTie2Win: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押超和3金額 */
+  superTie3Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和3是否贏 */
+  superTie3Win: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押超和4金額 */
+  superTie4Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和4是否贏 */
+  superTie4Win: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押超和5金額 */
+  superTie5Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和5是否贏 */
+  superTie5Win: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押超和6金額 */
+  superTie6Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和6是否贏 */
+  superTie6Win: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押超和7金額 */
+  superTie7Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和7是否贏 */
+  superTie7Win: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押超和8金額 */
+  superTie8Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和8是否贏 */
+  superTie8Win: Maybe<FieldWrapper<Scalars['Boolean']>>;
+  /** 押超和9金額 */
+  superTie9Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和9是否贏 */
+  superTie9Win: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** 所有門的下注 */
   targets: Maybe<FieldWrapper<Scalars['JSON']>>;
-  /** 押和總金額 */
+  /** Tie amount */
   tieAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押和是否贏 */
+  /** Tie win */
   tieWin: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** 總下注量 */
   totalAmount: Maybe<FieldWrapper<Scalars['Float']>>;
@@ -1249,38 +1385,68 @@ export type CreateAnnoncementPayload = {
 
 /** Autogenerated input type of CreateBaccaratBet */
 export type CreateBaccaratBetInput = {
+  /** Any pair */
+  anyPairAmount?: InputMaybe<Scalars['Float']>;
   baccaratRoomId: Scalars['ID'];
-  /** 押大金額 */
+  /** Big */
   bigAmount?: InputMaybe<Scalars['Float']>;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>;
-  /** 押莊金額 */
+  /** Dealer */
   dealerAmount?: InputMaybe<Scalars['Float']>;
-  /** 莊雙 */
+  /** Dealer double */
   dealerDoubleAmount?: InputMaybe<Scalars['Float']>;
-  /** 莊龍寶 */
+  /** Dealer dragon */
   dealerDragonAmount?: InputMaybe<Scalars['Float']>;
-  /** 押莊對金額 */
+  /** Dealer king */
+  dealerKingAmount?: InputMaybe<Scalars['Float']>;
+  /** Dealer pair */
   dealerPairAmount?: InputMaybe<Scalars['Float']>;
-  /** 莊單 */
+  /** Dealer single */
   dealerSingleAmount?: InputMaybe<Scalars['Float']>;
   /** 裝置資訊 */
   deviceInfo: Scalars['JSON'];
-  /** 押閒金額 */
+  /** 遊戲類型(normal/super6) */
+  gameType?: InputMaybe<Scalars['String']>;
+  /** Perfect pair */
+  perfectPairAmount?: InputMaybe<Scalars['Float']>;
+  /** Player */
   playerAmount?: InputMaybe<Scalars['Float']>;
-  /** 閒雙 */
+  /** Player double */
   playerDoubleAmount?: InputMaybe<Scalars['Float']>;
-  /** 莊龍寶 */
+  /** Player dragon */
   playerDragonAmount?: InputMaybe<Scalars['Float']>;
-  /** 押閒對金額 */
+  /** Player king */
+  playerKingAmount?: InputMaybe<Scalars['Float']>;
+  /** Player pair */
   playerPairAmount?: InputMaybe<Scalars['Float']>;
-  /** 閒單 */
+  /** Player single */
   playerSingleAmount?: InputMaybe<Scalars['Float']>;
-  /** 押小金額 */
+  /** Small */
   smallAmount?: InputMaybe<Scalars['Float']>;
-  /** 押幸運6金額 */
+  /** Super6 */
   super6Amount?: InputMaybe<Scalars['Float']>;
-  /** 押和金額 */
+  /** Super tie 0 */
+  superTie0Amount?: InputMaybe<Scalars['Float']>;
+  /** Super tie 1 */
+  superTie1Amount?: InputMaybe<Scalars['Float']>;
+  /** Super tie 2 */
+  superTie2Amount?: InputMaybe<Scalars['Float']>;
+  /** Super tie 3 */
+  superTie3Amount?: InputMaybe<Scalars['Float']>;
+  /** Super tie 4 */
+  superTie4Amount?: InputMaybe<Scalars['Float']>;
+  /** Super tie 5 */
+  superTie5Amount?: InputMaybe<Scalars['Float']>;
+  /** Super tie 6 */
+  superTie6Amount?: InputMaybe<Scalars['Float']>;
+  /** Super tie 7 */
+  superTie7Amount?: InputMaybe<Scalars['Float']>;
+  /** Super tie 8 */
+  superTie8Amount?: InputMaybe<Scalars['Float']>;
+  /** Super tie 9 */
+  superTie9Amount?: InputMaybe<Scalars['Float']>;
+  /** Tie */
   tieAmount?: InputMaybe<Scalars['Float']>;
 };
 
@@ -2045,6 +2211,10 @@ export type CsReadTicketMessagesPayload = {
 
 export type CurrentBaccaratBetRecord = {
   __typename: 'CurrentBaccaratBetRecord';
+  /** 押任意對子金額 */
+  anyPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押任意對子派彩 */
+  anyPairDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押大金額 */
   bigAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押大派彩 */
@@ -2053,36 +2223,60 @@ export type CurrentBaccaratBetRecord = {
   dealerAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押莊派彩 */
   dealerDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 莊雙 */
+  /** 押莊雙金額 */
   dealerDoubleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 閒龍寶 */
+  /** 押莊雙派彩 */
+  dealerDoubleDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押莊龍寶金額 */
   dealerDragonAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押莊龍寶派彩 */
+  dealerDragonDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押莊例牌金額 */
+  dealerKingAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押莊例牌派彩 */
+  dealerKingDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押莊對金額 */
   dealerPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押莊對派彩 */
   dealerPairDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 莊單 */
+  /** 押莊單金額 */
   dealerSingleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押莊單派彩 */
+  dealerSingleDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 遊戲局號 */
   gameNo: Maybe<FieldWrapper<Scalars['String']>>;
   /** 是否已派彩 */
   hasResult: Maybe<FieldWrapper<Scalars['Boolean']>>;
   /** ID */
   id: FieldWrapper<Scalars['ID']>;
+  /** 押完美對子金額 */
+  perfectPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押完美對子派彩 */
+  perfectPairDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押閒金額 */
   playerAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押閒派彩 */
   playerDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 閒雙 */
+  /** 押閒雙金額 */
   playerDoubleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 閒龍寶 */
+  /** 押閒雙派彩 */
+  playerDoubleDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押閒龍寶金額 */
   playerDragonAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押閒龍寶派彩 */
+  playerDragonDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押閒例牌金額 */
+  playerKingAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押閒例牌派彩 */
+  playerKingDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押閒對金額 */
   playerPairAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押閒對派彩 */
   playerPairDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 閒單 */
+  /** 押閒單金額 */
   playerSingleAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押閒單派彩 */
+  playerSingleDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 房名 */
   roomName: Maybe<FieldWrapper<Scalars['String']>>;
   /** 押小金額 */
@@ -2091,11 +2285,51 @@ export type CurrentBaccaratBetRecord = {
   smallDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 押幸運6金額 */
   super6Amount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押幸運派彩 */
+  /** 押幸運6派彩 */
   super6DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押和金額 */
+  /** 押超和0金額 */
+  superTie0Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和0派彩 */
+  superTie0DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和1金額 */
+  superTie1Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和1派彩 */
+  superTie1DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和2金額 */
+  superTie2Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和2派彩 */
+  superTie2DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和3金額 */
+  superTie3Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和3派彩 */
+  superTie3DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和4金額 */
+  superTie4Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和4派彩 */
+  superTie4DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和5金額 */
+  superTie5Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和5派彩 */
+  superTie5DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和6金額 */
+  superTie6Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和6派彩 */
+  superTie6DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和7金額 */
+  superTie7Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和7派彩 */
+  superTie7DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和8金額 */
+  superTie8Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和8派彩 */
+  superTie8DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和9金額 */
+  superTie9Amount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** 押超和9派彩 */
+  superTie9DiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
+  /** Tie amount */
   tieAmount: Maybe<FieldWrapper<Scalars['Float']>>;
-  /** 押和派彩 */
+  /** Tie diff amount */
   tieDiffAmount: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 總押注金額 */
   totalAmount: Maybe<FieldWrapper<Scalars['Float']>>;
