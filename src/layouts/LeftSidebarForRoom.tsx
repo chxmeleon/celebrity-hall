@@ -34,7 +34,7 @@ const LeftSidebarForRoom = () => {
 
 
   return (
-    <div className="hidden md:flex flex-shrink-0 px-1.5 w-0 text-center md:py-5 md:px-7 md:w-52 border-r-[0.5px] border-r-theme-75">
+    <div className="hidden md:flex flex-shrink-0 px-1.5 w-0 text-center md:py-5 md:px-7 md:w-44 border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full">
         <section className="hidden pb-6 w-full md:block">
           <div className="flex">
@@ -54,7 +54,7 @@ const LeftSidebarForRoom = () => {
               <div className="m-auto w-2/3 h-11 text-sm">
                 <div className="m-auto w-2/3 text-left">
                   <p className="truncate">{user?.profile?.nickname}</p>
-                  <p className="pt-1 truncate text-theme-300">
+                  <p className="pt-1 truncate text-theme-300 text-xs">
                     {user?.profile?.balance}
                   </p>
                 </div>

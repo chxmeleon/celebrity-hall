@@ -337,11 +337,11 @@ const Room = () => {
                   </div>
                 </div>
 
-                <div className="h-full w-[117px]">
+                <div className="h-full w-[111px]">
                   <AskGrid />
                 </div>
               </div>
-              <div className="w-[11%] h-full">
+              <div className="w-[13%] h-full">
                 <QuickRoads />
               </div>
 

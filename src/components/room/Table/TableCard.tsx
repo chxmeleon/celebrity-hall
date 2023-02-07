@@ -240,14 +240,14 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
 
       <div className="flex relative flex-col w-full">
         <div className="flex w-full bg-gray-50">
-          <div className="w-[38%]">
+          <div className="w-[39%]">
             {room && (
               <BeadRoad columnSize={6} roads={room.roads.bead_road.array} />
             )}
           </div>
-          <div className="w-[62%]">
+          <div className="w-[62.2%]">
             {room && (
-              <BigRoad columnSize={15} roads={room.roads.big_road.array} />
+              <BigRoad columnSize={14} roads={room.roads.big_road.array} />
             )}
             <div className="flex w-full h-2/5">
               <div className="w-1/3">
@@ -277,7 +277,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
             </div>
           </div>
         </div>
-        <div className="h-[34px]">
+        <div className="w-full h-[29px]">
           <AskGridMobile />
         </div>
       </div>
