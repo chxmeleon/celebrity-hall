@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
 
 
-const Progress: React.FC<PropsWithChildren> = ({ children }) => {
+export const Progress: React.FC<PropsWithChildren> = ({ children }) => {
   const { isTablesPath } = useContext(RoomDataContext)
   const countDownStyle = cx(
     'border-theme-300 w-[82%] h-[82%] rounded-full absolute  border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
