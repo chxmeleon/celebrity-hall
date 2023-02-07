@@ -110,7 +110,7 @@ const ChatRoom = () => {
     setNewMessage('')
   }
 
-  const [showSnow, setShowSnow] = useState(true)
+  const [showSnow, setShowSnow] = useState(false)
   const onEnd = () => {
     setShowSnow(false)
   }
