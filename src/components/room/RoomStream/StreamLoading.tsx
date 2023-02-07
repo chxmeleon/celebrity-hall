@@ -1,5 +1,5 @@
 import { clsx as cx } from 'clsx'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, useMemo } from 'react'
 import LogoImg from '/login_logo.webp'
 import BgImg from '/login_bg.avif'
 import { FormattedMessage } from 'react-intl'
@@ -24,11 +24,12 @@ export const Progress: React.FC<PropsWithChildren> = ({ children }) => {
 }
 
 const Loading: React.FC = () => {
+  const loadingBgImg  = useMemo(() => BgImg, [])
   const { isTablesPath } = useContext(RoomDataContext)
   return (
     <div className="flex absolute z-30 flex-col w-full h-full">
       <div className="absolute overflow-hidden w-full h-full">
-        <img src={BgImg} alt="bg image"  className="w-full h-full object-cover" />
+        <img src={loadingBgImg} alt="bg image"  className="w-full h-full object-cover" />
       </div>
       <div className={cx("m-auto ", isTablesPath ? 'w-28 h-28' : 'md:w-48 md:h-48 w-32 h-32' )}>
         <Progress>

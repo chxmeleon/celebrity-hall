@@ -134,103 +134,107 @@ const Room = () => {
   return (
     <>
       <Responsive.Desktop className="w-full h-full">
-        <section className="flex relative flex-col w-full h-full">
-          <div className="relative w-full h-4/5">
-            {isSecondCam && secoundStreamName && secoundStreamKey ? (
-              <RoomStream
-                streamName={secoundStreamName}
-                streamKey={secoundStreamKey}
-                videoOn={true}
-                isWebRTC={isWebRTC}
-              />
-            ) : streamName && streamKey ? (
-              <RoomStream
-                streamName={streamName}
-                streamKey={streamKey}
-                videoOn={true}
-                isWebRTC={isWebRTC}
-              />
-            ) : (
-              <Loading />
-            )}
-            <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
-              <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
-                <div className="flex flex-col justify-around items-end h-24">
-                  <Tooltip
-                    content={formatMessage({
-                      id: 'components.stream.camSwitch',
-                      defaultMessage: 'Switch Camera'
-                    })}
-                    placement="left"
-                  >
-                    <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
-                      <button
-                        disabled={
-                          secoundStreamKey === undefined &&
-                          secoundStreamName === undefined
-                        }
-                        onClick={handleSwitchCam}
-                        className={cx(
-                          isSecondCam ? 'text-theme-300' : '',
-                          secoundStreamKey === undefined &&
+        {rooms.length ? (
+          <section className="flex relative flex-col w-full h-full">
+            <div className="relative w-full h-4/5">
+              {isSecondCam && secoundStreamName && secoundStreamKey ? (
+                <RoomStream
+                  streamName={secoundStreamName}
+                  streamKey={secoundStreamKey}
+                  videoOn={true}
+                  isWebRTC={isWebRTC}
+                />
+              ) : streamName && streamKey ? (
+                <RoomStream
+                  streamName={streamName}
+                  streamKey={streamKey}
+                  videoOn={true}
+                  isWebRTC={isWebRTC}
+                />
+              ) : (
+                <Loading />
+              )}
+              <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
+                <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
+                  <div className="flex flex-col justify-around items-end h-24">
+                    <Tooltip
+                      content={formatMessage({
+                        id: 'components.stream.camSwitch',
+                        defaultMessage: 'Switch Camera'
+                      })}
+                      placement="left"
+                    >
+                      <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
+                        <button
+                          disabled={
+                            secoundStreamKey === undefined &&
                             secoundStreamName === undefined
-                            ? 'text-gray-500 hover:cursor-not-allowed'
-                            : '',
-                          'm-auto text-2xl i-heroicons-video-camera-20-solid'
-                        )}
-                      ></button>
-                    </div>
-                  </Tooltip>
-                  <Tooltip
-                    content={formatMessage({
-                      id: 'components.stream.streamSwitch',
-                      defaultMessage: 'Switch Line'
-                    })}
-                    placement="left"
-                  >
-                    <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
-                      <button
-                        onClick={handleSwitchStream}
-                        className={`${
-                          isWebRTC ? 'text-theme-300' : ''
-                        } m-auto text-2xl i-heroicons-wifi-20-solid`}
-                      ></button>
-                    </div>
-                  </Tooltip>
-                </div>
-              </div>
-              <div className="relative w-full h-[63%] grid grid-cols-3">
-                <div className="flex justify-start items-end pb-2 pl-4">
-                  <div className="w-[360px] h-[76%]">
-                    <PokerResult roomId={room?.id ?? ''} />
+                          }
+                          onClick={handleSwitchCam}
+                          className={cx(
+                            isSecondCam ? 'text-theme-300' : '',
+                            secoundStreamKey === undefined &&
+                              secoundStreamName === undefined
+                              ? 'text-gray-500 hover:cursor-not-allowed'
+                              : '',
+                            'm-auto text-2xl i-heroicons-video-camera-20-solid'
+                          )}
+                        ></button>
+                      </div>
+                    </Tooltip>
+                    <Tooltip
+                      content={formatMessage({
+                        id: 'components.stream.streamSwitch',
+                        defaultMessage: 'Switch Line'
+                      })}
+                      placement="left"
+                    >
+                      <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
+                        <button
+                          onClick={handleSwitchStream}
+                          className={`${
+                            isWebRTC ? 'text-theme-300' : ''
+                          } m-auto text-2xl i-heroicons-wifi-20-solid`}
+                        ></button>
+                      </div>
+                    </Tooltip>
                   </div>
                 </div>
-                <div className="flex relative justify-center">
-                  <WinAndLoseResult gameState={gameState} />
-                </div>
-                <div className="flex flex-col h-full">
-                  <div className="flex-grow pt-32">
-                    <div className="m-auto h-32 aspect-square">
-                      <Timer roomId={room?.id ?? ''} />
+                <div className="relative w-full h-[63%] grid grid-cols-3">
+                  <div className="flex justify-start items-end pb-2 pl-4">
+                    <div className="w-[360px] h-[76%]">
+                      <PokerResult roomId={room?.id ?? ''} />
                     </div>
                   </div>
-                  <div className="flex justify-center items-end pb-2 h-12">
-                    <RoomNotification
-                      isConfirmedSuccess={btnState.isConfirmSuccess}
-                      isConfirmedFailure={btnState.isConfirmFailure}
-                      isRepeatSuccess={btnState.isRepeatSuccess}
-                      gameState={gameState}
-                    />
+                  <div className="flex relative justify-center">
+                    <WinAndLoseResult gameState={gameState} />
+                  </div>
+                  <div className="flex flex-col h-full">
+                    <div className="flex-grow pt-32">
+                      <div className="m-auto h-32 aspect-square">
+                        <Timer roomId={room?.id ?? ''} />
+                      </div>
+                    </div>
+                    <div className="flex justify-center items-end pb-2 h-12">
+                      <RoomNotification
+                        isConfirmedSuccess={btnState.isConfirmSuccess}
+                        isConfirmedFailure={btnState.isConfirmFailure}
+                        isRepeatSuccess={btnState.isRepeatSuccess}
+                        gameState={gameState}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex-grow flex-shrink-0 w-full">
-                <BetDesk isDisabled={btnState.isDisable} isToggle={isChangedDesk} />
-              </div>
-              <div className="flex justify-between items-center px-2 my-2 w-full h-10">
-                <div className="flex items-center w-[30%]">
-                  {/* gameplay's switch */}
-                  {/* <button
+                <div className="flex-grow flex-shrink-0 w-full">
+                  <BetDesk
+                    isDisabled={btnState.isDisable}
+                    isToggle={isChangedDesk}
+                  />
+                </div>
+                <div className="flex justify-between items-center px-2 my-2 w-full h-10">
+                  <div className="flex items-center w-[30%]">
+                    {/* gameplay's switch */}
+                    {/* <button
                 onClick={handleSwitchDesk}
                 className={`${
                   isChangedDesk
@@ -246,7 +250,7 @@ const Room = () => {
                   } text-2xl `}
                 ></div>
               </button> */}
-                  {/* <button onClick={handleRegularToggle} className="px-1 ml-2">
+                    {/* <button onClick={handleRegularToggle} className="px-1 ml-2">
                 <div
                   className={`${
                     isRegular
@@ -261,109 +265,117 @@ const Room = () => {
                   )}
                 </div>
               </button> */}
-                  <div className="inline-flex items-center px-2">
-                    <FormattedMessage id="screens.room.bet" />
-                    <p className="px-2">|</p>
-                    <p className="px-2">{totalAmount?.toLocaleString()}</p>
+                    <div className="inline-flex items-center px-2">
+                      <FormattedMessage id="screens.room.bet" />
+                      <p className="px-2">|</p>
+                      <p className="px-2">{totalAmount?.toLocaleString()}</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-around items-center w-1/3">
+                    <ChipButtonList
+                      selectedChip={selectedChip}
+                      onSelectedChipChanged={setSelectedChip}
+                    />
+                    {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
+                    {/*   <button className="text-xl i-heroicons-play-pause-solid" /> */}
+                    {/* </div> */}
+                    {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
+                    {/*   <button className="text-xl i-heroicons-pencil-square-20-solid" /> */}
+                    {/* </div> */}
+                  </div>
+                  <div className="flex justify-around pl-4 w-[33%] text-theme-300">
+                    <BetButton
+                      isDisabled={btnState.isCancelDisabled}
+                      onClick={() => onCancel(roomId ?? '')}
+                    >
+                      <div className="text-2xl i-heroicons-x-mark-solid"></div>
+                      <FormattedMessage id="common.cancel" />
+                    </BetButton>
+                    <BetButton
+                      isDisabled={btnState.isRepeatDisabled}
+                      onClick={() => onRepeat(roomId ?? '')}
+                    >
+                      <div className="text-2xl i-heroicons-arrow-path-solid"></div>
+                      <FormattedMessage id="common.repeat" />
+                    </BetButton>
+                    <BetButton
+                      isDisabled={btnState.isConfirmDisabled}
+                      onClick={(e) => onConfirm(e, roomId ?? '')}
+                    >
+                      <div className="text-2xl i-heroicons-check-solid"></div>
+                      <FormattedMessage id="common.confirm" />
+                    </BetButton>
                   </div>
                 </div>
-                <div className="flex justify-around items-center w-1/3">
-                  <ChipButtonList
-                    selectedChip={selectedChip}
-                    onSelectedChipChanged={setSelectedChip}
+              </div>
+            </div>
+
+            {room && (
+              <div className="flex w-full h-[20%] bg-gray-50">
+                <div className="flex flex-grow justify-start">
+                  <BeadRoad
+                    columnSize={6}
+                    className="w-[152px]"
+                    roads={room.roads.bead_road.array}
                   />
-                  {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
-                  {/*   <button className="text-xl i-heroicons-play-pause-solid" /> */}
-                  {/* </div> */}
-                  {/* <div className="flex justify-center items-center w-10 h-10 rounded-full bg-theme-50/90 text-theme-300"> */}
-                  {/*   <button className="text-xl i-heroicons-pencil-square-20-solid" /> */}
-                  {/* </div> */}
+
+                  <div className="flex-grow">
+                    <div>
+                      <BigRoad
+                        columnSize={30}
+                        roads={room.roads.big_road.array}
+                      />
+                    </div>
+                    <div className="flex w-full">
+                      <BigEyeRoad
+                        className="w-1/3 h-full"
+                        columnSize={16}
+                        roads={room.roads.big_eye_road.graph}
+                      />
+
+                      <SmallRoad
+                        className="w-1/3 h-full"
+                        columnSize={16}
+                        roads={room.roads.small_road.graph}
+                      />
+
+                      <CockroachRoad
+                        className="w-1/3 h-full"
+                        columnSize={16}
+                        roads={room.roads.cockroach_road.graph}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="h-full w-[111px]">
+                    <AskGrid />
+                  </div>
                 </div>
-                <div className="flex justify-around pl-4 w-[33%] text-theme-300">
-                  <BetButton isDisabled={btnState.isCancelDisabled} onClick={() => onCancel(roomId?? '')}>
-                    <div className="text-2xl i-heroicons-x-mark-solid"></div>
-                    <FormattedMessage id="common.cancel" />
-                  </BetButton>
-                  <BetButton isDisabled={btnState.isRepeatDisabled} onClick={() => onRepeat(roomId ?? '')}>
-                    <div className="text-2xl i-heroicons-arrow-path-solid"></div>
-                    <FormattedMessage id="common.repeat" />
-                  </BetButton>
-                  <BetButton
-                    isDisabled={btnState.isConfirmDisabled}
-                    onClick={(e) => onConfirm(e, roomId ?? '')}
+                <div className="w-[13%] h-full">
+                  <QuickRoads rooms={rooms} />
+                </div>
+                <div className="relative w-[29%] h-full">
+                  <div
+                    className={cx(
+                      'absolute bottom-0 w-full h-full flex justify-center items-center right-0 bg-theme-50/60 z-50',
+                      isTrial ? 'block' : 'hidden'
+                    )}
                   >
-                    <div className="text-2xl i-heroicons-check-solid"></div>
-                    <FormattedMessage id="common.confirm" />
-                  </BetButton>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {room && (
-            <div className="flex w-full h-[20%] bg-gray-50">
-              <div className="flex flex-grow justify-start">
-                <BeadRoad
-                  columnSize={6}
-                  className="w-[152px]"
-                  roads={room.roads.bead_road.array}
-                />
-
-                <div className="flex-grow">
-                  <div >
-                    <BigRoad
-                      columnSize={30}
-                      roads={room.roads.big_road.array}
-                    />
+                    <div className="text-xl text-white">
+                      <FormattedMessage
+                        id="common.disabledForTrial"
+                        defaultMessage="Disabled For Trial"
+                      />
+                    </div>
                   </div>
-                  <div className="flex w-full ">
-                    <BigEyeRoad
-                      className="w-1/3 h-full"
-                      columnSize={16}
-                      roads={room.roads.big_eye_road.graph}
-                    />
-
-                    <SmallRoad
-                      className="w-1/3 h-full"
-                      columnSize={16}
-                      roads={room.roads.small_road.graph}
-                    />
-
-                    <CockroachRoad
-                      className="w-1/3 h-full"
-                      columnSize={16}
-                      roads={room.roads.cockroach_road.graph}
-                    />
-                  </div>
-                </div>
-
-                <div className="h-full w-[111px]">
-                  <AskGrid />
+                  <ChatRoom />
                 </div>
               </div>
-              <div className="w-[13%] h-full">
-                <QuickRoads />
-              </div>
-
-              <div className="relative w-[29%] h-full">
-                <div
-                  className={cx(
-                    'absolute bottom-0 w-full h-full flex justify-center items-center right-0 bg-theme-50/60 z-50',
-                    isTrial ? 'block' : 'hidden'
-                  )}
-                >
-                  <div className="text-xl text-white">
-                    <FormattedMessage
-                      id="common.disabledForTrial"
-                      defaultMessage="Disabled For Trial"
-                    />
-                  </div>
-                </div>
-                <ChatRoom />
-              </div>
-            </div>
-          )}
-        </section>
+            )}
+          </section>
+        ) : (
+          <Loading />
+        )}
       </Responsive.Desktop>
 
       <Responsive.Default className="w-full h-full bg-theme-50">
@@ -513,7 +525,7 @@ const Room = () => {
                 <BetButton
                   className="mx-1 text-md"
                   isDisabled={btnState.isConfirmDisabled}
-                  onClick={(e)=>onConfirm(e, roomId ?? '')}
+                  onClick={(e) => onConfirm(e, roomId ?? '')}
                 >
                   <div className="i-heroicons-check-solid"></div>
                   <FormattedMessage id="common.confirm" />

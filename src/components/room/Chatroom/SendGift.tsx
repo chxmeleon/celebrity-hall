@@ -10,6 +10,7 @@ import { GET_PROFILE } from '@/gql/profile'
 import defaultAvatar from '/user.png'
 
 interface GiftPorps {
+  onTriggerAnimation: React.Dispatch<React.SetStateAction<boolean>> 
   clickRef: React.LegacyRef<HTMLImageElement> | undefined
   isShow: boolean
   setIsShow: React.Dispatch<React.SetStateAction<boolean>>
@@ -18,6 +19,7 @@ interface GiftPorps {
 }
 
 const SendGift: React.FC<GiftPorps> = ({
+  onTriggerAnimation,
   clickRef,
   onClick,
   isShow,
@@ -57,15 +59,18 @@ const SendGift: React.FC<GiftPorps> = ({
       } catch (error) {
         console.log(error)
       }
+      onTriggerAnimation(true)
+      setTimeout(() => {
+        onTriggerAnimation(false)
+      }, 2000)
     }
   }
 
   return (
     <div ref={clickRef}>
       <div
-        className={`${
-          isShow ? '' : 'hidden'
-        } absolute right-0 bottom-8 z-30 my-1 w-full`}
+        className={`${isShow ? '' : 'hidden'
+          } absolute right-0 bottom-8 z-30 my-1 w-full`}
       >
         <div className="py-1 px-3 w-full h-full bg-white rounded-md border border-gray-300">
           <div className="flex justify-center items-center mb-1 w-full h-12 text-theme-50">
@@ -135,11 +140,10 @@ const SendGift: React.FC<GiftPorps> = ({
             </div>
             <div
               onClick={handleSendGift}
-              className={`py-2 px-4 font-medium bg-amber-400 rounded-lg   ${
-                isDisable
+              className={`py-2 px-4 font-medium bg-amber-400 rounded-lg   ${isDisable
                   ? 'hover:cursor-not-allowed hover:bg-gray-300 pointer-events-none'
                   : 'hover:cursor-pointer active:bg-yellow-300 hover:text-theme-300 active:text-theme-50 hover:bg-orange-500'
-              }`}
+                }`}
             >
               <FormattedMessage id="common.confirm" defaultMessage="Confirm" />
             </div>

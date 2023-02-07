@@ -65,6 +65,11 @@ const ChatroomMobile = () => {
   const [focused, setFocused] = useState(false)
   const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null)
 
+  const [showSnow, setShowSnow] = useState(true)
+  const onEnd = () => {
+    setShowSnow(false)
+  }
+
   useEffect(() => {
     if (focused) {
       inputRef?.focus()
@@ -208,6 +213,7 @@ const ChatroomMobile = () => {
             autoComplete="off"
           />
           <SendGift
+            onTriggerAnimation={setShowSnow}
             clickRef={setGiftRef}
             isShow={isGiftShow}
             setIsShow={setIsGiftShow}
