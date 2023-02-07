@@ -63,7 +63,8 @@ const BetArea: React.FC<{ target: number; type: string }> = ({
 export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
   isDisabled
 }) => {
-  const { selectedChip, betState, dispatchBet, isNoFee } = useContext(GamePlayContext)
+  const { selectedChip, betState, dispatchBet, isNoFee } =
+    useContext(GamePlayContext)
 
   return (
     <div className="relative w-full h-full">
@@ -293,7 +294,8 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 })
               }
               className={cx(
-                isDisabled ? 'bg-theme-50/50  pb-1' : '',
+                'pb-1',
+                isDisabled ? 'bg-theme-50/50 ' : '',
                 btnIdx.bn4
               )}
             >
@@ -500,7 +502,8 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 })
               }
               className={cx(
-                isDisabled ? 'bg-theme-50/50  pb-1' : '',
+                'pb-1',
+                isDisabled ? 'bg-theme-50/50' : '',
                 btnIdx.bn4
               )}
             >
