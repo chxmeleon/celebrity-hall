@@ -35,6 +35,7 @@ import SinglePlayerMobile from '@/components/room/BetDesk/SinglePlayerMobile'
 import RoomDataContext from '@/contexts/RoomDataContext'
 import Loading from '@/components/room/RoomStream/StreamLoading'
 import { Tooltip } from '@material-tailwind/react'
+import QuickRoads from '@/components/room/SwitchRoom'
 
 export const ChipButtonList: React.FC<{
   selectedChip: string
@@ -303,47 +304,48 @@ const Room = () => {
             <div className="flex w-full h-[20%] bg-gray-50">
               <div className="flex flex-grow justify-start">
                 <BeadRoad
-                  columnSize={8}
-                  className="w-[204px]"
+                  columnSize={6}
+                  className="w-[152px]"
                   roads={room.roads.bead_road.array}
                 />
 
-                <div className="w-[506px]">
-                  <div>
+                <div className="flex-grow">
+                  <div >
                     <BigRoad
                       columnSize={30}
                       roads={room.roads.big_road.array}
                     />
                   </div>
-
-                  <div className="flex w-full">
+                  <div className="flex w-full ">
                     <BigEyeRoad
-                      className="w-1/3"
-                      columnSize={20}
+                      className="w-1/3 h-full"
+                      columnSize={16}
                       roads={room.roads.big_eye_road.graph}
                     />
 
                     <SmallRoad
-                      className="w-1/3"
-                      columnSize={20}
+                      className="w-1/3 h-full"
+                      columnSize={16}
                       roads={room.roads.small_road.graph}
                     />
 
                     <CockroachRoad
-                      className="w-1/3"
-                      columnSize={20}
+                      className="w-1/3 h-full"
+                      columnSize={16}
                       roads={room.roads.cockroach_road.graph}
                     />
                   </div>
                 </div>
 
-                <div className="h-full w-[152px]">
+                <div className="h-full w-[117px]">
                   <AskGrid />
                 </div>
               </div>
-              {/* <div className="w-[11%] h-full flex-shrink-0"></div> */}
+              <div className="w-[11%] h-full">
+                <QuickRoads />
+              </div>
 
-              <div className="relative w-[30%] h-full">
+              <div className="relative w-[29%] h-full">
                 <div
                   className={cx(
                     'absolute bottom-0 w-full h-full flex justify-center items-center right-0 bg-theme-50/60 z-50',
