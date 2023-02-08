@@ -82,13 +82,19 @@ const LeftSidebarForRoom = () => {
             <LinkButton href="/home/liverooms" isTarget={false}>
               <FormattedMessage
                 id="layout.liverooms"
-                defaultMessage="Live Rooms"
+                defaultMessage="Live Hall"
               />
             </LinkButton>
             <LinkButton href="/home/mutualrooms" isTarget={false}>
               <FormattedMessage
                 id="layout.mutualrooms"
-                defaultMessage="Mutual Rooms"
+                defaultMessage="Mutual Hall"
+              />
+            </LinkButton>
+            <LinkButton href="/home/kgrooms" isTarget={false}>
+              <FormattedMessage
+                id="layout.kgrooms"
+                defaultMessage="KG Hall"
               />
             </LinkButton>
             {/* <LinkButton href="/home/following" isTarget={false}> */}

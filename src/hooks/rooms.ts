@@ -1,18 +1,12 @@
-import { useParams } from 'react-router-dom'
+import { RoomProps } from '@/types/room'
 import { useQuery } from '@apollo/client'
 import {
+  GET_BACCARATROOMS,
   GET_CURRENT_BACCARAT_ROOM,
   GET_CURRENT_COUNTDOWN
 } from '@/gql/baccaratrooms'
 import StreamLatencyContext from '@/contexts/StreamLatencyContext'
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import types from '@/types'
 
@@ -43,6 +37,30 @@ export const convertStatus = (status: string | null | undefined) => {
     case 'sos_recover':
       return 'SOS_RECOVER'
   }
+}
+
+export const useGetRoomData = (type: string) => {
+  const [rooms, setRooms] = useState<RoomProps[]>([])
+  const { data, refetch } = useQuery<types.GET_BACCARATROOMS>(
+    GET_BACCARATROOMS,
+    { variables: { type } }
+  )
+
+  useEffect(() => {
+    if (data?.activeBaccaratRooms) {
+      setRooms(data?.activeBaccaratRooms)
+    }
+  }, [data])
+
+  const allData = useMemo(
+    () => ({
+      rooms,
+      refetch
+    }),
+    [rooms, refetch]
+  )
+
+  return allData 
 }
 
 export const useCurrentGame = (roomId: string | undefined) => {

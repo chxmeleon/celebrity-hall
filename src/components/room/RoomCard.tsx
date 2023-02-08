@@ -16,7 +16,8 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
   const { counter, startCount, isLeftTen, isOpening, isClose } = useTimeLeft(
     room.id
   )
-  const { refetchAllRooms: refetchRooms } = useContext(RoomDataContext)
+  const { useGetRoomData } = useContext(RoomDataContext)
+  const { refetch: refetchRooms } = useGetRoomData('all')
   const href = `/home/rooms/${room.id}`
   const girl = room.girl
 
@@ -32,17 +33,19 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
         <div className="flex flex-col w-full h-full rounded-2xl bg-theme-50">
           <div className="flex justify-start items-center pl-4 w-full h-12">
             <div
-              className={`${isLeftTen && startCount && counter !== undefined && counter > 0
+              className={`${
+                isLeftTen && startCount && counter !== undefined && counter > 0
                   ? 'bg-red-500'
                   : 'bg-link-button-54'
-                }
+              }
               rounded-sm p-[1.1px] `}
             >
               <div className="w-6 h-6 text-center rounded-sm bg-theme-50">
                 {startCount && counter !== undefined && counter > 0 ? (
                   <p
-                    className={`${isLeftTen ? 'text-red-500' : 'text-theme-300'
-                      } font-bold`}
+                    className={`${
+                      isLeftTen ? 'text-red-500' : 'text-theme-300'
+                    } font-bold`}
                   >
                     {counter}
                   </p>
