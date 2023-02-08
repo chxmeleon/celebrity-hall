@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { numberFormmat } from '@/hooks/bet'
+import { useWallet } from '@/hooks/profile'
 
 type MultiProps = {
   isActive: boolean
@@ -26,13 +27,13 @@ const MultiGrid: React.FC<MultiProps> = ({ isActive, idx }) => {
 }
 
 const userData = [
-  { id: 0, username: 'A', balance: 1889 },
-  { id: 1, username: 'B', balance: 1117 },
-  { id: '', username: '', balance: '' },
-  { id: '', username: '', balance: '' },
-  { id: 4, username: 'ewpe', balance: 12 },
-  { id: 5, username: 'eeasdf', balance: 21 },
-  { id: '', username: '', balance: '' }
+  { username: '', balance: '' },
+  { username: '', balance: '' },
+  { username: '', balance: '' },
+  { username: '', balance: '' },
+  { username: '', balance: '' },
+  { username: '', balance: '' },
+  { username: '', balance: '' }
 ]
 
 const multipleGrid = userData.map((item: any, idx: number) => {
@@ -78,8 +79,8 @@ const BetArea: React.FC<{ target: number }> = ({ target }) => {
                 target < 10000
                 ? 'text-[9px] font-bold'
                 : (target / 10000).toString().length > 3 && target >= 10000
-                ? 'text-[9px] font-bold'
-                : ''
+                  ? 'text-[9px] font-bold'
+                  : ''
             )}
           >
             {numberFormmat(target)}
@@ -90,11 +91,15 @@ const BetArea: React.FC<{ target: number }> = ({ target }) => {
   )
 }
 
-export const MultiplePlayers: React.FC<{ isDisabled: boolean }> = ({
-  isDisabled
-}) => {
+export const MultiplePlayers: React.FC<{
+  isDisabled: boolean
+  targetsData: { [key: string]: [] }
+}> = ({ isDisabled, targetsData }) => {
   const { selectedChip, betState, dispatchBet, isNoFee } =
     useContext(GamePlayContext)
+  const { user } = useWallet()
+  const { profile } = user
+
 
   return (
     <>

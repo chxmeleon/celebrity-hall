@@ -8,6 +8,7 @@ import { Tooltip } from '@material-tailwind/react'
 const LeftSidebar = () => {
   const { user } = useWallet()
   const { formatMessage } = useIntl()
+  
   const linkLisetMapper = [
     {
       href: '/home/rooms/all',
@@ -73,7 +74,7 @@ const LeftSidebar = () => {
               </div>
               <div className="m-auto w-2/3 h-11 text-sm">
                 <div className="m-auto w-2/3 text-left">
-                  <p className="truncate">{user?.profile?.nickname}</p>
+                  <p className="truncate">{user?.profile?.nickname ?? user?.profile?.username}</p>
                   <p className="pt-1 text-xs truncate text-theme-300">
                     {user?.profile?.balance}
                   </p>
