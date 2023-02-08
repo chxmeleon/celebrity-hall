@@ -6,7 +6,6 @@ import Loading from '@/components/room/RoomStream/StreamLoading'
 import { Responsive } from '@/hooks/useResponsive'
 import TableCardMobile from '@/components/room/Table/TableCardMobile'
 
-
 const Tables = () => {
   const { useGetRoomData } = useContext(RoomDataContext)
   const { rooms } = useGetRoomData('all')
@@ -29,10 +28,10 @@ const Tables = () => {
         )}
       </Responsive.Desktop>
 
-      <Responsive.Default>
+      <Responsive.Default className="w-full h-full">
         {rooms.length ? (
-          <div className="w-full overflow-hidden">
-            {rooms.slice(4, 8).map((item, idx) => (
+          <div className="overflow-y-scroll w-full h-full">
+            {rooms.map((item, idx) => (
               <div key={idx}>
                 <GamePlayProvider>
                   <TableCardMobile room={item} />
@@ -43,7 +42,6 @@ const Tables = () => {
         ) : (
           <Loading />
         )}
-
       </Responsive.Default>
     </>
   )

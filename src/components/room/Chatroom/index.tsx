@@ -10,8 +10,7 @@ import { v4 as uuidV4 } from 'uuid'
 import defaultAvatar from '/user.png'
 import SendGift from './SendGift'
 import { useClickOutside } from '@/hooks/common'
-import { SnowMoney } from './snow'
-import Snowfall from 'react-snowfall'
+import GiftAnimation from './GiftAnimation'
 
 type ContentProps = {
   avatar: string
@@ -111,17 +110,11 @@ const ChatRoom = () => {
   }
 
   const [showSnow, setShowSnow] = useState(false)
-  const onEnd = () => {
-    setShowSnow(false)
-  }
+  const [gift, setGift] = useState('rose')
 
   return (
     <div className="flex flex-col w-full h-full bg-gray-50 border-gray-500 border-b-1">
-      <div className="absolute z-30 w-full h-full pointer-events-none">
-        <div className="relative w-full h-full">
-          {/* <Snowfall color="red" snowflakeCount={100} wind={[8, -8]} /> */}
-        </div>
-      </div>
+      <GiftAnimation isShow={showSnow} selectedGift={gift} />
       <div className="flex overflow-x-hidden flex-col-reverse flex-grow-0 w-full h-screen scroll-smooth">
         <div
           id="chat-content"
@@ -193,6 +186,8 @@ const ChatRoom = () => {
             autoComplete="off"
           />
           <SendGift
+            gift={gift}
+            setGift={setGift}
             onTriggerAnimation={setShowSnow}
             clickRef={setGiftRef}
             isShow={isGiftShow}

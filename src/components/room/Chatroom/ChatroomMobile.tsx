@@ -11,6 +11,7 @@ import { v4 as uuidV4 } from 'uuid'
 import defaultAvatar from '/user.png'
 import SendGift from './SendGift'
 import { useClickOutside } from '@/hooks/common'
+import GiftAnimation from './GiftAnimation'
 
 type ContentProps = {
   avatar: string
@@ -65,10 +66,9 @@ const ChatroomMobile = () => {
   const [focused, setFocused] = useState(false)
   const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null)
 
+
+  const [gift, setGift] = useState('rose')
   const [showSnow, setShowSnow] = useState(true)
-  const onEnd = () => {
-    setShowSnow(false)
-  }
 
   useEffect(() => {
     if (focused) {
@@ -132,6 +132,7 @@ const ChatroomMobile = () => {
 
   return (
     <div className="flex flex-col w-full h-full border-gray-500 border-b-1">
+      <GiftAnimation isShow={showSnow} selectedGift={gift} />
       <div
         className={cx(
           'flex overflow-x-hidden overflow-y-scroll flex-col-reverse flex-grow-0 w-full h-screen scroll-smooth',
@@ -213,6 +214,8 @@ const ChatroomMobile = () => {
             autoComplete="off"
           />
           <SendGift
+            gift={gift}
+            setGift={setGift}
             onTriggerAnimation={setShowSnow}
             clickRef={setGiftRef}
             isShow={isGiftShow}

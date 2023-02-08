@@ -79,8 +79,8 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room }) => {
   }, [gameState, dispatchBet, totalAmount, refetchRooms, dispatchBtn])
 
   return (
-    <div className="flex flex-col w-full h-full">
-      <div className="flex justify-between items-center py-1 px-2 w-full h-12 bg-theme-50/10">
+    <div className="w-full h-full">
+      <div className="flex justify-between items-center py-1 px-2 w-full h-8 bg-theme-50/10 text-sm">
         <div className="font-bold text-gray-50">{room.name}</div>
         <div className="flex px-3 rounded-full border border-theme-300 text-theme-300">
           <Link to={href} key={href} className="m-auto text-center">
@@ -91,155 +91,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room }) => {
           </Link>
         </div>
       </div>
-      <div className="relative w-full h-[266px] hidden">
-        <div className="absolute w-full h-full">
-          <div className="grid absolute z-20 grid-cols-3 grid-rows-2 w-full h-full">
-            <div className="flex pl-1">
-              <div className="flex flex-col justify-around items-end h-[72px]">
-                <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
-                  <Tooltip
-                    content={formatMessage({
-                      id: 'components.stream.camSwitch',
-                      defaultMessage: 'Switch Line'
-                    })}
-                    placement="right"
-                  >
-                    <button
-                      onClick={handleSwitchCam}
-                      className={`${
-                        isSecondCam ? 'text-theme-300' : ''
-                      } m-auto text-xl i-heroicons-video-camera-20-solid`}
-                    ></button>
-                  </Tooltip>
-                </div>
-                <div className="flex p-1 w-8 h-8 rounded-md bg-theme-50/80">
-                  <Tooltip
-                    content={formatMessage({
-                      id: 'components.stream.streamSwitch',
-                      defaultMessage: 'Switch Line'
-                    })}
-                    placement="right"
-                  >
-                    <button
-                      onClick={handleSwitchStream}
-                      className={`${
-                        isWebRTC ? 'text-theme-300' : ''
-                      } m-auto text-xl i-heroicons-wifi-20-solid`}
-                    ></button>
-                  </Tooltip>
-                </div>
-              </div>
-            </div>
-            <div></div>
-            <div className="flex m-auto w-14 aspect-square">
-              <Timer roomId={room.id} />
-            </div>
-            <div></div>
-            <div className="flex col-span-2 justify-end pb-1 w-full h-full">
-              <div className="flex flex-col justify-end items-end w-full">
-                <RoomNotification
-                  isConfirmedSuccess={btnState.isConfirmSuccess}
-                  isConfirmedFailure={btnState.isConfirmFailure}
-                  isRepeatSuccess={btnState.isRepeatSuccess}
-                  isTablesPath={isTablesPath}
-                  gameState={gameState}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="relative w-full h-full">
-            {isSecondCam && secoundStreamName && secoundStreamKey ? (
-              <RoomStreamMobile
-                streamName={secoundStreamName}
-                streamKey={secoundStreamKey}
-                videoOn={true}
-                isWebRTC={isWebRTC}
-                isTablesPath={isTablesPath}
-              />
-            ) : streamName && streamKey ? (
-              <RoomStreamMobile
-                streamName={streamName}
-                streamKey={streamKey}
-                videoOn={true}
-                isWebRTC={isWebRTC}
-                isTablesPath={isTablesPath}
-              />
-            ) : (
-              <Loading size='small' />
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className="relative w-full h-10">
-        <div className="flex absolute top-1.5 z-30 justify-center w-full pointer-events-none">
-          <WinAndLoseResult gameState={gameState} />
-        </div>
-        <div className="inline-flex items-center px-2 h-full text-xs">
-          <span>
-            <FormattedMessage id="screens.room.bet" />
-          </span>
-          <span className="px-2">|</span>
-          <span>{totalAmount?.toLocaleString()}</span>
-        </div>
-      </div>
-
-      <div className="flex relative flex-col w-full h-1/2">
-        <div className="absolute z-30 w-full h-full pointer-events-none">
-          <div className="px-2 pb-14 w-full h-full">
-            <PokerResult roomId={room.id} isTablesPath={isTablesPath} />
-          </div>
-        </div>
-
-        <div className="h-1/2">
-          <SinglePlayerMobile isDisabled={btnState.isDisable} />
-        </div>
-
-        <div className="flex flex-col w-full h-1/2">
-          <div className="grid grid-cols-4 grid-rows-2 gap-2 py-2.5 px-5 w-full">
-            <ChipButtonList
-              selectedChip={selectedChip}
-              onSelectedChipChanged={setSelectedChip}
-            />
-          </div>
-          <div className="flex justify-between items-center px-1 pt-1.5 pb-2.5 w-full">
-            <BetButton
-              className="mx-1 text-md"
-              isDisabled={btnState.isCancelDisabled}
-              onClick={() => onCancel(room.id)}
-            >
-              <div className="i-heroicons-x-mark-solid"></div>
-              <FormattedMessage id="common.cancel" />
-            </BetButton>
-            <BetButton
-              className="mx-1 text-md"
-              isDisabled={btnState.isRepeatDisabled}
-              onClick={() => onRepeat(room?.id)}
-            >
-              <div className="i-heroicons-arrow-path-solid"></div>
-              <FormattedMessage id="common.repeat" />
-            </BetButton>
-            <BetButton
-              className="mx-1 text-md"
-              isDisabled={btnState.isConfirmDisabled}
-              onClick={(e) => onConfirm(e, room?.id)}
-            >
-              <div className="i-heroicons-check-solid"></div>
-              <FormattedMessage id="common.confirm" />
-            </BetButton>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex relative flex-col w-full">
-        <div className="flex w-full bg-gray-50">
-          <div className="w-[39%]">
-            {room && (
-              <BeadRoad columnSize={6} roads={room.roads.bead_road.array} />
-            )}
-          </div>
-        </div>
-      </div>
+      <div className="h-32"></div>
     </div>
   )
 }
