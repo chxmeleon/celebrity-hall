@@ -112,7 +112,7 @@ const Room = () => {
 
   const { formatMessage } = useIntl()
   const { currentGameState } = useCurrentGameState(roomId ?? '')
-  const { gameState } = currentGameState
+  const { gameState, targets } = currentGameState
 
   useEffect(() => {
     if (gameState === 'START_BET' || gameState === 'UPDATE_AMOUNT') {
@@ -224,6 +224,7 @@ const Room = () => {
                   <BetDesk
                     isDisabled={btnState.isDisable}
                     isToggle={isChangedDesk}
+                    targetsData={targets}
                   />
                 </div>
                 <div className="flex justify-between items-center px-2 my-2 w-full h-10">

@@ -99,7 +99,7 @@ export const useCurrentGameState = (roomId: string | undefined) => {
   const [targets, setTargets] = useState<any | null>(null)
 
   useEffect(() => {
-    refetch()
+    /* refetch() */
     setGameState(convertStatus(currentGame?.status))
     setTargets(currentGame?.targets)
   }, [refetch, currentGame])
