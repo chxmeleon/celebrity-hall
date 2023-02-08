@@ -11,7 +11,7 @@ import defaultAvatar from '/user.png'
 import SendGift from './SendGift'
 import { useClickOutside } from '@/hooks/common'
 import { SnowMoney } from './snow'
-
+import Snowfall from 'react-snowfall'
 
 type ContentProps = {
   avatar: string
@@ -117,9 +117,9 @@ const ChatRoom = () => {
 
   return (
     <div className="flex flex-col w-full h-full bg-gray-50 border-gray-500 border-b-1">
-      <div className="absolute w-full h-full z-30 pointer-events-none">
-        <div className="relative w-full h-full ">
-          <SnowMoney isShow={showSnow} onEnd={onEnd} />
+      <div className="absolute z-30 w-full h-full pointer-events-none">
+        <div className="relative w-full h-full">
+          {/* <Snowfall color="red" snowflakeCount={100} wind={[8, -8]} /> */}
         </div>
       </div>
       <div className="flex overflow-x-hidden flex-col-reverse flex-grow-0 w-full h-screen scroll-smooth">

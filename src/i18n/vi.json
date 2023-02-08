@@ -527,5 +527,6 @@
   "profile.info.dividend": "Phần thưởng",
   "profile.info.balance": "Số dư",
   "ranking.card.timetable": "Thời gian",
-  "streams.loading": "Đang tải"
+  "streams.loading": "Đang tải",
+  "stream.maintain": "Maintaining"
 }

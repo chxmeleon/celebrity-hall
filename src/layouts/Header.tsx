@@ -53,7 +53,7 @@ const Header: React.FC = () => {
     <header className="relative" ref={sidebarRef} onClick={onCloseSide}>
       <nav
         className={clsx(
-          'h-9 absolute top-0 left-0 z-40 w-full border-b bg-theme-50 border-b-theme-75'
+          'h-9 absolute top-0 left-0 z-50 w-full border-b bg-theme-50 border-b-theme-75'
         )}
       >
         <div className="flex justify-between items-center w-full h-full">
@@ -87,7 +87,7 @@ const Header: React.FC = () => {
                 <div
                   className={clsx(
                     toggle ? '' : ' hidden',
-                    'absolute w-[17.5rem] min-h-fit max-h-fit -translate-x-[16rem] z-40 bg-theme-50/95 border border-theme-75 border-y-transparent'
+                    'absolute w-[17.5rem] min-h-fit max-h-fit -translate-x-[16rem] z-50 bg-theme-50/95 border border-theme-75 border-y-transparent'
                   )}
                 >
                   <div

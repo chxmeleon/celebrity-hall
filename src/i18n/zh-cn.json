@@ -528,5 +528,6 @@
   "profile.info.dividend": "红利",
   "profile.info.balance": "余额",
   "ranking.card.timetable": "时段",
-  "streams.loading": "加载中"
+  "streams.loading": "加载中",
+  "stream.maintain": "维护中"
 }

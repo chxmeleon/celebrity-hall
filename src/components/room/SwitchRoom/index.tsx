@@ -16,8 +16,8 @@ const QuickRoads: React.FC<{rooms: RoomProps[]}> = ({rooms}) => {
     <>
       {newRooms?.length ? (
         <div className="overflow-y-auto w-full h-full text-sm text-gray-50 bg-theme-50/95">
-          <div className="inline-flex justify-between items-center py-1.5 px-3 w-full bg-theme-75">
-            <div className="py-0.5 px-3 bg-red-600 rounded-full">
+          <div className="text-xs inline-flex justify-between items-center py-1 px-3 w-full bg-theme-75">
+            <div className="py-[1px] px-2 bg-red-600 rounded-full">
               {newRooms?.length}
             </div>
             <FormattedMessage
