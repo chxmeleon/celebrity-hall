@@ -10,8 +10,6 @@ import PublicLayout from '@/layouts/PublicLayout'
 import ProtectedLayout from '@/layouts/ProtectedLayout'
 import RoomsLayout from '@/layouts/RoomsLayout'
 import Tables from '@/pages/Tables'
-import Liverooms from '@/pages/Liverooms'
-import Mutualrooms from '@/pages/Mutualrooms'
 import Following from '@/pages/Following'
 import UserRanking from '@/pages/UserRanking'
 import ProtectedLayoutForRoom from '@/layouts/ProtectedLayoutForRoom'
@@ -38,10 +36,10 @@ const Router: React.FC = () => {
         </Route>
         <Route element={<RoomsLayout />}>
           <Route index element={<Navigate to="rooms" replace />} />
-          <Route path="liverooms" element={<Rooms type="liveRooms" />} />
-          <Route path="mutualrooms" element={<Rooms type="mutualRooms" />} />
-          <Route path="rooms" element={<Rooms type="rooms" />} />
-          <Route path="kgrooms" element={<Rooms type="kgRooms" />} />
+          <Route path="liverooms" element={<Rooms type="live" />} />
+          <Route path="mutualrooms" element={<Rooms type="interaction" />} />
+          <Route path="rooms" element={<Rooms type="all" />} />
+          <Route path="kgrooms" element={<Rooms type="kg" />} />
         </Route>
         <Route path="streamers" element={<Streamers />} />
         <Route path="streamers/:id" element={<Streamer />} />

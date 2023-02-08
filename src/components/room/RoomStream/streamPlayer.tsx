@@ -28,8 +28,6 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
   isTablesPath
 }) => {
   const [player, setPlayer] = useState<NodePlayer | null>(null)
-  console.log(isTablesPath);
-  
 
   useEffect(() => {
     const player = new NodePlayer()

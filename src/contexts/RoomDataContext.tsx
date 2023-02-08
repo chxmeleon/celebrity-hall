@@ -5,22 +5,34 @@ import types from '@/types'
 import { GET_BACCARATROOMS } from '@/gql/baccaratrooms'
 import { useLocation } from 'react-router-dom'
 
-const RoomDataContext = createContext<{
-  rooms: RoomProps[]
-  refetchAllRooms?: () => Promise<any>
-  liveRooms: RoomProps[]
-  refetchLiveRooms?: () => Promise<any>
-  mutualRooms: RoomProps[]
-  refetchMutualRooms?: () => Promise<any>
-  kgRooms: RoomProps[]
-  refetchKgRooms?: () => Promise<any>
+/* const RoomDataContext = createContext<{ */
+/*   rooms: RoomProps[] */
+/*   refetchAllRooms?: () => Promise<any> */
+/*   liveRooms: RoomProps[] */
+/*   refetchLiveRooms?: () => Promise<any> */
+/*   mutualRooms: RoomProps[] */
+/*   refetchMutualRooms?: () => Promise<any> */
+/*   kgRooms: RoomProps[] */
+/*   refetchKgRooms?: () => Promise<any> */
+/*   isTablesPath?: boolean */
+/* }>({ */
+/*   rooms: [], */
+/*   liveRooms: [], */
+/*   mutualRooms: [], */
+/*   kgRooms: [] */
+/* }) */
+
+type RoomDataContextData = {
   isTablesPath?: boolean
-}>({
-  rooms: [],
-  liveRooms: [],
-  mutualRooms: [],
-  kgRooms: []
-})
+  useGetRoomData: (type: string) => {
+    rooms: RoomProps[],
+    refetch?: () => Promise<any>
+  } 
+}
+
+const RoomDataContext = createContext<RoomDataContextData>(
+  {} as RoomDataContextData
+)
 
 export const RoomDataProvider: React.FC<React.PropsWithChildren> = ({
   children
@@ -31,60 +43,28 @@ export const RoomDataProvider: React.FC<React.PropsWithChildren> = ({
     [location]
   )
 
-  const [rooms, setRooms] = useState<RoomProps[]>([])
-  const { data: allData, refetch: allRoomsRefetch } =
-    useQuery<types.GET_BACCARATROOMS>(GET_BACCARATROOMS, {
-      variables: { type: 'all' }
-    })
+  const useGetRoomData = (type: string) => {
+    const [rooms, setRooms] = useState<RoomProps[]>([])
+    const { data, refetch } = useQuery<types.GET_BACCARATROOMS>(
+      GET_BACCARATROOMS,
+      { variables: { type } }
+    )
 
-  const [liveRooms, setLiveRooms] = useState<RoomProps[]>([])
-  const { data: liveData, refetch: liveRoomsRefetch } =
-    useQuery<types.GET_BACCARATROOMS>(GET_BACCARATROOMS, {
-      variables: { type: 'live' }
-    })
+    useEffect(() => {
+      if (data?.activeBaccaratRooms) {
+        setRooms(data?.activeBaccaratRooms)
+      }
+    }, [data])
 
-  const [mutualRooms, setMutualRooms] = useState<RoomProps[]>([])
-  const { data: mutualData, refetch: mutualRoomsRefetch } =
-    useQuery<types.GET_BACCARATROOMS>(GET_BACCARATROOMS, {
-      variables: { type: 'interaction' }
-    })
+    return { rooms, refetch }
+  }
 
-  const [kgRooms, setKgRooms] = useState<RoomProps[]>([])
-  const { data: kgData, refetch: kgRoomsRefetch } =
-    useQuery<types.GET_BACCARATROOMS>(GET_BACCARATROOMS, {
-      variables: { type: 'kg' }
-    })
-
-  useEffect(() => {
-    if (allData?.activeBaccaratRooms) {
-      setRooms(allData.activeBaccaratRooms)
-    }
-
-    if (liveData?.activeBaccaratRooms) {
-      setLiveRooms(liveData.activeBaccaratRooms)
-    }
-
-    if (mutualData?.activeBaccaratRooms) {
-      setMutualRooms(mutualData?.activeBaccaratRooms)
-    }
-
-    if (kgData?.activeBaccaratRooms) {
-      setKgRooms(kgData?.activeBaccaratRooms)
-    }
-  }, [allData, liveData, mutualData, kgData])
 
   return (
     <RoomDataContext.Provider
       value={{
-        rooms,
-        refetchAllRooms: allRoomsRefetch,
-        liveRooms,
-        refetchLiveRooms: liveRoomsRefetch,
-        mutualRooms,
-        refetchMutualRooms: mutualRoomsRefetch,
-        kgRooms,
-        refetchKgRooms: kgRoomsRefetch,
-        isTablesPath
+        isTablesPath,
+        useGetRoomData
       }}
     >
       {children}

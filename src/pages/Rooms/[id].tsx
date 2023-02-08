@@ -57,11 +57,10 @@ export const ChipButtonList: React.FC<{
           <button
             key={idx}
             onClick={() => onSelectedChipChanged?.(itemName)}
-            className={`${
-              isActive
+            className={`${isActive
                 ? 'brightness-105 backdrop-brightness-110 shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
                 : 'shadow shadow-theme-50/80 brightness-[78%] opacity-[80%]'
-            } m-auto rounded-full relative hover:cursor-pointer`}
+              } m-auto rounded-full relative hover:cursor-pointer`}
           >
             <img src={item?.src} alt="bet image" className="w-10" />
           </button>
@@ -72,7 +71,8 @@ export const ChipButtonList: React.FC<{
 }
 
 const Room = () => {
-  const { rooms, refetchAllRooms: refetchRooms } = useContext(RoomDataContext)
+  const { useGetRoomData } = useContext(RoomDataContext)
+  const { rooms, refetch: refetchRooms } = useGetRoomData('all')
   const { id: roomId } = useParams<{ id: string }>()
   const room = useMemo(
     () => (roomId ? rooms.find((room) => room.id === roomId) : undefined),
@@ -192,9 +192,8 @@ const Room = () => {
                       <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
                         <button
                           onClick={handleSwitchStream}
-                          className={`${
-                            isWebRTC ? 'text-theme-300' : ''
-                          } m-auto text-2xl i-heroicons-wifi-20-solid`}
+                          className={`${isWebRTC ? 'text-theme-300' : ''
+                            } m-auto text-2xl i-heroicons-wifi-20-solid`}
                         ></button>
                       </div>
                     </Tooltip>
@@ -426,9 +425,8 @@ const Room = () => {
                       >
                         <button
                           onClick={handleSwitchStream}
-                          className={`${
-                            isWebRTC ? 'text-theme-300' : ''
-                          } m-auto text-xl i-heroicons-wifi-20-solid`}
+                          className={`${isWebRTC ? 'text-theme-300' : ''
+                            } m-auto text-xl i-heroicons-wifi-20-solid`}
                         ></button>
                       </Tooltip>
                     </div>

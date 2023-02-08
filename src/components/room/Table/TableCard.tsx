@@ -30,13 +30,13 @@ import { useContext, useEffect, useState } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
 import GamePlayContext from '@/contexts/GamePlayContext'
 
-
 type RoomDataProps = {
   room: RoomProps
 }
 
 const TableCard: React.FC<RoomDataProps> = ({ room }) => {
-  const { refetchAllRooms: refetchRooms, isTablesPath } = useContext(RoomDataContext)
+  const { useGetRoomData, isTablesPath } = useContext(RoomDataContext)
+  const { refetch: refetchRooms } = useGetRoomData('all')
   const href = `/home/rooms/${room.id}`
   const streamName = room?.streamName ?? room?.streams?.[0]?.name
   const streamKey = room?.streamKey ?? room?.streams?.[0]?.key
@@ -58,15 +58,13 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
     btnState,
     dispatchBtn,
     dispatchBet,
-    totalAmount,
+    totalAmount
   } = useContext(GamePlayContext)
-
 
   const { formatMessage } = useIntl()
 
   const { currentGameState } = useCurrentGameState(room.id)
   const { gameState } = currentGameState
-  
 
   useEffect(() => {
     if (gameState === 'START_BET' || gameState === 'UPDATE_AMOUNT') {
@@ -93,11 +91,11 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
           </Link>
         </div>
         {/* <div className="inline-flex justify-between items-center w-[42%]"> */}
-          {/* <div className="flex px-3 text-gray-100 rounded-full border border-gray-100"> */}
-          {/*   <div className="m-auto"> */}
-          {/*     <FormattedMessage id="common.tables" defaultMessage="Enter" /> */}
-          {/*   </div> */}
-          {/* </div> */}
+        {/* <div className="flex px-3 text-gray-100 rounded-full border border-gray-100"> */}
+        {/*   <div className="m-auto"> */}
+        {/*     <FormattedMessage id="common.tables" defaultMessage="Enter" /> */}
+        {/*   </div> */}
+        {/* </div> */}
         {/* </div> */}
       </div>
       <div className="relative w-full h-[266px]">
@@ -173,7 +171,9 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
                 isWebRTC={isWebRTC}
                 isTablesPath={isTablesPath}
               />
-            ) : <Loading />}
+            ) : (
+              <Loading size='small' />
+            )}
           </div>
         </div>
       </div>
@@ -193,7 +193,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
 
       <div className="flex relative flex-col w-full h-1/2">
         <div className="absolute z-30 w-full h-full pointer-events-none">
-          <div className="pb-14 px-2 w-full h-full">
+          <div className="px-2 pb-14 w-full h-full">
             <PokerResult roomId={room.id} isTablesPath={isTablesPath} />
           </div>
         </div>
@@ -203,7 +203,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
         </div>
 
         <div className="flex flex-col w-full h-1/2">
-          <div className="grid grid-cols-4 grid-rows-2 px-5 py-2.5 w-full gap-2">
+          <div className="grid grid-cols-4 grid-rows-2 gap-2 py-2.5 px-5 w-full">
             <ChipButtonList
               selectedChip={selectedChip}
               onSelectedChipChanged={setSelectedChip}
