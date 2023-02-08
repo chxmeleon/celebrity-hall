@@ -52,10 +52,11 @@ export const ChipButtonList: React.FC<{
           <button
             key={idx}
             onClick={() => onSelectedChipChanged?.(itemName)}
-            className={`${isActive
+            className={`${
+              isActive
                 ? 'brightness-105 backdrop-brightness-110 shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
                 : 'shadow shadow-theme-50/80 brightness-[78%] opacity-[80%]'
-              } m-auto rounded-full relative hover:cursor-pointer`}
+            } m-auto rounded-full relative hover:cursor-pointer`}
           >
             <img src={item?.src} alt="bet image" className="w-10" />
           </button>
@@ -66,8 +67,7 @@ export const ChipButtonList: React.FC<{
 }
 
 const Room = () => {
-  const { useGetRoomData } = useContext(RoomDataContext)
-  const { rooms, refetch: refetchRooms } = useGetRoomData('all')
+  const { rooms, refetch: refetchRooms } = useContext(RoomDataContext)
   const { id: roomId } = useParams<{ id: string }>()
   const room = useMemo(
     () => (roomId ? rooms.find((room) => room.id === roomId) : undefined),
@@ -187,8 +187,9 @@ const Room = () => {
                       <div className="flex w-10 h-10 rounded-md bg-theme-50/80">
                         <button
                           onClick={handleSwitchStream}
-                          className={`${isWebRTC ? 'text-theme-300' : ''
-                            } m-auto text-2xl i-heroicons-wifi-20-solid`}
+                          className={`${
+                            isWebRTC ? 'text-theme-300' : ''
+                          } m-auto text-2xl i-heroicons-wifi-20-solid`}
                         ></button>
                       </div>
                     </Tooltip>
@@ -227,38 +228,37 @@ const Room = () => {
                 </div>
                 <div className="flex justify-between items-center px-2 my-2 w-full h-10">
                   <div className="flex items-center w-[30%]">
-                    {/* gameplay's switch */}
-                    {/* <button
-                onClick={handleSwitchDesk}
-                className={`${
-                  isChangedDesk
-                    ? 'text-theme-70 bg-theme-300 '
-                    : 'bg-theme-70 text-theme-300'
-                } inline-flex p-2 text-2xl rounded-full `}
-              >
-                <div
-                  className={`${
-                    isChangedDesk
-                      ? 'i-heroicons-user-solid'
-                      : 'i-heroicons-user-group-20-solid'
-                  } text-2xl `}
-                ></div>
-              </button> */}
-                    {/* <button onClick={handleRegularToggle} className="px-1 ml-2">
-                <div
-                  className={`${
-                    isRegular
-                      ? 'bg-theme-300 text-theme-70'
-                      : 'bg-theme-70 text-theme-300'
-                  } py-1.5 px-3 font-bold rounded-full `}
-                >
-                  {isRegular ? (
-                    <FormattedMessage id="common.noFee" />
-                  ) : (
-                    <FormattedMessage id="common.standard" />
-                  )}
-                </div>
-              </button> */}
+                    <button
+                      onClick={handleSwitchDesk}
+                      className={`${
+                        isChangedDesk
+                          ? 'text-theme-70 bg-theme-300 '
+                          : 'bg-theme-70 text-theme-300'
+                      } inline-flex p-2 text-2xl rounded-full `}
+                    >
+                      <div
+                        className={`${
+                          isChangedDesk
+                            ? 'i-heroicons-user-solid'
+                            : 'i-heroicons-user-group-20-solid'
+                        } text-2xl `}
+                      ></div>
+                    </button>
+                    <button onClick={handleNoFeeToggle} className="px-1 ml-2">
+                      <div
+                        className={`${
+                          isNoFee
+                            ? 'bg-theme-300 text-theme-70'
+                            : 'bg-theme-70 text-theme-300'
+                        } py-1.5 px-3 font-bold rounded-full `}
+                      >
+                        {isNoFee ? (
+                          <FormattedMessage id="common.noFee" />
+                        ) : (
+                          <FormattedMessage id="common.standard" />
+                        )}
+                      </div>
+                    </button>{' '}
                     <div className="inline-flex items-center px-2">
                       <FormattedMessage id="screens.room.bet" />
                       <p className="px-2">|</p>
@@ -381,7 +381,7 @@ const Room = () => {
                   <div className="flex flex-col justify-around items-end h-23">
                     <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
                       <Link
-                        to="/home/rooms"
+                        to="/home/rooms/all"
                         className="m-auto text-xl i-heroicons-arrow-uturn-left-20-solid"
                       ></Link>
                     </div>
@@ -420,8 +420,9 @@ const Room = () => {
                       >
                         <button
                           onClick={handleSwitchStream}
-                          className={`${isWebRTC ? 'text-theme-300' : ''
-                            } m-auto text-xl i-heroicons-wifi-20-solid`}
+                          className={`${
+                            isWebRTC ? 'text-theme-300' : ''
+                          } m-auto text-xl i-heroicons-wifi-20-solid`}
                         ></button>
                       </Tooltip>
                     </div>

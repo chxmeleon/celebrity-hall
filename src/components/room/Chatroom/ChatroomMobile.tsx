@@ -68,7 +68,7 @@ const ChatroomMobile = () => {
 
 
   const [gift, setGift] = useState('rose')
-  const [showSnow, setShowSnow] = useState(true)
+  const [isShowSnow, setIsShowSnow] = useState(false)
 
   useEffect(() => {
     if (focused) {
@@ -132,7 +132,7 @@ const ChatroomMobile = () => {
 
   return (
     <div className="flex flex-col w-full h-full border-gray-500 border-b-1">
-      <GiftAnimation isShow={showSnow} selectedGift={gift} />
+      <GiftAnimation isShow={isShowSnow} selectedGift={gift} />
       <div
         className={cx(
           'flex overflow-x-hidden overflow-y-scroll flex-col-reverse flex-grow-0 w-full h-screen scroll-smooth',
@@ -216,7 +216,7 @@ const ChatroomMobile = () => {
           <SendGift
             gift={gift}
             setGift={setGift}
-            onTriggerAnimation={setShowSnow}
+            onTriggerAnimation={setIsShowSnow}
             clickRef={setGiftRef}
             isShow={isGiftShow}
             setIsShow={setIsGiftShow}

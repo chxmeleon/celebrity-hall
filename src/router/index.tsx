@@ -23,23 +23,21 @@ const Router: React.FC = () => {
         <Route index element={<Navigate to="login" replace />} />
         <Route path="login" element={<Login />} />
       </Route>
+
       <Route path="home" element={<ProtectedLayoutForRoom />}>
         <Route element={<RoomsLayout />}>
-          <Route path="rooms/:id" element={<Room />} />
+          <Route path="room/:id" element={<Room />} />
           <Route path="profile" element={<Profile />} />
           <Route path="intro-rule" element={<Rule />} />
         </Route>
       </Route>
+
       <Route path="home" element={<ProtectedLayout />}>
         <Route element={<TablesLayout />}>
           <Route path="tables" element={<Tables />} />
         </Route>
-        <Route element={<RoomsLayout />}>
-          <Route index element={<Navigate to="rooms" replace />} />
-          <Route path="liverooms" element={<Rooms type="live" />} />
-          <Route path="mutualrooms" element={<Rooms type="interaction" />} />
-          <Route path="rooms" element={<Rooms type="all" />} />
-          <Route path="kgrooms" element={<Rooms type="kg" />} />
+        <Route path="rooms/:type?" element={<RoomsLayout />} >
+          <Route index element={<Rooms />} />
         </Route>
         <Route path="streamers" element={<Streamers />} />
         <Route path="streamers/:id" element={<Streamer />} />

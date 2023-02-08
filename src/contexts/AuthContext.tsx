@@ -58,7 +58,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
         if (result?.token !== undefined) {
           setAuth(result?.token)
           setExpiredTime(result?.exp)
-          navigate('/home/rooms')
+          navigate('/home/rooms/all')
         }
       },
       onError: (err) => {
@@ -88,7 +88,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
         setAuth(token)
         setExpiredTime(tomorrow)
         setIsTrial(true)
-        navigate('/home/rooms')
+        navigate('/home/rooms/all')
       }
     },
     [setAuth, setExpiredTime, navigate, setIsTrial]

@@ -1,6 +1,6 @@
 import Router from '@/router'
 import { ResponsiveProvider } from '@/hooks/useResponsive'
-import { HashRouter } from 'react-router-dom'
+import { HashRouter, BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from '@/contexts/AuthContext'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { ApiProvider } from '@/contexts/ApiContext'

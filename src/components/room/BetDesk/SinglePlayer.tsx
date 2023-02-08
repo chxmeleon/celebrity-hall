@@ -356,7 +356,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               </div>
             </button>
             <button
-              disabled={isDisabled}
+              disabled={isNoFee ? isDisabled : true}
               onClick={() =>
                 dispatchBet({
                   type: 'addChips',
@@ -366,6 +366,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               }
               className={cx(
                 isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+                isNoFee ? '' : 'bg-theme-50/70 hover:bg-theme-50/70 hover:cursor-not-allowed',
                 btnIdx.bhhn
               )}
             >

@@ -2,10 +2,11 @@ import RoomList from '@/components/room/RoomList'
 import { useContext } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
 import Loading from '@/components/room/RoomStream/StreamLoading'
+import { useParams } from 'react-router-dom'
 
-const Rooms: React.FC<{ type: string }> = ({ type }) => {
-  const { useGetRoomData } = useContext(RoomDataContext)
-  const { rooms } = useGetRoomData(type)
+const Rooms: React.FC = () => {
+  const { rooms } = useContext(RoomDataContext)
+  const { type } = useParams<{ type: string }>()
 
   return (
     <>
@@ -15,7 +16,7 @@ const Rooms: React.FC<{ type: string }> = ({ type }) => {
         </div>
       ) : (
         <Loading
-          type={type === 'interaction' || type === 'live' ? 'fixed' : 'default'}
+          type={type === 'live' || type === 'interaction' ? 'fixed' : 'default'}
         />
       )}
     </>
