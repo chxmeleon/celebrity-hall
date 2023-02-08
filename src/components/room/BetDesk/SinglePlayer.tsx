@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import { chipsData } from './chips'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { clsx as cx } from 'clsx'
+import { numberFormmat } from '@/hooks/bet'
 
 const betAreaMapper = {
   ver: { firstDiv: 'items-end', secoundDiv: 'w-14 h-14 text-sm' },
@@ -49,11 +50,7 @@ const BetArea: React.FC<{ target: number; type: string }> = ({
               : ''
           )}
         >
-          {target >= 1000 && target < 10000
-            ? (target / 1000).toFixed(2) + 'K'
-            : target >= 10000
-            ? (target / 10000).toFixed(2) + 'W'
-            : target}
+          {numberFormmat(target)}
         </span>
       </div>
     </div>

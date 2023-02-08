@@ -5,6 +5,8 @@ import { chipsData } from './chips'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import RoomDataContext from '@/contexts/RoomDataContext'
 import { clsx as cx } from 'clsx'
+import { numberFormmat } from '@/hooks/bet'
+
 
 const BetArea: React.FC<{ target: number }> = ({ target }) => {
   return (
@@ -33,16 +35,6 @@ const BetArea: React.FC<{ target: number }> = ({ target }) => {
   )
 }
 
-const numberFormmat = (target: number) =>
-  target >= 1000 && target < 10000 && (target / 1000).toString().length > 3
-    ? (target / 1000).toFixed(1) + 'K'
-    : target >= 1000 && target < 10000
-    ? target / 1000 + 'K'
-    : target >= 10000 && (target / 10000).toString().length > 4
-    ? (target / 10000).toFixed(1) + 'W'
-    : target >= 10000
-    ? target / 10000 + 'W'
-    : target
 
 const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
   isDisabled

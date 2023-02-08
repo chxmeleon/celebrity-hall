@@ -25,3 +25,12 @@ export const giftList = [
   { name: 'car', title: '超級跑車', value: 2000, image: car, game: true },
   { name: 'boat', title: '豪華遊艇', value: 10000, image: boat, game: true }
 ]
+
+export const giftSrc = {
+  rose,
+  bag,
+  diamond,
+  treasure,
+  car,
+  boat
+}

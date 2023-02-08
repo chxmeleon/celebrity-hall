@@ -16,6 +16,8 @@ interface GiftPorps {
   setIsShow: React.Dispatch<React.SetStateAction<boolean>>
   onClick: React.MouseEventHandler<HTMLDivElement>
   setFocused: React.Dispatch<React.SetStateAction<boolean>>
+  gift: string
+  setGift: React.Dispatch<React.SetStateAction<string>>
 }
 
 const SendGift: React.FC<GiftPorps> = ({
@@ -24,9 +26,10 @@ const SendGift: React.FC<GiftPorps> = ({
   onClick,
   isShow,
   setIsShow,
-  setFocused
+  setFocused,
+  gift,
+  setGift
 }) => {
-  const [gift, setGift] = useState('rose')
   const [createGift] = useMutation<
     types.SEND_BACCARAT_GIFT,
     types.SEND_BACCARAT_GIFTVariables
@@ -62,7 +65,7 @@ const SendGift: React.FC<GiftPorps> = ({
       onTriggerAnimation(true)
       setTimeout(() => {
         onTriggerAnimation(false)
-      }, 2000)
+      }, 5700)
     }
   }
 
