@@ -527,5 +527,7 @@
   "profile.info.balance": "Saldo",
   "ranking.card.timetable": "Oras",
   "streams.loading": "Ikinakarga",
+  "stream.maintain": "Maintaining",
   "screens.profile.transferToThisAddress": "Mangyaring magtransfer ng USDT sa sumusunod na address"
+
 }

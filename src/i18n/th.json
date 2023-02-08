@@ -531,5 +531,6 @@
   "common.for": "สำหรับ",
   "common.noFee": "ไม่มีค่าใช้จ่าย",
   "common.standard": "มาตรฐาน",
-  "common.currentBet": "แทงปัจจุบัน"
+  "common.currentBet": "แทงปัจจุบัน",
+  "stream.maintain": "Maintaining"
 }

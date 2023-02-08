@@ -59,7 +59,6 @@ export const RoomDataProvider: React.FC<React.PropsWithChildren> = ({
     return { rooms, refetch }
   }
 
-
   return (
     <RoomDataContext.Provider
       value={{

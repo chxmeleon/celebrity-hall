@@ -25,7 +25,10 @@ export const Progress: React.FC<
   )
 }
 
-const Loading: React.FC<{ size?: 'default' | 'small' }> = ({ size }) => {
+const Loading: React.FC<{
+  size?: 'default' | 'small'
+  type?: 'default' | 'fixed'
+}> = ({ size, type }) => {
   const loadingBgImg = useMemo(() => BgImg, [])
   return (
     <div className="flex absolute z-30 flex-col w-full h-full">
@@ -57,11 +60,21 @@ const Loading: React.FC<{ size?: 'default' | 'small' }> = ({ size }) => {
             </div>
             <div
               className={cx(
-                'text-theme-300',
+                'text-theme-300 py-0.5 font-bold',
                 size === 'small' ? 'text-[11px]' : 'text-sm md:text-xl'
               )}
             >
-              <FormattedMessage id="streams.loading" defaultMessage="Loading" />
+              {type === 'fixed' ? (
+                <FormattedMessage
+                  id="stream.maintain"
+                  defaultMessage="Maintaining"
+                />
+              ) : (
+                <FormattedMessage
+                  id="streams.loading"
+                  defaultMessage="Loading"
+                />
+              )}
             </div>
           </div>
         </Progress>

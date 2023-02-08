@@ -1,14 +1,60 @@
 import LogoImg from '@/assets/login_logo.webp'
 import { LinkButton } from '@/components/common/Button'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import defaultAvatar from '/user.png'
 import { useWallet } from '@/hooks/profile'
+import { Tooltip } from '@material-tailwind/react'
 
 const LeftSidebar = () => {
   const { user } = useWallet()
+  const { formatMessage } = useIntl()
+  const linkLisetMapper = [
+    {
+      href: '/home/rooms',
+      id: 'layout.all',
+      default: 'Explore',
+      src: '/icons/all.png'
+    },
+    {
+      href: '/home/liverooms',
+      id: 'layout.liverooms',
+      default: 'Live Hall',
+      src: '/icons/live.png'
+    },
+    {
+      href: '/home/mutualrooms',
+      id: 'layout.mutualrooms',
+      default: 'Mutual Hall',
+      src: '/icons/mutual.png'
+    },
+    {
+      href: '/home/kgrooms',
+      id: 'layout.kgrooms',
+      default: 'KG Hall',
+      src: '/icons/KG.png'
+    },
+    {
+      href: '/home/tables',
+      id: 'layout.tables',
+      default: 'Tables',
+      src: '/icons/table.png'
+    },
+    {
+      href: '/home/rankings/streamers',
+      id: 'layout.rankings',
+      default: 'Rankings',
+      src: '/icons/rankings.png'
+    },
+    {
+      href: '/home/streamers',
+      id: 'layout.streamers',
+      default: 'Streamers',
+      src: '/icons/streamer.png'
+    }
+  ]
 
   return (
-    <div className="flex flex-shrink-0 px-1.5 w-14 text-center md:py-5 md:px-7 md:w-44 border-r-[0.5px] border-r-theme-75">
+    <div className="flex flex-shrink-0 px-1.5 w-14 h-full text-center md:py-5 md:px-7 md:w-44 border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full">
         <section className="hidden pb-6 w-full md:block">
           <div className="flex">
@@ -28,7 +74,7 @@ const LeftSidebar = () => {
               <div className="m-auto w-2/3 h-11 text-sm">
                 <div className="m-auto w-2/3 text-left">
                   <p className="truncate">{user?.profile?.nickname}</p>
-                  <p className="pt-1 truncate text-theme-300">
+                  <p className="pt-1 text-xs truncate text-theme-300">
                     {user?.profile?.balance}
                   </p>
                 </div>
@@ -41,92 +87,34 @@ const LeftSidebar = () => {
 
         <hr className="hidden border-t md:block border-t-theme-75" />
 
-        <section className="my-2 w-full h-[350px]">
+        <section className="my-2 w-full h-[400px] md:h-[350px]">
           <div className="flex flex-col justify-evenly w-full h-full">
-            <LinkButton href="/home/rooms" isTarget={false}>
-              <div className="hidden md:block">
-                <FormattedMessage id="layout.all" defaultMessage="Explore" />
-              </div>
-              <div className="w-full h-full md:hidden">
-                <img
-                  src="/icons/all.png"
-                  alt="all icon"
-                  className="w-7 h-7 object-fit"
-                />
-              </div>
-            </LinkButton>
-            <LinkButton href="/home/liverooms" isTarget={false}>
-              <FormattedMessage
-                id="layout.liverooms"
-                defaultMessage="Live Hall"
-              />
-            </LinkButton>
-            <LinkButton href="/home/mutualrooms" isTarget={false}>
-              <FormattedMessage
-                id="layout.mutualrooms"
-                defaultMessage="Mutual Hall"
-              />
-            </LinkButton>
-            <LinkButton href="/home/kgrooms" isTarget={false}>
-              <FormattedMessage
-                id="layout.kgrooms"
-                defaultMessage="KG Hall"
-              />
-            </LinkButton>
-            {/* <LinkButton href="/home/following" isTarget={false}> */}
-            {/*   <FormattedMessage */}
-            {/*     id="layout.following" */}
-            {/*     defaultMessage="Following" */}
-            {/*   /> */}
-            {/* </LinkButton> */}
-            <LinkButton href="/home/tables" isTarget={false}>
-              <div className="hidden md:block">
-                <FormattedMessage id="layout.tables" defaultMessage="Tables" />
-              </div>
-              <div className="w-full h-full md:hidden">
-                <img
-                  src="/icons/table.png"
-                  alt="all icon"
-                  className="w-7 h-7 object-fit"
-                />
-              </div>
-            </LinkButton>
-            <LinkButton href="/home/rankings/streamers" isTarget={false}>
-              <div className="hidden md:block">
-                <FormattedMessage
-                  id="layout.rankings"
-                  defaultMessage="Rankings"
-                />
-              </div>
-              <div className="w-full h-full md:hidden">
-                <img
-                  src="/icons/rankings.png"
-                  alt="all icon"
-                  className="w-7 h-7 object-fit"
-                />
-              </div>
-            </LinkButton>
-            <LinkButton href="/home/streamers" isTarget={false}>
-              <div className="hidden md:block">
-                <FormattedMessage
-                  id="layout.streamers"
-                  defaultMessage="Streamers"
-                />
-              </div>
-              <div className="w-full h-full md:hidden">
-                <img
-                  src="/icons/streamer.png"
-                  alt="all icon"
-                  className="w-7 h-7 object-fit"
-                />
-              </div>
-            </LinkButton>
-            {/* <LinkButton href="https://google.com/" isTarget={true}> */}
-            {/*   <FormattedMessage */}
-            {/*     id="layout.appdownload" */}
-            {/*     defaultMessage="App Download" */}
-            {/*   /> */}
-            {/* </LinkButton> */}
+            {linkLisetMapper.map((item, idx) => (
+              <LinkButton key={idx} href={item.href} isTarget={false}>
+                <div className="hidden md:block">
+                  <FormattedMessage
+                    id={item.id}
+                    defaultMessage={item.default}
+                  />
+                </div>
+                <div className="w-full h-full md:hidden">
+                  <Tooltip
+                    content={formatMessage({
+                      id: item.id,
+                      defaultMessage: item.default
+                    })}
+                    placement="bottom"
+                    className="relative z-40 pointer-events-none px-1.5 py-0.5 text-[11px] mt-1.5 rounded-sm"
+                  >
+                    <img
+                      src={item.src}
+                      alt="mobile icon image"
+                      className="w-7 h-7 object-fit"
+                    />
+                  </Tooltip>
+                </div>
+              </LinkButton>
+            ))}
           </div>
         </section>
       </div>

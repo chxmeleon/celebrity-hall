@@ -14,7 +14,9 @@ const Rooms: React.FC<{ type: string }> = ({ type }) => {
           <RoomList rooms={rooms} />
         </div>
       ) : (
-        <Loading />
+        <Loading
+          type={type === 'interaction' || type === 'live' ? 'fixed' : 'default'}
+        />
       )}
     </>
   )
