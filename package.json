@@ -52,6 +52,7 @@
     "react-hot-toast": "^2.4.0",
     "react-intl": "^6.2.5",
     "react-router-dom": "^6.4.5",
+    "react-snowfall": "^1.2.1",
     "sort-by": "^1.2.0",
     "styled-components": "^5.3.6",
     "swr": "^2.0.0",

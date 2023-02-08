@@ -16,7 +16,7 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
   const { counter, startCount, isLeftTen, isOpening, isClose } = useTimeLeft(
     room.id
   )
-  const { refetchRooms } = useContext(RoomDataContext)
+  const { refetchAllRooms: refetchRooms } = useContext(RoomDataContext)
   const href = `/home/rooms/${room.id}`
   const girl = room.girl
 
