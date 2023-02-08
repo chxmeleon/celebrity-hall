@@ -9,8 +9,8 @@ export const GIRL_TYPE = gql`
 `
 
 export const GET_BACCARATROOMS = gql`
-  query GET_BACCARATROOMS {
-    activeBaccaratRooms {
+  query GET_BACCARATROOMS($type: String) {
+    activeBaccaratRooms(type: $type) {
       id
       name
       girl {

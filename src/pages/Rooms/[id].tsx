@@ -72,7 +72,7 @@ export const ChipButtonList: React.FC<{
 }
 
 const Room = () => {
-  const { rooms, refetchRooms } = useContext(RoomDataContext)
+  const { rooms, refetchAllRooms: refetchRooms } = useContext(RoomDataContext)
   const { id: roomId } = useParams<{ id: string }>()
   const room = useMemo(
     () => (roomId ? rooms.find((room) => room.id === roomId) : undefined),

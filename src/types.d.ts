@@ -861,6 +861,7 @@ export type BaccaratRoom = {
   dealerOdds: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 莊對賠率 */
   dealerPairOdds: Maybe<FieldWrapper<Scalars['Float']>>;
+  defaultScale: Maybe<FieldWrapper<Scalars['Float']>>;
   /** 房間網域 */
   domain: Maybe<FieldWrapper<Scalars['String']>>;
   /** 是否開啟網頁推播 */
@@ -5012,6 +5013,11 @@ export type Query = {
 };
 
 
+export type QueryactiveBaccaratRoomsArgs = {
+  type?: InputMaybe<Scalars['String']>;
+};
+
+
 export type QueryactiveRoomArgs = {
   id: Scalars['ID'];
 };
@@ -8159,7 +8165,9 @@ export type GET_STREAMERS = { streamers: Array<{ __typename: 'Streamer', avatar:
 
 export type GIRL_TYPE = { __typename: 'Girl', id: string, name: string | null, avatar: string | null };
 
-export type GET_BACCARATROOMSVariables = Exact<{ [key: string]: never; }>;
+export type GET_BACCARATROOMSVariables = Exact<{
+  type?: InputMaybe<Scalars['String']>;
+}>;
 
 
 export type GET_BACCARATROOMS = { activeBaccaratRooms: Array<{ __typename: 'BaccaratRoom', id: string, name: string | null, currentRoadsImage: string | null, waitingBetSeconds: number | null, roads: any | null, alertText: string | null, waitingText: string | null, zoomType: string | null, status: string | null, streamName: string | null, streamKey: string | null, girl: (

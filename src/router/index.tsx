@@ -18,7 +18,6 @@ import ProtectedLayoutForRoom from '@/layouts/ProtectedLayoutForRoom'
 import Rule from '@/pages/Rule'
 import TablesLayout from '@/layouts/TablesLayout'
 
-
 const Router: React.FC = () => {
   return (
     <Routes>
@@ -39,9 +38,10 @@ const Router: React.FC = () => {
         </Route>
         <Route element={<RoomsLayout />}>
           <Route index element={<Navigate to="rooms" replace />} />
-          <Route path="liverooms" element={<Liverooms />} />
-          <Route path="mutualrooms" element={<Mutualrooms />} />
-          <Route path="rooms" element={<Rooms />} />
+          <Route path="liverooms" element={<Rooms type="liveRooms" />} />
+          <Route path="mutualrooms" element={<Rooms type="mutualRooms" />} />
+          <Route path="rooms" element={<Rooms type="rooms" />} />
+          <Route path="kgrooms" element={<Rooms type="kgRooms" />} />
         </Route>
         <Route path="streamers" element={<Streamers />} />
         <Route path="streamers/:id" element={<Streamer />} />

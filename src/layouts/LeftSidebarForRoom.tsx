@@ -65,7 +65,7 @@ const LeftSidebarForRoom = () => {
           )}
         </section>
         <hr className="hidden border-t md:block border-t-theme-75" />
-        <section className="my-2 w-full h-[190px]">
+        <section className="my-2 w-full h-[310px]">
           <div className="flex flex-col justify-evenly w-full h-full">
             <LinkButton href="/home/rooms" isTarget={false}>
               <div className="hidden md:block">
@@ -79,18 +79,18 @@ const LeftSidebarForRoom = () => {
                 />
               </div>
             </LinkButton>
-            {/* <LinkButton href="/home/liverooms" isTarget={false}> */}
-            {/*   <FormattedMessage */}
-            {/*     id="layout.liverooms" */}
-            {/*     defaultMessage="Live Rooms" */}
-            {/*   /> */}
-            {/* </LinkButton> */}
-            {/* <LinkButton href="/home/mutualrooms" isTarget={false}> */}
-            {/*   <FormattedMessage */}
-            {/*     id="layout.mutualrooms" */}
-            {/*     defaultMessage="Mutual Rooms" */}
-            {/*   /> */}
-            {/* </LinkButton> */}
+            <LinkButton href="/home/liverooms" isTarget={false}>
+              <FormattedMessage
+                id="layout.liverooms"
+                defaultMessage="Live Rooms"
+              />
+            </LinkButton>
+            <LinkButton href="/home/mutualrooms" isTarget={false}>
+              <FormattedMessage
+                id="layout.mutualrooms"
+                defaultMessage="Mutual Rooms"
+              />
+            </LinkButton>
             {/* <LinkButton href="/home/following" isTarget={false}> */}
             {/*   <FormattedMessage */}
             {/*     id="layout.following" */}
