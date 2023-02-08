@@ -470,24 +470,14 @@ const Room = () => {
             <div className="flex absolute top-1.5 z-30 justify-center w-full pointer-events-none">
               <WinAndLoseResult gameState={gameState} />
             </div>
-
-            <div className="flex items-center px-2 h-full text-xs">
-              <button
-                onClick={handleSwitchDesk}
-                className={`${
-                  isChangedDesk
-                    ? 'text-theme-70 bg-theme-300 '
-                    : 'bg-theme-70 text-theme-300'
-                } inline-flex py-0.5 px-1.5 rounded-full `}
-              >
-                <div
-                  className={`${
-                    isChangedDesk
-                      ? 'i-heroicons-user-solid'
-                      : 'i-heroicons-user-group-20-solid'
-                  } text-sm`}
-                ></div>
-              </button>
+            <div className="w-full flex justify-between items-center px-2 py-1 h-full text-xs">
+              <div className="inline-flex pl-2.5">
+                <span>
+                  <FormattedMessage id="screens.room.bet" />
+                </span>
+                <span className="px-2">|</span>
+                <span>{totalAmount?.toLocaleString()}</span>
+              </div>
               <button onClick={handleNoFeeToggle} className="px-1 ml-2">
                 <div
                   className={`${
@@ -503,13 +493,7 @@ const Room = () => {
                   )}
                 </div>
               </button>
-              <div className="inline-flex pl-2.5">
-                <span>
-                  <FormattedMessage id="screens.room.bet" />
-                </span>
-              </div>
-              <span className="px-2">|</span>
-              <span>{totalAmount?.toLocaleString()}</span>
+
             </div>
           </div>
 

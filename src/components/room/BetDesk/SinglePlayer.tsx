@@ -366,7 +366,9 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               }
               className={cx(
                 isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
-                isNoFee ? '' : 'bg-theme-50/70 hover:bg-theme-50/70 hover:cursor-not-allowed',
+                isNoFee
+                  ? ''
+                  : 'brightness-50 bg-theme-50/80 hover:bg-theme-50/80 hover:cursor-not-allowed',
                 btnIdx.bhhn
               )}
             >

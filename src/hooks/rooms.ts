@@ -60,7 +60,7 @@ export const useGetRoomData = (type: string) => {
     [rooms, refetch]
   )
 
-  return allData 
+  return allData
 }
 
 export const useCurrentGame = (roomId: string | undefined) => {
@@ -94,14 +94,15 @@ export const useCurrentGameState = (roomId: string | undefined) => {
   const currentGame = useMemo(() => {
     return data?.baccaratRoom?.currentGame
   }, [data])
-
-  const gameStatus = convertStatus(currentGame?.status)
+  
   const [gameState, setGameState] = useState<any | null>(null)
+  const [targets, setTargets] = useState<any | null>(null)
 
   useEffect(() => {
     refetch()
-    setGameState(gameStatus)
-  }, [gameStatus, refetch])
+    setGameState(convertStatus(currentGame?.status))
+    setTargets(currentGame?.targets)
+  }, [refetch, currentGame])
 
   useEffect(() => {
     const subscription = cable.subscriptions.create(
@@ -110,6 +111,9 @@ export const useCurrentGameState = (roomId: string | undefined) => {
         received: (data) => {
           if (data) {
             setGameState(data?.command)
+            if (data?.command === 'UPDATE_AMOUNT') {
+              setTargets(data?.data?.targets)
+            }
           }
         }
       }
@@ -117,11 +121,12 @@ export const useCurrentGameState = (roomId: string | undefined) => {
     return () => {
       subscription.unsubscribe()
     }
-  }, [cable, roomId, gameState])
+  }, [cable, roomId])
+
 
   const currentGameState = useMemo(
-    () => ({ currentGame, gameState }),
-    [currentGame, gameState]
+    () => ({ currentGame, gameState, targets }),
+    [currentGame, gameState, targets]
   )
 
   return { currentGameState }
