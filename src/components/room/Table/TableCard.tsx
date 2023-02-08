@@ -48,7 +48,12 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
   const [isWebRTC, setIsWebRTC] = useState(false)
   const handleSwitchStream = () => setIsWebRTC(!isWebRTC)
 
+  const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
+  const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
+
   const {
+    isNoFee,
+    handleNoFeeToggle,
     selectedChip,
     setSelectedChip,
     onConfirm,
@@ -89,13 +94,6 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
             />
           </Link>
         </div>
-        {/* <div className="inline-flex justify-between items-center w-[42%]"> */}
-        {/* <div className="flex px-3 text-gray-100 rounded-full border border-gray-100"> */}
-        {/*   <div className="m-auto"> */}
-        {/*     <FormattedMessage id="common.tables" defaultMessage="Enter" /> */}
-        {/*   </div> */}
-        {/* </div> */}
-        {/* </div> */}
       </div>
       <div className="relative w-full h-[266px]">
         <div className="absolute w-full h-full">
@@ -171,7 +169,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
                 isTablesPath={isTablesPath}
               />
             ) : (
-              <Loading size='small' />
+              <Loading size="small" />
             )}
           </div>
         </div>
@@ -181,12 +179,30 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
         <div className="flex absolute top-1.5 z-30 justify-center w-full pointer-events-none">
           <WinAndLoseResult gameState={gameState} />
         </div>
-        <div className="inline-flex items-center px-2 h-full text-xs">
-          <span>
-            <FormattedMessage id="screens.room.bet" />
-          </span>
-          <span className="px-2">|</span>
-          <span>{totalAmount?.toLocaleString()}</span>
+
+        <div className="inline-flex justify-between items-center px-2 w-full h-full text-xs">
+          <div className="inline-flex pl-1">
+            <span>
+              <FormattedMessage id="screens.room.bet" />
+            </span>
+            <span className="px-2">|</span>
+            <span>{totalAmount?.toLocaleString()}</span>
+          </div>
+          <button onClick={handleNoFeeToggle} className="px-1 ml-2">
+            <div
+              className={`${
+                isNoFee
+                  ? 'bg-theme-300 text-theme-70'
+                  : 'bg-theme-70 text-theme-300'
+              } py-[1px] px-1.5 font-bold rounded-full `}
+            >
+              {isNoFee ? (
+                <FormattedMessage id="common.noFee" />
+              ) : (
+                <FormattedMessage id="common.standard" />
+              )}
+            </div>
+          </button>
         </div>
       </div>
 

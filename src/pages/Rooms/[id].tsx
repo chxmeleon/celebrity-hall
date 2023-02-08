@@ -234,7 +234,7 @@ const Room = () => {
                         isChangedDesk
                           ? 'text-theme-70 bg-theme-300 '
                           : 'bg-theme-70 text-theme-300'
-                      } inline-flex p-2 text-2xl rounded-full `}
+                      } inline-flex py-1.5 px-3 text-2xl rounded-full `}
                     >
                       <div
                         className={`${
@@ -258,7 +258,7 @@ const Room = () => {
                           <FormattedMessage id="common.standard" />
                         )}
                       </div>
-                    </button>{' '}
+                    </button>
                     <div className="inline-flex items-center px-2">
                       <FormattedMessage id="screens.room.bet" />
                       <p className="px-2">|</p>
@@ -471,10 +471,43 @@ const Room = () => {
               <WinAndLoseResult gameState={gameState} />
             </div>
 
-            <div className="inline-flex items-center px-2 h-full text-xs">
-              <span>
-                <FormattedMessage id="screens.room.bet" />
-              </span>
+            <div className="flex items-center px-2 h-full text-xs">
+              <button
+                onClick={handleSwitchDesk}
+                className={`${
+                  isChangedDesk
+                    ? 'text-theme-70 bg-theme-300 '
+                    : 'bg-theme-70 text-theme-300'
+                } inline-flex py-0.5 px-1.5 rounded-full `}
+              >
+                <div
+                  className={`${
+                    isChangedDesk
+                      ? 'i-heroicons-user-solid'
+                      : 'i-heroicons-user-group-20-solid'
+                  } text-sm`}
+                ></div>
+              </button>
+              <button onClick={handleNoFeeToggle} className="px-1 ml-2">
+                <div
+                  className={`${
+                    isNoFee
+                      ? 'bg-theme-300 text-theme-70'
+                      : 'bg-theme-70 text-theme-300'
+                  } py-[1px] px-1.5 font-bold rounded-full `}
+                >
+                  {isNoFee ? (
+                    <FormattedMessage id="common.noFee" />
+                  ) : (
+                    <FormattedMessage id="common.standard" />
+                  )}
+                </div>
+              </button>
+              <div className="inline-flex pl-2.5">
+                <span>
+                  <FormattedMessage id="screens.room.bet" />
+                </span>
+              </div>
               <span className="px-2">|</span>
               <span>{totalAmount?.toLocaleString()}</span>
             </div>
