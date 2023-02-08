@@ -40,7 +40,7 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
               }
               rounded-sm p-[1.1px] `}
             >
-              <div className="w-6 h-6 text-center rounded-sm bg-theme-50">
+              <div className="w-12 h-6 text-center rounded-sm bg-theme-50">
                 {startCount && counter !== undefined && counter > 0 ? (
                   <p
                     className={`${

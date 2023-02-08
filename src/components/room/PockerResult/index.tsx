@@ -1,6 +1,6 @@
 import CardWidget from './CardWidget'
 import { FormattedMessage } from 'react-intl'
-import { usePokerUpdate } from '@/hooks/pocker'
+import { usePokerUpdate } from '@/hooks/poker'
 import { clsx as cx } from 'clsx'
 import { useContext, useEffect, useState } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'

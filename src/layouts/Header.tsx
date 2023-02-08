@@ -77,7 +77,7 @@ const Header: React.FC = () => {
               onClick={stopProp}
             >
               {/* <button className={icons.heart}></button> */}
-              {/* <button className={icons.chart}></button> */}
+              {/* <button className={icons.chart}></b4utton> */}
               <button
                 onClick={(e) => window.location.reload()}
                 className={icons.refresh}

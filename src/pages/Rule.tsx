@@ -159,15 +159,15 @@ const Rule = () => {
             <div className="inline-flex justify-between items-center w-1/2">
               <p>閒家9點</p>
               <span className="inline-flex justify-around w-1/3">
-                <img src={Card_h_4} alt="pocker card image" className="w-11" />
-                <img src={Card_c_8} alt="pocker card image" className="w-11" />
-                <img src={Card_c_7} alt="pocker card image" className="w-11" />
+                <img src={Card_h_4} alt="poker card image" className="w-11" />
+                <img src={Card_c_8} alt="poker card image" className="w-11" />
+                <img src={Card_c_7} alt="poker card image" className="w-11" />
               </span>
               <p>莊家5點</p>
               <span className="inline-flex justify-around w-1/3">
-                <img src={Card_h_7} alt="pocker card image" className="w-11" />
-                <img src={Card_c_4} alt="pocker card image" className="w-11" />
-                <img src={Card_s_4} alt="pocker card image" className="w-11" />
+                <img src={Card_h_7} alt="poker card image" className="w-11" />
+                <img src={Card_c_4} alt="poker card image" className="w-11" />
+                <img src={Card_s_4} alt="poker card image" className="w-11" />
               </span>
             </div>
             <p className="pt-1 pb-4">
@@ -178,20 +178,20 @@ const Rule = () => {
             <div className="inline-flex justify-between items-center w-1/2">
               <p>閒家6點</p>
               <span className="inline-flex w-1/3">
-                <img src={Card_h_k} alt="pocker card image" className="w-11" />
+                <img src={Card_h_k} alt="poker card image" className="w-11" />
                 <div className="pl-1">
                   <img
                     src={Card_h_6}
-                    alt="pocker card image"
+                    alt="poker card image"
                     className="w-11"
                   />
                 </div>
               </span>
               <p>莊家9點</p>
               <span className="inline-flex justify-around w-1/3">
-                <img src={Card_h_7} alt="pocker card image" className="w-11" />
-                <img src={Card_d_j} alt="pocker card image" className="w-11" />
-                <img src={Card_c_4} alt="pocker card image" className="w-11" />
+                <img src={Card_h_7} alt="poker card image" className="w-11" />
+                <img src={Card_d_j} alt="poker card image" className="w-11" />
+                <img src={Card_c_4} alt="poker card image" className="w-11" />
               </span>
             </div>
             <p className="pt-1 pb-4">
@@ -202,22 +202,22 @@ const Rule = () => {
             <div className="inline-flex justify-between items-center w-1/2">
               <p>閒家9點</p>
               <span className="inline-flex w-1/3">
-                <img src={Card_h_5} alt="pocker card image" className="w-11" />
+                <img src={Card_h_5} alt="poker card image" className="w-11" />
                 <div className="pl-1">
                   <img
                     src={Card_d_4}
-                    alt="pocker card image"
+                    alt="poker card image"
                     className="w-11"
                   />
                 </div>
               </span>
               <p>莊家8點</p>
               <span className="inline-flex w-1/3">
-                <img src={Card_s_7} alt="pocker card image" className="w-11" />
+                <img src={Card_s_7} alt="poker card image" className="w-11" />
                 <div className="pl-1">
                   <img
                     src={Card_s_1}
-                    alt="pocker card image"
+                    alt="poker card image"
                     className="w-11"
                   />
                 </div>
@@ -230,20 +230,20 @@ const Rule = () => {
             <div className="inline-flex justify-between items-center w-1/2">
               <p>閒家7點</p>
               <span className="inline-flex w-1/3">
-                <img src={Card_d_5} alt="pocker card image" className="w-11" />
+                <img src={Card_d_5} alt="poker card image" className="w-11" />
                 <div className="pl-1">
                   <img
                     src={Card_h_2}
-                    alt="pocker card image"
+                    alt="poker card image"
                     className="w-11"
                   />
                 </div>
               </span>
               <p>莊家7點</p>
               <span className="inline-flex justify-around w-1/3">
-                <img src={Card_c_8} alt="pocker card image" className="w-11" />
-                <img src={Card_d_2} alt="pocker card image" className="w-11" />
-                <img src={Card_h_7} alt="pocker card image" className="w-11" />
+                <img src={Card_c_8} alt="poker card image" className="w-11" />
+                <img src={Card_d_2} alt="poker card image" className="w-11" />
+                <img src={Card_h_7} alt="poker card image" className="w-11" />
               </span>
             </div>
             <p className="pt-1 pb-4">
@@ -253,22 +253,22 @@ const Rule = () => {
             <div className="inline-flex justify-between items-center w-1/2">
               <p>閒家8點</p>
               <span className="inline-flex w-1/3">
-                <img src={Card_h_5} alt="pocker card image" className="w-11" />
+                <img src={Card_h_5} alt="poker card image" className="w-11" />
                 <div className="pl-1">
                   <img
                     src={Card_d_3}
-                    alt="pocker card image"
+                    alt="poker card image"
                     className="w-11"
                   />
                 </div>
               </span>
               <p>莊家8點</p>
               <span className="inline-flex w-1/3">
-                <img src={Card_h_6} alt="pocker card image" className="w-11" />
+                <img src={Card_h_6} alt="poker card image" className="w-11" />
                 <div className="pl-1">
                   <img
                     src={Card_h_2}
-                    alt="pocker card image"
+                    alt="poker card image"
                     className="w-11"
                   />
                 </div>
