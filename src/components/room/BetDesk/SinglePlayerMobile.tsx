@@ -7,7 +7,6 @@ import RoomDataContext from '@/contexts/RoomDataContext'
 import { clsx as cx } from 'clsx'
 import { numberFormmat } from '@/hooks/bet'
 
-
 const BetArea: React.FC<{ target: number }> = ({ target }) => {
   return (
     <div
@@ -35,7 +34,6 @@ const BetArea: React.FC<{ target: number }> = ({ target }) => {
   )
 }
 
-
 const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
   isDisabled
 }) => {
@@ -46,7 +44,8 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
     isDisabled ? 'brightness-75' : ''
   )
 
-  const { selectedChip, betState, dispatchBet } = useContext(GamePlayContext)
+  const { isNoFee, selectedChip, betState, dispatchBet } =
+    useContext(GamePlayContext)
 
   const betTarget = [
     'playerDragon',
@@ -66,7 +65,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
       {betTarget.map((item, idx) => (
         <button
           key={item}
-          disabled={isDisabled}
+          disabled={!isNoFee && idx === 2 ? true : isDisabled}
           onClick={() =>
             dispatchBet({
               type: 'addChips',
@@ -74,7 +73,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
               amount: chipsData?.[selectedChip]?.value
             })
           }
-          className={btnStyle}
+          className={cx(btnStyle, !isNoFee && idx === 2 ? 'brightness-50' : '')}
         >
           <BetArea target={betState[item]} />
           <div className={cx(betAreaMapper[item].textStyle)}>
@@ -92,7 +91,12 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
                 <FormattedMessage id={betAreaMapper[item].id} />
               </div>
             )}
-            <p className="ratio">{betAreaMapper[item].text}</p>
+
+            {isNoFee && idx === 8 ? (
+              <p className="ratio">{betAreaMapper[item].text}</p>
+            ) : (
+              <p className="ratio">1:0.95</p>
+            )}
           </div>
         </button>
       ))}

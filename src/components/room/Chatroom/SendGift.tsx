@@ -65,7 +65,7 @@ const SendGift: React.FC<GiftPorps> = ({
       onTriggerAnimation(true)
       setTimeout(() => {
         onTriggerAnimation(false)
-      }, 5700)
+      }, 5000)
     }
   }
 
