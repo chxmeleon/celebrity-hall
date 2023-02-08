@@ -1,10 +1,13 @@
 import { GamePlayProvider } from '@/contexts/GamePlayContext'
 import { RoomDataProvider } from '@/contexts/RoomDataContext'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 
 const RoomsLayout = () => {
+  const { type } = useParams<{ type: string | undefined }>()
+  
+
   return (
-    <RoomDataProvider>
+    <RoomDataProvider type={type}>
       <GamePlayProvider>
         <Outlet />
       </GamePlayProvider>

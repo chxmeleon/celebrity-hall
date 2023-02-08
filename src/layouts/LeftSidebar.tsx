@@ -10,25 +10,25 @@ const LeftSidebar = () => {
   const { formatMessage } = useIntl()
   const linkLisetMapper = [
     {
-      href: '/home/rooms',
+      href: '/home/rooms/all',
       id: 'layout.all',
       default: 'Explore',
       src: '/icons/all.png'
     },
     {
-      href: '/home/liverooms',
+      href: '/home/rooms/live',
       id: 'layout.liverooms',
       default: 'Live Hall',
       src: '/icons/live.png'
     },
     {
-      href: '/home/mutualrooms',
+      href: '/home/rooms/interaction',
       id: 'layout.mutualrooms',
       default: 'Mutual Hall',
       src: '/icons/mutual.png'
     },
     {
-      href: '/home/kgrooms',
+      href: '/home/rooms/kg',
       id: 'layout.kgrooms',
       default: 'KG Hall',
       src: '/icons/KG.png'

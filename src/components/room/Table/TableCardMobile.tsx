@@ -35,8 +35,7 @@ type RoomDataProps = {
 }
 
 const TableCardMobile: React.FC<RoomDataProps> = ({ room }) => {
-  const { useGetRoomData, isTablesPath } = useContext(RoomDataContext)
-  const { refetch: refetchRooms } = useGetRoomData('all')
+  const { refetch: refetchRooms, isTablesPath } = useContext(RoomDataContext)
   const href = `/home/rooms/${room.id}`
   const streamName = room?.streamName ?? room?.streams?.[0]?.name
   const streamKey = room?.streamKey ?? room?.streams?.[0]?.key

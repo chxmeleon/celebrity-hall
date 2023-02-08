@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import logoImgMobile from '/logo_m.webp'
 import { useWallet } from '@/hooks/profile'
+import { Link } from 'react-router-dom'
+
 
 const icons = {
   heart: cx`i-heroicons-heart-solid text-2xl hover:text-pink-500 `,
@@ -58,9 +60,9 @@ const Header: React.FC = () => {
       >
         <div className="flex justify-between items-center w-full h-full">
           <div className="flex ml-1 w-full h-full md:hidden">
-            <a href="/home/rooms" className="my-auto ">
+            <Link to='/home/rooms/all'  className="my-auto ">
               <img src={logoImgMobile} alt="logo img" className="w-auto h-6" />
-            </a>
+            </Link>
           </div>
           <div className="flex justify-end items-center px-3 w-full h-full bg-theme-50">
             <div className="m-auto w-2/3 text-xs md:hidden">

@@ -7,8 +7,7 @@ import { Responsive } from '@/hooks/useResponsive'
 import TableCardMobile from '@/components/room/Table/TableCardMobile'
 
 const Tables = () => {
-  const { useGetRoomData } = useContext(RoomDataContext)
-  const { rooms } = useGetRoomData('all')
+  const { rooms } = useContext(RoomDataContext)
 
   return (
     <>

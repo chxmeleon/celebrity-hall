@@ -183,7 +183,7 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
               super6Amount: betState?.super6,
               smallAmount: betState?.small,
               bigAmount: betState?.big,
-              gameType: 'normal',
+              gameType: isNoFee ? 'super6' : 'normal',
               deviceInfo: JSON.stringify(deviceInfo)
             }
           }
@@ -233,7 +233,7 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
             super6Amount: preBetState?.super6Amount,
             smallAmount: preBetState?.smallAmount,
             bigAmount: preBetState?.bigAmount,
-            gameType: 'normal',
+            gameType: isNoFee ? 'super6' : 'normal',
             deviceInfo: JSON.stringify(deviceInfo)
           }
         }

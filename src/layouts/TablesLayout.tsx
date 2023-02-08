@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 const TablesLayout = () => {
   return (
-    <RoomDataProvider>
+    <RoomDataProvider type='all'>
       <Outlet />
     </RoomDataProvider>
   )
