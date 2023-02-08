@@ -2,7 +2,7 @@ import { clsx as cx } from 'clsx'
 import { FormattedMessage } from 'react-intl'
 import FlipCard from './FlipCard'
 import { useParams } from 'react-router-dom'
-import { PokerStateProps, usePokerUpdate } from '@/hooks/pocker'
+import { PokerStateProps, usePokerUpdate } from '@/hooks/poker'
 
 type cardsMapperProps = {
   [key: string]: {
@@ -36,8 +36,8 @@ interface CardProps {
 
 const CardWidget: React.FC<CardProps> = ({ role, roomId, isTable }) => {
   const { currentGameState } = usePokerUpdate(roomId)
-  const { pokerState: pockerState } = currentGameState
-  const isWin = pockerState?.result?.[`${role}Win`]
+  const { pokerState: pokerState } = currentGameState
+  const isWin = pokerState?.result?.[`${role}Win`]
 
   const titleStyle = cx(
     'flex justify-center items-center font-medium text-gray-50 rounded-full',
@@ -45,7 +45,7 @@ const CardWidget: React.FC<CardProps> = ({ role, roomId, isTable }) => {
     isTable ? ' w-7 h-7' : 'text-lg w-8 h-8'
   )
 
-  const pockerContainer = cx(
+  const pokerContainer = cx(
     'flex flex-col items-center py-1 px-2 w-full h-full border-2',
     isWin
       ? 'border-theme-300 bg-theme-300/20 win-shadow'
@@ -59,7 +59,7 @@ const CardWidget: React.FC<CardProps> = ({ role, roomId, isTable }) => {
   )
 
   return (
-    <div className={pockerContainer}>
+    <div className={pokerContainer}>
       <div className="flex justify-between items-center px-2 h-1/4 md:px-0 md:w-1/2">
         <div className={titleStyle}>
           <FormattedMessage
@@ -69,11 +69,11 @@ const CardWidget: React.FC<CardProps> = ({ role, roomId, isTable }) => {
         </div>
         <div className="flex pl-5 text-center text-gray-50">
           <p className={cx(isTable ? 'text-2xl' : 'text-3xl')}>
-            {pockerState?.[`${role}Points`] ?? 0}
+            {pokerState?.[`${role}Points`] ?? 0}
           </p>
         </div>
       </div>
-      <FlipCard data={pockerState?.[`${role}Cards`]} isTable={isTable} />
+      <FlipCard data={pokerState?.[`${role}Cards`]} isTable={isTable} />
       <div className={winResultImg}>
         <img src="/win.svg" alt="win image" />
         <FormattedMessage id="common.win" defaultMessage="Win" />
