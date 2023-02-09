@@ -86,14 +86,14 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
     <div className="flex flex-col w-full h-full">
       <div className="flex justify-between items-center py-1 px-2 w-full h-12 bg-theme-50/10">
         <div className="font-bold text-gray-50">{room.name}</div>
-        <div className="flex px-3 rounded-full border border-theme-300 text-theme-300">
-          <Link to={href} key={href} className="m-auto text-center">
+        <Link to={href} key={href} className="text-center">
+          <div className="flex rounded-full border border-theme-300 text-theme-300">
             <FormattedMessage
               id="screens.baccaratRooms.enterRoom"
               defaultMessage="Enter"
             />
-          </Link>
-        </div>
+          </div>
+        </Link>
       </div>
       <div className="relative w-full h-[266px]">
         <div className="absolute w-full h-full">

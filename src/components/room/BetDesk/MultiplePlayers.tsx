@@ -183,12 +183,12 @@ export const MultiplePlayers: React.FC<{
             className={cx(
               isDisabled ? 'bg-theme-50/50' : '',
               isNoFee
-                ? ''
-                : 'brightness-50 bg-theme-50/80 hover:bg-theme-50/80 hover:cursor-not-allowed',
-              btnIdx.tn3
+                ? 'text-grid-200'
+                : 'text-orange-400/50 bg-theme-50/80 hover:bg-theme-50/80 hover:cursor-not-allowed',
+              btnIdx.tn3 
             )}
           >
-            <div className="flex justify-evenly items-center m-auto w-2/3 text-grid-200">
+            <div className="flex justify-evenly items-center m-auto w-2/3">
               <div className="font-medium">SUPER 6</div>
               <p>1:20</p>
             </div>

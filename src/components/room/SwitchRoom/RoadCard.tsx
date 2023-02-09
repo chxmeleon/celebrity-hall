@@ -1,26 +1,32 @@
 import { useTimeLeft } from '@/hooks/rooms'
 import { RoomProps } from '@/types/room'
+import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { BigEyeRoad } from '../Roadmap'
 
 type RoomDataProps = {
   room: RoomProps
+  onClick: React.MouseEventHandler<HTMLDivElement>
 }
 
-const RoadCard: React.FC<RoomDataProps> = ({ room }) => {
-  const { counter, startCount, isLeftTen, isOpening } = useTimeLeft(
-    room.id
-  )
+const RoadCard: React.FC<RoomDataProps> = ({ room, onClick }) => {
+  const { counter, startCount, isLeftTen, isOpening } = useTimeLeft(room.id)
+  
+  
 
   return (
-    <div className="flex justify-between items-center p-2 w-full h-10 border border-theme-75 rounded-md hover:bg-blue-500/40 hover:cursor-pointer">
+    <div
+      onClick={onClick}
+      id={room.id}
+      className="flex justify-between items-center p-2 w-full h-10 rounded-md border hover:cursor-pointer border-theme-75 hover:bg-blue-500/40"
+    >
       <div
         className={`${
           isLeftTen && startCount && counter !== undefined && counter > 0
             ? 'bg-red-500'
             : 'bg-link-button-54'
         }
-        rounded-full p-[1px] flex`}
+        rounded-full p-[1px] flex pointer-events-none`}
       >
         <div className="flex justify-center items-center w-6 h-6 text-center rounded-full bg-theme-50">
           {startCount && counter !== undefined && counter > 0 ? (

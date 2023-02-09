@@ -83,7 +83,7 @@ export const buttonStyle = cva('w-full text-center m-auto', {
         'justify-around',
         'items-center',
         'border',
-        'drop-shadow-2xl',
+        'drop-shadow-2xl'
       ],
 
       outlineSwitch: [

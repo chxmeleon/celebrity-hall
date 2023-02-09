@@ -367,12 +367,12 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               className={cx(
                 isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
                 isNoFee
-                  ? ''
-                  : 'brightness-50 bg-theme-50/80 hover:bg-theme-50/80 hover:cursor-not-allowed',
+                  ? ' text-grid-200'
+                  : 'text-orange-400/50 bg-theme-50/80 hover:bg-theme-50/80 hover:cursor-not-allowed',
                 btnIdx.bhhn
               )}
             >
-              <div className="m-auto w-2/3 text-grid-200">
+              <div className="m-auto w-2/3">
                 <div className="font-bold">SUPER 6</div>
                 <p>1:20</p>
               </div>
