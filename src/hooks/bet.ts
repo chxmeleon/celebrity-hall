@@ -9,7 +9,6 @@ export const numberFormmat = (target: number) =>
     ? target / 10000 + 'W'
     : target
 
-
 export interface BetInitialValueProp {
   [key: string]: number
 }
@@ -76,7 +75,7 @@ export interface BettingBtnProp {
 }
 
 export type BettingBtnAction =
-  | { type: 'setTrue' | 'setFalse'; btnTarget: string }
+  | { type: 'setTrue' | 'setFalse' | 'setToggle'; btnTarget: string }
   | { type: 'onCancel' | 'onRepeat' | 'onConfirm' | 'disableBet' }
   | { type: 'enableBet'; totalAmount: number }
 
@@ -105,6 +104,12 @@ export const bettingBtnReducer = (
       return {
         ...state,
         [action?.btnTarget]: false
+      }
+
+    case 'setToggle':
+      return {
+        ...state,
+        [action?.btnTarget]: !state[action?.btnTarget]
       }
 
     case 'onCancel':

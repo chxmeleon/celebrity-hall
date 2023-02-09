@@ -58,6 +58,14 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [isNoFee, setIsNoFee] = useState<boolean>(false)
   const handleNoFeeToggle = () => setIsNoFee((isNoFee) => !isNoFee)
+  const [preNoFee, setPreNoFee] = useState<boolean>(isNoFee)
+
+  useEffect(() => {
+    if (isNoFee !== preNoFee) {
+      dispatchBtn({ type: 'setTrue', btnTarget: 'isRepeatDisabled' })
+      setPreNoFee(isNoFee)
+    }
+  }, [isNoFee, preNoFee])
 
   const preLocation = useLocation().pathname
   const [location, setLocation] = useState(preLocation)
@@ -70,7 +78,7 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
 
   useEffect(() => {
     if (preLocation !== location) {
-      return dispatchBet({ type: 'newRound' })
+      dispatchBet({ type: 'newRound' })
     }
   }, [preLocation, location, dispatchBet])
 

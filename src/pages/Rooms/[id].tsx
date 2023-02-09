@@ -17,7 +17,7 @@ import {
   AskGrid,
   AskGridMobile
 } from '@/components/room/Roadmap'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { useCurrentGameState } from '@/hooks/rooms'
 import RoomNotification from '@/components/room/RoomNotification'
@@ -31,6 +31,7 @@ import RoomDataContext from '@/contexts/RoomDataContext'
 import Loading from '@/components/room/RoomStream/StreamLoading'
 import { Tooltip } from '@material-tailwind/react'
 import QuickRoads from '@/components/room/SwitchRoom'
+import RoadDrawer from '@/components/room/SwitchRoom/RoadDrawer'
 
 export const ChipButtonList: React.FC<{
   selectedChip: string
@@ -363,6 +364,9 @@ const Room = () => {
                       />
                     </div>
                   </div>
+                  {/* <div className="absolute top-0 w-full h-full"> */}
+                  {/*   <RoadDrawer isOpenDrawer={isOpenRoadDrawer} /> */}
+                  {/* </div> */}
                   <ChatRoom />
                 </div>
               </div>
