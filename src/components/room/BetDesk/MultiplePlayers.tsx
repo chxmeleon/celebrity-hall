@@ -1,11 +1,11 @@
 import { btnIdx, btnIdxNoBorder } from './deskStyle'
 import { chipsData } from './chips'
 import { clsx as cx } from 'clsx'
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import { FormattedMessage } from 'react-intl'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { numberFormmat } from '@/hooks/bet'
-import _, { groupBy, sumBy, map as lmap } from 'lodash'
+import _ from 'lodash'
 
 import { useWallet } from '@/hooks/profile'
 
@@ -70,23 +70,29 @@ export const MultiplePlayers: React.FC<{
   const { user } = useWallet()
   const { profile } = user
 
-  const flapArr =
-    targetsData &&
-    Object.values(targetsData)
-      ?.flat()
-      ?.map((item) => ({ player: item.player, amount: Number(item.amount) }))
-      ?.filter(
-        (value) =>
-          value.player !== profile.nickname && value.player !== profile.username
-      )
+  const flatArr = useMemo(
+    () =>
+      targetsData &&
+      Object.values(targetsData)
+        ?.flat()
+        ?.map((item) => ({ player: item.player, amount: Number(item.amount) }))
+        ?.filter(
+          (value) =>
+            value.player !== profile.nickname &&
+            value.player !== profile.username
+        ),
+    [profile, targetsData]
+  )
 
-  const otherPlayers = _(flapArr)
-    ?.groupBy('player')
-    ?.map((obj, key) => ({
-      username: key,
-      total: _.sumBy(obj, 'amount')
-    }))
-    ?.value()
+  const otherPlayers = useMemo(() => {
+    return _(flatArr)
+      ?.groupBy('player')
+      ?.map((obj, key) => ({
+        username: key,
+        total: _.sumBy(obj, 'amount')
+      }))
+      ?.value()
+  }, [flatArr])
 
   const userData = [
     { username: profile?.username ?? profile?.nickname, total: totalAmount },

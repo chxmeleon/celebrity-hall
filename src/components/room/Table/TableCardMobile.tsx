@@ -17,12 +17,16 @@ import { useContext, useEffect, useState } from 'react'
 import RoomDataContext from '@/contexts/RoomDataContext'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { chipsData } from '../BetDesk/chips'
+import { ChipButtonList } from '@/pages/Rooms/[id]'
+import { BetButton } from '@/components/common/Button'
+import RoomNotification from '../RoomNotification'
 
 type RoomDataProps = {
   room: RoomProps
+  isActived?: boolean
 }
 
-const TableCardMobile: React.FC<RoomDataProps> = ({ room }) => {
+const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
   const { refetch: refetchRooms, isTablesPath } = useContext(RoomDataContext)
   const href = `/home/room/${room.id}`
   const streamName = room?.streamName ?? room?.streams?.[0]?.name
@@ -97,7 +101,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room }) => {
           <div className="flex items-center">
             <button
               onClick={onToggleStream}
-              disabled={isDisabledCamBtn}
+              disabled={!isActived}
               className={cx(
                 isOpen ? 'i-heroicons-camera-20-solid' : 'i-heroicons-camera',
                 'text-xl mr-3'
@@ -183,6 +187,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room }) => {
                   videoOn={true}
                   isWebRTC={isWebRTC}
                   isTablesPath={isTablesPath}
+                  isActived={isActived}
                 />
               ) : streamName && streamKey ? (
                 <RoomStreamMobile
@@ -191,6 +196,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room }) => {
                   videoOn={true}
                   isWebRTC={isWebRTC}
                   isTablesPath={isTablesPath}
+                  isActived={isActived}
                 />
               ) : (
                 <Loading size="small" />
@@ -199,7 +205,16 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room }) => {
           </div>
         </div>
         <div className="flex py-2 w-full h-[123px]">
-          <div className="w-1/2 bg-gray-50">
+          <div className="relative w-1/2 bg-gray-50">
+            <div className="absolute w-full h-full inset-0 z-10 flex justify-center items-end">
+              <RoomNotification
+                isConfirmedSuccess={btnState.isConfirmSuccess}
+                isConfirmedFailure={btnState.isConfirmFailure}
+                isRepeatSuccess={btnState.isRepeatSuccess}
+                isTablesPath={isTablesPath}
+                gameState={gameState}
+              />
+            </div>
             {room && (
               <BigRoad columnSize={10} roads={room.roads.big_road.array} />
             )}
@@ -263,6 +278,34 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room }) => {
                 </button>
               ))}
             </div>
+          </div>
+        </div>
+        <div className="flex py-2 px-1 w-full">
+          <div className="overflow-x-scroll w-1/2">
+            <div className="flex gap-1 w-[300px]">
+              <ChipButtonList
+                selectedChip={selectedChip}
+                onSelectedChipChanged={setSelectedChip}
+              />
+            </div>
+          </div>
+          <div className="flex justify-between items-center w-1/2">
+            <BetButton
+              className="mx-1 text-xs"
+              isDisabled={btnState.isCancelDisabled}
+              onClick={() => onCancel(room.id)}
+            >
+              <div className="i-heroicons-x-mark-solid"></div>
+              <FormattedMessage id="common.cancel" />
+            </BetButton>
+            <BetButton
+              className="mx-1 text-xs"
+              isDisabled={btnState.isConfirmDisabled}
+              onClick={(e) => onConfirm(e, room?.id)}
+            >
+              <div className="i-heroicons-check-solid"></div>
+              <FormattedMessage id="common.confirm" />
+            </BetButton>
           </div>
         </div>
       </div>

@@ -8,19 +8,18 @@ import TableCardMobile from '@/components/room/Table/TableCardMobile'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { clsx as cx } from 'clsx'
 
+
 const Tables = () => {
   const { rooms } = useContext(RoomDataContext)
   const [selectedChip, setSelectedChip] = useState('chips_100')
-  const [roomCameraActived, setRoomCameraActived] = useState<number | null>(
-    null
-  )
   const [activeId, setActiveId] = useState<string | undefined>(rooms[0]?.id)
+
 
   return (
     <>
       <Responsive.Desktop className="w-full h-full">
         {rooms.length ? (
-          <div className="grid grid-cols-4 grid-rows-1 w-full ">
+          <div className="grid grid-cols-4 grid-rows-1 w-full">
             {rooms.slice(4, 8).map((item, idx) => {
               const isActived = activeId === item?.id
               return (
@@ -28,17 +27,17 @@ const Tables = () => {
                   className="relative"
                   onClick={(e) => setActiveId(e.currentTarget.id)}
                   id={item?.id}
-                  key={item?.id}
+                  key={idx}
                 >
                   <div
                     className={cx(
-                      isActived ? 'w-full h-full border border-amber-300' : '', 'absolute z-[10]  pointer-events-none'
+                      isActived ? 'w-full h-full border border-amber-300' : '',
+                      'absolute z-[10]  pointer-events-none'
                     )}
-                  >
-                  </div>
-                    <GamePlayProvider>
-                      <TableCard room={item} isActived={isActived} />
-                    </GamePlayProvider>
+                  ></div>
+                  <GamePlayProvider>
+                    <TableCard room={item} isActived={isActived} />
+                  </GamePlayProvider>
                 </div>
               )
             })}
@@ -52,15 +51,30 @@ const Tables = () => {
         {rooms.length ? (
           <div className="relative w-full h-full">
             <div className="overflow-y-scroll py-4 px-2 pb-10 w-full h-full">
-              {rooms.map((item, idx) => (
-                <div key={idx}>
-                  <GamePlayProvider>
-                    <TableCardMobile room={item} />
-                  </GamePlayProvider>
-                </div>
-              ))}
+              {rooms.map((item, idx) => {
+                const isActived = activeId === item?.id
+                return (
+                  <div
+                    className="relative"
+                    onClick={(e) => setActiveId(e.currentTarget.id)}
+                    id={item?.id}
+                    key={idx}
+                  >
+                    <div
+                      className={cx(
+                        isActived
+                          ? 'w-full h-full  brightness-105 backdrop-brightness-110 shadow-md shadow-theme-300'
+                          : '',
+                      )}
+                    >
+                      <GamePlayProvider>
+                        <TableCardMobile room={item} isActived={isActived} />
+                      </GamePlayProvider>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
-            <div className="fixed bottom-0 z-40 w-full h-14 bg-black"></div>
           </div>
         ) : (
           <Loading />
