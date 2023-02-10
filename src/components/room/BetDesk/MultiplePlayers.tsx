@@ -95,7 +95,7 @@ export const MultiplePlayers: React.FC<{
   }, [flatArr])
 
   const userData = [
-    { username: profile?.username ?? profile?.nickname, total: totalAmount },
+    { username: profile?.nickname ?? profile?.username, total: totalAmount },
     ...otherPlayers
   ]
 
