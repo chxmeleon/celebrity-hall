@@ -32,9 +32,10 @@ import GamePlayContext from '@/contexts/GamePlayContext'
 
 type RoomDataProps = {
   room: RoomProps
+  isActived?: boolean
 }
 
-const TableCard: React.FC<RoomDataProps> = ({ room }) => {
+const TableCard: React.FC<RoomDataProps> = ({ room, isActived }) => {
   const { refetch: refetchRooms, isTablesPath } = useContext(RoomDataContext)
   const href = `/home/room/${room.id}`
   const streamName = room?.streamName ?? room?.streams?.[0]?.name
@@ -109,10 +110,19 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
                     placement="right"
                   >
                     <button
+                      disabled={
+                        secoundStreamKey === undefined &&
+                        secoundStreamName === undefined
+                      }
                       onClick={handleSwitchCam}
-                      className={`${
-                        isSecondCam ? 'text-theme-300' : ''
-                      } m-auto text-xl i-heroicons-video-camera-20-solid`}
+                      className={cx(
+                        isSecondCam ? 'text-theme-300' : '',
+                        secoundStreamKey === undefined &&
+                          secoundStreamName === undefined
+                          ? 'text-gray-500 hover:cursor-not-allowed'
+                          : '',
+                        'm-auto text-xl i-heroicons-video-camera-20-solid'
+                      )}
                     ></button>
                   </Tooltip>
                 </div>
@@ -159,6 +169,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
                 videoOn={true}
                 isWebRTC={isWebRTC}
                 isTablesPath={isTablesPath}
+                isActived={isActived}
               />
             ) : streamName && streamKey ? (
               <RoomStreamMobile
@@ -167,6 +178,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
                 videoOn={true}
                 isWebRTC={isWebRTC}
                 isTablesPath={isTablesPath}
+                isActived={isActived}
               />
             ) : (
               <Loading size="small" />
@@ -292,7 +304,7 @@ const TableCard: React.FC<RoomDataProps> = ({ room }) => {
             </div>
           </div>
         </div>
-        <div className="w-full h-[29px]">
+        <div className="w-full h-[26px]">
           <AskGridMobile roomId={room?.id} size="small" />
         </div>
       </div>
