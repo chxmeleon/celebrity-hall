@@ -139,9 +139,9 @@ export const bettingBtnReducer = (
       return {
         ...state,
         isDisable: true,
-        IsConfirmDisabled: true,
-        IsRepeatDisabled: true,
-        IsCancelDisabled: true
+        isConfirmDisabled: true,
+        isRepeatDisabled: true,
+        isCancelDisabled: true
       }
 
     case 'enableBet':

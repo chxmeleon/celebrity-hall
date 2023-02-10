@@ -164,7 +164,10 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
-              className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.tl5)}
+              className={cx(
+                isDisabled ? 'brightness-75 bg-theme-50/50' : '',
+                btnIdx.tl5
+              )}
             >
               <div className="text-lg flex justify-between items-center px-3 w-full [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
@@ -184,7 +187,10 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
-              className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.tn4)}
+              className={cx(
+                isDisabled ? 'brightness-75 bg-theme-50/50' : '',
+                btnIdx.tn4
+              )}
             >
               <div className="text-lg flex justify-between items-center px-3 w-full text-grid-400 [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
@@ -206,7 +212,10 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
-              className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.cl5)}
+              className={cx(
+                isDisabled ? 'brightness-75 bg-theme-50/50' : '',
+                btnIdx.cl5
+              )}
             >
               <div className="text-lg flex justify-between items-center px-3 w-full [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
@@ -226,7 +235,10 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
-              className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.cn4)}
+              className={cx(
+                isDisabled ? 'brightness-75 bg-theme-50/50' : '',
+                btnIdx.cn4
+              )}
             >
               <div className="flex justify-between items-center px-3 w-full text-grid-400 [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
@@ -249,7 +261,10 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                     amount: chipsData?.[selectedChip]?.value
                   })
                 }
-                className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.hbhln)}
+                className={cx(
+                  isDisabled ? 'brightness-75 bg-theme-50/50' : '',
+                  btnIdx.hbhln
+                )}
               >
                 <div className="text-xs flex justify-between items-center px-2 text-grid-400 [&_p]:text-gray-300 [&_p]:text-xs">
                   <div>
@@ -269,7 +284,10 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                     amount: chipsData?.[selectedChip]?.value
                   })
                 }
-                className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.hbhn)}
+                className={cx(
+                  isDisabled ? 'brightness-75 bg-theme-50/50' : '',
+                  btnIdx.hbhn
+                )}
               >
                 <div className="text-xs flex justify-between items-center px-2 w-full text-grid-400 [&_p]:text-gray-300 [&_p]:text-xs">
                   <div>
@@ -292,7 +310,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               }
               className={cx(
                 'pb-1',
-                isDisabled ? 'bg-theme-50/50 ' : '',
+                isDisabled ? 'brightness-75 bg-theme-50/50 ' : '',
                 btnIdx.bn4
               )}
             >
@@ -318,7 +336,9 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               })
             }
             className={cx(
-              isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+              isDisabled
+                ? 'brightness-75 bg-theme-50/50 hover:bg-theme-50/50 '
+                : '',
               btnIdx.ynn
             )}
           >
@@ -342,7 +362,9 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 })
               }
               className={cx(
-                isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+                isDisabled
+                  ? 'brightness-75 bg-theme-50/50 hover:bg-theme-50/50 '
+                  : '',
                 btnIdx.thhn
               )}
             >
@@ -365,11 +387,9 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 })
               }
               className={cx(
-                isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
-                isNoFee
-                  ? ' text-grid-200'
-                  : 'text-orange-400/50 bg-theme-50/80 hover:bg-theme-50/80 hover:cursor-not-allowed',
-                btnIdx.bhhn
+                isNoFee && !isDisabled ? '' : 'brightness-75',
+                btnIdx.bhhn,
+                'text-grid-200'
               )}
             >
               <div className="m-auto w-2/3">
@@ -388,7 +408,9 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               })
             }
             className={cx(
-              isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+              isDisabled
+                ? 'brightness-75 bg-theme-50/50 hover:bg-theme-50/50 '
+                : '',
               btnIdx.ynn
             )}
           >
@@ -412,7 +434,9 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 })
               }
               className={cx(
-                isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+                isDisabled
+                  ? 'brightness-75 bg-theme-50/50 hover:bg-theme-50/50 '
+                  : '',
                 btnIdx.tn4
               )}
             >
@@ -434,7 +458,10 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
-              className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.tr5)}
+              className={cx(
+                isDisabled ? 'brightness-75 bg-theme-50/50' : '',
+                btnIdx.tr5
+              )}
             >
               <div className="text-lg flex justify-between items-center px-3 w-full [&_p]:text-gray-300 [&_p]:text-xs">
                 <div>
@@ -456,7 +483,10 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   amount: chipsData?.[selectedChip]?.value
                 })
               }
-              className={cx('bg-theme-50/50  ', btnIdx.cn4)}
+              className={cx(
+                isDisabled ? 'bg-theme-50/50  brightness-75' : '',
+                btnIdx.cn4
+              )}
             >
               <div className="flex justify-between items-center px-3 w-full text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                 <div className="text-lg">
@@ -477,7 +507,9 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 })
               }
               className={cx(
-                isDisabled ? 'bg-theme-50/50 hover:bg-theme-50/50 ' : '',
+                isDisabled
+                  ? 'brightness-75 bg-theme-50/50 hover:bg-theme-50/50 '
+                  : '',
                 btnIdx.cr5
               )}
             >
@@ -503,7 +535,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               }
               className={cx(
                 'pb-1',
-                isDisabled ? 'bg-theme-50/50' : '',
+                isDisabled ? 'brightness-75 bg-theme-50/50' : '',
                 btnIdx.bn4
               )}
             >
@@ -526,7 +558,10 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                     amount: chipsData?.[selectedChip]?.value
                   })
                 }
-                className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.hbhn)}
+                className={cx(
+                  isDisabled ? 'brightness-75 bg-theme-50/50' : '',
+                  btnIdx.hbhn
+                )}
               >
                 <div className="text-xs flex justify-between items-center px-2 text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                   <div>
@@ -546,7 +581,10 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                     amount: chipsData?.[selectedChip]?.value
                   })
                 }
-                className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.hbhrn)}
+                className={cx(
+                  isDisabled ? 'brightness-75 bg-theme-50/50' : '',
+                  btnIdx.hbhrn
+                )}
               >
                 <div className="text-xs flex justify-between items-center px-2 text-grid-100 [&_p]:text-gray-300 [&_p]:text-xs">
                   <div>

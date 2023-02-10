@@ -1,5 +1,6 @@
 import { useModal } from '@/hooks/modal'
 import { createContext, useContext, useMemo, useState } from 'react'
+import { useLocalStorage } from 'usehooks-ts'
 
 interface SetupContextData {
   isShowSetup: boolean
@@ -14,6 +15,12 @@ interface SetupContextData {
   closeEditPassword: () => void
   openEditNickname: () => void
   closeEditNickname: () => void
+  gameVolume: number
+  setGameVolume: React.Dispatch<React.SetStateAction<number>>
+  effectVolume: number
+  setEffectVolume: React.Dispatch<React.SetStateAction<number>>
+  musicVolume: number
+  setMusicVolume: React.Dispatch<React.SetStateAction<number>>
 }
 
 const SetupContext = createContext<SetupContextData>({} as SetupContextData)
@@ -47,6 +54,13 @@ export const SetupProvider: React.FC<React.PropsWithChildren> = ({
 
 
 
+  const [gameVolume, setGameVolume] = useLocalStorage('gameVolume', 50)
+  const [effectVolume, setEffectVolume] = useLocalStorage('effectVolume', 50)
+  const [musicVolume, setMusicVolume] = useLocalStorage('musicVolume', 50)
+
+
+
+
   const value = {
     isShowSetup,
     isShowNotice,
@@ -60,6 +74,12 @@ export const SetupProvider: React.FC<React.PropsWithChildren> = ({
     closeEditPassword,
     openEditNickname,
     closeEditNickname,
+    gameVolume,
+    setGameVolume,
+    effectVolume,
+    setEffectVolume,
+    musicVolume,
+    setMusicVolume
   }
 
   return <SetupContext.Provider value={value}>{children}</SetupContext.Provider>
