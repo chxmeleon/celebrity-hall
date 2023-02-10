@@ -7,7 +7,7 @@ import RoomDataContext from '@/contexts/RoomDataContext'
 import { clsx as cx } from 'clsx'
 import { numberFormmat } from '@/hooks/bet'
 
-const BetArea: React.FC<{ target: number }> = ({ target }) => {
+export const BetArea: React.FC<{ target: number }> = ({ target }) => {
   return (
     <div
       className={cx(
@@ -93,9 +93,9 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             )}
 
             {isNoFee && idx === 8 ? (
-              <p className="ratio">{betAreaMapper[item].text}</p>
-            ) : (
               <p className="ratio">1:0.95</p>
+            ) : (
+              <p className="ratio">{betAreaMapper[item].text}</p>
             )}
           </div>
         </button>
@@ -104,7 +104,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
   )
 }
 
-const betAreaMapper = {
+export const betAreaMapper = {
   player: {
     textStyle: 'w-full text-grid-400 [&_p]:text-sm',
     id: 'common.simplePlayer',

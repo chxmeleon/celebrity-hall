@@ -19,16 +19,14 @@ const RoadDrawer: React.FC<{
     setIsOpenDraw(false)
   }
 
-  console.log(room)
-
   return (
     <GamePlayProvider>
       <div
         className={cx(
           isOpenDrawer
-            ? 'w-[365px]'
-            : 'w-0 -translate-x-3 opacity-0 pointer-events-none',
-          'absolute left-0 bottom-0 h-[153.6px] bg-theme-70 duration-200 ease-in-out'
+            ? ''
+            : 'hidden ',
+          'absolute left-0 bottom-0 w-[365px] h-[153.6px] bg-theme-70'
         )}
       >
         <div className={cx("flex flex-col w-full h-full", isOpenDrawer ? '' : 'hidden')}>
@@ -50,7 +48,7 @@ const RoadDrawer: React.FC<{
             </div>
           </div>
           {room && (
-            <div className="flex h-[120px] gap-1  items-center w-full">
+            <div className="flex h-[120px] gap-1 items-center w-full">
               <div className="relative w-1/3 h-full">
                 <div className="absolute bottom-0 w-full">
                   <div className="w-full font-medium tracking-widest text-center p-[1px] bg-theme-50/75">

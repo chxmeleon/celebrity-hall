@@ -5,11 +5,8 @@ import defaultAvatar from '/user.png'
 import { useWallet } from '@/hooks/profile'
 import { Tooltip } from '@material-tailwind/react'
 
-const LeftSidebar = () => {
-  const { user } = useWallet()
-  const { formatMessage } = useIntl()
-  
-  const linkLisetMapper = [
+
+export const linkLisetMapper = [
     {
       href: '/home/rooms/all',
       id: 'layout.all',
@@ -53,6 +50,11 @@ const LeftSidebar = () => {
       src: '/icons/streamer.png'
     }
   ]
+
+
+const LeftSidebar = () => {
+  const { user } = useWallet()
+  const { formatMessage } = useIntl()
 
   return (
     <div className="flex flex-shrink-0 px-1.5 w-14 h-full text-center md:py-5 md:px-7 md:w-44 border-r-[0.5px] border-r-theme-75">
