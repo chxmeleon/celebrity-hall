@@ -8,6 +8,7 @@ export interface RoomStreamProps {
   streamName?: string
   streamKey?: string
   resolution?: string
+  isActived?: boolean
   soundOn?: boolean
   videoOn?: boolean
   autoSize?: boolean
@@ -22,6 +23,7 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
   streamName,
   streamKey,
   resolution,
+  isActived,
   soundOn,
   videoOn,
   autoSize,
@@ -38,7 +40,13 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
     player.setView(`video-${streamName}-${streamKey}`)
     player.setBufferTime(0)
     player.setScaleMode(isTablesPath ? 2 : 1)
-    player.setVolume(volume)
+    console.log(isTablesPath, isActived)
+
+    if (isTablesPath) {
+      player.setVolume(isActived ? volume : 0)
+    } else {
+      player.setVolume(volume)
+    }
     player.setKeepScreenOn()
     player.start(`https://live.vvip99.net/${streamName}/${streamKey}.flv`)
     player.on('error', (err) => {
@@ -49,7 +57,7 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
     return () => {
       player.release(false)
     }
-  }, [streamName, streamKey, isTablesPath, volume])
+  }, [streamName, streamKey, isTablesPath, volume, isActived])
 
   return (
     <div className="overflow-hidden relative w-full h-full">
@@ -70,18 +78,28 @@ export const WebRTCStreamMobile: React.FC<RoomStreamProps> = ({
   autoSize,
   isLoading,
   height,
-  width
+  width,
+  isActived,
+  isTablesPath
 }) => {
   const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null)
   const { gameVolume } = useSetup()
   const volume = useMemo(() => gameVolume / 100, [gameVolume])
 
+  if (videoRef) {
+      if (isTablesPath) {
+        videoRef.volume = isActived ? volume : 0
+      } else {
+        videoRef.volume = volume
+      }
+  }
+
   useEffect(() => {
-    
     let pc: RTCPeerConnection | null = null
     const requestStream = async () => {
       if (!videoRef) return
-      videoRef.volume = volume
+
+
       try {
         pc = new RTCPeerConnection()
         pc.addTransceiver('audio', { direction: 'recvonly' })
@@ -93,7 +111,6 @@ export const WebRTCStreamMobile: React.FC<RoomStreamProps> = ({
           }
         })
 
-        
         const offerOptions = {
           offerToReceiveAudio: true,
           offerToReceiveVideo: true
@@ -135,7 +152,6 @@ export const WebRTCStreamMobile: React.FC<RoomStreamProps> = ({
       ) : (
         <div className="overflow-hidden relative w-full h-full">
           <video
-            
             ref={setVideoRef}
             playsInline
             autoPlay
@@ -208,7 +224,7 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
 
   if (videoRef) {
     videoRef.volume = volume
-  }   
+  }
 
   useEffect(() => {
     if (!videoRef || !streamName || !streamKey) return

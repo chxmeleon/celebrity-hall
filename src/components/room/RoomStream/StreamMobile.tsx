@@ -1,7 +1,7 @@
 import {
   NodePlayerStreamMobile,
   RoomStreamProps,
-  WebRTCStreamMobile,
+  WebRTCStreamMobile
 } from './streamPlayer'
 
 const RoomStreamMobile: React.FC<RoomStreamProps> = ({
@@ -12,14 +12,25 @@ const RoomStreamMobile: React.FC<RoomStreamProps> = ({
   videoOn,
   autoSize,
   isWebRTC,
-  isTablesPath
+  isTablesPath,
+  isActived
 }) => {
   return (
     <>
       {isWebRTC ? (
-        <WebRTCStreamMobile streamName={streamName} streamKey={streamKey} />
+        <WebRTCStreamMobile
+          streamName={streamName}
+          streamKey={streamKey}
+          isTablesPath={isTablesPath}
+          isActived={isActived}
+        />
       ) : (
-        <NodePlayerStreamMobile streamName={streamName} streamKey={streamKey} isTablesPath={isTablesPath} />
+        <NodePlayerStreamMobile
+          streamName={streamName}
+          streamKey={streamKey}
+          isTablesPath={isTablesPath}
+          isActived={isActived}
+        />
       )}
     </>
   )
