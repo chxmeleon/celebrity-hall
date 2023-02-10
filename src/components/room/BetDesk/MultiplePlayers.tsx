@@ -5,68 +5,22 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { numberFormmat } from '@/hooks/bet'
+import _, { groupBy, sumBy, map as lmap } from 'lodash'
+
 import { useWallet } from '@/hooks/profile'
-
-type MultiProps = {
-  isActive: boolean
-  idx: number
-}
-
-const MultiGrid: React.FC<MultiProps> = ({ isActive, idx }) => {
-  return (
-    <>
-      {idx === 0 ? (
-        <div className={isActive ? btnIdx.isUserL : btnIdx.bln} />
-      ) : idx === 6 ? (
-        <div className={isActive ? btnIdx.isUserR : btnIdx.brn} />
-      ) : (
-        <div className={isActive ? btnIdx.isUserN : btnIdx.bnn} />
-      )}
-    </>
-  )
-}
-
-const userData = [
-  { username: '', balance: '' },
-  { username: '', balance: '' },
-  { username: '', balance: '' },
-  { username: '', balance: '' },
-  { username: '', balance: '' },
-  { username: '', balance: '' },
-  { username: '', balance: '' }
-]
-
-const multipleGrid = userData.map((item: any, idx: number) => {
-  const isActive = item.username !== null && item.id === idx
-  return <MultiGrid isActive={isActive} idx={idx} key={idx} />
-})
-
-const userInfo = userData.map((item, idx) => {
-  return (
-    <div key={idx} className="flex items-center p-1 w-full">
-      <div className="flex flex-shrink-0 rounded-full bg-theme-50">
-        <div className="m-auto w-10 h-10 text-white i-heroicons-user-circle-solid"></div>
-      </div>
-      <div className="pl-5 w-full">
-        <p>{item.username}</p>
-        <p className="text-amber-300">{item.balance}</p>
-      </div>
-    </div>
-  )
-})
 
 const BetArea: React.FC<{ target: number }> = ({ target }) => {
   return (
     <div
       className={cx(
-        'flex absolute items-center inset-0 justify-center w-full h-full pointer-events-none'
+        'flex items-center justify-center w-full h-full pointer-events-none '
       )}
     >
       {target > 0 ? (
-        <div className={cx('relative flex w-10 h-10 text-xs chip-skew')}>
+        <div className={cx('relative flex w-7 h-7 text-[10px] chip-skew')}>
           <div
             className={cx(
-              'w-10 h-10 absolute top-0 left-0 flex justify-center items-center'
+              'w-7 h-7 absolute top-0 left-0 flex justify-center items-center'
             )}
           >
             <img src="/chips/chip_null.webp" alt="chip image" />
@@ -79,8 +33,8 @@ const BetArea: React.FC<{ target: number }> = ({ target }) => {
                 target < 10000
                 ? 'text-[9px] font-bold'
                 : (target / 10000).toString().length > 3 && target >= 10000
-                  ? 'text-[9px] font-bold'
-                  : ''
+                ? 'text-[9px] font-bold'
+                : ''
             )}
           >
             {numberFormmat(target)}
@@ -91,48 +45,119 @@ const BetArea: React.FC<{ target: number }> = ({ target }) => {
   )
 }
 
+const targets = [
+  ['playerDragon', 'playerPair', 'super6', 'dealerPair', 'dealerDragon'],
+  ['player', 'tie', 'dealer']
+]
+
+const targetsMapper = {
+  playerDragon: { betDiv: btnIdxNoBorder.tl2, betBtn: btnIdx.tl2 },
+  playerPair: { betDiv: btnIdxNoBorder.tn2, betBtn: btnIdx.tn2 },
+  super6: { betDiv: btnIdxNoBorder.tn3, betBtn: btnIdx.tn3 },
+  dealerPair: { betDiv: btnIdxNoBorder.tn2, betBtn: btnIdx.tn2 },
+  dealerDragon: { betDiv: btnIdxNoBorder.tr2, betBtn: btnIdx.tr2 },
+  player: { betDiv: btnIdxNoBorder.cl4, betBtn: btnIdx.cl4 },
+  tie: { betDiv: btnIdxNoBorder.cn3, betBtn: btnIdx.cn3 },
+  dealer: { betDiv: btnIdxNoBorder.cr4, betBtn: btnIdx.cr4 }
+}
+
 export const MultiplePlayers: React.FC<{
   isDisabled: boolean
-  targetsData: { [key: string]: [] }
+  targetsData: { [key: string]: { [key: string]: string }[] }
 }> = ({ isDisabled, targetsData }) => {
-  const { selectedChip, betState, dispatchBet, isNoFee } =
+  const { totalAmount, selectedChip, betState, dispatchBet, isNoFee } =
     useContext(GamePlayContext)
   const { user } = useWallet()
   const { profile } = user
 
+  const flapArr = targetsData && Object.values(targetsData)
+    .flat()
+    .map((item) => ({ player: item.player, amount: Number(item.amount) }))
+    .filter(
+      (value) =>
+        value.player !== profile.nickname && value.player !== profile.username
+    )
+
+  const otherPlayers = _(flapArr)
+    .groupBy('player')
+    .map((obj, key) => ({
+      username: key,
+      total: _.sumBy(obj, 'amount')
+    }))
+    .value()
+
+  const userData = [
+    { username: profile?.username ?? profile?.nickname, total: totalAmount },
+    ...otherPlayers
+  ]
+
+  const userInfo = userData.map((item, idx) => {
+    return (
+      <div key={idx} className="flex relative items-center p-1 w-full h-14">
+        <p className="absolute top-0 right-0 text-xs text-gray-500">{idx}</p>
+        <div className="flex flex-shrink-0 rounded-full bg-theme-50">
+          <div className="m-auto w-7 h-7 text-white i-heroicons-user-circle-solid"></div>
+        </div>
+        <div className="pl-3 w-full text-xs">
+          <p className="w-4/5 truncate">{item.username}</p>
+          <p className="text-amber-300">{item.total}</p>
+        </div>
+      </div>
+    )
+  })
 
   return (
     <>
-      <div className="grid absolute bottom-1 z-20 grid-rows-3 px-20 m-auto w-full h-full pointer-events-none">
-        <div className="grid grid-cols-11">
-          <div className={btnIdxNoBorder.tl2}>
-            <BetArea target={betState?.playerDragon} />
-          </div>
-          <div className={btnIdxNoBorder.tn2}>
-            <BetArea target={betState?.playerPair} />
-          </div>
-          <div className={btnIdxNoBorder.tn3}>
-            <BetArea target={betState?.super6} />
-          </div>
-          <div className={btnIdxNoBorder.tn2}>
-            <BetArea target={betState?.dealerPair} />
-          </div>
-          <div className={btnIdxNoBorder.tr2}>
-            <BetArea target={betState?.dealerDragon} />
-          </div>
+      <div className="grid absolute bottom-1 z-20 grid-rows-3 m-auto w-full h-full pointer-events-none">
+        <div className="grid grid-cols-11 gap-4 px-[141px]">
+          {targets[0].map((target, idx) => (
+            <div key={idx} className={targetsMapper?.[target]?.betDiv}>
+              <div className="inline-flex">
+                <p className="text-gray-500">0</p>
+                <BetArea target={betState?.[target]} />
+              </div>
+              {targetsData?.[target]
+                .filter(
+                  (value) =>
+                    value.player !== profile.nickname &&
+                    value.player !== profile.username
+                )
+                .slice(0, 8)
+                .map((item, idx) => (
+                  <div key={idx} className="inline-flex">
+                    <p className="text-gray-500">{idx + 1}</p>
+                    <BetArea target={Number(item.amount)} />
+                  </div>
+                ))}
+            </div>
+          ))}
         </div>
-        <div className="grid grid-cols-11">
-          <div className={btnIdxNoBorder.cl4}>
-            <BetArea target={betState?.player} />
-          </div>
-          <div className={btnIdxNoBorder.cn3}>
-            <BetArea target={betState?.tie} />
-          </div>
-          <div className={btnIdxNoBorder.cr4}>
-            <BetArea target={betState?.dealer} />
-          </div>
+        <div className="grid grid-cols-11 gap-4 px-28">
+          {targets[1].map((target, idx) => (
+            <div key={idx} className={targetsMapper?.[target]?.betDiv}>
+              <div className="inline-flex items-start">
+                <p className="text-gray-500 text-[14px]">0</p>
+                <BetArea target={betState?.[target]} />
+              </div>
+              {targetsData?.[target]
+                .filter(
+                  (value) =>
+                    value.player !== profile.nickname &&
+                    value.player !== profile.username
+                )
+                .slice(0, 8)
+                .map((item, idx) => (
+                  <div key={idx} className="inline-flex items-start">
+                    <p className="text-gray-500 text-[14px]">{idx + 1}</p>
+                    <BetArea target={Number(item.amount)} />
+                  </div>
+                ))}
+            </div>
+          ))}
         </div>
-        <div className="grid grid-cols-7 gap-9 m-auto w-full">{userInfo}</div>
+        <div className="grid grid-cols-8 gap-5 w-full px-[76px]">
+          {userInfo}
+        </div>
       </div>
       <div className="grid grid-rows-3 m-auto w-[91%] h-full bet-skew px-2 pb-4 pt-0.5 [&_p]:font-normal">
         <div className="grid grid-cols-11">
@@ -185,7 +210,7 @@ export const MultiplePlayers: React.FC<{
               isNoFee
                 ? 'text-grid-200'
                 : 'text-orange-400/50 bg-theme-50/80 hover:bg-theme-50/80 hover:cursor-not-allowed',
-              btnIdx.tn3 
+              btnIdx.tn3
             )}
           >
             <div className="flex justify-evenly items-center m-auto w-2/3">
@@ -287,7 +312,19 @@ export const MultiplePlayers: React.FC<{
             </div>
           </button>
         </div>
-        <div className="grid grid-cols-7">{multipleGrid}</div>
+        <div className="grid grid-cols-8">
+          {[...new Array(8)].map((_val, idx) => (
+            <>
+              {idx === 0 ? (
+                <div className={btnIdx.bln} />
+              ) : idx === 7 ? (
+                <div className={btnIdx.brn} />
+              ) : (
+                <div className={btnIdx.bnn} />
+              )}
+            </>
+          ))}
+        </div>
       </div>
     </>
   )

@@ -34,8 +34,10 @@ import {
   deviceType
 } from 'react-device-detect'
 
+
+
 type GamePlayContextData = {
-  selectedChip: string
+  selectedChip: string 
   setSelectedChip: React.Dispatch<React.SetStateAction<string>>
   btnState: BettingBtnProp
   dispatchBtn: React.Dispatch<BettingBtnAction>

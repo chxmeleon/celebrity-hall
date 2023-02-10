@@ -70,6 +70,7 @@ export const ChipButtonList: React.FC<{
 const Room = () => {
   const { rooms, refetch: refetchRooms } = useContext(RoomDataContext)
   const { id: roomId } = useParams<{ id: string }>()
+
   const room = useMemo(
     () => (roomId ? rooms.find((room) => room.id === roomId) : undefined),
     [roomId, rooms]
@@ -151,7 +152,12 @@ const Room = () => {
                 <Loading />
               )}
               <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
-                <div className="flex absolute top-0 right-0 z-30 justify-end p-2 w-full">
+                <div className="flex absolute top-0 right-0 z-30 justify-between p-2 w-full">
+                  <div>
+                    <div className="px-2 pt-0.5 pb-1 rounded-md text-2xl tracking-[6px] font-medium text-yellow-300 bg-theme-50/90">
+                      {room?.name}
+                    </div>
+                  </div>
                   <div className="flex flex-col justify-around items-end h-24">
                     <Tooltip
                       content={formatMessage({
@@ -353,7 +359,7 @@ const Room = () => {
                 <div className="relative w-[29%] h-full">
                   <div
                     className={cx(
-                      'absolute bottom-0 w-full h-full flex justify-center items-center right-0 bg-theme-50/60 z-50',
+                      'absolute bottom-0 w-full h-full flex justify-center items-center right-0 bg-theme-50/60 z-40',
                       isTrial ? 'block' : 'hidden'
                     )}
                   >
@@ -475,7 +481,7 @@ const Room = () => {
             <div className="flex absolute top-1.5 z-30 justify-center w-full pointer-events-none">
               <WinAndLoseResult gameState={gameState} />
             </div>
-            <div className="w-full flex justify-between items-center px-2 py-1 h-full text-xs">
+            <div className="flex justify-between items-center py-1 px-2 w-full h-full text-xs">
               <div className="inline-flex pl-2.5">
                 <span>
                   <FormattedMessage id="screens.room.bet" />
@@ -498,7 +504,6 @@ const Room = () => {
                   )}
                 </div>
               </button>
-
             </div>
           </div>
 
@@ -608,10 +613,10 @@ const Room = () => {
                 </div>
               </div>
             </div>
-            <div className="h-6">
-              <AskGridMobile />
+            <div className="h-7">
+              <AskGridMobile roomId={roomId ?? ''} />
             </div>
-            <div className="h-10"></div>
+            <div className="h-11"></div>
           </div>
         </div>
       </Responsive.Default>

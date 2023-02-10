@@ -94,12 +94,12 @@ export const useCurrentGameState = (roomId: string | undefined) => {
   const currentGame = useMemo(() => {
     return data?.baccaratRoom?.currentGame
   }, [data])
-  
+
   const [gameState, setGameState] = useState<any | null>(null)
   const [targets, setTargets] = useState<any | null>(null)
 
   useEffect(() => {
-    /* refetch() */
+    refetch()
     setGameState(convertStatus(currentGame?.status))
     setTargets(currentGame?.targets)
   }, [refetch, currentGame])
@@ -122,7 +122,6 @@ export const useCurrentGameState = (roomId: string | undefined) => {
       subscription.unsubscribe()
     }
   }, [cable, roomId])
-
 
   const currentGameState = useMemo(
     () => ({ currentGame, gameState, targets }),

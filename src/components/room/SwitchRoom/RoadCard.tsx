@@ -28,7 +28,7 @@ const RoadCard: React.FC<RoomDataProps> = ({ room, onClick }) => {
         }
         rounded-full p-[1px] flex pointer-events-none`}
       >
-        <div className="flex justify-center items-center w-6 h-6 text-center rounded-full bg-theme-50">
+        <div className="flex justify-center items-center w-6 h-6 text-sm text-center rounded-full bg-theme-50">
           {startCount && counter !== undefined && counter > 0 ? (
             <p
               className={`${

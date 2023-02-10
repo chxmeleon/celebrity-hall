@@ -229,9 +229,8 @@ export const AskGrid: React.FC = () => {
   )
 }
 
-export const AskGridMobile = () => {
-  const { id } = useParams()
-  const { currentGame } = useCurrentGame(id)
+export const AskGridMobile: React.FC<{ roomId: string, size?: 'default' | 'small' }> = ({ roomId, size }) => {
+  const { currentGame } = useCurrentGame(roomId ?? '')
   const roadsTotalData = currentGame?.baccaratRoom?.roads ?? ''
 
   return (
@@ -241,7 +240,8 @@ export const AskGridMobile = () => {
           <div
             key={`ask-${idx}`}
             className={cx(
-              'flex h-full items-center text-xs md:text-sm',
+              'flex h-full items-center ',
+              size === 'small' ? 'text-[10px]' : 'text-xs md:text-sm',
               item.className
             )}
           >
