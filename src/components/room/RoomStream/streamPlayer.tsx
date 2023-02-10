@@ -40,7 +40,6 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
     player.setView(`video-${streamName}-${streamKey}`)
     player.setBufferTime(0)
     player.setScaleMode(isTablesPath ? 2 : 1)
-    console.log(isTablesPath, isActived)
 
     if (isTablesPath) {
       player.setVolume(isActived ? volume : 0)

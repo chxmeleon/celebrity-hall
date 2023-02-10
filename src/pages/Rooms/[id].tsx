@@ -152,7 +152,7 @@ const Room = () => {
               )}
               <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
                 <div className="flex absolute top-0 right-0 z-30 justify-between p-2 w-full">
-                  <div>
+                  <div className="pt-1">
                     <div className="px-2 pt-0.5 pb-1 text-2xl font-medium text-yellow-300 rounded-md tracking-[6px] bg-theme-50/90">
                       {room?.name}
                     </div>

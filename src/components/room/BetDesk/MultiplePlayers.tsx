@@ -17,10 +17,10 @@ const BetArea: React.FC<{ target: number }> = ({ target }) => {
       )}
     >
       {target > 0 ? (
-        <div className={cx('relative flex w-7 h-7 text-[10px] chip-skew')}>
+        <div className={cx('relative flex w-8 h-8 text-[10px] chip-skew')}>
           <div
             className={cx(
-              'w-7 h-7 absolute top-0 left-0 flex justify-center items-center'
+              'w-8 h-8 absolute top-0 left-0 flex justify-center items-center'
             )}
           >
             <img src="/chips/chip_null.webp" alt="chip image" />

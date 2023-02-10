@@ -32,7 +32,7 @@ const Tables = () => {
                   <div
                     className={cx(
                       isActived ? 'w-full h-full border border-amber-300' : '',
-                      'absolute z-[10]  pointer-events-none'
+                      'absolute z-[10] pointer-events-none'
                     )}
                   ></div>
                   <GamePlayProvider>
