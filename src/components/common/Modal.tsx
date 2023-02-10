@@ -6,13 +6,15 @@ type ModalProps = {
   isShow: boolean
   onClose: () => void
   size: string
+  solidBackground?: boolean 
 }
 
 const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
   children,
   isShow,
   onClose,
-  size
+  size,
+  solidBackground = false
 }) => {
   const modalRoot = document.getElementById('modal-root')
   return (
@@ -26,7 +28,9 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
             >
               <div
                 onClick={onClose}
-                className="flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center w-full h-full bg-black/30 backdrop-blur-sm"
+                className={cx("flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center w-full h-full  backdrop-blur-sm",
+                solidBackground ? "bg-black" : "bg-black/30"
+              )}
               >
                 <div
                   onClick={(e) => {

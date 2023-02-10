@@ -63,35 +63,37 @@ const targetsMapper = {
 
 export const MultiplePlayers: React.FC<{
   isDisabled: boolean
-  targetsData: { [key: string]: { [key: string]: string }[] }
+  targetsData: { [key: string]: { [key: string]: string }[] } | undefined
 }> = ({ isDisabled, targetsData }) => {
   const { totalAmount, selectedChip, betState, dispatchBet, isNoFee } =
     useContext(GamePlayContext)
   const { user } = useWallet()
   const { profile } = user
 
-  const flapArr = targetsData && Object.values(targetsData)
-    .flat()
-    .map((item) => ({ player: item.player, amount: Number(item.amount) }))
-    .filter(
-      (value) =>
-        value.player !== profile.nickname && value.player !== profile.username
-    )
+  const flapArr =
+    targetsData &&
+    Object.values(targetsData)
+      ?.flat()
+      ?.map((item) => ({ player: item.player, amount: Number(item.amount) }))
+      ?.filter(
+        (value) =>
+          value.player !== profile.nickname && value.player !== profile.username
+      )
 
   const otherPlayers = _(flapArr)
-    .groupBy('player')
-    .map((obj, key) => ({
+    ?.groupBy('player')
+    ?.map((obj, key) => ({
       username: key,
       total: _.sumBy(obj, 'amount')
     }))
-    .value()
+    ?.value()
 
   const userData = [
     { username: profile?.username ?? profile?.nickname, total: totalAmount },
     ...otherPlayers
   ]
 
-  const userInfo = userData.map((item, idx) => {
+  const userInfo = userData?.map((item, idx) => {
     return (
       <div key={idx} className="flex relative items-center p-1 w-full h-14">
         <p className="absolute top-0 right-0 text-xs text-gray-500">{idx}</p>
@@ -170,7 +172,7 @@ export const MultiplePlayers: React.FC<{
                 amount: chipsData?.[selectedChip]?.value
               })
             }
-            className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.tl2)}
+            className={cx(isDisabled ? 'brightness-75' : '', btnIdx.tl2)}
           >
             <div className="text-grid-400">
               <FormattedMessage id="common.playerDragon" />
@@ -185,7 +187,7 @@ export const MultiplePlayers: React.FC<{
                 amount: chipsData?.[selectedChip]?.value
               })
             }
-            className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.tn2)}
+            className={cx(isDisabled ? 'brightness-75' : '', btnIdx.tn2)}
           >
             <div className="flex justify-around items-center px-5 w-full text-grid-400">
               <div>
@@ -206,10 +208,8 @@ export const MultiplePlayers: React.FC<{
               })
             }
             className={cx(
-              isDisabled ? 'bg-theme-50/50' : '',
-              isNoFee
-                ? 'text-grid-200'
-                : 'text-orange-400/50 bg-theme-50/80 hover:bg-theme-50/80 hover:cursor-not-allowed',
+              'text-grid-200',
+              isNoFee && !isDisabled ? '' : 'brightness-75',
               btnIdx.tn3
             )}
           >
@@ -227,7 +227,7 @@ export const MultiplePlayers: React.FC<{
                 amount: chipsData?.[selectedChip]?.value
               })
             }
-            className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.tn2)}
+            className={cx(isDisabled ? 'brightness-75' : '', btnIdx.tn2)}
           >
             <div className="flex justify-around items-center px-5 w-full text-grid-100">
               <div>
@@ -247,7 +247,7 @@ export const MultiplePlayers: React.FC<{
                 amount: chipsData?.[selectedChip]?.value
               })
             }
-            className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.tr2)}
+            className={cx(isDisabled ? 'brightness-75' : '', btnIdx.tr2)}
           >
             <div className="text-grid-100">
               <FormattedMessage id="common.dealerDragon" />
@@ -264,7 +264,7 @@ export const MultiplePlayers: React.FC<{
                 amount: chipsData?.[selectedChip]?.value
               })
             }
-            className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.cl4)}
+            className={cx(isDisabled ? 'brightness-75' : '', btnIdx.cl4)}
           >
             <div className="flex justify-evenly items-center m-auto w-2/3 text-grid-400">
               <div>
@@ -284,7 +284,7 @@ export const MultiplePlayers: React.FC<{
                 amount: chipsData?.[selectedChip]?.value
               })
             }
-            className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.cn3)}
+            className={cx(isDisabled ? 'brightness-75' : '', btnIdx.cn3)}
           >
             <div className="flex justify-around m-auto w-1/3 text-grid-300">
               <FormattedMessage id="common.simpleTie" />
@@ -302,7 +302,10 @@ export const MultiplePlayers: React.FC<{
                 amount: chipsData?.[selectedChip]?.value
               })
             }
-            className={cx(isDisabled ? 'bg-theme-50/50' : '', btnIdx.cr4)}
+            className={cx(
+              isDisabled ? 'brightness-75 hover:bg-theme-50/80' : '',
+              btnIdx.cr4
+            )}
           >
             <div className="flex justify-evenly items-center m-auto w-2/3 text-grid-100">
               <div>

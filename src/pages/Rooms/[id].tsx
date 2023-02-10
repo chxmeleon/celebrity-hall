@@ -120,14 +120,13 @@ const Room = () => {
     if (gameState === 'START_BET' || gameState === 'UPDATE_AMOUNT') {
       dispatchBtn({ type: 'enableBet', totalAmount: totalAmount })
     } else if (gameState === 'CLOSE') {
-      dispatchBtn({ type: 'setTrue', btnTarget: 'isDisable' })
       dispatchBet({ type: 'newRound' })
       refetchRooms?.()
     } else {
       dispatchBtn({ type: 'disableBet' })
     }
   }, [gameState, dispatchBet, totalAmount, refetchRooms, dispatchBtn])
-
+  
   return (
     <>
       <Responsive.Desktop className="w-full h-full">
@@ -154,7 +153,7 @@ const Room = () => {
               <div className="flex relative flex-col justify-between items-center w-full h-full z-[7]">
                 <div className="flex absolute top-0 right-0 z-30 justify-between p-2 w-full">
                   <div>
-                    <div className="px-2 pt-0.5 pb-1 rounded-md text-2xl tracking-[6px] font-medium text-yellow-300 bg-theme-50/90">
+                    <div className="px-2 pt-0.5 pb-1 text-2xl font-medium text-yellow-300 rounded-md tracking-[6px] bg-theme-50/90">
                       {room?.name}
                     </div>
                   </div>

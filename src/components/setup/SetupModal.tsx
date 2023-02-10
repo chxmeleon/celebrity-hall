@@ -5,12 +5,22 @@ import Modal from '../common/Modal'
 
 const SetupModal: React.FC = () => {
   const { locale, handleSelectValue, isSelected } = useLanguage()
-  const { isShowSetup, closeSetup } = useSetup()
+  const {
+    isShowSetup,
+    closeSetup,
+    musicVolume,
+    setMusicVolume,
+    gameVolume,
+    setGameVolume,
+    effectVolume,
+    setEffectVolume
+  } = useSetup()
 
   return (
     <Modal
       isShow={isShowSetup}
       onClose={closeSetup}
+      solidBackground={true}
       size="w-5/6 md:w-[620px] min-h-fit"
     >
       <h1 className="pt-3 pb-6 text-2xl font-semibold text-center">
@@ -61,7 +71,8 @@ const SetupModal: React.FC = () => {
         <div className="w-1/2">
           <input
             type="range"
-            defaultValue="50"
+            onChange={(e) => setGameVolume(Number(e.target.value))}
+            defaultValue={gameVolume}
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-400"
           />
         </div>
@@ -76,7 +87,8 @@ const SetupModal: React.FC = () => {
         <div className="w-1/2">
           <input
             type="range"
-            defaultValue="50"
+            onChange={(e) => setEffectVolume(Number(e.target.value))}
+            defaultValue={effectVolume}
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-400"
           />
         </div>
@@ -91,7 +103,8 @@ const SetupModal: React.FC = () => {
         <div className="w-1/2">
           <input
             type="range"
-            defaultValue="50"
+            onChange={(e) => setMusicVolume(Number(e.target.value))}
+            defaultValue={musicVolume}
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-400"
           />
         </div>
