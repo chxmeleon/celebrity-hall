@@ -133,7 +133,6 @@ export const MultiplePlayers: React.FC<{
                 .slice(0, 8)
                 .map((item, idx) => (
                   <div key={idx} className="inline-flex">
-                    <p className="text-gray-500">{idx + 1}</p>
                     <BetArea target={Number(item.amount)} />
                   </div>
                 ))}
@@ -156,7 +155,6 @@ export const MultiplePlayers: React.FC<{
                 .slice(0, 8)
                 .map((item, idx) => (
                   <div key={idx} className="inline-flex items-start">
-                    <p className="text-gray-500 text-[14px]">{idx + 1}</p>
                     <BetArea target={Number(item.amount)} />
                   </div>
                 ))}

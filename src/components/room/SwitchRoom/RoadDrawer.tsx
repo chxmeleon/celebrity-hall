@@ -26,7 +26,7 @@ const RoadDrawer: React.FC<{
           isOpenDrawer
             ? ''
             : 'hidden ',
-          'absolute left-0 bottom-0 w-[365px] h-[153.6px] bg-theme-70'
+          'absolute left-0 bottom-0 w-[368px] h-[153.6px] bg-theme-70'
         )}
       >
         <div className={cx("flex flex-col w-full h-full", isOpenDrawer ? '' : 'hidden')}>

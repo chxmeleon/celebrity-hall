@@ -64,7 +64,7 @@ const QuickRoads: React.FC<{ rooms: RoomProps[] }> = ({ rooms }) => {
             </div>
           </div>
 
-          <div className={cx(isOpenDrawer ? '' : 'hidden' ,"fixed right-0 bottom-0 z-50 w-[365px] h-[153.6px]")}>
+          <div className={cx(isOpenDrawer ? '' : 'hidden' ,"fixed right-0 bottom-0 z-50 w-[368px] h-[153.6px]")}>
             <RoadDrawer
               isOpenDrawer={isOpenDrawer}
               setIsOpenDraw={setIsOpenDrawer}
