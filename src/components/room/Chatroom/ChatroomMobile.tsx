@@ -12,6 +12,7 @@ import defaultAvatar from '/user.png'
 import SendGift from './SendGift'
 import { useClickOutside } from '@/hooks/common'
 import GiftAnimation from './GiftAnimation'
+import GifPicker from './GifPicker'
 
 type ContentProps = {
   avatar: string
@@ -29,6 +30,7 @@ const ChatroomMobile = () => {
   const [isGiftShow, setIsGiftShow] = useState(false)
   const [clickRef, setClickRef] = useState<HTMLDivElement | null>(null)
   const [giftRef, setGiftRef] = useState<HTMLDivElement | null>(null)
+  const [gifRef, setGifRef] = useState<HTMLDivElement | null>(null)
   const [messageRef, setMessageRef] = useState<HTMLDivElement | null>(null)
   const { formatMessage } = useIntl()
   const [data, setData] = useState<any>({})
@@ -66,7 +68,6 @@ const ChatroomMobile = () => {
   const [focused, setFocused] = useState(false)
   const [inputRef, setInputRef] = useState<HTMLInputElement | null>(null)
 
-
   const [gift, setGift] = useState('rose')
   const [isShowSnow, setIsShowSnow] = useState(false)
 
@@ -91,14 +92,21 @@ const ChatroomMobile = () => {
     setIsGiftShow((isGiftShow) => !isGiftShow)
   }
 
+  const [isGifShow, setIsGifShow] = useState(false)
+  const onTrigglerGif = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setIsGifShow((isGifShow) => !isGifShow)
+  }
+
   useClickOutside(clickRef, isPickerShow, setIsPickerShow)
   useClickOutside(giftRef, isGiftShow, setIsGiftShow)
+  useClickOutside(gifRef, isGifShow, setIsGifShow)
 
   const scrollToBottom = useCallback(() => {
     if (messageRef) {
       messageRef.scrollIntoView(false)
     }
-  },[messageRef])
+  }, [messageRef])
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -129,6 +137,23 @@ const ChatroomMobile = () => {
     }
     setNewMessage('')
   }
+
+  const [gif, setGif] = useState('')
+
+   const handleSendGif = async (e: React.MouseEvent, src: string) => {
+    e.preventDefault()
+    await createBaccaratMessage({
+      variables: {
+        input: {
+          baccaratRoomId: roomId.id ?? '',
+          content: src,
+          uuid: uuidV4()
+        }
+      }
+    })
+  }
+
+
 
   return (
     <div className="flex flex-col w-full h-full border-gray-500 border-b-1">
@@ -175,23 +200,45 @@ const ChatroomMobile = () => {
                       </div>
                     </div>
                     <p className="pr-2 text-sm">{content?.nickname}</p>
-                    <div className="inline-flex justify-start items-start">
-                      <div className="w-2 rounded-t-lg translate-y-2 -rotate-[9deg] -translate-x-[1px]">
-                        <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[20px] border-b-transparent border-r-[20px] border-r-neutral-200"></div>
+                    {content.body?.includes('/public/gif') ? (
+                      <div className="inline-flex items-end">
+                        <div className="p-3 w-24">
+                          <img src={content.body} alt="gif" />
+                        </div>
+                        <p className="self-end pl-3 text-xs text-gray-400">
+                          {content?.createdAt?.slice(11, 16)}
+                        </p>
                       </div>
-                      <div className="break-all rounded-lg border-r-2 border-b-2 bg-neutral-200 drop-shadow-sm border-b-theme-50/10">
-                        <p className="py-1 px-2 text-sm">{content?.body}</p>
-                      </div>
-                    </div>
-                    <p className="self-end pl-3 text-xs text-gray-400">
-                      {content?.createdAt?.slice(11, 16)}
-                    </p>
+                    ) : (
+                      <>
+                        <div className="inline-flex justify-start items-start">
+                          <div className="w-2 rounded-t-lg translate-y-2 -rotate-[9deg] -translate-x-[1px]">
+                            <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[20px] border-b-transparent border-r-[20px] border-r-neutral-200"></div>
+                          </div>
+                          <div className="break-all rounded-lg border-r-2 border-b-2 bg-neutral-200 drop-shadow-sm border-b-theme-50/10">
+                            <p className="py-1 px-2 text-sm">{content?.body}</p>
+                          </div>
+                        </div>
+                        <p className="self-end pl-3 text-xs text-gray-400">
+                          {content?.createdAt?.slice(11, 16)}
+                        </p>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
             )
           })}
         </div>
+      </div>
+      <div className="relative w-full">
+        <GifPicker
+          clickRef={setGifRef}
+          sendGif={handleSendGif}
+          isShow={isGifShow}
+          setIsShow={setIsGifShow}
+          onClick={onTrigglerGif}
+        />
       </div>
       <form
         onSubmit={handleSendMessage}

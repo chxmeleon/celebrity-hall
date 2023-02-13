@@ -34,7 +34,7 @@ const GiftAnimation: React.FC<GiftAnimatioPorps> = ({
   return (
     <div
       className={cx(
-        'absolute z-30 pointer-events-none w-[352px] h-[109px]',
+        'absolute z-30 pointer-events-none w-full h-full md:w-[352px] md:h-[109px]',
         isTrigger ? '' : 'hidden'
       )}
     >

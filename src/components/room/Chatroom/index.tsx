@@ -118,7 +118,7 @@ const ChatRoom = () => {
 
   const [gif, setGif] = useState('')
 
-  const handleSendGif = async (e: React.MouseEvent, src: string) => {
+   const handleSendGif = async (e: React.MouseEvent, src: string) => {
     e.preventDefault()
     await createBaccaratMessage({
       variables: {

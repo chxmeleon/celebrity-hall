@@ -25,7 +25,7 @@ const GifPicker: React.FC<GifPorps> = ({
       <div
         className={`${
           isShow ? '' : 'hidden'
-        } absolute right-0 bottom-9 z-30 my-1 w-full`}
+        } absolute bottom-0 right-0 md:bottom-9 z-30 md:my-1 w-full`}
       >
         <div className="relative overflow-y-auto px-4  w-full h-56 bg-white rounded-md border border-gray-300 ">
           <div className="fixed inline-flex gap-3 py-3 w-[330px] font-bold text-theme-50/80 bg-white">
@@ -71,7 +71,7 @@ const GifPicker: React.FC<GifPorps> = ({
           </div>
         </div>
       </div>
-      <div className="absolute z-10 px-1 right-[112px] bottom-[9px]">
+      <div className="absolute z-10 px-1 top-[9px] right-[112px] md:bottom-[9px]">
         <div
           onClick={onClick}
           className="text-2xl hover:cursor-pointer text-theme-50/40 i-heroicons-gif-solid"
