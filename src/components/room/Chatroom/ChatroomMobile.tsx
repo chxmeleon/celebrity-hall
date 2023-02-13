@@ -276,7 +276,7 @@ const ChatroomMobile = () => {
                 isPickerShow ? '' : 'hidden'
               } absolute bottom-9 right-0 z-30`}
             >
-              <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
+              <EmojiPicker width={300} autoFocusSearch={false} onEmojiClick={onPicked} />
             </div>
             <div className="px-1">
               <div
