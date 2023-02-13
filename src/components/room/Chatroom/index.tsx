@@ -11,6 +11,7 @@ import defaultAvatar from '/user.png'
 import SendGift from './SendGift'
 import { useClickOutside } from '@/hooks/common'
 import GiftAnimation from './GiftAnimation'
+import GifPicker from './GifPicker'
 
 type ContentProps = {
   avatar: string
@@ -28,9 +29,9 @@ const ChatRoom = () => {
   const [isGiftShow, setIsGiftShow] = useState(false)
   const [clickRef, setClickRef] = useState<HTMLDivElement | null>(null)
   const [giftRef, setGiftRef] = useState<HTMLDivElement | null>(null)
+  const [gifRef, setGifRef] = useState<HTMLDivElement | null>(null)
   const [messageRef, setMessageRef] = useState<HTMLDivElement | null>(null)
   const { formatMessage } = useIntl()
-  const [data, setData] = useState<any>({})
   const [createBaccaratMessage] = useMutation<
     types.CREATE_BACCARAT_MESSAGE,
     types.CREATE_BACCARAT_MESSAGEVariables
@@ -51,7 +52,6 @@ const ChatRoom = () => {
           if (data.message !== undefined) {
             setMessages((messages) => [...messages, data.message])
           }
-          setData(data.message)
         }
       }
     )
@@ -71,8 +71,15 @@ const ChatRoom = () => {
     setIsGiftShow((isGiftShow) => !isGiftShow)
   }
 
+  const [isGifShow, setIsGifShow] = useState(false)
+  const onTrigglerGif = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setIsGifShow((isGifShow) => !isGifShow)
+  }
+
   useClickOutside(clickRef, isPickerShow, setIsPickerShow)
   useClickOutside(giftRef, isGiftShow, setIsGiftShow)
+  useClickOutside(gifRef, isGifShow, setIsGifShow)
 
   const scrollToBottom = useCallback(() => {
     if (messageRef) {
@@ -109,6 +116,21 @@ const ChatRoom = () => {
     setNewMessage('')
   }
 
+  const [gif, setGif] = useState('')
+
+  const handleSendGif = async (e: React.MouseEvent, src: string) => {
+    e.preventDefault()
+    await createBaccaratMessage({
+      variables: {
+        input: {
+          baccaratRoomId: roomId.id ?? '',
+          content: src,
+          uuid: uuidV4()
+        }
+      }
+    })
+  }
+
   const [showSnow, setShowSnow] = useState(false)
   const [gift, setGift] = useState('rose')
 
@@ -131,7 +153,7 @@ const ChatRoom = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex justify-start items-center py-1 px-2.5 w-full h-auto text-xs text-theme-50">
+                  <div className="flex justify-start items-start py-1 px-2.5 w-full h-auto text-xs text-theme-50">
                     <div className="flex-shrink-0 pr-1.5 pt-[1.5px]">
                       <div className="overflow-hidden w-6 h-6 rounded-full bg-slate-200">
                         {content?.avatar === null ? (
@@ -150,17 +172,30 @@ const ChatRoom = () => {
                       </div>
                     </div>
                     <p className="pr-2 text-sm">{content?.nickname}</p>
-                    <div className="inline-flex justify-start items-start">
-                      <div className="w-2 rounded-t-lg translate-y-2 -rotate-[9deg] -translate-x-[1px]">
-                        <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[20px] border-b-transparent border-r-[20px] border-r-neutral-200"></div>
+                    {content.body?.includes('/public/gif') ? (
+                      <div className="inline-flex items-end">
+                        <div className="p-3 w-24">
+                          <img src={content.body} alt="gif" />
+                        </div>
+                        <p className="self-end pl-3 text-xs text-gray-400">
+                          {content?.createdAt?.slice(11, 16)}
+                        </p>
                       </div>
-                      <div className="break-all rounded-lg border-r-2 border-b-2 bg-neutral-200 drop-shadow-sm border-b-theme-50/10">
-                        <p className="py-1 px-2 text-sm">{content?.body}</p>
-                      </div>
-                    </div>
-                    <p className="self-end pl-3 text-xs text-gray-400">
-                      {content?.createdAt?.slice(11, 16)}
-                    </p>
+                    ) : (
+                      <>
+                        <div className="inline-flex justify-start items-start">
+                          <div className="w-2 rounded-t-lg translate-y-2 -rotate-[9deg] -translate-x-[1px]">
+                            <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[20px] border-b-transparent border-r-[20px] border-r-neutral-200"></div>
+                          </div>
+                          <div className="break-all rounded-lg border-r-2 border-b-2 bg-neutral-200 drop-shadow-sm border-b-theme-50/10">
+                            <p className="py-1 px-2 text-sm">{content?.body}</p>
+                          </div>
+                        </div>
+                        <p className="self-end pl-3 text-xs text-gray-400">
+                          {content?.createdAt?.slice(11, 16)}
+                        </p>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
@@ -168,53 +203,62 @@ const ChatRoom = () => {
           })}
         </div>
       </div>
-      <form
-        onSubmit={handleSendMessage}
-        className="flex relative flex-grow justify-between items-center py-1.5 px-2 w-full"
-      >
-        <div className="inline-flex relative items-center px-0.5 mx-1 w-full h-full bg-gray-200 rounded-lg text-theme-50">
-          <input
-            id="chat-input"
-            type="text"
-            placeholder={formatMessage({
-              id: 'common.sendMessage',
-              defaultMessage: 'Send Message'
-            })}
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            className="py-1.5 pr-2 pl-3 w-full h-full bg-gray-200 rounded-md outline-none focus:outline-none"
-            autoComplete="off"
-          />
-          <SendGift
-            gift={gift}
-            setGift={setGift}
-            onTriggerAnimation={setShowSnow}
-            clickRef={setGiftRef}
-            isShow={isGiftShow}
-            setIsShow={setIsGiftShow}
-            onClick={onTrigglerGift}
-            setFocused={() => null}
-          />
-          <div ref={setClickRef}>
-            <div
-              className={`${
-                isPickerShow ? '' : 'hidden'
-              } absolute bottom-4 -right-6 z-30  scale-75 md:scale-90`}
-            >
-              <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
-            </div>
-            <div className="px-1">
+      <div className="relative w-full">
+        <GifPicker
+          clickRef={setGifRef}
+          sendGif={handleSendGif}
+          isShow={isGifShow}
+          setIsShow={setIsGifShow}
+          onClick={onTrigglerGif}
+        />
+        <form
+          onSubmit={handleSendMessage}
+          className="flex relative flex-grow justify-between items-center py-1.5 px-2 w-full"
+        >
+          <div className="inline-flex relative items-center px-0.5 mx-1 w-full h-full bg-gray-200 rounded-lg text-theme-50">
+            <input
+              id="chat-input"
+              type="text"
+              placeholder={formatMessage({
+                id: 'common.sendMessage',
+                defaultMessage: 'Send Message'
+              })}
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              className="py-1.5 pr-2 pl-3 w-full h-full bg-gray-200 rounded-md outline-none focus:outline-none"
+              autoComplete="off"
+            />
+            <SendGift
+              gift={gift}
+              setGift={setGift}
+              onTriggerAnimation={setShowSnow}
+              clickRef={setGiftRef}
+              isShow={isGiftShow}
+              setIsShow={setIsGiftShow}
+              onClick={onTrigglerGift}
+              setFocused={() => null}
+            />
+            <div ref={setClickRef}>
               <div
-                onClick={onTrigglerPicker}
-                className="text-2xl hover:cursor-pointer i-mdi-emoticon-happy text-theme-50/40"
-              ></div>
+                className={`${
+                  isPickerShow ? '' : 'hidden'
+                } absolute bottom-4 -right-6 z-30  scale-75 md:scale-90`}
+              >
+                <EmojiPicker autoFocusSearch={false} onEmojiClick={onPicked} />
+              </div>
+              <div className="px-1">
+                <div
+                  onClick={onTrigglerPicker}
+                  className="text-2xl hover:cursor-pointer i-mdi-emoticon-happy text-theme-50/40"
+                ></div>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex px-1 h-full">
-          <button className="m-auto text-2xl text-amber-400 i-heroicons-paper-airplane-20-solid"></button>
-        </div>
-      </form>
+          <div className="flex px-1 h-full">
+            <button className="m-auto text-2xl text-amber-400 i-heroicons-paper-airplane-20-solid"></button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }
