@@ -40,11 +40,11 @@ const QuickRoads: React.FC<{ rooms: RoomProps[] }> = ({ rooms }) => {
     <>
       {newRooms?.length ? (
         <div
-          className="overflow-y-auto relative w-full h-full"
+          className="overflow-y-auto relative w-full h-full "
           ref={sidebarRef}
         >
           <div className="relative w-full h-full bg-theme-50/95">
-            <div className="flex fixed z-10 justify-between items-center py-1 px-3 h-6 text-xs text-gray-50 w-[149px] -translate-y-[0.5px] bg-theme-75">
+            <div className="flex fixed z-10 justify-between items-center py-1 px-3 h-6 text-xs text-gray-50 w-[164px] -translate-y-[0.5px] bg-theme-75">
               <div className="px-2 bg-red-600 rounded-full py-[1px]">
                 {newRooms?.length}
               </div>

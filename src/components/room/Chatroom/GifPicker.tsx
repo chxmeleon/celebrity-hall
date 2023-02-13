@@ -1,4 +1,6 @@
 import { gifList } from '@/libs/gifList'
+import React, { useState } from 'react'
+import { clsx as cx } from 'clsx'
 
 interface GifPorps {
   clickRef: React.LegacyRef<HTMLImageElement> | undefined
@@ -8,6 +10,8 @@ interface GifPorps {
   sendGif: (e: React.MouseEvent, src: string) => Promise<void>
 }
 
+const gifTab = ['ainti', 'gon', 'pigro', 'cat']
+
 const GifPicker: React.FC<GifPorps> = ({
   clickRef,
   onClick,
@@ -15,6 +19,7 @@ const GifPicker: React.FC<GifPorps> = ({
   setIsShow,
   sendGif
 }) => {
+  const [selectedTab, setSelectedTab] = useState('ainti')
   return (
     <div ref={clickRef}>
       <div
@@ -22,9 +27,27 @@ const GifPicker: React.FC<GifPorps> = ({
           isShow ? '' : 'hidden'
         } absolute right-0 bottom-9 z-30 my-1 w-full`}
       >
-        <div className="overflow-y-auto px-3 pt-5 pb-5 w-full  bg-white rounded-md border border-gray-300 h-56">
-          <div className=" grid grid-cols-3 grid-rows-2 grid-flow-row gap-4 w-full hover:cursor-pointer ">
-            {gifList.map((item, idx) => {
+        <div className="relative overflow-y-auto px-4  w-full h-56 bg-white rounded-md border border-gray-300 ">
+          <div className="fixed inline-flex gap-3 py-3 w-[330px] font-bold text-theme-50/80 bg-white">
+            {gifTab.map((item, idx) => {
+              const isActive = selectedTab === item
+              return (
+                <div
+                  key={idx}
+                  id={item}
+                  className={cx(
+                    isActive ? 'bg-sky-200' : '',
+                    'hover:cursor-pointer hover:bg-sky-200 p-2 rounded-md'
+                  )}
+                  onClick={(e) => setSelectedTab(e.currentTarget.id)}
+                >
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </div>
+              )
+            })}
+          </div>
+          <div className="pt-20 grid grid-cols-3 grid-rows-2 grid-flow-row gap-4 w-full hover:cursor-pointer">
+            {gifList[selectedTab].map((item, idx) => {
               return (
                 <button
                   onClick={(e: React.MouseEvent) => {

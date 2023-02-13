@@ -369,9 +369,6 @@ const Room = () => {
                       />
                     </div>
                   </div>
-                  {/* <div className="absolute top-0 w-full h-full"> */}
-                  {/*   <RoadDrawer isOpenDrawer={isOpenRoadDrawer} /> */}
-                  {/* </div> */}
                   <ChatRoom />
                 </div>
               </div>

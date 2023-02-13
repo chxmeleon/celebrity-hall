@@ -135,7 +135,7 @@ const ChatRoom = () => {
   const [gift, setGift] = useState('rose')
 
   return (
-    <div className="flex flex-col w-full h-full bg-gray-50 border-gray-500 border-b-1">
+    <div className="relative flex flex-col w-full h-full bg-gray-50 border-gray-500 border-b-1">
       <GiftAnimation isShow={showSnow} selectedGift={gift} />
       <div className="flex overflow-x-hidden flex-col-reverse flex-grow-0 w-full h-screen scroll-smooth">
         <div
