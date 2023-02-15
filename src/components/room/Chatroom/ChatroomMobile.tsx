@@ -200,7 +200,7 @@ const ChatroomMobile = () => {
                       </div>
                     </div>
                     <p className="pr-2 text-sm">{content?.nickname}</p>
-                    {content.body?.includes('/public/gif') ? (
+                    {content.body?.includes('gif') ? (
                       <div className="inline-flex items-end">
                         <div className="p-3 w-24">
                           <img src={content.body} alt="gif" />
