@@ -18,7 +18,11 @@ import {
 import RoomNotification from '@/components/room/RoomNotification'
 import WinAndLoseResult from '@/components/room/WinAndLoseResult'
 import { useCurrentGameState } from '@/hooks/rooms'
-import { BetInitialValueProp, initialChipAmount, useSelectedChip } from '@/hooks/bet'
+import {
+  BetInitialValueProp,
+  initialChipAmount,
+  useSelectedChip
+} from '@/hooks/bet'
 import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
 import SinglePlayerMobile from '@/components/room/BetDesk/SinglePlayerMobile'
 import Loading from '@/components/room/RoomStream/StreamLoading'
@@ -51,9 +55,9 @@ const TableCard: React.FC<RoomDataProps> = ({ room, isActived }) => {
 
   const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
   const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
-  
+
   const [selectedChip, setSelectedChip] = useSelectedChip(room?.id ?? '')
-  
+
   const {
     isNoFee,
     handleNoFeeToggle,
@@ -219,14 +223,22 @@ const TableCard: React.FC<RoomDataProps> = ({ room, isActived }) => {
       </div>
 
       <div className="flex relative flex-col w-full h-1/2">
-        <div className="absolute z-30 w-full h-full">
+        <div
+          className={cx(
+            'absolute z-30 w-full h-full ',
+            btnState.isDisable ? '' : 'pointer-events-none'
+          )}
+        >
           <div className="px-2 pb-14 w-full h-full">
             <PokerResult roomId={room.id} isTablesPath={isTablesPath} />
           </div>
         </div>
 
         <div className="h-1/2">
-          <SinglePlayerMobile isDisabled={btnState.isDisable} selectedChip={selectedChip} />
+          <SinglePlayerMobile
+            isDisabled={btnState.isDisable}
+            selectedChip={selectedChip}
+          />
         </div>
 
         <div className="flex flex-col w-full h-1/2">
