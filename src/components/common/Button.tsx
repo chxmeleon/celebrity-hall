@@ -1,3 +1,4 @@
+import { useLanguage } from '@/contexts/LanguageContext'
 import { clsx as cx } from 'clsx'
 import React, { PropsWithChildren } from 'react'
 import { Link, useLocation } from 'react-router-dom'
@@ -37,11 +38,15 @@ export const BetButton: React.FC<React.PropsWithChildren<BetButtonProps>> = ({
   children,
   onClick
 }) => {
+  const { isSelected } = useLanguage()
+  const isNotMandarin = isSelected !== 'zh-tw' && isSelected !== 'zh-cn'
+
   return (
     <button
       onClick={onClick}
       disabled={isDisabled}
       className={cx(
+        isNotMandarin ? 'text-[11px]' : '',
         className,
         isDisabled
           ? 'hover:cursor-not-allowed hover:bg-theme-50 text-theme-400 border-amber-500 bg-red-900'
@@ -115,6 +120,8 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
 }) => {
   const location = useLocation()
   const currentPath = location.pathname
+  const { isSelected } = useLanguage()
+  const isNotMandarin = isSelected !== 'zh-tw' && isSelected !== 'zh-cn'
   const isCurrentPath = (href: string) => {
     if (href.slice(0, 14) === currentPath.slice(0, 14)) {
       return true
@@ -143,7 +150,14 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
                 size: 'full'
               })}
             >
-              <div className="font-medium text-md">{children}</div>
+              <div
+                className={cx(
+                  'font-medium ',
+                  isNotMandarin ? 'text-[9px]' : 'text-md'
+                )}
+              >
+                {children}
+              </div>
             </div>
           </div>
         </a>
@@ -168,9 +182,11 @@ export const LinkButton: React.FC<React.PropsWithChildren<LinkButtonProps>> = ({
               })}
             >
               <div
-                className={`font-medium text-md ${
+                className={cx(
+                  'font-medium ',
+                  isNotMandarin ? 'text-[10px]' : 'text-md',
                   isCurrentPath(href) ? 'invert opacity-75 text-gray-200' : ''
-                }`}
+                )}
               >
                 {children}
               </div>

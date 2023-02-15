@@ -4,7 +4,8 @@ import { FormattedMessage } from 'react-intl'
 import Modal from '../common/Modal'
 
 const SetupModal: React.FC = () => {
-  const { locale, handleSelectValue, isSelected } = useLanguage()
+  const { handleSelectValue, isSelected } = useLanguage()
+  
   const {
     isShowSetup,
     closeSetup,

@@ -1,5 +1,7 @@
+import { useLanguage } from '@/contexts/LanguageContext'
 import { useTimeLeft } from '@/hooks/rooms'
 import { RoomProps } from '@/types/room'
+import { clsx as cx } from 'clsx'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { BigEyeRoad } from '../Roadmap'
@@ -11,8 +13,7 @@ type RoomDataProps = {
 
 const RoadCard: React.FC<RoomDataProps> = ({ room, onClick }) => {
   const { counter, startCount, isLeftTen, isOpening } = useTimeLeft(room.id)
-  
-  
+  const { isSelected } = useLanguage()
 
   return (
     <div
@@ -28,7 +29,12 @@ const RoadCard: React.FC<RoomDataProps> = ({ room, onClick }) => {
         }
         rounded-full p-[1px] flex pointer-events-none`}
       >
-        <div className="flex justify-center items-center w-6 h-6 text-sm text-center rounded-full bg-theme-50">
+        <div
+          className={cx(
+            'flex justify-center items-center h-6 text-sm text-center rounded-full bg-theme-50',
+            isSelected !== 'zh-tw' && isSelected !== 'zh-cn' ? 'w-10' : 'w-6'
+          )}
+        >
           {startCount && counter !== undefined && counter > 0 ? (
             <p
               className={`${
@@ -55,7 +61,7 @@ const RoadCard: React.FC<RoomDataProps> = ({ room, onClick }) => {
         </div>
       </div>
 
-      <div className="text-xs font-medium">
+      <div className="text-[10px] font-medium">
         <p>{room.name}</p>
       </div>
 

@@ -114,7 +114,6 @@ const Room = () => {
     isNoFee,
     handleNoFeeToggle
   } = useContext(GamePlayContext)
-  
 
   const { formatMessage } = useIntl()
   const { currentGameState } = useCurrentGameState(roomId ?? '')
@@ -368,7 +367,7 @@ const Room = () => {
                       isTrial ? 'block' : 'hidden'
                     )}
                   >
-                    <div className="text-xl text-white">
+                    <div className="w-4/5 text-xl text-center text-white">
                       <FormattedMessage
                         id="common.disabledForTrial"
                         defaultMessage="Disabled For Trial"

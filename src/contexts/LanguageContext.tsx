@@ -22,6 +22,7 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({
     setIsSelected(e.target.value)
   }, [setIsSelected])
 
+  
   const value = useMemo(
     () => ({
       locale,
