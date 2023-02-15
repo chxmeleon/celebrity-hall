@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export const numberFormmat = (target: number) =>
   target >= 1000 && target < 10000 && (target / 1000).toString().length > 3
     ? (target / 1000).toFixed(1) + 'K'
@@ -156,4 +158,10 @@ export const bettingBtnReducer = (
     default:
       return state
   }
+}
+
+
+export const useSelectedChip = (roomId: string) => {
+  const [selectedChip, setSelectedChip] = useState<{[key: string]: string}>({roomId, chips: 'chips_100'})
+  return [ selectedChip, setSelectedChip ] as const
 }

@@ -57,10 +57,11 @@ const BetArea: React.FC<{ target: number; type: string }> = ({
   )
 }
 
-export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
-  isDisabled
+export const SinglePlayer: React.FC<{ isDisabled: boolean, selectedChip: {[key: string]: string} }> = ({
+  isDisabled,
+  selectedChip
 }) => {
-  const { selectedChip, betState, dispatchBet, isNoFee } =
+  const { betState, dispatchBet, isNoFee } =
     useContext(GamePlayContext)
 
   return (
@@ -161,7 +162,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'playerAny',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -184,7 +185,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'playerPair',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -209,7 +210,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'big',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -232,7 +233,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'playerDragon',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -258,7 +259,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   dispatchBet({
                     type: 'addChips',
                     target: 'playerSingle',
-                    amount: chipsData?.[selectedChip]?.value
+                    amount: chipsData?.[selectedChip.chips]?.value
                   })
                 }
                 className={cx(
@@ -281,7 +282,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   dispatchBet({
                     type: 'addChips',
                     target: 'playerDouble',
-                    amount: chipsData?.[selectedChip]?.value
+                    amount: chipsData?.[selectedChip.chips]?.value
                   })
                 }
                 className={cx(
@@ -305,7 +306,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'playerNatural',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -332,7 +333,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               dispatchBet({
                 type: 'addChips',
                 target: 'player',
-                amount: chipsData?.[selectedChip]?.value
+                amount: chipsData?.[selectedChip.chips]?.value
               })
             }
             className={cx(
@@ -358,7 +359,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'tie',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -383,7 +384,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'super6',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -404,7 +405,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
               dispatchBet({
                 type: 'addChips',
                 target: 'dealer',
-                amount: chipsData?.[selectedChip]?.value
+                amount: chipsData?.[selectedChip.chips]?.value
               })
             }
             className={cx(
@@ -430,7 +431,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'dealerPair',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -455,7 +456,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'dealerAny',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -480,7 +481,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'dealerDragon',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -503,7 +504,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'small',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -530,7 +531,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                 dispatchBet({
                   type: 'addChips',
                   target: 'dealerNatural',
-                  amount: chipsData?.[selectedChip]?.value
+                  amount: chipsData?.[selectedChip.chips]?.value
                 })
               }
               className={cx(
@@ -555,7 +556,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   dispatchBet({
                     type: 'addChips',
                     target: 'dealerDouble',
-                    amount: chipsData?.[selectedChip]?.value
+                    amount: chipsData?.[selectedChip.chips]?.value
                   })
                 }
                 className={cx(
@@ -578,7 +579,7 @@ export const SinglePlayer: React.FC<{ isDisabled: boolean }> = ({
                   dispatchBet({
                     type: 'addChips',
                     target: 'dealerSingle',
-                    amount: chipsData?.[selectedChip]?.value
+                    amount: chipsData?.[selectedChip.chips]?.value
                   })
                 }
                 className={cx(

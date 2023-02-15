@@ -32,11 +32,13 @@ import Loading from '@/components/room/RoomStream/StreamLoading'
 import { Tooltip } from '@material-tailwind/react'
 import QuickRoads from '@/components/room/SwitchRoom'
 import RoadDrawer from '@/components/room/SwitchRoom/RoadDrawer'
+import { useSelectedChip } from '@/hooks/bet'
 
 export const ChipButtonList: React.FC<{
-  selectedChip: string
-  onSelectedChipChanged?: (selectedChip: string) => void
-}> = ({ selectedChip, onSelectedChipChanged }) => {
+  selectedChip: { [key: string]: string }
+  onSelectedChipChanged?: (selectedChip: { [key: string]: string }) => void
+  roomId: string
+}> = ({ selectedChip, onSelectedChipChanged, roomId }) => {
   return (
     <>
       {chipsImg.map((item, idx) => {
@@ -47,12 +49,13 @@ export const ChipButtonList: React.FC<{
           .slice(0, 1)
           .toString()
 
-        const isActive = selectedChip === itemName ?? 'chips_100'
+        const isActive = selectedChip.chips === itemName ?? 'chips_100'
+        const selected = { roomId: roomId, chips: itemName }
 
         return (
           <button
             key={idx}
-            onClick={() => onSelectedChipChanged?.(itemName)}
+            onClick={() => onSelectedChipChanged?.(selected)}
             className={`${
               isActive
                 ? 'brightness-105 backdrop-brightness-110 shadow-md shadow-theme-300 before:absolute before:left-1 before:top-2 before:w-7 before:h-4 before:rounded-full before:bg-theme-300 before:blur-md'
@@ -98,9 +101,9 @@ const Room = () => {
   const [isChangedDesk, setIsChangedDesk] = useState<boolean>(false)
   const handleSwitchDesk = () => setIsChangedDesk(!isChangedDesk)
 
+  const [selectedChip, setSelectedChip] = useSelectedChip(room?.id ?? '')
+
   const {
-    selectedChip,
-    setSelectedChip,
     onConfirm,
     onRepeat,
     onCancel,
@@ -111,6 +114,7 @@ const Room = () => {
     isNoFee,
     handleNoFeeToggle
   } = useContext(GamePlayContext)
+  
 
   const { formatMessage } = useIntl()
   const { currentGameState } = useCurrentGameState(roomId ?? '')
@@ -126,7 +130,7 @@ const Room = () => {
       dispatchBtn({ type: 'disableBet' })
     }
   }, [gameState, dispatchBet, totalAmount, refetchRooms, dispatchBtn])
-  
+
   return (
     <>
       <Responsive.Desktop className="w-full h-full">
@@ -228,6 +232,7 @@ const Room = () => {
                 </div>
                 <div className="flex-grow flex-shrink-0 w-full">
                   <BetDesk
+                    selectedChip={selectedChip}
                     isDisabled={btnState.isDisable}
                     isToggle={isChangedDesk}
                     targetsData={targets}
@@ -274,6 +279,7 @@ const Room = () => {
                   </div>
                   <div className="flex justify-around items-center w-1/3">
                     <ChipButtonList
+                      roomId={room?.id ?? ''}
                       selectedChip={selectedChip}
                       onSelectedChipChanged={setSelectedChip}
                     />
@@ -509,19 +515,20 @@ const Room = () => {
                 <PokerResult roomId={room?.id ?? ''} />
               </div>
             </div>
-
-            <div className="">
-              <SinglePlayerMobile isDisabled={btnState.isDisable} />
+            <div>
+              <SinglePlayerMobile
+                selectedChip={selectedChip}
+                isDisabled={btnState.isDisable}
+              />
             </div>
-
             <div className="flex flex-col w-full h-2/5">
               <div className="flex justify-around py-3 px-2 w-full">
                 <ChipButtonList
+                  roomId={room?.id ?? ''}
                   selectedChip={selectedChip}
                   onSelectedChipChanged={setSelectedChip}
                 />
               </div>
-
               <div className="flex flex-grow justify-between items-center px-1 w-full">
                 <BetButton
                   className="mx-1 text-md"

@@ -64,8 +64,9 @@ const targetsMapper = {
 export const MultiplePlayers: React.FC<{
   isDisabled: boolean
   targetsData: { [key: string]: { [key: string]: string }[] } | undefined
-}> = ({ isDisabled, targetsData }) => {
-  const { totalAmount, selectedChip, betState, dispatchBet, isNoFee } =
+  selectedChip: { [key: string]: string }
+}> = ({ isDisabled, targetsData, selectedChip }) => {
+  const { totalAmount, betState, dispatchBet, isNoFee } =
     useContext(GamePlayContext)
   const { user } = useWallet()
   const { profile } = user
@@ -173,7 +174,7 @@ export const MultiplePlayers: React.FC<{
               dispatchBet({
                 type: 'addChips',
                 target: 'playerDragon',
-                amount: chipsData?.[selectedChip]?.value
+                amount: chipsData?.[selectedChip.chips]?.value
               })
             }
             className={cx(isDisabled ? 'brightness-75' : '', btnIdx.tl2)}
@@ -188,7 +189,7 @@ export const MultiplePlayers: React.FC<{
               dispatchBet({
                 type: 'addChips',
                 target: 'playerPair',
-                amount: chipsData?.[selectedChip]?.value
+                amount: chipsData?.[selectedChip.chips]?.value
               })
             }
             className={cx(isDisabled ? 'brightness-75' : '', btnIdx.tn2)}
@@ -208,7 +209,7 @@ export const MultiplePlayers: React.FC<{
               dispatchBet({
                 type: 'addChips',
                 target: 'super6',
-                amount: chipsData?.[selectedChip]?.value
+                amount: chipsData?.[selectedChip.chips]?.value
               })
             }
             className={cx(
@@ -228,7 +229,7 @@ export const MultiplePlayers: React.FC<{
               dispatchBet({
                 type: 'addChips',
                 target: 'dealerPair',
-                amount: chipsData?.[selectedChip]?.value
+                amount: chipsData?.[selectedChip.chips]?.value
               })
             }
             className={cx(isDisabled ? 'brightness-75' : '', btnIdx.tn2)}
@@ -248,7 +249,7 @@ export const MultiplePlayers: React.FC<{
               dispatchBet({
                 type: 'addChips',
                 target: 'dealerDragon',
-                amount: chipsData?.[selectedChip]?.value
+                amount: chipsData?.[selectedChip.chips]?.value
               })
             }
             className={cx(isDisabled ? 'brightness-75' : '', btnIdx.tr2)}
@@ -265,7 +266,7 @@ export const MultiplePlayers: React.FC<{
               dispatchBet({
                 type: 'addChips',
                 target: 'player',
-                amount: chipsData?.[selectedChip]?.value
+                amount: chipsData?.[selectedChip.chips]?.value
               })
             }
             className={cx(isDisabled ? 'brightness-75' : '', btnIdx.cl4)}
@@ -285,7 +286,7 @@ export const MultiplePlayers: React.FC<{
               dispatchBet({
                 type: 'addChips',
                 target: 'tie',
-                amount: chipsData?.[selectedChip]?.value
+                amount: chipsData?.[selectedChip.chips]?.value
               })
             }
             className={cx(isDisabled ? 'brightness-75' : '', btnIdx.cn3)}
@@ -303,7 +304,7 @@ export const MultiplePlayers: React.FC<{
               dispatchBet({
                 type: 'addChips',
                 target: 'dealer',
-                amount: chipsData?.[selectedChip]?.value
+                amount: chipsData?.[selectedChip.chips]?.value
               })
             }
             className={cx(

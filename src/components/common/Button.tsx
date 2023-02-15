@@ -45,7 +45,7 @@ export const BetButton: React.FC<React.PropsWithChildren<BetButtonProps>> = ({
         className,
         isDisabled
           ? 'hover:cursor-not-allowed hover:bg-theme-50 text-theme-400 border-amber-500 bg-red-900'
-          : 'hover:text-theme-50 hover:bg-theme-300 border-theme-300 active:bg-amber-400 active:text-theme-50 ',
+          : 'text-theme-300 hover:text-theme-50 hover:bg-theme-300 border-theme-300 active:bg-amber-400 active:text-theme-50 ',
         bts({
           intent: 'outlineButton',
           round: 'full',

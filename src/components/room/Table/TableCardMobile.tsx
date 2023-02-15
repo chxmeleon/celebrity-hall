@@ -20,6 +20,7 @@ import { chipsData } from '../BetDesk/chips'
 import { ChipButtonList } from '@/pages/Rooms/[id]'
 import { BetButton } from '@/components/common/Button'
 import RoomNotification from '../RoomNotification'
+import { useSelectedChip } from '@/hooks/bet'
 
 type RoomDataProps = {
   room: RoomProps
@@ -39,15 +40,15 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
 
   const [isWebRTC, setIsWebRTC] = useState(false)
   const handleSwitchStream = () => setIsWebRTC(!isWebRTC)
+  
+  const [selectedChip, setSelectedChip] = useSelectedChip(room?.id ?? '')
+  
 
   const {
     isNoFee,
     handleNoFeeToggle,
     betState,
-    selectedChip,
-    setSelectedChip,
     onConfirm,
-    onRepeat,
     onCancel,
     btnState,
     dispatchBtn,
@@ -208,9 +209,9 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
           <div className="relative w-1/2 bg-gray-50">
             <div className="absolute w-full h-full inset-0 z-10 flex justify-center items-end">
               <RoomNotification
-                isConfirmedSuccess={btnState.isConfirmSuccess}
-                isConfirmedFailure={btnState.isConfirmFailure}
-                isRepeatSuccess={btnState.isRepeatSuccess}
+                isConfirmedSuccess={btnState?.isConfirmSuccess}
+                isConfirmedFailure={btnState?.isConfirmFailure}
+                isRepeatSuccess={btnState?.isRepeatSuccess}
                 isTablesPath={isTablesPath}
                 gameState={gameState}
               />
@@ -229,7 +230,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
                     dispatchBet({
                       type: 'addChips',
                       target: item,
-                      amount: chipsData?.[selectedChip]?.value
+                      amount: chipsData?.[selectedChip.chips]?.value
                     })
                   }
                   className={btnStyle}
@@ -259,7 +260,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
                     dispatchBet({
                       type: 'addChips',
                       target: item,
-                      amount: chipsData?.[selectedChip]?.value
+                      amount: chipsData?.[selectedChip.chips]?.value
                     })
                   }
                   className={btnStyle}
@@ -284,6 +285,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
           <div className="overflow-x-scroll w-1/2">
             <div className="flex gap-1 w-[300px]">
               <ChipButtonList
+                roomId={room?.id}
                 selectedChip={selectedChip}
                 onSelectedChipChanged={setSelectedChip}
               />

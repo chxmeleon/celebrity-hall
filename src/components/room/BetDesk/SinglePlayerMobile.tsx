@@ -34,9 +34,10 @@ export const BetArea: React.FC<{ target: number }> = ({ target }) => {
   )
 }
 
-const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
-  isDisabled
-}) => {
+const SinglePlayerMobile: React.FC<{
+  isDisabled: boolean
+  selectedChip: {[key: string]: string} 
+}> = ({ isDisabled, selectedChip }) => {
   const { isTablesPath } = useContext(RoomDataContext)
 
   const btnStyle = cx(
@@ -44,8 +45,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
     isDisabled ? 'brightness-75' : ''
   )
 
-  const { isNoFee, selectedChip, betState, dispatchBet } =
-    useContext(GamePlayContext)
+  const { isNoFee, betState, dispatchBet } = useContext(GamePlayContext)
 
   const betTarget = [
     'playerDragon',
@@ -70,7 +70,7 @@ const SinglePlayerMobile: React.FC<{ isDisabled: boolean }> = ({
             dispatchBet({
               type: 'addChips',
               target: item,
-              amount: chipsData?.[selectedChip]?.value
+              amount: chipsData?.[selectedChip.chips]?.value
             })
           }
           className={cx(btnStyle, !isNoFee && idx === 2 ? 'brightness-50' : '')}

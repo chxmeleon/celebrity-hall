@@ -4,7 +4,6 @@ import { Outlet, useParams } from 'react-router-dom'
 
 const RoomsLayout = () => {
   const { type } = useParams<{ type: string | undefined }>()
-  
 
   return (
     <RoomDataProvider type={type}>

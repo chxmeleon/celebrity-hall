@@ -37,8 +37,6 @@ import {
 
 
 type GamePlayContextData = {
-  selectedChip: string 
-  setSelectedChip: React.Dispatch<React.SetStateAction<string>>
   btnState: BettingBtnProp
   dispatchBtn: React.Dispatch<BettingBtnAction>
   betState: BetInitialValueProp
@@ -71,7 +69,6 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
 
   const preLocation = useLocation().pathname
   const [location, setLocation] = useState(preLocation)
-  const [selectedChip, setSelectedChip] = useState('chips_100')
   const [betState, dispatchBet] = useReducer(chipReducer, initialChipAmount)
   const [btnState, dispatchBtn] = useReducer(
     bettingBtnReducer,
@@ -264,8 +261,6 @@ export const GamePlayProvider: React.FC<React.PropsWithChildren> = ({
   }
 
   const value = {
-    selectedChip,
-    setSelectedChip,
     btnState,
     dispatchBtn,
     betState,
