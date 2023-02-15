@@ -11,9 +11,7 @@ import { clsx as cx } from 'clsx'
 
 const Tables = () => {
   const { rooms } = useContext(RoomDataContext)
-  const [selectedChip, setSelectedChip] = useState('chips_100')
   const [activeId, setActiveId] = useState<string | undefined>(rooms[0]?.id)
-
 
   return (
     <>
@@ -50,7 +48,7 @@ const Tables = () => {
       <Responsive.Default className="w-full h-full">
         {rooms.length ? (
           <div className="relative w-full h-full">
-            <div className="overflow-y-scroll py-4 px-2 pb-10 w-full h-full">
+            <div className="overflow-y-scroll py-4 px-2 w-full h-full">
               {rooms.map((item, idx) => {
                 const isActived = activeId === item?.id
                 return (

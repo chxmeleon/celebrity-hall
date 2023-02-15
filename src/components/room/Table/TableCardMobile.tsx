@@ -40,9 +40,8 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
 
   const [isWebRTC, setIsWebRTC] = useState(false)
   const handleSwitchStream = () => setIsWebRTC(!isWebRTC)
-  
+
   const [selectedChip, setSelectedChip] = useSelectedChip(room?.id ?? '')
-  
 
   const {
     isNoFee,
@@ -67,6 +66,14 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
     setIsOpen((isOpen) => !isOpen)
   }
 
+
+  useEffect(() => {
+    if (!isActived) {
+      setIsOpen(false)
+    }
+  }, [isActived])
+  
+
   useEffect(() => {
     if (gameState === 'START_BET' || gameState === 'UPDATE_AMOUNT') {
       dispatchBtn({ type: 'enableBet', totalAmount: totalAmount })
@@ -90,7 +97,16 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
   )
 
   return (
-    <div className="mb-4 w-full h-full rounded-md p-[1.6px] bg-link-button-54">
+    <div className="relative mb-4 w-full h-full rounded-md p-[1.6px] bg-link-button-54">
+      <div
+        className={cx(
+          btnState.isDisable ? '' : 'pointer-events-none',
+          'p-1 absolute bottom-0 left-0 z-40 flex justify-center items-center w-full ',
+          isOpen ? 'h-1/2' : 'h-full'
+        )}
+      >
+        <PokerResult roomId={room?.id} isTablesPath={true} />
+      </div>
       <div className="pb-1.5 rounded-md bg-theme-50">
         <div className="flex justify-between items-center p-3 w-full h-11 text-sm">
           <div className="inline-flex items-center">
@@ -146,7 +162,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
               'relative bg-black w-full h-full'
             )}
           >
-            <div className="flex absolute z-30 flex-col justify-around h-20">
+            <div className="flex absolute z-30 flex-col justify-around pl-1 h-20">
               <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
                 <Tooltip
                   content={formatMessage({
@@ -157,9 +173,18 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
                 >
                   <button
                     onClick={handleSwitchCam}
-                    className={`${
-                      isSecondCam ? 'text-theme-300' : ''
-                    } m-auto text-xl i-heroicons-video-camera-20-solid`}
+                    disabled={
+                      secoundStreamKey === undefined &&
+                      secoundStreamName === undefined
+                    }
+                    className={cx(
+                      isSecondCam ? 'text-theme-300' : '',
+                      secoundStreamKey === undefined &&
+                        secoundStreamName === undefined
+                        ? 'text-gray-500 hover:cursor-not-allowed'
+                        : '',
+                      'm-auto text-2xl i-heroicons-video-camera-20-solid'
+                    )}
                   ></button>
                 </Tooltip>
               </div>
@@ -207,7 +232,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
         </div>
         <div className="flex py-2 w-full h-[123px]">
           <div className="relative w-1/2 bg-gray-50">
-            <div className="absolute w-full h-full inset-0 z-10 flex justify-center items-end">
+            <div className="flex absolute inset-0 z-10 justify-center items-end w-full h-full">
               <RoomNotification
                 isConfirmedSuccess={btnState?.isConfirmSuccess}
                 isConfirmedFailure={btnState?.isConfirmFailure}
@@ -271,7 +296,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
                       <FormattedMessage id={betAreaMapper[item].id} />
                     </div>
                     {isNoFee && idx === 1 ? (
-                      <p className="ratio">1:0.95</p>
+                      <p className="ratio">1:1</p>
                     ) : (
                       <p className="ratio">{betAreaMapper[item].text}</p>
                     )}

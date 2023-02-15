@@ -123,7 +123,7 @@ export const betAreaMapper = {
   dealer: {
     textStyle: 'w-full text-grid-100 [&_p]:text-sm',
     id: 'common.simpleDealer',
-    text: '1:1'
+    text: '1:0.95'
   },
   dealerPair: {
     textStyle: 'w-full text-grid-100',
