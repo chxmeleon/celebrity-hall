@@ -5,7 +5,6 @@ import { GamePlayProvider } from '@/contexts/GamePlayContext'
 import Loading from '@/components/room/RoomStream/StreamLoading'
 import { Responsive } from '@/hooks/useResponsive'
 import TableCardMobile from '@/components/room/Table/TableCardMobile'
-import GamePlayContext from '@/contexts/GamePlayContext'
 import { clsx as cx } from 'clsx'
 
 
