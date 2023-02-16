@@ -3,8 +3,8 @@ import heart from '@/assets/rankings/heart.png'
 import { streamType } from '@/pages/Streamers/index'
 import { FormattedMessage } from 'react-intl'
 import { Link } from 'react-router-dom'
-import React, { useContext } from 'react'
-import { Responsive, ResponsiveContext } from '@/hooks/useResponsive'
+import React from 'react'
+import { Responsive } from '@/hooks/useResponsive'
 
 const Win: React.FC<{ percent: number }> = ({ percent }) => {
   return (

@@ -31,7 +31,6 @@ import RoomDataContext from '@/contexts/RoomDataContext'
 import Loading from '@/components/room/RoomStream/StreamLoading'
 import { Tooltip } from '@material-tailwind/react'
 import QuickRoads from '@/components/room/SwitchRoom'
-import RoadDrawer from '@/components/room/SwitchRoom/RoadDrawer'
 import { useSelectedChip } from '@/hooks/bet'
 
 export const ChipButtonList: React.FC<{
