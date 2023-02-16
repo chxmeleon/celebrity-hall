@@ -14,7 +14,7 @@ const Tables = () => {
 
   return (
     <>
-      <Responsive.Desktop className="w-full h-full">
+      <Responsive.Desktop className="w-full h-full bg-black">
         {rooms.length ? (
           <div className="grid grid-cols-4 grid-rows-1 w-full">
             {rooms.slice(4, 8).map((item, idx) => {
@@ -44,7 +44,7 @@ const Tables = () => {
         )}
       </Responsive.Desktop>
 
-      <Responsive.Default className="w-full h-full">
+      <Responsive.Default className="w-full h-full bg-black">
         {rooms.length ? (
           <div className="relative w-full h-full">
             <div className="overflow-y-scroll py-4 px-2 w-full h-full">

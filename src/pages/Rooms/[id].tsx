@@ -17,7 +17,7 @@ import {
   AskGrid,
   AskGridMobile
 } from '@/components/room/Roadmap'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { useCurrentGameState } from '@/hooks/rooms'
 import RoomNotification from '@/components/room/RoomNotification'

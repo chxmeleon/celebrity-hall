@@ -16,7 +16,7 @@ const Rooms: React.FC = () => {
           type={type === 'live' || type === 'interaction' ? 'fixed' : 'default'}
         />
       ) : rooms.length ? (
-        <div className="overflow-y-auto p-4 w-full h-full md:p-16">
+        <div className="overflow-y-auto p-4 w-full h-full md:p-16 bg-black">
           <RoomList rooms={rooms} />
         </div>
       ) : (
