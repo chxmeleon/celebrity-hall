@@ -17,7 +17,7 @@ import {
   AskGrid,
   AskGridMobile
 } from '@/components/room/Roadmap'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import GamePlayContext from '@/contexts/GamePlayContext'
 import { useCurrentGameState } from '@/hooks/rooms'
 import RoomNotification from '@/components/room/RoomNotification'
@@ -81,6 +81,7 @@ const Room = () => {
 
   const { isTrial } = useAuth()
   const { onResizeWindow } = useContext(ResponsiveContext)
+
   useEffect(() => {
     if (room) {
       onResizeWindow?.()
@@ -118,6 +119,10 @@ const Room = () => {
   const { formatMessage } = useIntl()
   const { currentGameState } = useCurrentGameState(roomId ?? '')
   const { gameState, targets } = currentGameState
+  const navigate = useNavigate()
+  const handleBack = () => {
+    navigate('home/rooms/all')
+  }
 
   useEffect(() => {
     if (gameState === 'START_BET' || gameState === 'UPDATE_AMOUNT') {
@@ -392,6 +397,10 @@ const Room = () => {
                 <div className="flex pl-1">
                   <div className="flex flex-col justify-around items-end h-23">
                     <div className="flex w-8 h-8 rounded-md bg-theme-50/80">
+                      {/* <button */}
+                      {/*   onClick={handleBack} */}
+                      {/*   className="m-auto text-xl i-heroicons-arrow-uturn-left-20-solid" */}
+                      {/* ></button> */}
                       <Link
                         to="/home/rooms/all"
                         className="m-auto text-xl i-heroicons-arrow-uturn-left-20-solid"

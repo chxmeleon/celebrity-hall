@@ -29,11 +29,11 @@ const Router: React.FC = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="intro-rule" element={<Rule />} />
         </Route>
+      </Route>
+      <Route path="home" element={<ProtectedLayout />}>
         <Route element={<TablesLayout />}>
           <Route path="tables" element={<Tables />} />
         </Route>
-      </Route>
-      <Route path="home" element={<ProtectedLayout />}>
         <Route path="rooms/:type?" element={<RoomsLayout />}>
           <Route index element={<Rooms />} />
         </Route>

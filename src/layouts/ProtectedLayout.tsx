@@ -1,11 +1,11 @@
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { clsx as cx } from 'clsx'
 import Header from './Header'
 import LeftSidebar from './LeftSidebar'
 import { useAuth } from '@/contexts/AuthContext'
 import SetupModal from '@/components/setup/SetupModal'
 import NoticeModal from '@/components/setup/NoticeModal'
-import { useActivedTab } from '@/hooks/rooms'
+import { NavbarBottom, NavbarTop } from './navbar'
 
 const ProtectedLayout: React.FC = () => {
   const { auth, isExpired } = useAuth()
@@ -17,19 +17,21 @@ const ProtectedLayout: React.FC = () => {
      absolute top-0 w-full h-full aspect-video bg-no-repeat z-[-1] bg-[url('../assets/login_bg.avif')] 
      before:absolute before:w-full before:h-full before:bg-black/20 before:content-['']`
 
+
+
   return (
     <main className="relative w-full h-full">
       <SetupModal />
       <NoticeModal />
-      <section className="relative m-auto w-full h-full border aspect-video border-theme-70">
+      <section className="relative m-auto w-full h-full border border-theme-70">
         <div className={bgImage}></div>
         <Header />
-        <div className="flex justify-start pt-9 w-full h-full">
+        <NavbarTop />
+        <div className="flex justify-start w-full h-[90%] pt-0 md:pt-9 md:h-full">
           <LeftSidebar />
-          <div className="relative w-full h-full bg-black">
-            <Outlet />
-          </div>
+          <Outlet />
         </div>
+        <NavbarBottom />
       </section>
     </main>
   )

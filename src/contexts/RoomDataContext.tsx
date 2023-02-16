@@ -9,6 +9,7 @@ type RoomDataContextData = {
   isTablesPath?: boolean
   rooms: RoomProps[]
   refetch?: () => Promise<any>
+  loading: boolean
 }
 
 const RoomDataContext = createContext<RoomDataContextData>(
@@ -24,7 +25,7 @@ export const RoomDataProvider: React.FC<
     [location]
   )
 
-  const { data, refetch } = useQuery<
+  const { data, refetch, loading } = useQuery<
     types.GET_BACCARATROOMS,
     types.GET_BACCARATROOMSVariables
   >(GET_BACCARATROOMS, { variables: { type } })
@@ -34,6 +35,7 @@ export const RoomDataProvider: React.FC<
   return (
     <RoomDataContext.Provider
       value={{
+        loading,
         isTablesPath,
         rooms,
         refetch

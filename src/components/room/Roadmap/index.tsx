@@ -229,32 +229,57 @@ export const AskGrid: React.FC = () => {
   )
 }
 
-export const AskGridMobile: React.FC<{ roomId: string, size?: 'default' | 'small' }> = ({ roomId, size }) => {
+export const AskGridMobile: React.FC<{
+  roomId: string
+  size?: 'default' | 'small'
+  noAsk?: boolean
+}> = ({ roomId, size, noAsk = false }) => {
   const { currentGame } = useCurrentGame(roomId ?? '')
   const roadsTotalData = currentGame?.baccaratRoom?.roads ?? ''
-
+  
   return (
     <div className="flex justify-between items-center w-full h-full bg-blue-800/20">
-      {askMapperMobile.map((item, idx) => {
-        return (
-          <div
-            key={`ask-${idx}`}
-            className={cx(
-              'flex h-full items-center ',
-              size === 'small' ? 'text-[10px]' : 'text-xs md:text-sm',
-              item.className
-            )}
-          >
-            <FormattedMessage
-              id={item.contentId}
-              defaultMessage={item.default}
-            />
-            <p className="pl-1 text-gray-100">
-              {roadsTotalData?.[item?.value as string]}
-            </p>
-          </div>
-        )
-      })}
+      {noAsk
+        ? askMapperMobile.slice(1, 7).map((item, idx) => {
+            return (
+              <div
+                key={`ask-${idx}`}
+                className={cx(
+                  'flex h-full items-center ',
+                  size === 'small' ? 'text-[10px]' : 'text-xs md:text-sm',
+                  item.className
+                )}
+              >
+                <FormattedMessage
+                  id={item.contentId}
+                  defaultMessage={item.default}
+                />
+                <p className="pl-1 text-gray-100">
+                  {roadsTotalData?.[item?.value as string]}
+                </p>
+              </div>
+            )
+          })
+        : askMapperMobile.map((item, idx) => {
+            return (
+              <div
+                key={`ask-${idx}`}
+                className={cx(
+                  'flex h-full items-center ',
+                  size === 'small' ? 'text-[10px]' : 'text-xs md:text-sm',
+                  item.className
+                )}
+              >
+                <FormattedMessage
+                  id={item.contentId}
+                  defaultMessage={item.default}
+                />
+                <p className="pl-1 text-gray-100">
+                  {roadsTotalData?.[item?.value as string]}
+                </p>
+              </div>
+            )
+          })}
     </div>
   )
 }

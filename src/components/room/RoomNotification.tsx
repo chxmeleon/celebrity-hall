@@ -58,7 +58,7 @@ const RoomNotification: React.FC<NoticeProps> = ({
       ) : gameState === noticeMapper?.[gameState]?.state &&
         gameState !== undefined ? (
         <div className="flex w-full h-12 md:w-2/3">
-          <div className="flex py-1 m-auto w-3/4 rounded-md bg-yellow-400/95">
+          <div className="flex py-1 m-auto w-3/4 rounded-md bg-yellow-300">
             <div
               className={cx(
                 'm-auto  font-medium text-theme-50',

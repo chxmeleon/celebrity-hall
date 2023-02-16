@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 
 export const BREAK_POINT_SM = 576
@@ -135,6 +136,7 @@ export const ResponsiveProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [isMobile, setIsMobile] = useState(true)
   const [isDesktop, setIsDesktop] = useState(true)
+  const location = useLocation()
 
   useEffect(() => {
     const onWindowResize = () => {
@@ -209,7 +211,7 @@ export const ResponsiveProvider: React.FC<React.PropsWithChildren> = ({
     return () => {
       window.removeEventListener('resize', onResizeWindow)
     }
-  }, [onResizeWindow])
+  }, [onResizeWindow, location])
 
   return (
     <ResponsiveContext.Provider value={{ isMobile, isDesktop, onResizeWindow }}>

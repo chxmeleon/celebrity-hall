@@ -63,10 +63,12 @@ export const StreamersCard: React.FC<{
           {!item?.online && (
             <div className="absolute w-full h-full pointer-events-none bg-black/60"></div>
           )}
-          <img
-            className="object-cover object-center w-[313px] h-[278px] sm:w-[401px] sm:h-[355px]"
-            src={item.avatar}
-          />
+          <div className="overflow-hidden w-full h-[331px] sm:w-[401px] sm:h-[355px]">
+            <img
+              className="object-cover object-center w-full h-full"
+              src={item.avatar}
+            />
+          </div>
         </div>
         <div className="absolute bottom-[1px] flex justify-between items-center p-2 w-[99%] bg-theme-50/60">
           <div className="text-lg md:text-xl truncate">{item.nickname}</div>

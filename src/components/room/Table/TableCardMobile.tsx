@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { clsx as cx } from 'clsx'
 import Timer from '@/components/room/Timer'
 import PokerResult from '@/components/room/PockerResult'
-import { BigRoad } from '@/components/room/Roadmap'
+import { AskGridMobile, BigRoad } from '@/components/room/Roadmap'
 import { useCurrentGameState } from '@/hooks/rooms'
 import RoomStreamMobile from '@/components/room/RoomStream/StreamMobile'
 import {
@@ -66,13 +66,11 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
     setIsOpen((isOpen) => !isOpen)
   }
 
-
   useEffect(() => {
     if (!isActived) {
       setIsOpen(false)
     }
   }, [isActived])
-  
 
   useEffect(() => {
     if (gameState === 'START_BET' || gameState === 'UPDATE_AMOUNT') {
@@ -306,6 +304,9 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
             </div>
           </div>
         </div>
+        <div className="px-2">
+          <AskGridMobile size="small" roomId={room?.id} noAsk={true} />
+        </div>
         <div className="flex py-2 px-1 w-full">
           <div className="overflow-x-scroll w-1/2">
             <div className="flex gap-1 w-[300px]">
@@ -318,7 +319,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
           </div>
           <div className="flex justify-between items-center w-1/2">
             <BetButton
-              className="mx-1 text-xs"
+              className="mx-1 text-[9px]"
               isDisabled={btnState.isCancelDisabled}
               onClick={() => onCancel(room.id)}
             >
@@ -326,7 +327,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
               <FormattedMessage id="common.cancel" />
             </BetButton>
             <BetButton
-              className="mx-1 text-xs"
+              className="mx-1 text-[9px]"
               isDisabled={btnState.isConfirmDisabled}
               onClick={(e) => onConfirm(e, room?.id)}
             >

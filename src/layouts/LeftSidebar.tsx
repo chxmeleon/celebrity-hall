@@ -14,6 +14,12 @@ export const linkLisetMapper = [
       src: '/icons/all.png'
     },
     {
+      href: '/home/tables',
+      id: 'layout.tables',
+      default: 'Tables',
+      src: '/icons/table.png'
+    },
+    {
       href: '/home/rooms/live',
       id: 'layout.liverooms',
       default: 'Live Hall',
@@ -30,12 +36,6 @@ export const linkLisetMapper = [
       id: 'layout.kgrooms',
       default: 'KG Hall',
       src: '/icons/KG.png'
-    },
-    {
-      href: '/home/tables',
-      id: 'layout.tables',
-      default: 'Tables',
-      src: '/icons/table.png'
     },
     {
       href: '/home/rankings/streamers',
@@ -57,7 +57,7 @@ const LeftSidebar = () => {
   const { formatMessage } = useIntl()
 
   return (
-    <div className="flex flex-shrink-0 px-1.5 w-14 h-full text-center md:py-5 md:px-7 md:w-44 border-r-[0.5px] border-r-theme-75">
+    <div className="hidden md:flex flex-shrink-0 px-1.5 w-14 h-full text-center md:py-5 md:px-7 md:w-44 border-r-[0.5px] border-r-theme-75">
       <div className="mx-auto w-full">
         <section className="hidden pb-6 w-full md:block">
           <div className="flex">

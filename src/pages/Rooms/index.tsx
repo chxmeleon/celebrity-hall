@@ -5,19 +5,28 @@ import Loading from '@/components/room/RoomStream/StreamLoading'
 import { useParams } from 'react-router-dom'
 
 const Rooms: React.FC = () => {
-  const { rooms } = useContext(RoomDataContext)
+  const { rooms, loading } = useContext(RoomDataContext)
   const { type } = useParams<{ type: string }>()
+
 
   return (
     <>
-      {rooms.length ? (
+      {loading ? (
+        <Loading
+          type={type === 'live' || type === 'interaction' ? 'fixed' : 'default'}
+        />
+      ) : rooms.length ? (
         <div className="overflow-y-auto p-4 w-full h-full md:p-16">
           <RoomList rooms={rooms} />
         </div>
       ) : (
-        <Loading
-          type={type === 'live' || type === 'interaction' ? 'fixed' : 'default'}
-        />
+        <div className="w-full">
+          <Loading
+            type={
+              type === 'live' || type === 'interaction' ? 'fixed' : 'default'
+            }
+          />
+        </div>
       )}
     </>
   )
