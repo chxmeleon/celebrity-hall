@@ -48,21 +48,7 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
                   >
                     {counter}
                   </p>
-                ) : isOpening ? (
-                  <div className="text-theme-300">
-                    <FormattedMessage
-                      id="status.baccarat.waitingBet"
-                      defaultMessage="Open"
-                    />
-                  </div>
-                ) : (
-                  <div className="text-theme-300">
-                    <FormattedMessage
-                      id="status.baccarat.openingCard"
-                      defaultMessage="Close"
-                    />
-                  </div>
-                )}
+                ) : null}
               </div>
             </div>
             <div className="pl-4 font-bold tracking-[0.15rem]">{room.name}</div>
@@ -120,9 +106,9 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
             </div>
           </div>
           <div className="flex justify-between px-3 w-full h-14">
-            <div className="flex justify-between items-center  w-1/2 h-full md:text-lg font-light [&_p]:pl-1 md:[&_p]:pl-3 text-white text-[11px]">
+            <div className="flex justify-between items-center w-2/3 h-full md:text-lg font-light [&_p]:pl-1 md:[&_p]:pl-3 text-white text-[11px]">
               <div className="inline-flex items-center">
-                <div className="flex justify-center items-center w-5 h-5 rounded-full md:w-8 md:h-8 bg-grid-100">
+                <div className="flex justify-center items-center w-5 h-5 rounded-full md:w-8 md:h-8 bg-red-600">
                   <FormattedMessage
                     id="common.simpleDealer"
                     defaultMessage="B"
@@ -131,7 +117,7 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
                 <p>{room.roads.dealer_count}</p>
               </div>
               <div className="inline-flex items-center">
-                <div className="flex justify-center items-center w-5 h-5 rounded-full md:w-8 md:h-8 bg-grid-400">
+                <div className="flex justify-center items-center w-5 h-5 rounded-full md:w-8 md:h-8 bg-blue-600">
                   <FormattedMessage
                     id="common.simplePlayer"
                     defaultMessage="P"
@@ -140,10 +126,16 @@ const RoomCard: React.FC<RoomDataProps> = ({ room }) => {
                 <p>{room.roads.player_count}</p>
               </div>
               <div className="inline-flex items-center">
-                <div className="flex justify-center items-center w-5 h-5 rounded-full md:w-8 md:h-8 bg-grid-300">
+                <div className="flex justify-center items-center w-5 h-5 rounded-full md:w-8 md:h-8 bg-teal-600">
                   <FormattedMessage id="common.simpleTie" defaultMessage="T" />
                 </div>
                 <p>{room.roads.tie_count}</p>
+              </div>
+              <div className="inline-flex items-center">
+                <div className="flex justify-center items-center w-5 h-5 rounded-full md:w-8 md:h-8 bg-amber-500">
+                  <FormattedMessage id="common.total" defaultMessage="A" />
+                </div>
+                <p>{room.roads.total_count}</p>
               </div>
             </div>
             <div className="flex h-full md:w-1/4">

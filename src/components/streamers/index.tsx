@@ -43,7 +43,7 @@ export const StreamersCard: React.FC<{
   return (
     <div
       key={item.id}
-      className={`px-2 relative w-full ${
+      className={` relative w-full bg-link-button-54 p-[1px] ${
         item.online ? 'cursor-pointer' : 'cursor-not-allowed'
       }`}
       onClick={() =>
@@ -53,25 +53,27 @@ export const StreamersCard: React.FC<{
         })
       }
     >
-      {item.online && (
-        <div className="absolute z-20 bg-[#FF0A18] w-[53px] h-[20px] text-[13px] text-center right-[12px] top-[12px]">
-          <div>● Live</div>
-        </div>
-      )}
-      <div className="relative">
-        {!item?.online && (
-          <div className="absolute w-full h-full pointer-events-none bg-black/60"></div>
+      <div className="bg-theme-50">
+        {item.online && (
+          <div className="absolute z-20 bg-[#FF0A18] w-[53px] h-[20px] text-[13px] text-center right-[12px] top-[12px]">
+            <div>● Live</div>
+          </div>
         )}
-        <img
-          className="object-cover object-center w-[278px] h-[246px] sm:w-[401px] sm:h-[355px]"
-          src={item.avatar}
-        />
-      </div>
-      <div className="w-full flex justify-between items-center p-1">
-        <div className="text-lg md:text-xl truncate">{item.nickname}</div>
-        <div className="flex">
-          <Win percent={item.winRate} />
-          <Heart like={item.likesCount} />
+        <div className="relative">
+          {!item?.online && (
+            <div className="absolute w-full h-full pointer-events-none bg-black/60"></div>
+          )}
+          <img
+            className="object-cover object-center w-[313px] h-[278px] sm:w-[401px] sm:h-[355px]"
+            src={item.avatar}
+          />
+        </div>
+        <div className="absolute bottom-[1px] flex justify-between items-center p-2 w-[99%] bg-theme-50/60">
+          <div className="text-lg md:text-xl truncate">{item.nickname}</div>
+          <div className="flex">
+            <Win percent={item.winRate} />
+            <Heart like={item.likesCount} />
+          </div>
         </div>
       </div>
     </div>
@@ -85,15 +87,17 @@ export const StreamersCards: React.FC<{
   return (
     <>
       <Responsive.Default>
-        {data.map((item, idx) => (
-          <Link
-            key={idx}
-            to={`/home/streamers/${item.id}`}
-            className={!item.online ? `pointer-events-none` : ''}
-          >
-            <StreamersCard item={item} onStreamChanged={onStreamChanged} />
-          </Link>
-        ))}
+        <div className="flex flex-col gap-4">
+          {data.map((item, idx) => (
+            <Link
+              key={idx}
+              to={`/home/streamers/${item.id}`}
+              className={!item.online ? `pointer-events-none` : ''}
+            >
+              <StreamersCard item={item} onStreamChanged={onStreamChanged} />
+            </Link>
+          ))}
+        </div>
       </Responsive.Default>
 
       <Responsive.Desktop>

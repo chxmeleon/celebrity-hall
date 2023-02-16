@@ -34,7 +34,7 @@ const Router: React.FC = () => {
         </Route>
       </Route>
       <Route path="home" element={<ProtectedLayout />}>
-        <Route path="rooms/:type?" element={<RoomsLayout />} >
+        <Route path="rooms/:type?" element={<RoomsLayout />}>
           <Route index element={<Rooms />} />
         </Route>
         <Route path="streamers" element={<Streamers />} />

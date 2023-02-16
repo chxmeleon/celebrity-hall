@@ -183,7 +183,7 @@ export const SubTabs: React.FC<{
   setSelected: Dispatch<SetStateAction<string>>
 }> = ({ selected, setSelected }) => {
   return (
-    <div className="flex sm:justify-between justify-center sm:w-[175px] mt-[10px] sm:text-[14px] text-[9px]">
+    <div className="flex sm:justify-between justify-center sm:w-[175px] mt-[10px] md:text-xl text-[9px]">
       <button
         className={`${
           SubTabsConfig[selected === 'month' ? 'isSelected' : 'notSelected']

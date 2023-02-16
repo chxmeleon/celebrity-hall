@@ -37,6 +37,7 @@
   "actions.update": "update",
   "actions.updateSuccess": "update success",
   "actions.updateFailed": "update failed",
+  "streamers.win": "W",
   "common.site": "AV",
   "common.tables": "轉桌",
   "common.roadsList": "Roads",
