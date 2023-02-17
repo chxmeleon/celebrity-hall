@@ -17,7 +17,7 @@ const ProtectedLayoutForRoom: React.FC = () => {
   }
 
   const bgImage = cx`bg-left-bottom bg-auto
-     absolute top-0 w-full h-full aspect-video bg-no-repeat z-[-1] bg-[url('../assets/login_bg.avif')] 
+     absolute top-0 w-full h-full aspect-video bg-no-repeat z-[-1] bg-[url('/login_bg.jpg')] 
      before:absolute before:w-full before:h-full before:bg-black/20 before:content-['']`
 
   return (

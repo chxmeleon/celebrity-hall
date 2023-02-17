@@ -52,7 +52,7 @@ const linkLisetMapper = [
 
 export const NavbarTop = () => {
   return (
-    <div className="flex relative z-10 justify-around items-center p-2 pt-1 pb-3 mt-10 w-full h-12 md:hidden">
+    <div className="bg-black flex relative z-10 justify-around items-center p-2 pb-3 mt-9 w-full h-12 md:hidden">
       {linkLisetMapper[0].map((item, idx) => (
         <LinkButton key={idx} href={item.href} isTarget={false}>
           <div className="px-1 w-14 text-xs truncate">
@@ -69,7 +69,7 @@ export const NavbarBottom = () => {
     <div className="bg-black flex relative z-50 justify-around items-center p-2 py-3 w-full h-12 md:hidden">
       {linkLisetMapper[1].map((item, idx) => (
         <LinkButton key={idx} href={item.href} isTarget={false}>
-          <div className="px-1 w-14 text-xs truncate">
+          <div className="px-1 w-20 text-xs truncate">
             <FormattedMessage id={item.id} defaultMessage={item.default} />
           </div>
         </LinkButton>
