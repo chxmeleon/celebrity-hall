@@ -131,9 +131,9 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
                 } py-[1px] px-1.5  rounded-full  text-sm`}
               >
                 {isNoFee ? (
-                  <FormattedMessage id="common.noFee" />
+                  <FormattedMessage id="common.noFee" defaultMessage="No Fee" />
                 ) : (
-                  <FormattedMessage id="common.standard" />
+                  <FormattedMessage id="common.standard" defaultMessage="Standard" />
                 )}
               </div>
             </button>
@@ -324,7 +324,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
               onClick={() => onCancel(room.id)}
             >
               <div className="i-heroicons-x-mark-solid"></div>
-              <FormattedMessage id="common.cancel" />
+              <FormattedMessage id="common.cancel" defaultMessage="Cancel" />
             </BetButton>
             <BetButton
               className="mx-1 text-[9px]"
@@ -332,7 +332,7 @@ const TableCardMobile: React.FC<RoomDataProps> = ({ room, isActived }) => {
               onClick={(e) => onConfirm(e, room?.id)}
             >
               <div className="i-heroicons-check-solid"></div>
-              <FormattedMessage id="common.confirm" />
+              <FormattedMessage id="common.confirm" defaultMessage="Confirm" />
             </BetButton>
           </div>
         </div>

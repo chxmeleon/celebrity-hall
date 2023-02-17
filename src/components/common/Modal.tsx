@@ -1,12 +1,13 @@
+import { ResponsiveContext } from '@/hooks/useResponsive'
 import { clsx as cx } from 'clsx'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
 type ModalProps = {
   isShow: boolean
   onClose: () => void
   size: string
-  solidBackground?: boolean 
+  solidBackground?: boolean
 }
 
 const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
@@ -17,6 +18,13 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
   solidBackground = false
 }) => {
   const modalRoot = document.getElementById('modal-root')
+
+  const { onResizeWindow } = useContext(ResponsiveContext)
+
+  useEffect(() => {
+    onResizeWindow?.()
+  }, [onResizeWindow, isShow])
+
   return (
     <>
       {isShow && modalRoot
@@ -28,9 +36,10 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
             >
               <div
                 onClick={onClose}
-                className={cx("flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center w-full h-full  backdrop-blur-sm",
-                solidBackground ? "bg-black" : "bg-black/30"
-              )}
+                className={cx(
+                  'flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 justify-center items-center w-full h-full  backdrop-blur-sm',
+                  solidBackground ? 'bg-black' : 'bg-black/30'
+                )}
               >
                 <div
                   onClick={(e) => {
