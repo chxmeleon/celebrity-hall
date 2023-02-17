@@ -12,9 +12,11 @@ const Rooms: React.FC = () => {
   return (
     <>
       {loading ? (
-        <Loading
-          type={type === 'live' || type === 'interaction' ? 'fixed' : 'default'}
-        />
+        <div className="w-full">
+          <Loading
+            type={type === 'live' || type === 'interaction' ? 'fixed' : 'default'}
+          />
+        </div>
       ) : rooms.length ? (
         <div className="overflow-y-auto p-4 w-full h-full md:p-16 bg-black">
           <RoomList rooms={rooms} />

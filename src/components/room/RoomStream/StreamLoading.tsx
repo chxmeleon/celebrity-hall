@@ -31,7 +31,7 @@ const Loading: React.FC<{
 }> = ({ size, type }) => {
   const loadingBgImg = useMemo(() => BgImg, [])
   return (
-    <div className="flex absolute z-30 flex-col w-full h-full">
+    <div className="flex relative z-30 flex-col w-full h-full">
       <div className="overflow-hidden absolute w-full h-full">
         <img
           src={loadingBgImg}
