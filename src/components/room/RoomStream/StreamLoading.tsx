@@ -33,7 +33,7 @@ const Loading: React.FC<{
     <div className="flex relative z-30 flex-col w-full h-full">
       <div className="overflow-hidden absolute w-full h-full">
         <img
-          src="/login_bg.avif"
+          src="/login_bg.jpg"
           alt="bg image"
           className="object-cover w-full h-full"
         />
