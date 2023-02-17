@@ -10,7 +10,7 @@ export const Progress: React.FC<
   PropsWithChildren<{ size?: 'default' | 'small' }>
 > = ({ children, size }) => {
   const countDownStyle = cx(
-    'border-theme-300 w-[82%] h-[82%] rounded-full absolute  border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
+    'border-theme-300 w-[82%] h-[82%] rounded-full absolute border-b-transparent brightness-125 blur-[1px] inset-0 m-auto transition-all duration-150 ease-in-out countdown-progress',
     size == 'small'
       ? 'border-t-[0.5px] border-r-[2px]'
       : 'border-t-[1px] border-r-[3px] md:border-t-[3px] md:border-r-[6px]'
@@ -29,12 +29,11 @@ const Loading: React.FC<{
   size?: 'default' | 'small'
   type?: 'default' | 'fixed'
 }> = ({ size, type }) => {
-  const loadingBgImg = useMemo(() => BgImg, [])
   return (
     <div className="flex relative z-30 flex-col w-full h-full">
       <div className="overflow-hidden absolute w-full h-full">
         <img
-          src={loadingBgImg}
+          src="/login_bg.avif"
           alt="bg image"
           className="object-cover w-full h-full"
         />
