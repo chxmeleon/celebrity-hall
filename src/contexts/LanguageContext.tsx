@@ -14,20 +14,22 @@ const LanguageContext = createContext<LanguageContextData>(
 )
 
 export const LanguageProvider: React.FC<React.PropsWithChildren> = ({
-  children,
+  children
 }) => {
-  const locale = navigator.language.toLowerCase() ?? 'zh-tw'
+  const locale = navigator.language.toLowerCase()
   const [isSelected, setIsSelected] = useLocalStorage('lang', locale)
-  const handleSelectValue = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    setIsSelected(e.target.value)
-  }, [setIsSelected])
+  const handleSelectValue = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setIsSelected(e.target.value)
+    },
+    [setIsSelected]
+  )
 
-  
   const value = useMemo(
     () => ({
       locale,
       isSelected,
-      handleSelectValue,
+      handleSelectValue
     }),
     [locale, isSelected, handleSelectValue]
   )
@@ -37,7 +39,7 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({
       <IntlProvider
         locale={locale}
         key={locale}
-        defaultLocale={message['en-US']}
+        defaultLocale="en-us"
         messages={message[isSelected]}
       >
         {children}
