@@ -66,7 +66,7 @@ export const NavbarTop = () => {
 
 export const NavbarBottom = () => {
   return (
-    <div className="flex relative z-50 justify-around items-center p-2 py-3 w-full h-12 md:hidden">
+    <div className="bg-black flex relative z-50 justify-around items-center p-2 py-3 w-full h-12 md:hidden">
       {linkLisetMapper[1].map((item, idx) => (
         <LinkButton key={idx} href={item.href} isTarget={false}>
           <div className="px-1 w-14 text-xs truncate">

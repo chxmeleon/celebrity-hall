@@ -27,7 +27,7 @@ const ProtectedLayout: React.FC = () => {
         <div className={bgImage}></div>
         <Header />
         <NavbarTop />
-        <div className="flex justify-start w-full h-[90%] pt-0 md:pt-9 md:h-full">
+        <div className="flex justify-start w-full h-[76%] pt-0 md:pt-9 md:h-full">
           <LeftSidebar />
           <Outlet />
         </div>
