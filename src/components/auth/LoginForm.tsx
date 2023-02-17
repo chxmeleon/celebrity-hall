@@ -1,5 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useEffect, useState } from 'react'
+
+import { useNavigate } from 'react-router-dom'
 import { LoginButton } from '@/components/common/Button'
 import { clsx as cx } from 'clsx'
 import { useAuth } from '@/contexts/AuthContext'
@@ -20,6 +22,7 @@ const LoginForm: React.FC = () => {
     formState: { errors }
   } = useForm<Inputs>()
 
+  const navigate = useNavigate()
   const { login, auth, traitLogin } = useAuth()
   const { formatMessage } = useIntl()
 
@@ -35,13 +38,24 @@ const LoginForm: React.FC = () => {
     traitLogin(token)
   }
 
+  const callback = (res) => {
+    if (res.ret === 0) {
+      createTrail()
+    }
+
+    if (res.ret === 2) {
+      window.location.reload()
+    }
+  }
 
   const showCaptcha = () => {
-    const captcha = new (window as any).TencentCaptcha(
-      '1259693855',
-      createTrail
-    )
-    captcha.show()
+    try {
+      const captcha = new (window as any).TencentCaptcha('1259693855', callback)
+      captcha.show()
+    } catch (err) {
+      console.log(err);
+      
+    }
   }
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -113,7 +127,10 @@ const LoginForm: React.FC = () => {
                   </p>
                 </div>
                 <p className="px-7">|</p>
-                <div onClick={showCaptcha} className="active:text-theme-300 hover:text-theme-400 hover:cursor-pointer">
+                <div
+                  onClick={showCaptcha}
+                  className="hover:cursor-pointer hover:text-theme-400 active:text-theme-300"
+                >
                   <p className="text-amber-200">
                     {formatMessage({
                       id: 'screens.login.trialLogin',

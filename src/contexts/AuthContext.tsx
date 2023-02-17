@@ -47,6 +47,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     'exp',
     ' '
   )
+
   const [isTrial, setIsTrial] = useLocalStorage<boolean>('isTrial', false)
   const [isError, setIsError] = useState<boolean>(false)
   const navigate = useNavigate()
@@ -94,6 +95,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     [setAuth, setExpiredTime, navigate, setIsTrial]
   )
 
+  
   const logout = useCallback(() => {
     setAuth(null)
     setExpiredTime('')

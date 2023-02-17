@@ -111,10 +111,19 @@ html {
     box-shadow: rgba(252, 237, 149, 0.96) 0px 0px 23px 4px;
   }
 
+  @media screen and (min-width: 768px) {
+    .tcaptcha-transform {
+      left: 50% !important;
+      top: 50% !important;
+      transform: scale(0.85) translate(-50%, -55%);
+    }
+
+  }
+
   .tcaptcha-transform {
     left: 50% !important;
     top: 50% !important;
-    transform: scale(0.85) translate(-55%, -55%);
+    transform: scale(0.85) translate(-58%, -55%);
   }
 
   .snow {
@@ -126,11 +135,6 @@ html {
     overflow: hidden;
   }
 
-  /* .snowChild { */
-  /*   position: absolute; */
-  /*   top: 0; */
-  /*   left: 0; */
-  /* } */
 
   .snowRotate {
     transform-origin: center center;
