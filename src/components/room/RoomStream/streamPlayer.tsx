@@ -47,7 +47,7 @@ export const NodePlayerStreamMobile: React.FC<RoomStreamProps> = ({
       player.setVolume(volume)
     }
     player.setKeepScreenOn()
-    player.start(`https://live.vvip99.net/${streamName}/${streamKey}.flv`)
+    player.start(`https://live.vvip88.net/${streamName}/${streamKey}.flv`)
     player.on('error', (err) => {
       console.error('playerError', err)
     })
@@ -119,7 +119,7 @@ export const WebRTCStreamMobile: React.FC<RoomStreamProps> = ({
           pc.setLocalDescription(offer),
           axios
             .post(
-              `https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`,
+              `https://rtc.vvip88.net/${streamName}/${streamKey}.sdp`,
               JSON.stringify({
                 version: 'v1.0',
                 sessionId: Date.now().toString(),
@@ -184,7 +184,7 @@ export const NodePlayerStream: React.FC<RoomStreamProps> = ({
     player.setScaleMode(0)
     player.setVolume(volume)
     player.setKeepScreenOn()
-    player.start(`https://live.vvip99.net/${streamName}/${streamKey}.flv`)
+    player.start(`https://live.vvip88.net/${streamName}/${streamKey}.flv`)
     player.on('error', (err) => {
       console.error('playerError', err)
     })
@@ -246,7 +246,7 @@ export const WebRTCStream: React.FC<RoomStreamProps> = ({
         const [, { data }] = await Promise.all([
           pc.setLocalDescription(offer),
           axios.post(
-            `https://rtc.vvip99.net/${streamName}/${streamKey}.sdp`,
+            `https://rtc.vvip88.net/${streamName}/${streamKey}.sdp`,
             JSON.stringify({
               version: 'v1.0',
               sessionId: Date.now().toString(),

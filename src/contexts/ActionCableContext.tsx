@@ -1,9 +1,7 @@
 import React, {
   createContext,
   useContext,
-  useEffect,
   useMemo,
-  useState
 } from 'react'
 import ActionCable from 'actioncable'
 import { useAuth } from './AuthContext'
@@ -23,7 +21,7 @@ export const ActionCableProvider: React.FC<React.PropsWithChildren> = ({
   const value = useMemo(
     () => ({
       cable: ActionCable.createConsumer(
-        `wss://staging.vvip99.net/cable?token=${auth}`
+        `wss://staging.vvip88.net/cable?token=${auth}`
       )
     }),
     [auth]
