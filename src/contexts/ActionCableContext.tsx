@@ -1,8 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useMemo,
-} from 'react'
+import React, { createContext, useContext, useMemo } from 'react'
 import ActionCable from 'actioncable'
 import { useAuth } from './AuthContext'
 
@@ -18,13 +14,12 @@ export const ActionCableProvider: React.FC<React.PropsWithChildren> = ({
   children
 }) => {
   const { auth } = useAuth()
+  const endpoint = import.meta.env.VITE_SOCKET_ENDPOINT
   const value = useMemo(
     () => ({
-      cable: ActionCable.createConsumer(
-        `wss://staging.vvip88.net/cable?token=${auth}`
-      )
+      cable: ActionCable.createConsumer(`${endpoint}?token=${auth}`)
     }),
-    [auth]
+    [auth, endpoint]
   )
 
   return (
