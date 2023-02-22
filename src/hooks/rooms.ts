@@ -2,13 +2,13 @@ import { RoomProps } from '@/types/room'
 import { useQuery } from '@apollo/client'
 import {
   GET_BACCARATROOMS,
-  GET_CURRENT_BACCARAT_ROOM,
-  GET_CURRENT_COUNTDOWN
+  GET_CURRENT_BACCARAT_ROOM
 } from '@/gql/baccaratrooms'
 import StreamLatencyContext from '@/contexts/StreamLatencyContext'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useActionCable } from '@/contexts/ActionCableContext'
 import types from '@/types'
+import RoomDataContext from '@/contexts/RoomDataContext'
 
 export const convertStatus = (status: string | null | undefined) => {
   switch (status) {
@@ -132,19 +132,19 @@ export const useCurrentGameState = (roomId: string | undefined) => {
 }
 
 export const useTimeLeft = (roomId: string) => {
-  const { data, refetch } = useQuery<
-    types.GET_CURRENT_COUNTDOWN,
-    types.GET_CURRENT_COUNTDOWNVariables
-  >(GET_CURRENT_COUNTDOWN, {
-    variables: { baccaratRoomId: roomId }
-  })
+  const { rooms, refetch } = useContext(RoomDataContext)
+
+  const room = useMemo(
+    () => (roomId ? rooms.find((room) => room.id === roomId) : undefined),
+    [roomId, rooms]
+  )
 
   const currentGame = useMemo(
     () => ({
-      status: convertStatus(data?.baccaratRoom?.currentGame?.status),
-      endAt: data?.baccaratRoom?.currentGame?.endAt
+      status: convertStatus(room?.currentGame?.status),
+      endAt: room?.currentGame?.endAt
     }),
-    [data]
+    [room]
   )
 
   const [gameState, setGameState] = useState<{
@@ -153,7 +153,7 @@ export const useTimeLeft = (roomId: string) => {
   } | null>(null)
 
   useEffect(() => {
-    refetch()
+    refetch?.()
     setGameState(currentGame)
   }, [currentGame, refetch])
 
@@ -187,8 +187,8 @@ export const useTimeLeft = (roomId: string) => {
 
   useEffect(() => {
     const isCountDownStarted = gameState?.status === 'START_BET'
-    if (data?.baccaratRoom?.currentGame && isCountDownStarted && counter <= 0) {
-      const { latency } = data.baccaratRoom
+    if (room && isCountDownStarted && counter <= 0) {
+      const { latency } = room 
       const endAt = new Date(gameState?.endAt)
 
       const timeLeftRaw =
@@ -202,7 +202,7 @@ export const useTimeLeft = (roomId: string) => {
         setIsCountingDown(true)
       }, timeLeftFraction * 1000)
     }
-  }, [data, streamLatency, gameState, counter])
+  }, [room, streamLatency, gameState, counter])
 
   useEffect(() => {
     let timeout: number | null = null

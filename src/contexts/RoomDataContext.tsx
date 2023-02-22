@@ -31,6 +31,8 @@ export const RoomDataProvider: React.FC<
   >(GET_BACCARATROOMS, { variables: { type } })
 
   const rooms = useMemo(() => data?.activeBaccaratRooms || [], [data])
+  console.log(rooms);
+  
 
   return (
     <RoomDataContext.Provider

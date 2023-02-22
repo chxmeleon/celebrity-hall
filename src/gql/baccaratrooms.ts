@@ -19,6 +19,7 @@ export const GET_BACCARATROOMS = gql`
       currentRoadsImage
       waitingBetSeconds
       roads
+      latency
       alertText
       waitingText
       zoomType
@@ -170,21 +171,6 @@ export const GET_CURRENT_ROOM_STREAM = gql`
   }
 `
 
-export const GET_CURRENT_COUNTDOWN = gql`
-  query GET_CURRENT_COUNTDOWN($baccaratRoomId: ID!) {
-    baccaratRoom(id: $baccaratRoomId) {
-      id
-      latency
-      waitingBetSeconds
-      currentGame {
-        id
-        status
-        updatedAt
-        endAt
-      }
-    }
-  }
-`
 
 export const CREATE_BACCARAT_BET = gql`
   mutation CREATE_BACCARAT_BET($input: CreateBaccaratBetInput!) {

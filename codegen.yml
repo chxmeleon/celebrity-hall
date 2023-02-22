@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - https://staging.vvip99.net/graphql:
+  - https://staging.vvip88.net/graphql:
       headers:
         Authorization: UserBearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozMTQzLCJleHAiOjE2NzM1MTU2NTR9.ZNQQ1juIbbCT4tedaWx3EGo1aVNQe95wwIHrp9LyI34
 documents:
