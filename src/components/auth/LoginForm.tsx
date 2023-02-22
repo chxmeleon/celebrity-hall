@@ -61,6 +61,7 @@ const LoginForm: React.FC = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     login(data.email, data.password)
   }
+
   const isError = errors.password?.type === 'required'
   const [notify, setNotify] = useState<boolean>(false)
   const handleNotify = () => {
