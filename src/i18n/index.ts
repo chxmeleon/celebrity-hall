@@ -7,7 +7,7 @@ import vi from './vi.json'
 import th from './th.json'
 
 const message: any = {
-  en: en,
+  'en-us': en,
   'zh-tw': zh,
   'zh-cn': cn,
   id: id,

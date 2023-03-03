@@ -17,7 +17,7 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({
   children
 }) => {
   const locale = navigator.language.toLowerCase() 
-  const defaultLocale = locale.includes('en') ? 'en' : 'zh-tw'
+  const defaultLocale = locale.includes('en') ? 'en-us' : 'zh-tw'
   const [isSelected, setIsSelected] = useLocalStorage('lang', defaultLocale)
   const handleSelectValue = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -40,7 +40,7 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({
       <IntlProvider
         locale={locale}
         key={locale}
-        defaultLocale="en"
+        defaultLocale="en-us"
         messages={message[isSelected]}
       >
         {children}
