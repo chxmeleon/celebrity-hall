@@ -1,8 +1,14 @@
 # Celebrity Hall 
 
-- yarn
-- typescript
-- tailwindcss
-- styled component
-- cva
-- clsx
+Live streaming Baccarat game.
+
+## Technologies
+- Yarn
+- Vite
+- TypeScript
+- TailwindCSS
+- Styled Component
+- Apollo GraphQL
+- WebSocket
+- WebRTC
+- NodePlayer
